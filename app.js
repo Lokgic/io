@@ -13,7 +13,7 @@ var app = express();
 //mongodb connection
 
 
-mongoose.connect("mongodb://localhost:27017/lokgic")
+mongoose.connect("mongodb://lokgic:WAuS8Pi4X37y4.mlab.com:13216/heroku_7j1n343l/lokgic")
 var db = mongoose.connection;
 
 //mongo error
