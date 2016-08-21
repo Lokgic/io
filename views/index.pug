@@ -2,14 +2,14 @@ extends layout
 
 block content
 	.jumbotron.jumbotron-fluid
-		.container.p-t-3
-			h1.display-2 Logic
-			p.lead Logic is justly considered the basis of all other sciences, even if only for the reason that in every argument we employ concepts taken from the field of logic, and that ever correct inference proceeds in accordance with its laws.
+		.container.m-t-2#jimbo
+			blockquote.blockquote.lead#quote 
+				
 	.container.p-t-2.m-b-3
 		.row
 			.col-lg-4
 				h3.m-b-2 #{sylList[0].title}
-				img.m-b-1.img-fluid.hidden-xs-down(src="images/frege.jpg", alt = "Frege")
+				img.m-b-1.img-fluid.hidden-xs-down(src="img/frege.jpg", alt = "Frege")
 				p #{sylList[0].description}
 			.col-lg-4
 				h3.m-b-2 #{sylList[1].title}
@@ -45,5 +45,5 @@ block content
 					.card.card-block
 						h4.card-title #{module.title}
 						p.card-text #{module.description}
-		
-
+block extrafooter		
+	script(src="javascripts/randombg.js" type="text/javascript")
