@@ -1,0 +1,9 @@
+{
+  "0" : {"question": "If an argument is inductively firm(good), then the premises render the conclusion ____. Nevertheless, unlike a deductively valid argument, it is possible for the conclusion to be ____ even if the premises are _____.", 
+          "real": "probable, false, true",
+          "fake": ["probable, true, false", "possible, false, true", "improbable, true, false"]},
+  "1" : {"question": "It is impossible for a valid argument to have false premises and a true conclusion.", 
+          "real": "False",
+          "fake": ["True"]}
+
+}

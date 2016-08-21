@@ -1,0 +1,26 @@
+nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+	.container
+		ul.nav.navbar-nav
+			li.nav-item
+				a.nav-link(href='/') Home
+			li.nav-item.dropdown
+				a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Modules
+					.dropdown-menu
+						a.dropdown-item(href="/1") 1
+						a.dropdown-item(href="/2") 2
+						a.dropdown-item(href="/3") 3
+						a.dropdown-item(href="/4") 4
+						a.dropdown-item(href="/5") 5
+						a.dropdown-item(href="/6") 6
+						a.dropdown-item(href="/7") 7
+						a.dropdown-item(href="/8") 8
+			li.nav-item
+				a.nav-link(href='/grading') Grading and Policies
+			li.nav-item
+				a.nav-link(href='#logicizes') Logicizes
+			li.nav-item.pull-md-right
+				if currentUser
+					div
+						a.btn.btn-outline-secondary(href='/logout') Log out
+				else
+					a.btn.btn-primary(href='/login') Login
