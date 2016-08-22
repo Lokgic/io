@@ -59,7 +59,7 @@ $(function() {
 		$answerList.html("");
 		for (var i = 0; i <arr.length; i++){
 			
-			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + arr[i] + '">' + (i + 1) + '</button><p class = " lead text-xs-center">' + arr[i]+'</p></li>';
+			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + arr[i] + '">' + (i + 1) + '</button>' + arr[i]+'</li>';
 			$answerList.append(htmlHead);
 		}
 

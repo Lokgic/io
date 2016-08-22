@@ -19,7 +19,6 @@ $(function() {
     }
 
     getInfo(function(err, data){
-        console.log()
     	$header.html("Module " + data[moduleNo - 1].header);
     	$body.html('<p>'+data[moduleNo - 1].description+'</p>');
     })
@@ -42,7 +41,6 @@ $(function() {
         }
         for (var i = 0; i < 3 - count; i++){
             terms+= '<td></td>'
-            console.log(i);
         }
         terms += '</tbody>'
         $body.append('<p>For the reading quiz below, you are asked to select the definition of the term showned. All definitions are taken directly from the text.</p>' + terms);
