@@ -1,20 +1,45 @@
 $(function() {
-
+	var $progresscap = $('#progresscap');
+	var $progressbar = $('.progress');
 	var $question = $('#question');
 	var $submit = $('#submit');
 	var $answerList = $('#answers');
 	var $next = $('#next');
 	var $main = $('#quizcard');
 	var $header = $('#quizheader');
+	var $alert = $('#quizalert');
 	var $choice = $('.choice');
 	var score;
-
+	var answered;
+	var perfectScore;
 	var moduleNo = $("title").attr('id');
 	var quizId = "m" + moduleNo + "quiz";
 	function resetQuizCard(){
 			$main.removeClass("card-danger");
 		   	$main.removeClass("card-success");
+		   	$alert.removeClass('alert');
+		   	$alert.html("");
 	}
+
+
+	function alertMaker(code, content){
+		if (!$alert.hasClass('alert')) $alert.addClass('alert');
+		if ($alert.hasClass('alert-danger')) $alert.removeClass('alert-danger');
+			else if ($alert.hasClass('alert-success')) $alert.removeClass('alert-sucess');
+			else if ($alert.hasClass('alert-warning')) $alert.removeClass('alert-warning');
+			else if ($alert.hasClass('alert-info')) $alert.removeClass('alert-info');
+	    var tag;
+	    if (code == 1){tag = "success";}
+	    else if (code == 2){tag = "info";}
+	    else if (code == 3){tag = "warning"}
+	    else{tag = "danger"}
+	    $alert.addClass("alert alert-" + tag +" alert-dismissible fade in");
+	            $alert.attr('role', 'alert');
+	            var html = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
+	            $alert.html(html);
+	  }
+
+
 	function shuffle(arr){
 		var currentI = arr.length, tempValue, randomI;
 
@@ -34,7 +59,7 @@ $(function() {
 		$answerList.html("");
 		for (var i = 0; i <arr.length; i++){
 			
-			var htmlHead = '<button type="button" class="btn btn-primary  btn-block choice" value = "' + arr[i] + '">' + arr[i] + '</button>';
+			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + arr[i] + '">' + (i + 1) + '</button><p class = " lead text-xs-center">' + arr[i]+'</p></li>';
 			$answerList.append(htmlHead);
 		}
 
@@ -47,33 +72,43 @@ $(function() {
     	Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
    		answers.push(q.real);
    		shuffle(answers);       
-   		$question.html('<p>'  + q.question + '</p>');		
+   		$question.html('<p class = "lead">'  + q.question + '</p>');		
    		printAnswers(answers);
 
    		$(".choice").on("click", function(e){
 			e.preventDefault();
 			$(".choice").attr("disabled", true)
-	   		var chosen = e.target.innerText;
+
+	   		var chosen = $(e.target).val();
+	   		console.log($(e.target).val());
 
 	   		if (chosen !== q.real){
-		    	$header.html("WRONG!")
+		    	alertMaker(4,"Opps, that was wrong.")
 		    	$main.addClass("card-danger");
 		    	$next.attr("disabled", false);
+		    	answered++;
+		    	updateProgress(answered, perfectScore, score);
 		    	
-		    } else {$header.html("Correct!")
+		    } else {
+		    	alertMaker(1,"That's correct!")
 		    	$main.addClass("card-success");
 		    	$next.attr("disabled", false);
 		    	score += 1;
-
+				answered++;
+		    	updateProgress(answered, perfectScore, score);
 		    }
 
 	    	
        });
     }
+    function updateProgress(answered, total, right){
+     	$progresscap.html("Answered: " + answered + " Total: " + total + " Correct: " + right);
+     	$progressbar.attr("value", answered);
 
+     }
    $.getJSON('json/quiz' + moduleNo +'.json') 
      .done(function(data){
-     	var perfectScore;
+     	
 	    var currentQuestion;
 	    var quizOver;
 	    var quiz;
@@ -82,7 +117,10 @@ $(function() {
        		quiz = shuffle(Object.keys(data).map(function(value) {
 							         return data[value]}));
        		score = 0;
+       		answered = 0
        		perfectScore = quiz.length;
+       		$progressbar.attr("max", perfectScore);
+       		updateProgress(answered, perfectScore, score);
 	    	currentQuestion = quiz.pop();
 	    	quizOver = false;
 	        $next.attr("disabled", true);
@@ -100,20 +138,21 @@ $(function() {
 		   		resetQuizCard();
 		   		scoring(score,perfectScore);
 		   		quizOver = true;
+		   		alertMaker(3, "Press Continue to restart the quiz.")
 		   	} else{
 		   		// restart quiz
-		   		quizInit()
+		   		quizInit();
 		   	}
 		   	
 		   }
        }); 
 
-
+     
 
     function scoring(actualScore, perfectScore){
-    	$question.html("Your score is " + actualScore +"/" + perfectScore+". ");
+    	$question.html("<p class='lead'>You got " +actualScore + " out of " + perfectScore + ".</p>");
     	$answerList.html("");
-    	$header.html("Result");
+
     	if(actualScore===perfectScore){
 			   	$question.append("You passed! Press continue to review the quiz.");
 			   	// Generate answers? Maybe
@@ -121,7 +160,8 @@ $(function() {
 			   		$question.append('<p>'+res[1]+'</p>');
 		   		});
 		   	}else {
-		   		$question.append("Unfortunately, you didn't pass! Press continue to restart the quiz.");
+		   		$question.append("Unfortunately, you didn't pass! You need to get all " + perfectScore + " questions correct to pass. But it doesn't cost anything to take the quiz, so why not try again?");
+		   		alertMaker(3, "Press 'Continue' to restart the quiz.")
 		   	}
     }
        

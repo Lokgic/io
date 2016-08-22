@@ -145,7 +145,7 @@ router.post('/report', function(req, res, next){
 	
 
 	if (!req.session || ! req.session.userId){
-		return res.send([3, "Nice, but since you were not signed in, no record was made. Sadly, the world will never know about your logical prowness."])
+		return res.send([3, "Nice, but since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess."])
 	} else {
 		User.checkQuizRecord(req.body.quiz, req.session.userId, function (err, passed){
 			if (err){
@@ -174,46 +174,46 @@ router.post('/report', function(req, res, next){
 });
 
 
-router.post('/1q', function(req, res, next){
-	if (!req.session || ! req.session.userId){
-		return res.send("Your score was not recorded because you were not signed in.")
-	} else {
+// router.post('/1q', function(req, res, next){
+// 	if (!req.session || ! req.session.userId){
+// 		return res.send("Your score was not recorded because you were not signed in.")
+// 	} else {
 
-		User.findOneAndUpdate({"_id": req.session.userId},{"quiz1": true, "quiz1time": Date.now()}, function(error, user){
+// 		User.findOneAndUpdate({"_id": req.session.userId},{"quiz1": true, "quiz1time": Date.now()}, function(error, user){
 
-			if (error){
-				return next(error);
-			}else{
+// 			if (error){
+// 				return next(error);
+// 			}else{
 				
-				return res.send("Record Updated.");
-			}
+// 				return res.send("Record Updated.");
+// 			}
 			
-		});
-	}
-});
+// 		});
+// 	}
+// });
 
 
-router.post('/1r', function(req, res, next){
-	console.log(req.originalUrl);
-	if (!req.session || ! req.session.userId){
-		return res.send("You are not signed in.");
-	} else {
+// router.post('/1r', function(req, res, next){
+// 	console.log(req.originalUrl);
+// 	if (!req.session || ! req.session.userId){
+// 		return res.send("You are not signed in.");
+// 	} else {
 		
-		User.checkQuizRecord("reading1",req.session.userId, function (err, passed){
-			if (passed){
-				return res.send(" Quiz passed previously.");
-			}else if(req.body.passed){	
-				User.findOneAndUpdate({"_id": req.session.userId},{"reading1": true, "reading1time": Date.now()}, function(error, user){
-					if (error){
-						return next(error);
-					}else{
-						return res.send("Record Updated.");
-						}
-					});
-			}
-		})
-	}
-});
+// 		User.checkQuizRecord("reading1",req.session.userId, function (err, passed){
+// 			if (passed){
+// 				return res.send(" Quiz passed previously.");
+// 			}else if(req.body.passed){	
+// 				User.findOneAndUpdate({"_id": req.session.userId},{"reading1": true, "reading1time": Date.now()}, function(error, user){
+// 					if (error){
+// 						return next(error);
+// 					}else{
+// 						return res.send("Record Updated.");
+// 						}
+// 					});
+// 			}
+// 		})
+// 	}
+// });
 
 // Requesting info from DB
 //Get quiz

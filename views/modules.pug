@@ -6,34 +6,41 @@ head
 	title(id = file) Lokgic | #{title}
 	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css', integrity='sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY', crossorigin='anonymous')
 	link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+	script(src="javascripts/pdfobject.js")
 
 body
 	include navbar
 	.container-fluid.m-t-3.p-t-1#flexstuff
 		.row
-			.col-lg-6.p-a-3#left
+			.col-lg-6#left
 				ul.nav.nav-tabs
 					li.nav-item
-						a.nav-link.active(data-toggle="tab", href="#reading", aria-controls="reading") Reading
+						a.nav-link.active(data-toggle="tab", href="#reading", aria-controls="reading") Read
 					li.nav-item
-						a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quizzing
+						a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
+					li.nav-item
+						a.nav-link(data-toggle="tab", href="#practice", aria-controls="practice") Practice
 				.tab-content
 					.tab-pane.fade.in.active#reading(role="tabpanel")
 						.card#readingcard
 							h3.card-header#readingheader Reading
 							.card-block#readingblock
-								p.card-text Reading
 						div#alert
 						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#submit(type="button") Submit for Grading 
 					.tab-pane.fade#quiz(role="tabpanel")
 						.card#quizcard
-							h3.card-header#quizheader #{title}
+							h3.card-header#quizheader Quiz #{file}
 							.card-block#quizblock
+								.text-xs-center#progresscap Progress
+								progress.progress(aria-describedby="progresscap")
 								p.card-text#question
-								div#answers
+								div#answers.list-group
 								button.btn.button-primary.m-t-1#next(type="button") Continue
+						div#quizalert
+					.tab-pane.fade#practice(role="tabpanel")
+						script PDFObject.embed('pdf/practice#{file}.pdf', '#practice');
 			.col-lg-6.col-md-12#right
-				script(src="javascripts/pdfobject.js")
+				
 				script PDFObject.embed('pdf/text#{file}.pdf', '#right');
 
 
@@ -43,5 +50,7 @@ footer
 	script(src ="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous")
 	script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous")
 	script(src='javascripts/quiz.js')
+	script(src='javascripts/readinginfo.js')
 	script(src='javascripts/readingquiz.js')
-	link(rel="stylesheet", type="text/css", href="css/pdf.css")
+	script(src="javascripts/pdfobject.js")
+	link(rel="stylesheet", type="text/css", href="css/module.css")

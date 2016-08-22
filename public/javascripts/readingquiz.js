@@ -22,7 +22,6 @@ $(function() {
   var reset = false;
 
   function alertMaker(code, content){
-
     var tag;
     if (code == 1){tag = "success";}
     else if (code == 2){tag = "info";}
@@ -51,25 +50,41 @@ $(function() {
 
 
 
-  	function makeQCard(q, n){
-  		var html = '<div class="card" id =QCard'+ n + '><h4 class="card-header"> Question ' + (n+1) + '</h3><div class="card-block"><p>' + q.question +'</p>' + buttonGroupPrior;
-		var answers = [];
-    	Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
-   		answers.push(q.real);
-   		shuffle(answers); 
-   		for (var i = 0; i<answers.length;i++){
-   			var idVal = '"'+'q' + n + 'a' + (i+1) +'" value = "'+answers[i]+'"';
-   			html += buttonPrior1 + idVal + buttonPrior2 + answers[i] + buttonPost
-   		}
+  	function makeQCard(n, q, allDfs){
+  		var html = '<div class="card" id =QCard'+ n + '><h1 class="card-header display-4">' + (n+1) + '.' + q.term +  '</h1><div class="card-block qcard">';
+      // <div class="list-group">'
+
+      html += '<div class="btn-group-vertical definitions" data-toggle="buttons">'; 
+		 var answers = [];
+     answers.push(q.df);
+     while (answers.length<5){
+         var temp = allDfs[Math.floor(Math.random()* allDfs.length)];
+         var contained = false;
+         for (var i = 0; i < answers.length; i++){
+          if (temp === answers[i]) contained = true;
+         }
+         if (!contained){
+          answers.push(temp);
+         }
+     }
+    	// Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
+   		// answers.push(q.real);
+   		 shuffle(answers); 
+   	
+   		 // html += '<button type="button" class="list-group-item list-group-item-action" value=' +answers[i] + '">' + answers[i] + '</button>';
+    for (var i = 0; i < answers.length; i++){
+       html += '<label class="btn btn-outline-primary btn-sm definition"><input type="radio" name="options" id="option1" autocomplete="off" value ="' + answers[i] +'">' + answers[i] + "</label>"
+      }
+      html += '</div>'
   		return html;
   	}
 
   	function checkAnswer(quiz){
   		score = 0;
   		for (var i = 0; i<quiz.length;i++){
-  			var currentQCard = "#QCard"+i;
+  			var currentQCard = "#QCard"+(i);
   			var chosen = $("label.btn.active", currentQCard).children().val();
-  			if (chosen === quiz[i].real){
+  			if (chosen === quiz[i].df){
   				$(currentQCard).addClass('card-success');
   				score++;
   			} else{
@@ -81,13 +96,12 @@ $(function() {
   			$submit.removeClass('btn-primary');
   			$submit.addClass('btn-warning')
         
-        alertMaker(4, "Something wasn't quite right. Try again?");
+        alertMaker(4, "You got " + score +" out of "+ quiz.length + ". Try again?");
         reset = true;
   		} else{
   			$submit.html("Success!");
   			$submit.removeClass('btn-primary');
   			$submit.addClass('btn-success')
-        
         $submit.attr("disabled", true);
   			jQuery.post("/report", {passed: true, quiz: quizId}, function(res){
 	
@@ -113,7 +127,7 @@ $(function() {
    //   }).fail(function(){console.log('Failed to Load Quiz')});
 
     function makeReadingQuiz(callback){
-        $.getJSON('json/quiz' + moduleNo +'.json') 
+        $.getJSON('json/readingquiz' + moduleNo +'.json') 
         .done(function(data){
         callback(null, data);
      }).fail(function(){console.log('Failed to Load Quiz')});
@@ -121,11 +135,11 @@ $(function() {
     }
     function resetReadingQuiz(n){
         reset = false;
+        instruction();
         $submit.addClass('btn-primary');
         $submit.removeClass('btn-warning')
         $submit.html("Submit for Grading");
-        $alert.html("");
-        $alert.removeClass();
+        // $alert.html("");
         for (var i = 0; i<n;i++){
           var $target = $("#QCard"+i);
           $target.removeClass("card-danger");
@@ -133,13 +147,20 @@ $(function() {
         }
       }
 
-
+    function instruction(){
+      $alert.removeClass();
+      alertMaker(3, 'Answer the reading questions below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit.');
+    }
     //init
     makeReadingQuiz(function(err, data){
+      instruction();
       var quiz = Object.keys(data).map(function(value) {return data[value]});
-
+      var allDfs =[];
+      for (var i = 0; i < quiz.length; i++){
+        allDfs.push(quiz[i].df);
+      }
       for (var i = 0; i<quiz.length;i++){
-          $panel.append(makeQCard(quiz[i],i))
+          $panel.append(makeQCard(i,quiz[i],allDfs))
             }
       $submit.on('click', function(e){
           if (reset == false){

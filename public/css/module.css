@@ -1,0 +1,53 @@
+.pdfobject-container { 
+height: 100%;
+}
+
+
+ 
+#flexstuff {
+  height: 90vh;
+  display: flex;
+}
+
+.row {
+  flex: 1;
+  display: flex;
+}
+ 
+#left, #right {
+  overflow-y: scroll;
+  
+}
+ 
+#left {
+  flex: 1;
+
+}
+ 
+#right {
+  flex: 1;
+}
+
+.choice{
+	border-radius:20%;
+	transition-duration: 0.5s;
+	margin-bottom: 20px;
+	margin-top: 10px;
+
+}
+
+
+.btn-primary{
+	background-color: #333E48;
+	border-color: #333E48;
+}
+
+.definition{
+  white-space: normal;
+  text-align: left;
+  color: black;
+  padding: 1rem;
+  font-size: 130%;
+  border-radius: 20px;
+}
+

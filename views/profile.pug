@@ -1,9 +1,12 @@
 extends layout
 
 block content
+	.jumbotron.jumbotron-fluid#randomjumbo
+		.container.m-t-2
+			blockquote.blockquote.lead 
+				p.display-3  #{random}
+				footer.blockquote-footer #{name} 
 	.container.p-t-2.m-t-3
 		.row
 			.col-md-8.col-md-offset-2
-				h1.display-4 Name: #{name}
-				h2.random Random Fact:
-				| #{random}
+				h2.display-4 Course Progress
