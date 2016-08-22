@@ -18,14 +18,39 @@ var modulesList = Object.keys(modulesObj).map(function(value) {
 
 router.get('/profile', mid.requiresLogin, function(req, res, next){
 	
-	User.findById(req.session.userId)
-		.exec(function (error, user){
-			if (error){
-				return next(error);
+	// User.findById(req.session.userId)
+	// 	.exec(function (error, user){
+	// 		if (error){
+	// 			return next(error);
+	// 		} else {
+	// 			return res.render('profile',{ title: 'Student Profile', name: user.name, random: user.random});
+	// 		}
+	// 	});
+	User.reportCard(req.session.userId, function (err, record){
+		if (err){
+				return next(err);
 			} else {
-				return res.render('profile',{ title: 'Student Profile', name: user.name, random: user.random});
+				var recordArr = Object.keys(record).map(function(value) {
+							         return record[value]});
+				var name =record[0].name;
+				var random = record[0].random;
+				var reportCard = [];
+				var completed = 0;
+				for (var i = 1; i < recordArr.length ; i++){
+					reportCard[i-1] = recordArr[i];
+					reportCard[i-1].name = "Module " + i;
+				}
+				for (var i = 0; i < reportCard.length; i++){
+					if (reportCard[i].reading) completed++;
+					if (reportCard[i].quiz) completed ++;
+					if (reportCard[i].ass) completed++;
+					if (reportCard[i].test) completed++;
+				}
+				completed =  Math.trunc(100*completed/(reportCard.length * 4))
+				return res.render('profile',{ title: 'Student Profile', name:name, random: random, record:reportCard, modules:modulesList, completed:completed});
 			}
-		});
+
+	})
 });
 
 //get /login

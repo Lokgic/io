@@ -24,15 +24,8 @@
          "real": "Yes",
           "fake": ["No",
           	"Sometimes, but not always."
-          ]},
+          ]}
 
 
 }
 
-     // "" : {"question": "", 
-     //     "real": "",
-     //      "fake": ["",
-     //        "",
-     //        "",
-     //        ""
-     //      ]}

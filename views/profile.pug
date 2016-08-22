@@ -8,5 +8,72 @@ block content
 				footer.blockquote-footer #{name} 
 	.container.p-t-2.m-t-3
 		.row
-			.col-md-8.col-md-offset-2
-				h2.display-4 Course Progress
+		h1.display-4.text-xs-center.m-y-3.text-muted#modules #{name}'s Course Progress 
+		.text-xs-center#percent #{completed}%
+		progress.progress.progress-striped.m-b-3#percentbar(value = completed, max = "100" aria-describedby="percent")
+		.row
+			for module in record
+				.col-lg-3.col-md-12.m-b-2
+					if (module.ass&&module.reading&&module.test&&module.quiz)
+						.card
+							.card-header #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.ass)  
+									p.card-text Practice &#10003;
+								else 
+									p.card-text Practice &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+							.card-footer.card-success.text-xs-center.lead Completed!
+					else if (module.ass||module.reading||module.test||module.quiz)
+						.card
+							.card-header #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.ass)  
+									p.card-text Practice &#10003;
+								else 
+									p.card-text Practice &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+							.card-footer.card-info.text-xs-center.lead In Progress
+					else
+						.card 
+							.card-header #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.ass)  
+									p.card-text Practice &#10003;
+								else 
+									p.card-text Practice &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+							.card-footer.card-warning.text-xs-center.lead Not Started
