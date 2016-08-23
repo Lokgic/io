@@ -7,32 +7,35 @@ $(function() {
 	var $next = $('#next');
 	var $main = $('#quizcard');
 	var $header = $('#quizheader');
-	var $alert = $('#quizalert');
+	var $alertdiv = $('#quizalertdiv');
+	var $alert = $('.quizalert');
 	var $choice = $('.choice');
 	var score;
 	var answered;
 	var perfectScore;
 	var moduleNo = $("title").attr('id');
-	var quizId = "m" + moduleNo + "quiz";
+
 	function resetQuizCard(){
 			$main.removeClass("card-danger");
 		   	$main.removeClass("card-success");
-		   	$alert.removeClass('alert');
-		   	$alert.html("");
+		   	$alertdiv.html("");
 	}
 
 
 	function alertMaker(code, content){
-		if (!$alert.hasClass('alert')) $alert.addClass('alert');
+		if ($alertdiv.html() == "") $alertdiv.html("<div class='alert quizalert'></div>");
+		$alert = $('.quizalert')
 		if ($alert.hasClass('alert-danger')) $alert.removeClass('alert-danger');
 			else if ($alert.hasClass('alert-success')) $alert.removeClass('alert-sucess');
 			else if ($alert.hasClass('alert-warning')) $alert.removeClass('alert-warning');
 			else if ($alert.hasClass('alert-info')) $alert.removeClass('alert-info');
-	    var tag;
+
+		var tag;
 	    if (code == 1){tag = "success";}
 	    else if (code == 2){tag = "info";}
 	    else if (code == 3){tag = "warning"}
 	    else{tag = "danger"}
+
 	    $alert.addClass("alert alert-" + tag +" alert-dismissible fade in");
 	            $alert.attr('role', 'alert');
 	            var html = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
@@ -80,7 +83,7 @@ $(function() {
 			$(".choice").attr("disabled", true)
 
 	   		var chosen = $(e.target).val();
-	   		console.log($(e.target).val());
+
 
 	   		if (chosen !== q.real){
 		    	alertMaker(4,"Opps, that was wrong.")
@@ -156,7 +159,7 @@ $(function() {
     	if(actualScore===perfectScore){
 			   	$question.append("You passed! Press continue to review the quiz.");
 			   	// Generate answers? Maybe
-			   	jQuery.post("/report", {passed: true, quiz: quizId}, function(res){
+			   	jQuery.post("/report", {passed: true, moduleNo: moduleNo, task : "quiz"}, function(res){
 			   		$question.append('<p>'+res[1]+'</p>');
 		   		});
 		   	}else {

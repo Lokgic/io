@@ -21,12 +21,17 @@ body
 						a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 					li.nav-item
 						a.nav-link(data-toggle="tab", href="#practice", aria-controls="practice") Practice
+					li.nav-item.dropdown
+						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
+							.dropdown-menu
+								a.dropdown-item(href='pdf/text'+file +'.pdf') Text
+								a.dropdown-item(href='pdf/practice'+file +'.pdf') Assignment
 				.tab-content
 					.tab-pane.fade.in.active#reading(role="tabpanel")
 						.card#readingcard
 							h3.card-header#readingheader Reading
 							.card-block#readingblock
-						div#alert
+						div#readingalertdiv
 						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#submit(type="button") Submit for Grading 
 					.tab-pane.fade#quiz(role="tabpanel")
 						.card#quizcard
@@ -36,11 +41,12 @@ body
 								progress.progress(aria-describedby="progresscap")
 								p.card-text#question
 								div#answers.list-group
+
 								button.btn.button-primary.m-t-1#next(type="button") Continue
-						div#quizalert
+						div#quizalertdiv
 					.tab-pane.fade#practice(role="tabpanel")
 						script PDFObject.embed('pdf/practice#{file}.pdf', '#practice');
-			.col-lg-6.col-md-12#right
+			.col-lg-6.col-md-12#right.hidden-md-down
 				
 				script PDFObject.embed('pdf/text#{file}.pdf', '#right');
 

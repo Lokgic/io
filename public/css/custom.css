@@ -12,3 +12,8 @@ p.lead{
 	background-color: #333E48;
 	'background-image': 'none',
 }
+
+.btn-primary{
+	background-color: #333E48;
+	border-color: #333E48;
+}

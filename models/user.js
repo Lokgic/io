@@ -2,18 +2,291 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
+// var UserSchema = new mongoose.Schema({
+//   email: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//     unique: true,
+//   },
+//   name: {
+//     type: String,
+//     required: true,
+//     trim: true,
+//   },
+//   random: {
+//     type: String,
+//     required: true,
+//     trim: true
+//   },
+//   password: {
+//     type: String,
+//     required: true
+//   },
+//   m1quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m1quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m1reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m1readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m1test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m1ass:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m2quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m2ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m2quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m2reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m2readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m2test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m3ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m3quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m3quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m3reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m3readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m3test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m4quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m4quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m4reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m4readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m4ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m4test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m5quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m5ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m5quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m5reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m5readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m5test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m6ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m6quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m6quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m6reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m6readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m6test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m7ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m7quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m7quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m7reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m7readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m7test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   },
+//   m8quiz:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m8ass:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+    
+//   },
+//   m8quiztime:{
+//     type: Date,
+//     required: false
+//   },
+//   m8reading:{
+//     type:Boolean,
+//     default: false,
+//     required: false
+//   },
+//   m8readingtime:{
+//     type: Date,
+//     required: false
+//   },
+//   m8test:{
+//     type: Boolean,
+//     default: false,
+//     required: false
+
+//   }
+
+// });
 var UserSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
   },
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+  
   random: {
     type: String,
     required: true,
@@ -23,266 +296,164 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  m1quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
+  module: {
+    "1": {
+     "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+     "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+     "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m1quiztime:{
-    type: Date,
-    required: false
+  "2": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m1reading:{
-    type:Boolean,
-    default: false,
-    required: false
+  "3": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+     "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m1readingtime:{
-    type: Date,
-    required: false
+  "4": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m1test:{
-    type: Boolean,
-    default: false,
-    required: false
-
+  "5": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+    "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m1ass:{
-    type: Boolean,
-    default: false,
-    required: false
-
+  "6": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+     "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m2quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
+  "7": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   },
-  m2ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m2quiztime:{
-    type: Date,
-    required: false
-  },
-  m2reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m2readingtime:{
-    type: Date,
-    required: false
-  },
-  m2test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m3ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m3quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m3quiztime:{
-    type: Date,
-    required: false
-  },
-  m3reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m3readingtime:{
-    type: Date,
-    required: false
-  },
-  m3test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m4quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m4quiztime:{
-    type: Date,
-    required: false
-  },
-  m4reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m4readingtime:{
-    type: Date,
-    required: false
-  },
-  m4ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m4test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m5quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m5ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m5quiztime:{
-    type: Date,
-    required: false
-  },
-  m5reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m5readingtime:{
-    type: Date,
-    required: false
-  },
-  m5test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m6ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m6quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m6quiztime:{
-    type: Date,
-    required: false
-  },
-  m6reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m6readingtime:{
-    type: Date,
-    required: false
-  },
-  m6test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m7ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m7quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m7quiztime:{
-    type: Date,
-    required: false
-  },
-  m7reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m7readingtime:{
-    type: Date,
-    required: false
-  },
-  m7test:{
-    type: Boolean,
-    default: false,
-    required: false
-
-  },
-  m8quiz:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m8ass:{
-    type:Boolean,
-    default: false,
-    required: false
-    
-  },
-  m8quiztime:{
-    type: Date,
-    required: false
-  },
-  m8reading:{
-    type:Boolean,
-    default: false,
-    required: false
-  },
-  m8readingtime:{
-    type: Date,
-    required: false
-  },
-  m8test:{
-    type: Boolean,
-    default: false,
-    required: false
-
+  "8": {
+    "reading": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "quiz": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "ass": {
+     "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    },
+    "test": {
+      "passed": {type: Boolean,required: false, default :false} ,
+      "time": {type: Date,required :false, default: null}
+    }
   }
+}
+
 
 });
-
 //authenticate input against data base
 
-UserSchema.statics.checkQuizRecord = function checkRecord(recordId, userId, callback){
+UserSchema.statics.checkRecord = function checkRecord(moduleNo, task, userId, callback){
     User.findById(userId)
     .exec(function (error, user){
       if (error){
         return next(error);
       } else {
-        callback(null, user[recordId]);
+        callback(null, user.module[moduleNo][task].passed);
       }
     });
   }
@@ -292,69 +463,17 @@ UserSchema.statics.reportCard = function reportCard(userId, callback){
     .exec(function (error, user){
       if (error){
         return next(error);
-      } else {
-        var report = {
-          "0": {
-          },
-          "1": {
-            "reading": false,
-            "quiz": false,
-            "test": false,
-            "ass": false,
-          },
-          "2": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "3": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "4": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "5": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "6": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "7": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          },
-          "8": {
-            "reading": false,
-            "quiz": false,
-            "test": false
-          }
+      } else {       
+        var report = {};
+        var modules = {};
+        for (var i =1; i<9;i++){
+          modules[i] = user.module[i];
+          
         }
-        for (var i = 1; i<9; i++){
-          var n = "m"+i;
-          var quiz = n +"quiz";
-          var reading = n + "reading";
-          var test = n + "test";
-          var ass = n + "ass";
-          if (user[quiz]) report[i].quiz = true;
-          if (user[reading]) report[i].reading = true;
-          if (user[test]) report[i].test = true;
-          if (user[ass]){
-            report[i].ass = true;
-          } else {
-            report[i].ass = false;
-          }
-        }
-        report[0].name = user.name;
-        report[0].random = user.random;
+
+        report.modules = modules;
+        report.name = user.name;
+        report.random = user.random;
         callback(null, report);
       }
     });

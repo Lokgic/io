@@ -27,29 +27,32 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 	// 		}
 	// 	});
 	User.reportCard(req.session.userId, function (err, record){
+
 		if (err){
 				return next(err);
 			} else {
-				var recordArr = Object.keys(record).map(function(value) {
-							         return record[value]});
-				var name =record[0].name;
-				var random = record[0].random;
-				var reportCard = [];
-				var completed = 0;
-				for (var i = 1; i < recordArr.length ; i++){
-					reportCard[i-1] = recordArr[i];
-					reportCard[i-1].name = "Module " + i;
-				}
-				for (var i = 0; i < reportCard.length; i++){
-					if (reportCard[i].reading) completed++;
-					if (reportCard[i].quiz) completed ++;
-					if (reportCard[i].ass) completed++;
-					if (reportCard[i].test) completed++;
-				}
-				completed =  Math.trunc(100*completed/(reportCard.length * 4))
-				return res.render('profile',{ title: 'Student Profile', name:name, random: random, record:reportCard, modules:modulesList, completed:completed});
-			}
 
+
+
+				var completed = 0;
+				var modules = Object.keys(record.modules).map(function(value) {return record.modules[value]});		
+				console.log(modules[0].reading.passed);
+				completed = 0;
+
+				for (var i = 0; i < modules.length; i++){
+					if (modules[i].reading.passed) completed++;
+					if (modules[i].quiz.passed) completed ++;
+					if (modules[i].ass.passed) completed++;
+					if (modules[i].test.passed) completed++;
+					modules[i].name = "Module " + (i+1);
+
+				}
+
+				completed =  Math.trunc(100*completed/(modules.length * 4))
+			
+
+				return res.render('profile',{ title: 'Student Profile', name:record.name, random: record.random, record:modules, completed:completed});
+			}
 	})
 });
 
@@ -165,14 +168,15 @@ router.get('/1', function(req, res, next){
 });
 
 
+// grading reporting
 
 router.post('/report', function(req, res, next){
 	
 
 	if (!req.session || ! req.session.userId){
-		return res.send([3, "Nice, but since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess."])
+		return res.send([3, "Since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess."])
 	} else {
-		User.checkQuizRecord(req.body.quiz, req.session.userId, function (err, passed){
+		User.checkRecord(req.body.moduleNo, req.body.task, req.session.userId, function (err, passed){
 			if (err){
 				console.log(err);
 				return next(err);
@@ -180,12 +184,15 @@ router.post('/report', function(req, res, next){
 				if (passed){
 					return res.send([2, "No change was made to your record since you had already completed this task, but hey - you still got it!"]);
 				}else if(req.body.passed){	
-					var quizId = ""+req.body.quiz;
-					var timeString =quizId + "time";
-					var query ={};
-					query[quizId] = true;
-					query[timeString] = Date.now();
-					User.findOneAndUpdate({"_id": req.session.userId},query, function(error, user){
+					var taskObj = {};
+					var moduleObj ={};
+					var query = {};
+					taskObj["passed"] = true;
+					taskObj["time"] = Date.now();
+					moduleObj[res.body.task] = taskObj;
+					query[res.body.moduleNo] = moduleObj;
+	
+					User.findOneAndUpdate({"_id": req.session.userId},modulesObjes, function(error, user){
 						if (error){
 							return next(error);
 						}else{

@@ -1,6 +1,7 @@
 $(function() {
   // ajax var
-  var $alert = $('#alert');
+  var $alertdiv = $('#readingalertdiv');
+  var $alert = $('.readingalert');
 	var $panel = $('#reading');
 	var $card = $('#readingcard');
 	var $header =$('#readingheader');
@@ -22,16 +23,24 @@ $(function() {
   var reset = false;
 
   function alertMaker(code, content){
+    if ($alertdiv.html() == "") $alertdiv.html("<div class='alert readingalert'></div>");
+    $alert = $('.readingalert')
+    if ($alert.hasClass('alert-danger')) $alert.removeClass('alert-danger');
+      else if ($alert.hasClass('alert-success')) $alert.removeClass('alert-sucess');
+      else if ($alert.hasClass('alert-warning')) $alert.removeClass('alert-warning');
+      else if ($alert.hasClass('alert-info')) $alert.removeClass('alert-info');
+
     var tag;
-    if (code == 1){tag = "success";}
-    else if (code == 2){tag = "info";}
-    else if (code == 3){tag = "warning"}
-    else{tag = "danger"}
-    $alert.addClass("alert alert-" + tag +" alert-dismissible fade in");
-            $alert.attr('role', 'alert');
-            var html = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
-            $alert.html(html);
-  }
+      if (code == 1){tag = "success";}
+      else if (code == 2){tag = "info";}
+      else if (code == 3){tag = "warning"}
+      else{tag = "danger"}
+
+      $alert.addClass("alert alert-" + tag +" alert-dismissible fade in");
+              $alert.attr('role', 'alert');
+              var html = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
+              $alert.html(html);
+    }
 
   function shuffle(arr){
 		var currentI = arr.length, tempValue, randomI;
@@ -164,8 +173,10 @@ $(function() {
             }
       $submit.on('click', function(e){
           if (reset == false){
+            $alertdiv.html("");
             checkAnswer(quiz);
           } else{
+            $alertdiv.html("");
             resetReadingQuiz(quiz.length);
           }
        });

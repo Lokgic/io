@@ -14,65 +14,65 @@ block content
 		.row
 			for module in record
 				.col-lg-3.col-md-12.m-b-2
-					if (module.ass&&module.reading&&module.test&&module.quiz)
+					if (module.ass.passed&&module.reading.passed&&module.test.passed&&module.quiz.passed)
 						.card
-							.card-header #{module.name}
+							.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading.passed)  
 									p.card-text Reading &#10003;
 								else 
 									p.card-text Reading &#10007;
-								if (module.quiz)  
+								if (module.quiz.passed)  
 									p.card-text Quiz &#10003;
 								else 
 									p.card-text Quiz &#10007;
-								if (module.ass)  
+								if (module.ass.passed)  
 									p.card-text Practice &#10003;
 								else 
 									p.card-text Practice &#10007;
-								if (module.test)  
+								if (module.test.passed)  
 									p.card-text Test &#10003;
 								else 
 									p.card-text Test &#10007;
 							.card-footer.card-success.text-xs-center.lead Completed!
-					else if (module.ass||module.reading||module.test||module.quiz)
+					else if (module.ass.passed||module.reading.passed||module.test.passed||module.quiz.passed)
 						.card
-							.card-header #{module.name}
+							.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading.passed)  
 									p.card-text Reading &#10003;
 								else 
 									p.card-text Reading &#10007;
-								if (module.quiz)  
+								if (module.quiz.passed)  
 									p.card-text Quiz &#10003;
 								else 
 									p.card-text Quiz &#10007;
-								if (module.ass)  
+								if (module.ass.passed)  
 									p.card-text Practice &#10003;
 								else 
 									p.card-text Practice &#10007;
-								if (module.test)  
+								if (module.test.passed)  
 									p.card-text Test &#10003;
 								else 
 									p.card-text Test &#10007;
 							.card-footer.card-info.text-xs-center.lead In Progress
 					else
 						.card 
-							.card-header #{module.name}
+							.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading.passed)  
 									p.card-text Reading &#10003;
 								else 
 									p.card-text Reading &#10007;
-								if (module.quiz)  
+								if (module.quiz.passed)  
 									p.card-text Quiz &#10003;
 								else 
 									p.card-text Quiz &#10007;
-								if (module.ass)  
+								if (module.ass.passed)  
 									p.card-text Practice &#10003;
 								else 
 									p.card-text Practice &#10007;
-								if (module.test)  
+								if (module.test.passed)  
 									p.card-text Test &#10003;
 								else 
 									p.card-text Test &#10007;
