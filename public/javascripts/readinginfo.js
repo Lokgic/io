@@ -19,7 +19,7 @@ $(function() {
     }
 
     getInfo(function(err, data){
-    	$header.html("Module " + CurrentModuleNo + data[CurrentModuleNo].title);
+    	$header.html("Module " + CurrentModuleNo + " " + data[CurrentModuleNo].title);
     	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
     })
 
