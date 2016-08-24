@@ -46,7 +46,8 @@ block content
 						.card-block
 							h4.card-title Module #{modules[i].moduleNo}
 							h6.card-subtitle.text-muted #{modules[i].title}
-						.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[i].symbol}
+						a(href="/"+ modules[i].moduleNo)
+							.card-block.display-1.text-xs-center #{modules[i].symbol}
 						.card-block.p-a-2
 							p.card-text #{modules[i].description}
 		.row
@@ -55,31 +56,34 @@ block content
 					.card-block
 						h4.card-title Module #{modules[3].moduleNo}
 						h6.card-subtitle.text-muted #{modules[3].title}
-					.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[3].symbol}
+					a(href="/3")
+						.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[3].symbol}
 					.card-block.p-a-2
 						p.card-text #{modules[3].description}
 			.col-md-12.col-lg-4
 				.card.moduleintro
 					.card-block
 						blockquote.card-blockquote.p-a-2
-							p.lead.text-muted#moduleIntroQuote
+							p.m-t-1.lead.text-muted.m-t-2#moduleIntroQuote
 							footer.blockquote-footer.text-muted#moduleIntroAuthor
 			.col-md-12.col-lg-4
 				.card.moduleintro
 					.card-block
 						h4.card-title Module #{modules[4].moduleNo}
 						h6.card-subtitle.text-muted #{modules[4].title}
-					.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[4].symbol}
+					a(href="/#{4}")
+						.card-block.display-1.text-xs-center #{modules[4].symbol}
 					.card-block.p-a-2
 						p.card-text #{modules[4].description}
 		.row
 			for i in [5,6,7]
 				.col-md-12.col-lg-4
-					.card.moduleintro.p-a-2
+					.card.moduleintro
 						.card-block
 							h4.card-title Module #{modules[i].moduleNo}
 							h6.card-subtitle.text-muted #{modules[i].title}
-						.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[i].symbol}
+						a(href="/#{i}")
+							.card-block.display-1.text-xs-center #{modules[i].symbol}
 						.card-block.p-a-2
 							p.card-text #{modules[i].description}
 block extrafooter		

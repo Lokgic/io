@@ -19,3 +19,19 @@ p.lead{
 }
 
 .moduleintro{ border-width: 0px;}
+
+.moduleintro a:hover{
+	text-decoration: none;
+
+}
+
+.moduleintro .display-1{
+	color:white;
+	background-color: #333;
+	border-color: #333;
+}
+
+.moduleintro .display-1:hover{
+	background-color: black;
+	transition: 0.5s;
+}

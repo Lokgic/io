@@ -57,7 +57,7 @@ $(function() {
 	var seed2 = Math.floor(Math.random()* data.length)
 
 	$('#moduleIntroQuote').html(data[seed2].quote);
-	$('#moduleIntroAuthor').html(data[seed2].lname);
+	$('#moduleIntroAuthor').html(data[seed2].fname + " " + data[seed2].lname);
 	// $jimbo.attr("style", attrbeginning + data[seed].lname.toLowerCase() + attrending);
 	 // $author.html("- " + data[seed].fname + " " + data[seed].lname + ", <i>" +data[seed].source + "</i>");
 	// $quote.html(data[seed].quote);
