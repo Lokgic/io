@@ -5,7 +5,7 @@
           "label": "reading_1",
         "id": "Statement_Identification", 
   		"method": "fill",
-       "instruction": "Identify the following expressions. They are either questions, commands or exclamations",
+       "instruction": "Identify the following expressions. Enter either 'statement', 'question', 'command' or 'exclamation'",
           "questions":[
           	["England is smaller than China.", "statement"],
           	["Greenland is south of Jerusalem.", "statement"],
