@@ -42,7 +42,6 @@ $(function() {
 	            $alert.html(html);
 	  }
 
-
 	function shuffle(arr){
 		var currentI = arr.length, tempValue, randomI;
 
@@ -159,8 +158,8 @@ $(function() {
     	if(actualScore===perfectScore){
 			   	$question.append("You passed! Press continue to review the quiz.");
 			   	// Generate answers? Maybe
-			   	jQuery.post("/report", {passed: true, moduleNo: moduleNo, task : "quiz"}, function(res){
-			   		$question.append('<p>'+res[1]+'</p>');
+			   	jQuery.post("/report", {moduleNo: moduleNo, label : "quiz"}, function(res){
+			   		$question.append('<p>'+res+'</p>');
 		   		});
 		   	}else {
 		   		$question.append("Unfortunately, you didn't pass! You need to get all " + perfectScore + " questions correct to pass. But it doesn't cost anything to take the quiz, so why not try again?");

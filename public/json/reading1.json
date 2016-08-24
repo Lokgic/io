@@ -1,0 +1,33 @@
+{
+  "1" : { "title": "Identifying Statements",
+          "moduleNo": 1,
+          "section": "I",
+          "label": "reading_1",
+        "id": "Statement_Identification", 
+  		"method": "fill",
+       "instruction": "Identify the following expressions. They are either questions, commands or exclamations",
+          "questions":[
+          	["England is smaller than China.", "statement"],
+          	["Greenland is south of Jerusalem.", "statement"],
+          	["Is New Jersey east of Wisconsin?", "question"],
+          	["The atomic number of helium is 2.", "statement"],
+          	["Blech! Overcooked noodles!", "statement"],
+          	["Blech!", "exclamation"]
+          	]
+          },
+    "2" : { "title": "test",
+          "moduleNo": 1,
+          "section": "II",
+          "label": "reading_2",
+        "id": "test", 
+      "method": "fill",
+       "instruction": "Identify the following expressions. They are either questions, commands or exclamations",
+          "questions":[
+
+            ["test!", "test"]
+            ]
+          }
+   
+   
+
+}

@@ -1,279 +1,17 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
-// var UserSchema = new mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true,
-//     trim: true,
-//     unique: true,
-//   },
-//   name: {
-//     type: String,
-//     required: true,
-//     trim: true,
-//   },
-//   random: {
-//     type: String,
-//     required: true,
-//     trim: true
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   },
-//   m1quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m1quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m1reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m1readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m1test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
+var RecordSchema = new Schema({
+  moduleNo:  Number,
+  label: String,
+  section: String,
+},
+{ timestamps: { createdAt: 'created_at' }}
+);
 
-//   },
-//   m1ass:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m2quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m2ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m2quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m2reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m2readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m2test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m3ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m3quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m3quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m3reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m3readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m3test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m4quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m4quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m4reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m4readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m4ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m4test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m5quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m5ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m5quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m5reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m5readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m5test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m6ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m6quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m6quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m6reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m6readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m6test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m7ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m7quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m7quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m7reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m7readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m7test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   },
-//   m8quiz:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m8ass:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-    
-//   },
-//   m8quiztime:{
-//     type: Date,
-//     required: false
-//   },
-//   m8reading:{
-//     type:Boolean,
-//     default: false,
-//     required: false
-//   },
-//   m8readingtime:{
-//     type: Date,
-//     required: false
-//   },
-//   m8test:{
-//     type: Boolean,
-//     default: false,
-//     required: false
-
-//   }
-
-// });
-var UserSchema = new mongoose.Schema({
+var UserSchema = new Schema({
     name: {
       type: String,
       required: true,
@@ -296,188 +34,262 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  module: {
-    "1": {
-     "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-     "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-     "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "2": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "3": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-     "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "4": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "5": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-    "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "6": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-     "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "7": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  },
-  "8": {
-    "reading": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "quiz": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "ass": {
-     "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    },
-    "test": {
-      "passed": {type: Boolean,required: false, default :false} ,
-      "time": {type: Date,required :false, default: null}
-    }
-  }
-}
-
-
+  record: [RecordSchema]
 });
-//authenticate input against data base
 
-UserSchema.statics.checkRecord = function checkRecord(moduleNo, task, userId, callback){
+
+
+UserSchema.statics.record = function record(userId, moduleNo, label, callback){
     User.findById(userId)
     .exec(function (error, user){
       if (error){
         return next(error);
       } else {
-        callback(null, user.module[moduleNo][task].passed);
+        var query = {};
+
+        for (var i = 0; i <user.record.length;i++){         
+            if(user.record[i].label == label && user.record[i].moduleNo){
+              console.log(user.record[i].label);
+              console.log(user.record[i].moduleNo);
+                return callback(null, "No change was made to your record since you had already completed this task, but hey - you still got it!")
+            }
+        }
+        var rec = {}
+        rec.moduleNo = moduleNo;
+        rec.label = label;
+        user.record.push(rec);
+        user.save();
+        return callback(null, "Your record has been updated.")
       }
     });
   }
 
-UserSchema.statics.reportCard = function reportCard(userId, callback){
-    User.findById(userId)
+
+UserSchema.statics.getProfile = function getProfile(userId, callback){
+  User.findById(userId)
     .exec(function (error, user){
       if (error){
         return next(error);
-      } else {       
-        var report = {};
-        var modules = {};
-        for (var i =1; i<9;i++){
-          modules[i] = user.module[i];
-          
-        }
+      } else {
+        
+        // modules = [];
+        // for (var i = 0; i<9; i++){
+        //   modules[i] = {};
+        // }
 
-        report.modules = modules;
-        report.name = user.name;
-        report.random = user.random;
-        callback(null, report);
+        // for (var i =0; i<data.length;i++ ){
+        //   modules[data[i].moduleNo - 1][data[i].label] = true;
+         
+        // }
+        //   for (var i = 0; i<9; i++){
+
+        //   } 
+          return callback(null, user);
       }
-    });
-  }
+
+    })
+
+}
+//   module: {
+//     "1": {
+//      "reading": {
+//         "passed": {type: Boolean,required: false, default :false} ,
+//         "time": {type: Date,required :false, default: null},
+//         "section":{
+//           "I":{
+//             "passed": {type: Boolean,required: false, default :false},
+//           "time": {type: Date,required :false, default: null}
+//           },
+//           "II":{
+//             "passed": {type: Boolean,required: false, default :false},
+//           "time": {type: Date,required :false, default: null}
+//           }
+//         },
+//       },
+//     "quiz": {
+//      "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//      "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "2": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "3": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//      "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "4": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "5": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//     "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "6": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//      "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "7": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   },
+//   "8": {
+//     "reading": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "quiz": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "ass": {
+//      "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     },
+//     "test": {
+//       "passed": {type: Boolean,required: false, default :false} ,
+//       "time": {type: Date,required :false, default: null}
+//     }
+//   }
+// }
+
+
+
+//authenticate input against data base
+
+// UserSchema.statics.checkRecord = function checkRecord(moduleNo, type, userId, callback){
+
+      
+
+//     User.findById(userId)
+//     .exec(function (error, user){
+//       if (error){
+//         return next(error);
+//       } else {
+//         if (typeof type == 'object'){
+//           var typename = type.name;
+//           var section = type.section;
+//           console.log(typename + section);
+//           callback(null, user.module[moduleNo][typename].section[section].passed);
+//         } else callback(null, user.module[moduleNo][type].passed);
+//       }
+//     });
+//   }
+
+// UserSchema.statics.reportCard = function reportCard(userId, callback){
+//     User.findById(userId)
+//     .exec(function (error, user){
+//       if (error){
+//         return next(error);
+//       } else {       
+//         var report = {};
+//         var modules = {};
+//         for (var i =1; i<9;i++){
+//           modules[i] = user.module[i];
+          
+//         }
+
+//         report.modules = modules;
+//         report.name = user.name;
+//         report.random = user.random;
+//         callback(null, report);
+//       }
+//     });
+//   }
 
 UserSchema.statics.authenticate = function(email, password, callback){
   User.findOne({email: email})

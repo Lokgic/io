@@ -12,7 +12,7 @@ $(function() {
     }
 
     function getTerms(callback){
-        $.getJSON('json/readingquiz' + moduleNo +'.json')
+        $.getJSON('json/concepts' + moduleNo +'.json')
         .done(function(data){
             callback(null, data)
         }).fail(function(){$body.append("Failed to Load Data.")})
@@ -43,7 +43,7 @@ $(function() {
             terms+= '<td></td>'
         }
         terms += '</tbody>'
-        $body.append('<p>For the reading quiz below, you are asked to select the definition of the term showned. All definitions are taken directly from the text.</p>' + terms);
+        $body.append('<p>For conceptual quiz, you are quizzed on the terms below. All definitions are taken directly from the text.</p>' + terms);
        
         
     })
