@@ -72,18 +72,8 @@ UserSchema.statics.getProfile = function getProfile(userId, callback){
         return next(error);
       } else {
         
-        // modules = [];
-        // for (var i = 0; i<9; i++){
-        //   modules[i] = {};
-        // }
+        
 
-        // for (var i =0; i<data.length;i++ ){
-        //   modules[data[i].moduleNo - 1][data[i].label] = true;
-         
-        // }
-        //   for (var i = 0; i<9; i++){
-
-        //   } 
           return callback(null, user);
       }
 
