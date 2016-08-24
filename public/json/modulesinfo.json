@@ -1,0 +1,50 @@
+{
+	"1":{
+		"moduleNo": 1,
+		"symbol" : "¬",
+		"title": "Basic Concepts in Logic",
+		"description": "We begin with learning the basic concepts in logic. We look at the role of argument in general, and what it means to evaluate arguments. We end with an introduction of formal logic - the topic of our class." 
+	},
+	"2":{
+		"moduleNo": 2,
+				"symbol" :"∅" ,
+		"title": "Categorical Logic",
+		"description": "Ennui polaroid keytar tousled, chambray gochujang swag church-key XOXO taxidermy irony. Green juice distillery chartreuse, aesthetic mumblecore XOXO portland kombucha salvia plaid helvetica selvage truffaut.  " 
+	},
+	"3":{
+		"moduleNo": 3,
+		"title": "Sentence Logic: introduction",
+				"symbol" :"⊥" ,
+		"description": "Bitters try-hard 3 wolf moon actually before they sold out. Kinfolk neutra normcore meh, cred meditation health goth vice kickstarter craft beer. Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter."
+	},
+	"4":{
+		"moduleNo": 4,
+		"title": "Sentence Logic: Proofs",
+		"symbol" :"⊢" ,
+		"description": "Blog chambray pug offal vinyl humblebrag health goth kogi beard affogato hashtag. Tattooed drinking vinegar meggings vinyl. Cliche XOXO distillery viral kogi kale chips. Vice seitan green juice, meh chia ugh church-key asymmetrical master cleanse distillery. " 
+	},
+	"5":{
+		"moduleNo": 5,
+		"title": "Predicate Logic: Syntax",
+		"symbol" :"∀" ,
+		"description": "Butcher you probably haven't heard of them ennui sartorial. Bitters try-hard 3 wolf moon actually before they sold out. Kinfolk neutra normcore meh, cred meditation health goth vice kickstarter craft beer. Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
+	},
+	"6":{
+		"moduleNo": 6,
+		"title": "Predicate Logic: Semantics",
+		"symbol" :"⊨" ,
+		"description": "Actually YOLO kale chips, meditation fap mlkshk photo booth keffiyeh artisan fingerstache normcore humblebrag you probably haven't heard of them letterpress.  "  
+	},
+	"7":{
+		"moduleNo": 7,
+		"title": "Predicate Logic: Proofs",
+		"symbol" :"∃" ,
+		"description": "Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
+	},
+	"8":{
+		"moduleNo": 8,
+		"title": "Review and Metalogic",
+		"symbol" :"∴" ,
+		"description":" Mustache before they sold out bitters try-hard sartorial. Forage actually organic disrupt waistcoat, XOXO kitsch portland venmo. Chambray semiotics franzen, bespoke biodiesel asymmetrical umami chicharrones. Deep v semiotics kombucha, hella lumbersexual photo booth narwhal vinyl craft beer.."
+	}
+}
