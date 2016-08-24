@@ -8,42 +8,79 @@ block content
 	.container.p-t-2.m-b-3
 		.row
 			.col-lg-4
-				h3.m-b-2 #{sylList[0].title}
 				img.m-b-1.img-fluid.hidden-xs-down(src="img/frege.jpg", alt = "Frege")
+			.col-lg-8
+				h3.m-b-2 #{sylList[0].title}
 				p #{sylList[0].description}
-			.col-lg-4
 				h3.m-b-2 #{sylList[1].title}
 				p #{sylList[1].description}
-				h3.m-b-2 #{sylList[2].title}
-				p #{sylList[2].description}
-			.col-lg-4
-				h3.m-b-2 What You'll Learn
-				ul.list-group
-					li.list-group-item
-						strong Argument: 
-						|From Premises to Conclusion
-					li.list-group-item
-						strong Evalution: 
-						|Deductive Validity
-					li.list-group-item
-						strong Categorical Syllogisms: 
-						|One to Many and Many to One
-					li.list-group-item
-						strong Symbolic Languages: 
-						|Sentential and Predicate
-					li.list-group-item
-						strong Formal Semantics: 
-						|Truth Tables and Models
-					li.list-group-item
-						strong Proofs: 
-						|Natural Deduction
+				//- h3.m-b-2 #{sylList[2].title}
+				//- p #{sylList[2].description}
+			//- .col-lg-4
+			//- 	h3.m-b-2 What You'll Learn
+			//- 	ul.list-group
+			//- 		li.list-group-item
+			//- 			strong Argument: 
+			//- 			|From Premises to Conclusion
+			//- 		li.list-group-item
+			//- 			strong Evalution: 
+			//- 			|Deductive Validity
+			//- 		li.list-group-item
+			//- 			strong Categorical Syllogisms: 
+			//- 			|One to Many and Many to One
+			//- 		li.list-group-item
+			//- 			strong Symbolic Languages: 
+			//- 			|Sentential and Predicate
+			//- 		li.list-group-item
+			//- 			strong Formal Semantics: 
+			//- 			|Truth Tables and Models
+			//- 		li.list-group-item
+			//- 			strong Proofs: 
+			//- 			|Natural Deduction
 	.container.p-t-2.m-b-3
 		h1.display-4.text-xs-center.m-y-3.text-muted#modules Modules
 		.row
-			for module in modules
-				.col-lg-6.col-md-12
-					.card.card-block
-						h4.card-title #{module.title}
-						p.card-text #{module.description}
+			for i in [0,1,2]
+				.col-md-12.col-lg-4
+					.card.moduleintro
+						.card-block
+							h4.card-title Module #{modules[i].moduleNo}
+							h6.card-subtitle.text-muted #{modules[i].title}
+						.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[i].symbol}
+						.card-block.p-a-2
+							p.card-text #{modules[i].description}
+		.row
+			.col-md-12.col-lg-4
+				.card.moduleintro
+					.card-block
+						h4.card-title Module #{modules[3].moduleNo}
+						h6.card-subtitle.text-muted #{modules[3].title}
+					.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[3].symbol}
+					.card-block.p-a-2
+						p.card-text #{modules[3].description}
+			.col-md-12.col-lg-4
+				.card.moduleintro
+					.card-block
+						blockquote.card-blockquote.p-a-2
+							p.lead.text-muted#moduleIntroQuote
+							footer.blockquote-footer.text-muted#moduleIntroAuthor
+			.col-md-12.col-lg-4
+				.card.moduleintro
+					.card-block
+						h4.card-title Module #{modules[4].moduleNo}
+						h6.card-subtitle.text-muted #{modules[4].title}
+					.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[4].symbol}
+					.card-block.p-a-2
+						p.card-text #{modules[4].description}
+		.row
+			for i in [5,6,7]
+				.col-md-12.col-lg-4
+					.card.moduleintro.p-a-2
+						.card-block
+							h4.card-title Module #{modules[i].moduleNo}
+							h6.card-subtitle.text-muted #{modules[i].title}
+						.card-block.display-1.text-xs-center(style="background-color: #333; border-color: #333; color:white") #{modules[i].symbol}
+						.card-block.p-a-2
+							p.card-text #{modules[i].description}
 block extrafooter		
 	script(src="javascripts/randomBG.js" type="text/javascript")

@@ -14,18 +14,6 @@
           	["Blech! Overcooked noodles!", "statement"],
           	["Blech!", "exclamation"]
           	]
-          },
-    "2" : { "title": "test",
-          "moduleNo": 1,
-          "section": "II",
-          "label": "reading_2",
-        "id": "test", 
-      "method": "fill",
-       "instruction": "Identify the following expressions. They are either questions, commands or exclamations",
-          "questions":[
-
-            ["test!", "test"]
-            ]
           }
    
    

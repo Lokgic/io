@@ -1,10 +1,10 @@
 $(function() {
 	var $header = $('#readingheader');
 	var $body = $('#readingblock')
-	var moduleNo = $("title").attr('id');
+	var CurrentModuleNo = $("title").attr('id');
 
 	function getInfo(callback){
-        $.getJSON('json/readinginfo.json') 
+        $.getJSON('json/modulesinfo.json') 
         .done(function(data){
         callback(null, data);
      }).fail(function(){$body.append('Failed to Load Quiz')});
@@ -12,15 +12,15 @@ $(function() {
     }
 
     function getTerms(callback){
-        $.getJSON('json/concepts' + moduleNo +'.json')
+        $.getJSON('json/concepts' + CurrentModuleNo +'.json')
         .done(function(data){
             callback(null, data)
         }).fail(function(){$body.append("Failed to Load Data.")})
     }
 
     getInfo(function(err, data){
-    	$header.html("Module " + data[moduleNo - 1].header);
-    	$body.html('<p>'+data[moduleNo - 1].description+'</p>');
+    	$header.html("Module " + CurrentModuleNo + data[CurrentModuleNo].title);
+    	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
     })
 
     getTerms(function(err, data){

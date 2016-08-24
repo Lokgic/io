@@ -9,7 +9,7 @@ var syllabus = require('../public/json/syllabus.json');
 var sylList = Object.keys(syllabus).map(function(value) {
 							         return syllabus[value]});
 
-var modulesObj = require('../public/json/modules.json')
+var modulesObj = require('../public/json/modulesinfo.json')
 
 var modulesList = Object.keys(modulesObj).map(function(value) {
 							         return modulesObj[value]});
