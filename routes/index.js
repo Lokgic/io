@@ -173,8 +173,22 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 // 1//
 
 router.get('/1', function(req, res, next){
-	return res.render('modules', {title: 'Module One', file: "1"})
+	return res.render('modules', {title: 'Module One', file: "1", "part": "reading"})
 });
+
+router.get('/1reading', function(req, res, next){
+	return res.redirect('/1')
+});
+
+router.get('/1concepts', function(req, res, next){
+	return res.render('modules', {title: 'Module One', file: "1", part: "concepts"})
+});
+
+router.get('/1quiz', function(req, res, next){
+	return res.render('modules', {title: 'Module One', file: "1", part: "quiz"})
+});
+
+
 
 
 // grading reporting

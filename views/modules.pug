@@ -15,13 +15,22 @@ body
 		.row
 			.col-lg-6#left
 				ul.nav.nav-tabs
-					li.nav-item
-						a.nav-link.active(data-toggle="tab", href="#reading", aria-controls="reading") Read
-					li.nav-item
-						a.nav-link(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
-					li.nav-item
-						a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Practice
-					li.nav-item.dropdown
+					li.nav-item.display-4
+						if (part == "reading")
+							a.nav-link.active(data-toggle="tab", href="#reading", aria-controls="reading") Reading
+						else 
+							a.nav-link(data-toggle="tab", href="#reading", aria-controls="reading") Reading
+					li.nav-item.display-4
+						if (part == "concepts")
+							a.nav-link.active(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
+						else 
+							a.nav-link(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
+					li.nav-item.display-4
+						if (part =="quiz")
+							a.nav-link.active(data-toggle="tab", href="#quiz", aria-controls="quiz") Practice
+						else
+							a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Practice
+					li.nav-item.dropdown.display-4
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
 								a.dropdown-item(href='pdf/text'+file +'.pdf') Text

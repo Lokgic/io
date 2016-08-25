@@ -167,6 +167,51 @@ function init(type){
       return html;
     }
 
+    function makeDropdownCard(obj){
+
+        var dropdownItems;
+        for (var i = 0; i < obj.possibleAnswers.length; i++){
+          dropdownItems += '<option value ='+obj.possibleAnswers[i]+'>' + obj.possibleAnswers[i] + '</option>';
+        }
+
+        var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
+        html += '<p class="font-italic">' + obj.instruction +'<p>';
+      html += '<form>';
+         
+         for (var i = 0;i<obj.questions.length;i++){
+          var tempLabel = obj.id + i; 
+           html += '<div class="form-group row">';
+            html += '<label id = ' + tempLabel +'label class="col-md-10 col-form-label col-xs-12" for = ' + tempLabel + '>' + obj.questions[i][0] + '</label>'
+           html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
+           html += dropdownItems;
+           html += '</select></div></div>'
+
+         }
+
+         html += '</form>';
+
+      html +='<button class="btn btn-primary btn-lg btn-block m-t-1 m-b-1" id=' + obj.id +  'submit type="button">Submit</button>'
+
+         return html;
+      }
+
+
+    function checkDropdownAnswer(obj){
+      var correct =[];
+      for (var i = 0; i < obj.questions.length;i++){
+        var $targetLabel = $("#" +obj.id + i +"label");
+        var $targetInput = $("#" + obj.id + i+ " option:selected");
+        console.log($targetInput.val()+ " "+ obj.questions[i][1]);
+
+        if ($targetInput.val() == obj.questions[i][1]){
+          correct.push(i);
+          $targetLabel.html(obj.questions[i][0] + " &#10004;");
+        } else $targetLabel.html(obj.questions[i][0] + " &#10008;");
+      }
+      if (correct.length == obj.questions.length) return true;
+        else return false;
+    }
+
     function checkFillAnswer(obj){
       var correct =[];
       for (var i = 0; i < obj.questions.length;i++){
@@ -215,33 +260,40 @@ function init(type){
     //init
       loadJSON(function(err, data){
         instruction();
+        var makeQuestionType = {};
+        var checkQuestionType = {};
+        makeQuestionType.fill = makefillCard;
+        makeQuestionType.dropdown = makeDropdownCard;
+         checkQuestionType.fill = checkFillAnswer;
+        checkQuestionType.dropdown = checkDropdownAnswer;
 
         if(type =="reading"){
   
-          for (problem in data){
+           for (problem in data){
   
-            if(data[problem].method == "fill"){
-                $panel.append(makefillCard(data[problem]));
-                $('#' + data[problem].id + 'submit').on('click', function(e){
-  
-                  if (checkFillAnswer(data[problem])){
 
-                      jQuery.post("/report", {label: data[problem].label, moduleNo: data[problem].moduleNo}, function(res){
-                              makeAlert($('#' + data[problem].id + 'submit'), "a", "You have completed this section! " + res,2);
+              $panel.append(makeQuestionType[data[problem].method](data[problem]));
 
-                           });
+              $('#' + data[problem].id + 'submit').on('click', function(e){
+
+                if (checkQuestionType[data[problem].method](data[problem])){
+
+                    jQuery.post("/report", {label: data[problem].label, moduleNo: data[problem].moduleNo}, function(res){
+                            makeAlert($('#' + data[problem].id + 'submit'), "a", "You have completed this section! " + res,2);
+
+                         });
 
 
-                      
-                      
-                  } else {
-                    makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
+                    
+                    
+                } else {
+                  makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
 
-                  }
+                }
 
-                })
-            }
-          }
+              })
+          
+           }
         }
 
 

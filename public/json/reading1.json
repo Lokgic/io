@@ -4,16 +4,33 @@
           "section": "I",
           "label": "reading_1",
         "id": "Statement_Identification", 
-  		"method": "fill",
+  		"method": "dropdown",
        "instruction": "Identify the following expressions. Enter either 'statement', 'question', 'command' or 'exclamation'",
           "questions":[
-          	["England is smaller than China.", "statement"],
-          	["Greenland is south of Jerusalem.", "statement"],
-          	["Is New Jersey east of Wisconsin?", "question"],
-          	["The atomic number of helium is 2.", "statement"],
-          	["Blech! Overcooked noodles!", "statement"],
-          	["Blech!", "exclamation"]
-          	]
+          	["England is smaller than China.", "Statement"],
+          	["Greenland is south of Jerusalem.", "Statement"],
+          	["Is New Jersey east of Wisconsin?", "Question"],
+          	["The atomic number of helium is 2.", "Statement"],
+          	["Blech! Overcooked noodles!", "Statement"],
+          	["Blech!", "Exclamation"]
+          	],
+            "possibleAnswers": ["Statement", "Question", "Exclamation", "Command"]
+          },
+  "2" : { "title": "Identifying Statements",
+          "moduleNo": 1,
+          "section": "II",
+          "label": "reading_1",
+        "id": "Statement_Identification2", 
+      "method": "fill",
+       "instruction": "Identify the following expressions. Enter either 'statement', 'question', 'command' or 'exclamation'",
+          "questions":[
+            ["England is smaller than China.", "statement"],
+            ["Greenland is south of Jerusalem.", "statement"],
+            ["Is New Jersey east of Wisconsin?", "question"],
+            ["The atomic number of helium is 2.", "statement"],
+            ["Blech! Overcooked noodles!", "statement"],
+            ["Blech!", "exclamation"]
+            ]
           }
    
    
