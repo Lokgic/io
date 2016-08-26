@@ -47,7 +47,7 @@ $(function() {
             terms+= '<td></td>'
         }
         terms += '</tbody>'
-        $body.append('<p>For conceptual quiz, you are quizzed on the terms below. All definitions are taken directly from the text.</p>' + terms);
+        $body.append('<p>For conceptual quiz, you will quizzed on the terms below. All definitions are taken directly from the text.</p>' + terms);
        
         
     })
