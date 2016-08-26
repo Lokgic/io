@@ -54,8 +54,7 @@ height: 100%;
 }
 .nav-tabs {
   background-color: #333E48;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+
   display: block;
 
 }
@@ -68,3 +67,15 @@ a.nav-link{
 #readingheader, #quizheader,#conceptsheader{
   border-top-width: 0;
 }
+
+
+  @media (max-width: 568px){
+    #wtf{ float: none;}
+
+  }
+  
+#closepdf{
+  float:left;
+}
+
+

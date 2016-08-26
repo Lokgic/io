@@ -7,7 +7,7 @@ head
 	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css', integrity='sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY', crossorigin='anonymous')
 	link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
 	script(src="javascripts/pdfobject.js")
-	link(rel="stylesheet", type="text/css", href="css/module.css")
+
 
 body
 	include navbar
@@ -15,22 +15,22 @@ body
 		.row
 			.col-lg-6#left
 				ul.nav.nav-tabs
-					li.nav-item.display-4
+					li.nav-item.display-4#wtf
 						if (part == "reading")
 							a.nav-link.active(data-toggle="tab", href="#reading", aria-controls="reading") Reading
 						else 
 							a.nav-link(data-toggle="tab", href="#reading", aria-controls="reading") Reading
-					li.nav-item.display-4
+					li.nav-item.display-4#wtf
 						if (part == "concepts")
 							a.nav-link.active(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
 						else 
 							a.nav-link(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
-					li.nav-item.display-4
+					li.nav-item.display-4#wtf
 						if (part =="quiz")
 							a.nav-link.active(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 						else
 							a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
-					li.nav-item.dropdown.display-4
+					li.nav-item.dropdown.display-4#wtf
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
 								a.dropdown-item(href='pdf/text'+file +'.pdf') Text
@@ -58,9 +58,11 @@ body
 							div#conceptsalertdiv
 							.card-block#conceptsblock
 						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
-			.col-lg-6.col-md-12#right.hidden-md-down
-				
-				script PDFObject.embed('pdf/text#{file}.pdf', '#right');
+			.col-lg-6.hidden-md-down#rightCol
+				button(type = "button" class = "close" aria-label="close")#closepdf
+					span(aria-hidden='true') &times;
+				.container#right
+					script PDFObject.embed('pdf/text#{file}.pdf', '#right');
 
 
 footer
@@ -72,4 +74,6 @@ footer
 	script(src='javascripts/concepts.js')
 	script(src='javascripts/info.js')
 	//- script(src='javascripts/tutorial.js')
+	script(src="javascripts/closePDFButton.js")
 	script(src="javascripts/pdfobject.js")
+	link(rel="stylesheet", type="text/css", href="css/module.css")
