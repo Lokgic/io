@@ -1,14 +1,22 @@
 {
-	"Symbolic Logic":{
+	"symboliclogic":{
 		"title": "Symbolic Logic",
 		"description": "is the most precise form of notation ever developed, and has been absolutely fundamental to contemporary developments in in mathematics, linguistics, computer science and, yes, philosophy. Simply becoming comfortable with logical notation is an enormous benefit to anyone who would like to do advanced work in these fields." 
 	},
-	"About The Course":{
+	"aboutthiscourse":{
 		"title": "About This Course",
 		"description": "What does it really mean to prove something? A real proof is a thing of beauty, but it takes quite a bit of work to appreciate this. If this course is successful, then at least once before the end of the semester, the beauty of a deductive proof will smack you hard right between the eyes. You will shed tears of joy, and you will be forever changed. (Unfortunately, this form of success is difficult to test, and does not guarantee a passing grade.)"
 	},
-	"Course Format":{
+	"courceformat":{
 		"title": "Conditionally Self-Paced",
-		"description": "This course is conditionally self-paced:  you will decide when to turn in an assginment take a particular test, with conditions that aim to encourage progress. The aim of this structure aims to accomodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. "
+		"description": "This course is conditionally self-paced:  you will decide when to turn in an assginment take a particular test, under certrain progress-conducive conditions. The aim of this structure aims to accomodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. For more info, see the 'Grading and Policy' page"
+	},
+	"textbook":{
+		"title": "Open Source Textbook",
+		"description": "We will use a version of an open source textbook forall x by J. Robert Loftis, who built upon the works of P.D. Magnus and Cathal Woods. As the educational material of this website is directly built upon their work, lokgic.io is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License, which is compatible with the license under which both versions of forall x were made. Source code for this website is available on github. See About page for more detail."
+	},
+	"modular":{
+		"title":"Modular Progression",
+		"description": "The course is structured around eight modules. As each of the modules builds on the previous one, it is recommended that they are done in order. Each module is divided into 4 phases: reading, concepts, quizzing and testing. Click the corresponding icon below to begin a module."
 	}
 }

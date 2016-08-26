@@ -64,11 +64,6 @@ a.nav-link{
 
 
 }
-a.nav-link.active{
-  background-color: #f5f5f5;
-  box-shadow: 2px;
-
-}
 
 #readingheader, #quizheader,#conceptsheader{
   border-top-width: 0;

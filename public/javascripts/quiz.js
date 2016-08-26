@@ -73,8 +73,13 @@ $(function() {
 
     	Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
    		answers.push(q.real);
-   		shuffle(answers);       
-   		$question.html('<p class = "lead">'  + q.question + '</p>');		
+   		shuffle(answers);
+   		var question =""; 
+   		if ("setup" in q) {
+   			question +='<p class = "lead">'  + q.setup + '</p>'
+   		}  
+   		question+='<p class = "lead">'  + q.question + '</p>';
+   		$question.html(question);		
    		printAnswers(answers);
 
    		$(".choice").on("click", function(e){

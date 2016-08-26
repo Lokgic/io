@@ -27,14 +27,13 @@ body
 							a.nav-link(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
 					li.nav-item.display-4
 						if (part =="quiz")
-							a.nav-link.active(data-toggle="tab", href="#quiz", aria-controls="quiz") Practice
+							a.nav-link.active(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 						else
-							a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Practice
+							a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 					li.nav-item.dropdown.display-4
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
 								a.dropdown-item(href='pdf/text'+file +'.pdf') Text
-								a.dropdown-item(href='pdf/practice'+file +'.pdf') Assignment
 				.tab-content
 					.tab-pane.fade.in.active#reading(role="tabpanel")
 						.card#readingcard
@@ -44,7 +43,7 @@ body
 						//- button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#readingsubmit(type="button") Submit for Grading 
 					.tab-pane.fade#quiz(role="tabpanel")
 						.card#quizcard
-							h3.card-header#quizheader Practice Quiz #{file}
+							h3.card-header#quizheader Quiz #{file}
 							.card-block#quizblock
 								.text-xs-center#progresscap Progress
 								progress.progress(aria-describedby="progresscap")
@@ -57,7 +56,8 @@ body
 						.card#conceptscard
 							h3.card-header#conceptsheader Concepts
 							div#conceptsalertdiv
-							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
+							.card-block#conceptsblock
+						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
 			.col-lg-6.col-md-12#right.hidden-md-down
 				
 				script PDFObject.embed('pdf/text#{file}.pdf', '#right');
@@ -70,6 +70,6 @@ footer
 	script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous")
 	script(src='javascripts/quiz.js')
 	script(src='javascripts/concepts.js')
-	script(src='javascripts/readinginfo.js')
-	//- script(src='javascripts/readingquiz.js')
+	script(src='javascripts/printinfo.js')
+	//- script(src='javascripts/tutorial.js')
 	script(src="javascripts/pdfobject.js")

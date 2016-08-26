@@ -195,15 +195,15 @@ function init(type){
          return html;
       }
 
-
-    function checkDropdownAnswer(obj){
+    function checkReadingAnswer(obj){
+      var selectorTag;
+      if (obj.method == "dropdown") selectorTag = " option:selected";
+      else if (obj.method == "fill") selectorTag = "";
       var correct =[];
       for (var i = 0; i < obj.questions.length;i++){
         var $targetLabel = $("#" +obj.id + i +"label");
-        var $targetInput = $("#" + obj.id + i+ " option:selected");
-        console.log($targetInput.val()+ " "+ obj.questions[i][1]);
-
-        if ($targetInput.val() == obj.questions[i][1]){
+        var $targetInput = $("#" + obj.id + i+ selectorTag);
+        if ($targetInput.val().toLowerCase() == obj.questions[i][1].toLowerCase()){
           correct.push(i);
           $targetLabel.html(obj.questions[i][0] + " &#10004;");
         } else $targetLabel.html(obj.questions[i][0] + " &#10008;");
@@ -212,19 +212,6 @@ function init(type){
         else return false;
     }
 
-    function checkFillAnswer(obj){
-      var correct =[];
-      for (var i = 0; i < obj.questions.length;i++){
-        var $targetLabel = $("#" +obj.id + i +"label");
-        var $targetInput = $("#" + obj.id + i);
-        if ($targetInput.val() == obj.questions[i][1]){
-          correct.push(i);
-          $targetLabel.html(obj.questions[i][0] + " &#10004;");
-        } else $targetLabel.html(obj.questions[i][0] + " &#10008;");
-      }
-      if (correct.length == obj.questions.length) return true;
-        else return false;
-    }
     
     function makeAlert(location, direction, text, code){ //direction: a= above, b=below
       /////This takes care of the HTML
@@ -264,8 +251,7 @@ function init(type){
         var checkQuestionType = {};
         makeQuestionType.fill = makefillCard;
         makeQuestionType.dropdown = makeDropdownCard;
-         checkQuestionType.fill = checkFillAnswer;
-        checkQuestionType.dropdown = checkDropdownAnswer;
+        
 
         if(type =="reading"){
   
@@ -274,29 +260,28 @@ function init(type){
 
               $panel.append(makeQuestionType[data[problem].method](data[problem]));
 
-              $('#' + data[problem].id + 'submit').on('click', function(e){
 
-                if (checkQuestionType[data[problem].method](data[problem])){
-
-                    jQuery.post("/report", {label: data[problem].label, moduleNo: data[problem].moduleNo}, function(res){
-                            makeAlert($('#' + data[problem].id + 'submit'), "a", "You have completed this section! " + res,2);
-
-                         });
-
-
-                    
-                    
-                } else {
-                  makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
-
-                }
-
-              })
+                monitorButton(data[problem]);
           
            }
         }
 
+        function monitorButton(problemObject){
 
+              $('#' + problemObject.id + 'submit').on('click', function(e){
+
+                if (checkReadingAnswer(problemObject)){
+
+                    jQuery.post("/report", {label: problemObject.label, moduleNo: problemObject.moduleNo}, function(res){
+                            makeAlert($('#' + problemObject.id + 'submit'), "a", "You have completed this section! " + res,2);
+
+                         });
+        }else {
+                  makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
+
+                }
+    })
+            }
 
 
 

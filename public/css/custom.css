@@ -36,3 +36,16 @@ p.lead{
 	transition: 0.5s;
 }
 
+.blockimg{
+	height: auto;
+	max-width: 35%;
+	min-width: 30%;
+
+}
+
+.introBlock{
+	margin-top: 5%;
+	margin-bottom: :5%;
+	
+}
+

@@ -170,6 +170,10 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 
 // MODULE ROUTES/
 
+router.get('/shh1', function(req, res, next){
+	return res.render('solution', {title: 'Module One', file: "1"})
+});
+
 // 1//
 
 router.get('/1', function(req, res, next){
