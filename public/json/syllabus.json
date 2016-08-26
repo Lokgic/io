@@ -9,11 +9,11 @@
 	},
 	"courceformat":{
 		"title": "Conditionally Self-Paced",
-		"description": "This course is conditionally self-paced:  you will decide when to turn in an assginment take a particular test, under certrain progress-conducive conditions. The aim of this structure aims to accomodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. For more info, see the 'Grading and Policy' page"
+		"description": "This course is conditionally self-paced:  you will decide when to turn in an assignment take a particular test, under certain progress-conducive conditions. The aim of this structure aims to accommodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. For more info, see the 'Grading and Policy' page"
 	},
 	"textbook":{
 		"title": "Open Source Textbook",
-		"description": "We will use a version of an open source textbook forall x by J. Robert Loftis, who built upon the works of P.D. Magnus and Cathal Woods. As the educational material of this website is directly built upon their work, lokgic.io is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License, which is compatible with the license under which both versions of forall x were made. Source code for this website is available on github. See About page for more detail."
+		"description": "We will use a version of an open source textbook 'forall x' by J. Robert Loftis, who built upon the works of P.D. Magnus and Cathal Woods. As the educational material of this website is directly built upon their work, lokgic.io is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License, which is compatible with the license under which both versions of 'forall x' were made. Source code for this website is available on github. See About page for more detail."
 	},
 	"modular":{
 		"title":"Modular Progression",
