@@ -143,7 +143,7 @@ function init(type){
 
     function instruction(){
       $alert.removeClass();
-      alertMaker(3, 'Answer the questions below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit.');
+      alertMaker(3, 'Finish the reading quizzes below in order to complete this module. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.');
     }
 
 
