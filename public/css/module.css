@@ -36,7 +36,7 @@ height: 100%;
 }
 
 .display-4{
-  font-size: 150%;
+  font-size: 120%;
 }
 
 .btn-primary{
@@ -70,13 +70,13 @@ a.nav-link{
 
 
   @media (max-width: 1200px){
-    #wtf{ float: none;}
-    #closepdf{visibility: hidden;}
+    ul.nav.nav-tabs li.nav-item { font-size: 90%;}
+/*    #closepdf{visibility: hidden;}*/
 
   }
-  
+/*  
 #closepdf{
  position: fixed;
 }
 
-
+*/

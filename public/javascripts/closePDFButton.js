@@ -1,11 +1,20 @@
 $(function(){
 	var	$button = $('#closepdf');
 	var $pdf = $('#right');
-	var $rightCol = $('#rightCol');
+	var $row = $('#mainrow');
 	var $leftCol = $('left');
+	var saveHTML = $pdf;
+	var open = true;
 	$button.on('click', function(){
-		$rightCol.remove();
-		$button.remove();
+		if (open){
+			$pdf.remove();
+			open = false;
+			$button.html('&larr;');
+		} else{
+			$row.append(saveHTML);
+			open=true;
+			$button.html('&rarr;');
+		}
 		})
 })
 

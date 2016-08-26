@@ -46,11 +46,11 @@ UserSchema.statics.record = function record(userId, moduleNo, label, callback){
         return next(error);
       } else {
         var query = {};
-
+        console.log(moduleNo);
         for (var i = 0; i <user.record.length;i++){         
-            if(user.record[i].label == label && user.record[i].moduleNo){
-              console.log(user.record[i].label);
-              console.log(user.record[i].moduleNo);
+            if(user.record[i].label == label && user.record[i].moduleNo == moduleNo){
+              // console.log(user.record[i].label);
+              // console.log(user.record[i].moduleNo);
                 return callback(null, "No change was made to your record since you had already completed this task, but hey - you still got it!")
             }
         }

@@ -21,7 +21,7 @@ $(function() {
     printReadingInfo(function(err, data){
         var $header = $('#readingheader');
         var $body = $('#readingblock')
-    	$header.html("Module " + CurrentModuleNo + " " + data[CurrentModuleNo].title);
+    	$header.html(CurrentModuleNo + ": " + data[CurrentModuleNo].title);
     	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
     })
 

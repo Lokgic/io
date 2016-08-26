@@ -169,12 +169,13 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 });
 
 // MODULE ROUTES/
+// 1//
 
 router.get('/shh1', function(req, res, next){
 	return res.render('solution', {title: 'Module One', file: "1"})
 });
 
-// 1//
+
 
 router.get('/1', function(req, res, next){
 	return res.render('modules', {title: 'Module One', file: "1", "part": "reading"})
@@ -190,6 +191,29 @@ router.get('/1concepts', function(req, res, next){
 
 router.get('/1quiz', function(req, res, next){
 	return res.render('modules', {title: 'Module One', file: "1", part: "quiz"})
+});
+
+// 2//
+
+
+router.get('/shh2', function(req, res, next){
+	return res.render('solution', {title: 'Module Two', file: "2"})
+});
+
+router.get('/2', function(req, res, next){
+	return res.render('modules', {title: 'Module Two', file: "2", "part": "reading"})
+});
+
+router.get('/2reading', function(req, res, next){
+	return res.redirect('/2')
+});
+
+router.get('/2concepts', function(req, res, next){
+	return res.render('modules', {title: 'Module Two', file: "2", part: "concepts"})
+});
+
+router.get('/2quiz', function(req, res, next){
+	return res.render('modules', {title: 'Module Two', file: "2", part: "quiz"})
 });
 
 

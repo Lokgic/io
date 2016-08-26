@@ -168,7 +168,7 @@ function init(type){
     }
 
     function makeDropdownCard(obj){
-
+      dropdownItems += '<option>Answer</option>';
         var dropdownItems;
         for (var i = 0; i < obj.possibleAnswers.length; i++){
           dropdownItems += '<option value ='+obj.possibleAnswers[i]+'>' + obj.possibleAnswers[i] + '</option>';
@@ -203,7 +203,7 @@ function init(type){
       for (var i = 0; i < obj.questions.length;i++){
         var $targetLabel = $("#" +obj.id + i +"label");
         var $targetInput = $("#" + obj.id + i+ selectorTag);
-        if ($targetInput.val().toLowerCase() == obj.questions[i][1].toLowerCase()){
+        if ($targetInput.val().toLowerCase().trim() == obj.questions[i][1].toLowerCase().trim()){
           correct.push(i);
           $targetLabel.html(obj.questions[i][0] + " &#10004;");
         } else $targetLabel.html(obj.questions[i][0] + " &#10008;");

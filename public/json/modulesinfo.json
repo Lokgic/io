@@ -2,14 +2,14 @@
 	"1":{
 		"moduleNo": 1,
 		"symbol" : "¬",
-		"title": "Basic Concepts in Logic",
+		"title": "Basic Concepts",
 		"description": "We begin with learning the basic concepts in logic. We look at the role of argument in general, and what it means to evaluate arguments. We end with an introduction of formal logic - the topic of our class." 
 	},
 	"2":{
 		"moduleNo": 2,
 				"symbol" :"∅" ,
-		"title": "Categorical Logic",
-		"description": "Ennui polaroid keytar tousled, chambray gochujang swag church-key XOXO taxidermy irony. Green juice distillery chartreuse, aesthetic mumblecore XOXO portland kombucha salvia plaid helvetica selvage truffaut.  " 
+		"title": "Categorical Logic", 
+		"description": "After an informal introduction to logic, we begin transitioning into the formal realm by a branch of logic called categorical logic, also known as Aristotelian logic or term logic. One of Aristotle's most famous achievement, categorical logic deals with the relation between sets of objects. The reading exercises focuses on the first chapter of the module, and the quiz will focus on the second chapter. Conceptual exercises and the test will cover both."
 	},
 	"3":{
 		"moduleNo": 3,

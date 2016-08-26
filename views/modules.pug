@@ -12,7 +12,7 @@ head
 body
 	include navbar
 	.container-fluid.m-t-3.p-t-1#flexstuff
-		.row
+		.row#mainrow
 			.col-lg-6#left
 				ul.nav.nav-tabs
 					li.nav-item.display-4#wtf
@@ -34,8 +34,8 @@ body
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
 								a.dropdown-item(href='pdf/text'+file +'.pdf') Text	
-					li.nav-item.pull-xl-right.hidden-md-down
-						button.btn.btn-outline-secondary.btn-sm(type = "button")#closepdf &times;											
+					li.nav-item.pull-lg-right.hidden-md-down.display-4
+						a.nav-link(href="#", aria-controls="closepdf")#closepdf &rarr;											
 				.tab-content
 					.tab-pane.fade.in.active#reading(role="tabpanel")
 						.card#readingcard
@@ -60,8 +60,7 @@ body
 							div#conceptsalertdiv
 							.card-block#conceptsblock
 						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
-			.col-lg-6.hidden-md-down#rightCol
-				.container#right
+			.col-lg-6.hidden-md-down#right
 					script PDFObject.embed('pdf/text#{file}.pdf', '#right');
 
 
