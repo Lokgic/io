@@ -33,7 +33,9 @@ body
 					li.nav-item.dropdown.display-4#wtf
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
-								a.dropdown-item(href='pdf/text'+file +'.pdf') Text
+								a.dropdown-item(href='pdf/text'+file +'.pdf') Text	
+					li.nav-item.pull-xl-right.hidden-md-down
+						button.btn.btn-outline-secondary.btn-sm(type = "button")#closepdf &times;											
 				.tab-content
 					.tab-pane.fade.in.active#reading(role="tabpanel")
 						.card#readingcard
@@ -59,8 +61,6 @@ body
 							.card-block#conceptsblock
 						button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
 			.col-lg-6.hidden-md-down#rightCol
-				button(type = "button" class = "close" aria-label="close")#closepdf
-					span(aria-hidden='true') &times;
 				.container#right
 					script PDFObject.embed('pdf/text#{file}.pdf', '#right');
 

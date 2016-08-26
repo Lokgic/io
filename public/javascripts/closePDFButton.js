@@ -5,7 +5,7 @@ $(function(){
 	var $leftCol = $('left');
 	$button.on('click', function(){
 		$rightCol.remove();
-
-	}) 
-
+		$button.remove();
+		})
 })
+

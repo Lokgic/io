@@ -69,13 +69,14 @@ a.nav-link{
 }
 
 
-  @media (max-width: 568px){
+  @media (max-width: 1200px){
     #wtf{ float: none;}
+    #closepdf{visibility: hidden;}
 
   }
   
 #closepdf{
-  float:left;
+ position: fixed;
 }
 
 
