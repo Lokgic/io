@@ -62,15 +62,25 @@ $(function(){
     	
 
     	 for (question in data){
-    	 	html+= "<h3>" + question +'</h3>';
-    	 	if ("setup" in data[question]) html+= "Setup "+ data[question].setup;
-    	 	html += '<p class ="lead text-primary">Q: ' + data[question].question + '</p>';
-    	 	html += '<p class ="lead text-primary"> A: '+data[question].real + '</p>'
-    	 	for (var i = 0; i <data[question].fake.length ; i++){
+            if(data[question].type == "mc"){
+                 html+= "<h3>" + question +'</h3>';
+                 if ("setup" in data[question]) html+= "Setup "+ data[question].setup;
+                     html += '<p class ="lead text-primary">Q: ' + data[question].question + '</p>';
+                     html += '<p class ="lead text-primary"> A: '+data[question].real + '</p>'
+                 for (var i = 0; i <data[question].fake.length ; i++){
+                      html += '<p class = "text-warning"> Fake Answer: '  + data[question].fake[i] + '</p>'
+                         }
+            }else if (data[question].type == "dropdown"){
+                html+= "<h3>" + question +'</h3>';
+                for (var i= 0;i<data[question].questions.length; i++){
+                    html += '<p class ="lead text-info">Q: ' + data[question].questions[i][0] + '</p>';
+                    html += '<p class ="lead text-primary">A: ' + data[question].questions[i][1] + '</p>';
+                }
 
-	 	    	 	html += '<p class = "text-warning"> Fake Answer: '  + data[question].fake[i] + '</p>'}
-	 }
+           }
+         
 
+       }
     	
     	return html;
 

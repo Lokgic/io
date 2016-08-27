@@ -18,29 +18,44 @@ $(function() {
 	function resetQuizCard(){
 			$main.removeClass("card-danger");
 		   	$main.removeClass("card-success");
-		   	$alertdiv.html("");
+		   	makeAlert($main, "a","",0)
 	}
 
 
-	function alertMaker(code, content){
-		if ($alertdiv.html() == "") $alertdiv.html("<div class='alert quizalert'></div>");
-		$alert = $('.quizalert')
-		if ($alert.hasClass('alert-danger')) $alert.removeClass('alert-danger');
-			else if ($alert.hasClass('alert-success')) $alert.removeClass('alert-sucess');
-			else if ($alert.hasClass('alert-warning')) $alert.removeClass('alert-warning');
-			else if ($alert.hasClass('alert-info')) $alert.removeClass('alert-info');
 
-		var tag;
-	    if (code == 1){tag = "success";}
-	    else if (code == 2){tag = "info";}
-	    else if (code == 3){tag = "warning"}
-	    else{tag = "danger"}
 
-	    $alert.addClass("alert alert-" + tag +" alert-dismissible fade in");
-	            $alert.attr('role', 'alert');
-	            var html = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + content + '</div>';
-	            $alert.html(html);
-	  }
+    function makeAlert(location, direction, text, code){ //direction: a= above, b=below
+      /////This takes care of the HTML
+      var tag;
+      if (code == 0){
+		if (direction == "a"&& $(location).prev().hasClass("alert")){
+	          $(location).prev().remove();
+	        }
+	      if (direction == "b" && $(location).next().hasClass("alert")){
+	          $(location).next().remove();
+	        }
+      }
+      else if (code == 1){tag = "alert-success";}
+      else if (code == 2){tag = "alert-info";}
+      else if (code == 3){tag = "alert-warning"}
+      else{tag = "alert-danger"}
+      var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
+
+      if (direction == "a"){
+        if ($(location).prev().hasClass("alert")) {
+          $(location).prev().remove();
+        }
+        $(location).before(html);
+        }
+
+      if (direction == "b"){
+        if ($(location).next().hasClass("alert")) {
+          $(location).next().remove();
+        }
+        $(location).after(html);
+        }
+
+      }
 
 	function shuffle(arr){
 		var currentI = arr.length, tempValue, randomI;
@@ -57,65 +72,155 @@ $(function() {
 		return arr;
 	}
 
-	function printAnswers(arr){
-		$answerList.html("");
-		for (var i = 0; i <arr.length; i++){
-			
-			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + arr[i] + '">' + (i + 1) + '</button>' + arr[i]+'</li>';
-			$answerList.append(htmlHead);
-		}
 
-		
-	}
-
-	function askQuestion(q){
+	function askMC(q){
+		//prepare Q nd A
 		var answers = [];
-
-    	Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
+		Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
    		answers.push(q.real);
    		shuffle(answers);
    		var question =""; 
-   		if ("setup" in q) {
-   			question +='<p class = "lead">'  + q.setup + '</p>'
-   		}  
    		question+='<p class = "lead">'  + q.question + '</p>';
-   		$question.html(question);		
-   		printAnswers(answers);
+   		//Detect special setup
+   		if ("setup" in q) {
+   			if ("setuptype" in q){
+   				if(q.setuptype == "list"){
+   					question+='<ul  class="list-group">';
+   					for (var i = 0; i<q.setup.length;i++){
 
-   		$(".choice").on("click", function(e){
+   						question+='<li class="list-group-item lead">';
+   						question  += '<span class="tag tag-default tag-pill pull-xs-left m-x-2">'+ q.setup[i][0]+'</span>';
+   						question+= q.setup[i][1] + '</li>';
+   					}
+   					question+= "</ul>"
+   				}
+   			}else{
+   			question +='<p class = "lead">'  + q.setup + '</p>'
+   			}
+   		}  
+
+   		//Print Q and A
+   		$question.html(question);	
+
+   		$answerList.html("");
+		for (var i = 0; i <answers.length; i++){
+			
+			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + answers[i] + '">' + (i + 1) + '</button>' + answers[i]+'</li>';
+			$answerList.append(htmlHead);
+		}
+		activateButton(q);
+
+	}
+
+  function checkDropdownAnswer(obj){
+      var selectorTag = " option:selected";
+      
+      var correct =0;
+      console.log(correct);
+      for (var i = 0; i < obj.questions.length;i++){
+        var $targetInput = $("#" + obj.id + i+ selectorTag);
+
+        if ($targetInput.val().toLowerCase().trim() == obj.questions[i][1].toLowerCase().trim()) correct++;
+	        console.log(correct);
+      }
+      if (correct == obj.questions.length) return true;
+        else return false;
+
+    }
+
+	function activateButton(q){
+		$(".choice").on("click", function(e){
 			e.preventDefault();
 			$(".choice").attr("disabled", true)
+			if (q.type == "mc"){
+		   		var chosen = $(e.target).val();
+		   		respondToAnswer(chosen == q.real);
+		   	} else if (q.type == "dropdown"){
+		   		respondToAnswer(checkDropdownAnswer(q));
+		   	}
 
-	   		var chosen = $(e.target).val();
+	     });
+	}
 
+	function respondToAnswer (right){
 
-	   		if (chosen !== q.real){
-		    	alertMaker(4,"Opps, that was wrong.")
-		    	$main.addClass("card-danger");
-		    	$next.attr("disabled", false);
-		    	answered++;
-		    	updateProgress(answered, perfectScore, score);
-		    	
-		    } else {
-		    	alertMaker(1,"That's correct!")
-		    	$main.addClass("card-success");
-		    	$next.attr("disabled", false);
-		    	score += 1;
-				answered++;
-		    	updateProgress(answered, perfectScore, score);
+		if(!right){
+			makeAlert($main, "a", "Opps, that was wrong.",4);
+			    	$main.addClass("card-danger");
+			    	$next.attr("disabled", false);
+			    	answered++;
+			    	updateProgress(answered, perfectScore, score);
+		    } else{
+		    	makeAlert($main, "a","That's correct!",1);
+			    	$main.addClass("card-success");
+			    	$next.attr("disabled", false);
+			    	score += 1;
+					answered++;
+			    	updateProgress(answered, perfectScore, score);
+
 		    }
+	}
 
-	    	
-       });
+
+	    
+
+    function askDropdown(obj) {
+    	//create list of possibilities
+	 dropdownItems += '<option>Answer</option>';
+        var dropdownItems;
+        for (var i = 0; i < obj.possibleAnswers.length; i++){
+          dropdownItems += '<option value ="'+obj.possibleAnswers[i]+'">' + obj.possibleAnswers[i] + '</option>';
+        }
+
+        
+        var html = '<p class="font-italic">' + obj.instruction +'<p>';
+
+         html  += '<p class="lead">' + obj.question +'<p>';
+      html += '<form>';
+
+        if (obj.setuptype == "runon"){
+        	html +='<p class = "lead m-x-1">';
+	        for (var i = 0;i<obj.questions.length;i++){
+	        	var tempLabel = obj.id + i; 
+	         html+= obj.questions[i][0] +  '  <select style="width: auto; display: inline" class="form-control" id ='+ tempLabel +'>' + dropdownItems + '</select>  '
+		     }
+		     html += "</p>";
+        } else{
+	         for (var i = 0;i<obj.questions.length;i++){
+	          var tempLabel = obj.id + i; 
+	           html += '<div class="form-group row">';
+	            html += '<label id = ' + tempLabel +'label class="col-md-10 col-form-label col-xs-12" for = ' + tempLabel + '>' + obj.questions[i][0] + '</label>'
+	           html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
+	           html += dropdownItems;
+	           html += '</select></div></div>'
+
+	         }
+	     }
+
+
+         html += '</form>';
+
+
+
+
+         $question.html(html);
+         var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
+         $answerList.html(answerButton);
+         activateButton(obj);
+         
     }
+
     function updateProgress(answered, total, right){
      	$progresscap.html("Answered: " + answered + " Total: " + total + " Correct: " + right);
      	$progressbar.attr("value", answered);
 
      }
+
    $.getJSON('json/quiz' + moduleNo +'.json') 
      .done(function(data){
-     	
+     	 var ask = {};
+   		ask.mc = askMC;
+   		ask.dropdown = askDropdown;
 	    var currentQuestion;
 	    var quizOver;
 	    var quiz;
@@ -131,13 +236,17 @@ $(function() {
 	    	currentQuestion = quiz.pop();
 	    	quizOver = false;
 	        $next.attr("disabled", true);
-	        askQuestion(currentQuestion);
+	   		ask[currentQuestion.type](currentQuestion);
+	   	
+   		
    		}
+
+
   		quizInit();
-       $next.on('click', function(){
+        $next.on('click', function(){
        	if (quiz.length !== 0){
 		   	var currentQuestion = quiz.pop();
-		   	askQuestion(currentQuestion);
+		   	ask[currentQuestion.type](currentQuestion);
 		   	$next.attr("disabled", true);
 		   	resetQuizCard();
 		   } else{
@@ -145,7 +254,7 @@ $(function() {
 		   		resetQuizCard();
 		   		scoring(score,perfectScore);
 		   		quizOver = true;
-		   		alertMaker(3, "Press Continue to restart the quiz.")
+		   		makeAlert($main, "a", "Press Continue to restart the quiz.", 3)
 		   	} else{
 		   		// restart quiz
 		   		quizInit();
@@ -168,7 +277,7 @@ $(function() {
 		   		});
 		   	}else {
 		   		$question.append("Unfortunately, you didn't pass! You need to get all " + perfectScore + " questions correct to pass. But it doesn't cost anything to take the quiz, so why not try again?");
-		   		alertMaker(3, "Press 'Continue' to restart the quiz.")
+		   		makeAlert($main, "a", "Press 'Continue' to restart the quiz.", 3)
 		   	}
     }
        

@@ -3,8 +3,10 @@ $(function() {
   init("reading");
 })
   // ajax var
-function init(type){
 
+
+function init(type){
+  //html elements are attached according to the type of quiz
   var $alertdiv = $('#' + type  + 'alertdiv');
   var $alert = $('.' + type  + 'alert');
 	var $panel = $('#' + type);
@@ -21,6 +23,8 @@ function init(type){
   // status
   var reset = false;
 
+
+  // old alert maker, no direction
   function alertMaker(code, content){
     if ($alertdiv.html() == "") $alertdiv.html("<div class='alert " + type + "alert'></div>");
     $alert = $('.'+type+'alert');
@@ -41,6 +45,8 @@ function init(type){
               $alert.html(html);
     }
 
+
+    //Shuffle Array
   function shuffle(arr){
 		var currentI = arr.length, tempValue, randomI;
 
@@ -57,15 +63,15 @@ function init(type){
 	}
 
 
-
+    //generate concepts quizzing cards. n is the index of the solution in AllDfs, which includes just terms, but indexes preversed. q is the question term. return html
   	function makeConceptsCard(n, q, allDfs){
   		var html = '<div class="card" id ='+type+'QCard'+ n + '><h1 class="card-header display-4">' + q.term +  '</h1><div class="card-block qcard">';
 
 
       html += '<div class="btn-group-vertical definitions" data-toggle="buttons">'; 
 		 var answers = [];
-     answers.push(q.df);
-     while (answers.length<5){
+     answers.push(q.df);  //makes 5 answer. push the right answer first
+     while (answers.length<5){ //add 4 other random answers from allDfs
          var temp = allDfs[Math.floor(Math.random()* allDfs.length)];
          var contained = false;
          for (var i = 0; i < answers.length; i++){
@@ -76,9 +82,9 @@ function init(type){
          }
      }
 
-   		 shuffle(answers); 
+   		 shuffle(answers); //mix'em up
    	
-   		
+   		//make buttons
     for (var i = 0; i < answers.length; i++){
        html += '<label class="btn btn-outline-primary btn-sm definition"><input type="radio" name="options" id="option1" autocomplete="off" value ="' + answers[i] +'">' + answers[i] + "</label>"
       }
@@ -86,7 +92,8 @@ function init(type){
   		return html;
   	}
 
-  	function checkAnswer(quiz){
+    //check multiple answer on one page, works for concepts
+  	function checkConceptsAnswers(quiz){
   		score = 0;
   		for (var i = 0; i<quiz.length;i++){
   			var currentQCard = "#" + type + "QCard"+(i);
@@ -103,7 +110,7 @@ function init(type){
   			$submit.removeClass('btn-primary');
   			$submit.addClass('btn-warning')
         
-        alertMaker(4, "You got " + score +" out of "+ quiz.length + ". Try again?");
+        makeAlert($('#conceptscard'),'b' , "You got " + score +" out of "+ quiz.length + ". Try again?", 4);
         reset = true;
   		} else{
   			$submit.html("Success!");
@@ -117,7 +124,7 @@ function init(type){
   		}
   	}
 
-
+//used load json, embed the quiz initiation in the callback
     function loadJSON(callback){
         $.getJSON('json/' + type + moduleNo +'.json') 
         .done(function(data){
@@ -126,10 +133,10 @@ function init(type){
       
     }
 
-
-    function resetReadingQuiz(n){
+    //clear all color and reset the button
+    function resetConceptsQuiz(n){
         reset = false;
-        instruction();
+        instruction(type);
         $submit.addClass('btn-primary');
         $submit.removeClass('btn-warning')
         $submit.html("Submit for Grading");
@@ -141,12 +148,20 @@ function init(type){
         }
       }
 
-    function instruction(){
+      // run at this beginning of page, uses new alertmaker
+    function instruction(type){
       $alert.removeClass();
-      alertMaker(3, 'Finish the reading quizzes below in order to complete this module. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.');
+      if (type == "reading"){
+        var location = $('#readingcard');
+      makeAlert(location, "b",'Finish the reading quizzes below in order to complete this module. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.', 3);
+      } else if (type == "concepts"){
+        var location = $('#conceptscard');
+        makeAlert(location, 'b', 'Define the terms given below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.',3);
+      }
     }
 
 
+    //make fill in the bank card, put ids on elements. return html
     function makefillCard(obj){
       var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="card-block fillcard">';
       html += '<p class="font-italic">' + obj.instruction +'<p>';
@@ -166,7 +181,7 @@ function init(type){
 
       return html;
     }
-
+//make fill in the bank card, put ids on elements. return html
     function makeDropdownCard(obj){
       dropdownItems += '<option>Answer</option>';
         var dropdownItems;
@@ -195,6 +210,7 @@ function init(type){
          return html;
       }
 
+    //method agnostic - if drop down it jus goes add selected tag to find picked item.
     function checkReadingAnswer(obj){
       var selectorTag;
       if (obj.method == "dropdown") selectorTag = " option:selected";
@@ -246,7 +262,7 @@ function init(type){
 
     //init
       loadJSON(function(err, data){
-        instruction();
+        instruction(type);
         var makeQuestionType = {};
         var checkQuestionType = {};
         makeQuestionType.fill = makefillCard;
@@ -265,7 +281,7 @@ function init(type){
           
            }
         }
-
+        //create button that track the problem. needed to have multiple buttons
         function monitorButton(problemObject){
 
               $('#' + problemObject.id + 'submit').on('click', function(e){
@@ -293,7 +309,7 @@ function init(type){
             allDfs.push(quiz[i].df);
           }
           var picked =[]
-          while(picked.length < 10) {
+          while(picked.length < quiz.length) {
               var temp = Math.floor(Math.random()*quiz.length);
                 if (picked.indexOf(temp) === -1){
                   picked.push(temp);
@@ -306,10 +322,10 @@ function init(type){
           $submit.on('click', function(e){
               if (reset == false){
                 $alertdiv.html("");
-                checkAnswer(quiz);
+                checkConceptsAnswers(quiz);
               } else{
                 $alertdiv.html("");
-                resetReadingQuiz(quiz.length);
+                resetConceptsQuiz(quiz.length);
               }
            });
 

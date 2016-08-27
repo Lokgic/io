@@ -229,7 +229,7 @@ router.post('/report', function(req, res, next){
  //    console.log(typeof req.body.type);
 
 	if (!req.session || ! req.session.userId){
-		return res.send([3, "Since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess."])
+		return res.send("Since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess.")
 	} else {
 		User.record(req.session.userId, req.body.moduleNo, req.body.label, function(err, passed){
 			return res.send(passed);
