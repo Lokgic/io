@@ -198,6 +198,8 @@ router.get('/2', function(req, res, next){
 
 
 router.get('/shh3', function(req, res, next){
+		return res.render('solution', {title: 'Module Three', file: "3"})
+});
 
 router.get('/3', function(req, res, next){
 	return res.render('modules', {title: 'Module Three', file: "3"})
