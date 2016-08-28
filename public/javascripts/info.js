@@ -23,6 +23,12 @@ $(function() {
         var $body = $('#readingblock')
     	$header.html(CurrentModuleNo + ": " + data[CurrentModuleNo].title);
     	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub,readingblock]);
+
     })
 
     printConceptsInfo(function(err, data){

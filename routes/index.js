@@ -190,15 +190,14 @@ router.get('/shh2', function(req, res, next){
 });
 
 router.get('/2', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2", "part": "reading"})
+	return res.render('modules', {title: 'Module Two', file: "2"})
 });
+
 
 // 3
 
 
 router.get('/shh3', function(req, res, next){
-	return res.render('solution', {title: 'Module Three', file: "3"})
-});
 
 router.get('/3', function(req, res, next){
 	return res.render('modules', {title: 'Module Three', file: "3"})
