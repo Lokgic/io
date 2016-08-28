@@ -5,6 +5,10 @@ $(function() {
   // ajax var
 
 
+
+
+
+
 function init(type){
   //html elements are attached according to the type of quiz
   var $alertdiv = $('#' + type  + 'alertdiv');
@@ -119,7 +123,7 @@ function init(type){
         $submit.attr("disabled", true);
   			jQuery.post("/report", {passed: true, type: type, moduleNo: moduleNo}, function(res){
 	
-          alertMaker(res[0], res[1]);
+           makeAlert($('#conceptscard'),'b' , res, 1);
 		   		});
   		}
   	}
