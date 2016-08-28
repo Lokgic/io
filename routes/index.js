@@ -181,17 +181,6 @@ router.get('/1', function(req, res, next){
 	return res.render('modules', {title: 'Module One', file: "1", "part": "reading"})
 });
 
-router.get('/1reading', function(req, res, next){
-	return res.redirect('/1')
-});
-
-router.get('/1concepts', function(req, res, next){
-	return res.render('modules', {title: 'Module One', file: "1", part: "concepts"})
-});
-
-router.get('/1quiz', function(req, res, next){
-	return res.render('modules', {title: 'Module One', file: "1", part: "quiz"})
-});
 
 // 2//
 
@@ -201,21 +190,21 @@ router.get('/shh2', function(req, res, next){
 });
 
 router.get('/2', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2", "part": "reading"})
+	return res.render('modules', {title: 'Module Two', file: "2"})
 });
 
-router.get('/2reading', function(req, res, next){
-	return res.redirect('/2')
+
+
+// 2//
+
+
+router.get('/shh2', function(req, res, next){
+	return res.render('solution', {title: 'Module Three', file: "3"})
 });
 
-router.get('/2concepts', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2", part: "concepts"})
+router.get('/3', function(req, res, next){
+	return res.render('modules', {title: 'Module Three', file: "3"})
 });
-
-router.get('/2quiz', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2", part: "quiz"})
-});
-
 
 
 
