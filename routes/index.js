@@ -206,6 +206,17 @@ router.get('/3', function(req, res, next){
 });
 
 
+//100
+router.get('/shh8', function(req, res, next){
+		return res.render('solution', {title: 'Module Debug', file: "8"})
+});
+
+router.get('/8', function(req, res, next){
+	return res.render('modules', {title: 'Module Debug', file: "8"})
+});
+
+
+
 // grading reporting
 
 router.post('/report', function(req, res, next){
