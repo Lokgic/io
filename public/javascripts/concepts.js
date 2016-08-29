@@ -6,6 +6,30 @@ $(function() {
   init("reading");
 })
 
+  
+  randomize = {
+    drawOneRandomFromSet(set): {
+        return  set[Math.floor(Math.random()* set.length)];
+        },
+
+    shuffle(arr): {
+  var currentI = arr.length, tempValue, randomI;
+
+  while (0!== currentI){
+    randomI = Math.floor(Math.random() * currentI);
+        currentI -= 1;
+
+        tempValue = arr[currentI];
+        arr[currentI] = arr[randomI];
+        arr[randomI] = tempValue;
+      }
+
+      return arr;
+    }
+
+
+  }
+
   //Shuffle Array
 function shuffle(arr){
   var currentI = arr.length, tempValue, randomI;
