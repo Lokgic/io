@@ -51,4 +51,16 @@ p.lead{
 	
 }
 
+.profilehead{
+
+}
+.profilehead:hover{
+	background-color: #0275d8;
+	color:white;
+	text-decoration: none;
+}
+
+.profilehead a{
+	text-decoration: none;
+}
 

@@ -17,7 +17,7 @@ block content
 					if (module.concepts&&module.reading&&module.test&&module.quiz)
 						.card
 							a(href = '../'+module.moduleNo)
-								.card-header.text-xs-center.lead #{module.name}
+								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;
@@ -39,7 +39,7 @@ block content
 					else if (module.concepts||module.reading||module.test||module.quiz)
 						.card
 							a(href = '../'+module.moduleNo)
-								.card-header.text-xs-center.lead #{module.name}
+								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;
@@ -61,7 +61,7 @@ block content
 					else
 						.card 
 							a(href = '../'+module.moduleNo)
-								.card-header.text-xs-center.lead #{module.name}
+								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;

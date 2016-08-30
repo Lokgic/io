@@ -232,13 +232,46 @@ router.get('/3', function(req, res, next){
 });
 
 
-//100
-router.get('/shh8', function(req, res, next){
-		return res.render('solution', {title: 'Module Debug', file: "8"})
+router.get('/shh4', function(req, res, next){
+		return res.render('solution', {title: 'Module Three', file: "3"})
+});
+
+router.get('/4', function(req, res, next){
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
+});
+
+router.get('/5', function(req, res, next){
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
+});
+
+router.get('/6', function(req, res, next){
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
+});
+
+
+router.get('/7', function(req, res, next){
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
 });
 
 router.get('/8', function(req, res, next){
-	return res.render('modules', {title: 'Module Debug', file: "8"})
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
+});
+
+
+//100
+
+router.get('/debug', function(req, res, next){
+	return res.render('modules', {title: 'Module Debug', file: "debug"})
 });
 
 
