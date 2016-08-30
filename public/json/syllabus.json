@@ -1,15 +1,15 @@
 {
 	"symboliclogic":{
 		"title": "Symbolic Logic",
-		"description": "is the most precise form of notation ever developed, and has been absolutely fundamental to contemporary developments in in mathematics, linguistics, computer science and, yes, philosophy. Simply becoming comfortable with logical notation is an enormous benefit to anyone who would like to do advanced work in these fields." 
+		"description": "is an artificial language developed by logicians to deal with philosophical and mathematical problems in a precise manner. From antiquity to our time, it was crucial to many intellectual developments. It is a core element in linguistics, computer science and yes, philosophy. One would gain a better understanding of these fields simply by virtue of being familiar with logical notation." 
 	},
 	"aboutthiscourse":{
 		"title": "About This Course",
-		"description": "What does it really mean to prove something? A real proof is a thing of beauty, but it takes quite a bit of work to appreciate this. If this course is successful, then at least once before the end of the semester, the beauty of a deductive proof will smack you hard right between the eyes. You will shed tears of joy, and you will be forever changed. (Unfortunately, this form of success is difficult to test, and does not guarantee a passing grade.)"
+		"description": "How do we really prove something? This question strikes at the heart of philosophy: how can we know that we know? Successfully or not, philosophers through the ages provided us multifarious answers to this difficult problem, recalcitrant to a final solution. The purpose of this course is to explore  one venerable tradition - the method of deduction. Deductive logic aims for indubitable certainty and calls for relentless precision. If the course is successful, the intellectual and aesthetic value of deductive proofs would magically emerge in front of your eyes from previously meaningless symbols... Some say that this induces a state of mind that is religious or even mystical. (However, such experience, no matter how profound, is not an accurate indicator of a good grade.)"
 	},
 	"courceformat":{
 		"title": "Conditionally Self-Paced",
-		"description": "This course is conditionally self-paced:  you will decide when to turn in an assignment take a particular test, under certain progress-conducive conditions. The aim of this structure aims to accommodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. For more info, see the 'Grading and Policy' page"
+		"description": "This course is conditionally self-paced:  you will decide when to turn in an assignment take a particular test, under certain progress-conducive conditions. The aim of this structure aims to accommodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. This innovative structure originated from Professor G. Randolph Mayes from Sacramento State University.  For more info, see the 'Grading and Policy' page"
 	},
 	"textbook":{
 		"title": "Open Source Textbook",
