@@ -82,6 +82,44 @@
     "fake": ["(a), (b), (c)", "(b), (c), (d)"],
     "type": "mc",
     "id": "quiz1_9"
+  },
+  "10": {
+    "type": "dropdown",
+    "id": "quiz1_10",
+    "instruction": "Determine if the following situations are possible",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["A valid argument, whose premises are all tautologies, and whose conclusion is contingent", "Not Possible"],
+      ["A valid argument with true premises and a false conclusion.", "Not Possible"],
+      [" A consistent set of sentences that contains two sentences that are not logically equivalent", "Possible"],
+      ["A consistent set of sentences, all of which are contingent.", "Possible"],
+      ["A false tautology", "Not Possible"],
+      ["A valid argument with false premises", "Possible"],
+      ["A sound argument with false premises", "Not Possible"],
+      ["A logically equivalent pair of sentences that are not consistent. (Hint: the definition of consistency", "Possible"],
+      ["A tautological contradiction", "Not Possible"],
+      ["A true contradiction", "Not Possible"]
+    ],"possibleAnswers": ["Possible","Not Possible"]
+  },
+  "11": {
+    "type": "dropdown",
+    "id": "quiz1_11",
+    "instruction": "Determine if the following situations are possible",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["A valid argument that has one false premise and one true premise", "Possible"],
+      ["A valid argument that has a false conclusion.", "Possible"],
+      ["A valid argument, the conclusion of which is a contradiction", "Possible"],
+      ["An invalid argument, the conclusion of which is a tautology", "Not Possible"],
+      ["A tautology that is contingent", "Not Possible"],
+      ["Two logically equivalent sentences, both of which are tautologies", "Possible"],
+      ["Two logically equivalent sentences, one of which is a tautology and one of which is contingent", "Not Possible"],
+      ["Two logically equivalent sentences that together are an inconsistent", "Possible"],
+      ["A consistent set of sentences that contains a contradiction", "Not Possible"],
+      ["An inconsistent set of sentences that contains a tautology", "Possible"]
+    ],"possibleAnswers": ["Possible","Not Possible"]
   }
 
 

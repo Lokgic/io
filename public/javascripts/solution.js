@@ -2,7 +2,7 @@ $(function(){
 	var moduleNo = $("title").attr('id');
 	var $body = $("#main");
 	  function loadJSON(type, callback){
-        $.getJSON('json/' + type + moduleNo +'.json') 
+        $.getJSON('../json/' + type + moduleNo +'.json') 
         .done(function(data){
         callback(null, data);
      }).fail(function(){console.log('Failed to Load Quiz')});

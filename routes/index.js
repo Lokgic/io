@@ -28,7 +28,7 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 				
 
 				var completed = result.record.length;
-					modules = [];
+				modules = [];
 			        for (var i = 0; i<8; i++){
 			          modules[i] = {};
 			        }
@@ -41,18 +41,12 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 			       // console.log(modules)
 				for (var i = 0; i < modules.length; i++){
 					var readingCount = 0;
-					// if (modules[i].reading.passed) completed++;
-					// if (modules[i].quiz) modules[i].quiz.passed = true;
-					// 	else modules[i].quiz.passed = false;
-					// if (modules[i].concepts) modules[i].concepts.passed = true;
-					// 	else modules[i].concepts.passed = false;
-					// if (modules[i].test) modules[i].test.passed = true;
-					// 	else modules[i].test.passed = false;
 					if (modules[i].reading_1) readingCount++
 					if (modules[i].reading_2) readingCount++
 					if (modules[i].reading_3) readingCount++
 					modules[i].name = "Module " + (i+1);
 					modules[i].readingCount = readingCount;
+					modules[i].moduleNo = (i+1);
 					if (readingCount == 3) modules[i].reading = true;
 
 				}
@@ -176,9 +170,24 @@ router.get('/shh1', function(req, res, next){
 });
 
 
-
 router.get('/1', function(req, res, next){
-	return res.render('modules', {title: 'Module One', file: "1"})
+
+	return res.render('modules', {title: 'Module One', file: "1", part:"reading"})
+});
+
+router.get('/1/quiz', function(req, res, next){
+
+	return res.render('modules', {title: 'Module One', file: "1", part: "quiz"})
+});
+
+router.get('/1/concepts', function(req, res, next){
+
+	return res.render('modules', {title: 'Module One', file: "1", part: "concepts"})
+});
+
+router.get('/1/reading', function(req, res, next){
+
+	return res.redirect('/1');
 });
 
 
@@ -190,7 +199,24 @@ router.get('/shh2', function(req, res, next){
 });
 
 router.get('/2', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2"})
+	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
+});
+
+
+
+router.get('/2/quiz', function(req, res, next){
+
+	return res.render('modules', {title: 'Module One', file: "2", part: "quiz"})
+});
+
+router.get('/2/concepts', function(req, res, next){
+
+	return res.render('modules', {title: 'Module One', file: "2", part: "concepts"})
+});
+
+router.get('/2/reading', function(req, res, next){
+
+	return res.redirect('/2');
 });
 
 

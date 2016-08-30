@@ -4,7 +4,7 @@ $(function() {
 	var CurrentModuleNo = $("title").attr('id');
 
 	function printReadingInfo(callback){
-        $.getJSON('json/modulesinfo.json') 
+        $.getJSON('../json/modulesinfo.json') 
         .done(function(data){
         callback(null, data);
      }).fail(function(){$body.append('Failed to Load Quiz')});

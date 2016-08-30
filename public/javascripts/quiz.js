@@ -116,15 +116,13 @@ $(function() {
       var selectorTag = " option:selected";
       
       var correct =0;
-      console.log(correct);
       for (var i = 0; i < obj.questions.length;i++){
         var $targetInput = $("#" + obj.id + i+ selectorTag);
-
         if ($targetInput.val().toLowerCase().trim() == obj.questions[i][1].toLowerCase().trim()) correct++;
-	        console.log(correct);
       }
+      // console.log(correct + " out of "+ obj.questions.length);
       if (correct == obj.questions.length) return true;
-        else return false;
+        else return correct;
 
     }
 
@@ -144,12 +142,20 @@ $(function() {
 
 	function respondToAnswer (right){
 
-		if(!right){
-			makeAlert($main, "a", "Opps, that was wrong.",4);
+		if(right !== true){
+			if (typeof right === "number"){
+				makeAlert($main, "a", "Unfortunately, you only got " + right + " question(s) correctly",4);
 			    	$main.addClass("card-danger");
 			    	$next.attr("disabled", false);
 			    	answered++;
 			    	updateProgress(answered, perfectScore, score);
+			} else {
+				makeAlert($main, "a", "Opps, that was wrong.",4);
+			    	$main.addClass("card-danger");
+			    	$next.attr("disabled", false);
+			    	answered++;
+			    	updateProgress(answered, perfectScore, score);
+			    }
 		    } else{
 		    	makeAlert($main, "a","That's correct!",1);
 			    	$main.addClass("card-success");
@@ -216,7 +222,7 @@ $(function() {
 
      }
 
-   $.getJSON('json/quiz' + moduleNo +'.json') 
+   $.getJSON('../json/quiz' + moduleNo +'.json') 
      .done(function(data){
      	 var ask = {};
    		ask.mc = askMC;

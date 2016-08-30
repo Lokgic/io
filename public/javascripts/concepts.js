@@ -1,30 +1,58 @@
 // global var
 var moduleNo = $("title").attr('id');
 var conceptsReset = false;
+
 $(function() {
   init("concepts");
   init("reading");
 })
 
+
+var mathJax ={
+  load: function () {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+  },
+  reload: function(id){
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
+
+  }
+}
+
   
-  randomize = {
-    drawOneRandomFromSet(set): {
+var randomize = {
+  drawOneRandomFromSet: function(set) {
         return  set[Math.floor(Math.random()* set.length)];
         },
 
-    shuffle(arr): {
-  var currentI = arr.length, tempValue, randomI;
+  shuffle: function(arr) {
+    var currentI = arr.length, tempValue, randomI;
 
-  while (0!== currentI){
-    randomI = Math.floor(Math.random() * currentI);
-        currentI -= 1;
+    while (0!== currentI){
+      randomI = Math.floor(Math.random() * currentI);
+          currentI -= 1;
 
-        tempValue = arr[currentI];
-        arr[currentI] = arr[randomI];
-        arr[randomI] = tempValue;
+          tempValue = arr[currentI];
+          arr[currentI] = arr[randomI];
+          arr[randomI] = tempValue;
+        }
+
+        return arr;
+      },
+    chooceProbabilistically: function(set, probability){
+
+    var n = Math.random();
+    var low = 0;
+    var outcome;
+    for (var i = 0; i<set.length;i++){
+      if (low<n&&n<probability[i]){
+        low = probability[i];
+        outcome = set[i];
       }
-
-      return arr;
+    }
+      return outcome;
     }
 
 
@@ -238,7 +266,7 @@ function makeAlert(location, direction, text, code){ //direction: a= above, b=be
       
 //used load json, embed the quiz initiation in the callback
     function loadJSON(type, callback){
-        $.getJSON('json/' + type + moduleNo +'.json') 
+        $.getJSON('../json/' + type + moduleNo +'.json') 
         .done(function(data){
         callback(null, data);
      }).fail(function(){console.log('Failed to Load Quiz')});
@@ -248,22 +276,98 @@ function makeAlert(location, direction, text, code){ //direction: a= above, b=be
     }
 //create button that track the problem. needed to have multiple buttons
 function monitorButton(problemObject){
-
       $('#' + problemObject.id + 'submit').on('click', function(e){
-
         if (checkReadingAnswer(problemObject)){
-
             jQuery.post("/report", {label: problemObject.label, moduleNo: problemObject.moduleNo}, function(res){
                     makeAlert($('#' + problemObject.id + 'submit'), "a", "You have completed this section! " + res,2);
-
                  });
         }else {
                   makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
-
                 }
         })
 }
 
+function makeTable(x,y, id){
+  var tableHTML = '<table class="table truthtable"><tbody>';
+  for (var i=0;i<x;i++){
+    tableHTML += '<tr>';
+    for (var j = 0; j<y; j++){
+      tableHTML += '<td id=x'+i + 'y' +j +id+'></td>';
+    }
+    tableHTML+= "</tr>"
+  }
+  tableHTML+='</tbody></table>'
+  return tableHTML;
+}
+
+function fillTable(type, id){
+  $('#x0y0'+id).html('A');
+  $('#x0y1'+id).html('B');
+  symbol = {};
+  symbol.conditional = '\\to';
+  symbol.disjunction = '\\vee';
+  symbol.conjunction =  '\\wedge';
+  symbol.biconditional = '\\leftrightarrow';
+   $('#x0y2'+id).html('??');
+  var atomic = [['T', 'T'],
+                ['T', 'F'],
+                ['F', 'T'],
+                ['F', 'F']
+                      ];
+  truthValues = {};
+  truthValues.conditional = ['T','F','T','T'];
+  truthValues.conjunction = ['T','F','F','F'];
+  truthValues.disjunction = ['T','T', 'T', 'F'];
+  truthValues.biconditional = ['T', 'F', 'F', 'T'];
+
+
+
+    for (var x = 0; x<  atomic.length;x++){
+      for (var y = 0; y<  atomic[0].length; y++ ){
+        $('#x'+(x+1) +'y'+y+id).html(atomic[x][y]);
+      }
+    }
+
+  for (var x = 0; x <truthValues[type].length;x++){
+    $('#x'+(x+1) +'y2'+id).html(truthValues[type][x])
+  }
+}
+
+function truthTableInterpretation(type){
+    score = 0;
+  var tableId = "truthTable";
+    var $panel = $('#' + type);
+    var connectives = ['conditional','disjunction','conjunction','biconditional'];
+    var connectivesP = [0.4,0.6,.8,1];
+    var cardHTML = '<div class="card" id ="truthTableInterpretationCard"><h1 class="card-header display-4">Truth Table Interpretation</h1><div class="p-x-2 card-block" id = "truthTableInterpretationBlock"></div></div>';
+   
+    $panel.append(cardHTML);
+    var choose = randomize.chooceProbabilistically(connectives, connectivesP);
+    function setupProblem(){
+    $('#truthTableInterpretationBlock').html(makeTable(5,3,tableId));
+    fillTable(choose, tableId);
+    var buttonHTML = '<div class="btn-group" role="group" aria-label="TruthTableAnswer">';
+    buttonHTML +='<button type="button" class="btn btn-secondary TTbutton" value = "conditional"> \\(A \\to B \\)</button>';
+    buttonHTML +='<button type="button" class="btn btn-secondary TTbutton" value = "disjunction"> \\(A \\vee B \\)</button>';
+    buttonHTML +='<button type="button" class="btn btn-secondary TTbutton" value = "conjunction"> \\(A \\wedge B \\)</button>';
+    buttonHTML +='<button type="button" class="btn btn-secondary TTbutton" value = "biconditional"> \\(A \\leftrightarrow B \\)</button>';
+    buttonHTML += '</div>';
+    $('#truthTableInterpretationBlock').append(buttonHTML);
+    mathJax.reload("truthTableInterpretationBlock");
+    }
+   setupProblem();
+    $('.TTbutton').on('click', function(e){
+      var answer = $(e.currentTarget).val();
+      if (answer == choose){
+        score+=1;
+        console.log(score);
+      } else{
+        console.log("you suck")
+      }
+      choose = randomize.chooceProbabilistically(connectives, connectivesP);
+      setupProblem();
+    })
+}
 
 
 function init(type){
@@ -275,12 +379,8 @@ function init(type){
 	var $header =$('#' + type  + 'header');
 	var $block = $('#' + type  + 'block');
 	var score;
-
 	var $submit = $("#" +type + "submit");
   
-
-
-    
 
     //loadJSON rest of method exists within
       loadJSON(type, function(err, data){
@@ -294,15 +394,18 @@ function init(type){
         if(type =="reading"){
   
            for (problem in data){
-  
 
+              if (data[problem].method == "activity"){
+                truthTableInterpretation(type);
+              }
+              else{
               $panel.append(makeQuestionType[data[problem].method](data[problem]));
-
-
-                monitorButton(data[problem]);
-          
+                monitorButton(data[problem]);  
+                }        
            }
         }
+
+
 
 
 

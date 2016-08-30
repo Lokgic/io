@@ -16,7 +16,8 @@ block content
 				.col-lg-3.col-md-12.m-b-2
 					if (module.concepts&&module.reading&&module.test&&module.quiz)
 						.card
-							.card-header.text-xs-center.lead #{module.name}
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;
@@ -37,7 +38,8 @@ block content
 							.card-footer.card-success.text-xs-center.lead Completed!
 					else if (module.concepts||module.reading||module.test||module.quiz)
 						.card
-							.card-header.text-xs-center.lead #{module.name}
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;
@@ -58,7 +60,8 @@ block content
 							.card-footer.card-info.text-xs-center.lead In Progress
 					else
 						.card 
-							.card-header.text-xs-center.lead #{module.name}
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead #{module.name}
 							.card-block.text-xs-center.lead
 								if (module.reading)  
 									p.card-text Reading &#10003;

@@ -64,6 +64,10 @@ a.nav-link{
 
 }
 
+.truthtable{
+  width: auto;
+}
+
 #readingheader, #quizheader,#conceptsheader{
   border-top-width: 0;
 }
