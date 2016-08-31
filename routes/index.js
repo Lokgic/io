@@ -228,13 +228,15 @@ router.get('/shh3', function(req, res, next){
 });
 
 router.get('/3', function(req, res, next){
-	return res.render('modules', {title: 'Module Three', file: "3"})
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
 });
 
 
-router.get('/shh4', function(req, res, next){
-		return res.render('solution', {title: 'Module Three', file: "3"})
-});
+// router.get('/shh4', function(req, res, next){
+// 		return res.render('solution', {title: 'Module Three', file: "3"})
+// });
 
 router.get('/4', function(req, res, next){
 	var err = new Error('Module not yet available.');
