@@ -13,7 +13,7 @@ var app = express();
 //mongodb connection
 
 
-mongoose.connect("mongodb://lokgic:WAuS8Pi4X37y4@ds013216.mlab.com:13216/lokgic")
+mongoose.connect("mongodb://lokgic:WAuS8Pi4X37y4@ds021986-a0.mlab.com:21986,ds021986-a1.mlab.com:21986/lokgicio?replicaSet=rs-ds021986")
 var db = mongoose.connection;
 
 //mongo error

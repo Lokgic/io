@@ -14,6 +14,9 @@ var modulesObj = require('../public/json/modulesinfo.json')
 var modulesList = Object.keys(modulesObj).map(function(value) {
 							         return modulesObj[value]});
 
+router.get('/about_text', function(req, res, next){
+	return res.render('about_text');
+})
 
 // roll
 

@@ -3,8 +3,11 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
 		button.navbar-toggler.hidden-sm-up(type = "button" data-toggle ="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation")  	&#8872;
 		.collapse.navbar-toggleable-xs#exCollapsingNavbar2
 			ul.nav.navbar-nav
-				li.nav-item(href='/grading')
-					a.nav-link(href='/') Home
+				li.nav-item.dropdown
+					a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') About
+						.dropdown-menu
+							a.dropdown-item(href="/") The Course
+							a.dropdown-item(href="/about_text") The Text
 				li.nav-item.dropdown
 					a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Modules
 						.dropdown-menu
@@ -17,7 +20,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
 							a.dropdown-item(href="/7") 7
 							a.dropdown-item(href="/8") 8
 				li.nav-item
-					a.nav-link(href='/grading') Grading and Policies
+					a.nav-link(href='/grading') Course Logistics
 				li.nav-item
 					a.nav-link(href='/profile') Profile
 				li.nav-item.pull-md-right
