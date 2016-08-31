@@ -14,6 +14,12 @@ var modulesObj = require('../public/json/modulesinfo.json')
 var modulesList = Object.keys(modulesObj).map(function(value) {
 							         return modulesObj[value]});
 
+
+// roll
+
+router.get('/roll', function(req, res, next){
+	return res.render('roll');
+})
 //GET /profile
 
 router.get('/profile', mid.requiresLogin, function(req, res, next){
