@@ -46,7 +46,6 @@ UserSchema.statics.record = function record(userId, moduleNo, label, callback){
         return next(error);
       } else {
         var query = {};
-        console.log(moduleNo);
         for (var i = 0; i <user.record.length;i++){         
             if(user.record[i].label == label && user.record[i].moduleNo == moduleNo){
               // console.log(user.record[i].label);
@@ -304,13 +303,17 @@ UserSchema.statics.authenticate = function(email, password, callback){
 //hash password
 UserSchema.pre('save', function(next){
 	var user = this;
+  console.log(user.record.length);
+  if (user.record.length == 0){
 	bcrypt.hash(user.password, 10, function(err, hash){
 		if (err){
 			return next(err);
 		} 
 		user.password = hash;
 		next();
-	})
+	})}else{
+    next();
+  }
 });
 
 var User = mongoose.model('User', UserSchema);
