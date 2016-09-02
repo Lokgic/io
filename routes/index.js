@@ -207,26 +207,31 @@ router.get('/shh2', function(req, res, next){
 	return res.render('solution', {title: 'Module Two', file: "2"})
 });
 
+// router.get('/2', function(req, res, next){
+// 	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
+// });
+
 router.get('/2', function(req, res, next){
-	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
-});
+	var err = new Error('Module not yet available.');
+				err.status = 401;
+				return next(err);
 
 
 
-router.get('/2/quiz', function(req, res, next){
+// router.get('/2/quiz', function(req, res, next){
 
-	return res.render('modules', {title: 'Module One', file: "2", part: "quiz"})
-});
+// 	return res.render('modules', {title: 'Module One', file: "2", part: "quiz"})
+// });
 
-router.get('/2/concepts', function(req, res, next){
+// router.get('/2/concepts', function(req, res, next){
 
-	return res.render('modules', {title: 'Module One', file: "2", part: "concepts"})
-});
+// 	return res.render('modules', {title: 'Module One', file: "2", part: "concepts"})
+// });
 
-router.get('/2/reading', function(req, res, next){
+// router.get('/2/reading', function(req, res, next){
 
-	return res.redirect('/2');
-});
+// 	return res.redirect('/2');
+// });
 
 
 // 3
