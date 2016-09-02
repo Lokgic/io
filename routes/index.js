@@ -216,7 +216,7 @@ router.get('/2', function(req, res, next){
 				err.status = 401;
 				return next(err);
 
-}
+});
 
 
 // router.get('/2/quiz', function(req, res, next){
