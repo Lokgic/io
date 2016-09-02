@@ -203,9 +203,9 @@ router.get('/1/reading', function(req, res, next){
 // 2//
 
 
-router.get('/shh2', function(req, res, next){
-	return res.render('solution', {title: 'Module Two', file: "2"})
-});
+// router.get('/shh2', function(req, res, next){
+// 	return res.render('solution', {title: 'Module Two', file: "2"})
+// });
 
 // router.get('/2', function(req, res, next){
 // 	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
@@ -216,6 +216,7 @@ router.get('/2', function(req, res, next){
 				err.status = 401;
 				return next(err);
 
+}
 
 
 // router.get('/2/quiz', function(req, res, next){
