@@ -8,36 +8,36 @@
 	"2":{
 		"moduleNo": 2,
 				"symbol" :"∅" ,
-		"title": "Categorical Logic", 
-		"description": "After an informal introduction to logic, we begin transitioning into the formal realm by a branch of logic called categorical logic, also known as Aristotelian logic or term logic. One of Aristotle's most famous achievement, categorical logic deals with the relation between sets of objects. The reading exercises focuses on the first chapter of the module, and the quiz will focus on the second chapter. Conceptual exercises and the test will cover both."
+		"title": "Sentence Logic: Introduction", 
+		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. As we shall see, the truth table method is semantic because it involves one aspect of the meaning of sentences, whether those sentences are true or false."
 	},
 	"3":{
 		"moduleNo": 3,
-		"title": "Sentence Logic: Introduction",
+		"title": "Sentence Logic: Proofs",
 				"symbol" :"⊥" ,
 		"description": "Blog chambray pug offal vinyl humblebrag health goth kogi beard affogato hashtag. Tattooed drinking vinegar meggings vinyl. Cliche XOXO distillery viral kogi kale chips. Vice seitan green juice, meh chia ugh church-key asymmetrical master cleanse distillery."
 	},
 	"4":{
 		"moduleNo": 4,
-		"title": "Sentence Logic: Proofs",
+		"title": "Predicate Logic: Syntax",
 		"symbol" :"⊢" ,
 		"description": "Blog chambray pug offal vinyl humblebrag health goth kogi beard affogato hashtag. Tattooed drinking vinegar meggings vinyl. Cliche XOXO distillery viral kogi kale chips. Vice seitan green juice, meh chia ugh church-key asymmetrical master cleanse distillery." 
 	},
 	"5":{
 		"moduleNo": 5,
-		"title": "Predicate Logic: Syntax",
+		"title": "Predicate Logic: Semantics",
 		"symbol" :"∀" ,
 		"description": "Butcher you probably haven't heard of them ennui sartorial. Bitters try-hard 3 wolf moon actually before they sold out. Kinfolk neutra normcore meh, cred meditation health goth vice kickstarter craft beer. Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
 	},
 	"6":{
 		"moduleNo": 6,
-		"title": "Predicate Logic: Semantics",
+		"title": "Predicate Logic: Proofs",
 		"symbol" :"⊨" ,
 		"description": "Actually YOLO kale chips, meditation fap mlkshk photo booth keffiyeh artisan fingerstache normcore humblebrag you probably haven't heard of them letterpress.  "  
 	},
 	"7":{
 		"moduleNo": 7,
-		"title": "Predicate Logic: Proofs",
+		"title": "Predicate Logic: Identity",
 		"symbol" :"∃" ,
 		"description": "Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
 	},
