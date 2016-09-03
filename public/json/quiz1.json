@@ -125,6 +125,39 @@
       ["A consistent set of sentences that contains a contradiction", "Not Possible"],
       ["An inconsistent set of sentences that contains a tautology", "Possible"]
     ],"possibleAnswers": ["Possible","Not Possible"]
+  },
+  "12":{
+    "type": "dropdown",
+    "id": "quiz1_12",
+    "instruction": "The following arguments is invalid. Prove that they are invalid by providing a counterexample - an argument with true premises but a false conclusion.",
+    "question": "Some mammals are animals, and some dogs are mammals. Therefore, all dogs are animals.",
+    "setuptype": "runon",
+    "questions": [
+      ["Some mammals are", "chihuahaus"],
+      ["Some dogs are", "mammals"],
+      ["Therefore, all dogs are", "chihuahaus"]
+    ],
+    "possibleAnswers": ["chihuahaus", "mammals", "animals"]
+  },
+  "13": {
+    "question": "No M are P, and some S are M. Therefore:",
+    "real": "Some S are not P.",
+    "fake": ["No conclusion.", "Some S are P.", "All M are P.", "No S is P", "All S are M"],
+    "type": "mc",
+    "id": "quiz1_13"
+  },
+  "14": {
+    "type": "dropdown",
+    "id": "quiz1_14",
+    "instruction": "The following arguments is invalid. Prove that they are invalid by providing a counterexample - an argument with true premises but a false conclusion.",
+    "question": "Some evergreens are not spruces, and all spruces are trees. Therefore some trees are not evergreens.",
+    "setuptype": "runon",
+    "questions": [
+      ["Some plants are", "not spruces"],
+      ["All spruces are", "trees"],
+      ["Therefore, trees are", "not plants"]
+    ],
+    "possibleAnswers": ["not spruces", "spruces", "trees", "not trees", "plants", "not plants"]
   }
 
 

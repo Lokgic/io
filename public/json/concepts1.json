@@ -62,6 +62,41 @@
     "Premise":{
     	"term":"Premise",
     	"df": "a statement in an argument that provides evidence for the conclusion"
+    },
+    "Venn diagram ":{
+        "term":"Venn diagram ",
+        "df": "A diagram that represents categorical statements using circles that stand for classes. "
+    },
+    "Quantifier":{
+        "term":"Quantifier",
+        "df": "The part of a categorical sentence that specifies a portion of a class. "
+    },
+    "Statement mood":{
+        "term": "Statement mood",
+        "df": "The classification of a categorical statement based on its quantity and quality."
+    },
+    "Mood-A statement":{
+        "term":"Mood-A statement",
+        "df": "A quantified categorical statement of the form “All S are P.”"
+    },
+    "Mood-E statement":{
+        "term":"Mood-E statement",
+        "df": " A quantified categorical statement of the form “No S are P.”  "
+    },"Mood-I statement":{
+        "term":"Mood-I statement",
+        "df": "A quantified categorical statement of the form “Some S are P.”"
+    },
+    "Mood-O statement":{
+        "term":"Mood-O statement",
+        "df": "A quantified categorical statement of the form “Some S are not P.”  "
+    },
+    "Major term ":{
+        "term":"Major term ",
+        "df": "The term that is used as the predicate of the conclusion of an Aristotelian syllogism. "
+    },
+    "Middle term ":{
+        "term":"Middle term",
+        "df": "The one term in an Aristotelian syllogism that does not appear in the conclusion."
     }
     
     
