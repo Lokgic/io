@@ -60,6 +60,7 @@ body
 									progress.progress(aria-describedby="progresscap")
 									p.card-text#question
 									div#answers.list-group
+									button.btn.button-primary.m-t-1#next(type="button") Continue
 					else 
 						.tab-pane.fade#quiz(role="tabpanel")
 							.card#quizcard
@@ -69,7 +70,7 @@ body
 									progress.progress(aria-describedby="progresscap")
 									p.card-text#question
 									div#answers.list-group
-								button.btn.button-primary.m-t-1#next(type="button") Continue
+									button.btn.button-primary.m-t-1#next(type="button") Continue
 						div#quizalertdiv
 					if (part =="concepts")
 						.tab-pane.fade#concepts.in.active(role="tabpanel")
