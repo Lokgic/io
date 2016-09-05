@@ -218,6 +218,13 @@ router.get('/2', function(req, res, next){
 
 });
 
+router.get('/2/wason', function(req, res, next){
+
+	return res.render('wason');
+});
+
+
+
 
 // router.get('/2/quiz', function(req, res, next){
 

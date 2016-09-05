@@ -1,240 +1,217 @@
 $(function(){
-	var $content = $(".content");
-	var $rule = $("#rule");
-	var $confirm = $("#confirm");
-	var $interaction = $("#interaction");
-	var $instruction = $("#instruction");
-	var $reload = $("#reload");
-	var $retry = $("#retry");
-	 function makeBinary(){
-	 	return  Math.floor(Math.random()* 2);
+
+	$cards = $('#cards');
+	$rule = $('#rule');
+	var score = 0;
+	var $button = $('#wasonbutton');
+
+function makeAlert(location, direction, text, code){ //direction: a= above, b=below
+  /////This takes care of the HTML
+  var tag;
+  if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
+          $(location).prev().remove();
+        }
+      if (direction == "b" && $(location).next().hasClass("alert")){
+          $(location).next().remove();
+        }
+  }
+  else if (code == 1){tag = "alert-success";}
+  else if (code == 2){tag = "alert-info";}
+  else if (code == 3){tag = "alert-warning"}
+  else{tag = "alert-danger"}
+  var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
+
+  if (direction == "a"){
+    if ($(location).prev().hasClass("alert")) {
+      $(location).prev().remove();
+    }
+    $(location).before(html);
+    }
+
+  if (direction == "b"){
+    if ($(location).next().hasClass("alert")) {
+      $(location).next().remove();
+    }
+    $(location).after(html);
+    }
+
+  }
+var randomize = {
+  drawOneRandomFromSet: function(set) {
+        return  set[Math.floor(Math.random()* set.length)];
+        },
+
+  shuffle: function(arr) {
+    var currentI = arr.length, tempValue, randomI;
+
+    while (0!== currentI){
+      randomI = Math.floor(Math.random() * currentI);
+          currentI -= 1;
+
+          tempValue = arr[currentI];
+          arr[currentI] = arr[randomI];
+          arr[randomI] = tempValue;
+        }
+
+        return arr;
+      },
+    chooceProbabilistically: function(set, probability){
+
+    var n = Math.random();
+    var low = 0;
+    var outcome;
+    for (var i = 0; i<set.length;i++){
+      if (low<n&&n<probability[i]){
+        low = probability[i];
+        outcome = set[i];
+      }
+    }
+      return outcome;
+    },
+
+    sample: function(set, n){
+    	var newSet = randomize.shuffle(set);
+    	var output =[];
+    	for (var i= 0; i<n; i++){
+    		output.push(newSet.pop());
+    	} 
+    	return output;
+    }
+
+  }
+
+
+function printCards(cards){
+	var html = '<div class="btn-group" data-toggle="buttons">'
+	for (card in cards){
+		html+='<label class="btn btn-primary m-x-1 wason" value = ' + cards[card] + '>';
+		html += '<input type="checkbox" autocomplete="off">';
+		html += '<h1 class = "display-2">' + cards[card] + '</h1>';
+		html+='</label>';
+		
 	}
 
+	html += '</div>'
+	return html;
+}
 
-/* Multiple Color function
+function makeRule(options){
 
-	function makeColor() {
-		var seed  = Math.floor(Math.random()* 4);
-		var hex = "";
-		for (var i = 1; i < 4; i++){
-			if (seed == 0){
-				hex = "000";
-				break;
-			}else if (i === seed){
-				hex += "7"
-
-			}else{
-				hex += "0"
-			}
-
-		}
-
-		return hex;
+	rule = [];
+	for (i in options){
+		rule.push(randomize.drawOneRandomFromSet(options[i]));
 	}
-*/
-	
-	function drawRandom(set){
-		return 	set[Math.floor(Math.random()* set.length)];
-	}
+	rule = randomize.shuffle(rule);
+	return rule;
+}
 
-
-	function makeRule(){
-		rule = []
-			rule.push(drawRandom(possibility));
-			if (rule[0] === "an even number" || rule[0] === "an odd number")
-				{rule.push(drawRandom(possibility.slice(2,4)))}
-			else {rule.push(drawRandom(possibility.slice(0,2)))}
-		return rule;
-	}
-
-	function expressRule(rule){
-		var seed = drawRandom([1, 2, 3, 4, 5,6, 7]);
-		if (seed === 1) {return "if one side of the card is " + rule[0] + ", then the other side must be " + rule[1];}
+function printRule(rule){
+	var seed = randomize.drawOneRandomFromSet([1, 2, 3, 4, 5,6, 7]);
+	if (seed === 1) {return "if one side of the card is " + rule[0] + ", then the other side must be " + rule[1];}
 		else if (seed === 2) {return "one side of the card is " + rule[0] + " only if the other side is " + rule[1];}
 		else if (seed === 3) {return "a card cannot have " + rule[0] + " on one side without having " + rule[1] + " on another side";}
 		else if (seed === 4) {return "one side of card is " + rule[1] + " if it has " + rule[0] + " on another side";} 
-		else if (seed === 5) {return "it is necessary for a card to have " + rule[1] + " on one side in order for it to have " + rule[0] + " on the other side";}
-		else if (seed === 6) {return "The sufficient condition for a card to have " + rule[1] + " on one side, is for it to have " + rule[0] + " on another";}
+		else if (seed === 5) {return "having "+ rule[1] + "on one side is a necessary condition for having " + rule[0] + " on the other side.";}
+		else if (seed === 6) {return "having "+ rule[0] + "on one side is a sufficient condition for having " + rule[1] + " on the other side.";}
 		else {return "having " + rule[0] + " on one side implies that the other side is " +rule [1]}
-	}
 
-	function makeAnswer(rule){
-		var answer = [];
-		if (rule[0] === "an even number"|| rule[1] === "an odd number") {
-			for (var i = 1; i < 11; i++){
-				if (i % 2 === 0){answer.push(i)}
-			} //end for loop		
-		} //end conditional on even
-		else if (rule[0] === "an odd number"|| rule[1] === "an even number") {
-			for (var i = 1; i < 11; i++){
-				if (i % 2 === 1){answer.push(i)}
-			} //end for loop		
-		} //end conditional on odd
-		if (rule[0] === "a vowel"|| rule[1] === "a consonant") {
-			answer = answer.concat(vowels);	
-		} //end conditional on vowel
-		else if (rule[0] === "a consonant" || rule[1] === "a vowel") {
-			answer = answer.concat(consonants);} // antecedent consonant or consequent vowel
-		return answer;
-	}
+}
 
-	function checkAnswer(input, answers){
-		for (var i = 0; i < answers.length; i++){
-			if (answers[i] === input){
-				return true;
+function makeAnswer(rule, cards){
+	var answer = [];
+	if (rule[0] === "an even number"|| rule[1] === "an odd number") {
+			for (var i = 0; i < cards.length; i++){
+				if (cards[i] % 2 === 0){answer.push(cards[i])}
+			} //end for loop		
+		} else if (rule[0] === "an odd number"|| rule[1] === "an even number") {
+			for (var i = 0; i < cards.length; i++){
+				if (cards[i] % 2 === 1){answer.push(cards[i])}
+			} //end for loop		
+		} 
+
+
+	if (rule[0] === "a vowel"|| rule[1] === "a consonant") {
+			for (var i =0; i< cards.length;i++){
+				if (vowels.indexOf(cards[i])!= -1){
+					answer.push(cards[i]);
+				}
 			}
 
+		} else if (rule[0] === "a consonant" || rule[1] === "a vowel") {
+			for (var i = 0; i < cards.length; i++){
+				if(consonants.indexOf(cards[i])!= -1){
+					answer.push(cards[i]);
+				}
+			}
 		}
-		return false;;
 
+
+	return answer;
+}
+
+function checkAnswer(answers){
+	var checked = $('.active', '.btn-group').children().text();
+	for (answer in answers){
+		if (checked.indexOf(answers[answer])== -1){
+			return false;
+		} else {
+			return true;
+		}
 	}
+}
 
-	function makeResponse(input, answers){
-		var right = [];
-		var wrong = [];
-		var missed = [];
-		var specificanswers = [];
+function generalInstruction(){
+var html =' <p class = "lead">Suppose each card has a number on one side and a letter on the other. </p>'
+html += '<p class = "lead">Which of these cards MUST be turned over if you want to know if the statement above them is FALSE?</p>'
+html += '<p class = "lead">Choose by clicking the card(s) and then press "Confirm Answer".'
 
-		for (var i = 0; i < cards.length; i++){
+	makeAlert($button, "b", html,2);
+}
 
-			if (checkAnswer(cards[i], answers))
-				   {specificanswers.push(cards[i]);
-			   }
-		} //get a set of current right cards, since cards is the set of all POSSIBLE ONES
-
-		for (var i = 0; i < input.length; i++){
-			if (checkAnswer(input[i], answer) === true){
-				right.push(input[i]);
-			} else {wrong.push(input[i]);
-		}
-
-		} //looping over all answers to check input answers, output right and wrong 
-
-		for (var i = 0; i<specificanswers.length; i++){
-			if (checkAnswer(specificanswers[i], right) === false){
-				missed.push(specificanswers[i]);
-			}//This gets the missed answer by comparing what the agent got right and all the actual right asnwers.
-
-		}
-
-		return [right, wrong, missed];
-	}
-
-	function makeCards (n){
+function initCards (n){
 		var allcards = [];
 		allcards = allcards.concat(vowels);
 		allcards = allcards.concat(consonants);
 		allcards = allcards.concat(number);
-		var output = [];
-		for (var i = 0; i < n ; i ++){
-			var draw = drawRandom(allcards);
-			output = output.concat(draw);
-			allcards.splice(allcards.indexOf(draw), 1);
-
-		}
+		var output = randomize.sample(allcards, n);
 		return output;
 		}
 
-	/*** Printing out stuff *////
-	function printRule(rule){
-		$rule.html('<p>"' + expressRule(rule) + '"</p>');
-	}
-
-	function printCards(cards){
-		var html = "<form>";
-		for (var i = 0; i < cards.length; i++){
-			html += "<label for= '"+cards[i]+"'><div><p>" + cards[i] + "</p><input type ='checkbox' class = 'box' id = " + cards[i] +" value = "+ cards[i] +"></label></div>";
-		}
-		html += "</form>"
-		$content.append(html);
-	};
-
-	function print(x){
-		return console.log(x);
-	}
-
-	$confirm.on('click', function(){
-		var input = [];
-		var message = "";
-		for (var i = 0; i<cards.length; i++){
-			if (document.getElementById(cards[i]).checked){
-				input.push(cards[i]);
-			}
-		}
-		$confirm.hide();
-		$retry.show();
-		var tally = makeResponse(input, answer)
-		result = interpretResult(tally);
-		var reload = "<button id = 'reload'> Start Over with New Cards</button>";
-		var tryagain = "<button id = 'retry'> Try This Again </button>";
-
-		if (result === 1) {
-			message = "Spot on!";}
-		else if (result === 2) {
-			message = "Everything you picked was wrong! That's messed up!";}
-		else if (result === 3) {
-			message = "At least one card needs to be turned over! Don't be lazy!";}
-		else if (result === 4) {
-			message = "Yup, there's nothing to learn from turning any of the cards over. Almost tricked you, didn't I?";}
-		else if (result === 5){
-			message = "Not quite! This is how you did:<br> Right card picked: " + tally[0].length + "<br>Wrong card picked: " + tally[1].length + "<br>Card Missed: " + tally[2].length;
-		}
-
-		$instruction.html("<p>" + message + "</p>");
-
-	})
-
-	$reload.on('click', function(){
-		location.reload();
-		})
-
-	$retry.on('click', function(){
-		$confirm.show();
-		$retry.hide();
-		$instruction.html("<p>Alright, give it another go! Which card(s) must you turn over in order to verify the statement above?</p>");
-		})
-	$retry.hide();
-
-
-
-	function interpretResult (result){
-		if (result[1].length === 0 && result[2].length === 0 && result[0].length > 0){ // case 1: agent gets everything right - no missed no wrong answers
-			return 1;} 
-		else if (result[0].length === 0 && result[2].length === 0 && result[1].length > 0){ // case 2: agent gets everything wrong - no missed no right answers
-			return 2;}
-		else if (result[0].length === 0 && result[1].length === 0 && result[2].length > 0){ // case 3: agent didn't enter anything and missed some
-			return 3;}
-		else if (result[0].length === 0 && result[1].length === 0 && result[2].length === 0){ // case 4: agent didn't enter anything but didn't miss anything
-			return 4;} 
-		else 
-		{return 5;}
-	}
-
-/******Begining Parameter of the Game *///////
+	var $cards = $('#cards');
 	var vowels = ['a','e','u','i'];
 	var consonants = ['b','h','p','z'];
 	var number = [1,2,3,4,5,6,7,8,9]
-	var possibility = ["an even number", "an odd number", "a consonant", "a vowel"];
+	var possibility = [["an even number", "an odd number"], ["a consonant", "a vowel"]];
 
-/* game initiation*/
-	var rule = makeRule();
-	var cards = (makeCards(4));
-
-
-	printRule(rule);
-	printCards(cards);
-	var answer = makeAnswer(rule);
-	
-	
-
-
-	//var x = makeNumber();
-	//console.log(x);
-	//var html ="<div style = 'background-color: #"+ makeColor() + "'></div>";
-	//console.log(even(x));
-	//$content.append(html);
-
-
-
+	var current = initCards(4);
+	$cards.html(printCards(current));
+	var rule = makeRule(possibility);
+	var ans = makeAnswer(rule, current);
+	$rule.html(printRule(rule));
+	console.log(ans);
+	var reset = false;
+	generalInstruction();
+	$button.on('click', function (){
+		if (reset == false){
+			reset = true;
+			if (checkAnswer){
+				score++;
+				console.log(score);
+				makeAlert($button, "b","Correct", 1);
+			}else {
+				makeAlert($button, "b","Incorrect", 4);
+			}
+		} else{
+			current = initCards(4);
+			$cards.html(printCards(current));
+			rule = makeRule(possibility);
+			ans = makeAnswer(rule, current);
+			$rule.html(printRule(rule));
+			generalInstruction();
+			reset = false;
+			
+		}
+	})
 
 }) //end

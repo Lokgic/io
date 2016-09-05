@@ -336,14 +336,14 @@ function fillTable(type, id){
 function truthTableInterpretation(type){
     score = 0;
   var tableId = "truthTable";
-    var $panel = $('#' + type);
-    var connectives = ['conditional','disjunction','conjunction','biconditional'];
-    var connectivesP = [0.4,0.6,.8,1];
-    var cardHTML = '<div class="card" id ="truthTableInterpretationCard"><h1 class="card-header display-4">Truth Table Interpretation</h1><div class="p-x-2 card-block" id = "truthTableInterpretationBlock"></div></div>';
-   
-    $panel.append(cardHTML);
-    var choose = randomize.chooceProbabilistically(connectives, connectivesP);
-    function setupProblem(){
+  var $panel = $('#' + type);
+  var connectives = ['conditional','disjunction','conjunction','biconditional'];
+  var connectivesP = [0.4,0.6,.8,1];
+  var cardHTML = '<div class="card" id ="truthTableInterpretationCard"><h1 class="card-header display-4">Truth Table Interpretation</h1><div class="p-x-2 card-block" id = "truthTableInterpretationBlock"></div></div>';
+ 
+  $panel.append(cardHTML);
+  var choose = randomize.chooceProbabilistically(connectives, connectivesP);
+  function setupProblem(){
     $('#truthTableInterpretationBlock').html(makeTable(5,3,tableId));
     fillTable(choose, tableId);
     var buttonHTML = '<div class="btn-group" role="group" aria-label="TruthTableAnswer">';
@@ -356,17 +356,17 @@ function truthTableInterpretation(type){
     mathJax.reload("truthTableInterpretationBlock");
     }
    setupProblem();
-    $('.TTbutton').on('click', function(e){
-      var answer = $(e.currentTarget).val();
-      if (answer == choose){
-        score+=1;
-        console.log(score);
-      } else{
-        console.log("you suck")
-      }
-      choose = randomize.chooceProbabilistically(connectives, connectivesP);
-      setupProblem();
-    })
+  $('.TTbutton').on('click', function(e){
+    var answer = $(e.currentTarget).val();
+    if (answer == choose){
+      score+=1;
+      console.log(score);
+    } else{
+      console.log("you suck")
+    }
+    choose = randomize.chooceProbabilistically(connectives, connectivesP);
+    setupProblem();
+  })
 }
 
 
