@@ -1,63 +1,29 @@
 {
-  "1" : { "title": "Identification",
+      "1" : { "title": "Wason Selection Task",
           "moduleNo": 2,
           "section": "I",
           "label": "reading_1",
-        "id": "Identification", 
-  		"method": "fill",
-       "instruction": "Identify each of the following sentences as A, E, I, or O; state its quantity and quality; and state which terms are distributed. Form is 'A', 'E', 'I', or 'O', quantity 'Universal' or 'Particular', and quality 'Affirmative' or 'Negative. Capitalization does not matter. The system will automatically transform your answer into being lowered-cased for answer checking." ,
-          "questions":[
-          	["All gerbils are rodents. Form:", "A"],
-          	["Quantity", "Universal"],
-          	["Quality", "Affirmative"],
-          	["No extraterrestrials are in Cleveland. Form:", "E"],
-          	["Quantity", "Universal"],
-            ["Quality", "Negative"],
-            ["Some dancers are graceful. Form:", "I"],
-            ["Quantity", "Particular"],
-            ["Quality", "Affirmative"],
-            ["No grandsons are female. Form:", "E"],
-            ["Quantity.", "Universal"],
-            ["Quality", "Negative"],
-            ["Some manatees are not rappers. Form:", "O"],
-            ["Quantity", "Particular"],
-            ["Quality", "Negative"],
-            ["No customers are mistaken. Form:", "E"],
-            ["Quantity", "Universal"],
-            ["Quality", "Negative"]
-          	]
-          },
-      "2" : { "title": "Transforming Sentences",
-                "moduleNo": 2,
-                "section": "II",
-                "label": "reading_2",
-              "id": "transforming_sentences", 
-            "method": "fill",
-             "instruction": "Transform the following into logically structured English. Capitalization does not matter. The system will automatically transform your answer into being lowered-cased for answer checking; however, do get your phrasing exactly as shown in the text or the system might not recognize your answer. Periods at the end of a sentence also matter." ,
-                "questions":[
-                  ["Cats are predators.", "All cats are predators."],
-                  ["Monotremes are the only egg-laying mammals.", "All egg-laying mammals are monotremes."],
-                  ["Only natural born citizens can be president of the United States.", "All presidents of the United States are natural born citizens."],
-                  ["If something is worth doing, it is worth doing well.", "All things that are worth doing are things that are worth doing well."]
-                  ]
-                },
-      "3" : { "title": "Identifying Validity",
-          "moduleNo": 2,
+        "id": "wason", 
+      "method": "game",
+       "instruction": "Click to link below to play a randomized version of the Wason Selection Task, which tests your understanding of conditionals. You will need to obtain a certain score to pass."},
+
+       "2" : { "title": "Logical Statuses of Statements",
+          "moduleNo": 1,
           "section": "III",
           "label": "reading_3",
-        "id": "Validity", 
+        "id": "logical_statuses", 
       "method": "dropdown",
-       "instruction": "Determine whether the following arguments are valid by drawing a Venn diagram for the premise.",
+       "instruction": "Identify the following expressions.",
           "questions":[
-            ["Some smurfs are not blue. Therefore, some blue things are not smurfs.", "Invalid"],
-            ["All giraffes are majestic. Therefore, all non-majestic things are non-giraffes.", "Valid"],
-            ["Some roosters are not pets. Therefore, some pets are not roosters.", "Invalid"],
-            ["No anesthesiologists are doctors. Therefore, no doctors are anesthesiologists.  ", "Valid"],
-            ["All penguins are flightless. Therefore, all flightless things are penguins. ", "Invalid"],
-            ["No kisses are innocent. Therefore, no non-innocent things are non-kisses.", "Invalid"],
-            ["All operas are sung. Therefore, all sung things are operas.", "Invalid"],
-            ["Some shopping malls are not abandoned. Therefore, some shopping malls are non-abandoned.", "Valid"]
+            ["Someone once crossed the Rubicon.", "Contingent"],
+            ["If Caesar crossed the Rubicon, then someone has.", "Tautology"],
+            ["If anyone has ever crossed the Rubicon, it was Caesar", "Contingent"],
+            ["Even though Caesar crossed the Rubicon, no one has ever crossed the Rubicon.", "Contradiction"],
+            ["Elephants dissolve in water.", "Contingent"],
+            ["Wood is a light, durable substance useful for building things.", "Contingent"],
+            ["If wood were a good building material, it would be useful for building things.", "Tautology"],
+            ["I live in a three story building that is two stories tall. ", "Contradiction"]
             ],
-            "possibleAnswers": ["Valid", "Invalid"]
+            "possibleAnswers": ["Contradiction", "Contingent", "Tautology"]
           }
 }

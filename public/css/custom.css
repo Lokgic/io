@@ -64,3 +64,26 @@ p.lead{
 	text-decoration: none;
 }
 
+.wason.focus, .wason:focus {
+	background-color: white;
+	color:#0275d8;
+
+
+}
+
+#cards .btn-group>.btn{
+	float: none;
+}
+
+#wasoncontainer{
+	max-width: 544px;
+}
+
+#rule {
+	text-transform: capitalize;
+}
+.wason {
+	text-transform: capitalize;
+	width:150px;
+
+}

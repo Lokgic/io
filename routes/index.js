@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var Leader = require('../models/leader');
 var mid = require('../middleware');
 
 //for rendering index
@@ -207,16 +208,16 @@ router.get('/1/reading', function(req, res, next){
 // 	return res.render('solution', {title: 'Module Two', file: "2"})
 // });
 
-// router.get('/2', function(req, res, next){
-// 	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
-// });
-
 router.get('/2', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
-
+	return res.render('modules', {title: 'Module Two', file: "2", part:"reading"})
 });
+
+// router.get('/2', function(req, res, next){
+// 	var err = new Error('Module not yet available.');
+// 				err.status = 401;
+// 				return next(err);
+
+// });
 
 router.get('/2/wason', function(req, res, next){
 
@@ -304,10 +305,6 @@ router.get('/debug', function(req, res, next){
 
 router.post('/report', function(req, res, next){
 
-	// if (req.body.type.split("")[0] =='{'){
- //      req.body.type = JSON.parse(req.body.type);
- //    }
- //    console.log(typeof req.body.type);
 
 	if (!req.session || ! req.session.userId){
 		return res.send("Since you were not signed in, no record was made. Sadly, the world will never know about your logical prowess.")
@@ -317,93 +314,33 @@ router.post('/report', function(req, res, next){
 
 		})
 
-
-		// User.checkRecord(req.body.moduleNo, req.body.type, req.session.userId, function (err, passed){
-		// 	if (err){
-		// 		console.log(err);
-		// 		return next(err);
-		// 	}else {
-		// 		if (passed){
-		// 			return res.send([2, "No change was made to your record since you had already completed this task, but hey - you still got it!"]);
-		// 		}else {	
-		// 			var toWrite = {
-		// 					"passed" : true,
-		// 					"time" : Date.now()
-		// 					};
-		// 			var out = {};
-		// 			out.module = {};
-		// 			out.module[req.body.moduleNo] = {};
-
-		// 			if(typeof req.body.type == "object"){
-		// 				out.module[req.body.moduleNo][req.body.type.name] = {};
-		// 				out.module[req.body.moduleNo][req.body.type.name].section = {};
-		// 				out.module[req.body.moduleNo][req.body.type.name].section[req.body.type.section] = toWrite
-		// 				console.log(out);
-		// 				} else {
-		// 					out.module[req.body.moduleNo][req.body.type] = toWrite
-		// 				}
-		// 			User.findOneAndUpdate({"_id": req.session.userId},out, function(error, user){
-		// 				if (error){
-		// 					return next(error);
-		// 				}else{
-		// 					return res.send([1,"Congratulations! You have completed this task and your record has been updated."]);
-		// 					}
-		// 				});
-		// 		}
-		// 	}
-		// })
 	}
 });
 
 
-// router.post('/1q', function(req, res, next){
-// 	if (!req.session || ! req.session.userId){
-// 		return res.send("Your score was not recorded because you were not signed in.")
-// 	} else {
+router.post('/wason', function(req, res, next){
 
-// 		User.findOneAndUpdate({"_id": req.session.userId},{"quiz1": true, "quiz1time": Date.now()}, function(error, user){
 
-// 			if (error){
-// 				return next(error);
-// 			}else{
-				
-// 				return res.send("Record Updated.");
-// 			}
+	if (req.session.userId){
+		User.getName(req.session.userId, function (err, name){
 			
-// 		});
-// 	}
-// });
-
-
-// router.post('/1r', function(req, res, next){
-// 	console.log(req.originalUrl);
-// 	if (!req.session || ! req.session.userId){
-// 		return res.send("You are not signed in.");
-// 	} else {
-		
-// 		User.checkQuizRecord("reading1",req.session.userId, function (err, passed){
-// 			if (passed){
-// 				return res.send(" Quiz passed previously.");
-// 			}else if(req.body.passed){	
-// 				User.findOneAndUpdate({"_id": req.session.userId},{"reading1": true, "reading1time": Date.now()}, function(error, user){
-// 					if (error){
-// 						return next(error);
-// 					}else{
-// 						return res.send("Record Updated.");
-// 						}
-// 					});
-// 			}
-// 		})
-// 	}
-// });
-
-// Requesting info from DB
-//Get quiz
+			Leader.update(name, "wason", req.body.score, function(err, response){
+				return res.send(response);
+				})
+			})
+	}else{
+		return res.send(response);}
+});
 
 
 
-		
-		
+router.post('/ranking', function(req, res, next){
+
+	Leader.getRanking(req.body.game, function (err, response) {
+		// console.log(response);
+		return res.send(response);
+	})
+});
 
 
 module.exports = router;

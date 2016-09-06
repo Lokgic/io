@@ -1,12 +1,26 @@
 extends layout
 
 block content
-	.container.text-xs-center.p-t-3.m-t-3.fluid
+	.container-fluid.p-t-3.m-t-3
 		.row
-			.col-md-12#rule
-		.row
-			.col-md-12.fluid#cards
-		button.btn.btn-primary(type='button')#wasonbutton 
+			.col-md-8
+				.container.text-xs-center#wasoncontainer
+					h1.display-4 Wason Selection Task
+					.row
+						.col-md-6.m-y-3.lead#score
+						.col-md-6.m-y-3.lead
+							button.btn.btn-primary.btn-sm.m-x-1#minus(type='button') -
+							button.btn.btn-primary.btn-sm(type='button')#numOfCards # of Cards: 6
+							button.btn.btn-primary.btn-sm.m-x-1#plus(type='button') +
+						.col-md-12.lead#rule
+					.row.m-y-1
+						.col-md-12#cards
+						.col-md-12
+							button.btn.btn-primary.btn-block.m-y-3(type='button')#wasonbutton Button
+			.col-md-4
+				h1.display-4.text-xs-center.m-b-3 Leaderboard
+				.container.text-xs-center.m-t-3#leaderboard
+
 
 
 

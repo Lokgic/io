@@ -369,6 +369,14 @@ function truthTableInterpretation(type){
   })
 }
 
+function makeGameCard(obj){
+   var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
+    html += '<p class="font-italic">' + obj.instruction +'<p>';
+    html += '<a class="btn btn-primary" href="../2/wason" role="button">Link</a>';
+    html += '</div>'
+    return html;
+}
+
 
 function init(type){
   //html elements are attached according to the type of quiz
@@ -389,14 +397,15 @@ function init(type){
         var checkQuestionType = {};
         makeQuestionType.fill = makefillCard;
         makeQuestionType.dropdown = makeDropdownCard;
+        makeQuestionType.game = makeGameCard;
         
 
         if(type =="reading"){
   
            for (problem in data){
 
-              if (data[problem].method == "activity"){
-                truthTableInterpretation(type);
+              if (data[problem].method == "game"){
+                $panel.append(makeGameCard(data[problem]));
               }
               else{
               $panel.append(makeQuestionType[data[problem].method](data[problem]));
