@@ -12,6 +12,7 @@ $(function(){
 	var $plus = $('#plus');
 	var $minus = $('#minus');
 	var $numOfCards = $('#numOfCards');
+	var secondChance = 0;
 
 function makeAlert(location, direction, text, code){ //direction: a= above, b=below
   /////This takes care of the HTML
@@ -115,7 +116,7 @@ function makeRule(options){
 }
 
 function printRule(rule){
-	var seed = randomize.drawOneRandomFromSet([1, 2, 3, 4, 5,6, 7]);
+	var seed = randomize.drawOneRandomFromSet([1, 2, 3, 4, 5,6, 7,8]);
 	if (seed === 1) {return "if one side of the card is " + rule[0] + ", then the other side must be " + rule[1];}
 		else if (seed === 2) {return "one side of the card is " + rule[0] + " only if the other side is " + rule[1];}
 		else if (seed === 3) {return "a card cannot have " + rule[0] + " on one side without having " + rule[1] + " on another side";}
@@ -181,10 +182,12 @@ function checkAnswer(answers){
 }
 
 function generalInstruction(){
-var html =' <p >Suppose each card has a number on one side and a letter on the other. </p>'
-html += '<p >Which of these cards MUST be turned over if you want to know if the statement above them is FALSE?</p>'
-html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.'
-html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards. The score you get is directly correlated to the number of cards for each trial.'
+	var html = "<h4>Instruction</h4>"
+ html +=' <p>Suppose each card has a number on one side and a letter on the other. </p>'
+html += '<p><em>Which of these cards MUST be turned over if you want to know if the statement above them is FALSE?</em></p>'
+html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
+html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards. The score you get is directly correlated to the number of cards for each trial.</p>'
+html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
 
 	makeAlert($head, "b", html,2);
 }
@@ -205,8 +208,8 @@ function initCards (n){
 
 	var $cards = $('#cards');
 	var vowels = ['a','e','u','i','o'];
-	var consonants = ['b','h','p','z'];
-	var number = [1,2,3,4,5,6,7,8,9]
+	var consonants = ['b','h','p','z','g'];
+	var number = [10,2,3,4,5,6,7,8,9]
 	var possibility = [["an even number", "an odd number"], ["a consonant", "a vowel"]];
 	var x = 6;
 
@@ -228,7 +231,7 @@ function initCards (n){
 			console.log(ans);
 			$rule.html(printRule(rule));
 			reset = false;
-			makeAlert($head,"b","Which card(s) must you turn over in order to verify the above statement?",3);
+			makeAlert($head,"b","Which card(s) must you turn over in order to verify the statement below?",3);
 
 	}
 
@@ -256,7 +259,14 @@ function initCards (n){
 			if (checkAnswer(ans)){
 				Score(score + x);
 				makeAlert($head, "b","This is correct! Press the button the continue", 2);
-			}else {
+				if (score >= 40 && secondChance ==0) secondChance = 1;
+				console.log(secondChance);
+			} else if (secondChance == 1){
+				makeAlert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
+				secondChance = 3;
+				reset = false;
+			}
+			else {
 				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart. ";
 				if (score >= passing){				
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
