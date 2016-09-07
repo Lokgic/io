@@ -184,7 +184,7 @@ function checkAnswer(answers){
 function generalInstruction(){
 	var html = "<h4>Instruction</h4>"
  html +=' <p>Each card below has a number on one side and a letter on the other. </p>'
-html += '<p><em>Which of these cards MUST be turned over if you want to know if the statement above them is FALSE?</em></p>'
+html += '<p><em>Your task is to turn over the <strong>minimum</strong> number of cards required to determine whether the statement is true or false.</em></p>'
 html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
 html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards by pressing + or -. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
@@ -258,7 +258,7 @@ function initCards (n){
 			reset = true;
 			if (checkAnswer(ans)){
 				Score(score + x);
-				makeAlert($head, "b","This is correct! Press the button the continue", 2);
+				makeAlert($head, "b","This is correct! Press the button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
 				console.log(secondChance);
 			} else if (secondChance == 1){
@@ -267,10 +267,12 @@ function initCards (n){
 				reset = false;
 			}
 			else {
-				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart. See if you made it on the leaderboard.";
+				var output = "This is incorrect! Your final score is "+ score + ". Press the button to restart. See if you made it on the leaderboard.";
+				if (score > 0){
 				jQuery.post("../wason", {score:score}, function(res){
 				    	pingLeaderboard();
 				      });
+				}
 				if (score >= passing){				
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
 				       output += "You passed! "+res;
