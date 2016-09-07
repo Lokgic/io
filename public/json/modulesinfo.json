@@ -10,43 +10,43 @@
 		"moduleNo": 2,
 				"symbol" :"∅" ,
 		"title": "Sentence Logic: Introduction", 
-		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. As we shall see, the truth table method is semantic because it involves one aspect of the meaning of sentences, whether those sentences are true or false.",
-		"info": [["About the Test", "Make sure you understand the part about recursive defintions and how to prove that some string is a wff. Be ready to construct a complete or an incomplete truth table for logical relations. I might ask you to do some translations. The wason selection task might also be in the test."]]
+		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. ",
+		"info": [["About the Test", "Make sure you understand the part about recursive definitions and how to prove that some string is a wff. Be ready to construct a complete or an incomplete truth table for logical relations. I might ask you to do some translations. The wason selection task might also be in the test."]]
 	},
 	"3":{
 		"moduleNo": 3,
 		"title": "Sentence Logic: Proofs",
 				"symbol" :"⊥" ,
-		"description": "Blog chambray pug offal vinyl humblebrag health goth kogi beard affogato hashtag. Tattooed drinking vinegar meggings vinyl. Cliche XOXO distillery viral kogi kale chips. Vice seitan green juice, meh chia ugh church-key asymmetrical master cleanse distillery."
+		"description": "In this module, we are going to introduce a new method for checking for validity and other logical properties. This time our method is going to be purely syntactic. We won’t be at all concerned with what our symbols mean. We are just going to look at the way they are arranged. Our method here will be called a system of natural deduction. When you use a system of natural deduction, you won’t do it mechanically. "
 	},
 	"4":{
 		"moduleNo": 4,
-		"title": "Predicate Logic: Syntax",
+		"title": "Quantified Logic: Syntax",
 		"symbol" :"⊢" ,
-		"description": "Blog chambray pug offal vinyl humblebrag health goth kogi beard affogato hashtag. Tattooed drinking vinegar meggings vinyl. Cliche XOXO distillery viral kogi kale chips. Vice seitan green juice, meh chia ugh church-key asymmetrical master cleanse distillery." 
+		"description": "This chapter introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms." 
 	},
 	"5":{
 		"moduleNo": 5,
-		"title": "Predicate Logic: Semantics",
+		"title": "Quantified Logic: Semantics",
 		"symbol" :"∀" ,
-		"description": "Butcher you probably haven't heard of them ennui sartorial. Bitters try-hard 3 wolf moon actually before they sold out. Kinfolk neutra normcore meh, cred meditation health goth vice kickstarter craft beer. Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
+		"description": "In Module 2 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings for all the non-logical parts of a sentence, in this case, the sentence letters. Because QL is a more complicated system than SL developing semantics for QL will be much more complicated, and there will be greater limitations for what we can do with these methods." 
 	},
 	"6":{
 		"moduleNo": 6,
-		"title": "Predicate Logic: Proofs",
+		"title": "Quantified Logic: Proofs",
 		"symbol" :"⊨" ,
-		"description": "Actually YOLO kale chips, meditation fap mlkshk photo booth keffiyeh artisan fingerstache normcore humblebrag you probably haven't heard of them letterpress.  "  
+		"description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation."  
 	},
 	"7":{
 		"moduleNo": 7,
 		"title": "Predicate Logic: Identity",
 		"symbol" :"∃" ,
-		"description": "Messenger bag celiac tumblr church-key put a bird on it, affogato helvetica irony before they sold out vinyl ugh kogi typewriter." 
+		"description": "The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. For proofs involving identity, we add two rules of proof." 
 	},
 	"8":{
 		"moduleNo": 8,
 		"title": "Review and Metalogic",
 		"symbol" :"∴" ,
-		"description":" Mustache before they sold out bitters try-hard sartorial. Forage actually organic disrupt waistcoat, XOXO kitsch portland venmo. Chambray semiotics franzen, bespoke biodiesel asymmetrical umami chicharrones. Deep v semiotics kombucha, hella lumbersexual photo booth narwhal vinyl craft beer.."
+		"description":"It seems natural that provability and semantic entailment should agree. Yet, do not be fooled by the similarity of the symbols. The fact that these two are really interchangeable is not a simple thing to prove.This is the problem of soundness. A proof system is sound if there are no proofs of invalid arguments. Demonstrating that the proof system is sound would require showing that any possible proof is the proof of a valid argument. It would not be enough simply to succeed when trying to prove many valid arguments and to fail when trying to prove invalid ones."
 	}
 }
