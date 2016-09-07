@@ -24,12 +24,9 @@ var LeaderSchema = new Schema({
 LeaderSchema.statics.getRanking = function getRanking(game, callback){
   Leader.findOne({game: game})
     .exec(function (error, leaderboard){
-      if (error){
-        return next(error);
+      if (leaderboard == null){
+        return null;
       } else {
-        
-        
-
           return callback(null, leaderboard.record);
       }
 

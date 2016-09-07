@@ -257,7 +257,7 @@ function initCards (n){
 				makeAlert($cards, "a","This is correct! Press the button the continue", 2);
 			}else {
 				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart";
-				if (score > passing){				
+				if (score => passing){				
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
 				       output += "You passed! "+res;
 				       makeAlert($cards, "a",output, 1);
