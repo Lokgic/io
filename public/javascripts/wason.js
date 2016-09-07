@@ -1,11 +1,12 @@
 $(function(){
+	$head = $('#wasonhead');
 	$messagecard = $('#messagecard')
 	$message = $('#message')
 	$leaderboard = $('#leaderboard');
 	$cards = $('#cards');
 	$rule = $('#rule');
 	var score = 0;
-	var passing = 60;
+	var passing = 10;
 	var $button = $('#wasonbutton');
 	var $score = $('#score');
 	var $plus = $('#plus');
@@ -185,7 +186,7 @@ html += '<p >Which of these cards MUST be turned over if you want to know if the
 html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.'
 html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards. The score you get is directly correlated to the number of cards for each trial.'
 
-	makeAlert($cards, "a", html,2);
+	makeAlert($head, "b", html,2);
 }
 
 function Score(newScore){
@@ -227,7 +228,7 @@ function initCards (n){
 			console.log(ans);
 			$rule.html(printRule(rule));
 			reset = false;
-			makeAlert($cards,"a","Which card(s) must you turn over in order to verify the above statement?",3);
+			makeAlert($head,"b","Which card(s) must you turn over in order to verify the above statement?",3);
 
 	}
 
@@ -254,20 +255,20 @@ function initCards (n){
 			reset = true;
 			if (checkAnswer(ans)){
 				Score(score + x);
-				makeAlert($cards, "a","This is correct! Press the button the continue", 2);
+				makeAlert($head, "b","This is correct! Press the button the continue", 2);
 			}else {
 				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart";
-				if (score => passing){				
+				if (score >= passing){				
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
 				       output += "You passed! "+res;
-				       makeAlert($cards, "a",output, 1);
+				       makeAlert($head, "b",output, 1);
 				      });
 				    jQuery.post("../wason", {score:score}, function(res){
 				    	pingLeaderboard();
 				      });
 				    	Score(0);
   					}else{
-  					 makeAlert($cards, "a",output, 4);
+  					 makeAlert($head, "b",output, 4);
   					  Score(0);
   					  pingLeaderboard();
 
