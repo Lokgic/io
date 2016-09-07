@@ -8,7 +8,7 @@ $(function() {
 })
 
 
-var mathJax ={
+var mathJax = {
   load: function () {
   var script = document.createElement("script");
   script.type = "text/javascript";
@@ -283,7 +283,9 @@ function monitorButton(problemObject){
                  });
         }else {
                   makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
+                   
                 }
+        mathJax.reload(problemObject.id + "card"); 
         })
 }
 
@@ -410,7 +412,9 @@ function init(type){
               else{
               $panel.append(makeQuestionType[data[problem].method](data[problem]));
                 monitorButton(data[problem]);  
-                }        
+                } 
+
+              mathJax.reload(data[problem].id + "card");       
            }
         }
 

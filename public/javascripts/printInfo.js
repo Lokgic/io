@@ -23,6 +23,13 @@ $(function() {
         var $body = $('#readingblock')
     	$header.html("Module " + CurrentModuleNo + " " + data[CurrentModuleNo].title);
     	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
+        console.log(data[CurrentModuleNo].info)
+        if (data[CurrentModuleNo].info.length != 0){
+            for (index in data[CurrentModuleNo].info){
+                $body.append('<h4>' + data[CurrentModuleNo].info[index][0] + '</h4>');
+                $body.append('<p>' + data[CurrentModuleNo].info[index][1] + '</p>');
+            }
+        }
     })
 
     printConceptsInfo(function(err, data){

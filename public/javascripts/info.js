@@ -23,6 +23,12 @@ $(function() {
         var $body = $('#readingblock')
     	$header.html(CurrentModuleNo + ": " + data[CurrentModuleNo].title);
     	$body.html('<p>'+data[CurrentModuleNo].description+'</p>');
+        if (data[CurrentModuleNo].info.length != 0){
+            for (index in data[CurrentModuleNo].info){
+                $body.append('<h4>' + data[CurrentModuleNo].info[index][0] + '</h4>');
+                $body.append('<p>' + data[CurrentModuleNo].info[index][1] + '</p>');
+            }
+        }
           var script = document.createElement("script");
           script.type = "text/javascript";
           script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";

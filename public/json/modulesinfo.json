@@ -3,13 +3,15 @@
 		"moduleNo": 1,
 		"symbol" : "¬",
 		"title": "Basic Concepts",
-		"description": "We begin with learning the basic concepts in logic. We look at the role of argument in general, and what it means to evaluate arguments. We end with an introduction of formal logic - the topic of our class." 
+		"description": "We begin with learning the basic concepts in logic. We look at the role of argument in general, and what it means to evaluate arguments. We end with an introduction of formal logic - the topic of our class." ,
+		"info": [["About the Test", "Test 1 will be mostly conceptual in nature. Be sure to understand concepts such as consistency, validity, etc. Be sure to understand the relationship between Venn diagram and basic categorical syllogism."]]
 	},
 	"2":{
 		"moduleNo": 2,
 				"symbol" :"∅" ,
 		"title": "Sentence Logic: Introduction", 
-		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. As we shall see, the truth table method is semantic because it involves one aspect of the meaning of sentences, whether those sentences are true or false."
+		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. As we shall see, the truth table method is semantic because it involves one aspect of the meaning of sentences, whether those sentences are true or false.",
+		"info": [["About the Test", "Make sure you understand the part about recursive defintions and how to prove that some string is a wff. Be ready to construct a complete or an incomplete truth table for logical relations. I might ask you to do some translations. The wason selection task might also be in the test."]]
 	},
 	"3":{
 		"moduleNo": 3,

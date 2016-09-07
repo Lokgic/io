@@ -5,7 +5,7 @@ $(function(){
 	$cards = $('#cards');
 	$rule = $('#rule');
 	var score = 0;
-	var passing = 1;
+	var passing = 60;
 	var $button = $('#wasonbutton');
 	var $score = $('#score');
 	var $plus = $('#plus');

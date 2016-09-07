@@ -1,11 +1,11 @@
 {
-  "1" : {"term": "1", 
-          "df": "1" },
-   "2" : {"term": "2", 
-          "df": "2"
+  "Antecedent" : {"term": "Antecedent", 
+          "df": "The sentence to the left of a conditional" },
+   "2" : {"term": "Atomic sentence", 
+          "df": "A sentence that does not have any sentences as proper parts."
           },
-    "3": {"term":"3", 
-      "df" : "3."
+    "3": {"term":"Biconditional", 
+      "df" : "The symbol ↔, used to represent words and phrases that function like the English phrase 'if and only if'."
     },
     "4": {
       "term":"4", 

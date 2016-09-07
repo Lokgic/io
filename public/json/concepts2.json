@@ -1,86 +1,94 @@
 {
-  "Categorical syllogism " : {"term": "Categorical syllogism ", 
-          "df": "An argument with two premises composed of categorical statements." },
-   "Conversion" : {"term": "Conversion", 
-          "df": "The process of changing a sentence by reversing the subject and predicate."
-          },
-    "Copula": {"term":"Copula", 
-    	"df" : "The form of the verb “to be” that links subject and predicate."
+    "Antecedent": {
+        "term": "Antecedent",
+        "df": "The sentence to the left of a conditional"
     },
-    "Distribution": {
-    	"term":"Distribution", 
-    	"df": "A property of the terms of a categorical statement that is present when the statement makes a claim about the whole term."
+    "Atomic sentence": {
+        "term": "Atomic sentence",
+        "df": "A sentence that does not have any sentences as proper parts."
     },
-    "Logically structured English":{
-    	"term":"Logically structured English",
-    	"df": "English that has been regimented into a standard form to make its logical structure clear and to remove ambiguity. A stepping stone to full-fledged formal languages. "
+    "Biconditional": {
+        "term": "Biconditional",
+        "df": "The symbol ↔, used to represent words and phrases that function like the English phrase 'if and only if'."
     },
-    "Major Premise":{
-    	"term":"Major Premise",
-    	"df": "The one premise in an Aristotelian syllogism that names the major term.  "
+    "Complete truth table": {
+        "term": "Complete truth table",
+        "df": "A table that gives all the possible interpretations for a sentence or set of sentences in SL.."
     },
-    "Major term ":{
-    	"term":"Major term ",
-    	"df": "The term that is used as the predicate of the conclusion of an Aristotelian syllogism. "
+    "Conditional": {
+        "term": "Conditional",
+        "df": "The symbol →, used to represent words and phrases that function like the English phrase “if . . . then.” "
     },
-    "Middle term ":{
-    	"term":"Middle term",
-    	"df": "The one term in an Aristotelian syllogism that does not appear in the conclusion."
+    "Conjunct": {
+        "term": "Conjunct",
+        "df": "A sentences joined to another by a conjunction. "
     },
-    "Minor premise":{
-    	"term":"Minor premise",
-    	"df": "The one premise in an Aristotelian syllogism that names the minor term. "
+    "Conjunction": {
+        "term": "Conjunction",
+        "df": "The symbol used to represent words and phrases that function like the English word 'and'"
     },
-    "Formal logic":{
-    	"term":"Formal logic ",
-    	"df": "A way of studying logic that achieves content neutrality by replacing parts of the arguments being studied with abstract symbols. Often this will involve the construction of full formal languages."
+    "Consequent": {
+        "term": "Consequent",
+        "df": "The sentence to the right of a conditional. "
     },
-    "Mood-A statement":{
-    	"term":"Mood-A statement",
-    	"df": "A quantified categorical statement of the form “All S are P.”"
+    "Disjunct": {
+        "term": "Disjunct",
+        "df": " A sentences joined to another by a disjunction. "
     },
-    "Mood-E statement":{
-    	"term":"Mood-E statement",
-    	"df": " A quantified categorical statement of the form “No S are P.”  "
-    },"Mood-I statement":{
-    	"term":"Mood-I statement",
-    	"df": "A quantified categorical statement of the form “Some S are P.”"
+    "Disjunction": {
+        "term": "Disjunction",
+        "df": "The symbol ∨, used to represent words and phrases that function like the English word“ or” in its inclusive sense."
     },
-    "Mood-O statement":{
-    	"term":"Mood-O statement",
-    	"df": "A quantified categorical statement of the form “Some S are not P.”  "
+    "Interpretation": {
+        "term": "Interpretation",
+        "df": "A correspondence between nonlogical symbols of the object language and elements of some other language or logical structure. "
     },
-    "Valid":{
-    	"term":"Valid",
-    	"df": "A property of arguments where it is impossible for the premises to be true and the conclusion false"
+    "Logical symbol": {
+        "term": "Logical symbol",
+        "df": "A symbol that has its meaning fixed by the formal language. "
     },
-    "Truth Value":{
-    	"term":"Truth Value",
-    	"df": "The status of a statement with relationship to truth. In our context, this means the status of a statement as true or false"
+    "Main connective ": {
+        "term": "Main connective",
+        "df": "The last connective that you add when you assemble a sentence using the recursive definition."
     },
-    "Obversion":{
-    	"term":"Obversion",
-    	"df": "The process of transforming a categorical statement by changing its quality and replacing the predicate with its complement."
+    "Metalanguage": {
+        "term": "Metalanguage",
+        "df": "The language logicians use to talk about the object language. In our context, the metalanguage is English, supplemented by certain symbols like metavariables and technical terms like “valid.”"
     },
-    "Particular":{
-    	"term":"Particular",
-    	"df": "The quantity of a statement that uses the quantifier 'some'."
+    "Metavariables": {
+        "term": "Metavariables",
+        "df": "A variable in the metalanguage that can represent any sentence in the object language. "
     },
-    "Venn diagram ":{
-    	"term":"Venn diagram ",
-    	"df": "A diagram that represents categorical statements using circles that stand for classes. "
+    "Negation": {
+        "term": "Negation",
+        "df": "The symbol ¬, used to represent words and phrases that function like the English word “not”. "
     },
-    "Quantifier":{
-    	"term":"Quantifier",
-    	"df": "The part of a categorical sentence that specifies a portion of a class. "
+    "Recursive definition": {
+        "term": "Recursive definition",
+        "df": "A definition that defines a term by identifying base class and rules for extending that class. "
     },
-    "Statement mood":{
-    	"term": "Statement mood",
-    	"df": "The classification of a categorical statement based on its quantity and quality."
+    "Scope": {
+        "term": "Scope",
+        "df": "The sentences that are joined by a connective. These are the sentences the connective was applied to when the sentence was assembled using a recursive definition.  "
+    },
+    "Semantic contradiction in SL": {
+        "term": "Semantic contradiction in SL",
+        "df": " A statement that has only Fs in the column under the main connective of its complete truth table. "
+    },
+    "Semantic tautology": {
+        "term": "Semantic tautology",
+        "df": "A statement that has only Ts in the column under the main connective of its complete truth table. "
+    },
+    "Syntax": {
+        "term": "Syntax",
+        "df": "The structure of a bit of language, considered without reference to truth, falsity, or meaning "
+    },
+    "Truth assignment": {
+        "term": "Truth assignment",
+        "df": "A function that maps the sentence letters in SL onto truth values. "
     }
-    
-    
-    
+
+
 
 
 
