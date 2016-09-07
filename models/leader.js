@@ -51,7 +51,7 @@ LeaderSchema.statics.update  = function update(name, game, score, callback){
 	 		return callback(null, "created");
 
 	 	}else{
-	 		var boardLength = 10;
+	 		var boardLength = 20;
 	 		var rec = {}
         	rec.score = score;
         	rec.name = name;
