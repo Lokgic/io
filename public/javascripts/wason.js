@@ -186,7 +186,7 @@ function generalInstruction(){
  html +=' <p>Suppose each card has a number on one side and a letter on the other. </p>'
 html += '<p><em>Which of these cards MUST be turned over if you want to know if the statement above them is FALSE?</em></p>'
 html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
-html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards. The score you get is directly correlated to the number of cards for each trial.</p>'
+html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards by pressing + or -. You get more points from playing with a higher number of cards.</p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
 
 	makeAlert($head, "b", html,2);
