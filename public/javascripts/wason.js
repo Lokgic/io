@@ -6,7 +6,7 @@ $(function(){
 	$cards = $('#cards');
 	$rule = $('#rule');
 	var score = 0;
-	var passing = 10;
+	var passing = 60;
 	var $button = $('#wasonbutton');
 	var $score = $('#score');
 	var $plus = $('#plus');
@@ -257,7 +257,7 @@ function initCards (n){
 				Score(score + x);
 				makeAlert($head, "b","This is correct! Press the button the continue", 2);
 			}else {
-				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart";
+				var output = "This is incorrect! Your final score is "+ score + ". Press the button the restart. ";
 				if (score >= passing){				
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
 				       output += "You passed! "+res;
