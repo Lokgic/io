@@ -1,160 +1,33 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var makeAlert = require('./mods/alert.js')
+var randomize = require('./mods/randomize.js')
+var mathJax = require('./mods/mathjax.js')
+var makeCard = {};
+makeCard["fill"] = require('./mods/makefillcard.js')
+makeCard["dropdown"] = require('./mods/makedropdowncard.js')
+makeCard["game"] = require('./mods/makegamecard.js')
+var conceptsquiz = require('./mods/conceptsquiz.js')
+
 // global var
 var moduleNo = $("title").attr('id');
 var conceptsReset = false;
 
 $(function() {
   init("concepts");
-  init("reading");
 })
 
 
-var mathJax = {
-  load: function () {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-  document.getElementsByTagName("head")[0].appendChild(script);
-  },
-  reload: function(id){
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-
-  }
-}
-
-  
-var randomize = {
-  drawOneRandomFromSet: function(set) {
-        return  set[Math.floor(Math.random()* set.length)];
-        },
-
-  shuffle: function(arr) {
-    var currentI = arr.length, tempValue, randomI;
-
-    while (0!== currentI){
-      randomI = Math.floor(Math.random() * currentI);
-          currentI -= 1;
-
-          tempValue = arr[currentI];
-          arr[currentI] = arr[randomI];
-          arr[randomI] = tempValue;
-        }
-
-        return arr;
-      },
-    chooceProbabilistically: function(set, probability){
-
-    var n = Math.random();
-    var low = 0;
-    var outcome;
-    for (var i = 0; i<set.length;i++){
-      if (low<n&&n<probability[i]){
-        low = probability[i];
-        outcome = set[i];
-      }
-    }
-      return outcome;
-    }
 
 
-  }
+//generate concepts quizzing cards. n is the index of the solution in AllDfs, which includes just terms, but indexes preversexd. q is the question term. return htmlxxxxxx
 
-  //Shuffle Array
-function shuffle(arr){
-  var currentI = arr.length, tempValue, randomI;
-
-  while (0!== currentI){
-    randomI = Math.floor(Math.random() * currentI);
-    currentI -= 1;
-
-    tempValue = arr[currentI];
-    arr[currentI] = arr[randomI];
-    arr[randomI] = tempValue;
-  }
-
-  return arr;
-}
-
-
-//generate concepts quizzing cards. n is the index of the solution in AllDfs, which includes just terms, but indexes preversed. q is the question term. return html
-function makeConceptsCard(n, q, allDfs){
-  var html = '<div class="card" id = conceptsQCard'+ n + '><h1 class="card-header display-4">' + q.term +  '</h1><div class="card-block qcard">';
-
-
-  html += '<div class="btn-group-vertical definitions" data-toggle="buttons">'; 
- var answers = [];
- answers.push(q.df);  //makes 5 answer. push the right answer first
- while (answers.length<5){ //add 4 other random answers from allDfs
-     var temp = allDfs[Math.floor(Math.random()* allDfs.length)];
-     var contained = false;
-     for (var i = 0; i < answers.length; i++){
-      if (temp === answers[i]) contained = true;
-     }
-     if (!contained){
-      answers.push(temp);
-     }
- }
-
-   shuffle(answers); //mix'em up
-
-    //make buttons
-  for (var i = 0; i < answers.length; i++){
-     html += '<label class="btn btn-outline-primary btn-sm definition"><input type="radio" name="options" id="option1" autocomplete="off" value ="' + answers[i] +'">' + answers[i] + "</label>"
-    }
-    html += '</div>'
-    return html;
-  }
 
 //check multiple answer on one page, works for concepts
-function checkConceptsAnswers(quiz){
-  var $submit = $('#conceptssubmit');
-  var type = "concepts";
-  score = 0;
-  for (var i = 0; i<quiz.length;i++){
-    var currentQCard = "#conceptsQCard"+(i);
-    var chosen = $("label.btn.active", currentQCard).children().val();
-    if (chosen === quiz[i].df){
-      $(currentQCard).addClass('card-success');
-      score++;
-    } else{
-      $(currentQCard).addClass('card-danger');
-    }
-  }
-  if (score != quiz.length){
-    $submit.html("Reset quiz");
-    $submit.removeClass('btn-primary');
-    $submit.addClass('btn-warning')
-    
-    makeAlert($('#conceptscard'),'b' , "You got " + score +" out of "+ quiz.length + ". Press 'Reset' to retry", 4);
-    conceptsReset = true;
-  } else{
-    $submit.html("Success!");
-    $submit.removeClass('btn-primary');
-    $submit.addClass('btn-success')
-    $submit.attr("disabled", true);
-    jQuery.post("/report", {passed: true, label: type, moduleNo: moduleNo}, function(res){
 
-       makeAlert($('#conceptscard'),'b' , res, 1);
-      });
-  }
-}
 
 
 //clear all color and reset the button
-function resetConceptsQuiz(n){
-  var $submit = $('#conceptssubmit');
-  var type = "concepts";
-    conceptsReset = false;
-    instruction("concepts");
-    $submit.addClass('btn-primary');
-    $submit.removeClass('btn-warning')
-    $submit.html("Submit for Grading");
-    // $alert.html("");
-    for (var i = 0; i<n;i++){
-      var $target = $("#"+type +"QCard"+i);
-      $target.removeClass("card-danger");
-      $target.removeClass("card-success")
-    }
-  }
+
 
   // run at this beginning of page, uses new alertmaker
 function instruction(type){
@@ -170,54 +43,8 @@ function instruction(type){
 
 
 
-//make fill in the bank card, put ids on elements. return html
-function makefillCard(obj){
-  var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="card-block fillcard">';
-  html += '<p class="font-italic">' + obj.instruction +'<p>';
-  html += '<form>';
-  for (var i = 0;i<obj.questions.length;i++){
-    
-    html += '<div class="form-group">';
-    html += '<label id = "'+ obj.id +i+'label" for="'+ obj.id +i+'">' + obj.questions[i][0]+'</label>';
-    html +=  '<input type="text" class="form-control" id="'+ obj.id+i+'" placeholder="Type answer here"></div>';
-  }
-
-  html += '</form>';
-
-  html +='<button class="btn btn-primary btn-lg btn-block m-t-1 m-b-1" id=' + obj.id +  'submit type="button">Submit</button>'
-
-  return html;
-}
 
 
-//make fill in the bank card, put ids on elements. return html
-function makeDropdownCard(obj){
-  dropdownItems += '<option>Answer</option>';
-    var dropdownItems;
-    for (var i = 0; i < obj.possibleAnswers.length; i++){
-      dropdownItems += '<option value ='+obj.possibleAnswers[i]+'>' + obj.possibleAnswers[i] + '</option>';
-    }
-
-    var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
-    html += '<p class="font-italic">' + obj.instruction +'<p>';
-  html += '<form>';
-     
-     for (var i = 0;i<obj.questions.length;i++){
-      var tempLabel = obj.id + i; 
-       html += '<div class="form-group row">';
-        html += '<label id = ' + tempLabel +'label class="col-md-10 col-form-label col-xs-12" for = ' + tempLabel + '>' + obj.questions[i][0] + '</label>'
-       html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
-       html += dropdownItems;
-       html += '</select></div></div>'
-
-     }
-
-     html += '</form>';
-
-  html +='<button class="btn btn-primary btn-lg btn-block m-t-1 m-b-1" id=' + obj.id +  'submit type="button">Submit</button>'
-
-     return html;
-  }
 
 //method agnostic - if drop down it jus goes add selected tag to find picked item.
 function checkReadingAnswer(obj){
@@ -238,30 +65,6 @@ function checkReadingAnswer(obj){
 }
 
 
-function makeAlert(location, direction, text, code){ //direction: a= above, b=below
-  /////This takes care of the HTML
-  var tag;
-  if (code == 1){tag = "alert-success";}
-  else if (code == 2){tag = "alert-info";}
-  else if (code == 3){tag = "alert-warning"}
-  else{tag = "alert-danger"}
-  var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
-
-  if (direction == "a"){
-    if ($(location).prev().hasClass("alert")) {
-      $(location).prev().remove();
-    }
-    $(location).before(html);
-    }
-
-  if (direction == "b"){
-    if ($(location).next().hasClass("alert")) {
-      $(location).next().remove();
-    }
-    $(location).after(html);
-    }
-
-  }
 
       
 //used load json, embed the quiz initiation in the callback
@@ -371,13 +174,6 @@ function truthTableInterpretation(type){
   })
 }
 
-function makeGameCard(obj){
-   var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
-    html += '<p class="font-italic">' + obj.instruction +'<p>';
-    html += '<a class="btn btn-primary" href="../2/wason" role="button">Link</a>';
-    html += '</div>'
-    return html;
-}
 
 
 function init(type){
@@ -395,29 +191,8 @@ function init(type){
     //loadJSON rest of method exists within
       loadJSON(type, function(err, data){
         instruction(type);
-        var makeQuestionType = {};
-        var checkQuestionType = {};
-        makeQuestionType.fill = makefillCard;
-        makeQuestionType.dropdown = makeDropdownCard;
-        makeQuestionType.game = makeGameCard;
+
         
-
-        if(type =="reading"){
-  
-           for (problem in data){
-
-              if (data[problem].method == "game"){
-                $panel.append(makeGameCard(data[problem]));
-              }
-              else{
-              $panel.append(makeQuestionType[data[problem].method](data[problem]));
-                monitorButton(data[problem]);  
-                } 
-
-              mathJax.reload(data[problem].id + "card");       
-           }
-        }
-
 
 
 
@@ -434,7 +209,7 @@ function init(type){
               var temp = Math.floor(Math.random()*quiz.length);
                 if (picked.indexOf(temp) === -1){
                   picked.push(temp);
-                  $panel.append(makeConceptsCard(temp,quiz[temp],allDfs));
+                  $panel.append(conceptsquiz.ConceptsQuiz(temp,quiz[temp],allDfs));
                 }
           }
 
@@ -443,10 +218,10 @@ function init(type){
           $submit.on('click', function(e){
               if (conceptsReset == false){
                 $alertdiv.html("");
-                checkConceptsAnswers(quiz);
+                conceptsquiz.checkConceptsAnswers(quiz);
               } else{
                 $alertdiv.html("");
-                resetConceptsQuiz(quiz.length);
+                conceptsquiz.resetConceptsQuiz(quiz.length);
               }
            });
 
@@ -457,3 +232,260 @@ function init(type){
    
 
 }
+},{"./mods/alert.js":2,"./mods/conceptsquiz.js":3,"./mods/makedropdowncard.js":4,"./mods/makefillcard.js":5,"./mods/makegamecard.js":6,"./mods/mathjax.js":7,"./mods/randomize.js":8}],2:[function(require,module,exports){
+var makeAlert = function(location, direction, text, code){ //direction: a= above, b=below
+  /////This takes care of the HTML
+  var tag;
+  if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
+          $(location).prev().remove();
+        }
+      if (direction == "b" && $(location).next().hasClass("alert")){
+          $(location).next().remove();
+        }
+  }
+  else if (code == 1){tag = "alert-success";}
+  else if (code == 2){tag = "alert-info";}
+  else if (code == 3){tag = "alert-warning"}
+  else{tag = "alert-danger"}
+  var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
+
+  if (direction == "a"){
+    if ($(location).prev().hasClass("alert")) {
+      $(location).prev().remove();
+    }
+    $(location).before(html);
+    }
+
+  if (direction == "b"){
+    if ($(location).next().hasClass("alert")) {
+      $(location).next().remove();
+    }
+    $(location).after(html);
+    }
+
+  }
+
+ module.exports = makeAlert;
+},{}],3:[function(require,module,exports){
+var randomize = require('./randomize.js')
+var makeAlert = require('./alert.js')
+//generate concepts quizzing cards. n is the index of the solution in AllDfs, which includes just terms, but indexes preversed. q is the question term. return html
+
+var ConceptsQuiz =function makeConceptsQuiz(n, q, allDfs){
+  var html = '<div class="card" id = conceptsQCard'+ n + '><h1 class="card-header display-4">' + q.term +  '</h1><div class="card-block qcard">';
+
+
+  html += '<div class="btn-group-vertical definitions" data-toggle="buttons">'; 
+ var answers = [];
+ answers.push(q.df);  //makes 5 answer. push the right answer first
+ while (answers.length<5){ //add 4 other random answers from allDfs
+     var temp = allDfs[Math.floor(Math.random()* allDfs.length)];
+     var contained = false;
+     for (var i = 0; i < answers.length; i++){
+      if (temp === answers[i]) contained = true;
+     }
+     if (!contained){
+      answers.push(temp);
+     }
+ }
+
+   randomize.shuffle(answers); //mix'em up
+
+    //make buttons
+  for (var i = 0; i < answers.length; i++){
+     html += '<label class="btn btn-outline-primary btn-sm definition"><input type="radio" name="options" id="option1" autocomplete="off" value ="' + answers[i] +'">' + answers[i] + "</label>"
+    }
+    html += '</div>'
+    return html;
+  }
+
+var checkConceptsAnswers = function checkConceptsAnswers(quiz){
+  var $submit = $('#conceptssubmit');
+  var type = "concepts";
+  score = 0;
+  for (var i = 0; i<quiz.length;i++){
+    var currentQCard = "#conceptsQCard"+(i);
+    var chosen = $("label.btn.active", currentQCard).children().val();
+    if (chosen === quiz[i].df){
+      $(currentQCard).addClass('card-success');
+      score++;
+    } else{
+      $(currentQCard).addClass('card-danger');
+    }
+  }
+  if (score != quiz.length){
+    $submit.html("Reset quiz");
+    $submit.removeClass('btn-primary');
+    $submit.addClass('btn-warning')
+    
+    makeAlert($('#conceptscard'),'b' , "You got " + score +" out of "+ quiz.length + ". Press 'Reset' to retry", 4);
+    conceptsReset = true;
+  } else{
+    $submit.html("Success!");
+    $submit.removeClass('btn-primary');
+    $submit.addClass('btn-success')
+    $submit.attr("disabled", true);
+    jQuery.post("/report", {passed: true, label: type, moduleNo: moduleNo}, function(res){
+
+       makeAlert($('#conceptscard'),'b' , res, 1);
+      });
+  }
+}
+
+var resetConceptsQuiz = function resetConceptsQuiz(n){
+  var $submit = $('#conceptssubmit');
+  var type = "concepts";
+    conceptsReset = false;
+    instruction("concepts");
+    $submit.addClass('btn-primary');
+    $submit.removeClass('btn-warning')
+    $submit.html("Submit for Grading");
+    // $alert.html("");
+    for (var i = 0; i<n;i++){
+      var $target = $("#"+type +"QCard"+i);
+      $target.removeClass("card-danger");
+      $target.removeClass("card-success")
+    }
+  }
+
+
+
+
+var all = {
+  ConceptsQuiz: ConceptsQuiz,
+  checkConceptsAnswers: checkConceptsAnswers,
+  resetConceptsQuiz: resetConceptsQuiz
+}
+
+module.exports = all;
+},{"./alert.js":2,"./randomize.js":8}],4:[function(require,module,exports){
+var makeDropdownCard =  function makeDropdownCard(obj){
+  dropdownItems += '<option>Answer</option>';
+    var dropdownItems;
+    for (var i = 0; i < obj.possibleAnswers.length; i++){
+      dropdownItems += '<option value ='+obj.possibleAnswers[i]+'>' + obj.possibleAnswers[i] + '</option>';
+    }
+
+    var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
+    html += '<p class="font-italic">' + obj.instruction +'<p>';
+ 	 html += '<form>';
+     
+     for (var i = 0;i<obj.questions.length;i++){
+      var tempLabel = obj.id + i; 
+       html += '<div class="form-group row">';
+        html += '<label id = ' + tempLabel +'label class="col-md-10 col-form-label col-xs-12" for = ' + tempLabel + '>' + obj.questions[i][0] + '</label>'
+       html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
+       html += dropdownItems;
+       html += '</select></div></div>'
+
+     }
+
+     html += '</form>';
+
+  html +='<button class="btn btn-primary btn-lg btn-block m-t-1 m-b-1" id=' + obj.id +  'submit type="button">Submit</button>'
+
+     return html;
+  }
+
+
+module.exports = makeDropdownCard;
+},{}],5:[function(require,module,exports){
+var makefillCard = function makefillCard(obj){
+  var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="card-block fillcard">';
+  html += '<p class="font-italic">' + obj.instruction +'<p>';
+  html += '<form>';
+  for (var i = 0;i<obj.questions.length;i++){
+    
+    html += '<div class="form-group">';
+    html += '<label id = "'+ obj.id +i+'label" for="'+ obj.id +i+'">' + obj.questions[i][0]+'</label>';
+    html +=  '<input type="text" class="form-control" id="'+ obj.id+i+'" placeholder="Type answer here"></div>';
+  }
+
+  html += '</form>';
+
+  html +='<button class="btn btn-primary btn-lg btn-block m-t-1 m-b-1" id=' + obj.id +  'submit type="button">Submit</button>'
+
+  return html;
+}
+
+
+module.exports = makefillCard;
+},{}],6:[function(require,module,exports){
+var makeGameCard = function makeGameCard(obj){
+   var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
+    html += '<p class="font-italic">' + obj.instruction +'<p>';
+    html += '<a class="btn btn-primary" href="../2/wason" role="button">Link</a>';
+    html += '</div>'
+    return html;
+}
+
+
+
+
+
+module.exports = makeGameCard;
+},{}],7:[function(require,module,exports){
+var mathJax = {
+  load: function () {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+  },
+  reload: function(id){
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
+
+  }
+}
+
+
+
+module.exports = mathJax;
+},{}],8:[function(require,module,exports){
+var randomize = {
+  drawOneRandomFromSet: function(set) {
+        return  set[Math.floor(Math.random()* set.length)];
+        },
+
+  shuffle: function(arr) {
+    var currentI = arr.length, tempValue, randomI;
+
+    while (0!== currentI){
+      randomI = Math.floor(Math.random() * currentI);
+          currentI -= 1;
+
+          tempValue = arr[currentI];
+          arr[currentI] = arr[randomI];
+          arr[randomI] = tempValue;
+        }
+
+        return arr;
+      },
+    chooceProbabilistically: function(set, probability){
+
+    var n = Math.random();
+    var low = 0;
+    var outcome;
+    for (var i = 0; i<set.length;i++){
+      if (low<n&&n<probability[i]){
+        low = probability[i];
+        outcome = set[i];
+      }
+    }
+      return outcome;
+    },
+
+    sample: function(set, n){
+    	var newSet = randomize.shuffle(set);
+    	var output =[];
+    	for (var i= 0; i<n; i++){
+    		output.push(newSet.pop());
+    	} 
+    	return output;
+    }
+
+  }
+
+module.exports = randomize;
+},{}]},{},[1]);

@@ -18,19 +18,19 @@ body
 				ul.nav.nav-tabs
 					li.nav-item.display-4#wtf
 						if (part == "reading")
-							a.nav-link.active(href="../" + file + "/reading") Reading
+							a.nav-link.active(data-toggle="tab", href="http://www.lokgic.io", aria-controls="reading") Reading
 						else 
-							a.nav-link(href="../" + file + "/reading") Reading
+							a.nav-link(data-toggle="tab", href="#reading", aria-controls="reading") Reading
 					li.nav-item.display-4#wtf
 						if (part == "concepts")
-							a.nav-link.active(href="../" + file + "/concepts") Concepts
+							a.nav-link.active(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
 						else 
-							a.nav-link(href="../" + file + "/concepts") Concepts
+							a.nav-link(data-toggle="tab", href="#concepts", aria-controls="concepts") Concepts
 					li.nav-item.display-4#wtf
 						if (part =="quiz")
-							a.nav-link.active(href="../" + file + "/quiz") Quiz
+							a.nav-link.active(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 						else
-							a.nav-link(href="../" + file + "/quiz") Quiz
+							a.nav-link(data-toggle="tab", href="#quiz", aria-controls="quiz") Quiz
 					li.nav-item.dropdown.display-4#wtf
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
@@ -44,6 +44,13 @@ body
 								h3.card-header#readingheader Reading
 								.card-block#readingblock
 							div#readingalertdiv
+					else 
+						.tab-pane.fade#reading(role="tabpanel")
+							.card#readingcard
+								h3.card-header#readingheader Reading
+								.card-block#readingblock
+							div#readingalertdiv
+
 					if (part =="quiz")
 						.tab-pane.fade.in.active#quiz(role="tabpanel")
 							.card#quizcard
@@ -53,7 +60,17 @@ body
 									progress.progress(aria-describedby="progresscap")
 									p.card-text#question
 									div#answers.list-group
-									button.btn.button-primary.m-t-1#next(type="button") Continue					
+									button.btn.button-primary.m-t-1#next(type="button") Continue
+					else 
+						.tab-pane.fade#quiz(role="tabpanel")
+							.card#quizcard
+								h3.card-header#quizheader Quiz #{file}
+								.card-block#quizblock
+									.text-xs-center#progresscap Progress
+									progress.progress(aria-describedby="progresscap")
+									p.card-text#question
+									div#answers.list-group
+									button.btn.button-primary.m-t-1#next(type="button") Continue
 						div#quizalertdiv
 					if (part =="concepts")
 						.tab-pane.fade#concepts.in.active(role="tabpanel")
@@ -62,9 +79,15 @@ body
 								div#conceptsalertdiv
 								.card-block#conceptsblock
 							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
-			if (part == "reading")
-				.col-lg-6.hidden-md-down#right
-						script PDFObject.embed('../pdf/text#{file}.pdf', '#right');
+					else
+						.tab-pane.fade#concepts(role="tabpanel")
+							.card#conceptscard
+								h3.card-header#conceptsheader Concepts
+								div#conceptsalertdiv
+								.card-block#conceptsblock
+							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading
+			.col-lg-6.hidden-md-down#right
+					script PDFObject.embed('../pdf/text#{file}.pdf', '#right');
 
 
 footer
@@ -72,12 +95,8 @@ footer
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous")
 	script(src ="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous")
 	script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous")
-	if (part == "quiz")
-		script(src='../javascripts/quiz.js')
-	if (part == "reading")
-		script(src='../javascripts/reading.js')
-	if (part == "concepts")
-		script(src='../javascripts/concepts.js')
+	script(src='../javascripts/quiz.js')
+	script(src='../javascripts/reading.js')
 	script(src='../javascripts/info.js')
 	//- script(src='javascripts/tutorial.js')
 	script(src="../javascripts/closePDFButton.js")
