@@ -71,7 +71,7 @@
   "8": {
     "setup": [["a"," All people are mortal."], ["b"," Socrates is a person."], ["c"," Socrates will never die."], ["d"," Socrates is mortal"]],
     "setuptype": "list",
-    "question": "Based on the statements below, which set of the following is consistent?",
+    "question": "Based on the statements below, which set of the following is inconsistent?",
     "real": "(a), (b), (c), (d)",
     "fake": ["(a), (d)", "(a), (c)"],
     "type": "mc",
@@ -83,7 +83,7 @@
     "setup":[["a"," All people are mortal."], ["b"," Socrates is a person."], ["c"," Socrates will never die."], ["d"," Socrates is mortal"]],
     "question": "Based on the statements below, which set of the following is consistent?",
     "setuptype": "list",
-    "real": "(b), (c)",
+    "real": "(a), (c)",
     "fake": ["(a), (b), (c)", "(b), (c), (d)"],
     "type": "mc",
     "id": "quiz1_9"
