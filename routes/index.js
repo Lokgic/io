@@ -4,6 +4,7 @@ var User = require('../models/user');
 var Leader = require('../models/leader');
 var mid = require('../middleware');
 
+
 //for rendering index
 var syllabus = require('../public/json/syllabus.json');
 
@@ -24,10 +25,85 @@ router.get('/about_text', function(req, res, next){
 router.get('/roll', function(req, res, next){
 	return res.render('roll');
 })
-//GET /profile
 
+
+router.get('/adm', mid.requiresAdmin , function(req,res,next){
+	console.log(req.query.id == null);
+	User.find({}, function(err,users){
+		var userMap = {};
+
+		users.forEach(function(user){
+			userMap[user.name] = {name: user.name,
+								  id: user._id}
+
+		});
+		if (req.query.id == null) {
+			return res.render('adm',{userMap:userMap, profile:false});
+		}else{
+
+	User.getProfile(req.query.id, function (err, result){
+	
+		if (err){
+				return next(err);
+			} else {
+
+				
+
+				var completed = result.record.length;
+				modules = [];
+			        for (var i = 0; i<8; i++){
+			          modules[i] = {};
+			        }
+
+			        for (var i =0; i<result.record.length;i++ ){
+			          modules[result.record[i].moduleNo - 1][result.record[i].label] = true;
+			         
+			        }	
+
+			       // console.log(result)
+				for (var i = 0; i < modules.length; i++){
+					var readingCount = 0;
+					if (modules[i].reading_1) readingCount++
+					if (modules[i].reading_2) readingCount++
+					if (modules[i].reading_3) readingCount++
+					modules[i].name = "Module " + (i+1);
+					modules[i].readingCount = readingCount;
+					modules[i].moduleNo = (i+1);
+					if (readingCount == 3) modules[i].reading = true;
+
+				}
+
+				completed =  Math.trunc(100*completed/(modules.length * 6))
+				// console.log(modules);
+
+				 return res.render('adm',{userMap:userMap, profile:true, title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
+			}
+	})
+		}
+
+	})
+
+	
+
+})
+
+
+router.post('/reportTest',mid.requiresAdmin, function(req, res, next){
+
+
+		User.record(req.body.id, req.body.moduleNo, req.body.label, function(err, passed){
+			return res.send(passed);
+
+		})
+
+	
+});
+
+
+//GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next){
 	
+
 
 	User.getProfile(req.session.userId, function (err, result){
 	
@@ -62,7 +138,7 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 				}
 
 				completed =  Math.trunc(100*completed/(modules.length * 6))
-				console.log(modules);
+				// console.log(modules);
 
 				 return res.render('profile',{ title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
 			}

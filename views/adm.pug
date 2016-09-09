@@ -1,0 +1,89 @@
+extends layout
+
+block content
+	.container.m-t-3.p-t-3
+		.btn-group
+			button.btn.btn-secondary.dropdown-toggle(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button") Roster
+			.dropdown-menu
+				for things in userMap
+					a.dropdown-item(href="/adm?id="+things.id) #{things.name}
+	if profile 
+		.container.p-t-2.m-t-3
+		.row
+		h1.display-4.text-xs-center.m-y-3.text-muted#modules #{name}'s Course Progress 
+		.text-xs-center#percent #{completed}%
+		progress.progress.progress-striped.m-b-3#percentbar(value = completed, max = "100" aria-describedby="percent")
+		.row
+			for module in record
+				.col-lg-3.col-md-12.m-b-2
+					if (module.concepts&&module.reading&&module.test&&module.quiz)
+						.card
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead.profilehead #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading &#10007;
+								if (module.concepts)  
+									p.card-text Concepts &#10003;
+								else 
+									p.card-text Concepts &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+										button.btn.passbutton.btn-success(value = module.moduleNo) 
+							.card-footer.card-success.text-xs-center.lead Completed!
+					else if (module.concepts||module.reading||module.test||module.quiz)
+						.card
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead.profilehead #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading #{module.readingCount}/3  &#10007;
+								if (module.concepts)  
+									p.card-text Concepts &#10003;
+								else 
+									p.card-text Concepts &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+										button.btn.passbutton.btn-success(value = module.moduleNo) 
+							.card-footer.card-info.text-xs-center.lead In Progress
+					else
+						.card 
+							a(href = '../'+module.moduleNo)
+								.card-header.text-xs-center.lead.profilehead #{module.name}
+							.card-block.text-xs-center.lead
+								if (module.reading)  
+									p.card-text Reading &#10003;
+								else 
+									p.card-text Reading #{module.readingCount}/3 &#10007;
+								if (module.concepts)  
+									p.card-text Concepts &#10003;
+								else 
+									p.card-text Concepts &#10007;
+								if (module.quiz)  
+									p.card-text Quiz &#10003;
+								else 
+									p.card-text Quiz &#10007;
+								if (module.test)  
+									p.card-text Test &#10003;
+								else 
+									p.card-text Test &#10007;
+										button.btn.btn-success(value = module.moduleNo).passbutton 
+							.card-footer.card-warning.text-xs-center.lead Not Started
+block extrafooter
+	script(src='../javascripts/passTest.js')

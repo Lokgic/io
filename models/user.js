@@ -38,7 +38,6 @@ var UserSchema = new Schema({
 });
 
 
-
 UserSchema.statics.record = function record(userId, moduleNo, label, callback){
     User.findById(userId)
     .exec(function (error, user){
