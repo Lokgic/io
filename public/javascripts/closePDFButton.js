@@ -9,11 +9,11 @@ $(function(){
 		if (open){
 			$pdf.remove();
 			open = false;
-			$button.html('&larr;');
+			$button.html('Toggle Text &larr;');
 		} else{
 			$row.append(saveHTML);
 			open=true;
-			$button.html('&rarr;');
+			$button.html('Toggle Text &rarr;');
 		}
 		})
 })

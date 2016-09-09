@@ -36,7 +36,7 @@ body
 							.dropdown-menu
 								a.dropdown-item(href='pdf/text'+file +'.pdf') Text	
 					li.nav-item.pull-lg-right.hidden-md-down.display-4
-						a.nav-link(href="#", aria-controls="closepdf")#closepdf &rarr;											
+						a.nav-link(href="#", aria-controls="closepdf")#closepdf Toggle Text &rarr;								
 				.tab-content
 					if (part=="reading")
 						.tab-pane.fade#reading.in.active(role="tabpanel")
@@ -62,9 +62,8 @@ body
 								div#conceptsalertdiv
 								.card-block#conceptsblock
 							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
-			if (part == "reading")
-				.col-lg-6.hidden-md-down#right
-						script PDFObject.embed('../pdf/text#{file}.pdf', '#right');
+			.col-lg-6.hidden-md-down#right
+					script PDFObject.embed('../pdf/text#{file}.pdf', '#right');
 
 
 footer
@@ -78,7 +77,7 @@ footer
 		script(src='../javascripts/reading.js')
 	if (part == "concepts")
 		script(src='../javascripts/concepts.js')
-	script(src='../javascripts/info.js')
+	//- script(src='../javascripts/info.js')
 	//- script(src='javascripts/tutorial.js')
 	script(src="../javascripts/closePDFButton.js")
 	script(src="../javascripts/pdfobject.js")

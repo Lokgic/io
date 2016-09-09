@@ -15,17 +15,35 @@ $(function() {
   init("reading");
 })
 
+function getReadingInfo(callback){
+        $.getJSON('../json/modulesinfo.json') 
+        .done(function(data){
+        callback(null, data);
+     }).fail(function(){body.append('Failed to Load Data')});
+      
+    }
 
 
+var printReadingInfo =  function(header, body, CurrentModuleNo){
+    getReadingInfo(function(err, data){
 
-//generate concepts quizzing cards. n is the index of the solution in AllDfs, which includes just terms, but indexes preversexd. q is the question term. return htmlxxxxxx
+        header.html(CurrentModuleNo + ": " + data[CurrentModuleNo].title);
+        body.html('<p>'+data[CurrentModuleNo].description+'</p>');
+        if (data[CurrentModuleNo].info.length != 0){
+            for (index in data[CurrentModuleNo].info){
+                body.append('<h4>' + data[CurrentModuleNo].info[index][0] + '</h4>');
+                body.append('<p>' + data[CurrentModuleNo].info[index][1] + '</p>');
+            }
+        }
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub,readingblock]);
 
+    })
+}
 
-//check multiple answer on one page, works for concepts
-
-
-
-//clear all color and reset the button
 
 
   // run at this beginning of page, uses new alertmaker
@@ -185,7 +203,7 @@ function init(type){
 	var $block = $('#' + type  + 'block');
 	var score;
 	var $submit = $("#" +type + "submit");
-  
+  printReadingInfo($header,$block,moduleNo)
 
     //loadJSON rest of method exists within
       loadJSON(type, function(err, data){
