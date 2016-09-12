@@ -1,0 +1,17 @@
+{ "1": {
+  "type": "dropdown",
+  "id": "quiz2_1",
+  "instruction": "Determine whether each argument is valid or invalid. Using truth tables would be good practice for the test",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\(A\\to(A\\wedge\\neg A)\\vDash \\neg A\\)", "Valid"],
+    ["\\(A \\wedge B, A \\to B, B \\to A \\vDash A \\leftrightarrow B\\)", "Valid"],
+    ["\\(A\\vee (B\\to A)\\vDash \\neg A \\to \\neg B\\)", "Valid"],
+    ["\\(A \\vee B, A \\to B, B \\to A \\vDash A \\wedge B\\)", "Valid"],
+    ["\\((B\\wedge A)\\to C, (C\\wedge A) \\to B\\vDash (C \\wedge B)\\to A\\)", "Invalid"],
+    ["\\(\\neg (\\neg A \\vee \\neg B), A \\to \\neg C \\vDash A \\to (B \\to C)\\)", "Invalid"]
+  ],"possibleAnswers": ["Valid","Invalid"]
+}
+
+}

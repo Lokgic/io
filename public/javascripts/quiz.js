@@ -79,7 +79,7 @@ $(function() {
 		Array.prototype.push.apply(answers, q.fake); //get around answers arrary not being empty when quiz restarts
    		answers.push(q.real);
    		shuffle(answers);
-   		var question =""; 
+   		var question ="";
    		question+='<p class = "lead">'  + q.question + '</p>';
    		//Detect special setup
    		if ("setup" in q) {
@@ -97,14 +97,14 @@ $(function() {
    			}else{
    			question +='<p class = "lead">'  + q.setup + '</p>'
    			}
-   		}  
+   		}
 
    		//Print Q and A
-   		$question.html(question);	
+   		$question.html(question);
 
    		$answerList.html("");
 		for (var i = 0; i <answers.length; i++){
-			
+
 			var htmlHead = '<li class="list-group-item"><button type="button" class="btn btn-primary  choice" value = "' + answers[i] + '">' + (i + 1) + '</button>' + answers[i]+'</li>';
 			$answerList.append(htmlHead);
 		}
@@ -114,7 +114,7 @@ $(function() {
 
   function checkDropdownAnswer(obj){
       var selectorTag = " option:selected";
-      
+
       var correct =0;
       for (var i = 0; i < obj.questions.length;i++){
         var $targetInput = $("#" + obj.id + i+ selectorTag);
@@ -144,7 +144,7 @@ $(function() {
 
 		if(right !== true){
 			if (typeof right === "number"){
-				makeAlert($main, "a", "Unfortunately, you only got " + right + " question(s) correctly",4);
+				makeAlert($main, "a", "You got " + right + " correct answers",4);
 			    	$main.addClass("card-danger");
 			    	$next.attr("disabled", false);
 			    	answered++;
@@ -168,7 +168,7 @@ $(function() {
 	}
 
 
-	    
+
 
     function askDropdown(obj) {
     	//create list of possibilities
@@ -178,7 +178,7 @@ $(function() {
           dropdownItems += '<option value ="'+obj.possibleAnswers[i]+'">' + obj.possibleAnswers[i] + '</option>';
         }
 
-        
+
         var html = '<p class="font-italic">' + obj.instruction +'<p>';
 
          html  += '<p class="lead">' + obj.question +'<p>';
@@ -187,13 +187,13 @@ $(function() {
         if (obj.setuptype == "runon"){
         	html +='<p class = "lead m-x-1">';
 	        for (var i = 0;i<obj.questions.length;i++){
-	        	var tempLabel = obj.id + i; 
+	        	var tempLabel = obj.id + i;
 	         html+= obj.questions[i][0] +  '  <select style="width: auto; display: inline" class="form-control" id ='+ tempLabel +'>' + dropdownItems + '</select>  '
 		     }
 		     html += "</p>";
         } else{
 	         for (var i = 0;i<obj.questions.length;i++){
-	          var tempLabel = obj.id + i; 
+	          var tempLabel = obj.id + i;
 	           html += '<div class="form-group row">';
 	            html += '<label id = ' + tempLabel +'label class="col-md-10 col-form-label col-xs-12" for = ' + tempLabel + '>' + obj.questions[i][0] + '</label>'
 	           html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
@@ -213,7 +213,7 @@ $(function() {
          var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
          $answerList.html(answerButton);
          activateButton(obj);
-         
+
     }
 
     function updateProgress(answered, total, right){
@@ -222,7 +222,7 @@ $(function() {
 
      }
 
-   $.getJSON('../json/quiz' + moduleNo +'.json') 
+   $.getJSON('../json/quiz' + moduleNo +'.json')
      .done(function(data){
      	 var ask = {};
    		ask.mc = askMC;
@@ -243,8 +243,8 @@ $(function() {
 	    	quizOver = false;
 	        $next.attr("disabled", true);
 	   		ask[currentQuestion.type](currentQuestion);
-	   	
-   		
+
+
    		}
 
 
@@ -265,11 +265,11 @@ $(function() {
 		   		// restart quiz
 		   		quizInit();
 		   	}
-		   	
-		   }
-       }); 
 
-     
+		   }
+       });
+
+
 
     function scoring(actualScore, perfectScore){
     	$question.html("<p class='lead'>You got " +actualScore + " out of " + perfectScore + ".</p>");
@@ -286,10 +286,10 @@ $(function() {
 		   		makeAlert($main, "a", "Press 'Continue' to restart the quiz.", 3)
 		   	}
     }
-       
+
 
 
 
      }).fail(function(){$question.html('<p> Failed to Load Quiz</p>')});
-  	
+
 })
