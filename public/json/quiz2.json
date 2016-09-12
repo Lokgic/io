@@ -1,7 +1,7 @@
 { "1": {
   "type": "dropdown",
   "id": "quiz2_1",
-  "instruction": "Determine whether each argument is valid or invalid. Using truth tables would be good practice for the test",
+  "instruction": "Determine whether each argument is valid or invalid. Using truth tables, both complete and short, would be good a practice for the test 2.",
   "question": "",
   "setuptype": "list",
   "questions": [
@@ -12,6 +12,21 @@
     ["\\((B\\wedge A)\\to C, (C\\wedge A) \\to B\\vDash (C \\wedge B)\\to A\\)", "Invalid"],
     ["\\(\\neg (\\neg A \\vee \\neg B), A \\to \\neg C \\vDash A \\to (B \\to C)\\)", "Invalid"]
   ],"possibleAnswers": ["Valid","Invalid"]
+},
+"1": {
+  "type": "dropdown",
+  "id": "quiz2_1",
+  "instruction": "Determine whether each the following statements of equivalence are true or false using truth tables. ",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\(A\\equiv\\neg A\\)", "False"],
+    ["\\(A\\to A\\equiv A \\leftrightarrow A\\)", "False"],
+    ["\\(A\\wedge (B\\wedge C)\\equiv A \\wedge \\neg A\\)", "False"],
+    ["\\(A \\wedge \\neg A\\equiv\\neg B \\leftrightarrow B\\)", "True"],
+    ["\\(\\neg(A \\to B)\\equiv\\neg A \\to \\neg B\\)", "False"],
+    ["\\(A \\leftrightarrow B\\equiv\\neg[(A \\to B) \\to \\neg (B\\to A)]\\)", "True"]
+  ],"possibleAnswers": ["True","False"]
 }
 
 }

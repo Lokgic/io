@@ -6,6 +6,7 @@ var mathJax = {
   document.getElementsByTagName("head")[0].appendChild(script);
   },
   reload: function(id){
+    id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
 
   }

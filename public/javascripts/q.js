@@ -1,73 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var mathJax = {
-  load: function () {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-  document.getElementsByTagName("head")[0].appendChild(script);
-  },
-  reload: function(id){
-    id = id || "";
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-
-  }
-}
-
-
-
-module.exports = mathJax;
-
-},{}],2:[function(require,module,exports){
-var randomize = {
-  oneNumber: function(n){
-     return Math.floor(Math.random()* n) + 1
-  },
-  drawOneRandomFromSet: function(set) {
-        return  set[Math.floor(Math.random()* set.length)];
-        },
-
-  shuffle: function(arr) {
-    var currentI = arr.length, tempValue, randomI;
-
-    while (0!== currentI){
-      randomI = Math.floor(Math.random() * currentI);
-          currentI -= 1;
-
-          tempValue = arr[currentI];
-          arr[currentI] = arr[randomI];
-          arr[randomI] = tempValue;
-        }
-
-        return arr;
-      },
-    chooceProbabilistically: function(set, probability){
-
-    var n = Math.random();
-    var low = 0;
-    var outcome;
-    for (var i = 0; i<set.length;i++){
-      if (low<n&&n<probability[i]){
-        low = probability[i];
-        outcome = set[i];
-      }
-    }
-      return outcome;
-    },
-
-    sample: function(set, n){
-    	var newSet = randomize.shuffle(set);
-    	var output =[];
-    	for (var i= 0; i<n; i++){
-    		output.push(newSet.pop());
-    	}
-    	return output;
-    }
-
-  }
-
-module.exports = randomize;
-
-},{}],3:[function(require,module,exports){
 var randomize = require('./mods/randomize.js')
 var mathJax = require('./mods/mathjax.js')
 
@@ -368,5 +298,3 @@ $(function() {
      }).fail(function(){$question.html('<p> Failed to Load Quiz</p>')});
 
 })
-
-},{"./mods/mathjax.js":1,"./mods/randomize.js":2}]},{},[3]);
