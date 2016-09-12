@@ -1,4 +1,7 @@
 var randomize = {
+  oneNumber: function(n){
+     return Math.floor(Math.random()* n) + 1
+  },
   drawOneRandomFromSet: function(set) {
         return  set[Math.floor(Math.random()* set.length)];
         },
@@ -36,7 +39,7 @@ var randomize = {
     	var output =[];
     	for (var i= 0; i<n; i++){
     		output.push(newSet.pop());
-    	} 
+    	}
     	return output;
     }
 
