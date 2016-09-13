@@ -13,9 +13,9 @@
     ["\\(\\neg (\\neg A \\vee \\neg B), A \\to \\neg C \\vDash A \\to (B \\to C)\\)", "Invalid"]
   ],"possibleAnswers": ["Valid","Invalid"]
 },
-"1": {
+"2": {
   "type": "dropdown",
-  "id": "quiz2_1",
+  "id": "quiz2_2",
   "instruction": "Determine whether each the following statements of equivalence are true or false using truth tables. ",
   "question": "",
   "setuptype": "list",
@@ -27,6 +27,102 @@
     ["\\(\\neg(A \\to B)\\equiv\\neg A \\to \\neg B\\)", "False"],
     ["\\(A \\leftrightarrow B\\equiv\\neg[(A \\to B) \\to \\neg (B\\to A)]\\)", "True"]
   ],"possibleAnswers": ["True","False"]
+},
+"3": {
+  "type": "dropdown",
+  "id": "quiz2_3",
+  "instruction": "Determine whether each sentence is a tautology, a contradiction, or a contingent sentence. ",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\(A\\to\\neg A\\)", "Contingent"],
+    ["\\(A\\to (A\\wedge (A \\vee B))\\)", "Tautology"],
+    ["\\((A \\to B) \\leftrightarrow (B \\to A)\\)", "Contingent"],
+    ["\\(A \\to \\neg(A \\wedge (A \\vee B))\\)", "Contingent"],
+    ["\\(\\neg B \\to [(\\neg A \\wedge A) \\vee B]\\)", "Contingent"],
+    ["\\(\\neg(A \\vee B) \\leftrightarrow (\\neg A \\wedge \\neg B)\\)", "Tautology"]
+  ],"possibleAnswers": ["Contingent","Tautology","Contradiction"]
+},
+"4": {
+  "type": "dropdown",
+  "id": "quiz2_4",
+  "instruction": "Determine whether each sentence is a tautology, a contradiction, or a contingent sentence. ",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\([(A \\wedge B) \\wedge C] \\to B\\)", "Tautology"],
+    ["\\(\\neg[(C\\vee A) \\vee B)\\)", "Contingent"],
+    ["\\([(A\\wedge B) \\wedge\\neg(A\\wedge B)]\\wedge C\\)", "Contradiction"],
+    ["\\((A \\wedge B) \\to[(A \\wedge C) \\vee (B \\wedge D)]\\)", "Contingent"],
+    ["\\(\\neg (A \\vee A)\\)", "Contradiction"],
+    ["\\((A \\to B) \\vee (B \\to A)\\)", "Tautology"]
+  ],"possibleAnswers": ["Contingent","Tautology","Contradiction"]
+},
+"5": {
+  "type": "dropdown",
+  "id": "quiz2_5",
+  "instruction": "Determine whether each the following statements of equivalence are true or false using truth tables. ",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\((A \\wedge B) \\to (\\neg A \\vee \\neg B)\\equiv \\neg(A\\wedge B)\\)", "True"],
+    ["\\([(A \\vee B) \\vee C] \\equiv [A \\vee (B \\vee C)]\\)", "True"],
+    ["\\(Z \\wedge(\\neg R \\to O)) \\equiv \\neg (R \\to \\neg O) \\)", "False"]
+  ],"possibleAnswers": ["True","False"]
+},
+"6": {
+  "type": "dropdown",
+  "id": "quiz2_6",
+  "instruction": "Determine whether each argument is valid or invalid. Using truth tables, both complete and short, would be good a practice for the test 2.",
+  "question": "",
+  "setuptype": "list",
+  "questions": [
+    ["\\(A \\wedge (B \\to C), \\neg C \\wedge (\\neg B \\to \\neg A)\\vDash C \\wedge \\neg C\\)", "Valid"],
+    ["\\(A \\wedge B, \\neg A \\to \\neg C, B \\to \\neg D \\vDash A \\vee B\\)", "Invalid"],
+    ["\\(A \\to B\\vDash(A \\wedge B) \\vee (\\neg A \\wedge \\neg B)\\)", "Invalid"],
+    ["\\(\\neg A \\to B, \\neg B \\to C , \\neg C \\to A \\vDash \\neg A \\to (\\neg B \\vee \\neg C)\\)", "Invalid"]
+  ],"possibleAnswers": ["Valid","Invalid"]
+},
+"7": {
+  "question": "If you have to eliminate one of the following connectives from SL, which one cannot be taken out without losing expressive completeness?",
+  "real": "\\(\\neg\\)",
+  "fake": ["\\(\\to\\)", "\\(\\leftrightarrow\\)", "\\(\\vee\\)", "\\(\\wedge\\)"],
+  "type": "mc",
+  "id": "quiz1_7"
+
+},
+"8": {
+  "question": "Are \\(\\wedge\\) and \\(\\neg\\) together sufficient for expressive completeness?",
+  "real": "Damn right they are.",
+  "fake": ["No, due to Goedel’s Incompleteness Theorems, expressive completeness is not possible.", "No, because they are not expressively complete without \\(\\to\\).","No, because there are logical connectives we still have yet to learn."],
+  "type": "mc",
+  "id": "quiz1_8"
+
+},
+"9": {
+  "question": "Suppose you know that the sentence X is contradictory. Do you have information to construct a truth table for \\(\\neg X \\)?",
+  "real": "Yes, and values of the column are all Ts.",
+  "fake": ["Yes, and values of the column are all Fs.", "No, not until you know about the truth values of X.","No, because the values of \\(\\neg X\\) is independent of X."],
+  "type": "mc",
+  "id": "quiz1_9"
+
+},
+"10": {
+  "question": "Suppose you know that the sentence X is tautology. Do you have information to construct a truth table for \\(\\neg X \\)?",
+  "real": "Yes, and values of the column are all Fs.",
+  "fake": ["Yes, and values of the column are all Ts.", "No, not until you know about the truth values of X.","No, because the values of \\(\\neg X\\) is independent of X."],
+  "type": "mc",
+  "id": "quiz1_10"
+
+},
+"11": {
+  "question": "Suppose you know that the sentence X and Y logically equivalent and the truth values for Y. Do you have information to construct a truth table for \\(\\ X \\)?",
+  "real": "Yes, and values will be the same as Y",
+  "fake": ["Yes, and values of the column are all Ts for both X and Y.", "No, X and Y can be logically equivalent while having different truth tables.","No, because the values of \\(X\\) is independent of Y."],
+  "type": "mc",
+  "id": "quiz1_11"
+
 }
+
 
 }

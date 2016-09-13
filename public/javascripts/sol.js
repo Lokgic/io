@@ -1,23 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var mathJax = {
-  load: function () {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-  document.getElementsByTagName("head")[0].appendChild(script);
-  },
-  reload: function(id){
-    id = id || "";
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-
-  }
-}
-
-
-
-module.exports = mathJax;
-
-},{}],2:[function(require,module,exports){
 var mathJax = require('./mods/mathjax.js')
 $(function(){
 	var moduleNo = $("title").attr('id');
@@ -115,5 +95,3 @@ $(function(){
 		 mathJax.load();
 
 })
-
-},{"./mods/mathjax.js":1}]},{},[2]);
