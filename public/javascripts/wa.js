@@ -65,6 +65,9 @@ var all = {
 module.exports = all;
 },{}],3:[function(require,module,exports){
 var randomize = {
+  oneNumber: function(n){
+     return Math.floor(Math.random()* n) + 1
+  },
   drawOneRandomFromSet: function(set) {
         return  set[Math.floor(Math.random()* set.length)];
         },
@@ -102,13 +105,14 @@ var randomize = {
     	var output =[];
     	for (var i= 0; i<n; i++){
     		output.push(newSet.pop());
-    	} 
+    	}
     	return output;
     }
 
   }
 
 module.exports = randomize;
+
 },{}],4:[function(require,module,exports){
 var alert = require('./mods/alert.js')
 var randomize = require('./mods/randomize.js')
@@ -142,7 +146,7 @@ function printCards(cards){
 		html += '<input type="checkbox" autocomplete="off">';
 		html += '<h1 class = "display-1">' + cards[card] + '</h1>';
 		html+='</label>';
-		
+
 	}
 
 	html += '</div>'
@@ -164,7 +168,7 @@ function printRule(rule){
 	if (seed === 1) {return "if one side of the card is " + rule[0] + ", then the other side must be " + rule[1];}
 		else if (seed === 2) {return "one side of the card is " + rule[0] + " only if the other side is " + rule[1];}
 		else if (seed === 3) {return "a card cannot have " + rule[0] + " on one side without having " + rule[1] + " on another side";}
-		else if (seed === 4) {return "one side of card is " + rule[1] + " if it has " + rule[0] + " on another side";} 
+		else if (seed === 4) {return "one side of card is " + rule[1] + " if it has " + rule[0] + " on another side";}
 		else if (seed === 5) {return "having "+ rule[1] + " on one side is a necessary condition for having " + rule[0] + " on the other side.";}
 		else if (seed === 6) {return "having "+ rule[0] + " on one side is a sufficient condition for having " + rule[1] + " on the other side.";}
 		else {return "having " + rule[0] + " on one side implies that the other side is " +rule [1]}
@@ -176,12 +180,12 @@ function makeAnswer(rule, cards){
 	if (rule[0] === "an even number"|| rule[1] === "an odd number") {
 			for (var i = 0; i < cards.length; i++){
 				if (cards[i] % 2 === 0){answer.push(cards[i].toString())}
-			} //end for loop		
+			} //end for loop
 		} else if (rule[0] === "an odd number"|| rule[1] === "an even number") {
 			for (var i = 0; i < cards.length; i++){
 				if (cards[i] % 2 === 1){answer.push(cards[i].toString())}
-			} //end for loop		
-		} 
+			} //end for loop
+		}
 
 
 	if (rule[0] === "a vowel"|| rule[1] === "a consonant") {
@@ -214,13 +218,13 @@ function checkAnswer(answers){
 	for (answer in answers){
 		if (checked.indexOf(answers[answer])== -1){
 			return false;
-		} 
+		}
 	}
 
 	for (check in checked){
 		if (answers.indexOf(checked[check])== -1){
 			return false;
-		} 
+		}
 	}
 	return true;
 }
@@ -253,7 +257,7 @@ function initCards (n){
 	var $cards = $('#cards');
 	var vowels = ['a','e','u','i','o'];
 	var consonants = ['b','h','p','z','g'];
-	var number = [10,2,3,4,5,6,7,8,9]
+	var number = [2,3,4,5,6,7,8,9]
 	var possibility = [["an even number", "an odd number"], ["a consonant", "a vowel"]];
 	var x = 6;
 
@@ -267,7 +271,7 @@ function initCards (n){
 	Score(0);
 	generalInstruction();
 
-	function resetCards(){		
+	function resetCards(){
 			current = initCards(x);
 			$cards.html(printCards(current));
 			rule = makeRule(possibility);
@@ -285,7 +289,7 @@ function initCards (n){
 			resetCards();
 			$numOfCards.text("# of Cards : " + x);
 		}
-		
+
 	})
 
 	$minus.on('click', function (){
@@ -317,11 +321,11 @@ function initCards (n){
 				    	leaderboard.draw("wason", $leaderboard);
 				      });
 				}
-				if (score >= passing){				
+				if (score >= passing){
 				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 2}, function(res){
 				       output += "You passed! "+res;
 				       alert($head, "b",output, 1);
-				      });		    
+				      });
 				    	Score(0);
   					}else{
   					 alert($head, "b",output, 4);
@@ -329,8 +333,8 @@ function initCards (n){
   					  leaderboard.draw("wason", $leaderboard);
 
   					}
-  				
-				
+
+
 			}
 		} else{
 			resetCards();
@@ -340,4 +344,5 @@ function initCards (n){
 
 
 }) //end
+
 },{"./mods/alert.js":1,"./mods/leaderboard.js":2,"./mods/randomize.js":3}]},{},[4]);
