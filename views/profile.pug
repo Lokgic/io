@@ -3,12 +3,14 @@ extends layout
 block content
 	.jumbotron.jumbotron-fluid#randomjumbo
 		.container.m-t-2
-			blockquote.blockquote.lead 
+			blockquote.blockquote.lead
 				p.display-3  #{random}
-				footer.blockquote-footer #{name} 
+				footer.blockquote-footer #{name}
 	.container.p-t-2.m-t-3
 		.row
-		h1.display-4.text-xs-center.m-y-3.text-muted#modules #{name}'s Course Progress 
+		h1.display-4.text-xs-center.m-y-3.text-muted#modules #{name}'s Course Progress
+		if (box)
+			button(type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#myModal") Graded Tests
 		.text-xs-center#percent #{completed}%
 		progress.progress.progress-striped.m-b-3#percentbar(value = completed, max = "100" aria-describedby="percent")
 		.row
@@ -19,21 +21,21 @@ block content
 							a(href = '../'+module.moduleNo)
 								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading)
 									p.card-text Reading &#10003;
-								else 
+								else
 									p.card-text Reading &#10007;
-								if (module.concepts)  
+								if (module.concepts)
 									p.card-text Concepts &#10003;
-								else 
+								else
 									p.card-text Concepts &#10007;
-								if (module.quiz)  
+								if (module.quiz)
 									p.card-text Quiz &#10003;
-								else 
+								else
 									p.card-text Quiz &#10007;
-								if (module.test)  
+								if (module.test)
 									p.card-text Test &#10003;
-								else 
+								else
 									p.card-text Test &#10007;
 							.card-footer.card-success.text-xs-center.lead Completed!
 					else if (module.concepts||module.reading||module.test||module.quiz)
@@ -41,42 +43,49 @@ block content
 							a(href = '../'+module.moduleNo)
 								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading)
 									p.card-text Reading &#10003;
-								else 
+								else
 									p.card-text Reading #{module.readingCount}/3  &#10007;
-								if (module.concepts)  
+								if (module.concepts)
 									p.card-text Concepts &#10003;
-								else 
+								else
 									p.card-text Concepts &#10007;
-								if (module.quiz)  
+								if (module.quiz)
 									p.card-text Quiz &#10003;
-								else 
+								else
 									p.card-text Quiz &#10007;
-								if (module.test)  
+								if (module.test)
 									p.card-text Test &#10003;
-								else 
+								else
 									p.card-text Test &#10007;
 							.card-footer.card-info.text-xs-center.lead In Progress
 					else
-						.card 
+						.card
 							a(href = '../'+module.moduleNo)
 								.card-header.text-xs-center.lead.profilehead #{module.name}
 							.card-block.text-xs-center.lead
-								if (module.reading)  
+								if (module.reading)
 									p.card-text Reading &#10003;
-								else 
+								else
 									p.card-text Reading #{module.readingCount}/3 &#10007;
-								if (module.concepts)  
+								if (module.concepts)
 									p.card-text Concepts &#10003;
-								else 
+								else
 									p.card-text Concepts &#10007;
-								if (module.quiz)  
+								if (module.quiz)
 									p.card-text Quiz &#10003;
-								else 
+								else
 									p.card-text Quiz &#10007;
-								if (module.test)  
+								if (module.test)
 									p.card-text Test &#10003;
-								else 
+								else
 									p.card-text Test &#10007;
 							.card-footer.card-warning.text-xs-center.lead Not Started
+	if (box)
+		.modal.fade#myModal(tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+			.modal-dialog.modal-lg(role="document")
+				.modal-content
+					.button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+						span(aria-hidden = "true") &times;
+				iframe(src="https://app.box.com/embed_widget/s/" + box + "?view=list&sort=name&direction=ASC&theme=blue" width="100%" height="80%" frameborder="0" allowfullscreen webkitallowfullscreen msallowfullscreen)

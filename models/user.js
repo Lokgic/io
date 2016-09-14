@@ -17,14 +17,14 @@ var UserSchema = new Schema({
       required: true,
       trim: true,
     },
-    
+
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
   },
-  
+
   random: {
     type: String,
     required: true,
@@ -33,6 +33,10 @@ var UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  box: {
+    type: String,
+    required: false
   },
   record: [RecordSchema]
 });
@@ -45,7 +49,7 @@ UserSchema.statics.record = function record(userId, moduleNo, label, callback){
         return next(error);
       } else {
         var query = {};
-        for (var i = 0; i <user.record.length;i++){         
+        for (var i = 0; i <user.record.length;i++){
             if(user.record[i].label == label && user.record[i].moduleNo == moduleNo){
               // console.log(user.record[i].label);
               // console.log(user.record[i].moduleNo);
@@ -69,9 +73,9 @@ UserSchema.statics.getName = function getName(userId, callback){
       if (error){
         return next(error);
       } else {
-        
-        
-        
+
+
+
 
           return callback(null, user.name);
       }
@@ -86,8 +90,8 @@ UserSchema.statics.getProfile = function getProfile(userId, callback){
       if (error){
         return next(error);
       } else {
-        
-        
+
+
 
           return callback(null, user);
       }
@@ -125,7 +129,7 @@ UserSchema.pre('save', function(next){
 	bcrypt.hash(user.password, 10, function(err, hash){
 		if (err){
 			return next(err);
-		} 
+		}
 		user.password = hash;
 		next();
 	})}else{

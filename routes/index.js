@@ -42,12 +42,12 @@ router.get('/adm', mid.requiresAdmin , function(req,res,next){
 		}else{
 
 	User.getProfile(req.query.id, function (err, result){
-	
+
 		if (err){
 				return next(err);
 			} else {
 
-				
+
 
 				var completed = result.record.length;
 				modules = [];
@@ -57,8 +57,8 @@ router.get('/adm', mid.requiresAdmin , function(req,res,next){
 
 			        for (var i =0; i<result.record.length;i++ ){
 			          modules[result.record[i].moduleNo - 1][result.record[i].label] = true;
-			         
-			        }	
+
+			        }
 
 			       // console.log(result)
 				for (var i = 0; i < modules.length; i++){
@@ -83,7 +83,7 @@ router.get('/adm', mid.requiresAdmin , function(req,res,next){
 
 	})
 
-	
+
 
 })
 
@@ -96,22 +96,22 @@ router.post('/reportTest',mid.requiresAdmin, function(req, res, next){
 
 		})
 
-	
+
 });
 
 
 //GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next){
-	
+
 
 
 	User.getProfile(req.session.userId, function (err, result){
-	
+
 		if (err){
 				return next(err);
 			} else {
 
-				
+
 
 				var completed = result.record.length;
 				modules = [];
@@ -121,8 +121,8 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 
 			        for (var i =0; i<result.record.length;i++ ){
 			          modules[result.record[i].moduleNo - 1][result.record[i].label] = true;
-			         
-			        }	
+
+			        }
 
 			       // console.log(modules)
 				for (var i = 0; i < modules.length; i++){
@@ -139,8 +139,10 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 
 				completed =  Math.trunc(100*completed/(modules.length * 6))
 				// console.log(modules);
-
-				 return res.render('profile',{ title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
+				var box;
+				if (result.box == undefined) box = false;
+					else box = result.box;
+				 return res.render('profile',{box:box, title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
 			}
 	})
 });
@@ -169,9 +171,9 @@ router.post('/login', function(req, res, next){
 		err.status = 401;
 		return next(err);
 	}
-	
 
-	
+
+
 });
 
 
@@ -233,7 +235,7 @@ router.post('/register', function(req, res, next){
 			}
 		});
 
-		
+
 	}else{
 		var err = new Error('All fields required!')
 		err.status = 400;
@@ -399,7 +401,7 @@ router.post('/wason', function(req, res, next){
 
 	if (req.session.userId){
 		User.getName(req.session.userId, function (err, name){
-			
+
 			Leader.update(name, "wason", req.body.score, function(err, response){
 				return res.send(response);
 				})
@@ -420,7 +422,3 @@ router.post('/ranking', function(req, res, next){
 
 
 module.exports = router;
-
-
-
-
