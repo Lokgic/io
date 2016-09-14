@@ -93,8 +93,8 @@ function makeAnswer(rule, cards){
 
 function checkAnswer(answers){
 	var checked = $('.active', '.btn-group').children().text().split("");
-	console.log(checked);
-	console.log(answers);
+	// console.log(checked);
+	// console.log(answers);
 	if (answers.length == 0){
 		if (checked.length == 0) return true;
 		else return false;
@@ -160,7 +160,7 @@ function initCards (n){
 			$cards.html(printCards(current));
 			rule = makeRule(possibility);
 			ans = makeAnswer(rule, current);
-			console.log(ans);
+			// console.log(ans);
 			$rule.html(printRule(rule));
 			reset = false;
 			alert($head,"b","Which card(s) must you turn over in order to verify the statement below?",3);
@@ -192,7 +192,6 @@ function initCards (n){
 				Score(score + x);
 				alert($head, "b","This is correct! Press the button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
-				console.log(secondChance);
 			} else if (secondChance == 1){
 				alert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
 				secondChance = 3;
