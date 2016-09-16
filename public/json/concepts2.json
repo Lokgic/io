@@ -53,7 +53,7 @@
     },
     "Metalanguage": {
         "term": "Metalanguage",
-        "df": "The language logicians use to talk about the object language. In our context, the metalanguage is English, supplemented by certain symbols like metavariables and technical terms like “valid.”"
+        "df": "The language logicians use to talk about the object language. "
     },
     "Metavariables": {
         "term": "Metavariables",
