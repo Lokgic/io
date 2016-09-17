@@ -21,7 +21,7 @@
   "setuptype": "list",
   "questions": [
     ["\\(A\\equiv\\neg A\\)", "False"],
-    ["\\(A\\to A\\equiv A \\leftrightarrow A\\)", "False"],
+    ["\\(A\\to B\\equiv A \\leftrightarrow B\\)", "False"],
     ["\\(A\\wedge (B\\wedge C)\\equiv A \\wedge \\neg A\\)", "False"],
     ["\\(A \\wedge \\neg A\\equiv\\neg B \\leftrightarrow B\\)", "True"],
     ["\\(\\neg(A \\to B)\\equiv\\neg A \\to \\neg B\\)", "False"],
