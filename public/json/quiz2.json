@@ -78,7 +78,7 @@
   "setuptype": "list",
   "questions": [
     ["\\(A \\wedge (B \\to C), \\neg C \\wedge (\\neg B \\to \\neg A)\\vDash C \\wedge \\neg C\\)", "Valid"],
-    ["\\(A \\wedge B, \\neg A \\to \\neg C, B \\to \\neg D \\vDash A \\vee B\\)", "Invalid"],
+    ["\\(A \\vee B,  A \\to \\neg C, B \\to \\neg D \\vDash \\neg C \\vee \\neg D\\)", "Valid"],
     ["\\(A \\to B\\vDash(A \\wedge B) \\vee (\\neg A \\wedge \\neg B)\\)", "Invalid"],
     ["\\(\\neg A \\to B, \\neg B \\to C , \\neg C \\to A \\vDash \\neg A \\to (\\neg B \\vee \\neg C)\\)", "Invalid"]
   ],"possibleAnswers": ["Valid","Invalid"]
