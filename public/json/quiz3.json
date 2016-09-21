@@ -1,0 +1,29 @@
+{ "1": {
+  "type": "deduction",
+  "id": "quiz3_1",
+  "instruction": "Determine whether each argument is valid or invalid. Using truth tables, both complete and short, would be good a practice for the test 2.",
+  "question": "",
+  "setuptype": "random",
+  "derivation": [
+    {"scope":"1", "content": " A → B", "justification":"Given"},
+    {"scope":"1", "content": " A", "justification":"Given"},
+    {"scope":"1", "content": " B", "justification":"→E 1,2"},
+    {"scope":"1", "content": " A ∧ B", "justification":"∧ 2,3"}
+  ]
+},
+"1": {
+  "type": "deduction",
+  "id": "quiz3_1",
+  "instruction": "Determine whether each argument is valid or invalid. Using truth tables, both complete and short, would be good a practice for the test 2.",
+  "question": "",
+  "setuptype": "random",
+  "derivation": [
+    {"scope":1, "content": " A → B", "justification":"Given"},
+    {"scope":1, "content": " A", "justification":"Given"},
+    {"scope":1, "content": " B", "justification":"Given"},
+    {"scope":2, "content": " C", "justification":"Assumption"},
+    {"scope":2, "content": " A ∧ B", "justification":"∧I 2,3"},
+    {"scope":1, "content": "C → (A ∧ B)", "justification": "→ I 4-5"}
+  ]
+  }
+}

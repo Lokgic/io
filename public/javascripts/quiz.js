@@ -1,4 +1,72 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var randomize = require('./randomize.js')
+
+var lineleft = 'style ="border-right: 0px;border-bottom: 0px;border-top: 0px;border-left: 1px ;border-style: solid;"';
+
+
+
+
+var draw = function(proof){
+  var maxcol = 2
+  var html = '<table class="table table-sm"><tbody>';
+  var num = 0
+  for (line in proof){
+    num++;
+    html += '<tbody><tr><th scope="row" >'+ num+'</th>';
+
+    if (proof[line].scope > 1){
+      console.log(proof[line].content + " " + proof[line].scope);
+      for (var i = 1; i < proof[line].scope; i++){
+        html +=' <td '+ lineleft +'> </td>';
+      }
+
+    }
+
+    html +=' <td colspan="' + (maxcol + 1  - proof[line].scope) +'"'+ lineleft + '>';
+
+    html += proof[line].content + '</td>';
+    html += '<td>' + proof[line].justification + '</td>';
+    html += '</tr>';
+  }
+  html += '</tbody></table>'
+  return html;
+}
+
+var randomJustification = function(proof){
+  var maxcol = 2
+  var html = '<table class="table table-sm"><tbody>';
+  var num = 0
+  var question = 1;
+  while (proof[question - 1].justification == "Given"||proof[question - 1].justification == "Assumption"){
+    question = randomize.oneNumber(proof.length);
+  }
+  console.log(question);
+  for (line in proof){
+    num++;
+    html += '<tbody><tr><th scope="row" >'+ num+'</th>';
+
+    if (proof[line].scope > 1){
+      for (var i = 1; i < proof[line].scope; i++){
+        html +=' <td '+ lineleft +'> </td>';
+      }
+
+    }
+
+    html +=' <td colspan="' + (maxcol + 1  - proof[line].scope) +'"'+ lineleft + '>';
+
+    html += proof[line].content + '</td>';
+    if (num != question) html += '<td>' + proof[line].justification + '</td>';
+    else html += '<td></td>';
+    html += '</tr>';
+  }
+  html += '</tbody></table>'
+  return html;
+}
+
+module.exports = {draw: draw,
+                  randomJustification: randomJustification}
+
+},{"./randomize.js":3}],2:[function(require,module,exports){
 var mathJax = {
   load: function () {
   var script = document.createElement("script");
@@ -17,7 +85,7 @@ var mathJax = {
 
 module.exports = mathJax;
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var randomize = {
   oneNumber: function(n){
      return Math.floor(Math.random()* n) + 1
@@ -67,10 +135,7 @@ var randomize = {
 
 module.exports = randomize;
 
-},{}],3:[function(require,module,exports){
-var randomize = require('./mods/randomize.js')
-var mathJax = require('./mods/mathjax.js')
-
+},{}],4:[function(require,module,exports){
 
 $(function() {
 	var $progresscap = $('#progresscap');
@@ -88,6 +153,10 @@ $(function() {
 	var answered;
 	var perfectScore;
 	var moduleNo = $("title").attr('id');
+	var randomize = require('./mods/randomize.js')
+	var mathJax = require('./mods/mathjax.js')
+	var deduction = require('./mods/deduction.js')
+
 
 	function resetQuizCard(){
 			$main.removeClass("card-danger");
@@ -98,54 +167,45 @@ $(function() {
 
 
 
-    function makeAlert(location, direction, text, code){ //direction: a= above, b=below
-      /////This takes care of the HTML
-      var tag;
-      if (code == 0){
-		if (direction == "a"&& $(location).prev().hasClass("alert")){
-	          $(location).prev().remove();
-	        }
-	      if (direction == "b" && $(location).next().hasClass("alert")){
-	          $(location).next().remove();
-	        }
-      }
-      else if (code == 1){tag = "alert-success";}
-      else if (code == 2){tag = "alert-info";}
-      else if (code == 3){tag = "alert-warning"}
-      else{tag = "alert-danger"}
-      var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
-
-      if (direction == "a"){
-        if ($(location).prev().hasClass("alert")) {
+  function makeAlert(location, direction, text, code){ //direction: a= above, b=below
+    /////This takes care of the HTML
+    var tag;
+    if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
           $(location).prev().remove();
         }
-        $(location).before(html);
-        }
-
-      if (direction == "b"){
-        if ($(location).next().hasClass("alert")) {
+      if (direction == "b" && $(location).next().hasClass("alert")){
           $(location).next().remove();
         }
-        $(location).after(html);
-        }
+    }
+    else if (code == 1){tag = "alert-success";}
+    else if (code == 2){tag = "alert-info";}
+    else if (code == 3){tag = "alert-warning"}
+    else{tag = "alert-danger"}
+    var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
+    if (direction == "a"){
+      if ($(location).prev().hasClass("alert")) {
+        $(location).prev().remove();
+      }
+      $(location).before(html);
       }
 
-	// function shuffle(arr){
-	// 	var currentI = arr.length, tempValue, randomI;
-	//
-	// 	while (0!== currentI){
-	// 		randomI = Math.floor(Math.random() * currentI);
-	// 		currentI -= 1;
-	//
-	// 		tempValue = arr[currentI];
-	// 		arr[currentI] = arr[randomI];
-	// 		arr[randomI] = tempValue;
-	// 	}
-	//
-	// 	return arr;
-	// }
+    if (direction == "b"){
+      if ($(location).next().hasClass("alert")) {
+        $(location).next().remove();
+      }
+      $(location).after(html);
+      }
 
+    }
+
+	function askDeduction(q){
+		if (q.setuptype == "mc"){
+			$question.html(deduction.draw(q.derivation));
+		}
+
+	}
 
 	function askMC(q){
 		//prepare Q nd A
@@ -273,27 +333,18 @@ $(function() {
 	           html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
 	           html += dropdownItems;
 	           html += '</select></div></div>'
-
 	         }
 	     }
-
-
-         html += '</form>';
-
-
-
-
-         $question.html(html);
-         var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
-         $answerList.html(answerButton);
-         activateButton(obj);
-
+       html += '</form>';
+       $question.html(html);
+       var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
+       $answerList.html(answerButton);
+       activateButton(obj);
     }
 
     function updateProgress(answered, total, right){
      	$progresscap.html("Answered: " + answered + " Total: " + total + " Correct: " + right);
      	$progressbar.attr("value", answered);
-
      }
 
    $.getJSON('../json/quiz' + moduleNo +'.json')
@@ -301,9 +352,11 @@ $(function() {
      	 var ask = {};
    		ask.mc = askMC;
    		ask.dropdown = askDropdown;
+			ask.deduction = askDeduction;
 	    var currentQuestion;
 	    var quizOver;
 	    var quiz;
+
      	function quizInit(){
      		resetQuizCard();
        		quiz = randomize.shuffle(Object.keys(data).map(function(value) {
@@ -320,7 +373,6 @@ $(function() {
 				mathJax.reload(quizcard);
 
    		}
-
 
   		quizInit();
         $next.on('click', function(){
@@ -343,8 +395,6 @@ $(function() {
 
 			   }
 	       });
-
-
 
     function scoring(actualScore, perfectScore){
     	$question.html("<p class='lead'>You got " +actualScore + " out of " + perfectScore + ".</p>");
@@ -369,4 +419,4 @@ $(function() {
 
 })
 
-},{"./mods/mathjax.js":1,"./mods/randomize.js":2}]},{},[3]);
+},{"./mods/deduction.js":1,"./mods/mathjax.js":2,"./mods/randomize.js":3}]},{},[4]);

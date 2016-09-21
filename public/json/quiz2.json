@@ -54,7 +54,7 @@
     ["\\(\\neg[(C\\vee A) \\vee B)\\)", "Contingent"],
     ["\\([(A\\wedge B) \\wedge\\neg(A\\wedge B)]\\wedge C\\)", "Contradiction"],
     ["\\((A \\wedge B) \\to[(A \\wedge C) \\vee (B \\wedge D)]\\)", "Contingent"],
-    ["\\(\\neg (A \\vee A)\\)", "Contradiction"],
+    ["\\(\\neg (A \\vee \\neg A)\\)", "Contradiction"],
     ["\\((A \\to B) \\vee (B \\to A)\\)", "Tautology"]
   ],"possibleAnswers": ["Contingent","Tautology","Contradiction"]
 },

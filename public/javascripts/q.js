@@ -1,6 +1,3 @@
-var randomize = require('./mods/randomize.js')
-var mathJax = require('./mods/mathjax.js')
-
 
 $(function() {
 	var $progresscap = $('#progresscap');
@@ -18,6 +15,10 @@ $(function() {
 	var answered;
 	var perfectScore;
 	var moduleNo = $("title").attr('id');
+	var randomize = require('./mods/randomize.js')
+	var mathJax = require('./mods/mathjax.js')
+	var deduction = require('./mods/deduction.js')
+
 
 	function resetQuizCard(){
 			$main.removeClass("card-danger");
@@ -28,54 +29,45 @@ $(function() {
 
 
 
-    function makeAlert(location, direction, text, code){ //direction: a= above, b=below
-      /////This takes care of the HTML
-      var tag;
-      if (code == 0){
-		if (direction == "a"&& $(location).prev().hasClass("alert")){
-	          $(location).prev().remove();
-	        }
-	      if (direction == "b" && $(location).next().hasClass("alert")){
-	          $(location).next().remove();
-	        }
-      }
-      else if (code == 1){tag = "alert-success";}
-      else if (code == 2){tag = "alert-info";}
-      else if (code == 3){tag = "alert-warning"}
-      else{tag = "alert-danger"}
-      var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
-
-      if (direction == "a"){
-        if ($(location).prev().hasClass("alert")) {
+  function makeAlert(location, direction, text, code){ //direction: a= above, b=below
+    /////This takes care of the HTML
+    var tag;
+    if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
           $(location).prev().remove();
         }
-        $(location).before(html);
-        }
-
-      if (direction == "b"){
-        if ($(location).next().hasClass("alert")) {
+      if (direction == "b" && $(location).next().hasClass("alert")){
           $(location).next().remove();
         }
-        $(location).after(html);
-        }
+    }
+    else if (code == 1){tag = "alert-success";}
+    else if (code == 2){tag = "alert-info";}
+    else if (code == 3){tag = "alert-warning"}
+    else{tag = "alert-danger"}
+    var html = "<div class='alert " + tag +  " alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
+    if (direction == "a"){
+      if ($(location).prev().hasClass("alert")) {
+        $(location).prev().remove();
+      }
+      $(location).before(html);
       }
 
-	// function shuffle(arr){
-	// 	var currentI = arr.length, tempValue, randomI;
-	//
-	// 	while (0!== currentI){
-	// 		randomI = Math.floor(Math.random() * currentI);
-	// 		currentI -= 1;
-	//
-	// 		tempValue = arr[currentI];
-	// 		arr[currentI] = arr[randomI];
-	// 		arr[randomI] = tempValue;
-	// 	}
-	//
-	// 	return arr;
-	// }
+    if (direction == "b"){
+      if ($(location).next().hasClass("alert")) {
+        $(location).next().remove();
+      }
+      $(location).after(html);
+      }
 
+    }
+
+	function askDeduction(q){
+		if (q.setuptype == "mc"){
+			$question.html(deduction.draw(q.derivation));
+		}
+
+	}
 
 	function askMC(q){
 		//prepare Q nd A
@@ -203,27 +195,18 @@ $(function() {
 	           html+= '<div class= "col-md-4 col-xs-12"><select class="form-control" id ='+ tempLabel +'>';
 	           html += dropdownItems;
 	           html += '</select></div></div>'
-
 	         }
 	     }
-
-
-         html += '</form>';
-
-
-
-
-         $question.html(html);
-         var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
-         $answerList.html(answerButton);
-         activateButton(obj);
-
+       html += '</form>';
+       $question.html(html);
+       var answerButton = '<button type="button" class="btn btn-primary  choice pull-xs-right">Submit Answer</button>'
+       $answerList.html(answerButton);
+       activateButton(obj);
     }
 
     function updateProgress(answered, total, right){
      	$progresscap.html("Answered: " + answered + " Total: " + total + " Correct: " + right);
      	$progressbar.attr("value", answered);
-
      }
 
    $.getJSON('../json/quiz' + moduleNo +'.json')
@@ -231,9 +214,11 @@ $(function() {
      	 var ask = {};
    		ask.mc = askMC;
    		ask.dropdown = askDropdown;
+			ask.deduction = askDeduction;
 	    var currentQuestion;
 	    var quizOver;
 	    var quiz;
+
      	function quizInit(){
      		resetQuizCard();
        		quiz = randomize.shuffle(Object.keys(data).map(function(value) {
@@ -250,7 +235,6 @@ $(function() {
 				mathJax.reload(quizcard);
 
    		}
-
 
   		quizInit();
         $next.on('click', function(){
@@ -273,8 +257,6 @@ $(function() {
 
 			   }
 	       });
-
-
 
     function scoring(actualScore, perfectScore){
     	$question.html("<p class='lead'>You got " +actualScore + " out of " + perfectScore + ".</p>");

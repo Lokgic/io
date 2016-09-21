@@ -9,7 +9,7 @@
 	"2":{
 		"moduleNo": 2,
 				"symbol" :"∅" ,
-		"title": "Sentence Logic: Introduction", 
+		"title": "Sentence Logic: Introduction",
 		"description": " This module introduces a logical language called SL. It is a version of sentential logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English. It also introduces a way of evaluating sentences and arguments of SL called the truth table method. ",
 		"info": [["About the Test", "Make sure you understand the part about recursive definitions and how to prove that some string is a wff. Be ready to construct a complete or an incomplete truth table for logical relations. I might ask you to do some translations. The wason selection task might also be in the test."]]
 	},
@@ -17,31 +17,32 @@
 		"moduleNo": 3,
 		"title": "Sentence Logic: Proofs",
 				"symbol" :"⊥" ,
-		"description": "In this module, we are going to introduce a new method for checking for validity and other logical properties. This time our method is going to be purely syntactic. We won’t be at all concerned with what our symbols mean. We are just going to look at the way they are arranged. Our method here will be called a system of natural deduction. When you use a system of natural deduction, you won’t do it mechanically. "
+		"description": "In this module, we are going to introduce a new method for checking for validity and other logical properties. This time our method is going to be purely syntactic. We won’t be at all concerned with what our symbols mean. We are just going to look at the way they are arranged. Our method here will be called a system of natural deduction. When you use a system of natural deduction, you won’t do it mechanically.",
+		"info":[["Practice Problems", "Much of the work will involve working through the problems. Be sure to work through <a href= '..\\pdf\\practice3.pdf'>the practice problems</a> before taking the tests. No solution is given for these problems, because they are intended for you work through and seek help from me in class. For the module quiz, problems with solutions will be given. Make sure that you are pretty comfortable with them before making an attempt at the quiz."]]
 	},
 	"4":{
 		"moduleNo": 4,
 		"title": "Quantified Logic: Syntax",
 		"symbol" :"⊢" ,
-		"description": "This chapter introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms." 
+		"description": "This chapter introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms."
 	},
 	"5":{
 		"moduleNo": 5,
 		"title": "Quantified Logic: Semantics",
 		"symbol" :"∀" ,
-		"description": "In Module 2 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings for all the non-logical parts of a sentence, in this case, the sentence letters. Because QL is a more complicated system than SL developing semantics for QL will be much more complicated, and there will be greater limitations for what we can do with these methods." 
+		"description": "In Module 2 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings for all the non-logical parts of a sentence, in this case, the sentence letters. Because QL is a more complicated system than SL developing semantics for QL will be much more complicated, and there will be greater limitations for what we can do with these methods."
 	},
 	"6":{
 		"moduleNo": 6,
 		"title": "Quantified Logic: Proofs",
 		"symbol" :"⊨" ,
-		"description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation."  
+		"description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation."
 	},
 	"7":{
 		"moduleNo": 7,
 		"title": "Predicate Logic: Identity",
 		"symbol" :"∃" ,
-		"description": "The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. For proofs involving identity, we add two rules of proof." 
+		"description": "The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. For proofs involving identity, we add two rules of proof."
 	},
 	"8":{
 		"moduleNo": 8,
