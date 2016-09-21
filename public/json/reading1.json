@@ -3,7 +3,7 @@
           "moduleNo": 1,
           "section": "I",
           "label": "reading_1",
-        "id": "Statement_Identification", 
+        "id": "Statement_Identification",
   		"method": "dropdown",
        "instruction": "Identify the following expressions. Choose either 'statement', 'question', 'command' or 'exclamation'",
           "questions":[
@@ -22,12 +22,11 @@
           "moduleNo": 1,
           "section": "II",
           "label": "reading_2",
-        "id": "fillinr2", 
+        "id": "fillinr2",
       "method": "fill",
        "instruction": "Complete the sentence below. These passages are taken directly from the text. Punctuation matters.",
           "questions":[
             ["Both explanations and arguments are parts of reasoning, because both feature statements that act as reasons for other statements. The difference is that explanations are not used to convince an audience of a ___.", "conclusion"],
-            ["A _____ a kind of nonargumentative passage where the speaker simply asserts what they believe without giving reasons", "simple statement of belief"],
             ["In an ______ passage , statements are organized around a central theme or topic statement. The topic statement might look like a conclusion, but the other statements are not meant to be evidence for the topic statement.", "expository"],
             ["An argument is valid if and only if it is impossible for the premise to be ____ and the conclusion false", "true"],
             ["An argument is valid if and only if the conclusion is true in ________ in which the premises are true", "every imaginable scenario"],
@@ -38,7 +37,7 @@
           "moduleNo": 1,
           "section": "III",
           "label": "reading_3",
-        "id": "logical_statuses", 
+        "id": "logical_statuses",
       "method": "dropdown",
        "instruction": "Identify the following expressions.",
           "questions":[
@@ -53,7 +52,7 @@
             ],
             "possibleAnswers": ["Contradiction", "Contingent", "Tautology"]
           }
-   
-   
+
+
 
 }
