@@ -1,30 +1,28 @@
-var makeAlert = require('./mods/alert.js')
-var randomize = require('./mods/randomize.js')
-var mathJax = require('./mods/mathjax.js')
-var makeCard = {};
-makeCard["fill"] = require('./mods/makefillcard.js')
-makeCard["dropdown"] = require('./mods/makedropdowncard.js')
-makeCard["game"] = require('./mods/makegamecard.js')
-var conceptsquiz = {
-  ConceptsQuiz: ConceptsQuiz,
-  checkConceptsAnswers:checkConceptsAnswers,
-  resetConceptsQuiz: resetConceptsQuiz
-}
-
-var instruction = function(){
-   makeAlert($('#conceptscard'), 'b', 'Define the terms given below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.',3);
-
-}
-
-// global var
-var moduleNo = $("title").attr('id');
-var conceptsReset = false;
-
 $(function() {
-  init("concepts");
-})
 
 
+
+  var makeAlert = require('./mods/alert.js')
+  var randomize = require('./mods/randomize.js')
+  var mathJax = require('./mods/mathjax.js')
+  var makeCard = {};
+  makeCard["fill"] = require('./mods/makefillcard.js')
+  makeCard["dropdown"] = require('./mods/makedropdowncard.js')
+  makeCard["game"] = require('./mods/makegamecard.js')
+  var conceptsquiz = {
+    ConceptsQuiz: ConceptsQuiz,
+    checkConceptsAnswers:checkConceptsAnswers,
+    resetConceptsQuiz: resetConceptsQuiz
+  }
+
+  var instruction = function(){
+     makeAlert($('#conceptscard'), 'b', 'Define the terms given below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.',3);
+
+  }
+
+  // global var
+  var moduleNo = $("title").attr('id');
+  var conceptsReset = false;
 
 var printConceptsInfo =   function(header, body, data) {
 
@@ -295,3 +293,5 @@ function init(type){
 
 
 }
+  init("concepts");
+})

@@ -1,31 +1,29 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var makeAlert = require('./mods/alert.js')
-var randomize = require('./mods/randomize.js')
-var mathJax = require('./mods/mathjax.js')
-var makeCard = {};
-makeCard["fill"] = require('./mods/makefillcard.js')
-makeCard["dropdown"] = require('./mods/makedropdowncard.js')
-makeCard["game"] = require('./mods/makegamecard.js')
-var conceptsquiz = {
-  ConceptsQuiz: ConceptsQuiz,
-  checkConceptsAnswers:checkConceptsAnswers,
-  resetConceptsQuiz: resetConceptsQuiz
-}
-
-var instruction = function(){
-   makeAlert($('#conceptscard'), 'b', 'Define the terms given below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.',3);
-
-}
-
-// global var
-var moduleNo = $("title").attr('id');
-var conceptsReset = false;
-
 $(function() {
-  init("concepts");
-})
 
 
+
+  var makeAlert = require('./mods/alert.js')
+  var randomize = require('./mods/randomize.js')
+  var mathJax = require('./mods/mathjax.js')
+  var makeCard = {};
+  makeCard["fill"] = require('./mods/makefillcard.js')
+  makeCard["dropdown"] = require('./mods/makedropdowncard.js')
+  makeCard["game"] = require('./mods/makegamecard.js')
+  var conceptsquiz = {
+    ConceptsQuiz: ConceptsQuiz,
+    checkConceptsAnswers:checkConceptsAnswers,
+    resetConceptsQuiz: resetConceptsQuiz
+  }
+
+  var instruction = function(){
+     makeAlert($('#conceptscard'), 'b', 'Define the terms given below. Once you are finished, press the submit button for grading. Make sure you are logged in to get credit. They are infinitely repeatable, and there is no penalty for failing.',3);
+
+  }
+
+  // global var
+  var moduleNo = $("title").attr('id');
+  var conceptsReset = false;
 
 var printConceptsInfo =   function(header, body, data) {
 
@@ -296,6 +294,8 @@ function init(type){
 
 
 }
+  init("concepts");
+})
 
 },{"./mods/alert.js":2,"./mods/makedropdowncard.js":3,"./mods/makefillcard.js":4,"./mods/makegamecard.js":5,"./mods/mathjax.js":6,"./mods/randomize.js":7}],2:[function(require,module,exports){
 var makeAlert = function(location, direction, text, code){ //direction: a= above, b=below
@@ -407,6 +407,7 @@ var mathJax = {
   document.getElementsByTagName("head")[0].appendChild(script);
   },
   reload: function(id){
+    id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
 
   }
@@ -415,6 +416,7 @@ var mathJax = {
 
 
 module.exports = mathJax;
+
 },{}],7:[function(require,module,exports){
 var randomize = {
   oneNumber: function(n){

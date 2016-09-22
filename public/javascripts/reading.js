@@ -108,6 +108,7 @@ var mathJax = {
   document.getElementsByTagName("head")[0].appendChild(script);
   },
   reload: function(id){
+    id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
 
   }
@@ -116,8 +117,12 @@ var mathJax = {
 
 
 module.exports = mathJax;
+
 },{}],6:[function(require,module,exports){
 var randomize = {
+  oneNumber: function(n){
+     return Math.floor(Math.random()* n) + 1
+  },
   drawOneRandomFromSet: function(set) {
         return  set[Math.floor(Math.random()* set.length)];
         },
@@ -155,37 +160,38 @@ var randomize = {
     	var output =[];
     	for (var i= 0; i<n; i++){
     		output.push(newSet.pop());
-    	} 
+    	}
     	return output;
     }
 
   }
 
 module.exports = randomize;
+
 },{}],7:[function(require,module,exports){
-var makeAlert = require('./mods/alert.js')
-var randomize = require('./mods/randomize.js')
-var mathJax = require('./mods/mathjax.js')
-var makeCard = {};
-makeCard["fill"] = require('./mods/makefillcard.js')
-makeCard["dropdown"] = require('./mods/makedropdowncard.js')
-makeCard["game"] = require('./mods/makegamecard.js')
-
-
-// global var
-var moduleNo = $("title").attr('id');
-var conceptsReset = false;
-
 $(function() {
-  init("reading");
-})
+
+  var makeAlert = require('./mods/alert.js')
+  var randomize = require('./mods/randomize.js')
+  var mathJax = require('./mods/mathjax.js')
+  var makeCard = {};
+  makeCard["fill"] = require('./mods/makefillcard.js')
+  makeCard["dropdown"] = require('./mods/makedropdowncard.js')
+  makeCard["game"] = require('./mods/makegamecard.js')
+
+  // global var
+  var moduleNo = $("title").attr('id');
+  var conceptsReset = false;
+
+
+
 
 function getReadingInfo(callback){
-        $.getJSON('../json/modulesinfo.json') 
+        $.getJSON('../json/modulesinfo.json')
         .done(function(data){
         callback(null, data);
      }).fail(function(){body.append('Failed to Load Data')});
-      
+
     }
 
 
@@ -248,14 +254,14 @@ function checkReadingAnswer(obj){
 
 
 
-      
+
 //used load json, embed the quiz initiation in the callback
     function loadJSON(type, callback){
-        $.getJSON('../json/' + type + moduleNo +'.json') 
+        $.getJSON('../json/' + type + moduleNo +'.json')
         .done(function(data){
         callback(null, data);
      }).fail(function(){console.log('Failed to Load Quiz')});
-      
+
 
 
     }
@@ -268,9 +274,9 @@ function monitorButton(problemObject){
                  });
         }else {
                   makeAlert(this, "a", "Incorrect answers are marked by &#10008;. Fix them and press this button to submit again.",4)
-                   
+
                 }
-        mathJax.reload(problemObject.id + "card"); 
+        mathJax.reload(problemObject.id + "card");
         })
 }
 
@@ -327,7 +333,7 @@ function truthTableInterpretation(type){
   var connectives = ['conditional','disjunction','conjunction','biconditional'];
   var connectivesP = [0.4,0.6,.8,1];
   var cardHTML = '<div class="card" id ="truthTableInterpretationCard"><h1 class="card-header display-4">Truth Table Interpretation</h1><div class="p-x-2 card-block" id = "truthTableInterpretationBlock"></div></div>';
- 
+
   $panel.append(cardHTML);
   var choose = randomize.chooceProbabilistically(connectives, connectivesP);
   function setupProblem(){
@@ -374,16 +380,16 @@ function init(type){
       loadJSON(type, function(err, data){
         instruction(type);
 
-        
+
 
         if(type =="reading"){
-  
+
            for (problem in data){
 
               $panel.append(makeCard[data[problem].method](data[problem]));
-              if (data[problem].method != 'game') monitorButton(data[problem]);  
+              if (data[problem].method != 'game') monitorButton(data[problem]);
 
-              mathJax.reload(data[problem].id + "card");       
+              mathJax.reload(data[problem].id + "card");
            }
         }
 
@@ -392,9 +398,12 @@ function init(type){
 
 
       })
-   
 
-   
+
+
 
 }
+  init("reading");
+})
+
 },{"./mods/alert.js":1,"./mods/makedropdowncard.js":2,"./mods/makefillcard.js":3,"./mods/makegamecard.js":4,"./mods/mathjax.js":5,"./mods/randomize.js":6}]},{},[7]);

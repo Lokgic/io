@@ -27,8 +27,30 @@ router.get('/roll', function(req, res, next){
 })
 
 
+router.post('/stat' , function(req,res,next){
+
+		var roster = ["zalbert9@gmail.com","spencer.flynn49@gmail.com","vl25@duke.edu","jpp20@duke.edu","dyk@duke.edu","rk189@duke.edu","oneroyalace@gmail.com","lz114@duke.edu","haley.fisher@duke.edu", "aha19@duke.edu","bkc19@duke.edu","mts28@duke.edu","ec161@duke.edu","bac29@duke.edu"];
+		User.find({}, function(err, users){
+			var scores =[];
+			users.forEach(function(user){
+				if (roster.indexOf(user.email)!= -1){
+						scores.push(user.record.length);
+				}
+			})
+			return res.send(scores);
+		})
+})
+
+router.get('/stat' , function(req,res,next){
+
+
+			return res.render('stat');
+
+})
+
 router.get('/adm', mid.requiresAdmin , function(req,res,next){
-	console.log(req.query.id == null);
+
+
 	User.find({}, function(err,users){
 		var userMap = {};
 
@@ -74,6 +96,7 @@ router.get('/adm', mid.requiresAdmin , function(req,res,next){
 				}
 
 				completed =  Math.trunc(100*completed/(modules.length * 6))
+
 				// console.log(modules);
 
 				 return res.render('adm',{userMap:userMap, profile:true, title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
@@ -139,6 +162,7 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 
 				completed =  Math.trunc(100*completed/(modules.length * 6))
 				// console.log(modules);
+								// console.log(completed);
 				var box;
 				if (result.box == undefined) box = false;
 					else box = result.box;

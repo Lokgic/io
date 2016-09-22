@@ -42,6 +42,24 @@ var UserSchema = new Schema({
 });
 
 
+
+function gatherData(email, callback){
+  User.findOne({email: email})
+    .exec(function (error, user){
+      return callback(user.record.length);
+      // console.log(scores);
+    })
+}
+
+UserSchema.statics.getOverall = function (email, callback){
+  User.findOne({email: email})
+    .exec(function (error, user){
+      return callback(user.record.length);
+      // console.log(scores);
+    })
+  }
+
+
 UserSchema.statics.record = function record(userId, moduleNo, label, callback){
     User.findById(userId)
     .exec(function (error, user){
