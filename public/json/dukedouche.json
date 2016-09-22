@@ -1,0 +1,7 @@
+{
+  "1":{
+    "setup": ["Springbreak is upon us and a large group of Duke students have decided to spend the week on a relatively unknown island called Logicland. Unfortunately, students from a rival school called Douche University found out about this. Determined to not let Duke students have the island all for themselves, a large group of Douche students decide to go there as well. Now, this usually peaceful island is full of college students looking for good times.", "There, Duke students are referred as dukes, and students from the other school are called douches. More important, dukes always tell the truth and douches always lie. Each student is either a duke, or a douche.","On the day of your arrival, you come across three students, whom we will call A, B, and C. You ask A: 'are you a duke or a douche?' Unfortunately, A has been partying too much and is slurring her words. You can't quite make out what she's saying, so you ask B: 'What did A say?' B replies: 'She said she's a douche.' At this point, C jumps in and says: 'Don't believe B; it's a lie!'"]
+
+  },
+  "question":[["From a scale between 1 to 10, how certain are you that C is a Duke? 0 would mean that C is definitely not a duke (which is the same as saying C is definitely a douche) and 10 means C is definitely a Duke",0],["From a scale between 1 to 10, how strongly do you think that we find out what A is for sure? 0 means 'we can't find out for sure without more information'. 1 means 'we can find out for sure.'",0]]
+}

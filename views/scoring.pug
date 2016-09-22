@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	.container-fluid.p-t-3.m-t-3
+		.row
+			.col-lg-8
+				.card
+					.card-header#title
+					.card-block#block
+			.col-lg-4
+				h1.display-4.text-xs-center.m-b-3 Leaderboard
+				.container.text-xs-center.m-t-3#leaderboard
+
+
+
+
+block extrafooter
+	script(src='../javascripts/scoring.js')
