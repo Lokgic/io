@@ -110,9 +110,6 @@ router.get('/adm', mid.requiresAdmin , function(req,res,next){
 
 })
 
-router.get('/presentation', function(req,res,next){
-	return res.render('presentation');
-})
 
 router.post('/reportTest',mid.requiresAdmin, function(req, res, next){
 
