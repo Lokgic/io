@@ -230,6 +230,12 @@ router.get('/',  function(req, res, next) {
   res.render('index', { title: 'Home' , sylList: sylList, modules: modulesList});
 });
 
+
+router.get('/present',  function(req, res, next) {
+  res.redirect('/presentation/index.html');
+});
+
+
 // REGISTER POST */
 
 router.post('/register', function(req, res, next){
