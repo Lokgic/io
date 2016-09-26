@@ -19,12 +19,12 @@ body
 					li.nav-item.display-4#wtf
 						if (part == "reading")
 							a.nav-link.active(href="../" + file + "/reading") Reading
-						else 
+						else
 							a.nav-link(href="../" + file + "/reading") Reading
 					li.nav-item.display-4#wtf
 						if (part == "concepts")
 							a.nav-link.active(href="../" + file + "/concepts") Concepts
-						else 
+						else
 							a.nav-link(href="../" + file + "/concepts") Concepts
 					li.nav-item.display-4#wtf
 						if (part =="quiz")
@@ -34,9 +34,9 @@ body
 					li.nav-item.dropdown.display-4#wtf
 						a.nav-link.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-haspopup='true', aria-expanded='false') Files
 							.dropdown-menu
-								a.dropdown-item(href='../pdf/text'+file +'.pdf') Text	
+								a.dropdown-item(href='../pdf/text'+file +'.pdf') Text
 					li.nav-item.pull-lg-right.hidden-md-down.display-4
-						a.nav-link(href="#", aria-controls="closepdf")#closepdf Toggle Text &rarr;								
+						a.nav-link(href="#", aria-controls="closepdf")#closepdf Toggle Text &rarr;
 				.tab-content
 					if (part=="reading")
 						.tab-pane.fade#reading.in.active(role="tabpanel")
@@ -53,7 +53,7 @@ body
 									progress.progress(aria-describedby="progresscap")
 									p.card-text#question
 									div#answers.list-group
-									button.btn.button-primary.m-t-1#next(type="button") Continue					
+									button.btn.button-primary.m-t-1#next(type="button") Continue
 						div#quizalertdiv
 					if (part =="concepts")
 						.tab-pane.fade#concepts.in.active(role="tabpanel")
@@ -61,7 +61,7 @@ body
 								h3.card-header#conceptsheader Concepts
 								div#conceptsalertdiv
 								.card-block#conceptsblock
-							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading 
+							button.btn.btn-primary.btn-lg.btn-block.m-t-1.m-b-1#conceptssubmit(type="button") Submit for Grading
 			.col-lg-6.hidden-md-down#right
 					script PDFObject.embed('../pdf/text#{file}.pdf', '#right');
 
@@ -72,13 +72,15 @@ footer
 	script(src ="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous")
 	script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous")
 	if (part == "quiz")
-		script(src='../javascripts/quiz.js')
+		if (file == "3")
+			script(src='../javascripts/imgquiz.js')
+		else
+			script(src='../javascripts/quiz.js')
 	if (part == "reading")
 		script(src='../javascripts/reading.js')
 	if (part == "concepts")
 		script(src='../javascripts/concepts.js')
-	//- script(src='../javascripts/info.js')
-	//- script(src='javascripts/tutorial.js')
+
 	script(src="../javascripts/closePDFButton.js")
 	script(src="../javascripts/pdfobject.js")
 	link(rel="stylesheet", type="text/css", href="../css/module.css")

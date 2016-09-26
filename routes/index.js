@@ -372,10 +372,7 @@ router.get('/3/reading', function(req, res, next){
 });
 
 router.get('/3/quiz', function(req, res, next){
-
-	var err = new Error('Section not yet available.');
-				err.status = 401;
-				return next(err);
+return res.render('modules', {title: 'Module Three', file: "3", part: "quiz"})
 });
 
 // router.get('/shh4', function(req, res, next){
