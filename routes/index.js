@@ -372,7 +372,11 @@ router.get('/3/reading', function(req, res, next){
 });
 
 router.get('/3/quiz', function(req, res, next){
-return res.render('modules', {title: 'Module Three', file: "3", part: "quiz"})
+	return res.render('modules', {title: 'Module Three', file: "3", part: "quiz"})
+});
+
+router.get('/3/logicland', function(req,res,next){
+	return res.render('scoring')
 });
 
 // router.get('/shh4', function(req, res, next){

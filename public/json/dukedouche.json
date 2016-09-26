@@ -1,7 +1,61 @@
 {
-  "1":{
-    "setup": ["Springbreak is upon us and a large group of Duke students have decided to spend the week on a relatively unknown island called Logicland. Unfortunately, students from a rival school called Douche University found out about this. Determined to not let Duke students have the island all for themselves, a large group of Douche students decide to go there as well. Now, this usually peaceful island is full of college students looking for good times.", "There, Duke students are referred as dukes, and students from the other school are called douches. More important, dukes always tell the truth and douches always lie. Each student is either a duke, or a douche.","On the day of your arrival, you come across three students, whom we will call A, B, and C. You ask A: 'are you a duke or a douche?' Unfortunately, A has been partying too much and is slurring her words. You can't quite make out what she's saying, so you ask B: 'What did A say?' B replies: 'She said she's a douche.' At this point, C jumps in and says: 'Don't believe B; it's a lie!'"]
+    "setup": {
+        "Background": "Springbreak is upon us and a large group of Duke students have decided to spend the week on a relatively unknown island called Logicland. Unfortunately, students from a rival school called Douche University found out about this. Determined to not let Duke students have the island all for themselves, a large group of Douche students decide to go there as well. Now, this usually peaceful island is full of college students looking for good times. Douche students like to pose as Duke students (can you really blame them?). Unfortunately, there is no way to tell them apart by appearances. However, the following fact is absolutely certain: Duke students always tell the truth and Douche students always lie. You also know that on the island everyone goes to one of the two schools, but not both. So if someone doesn't go to Duke, then they must go to Douche, and vice versa.",
+        "Goal": "Your job is to answer the questions about the people you meet on the island based on evidence presented to you, using .  For instance, many of the questions will ask you how strong do you believe that a certain person is a Duke student. If you are absolute sure that the student goes to Duke, then you should pick 10. On the other hand, if you are sure that the student goes to Douche, then you should pick 0.",
+        "Uncertain Answer": "You can use values in between to indicate the degrees of uncertainty. For instance, if you feel that you have no evidence at all to answer one way or another, you can pick 5, which says that you are 50-50. On the other hand, if you are not absolutely sure but you believe the person is more likely to be a Duke student, then you can pick something between 6 and 9, depending on how much evidence you think you have.",
+        "Score Calculation": "Your score depends on how good your guesses are. 1 and 0 get you the highest score, but also the highest penalty. Suppose you were asked if a student goes to Duke. You get no point if the person is in fact a Douche student but you answered absolutely that she goes to Duke, but you get maximum possible score if she does go to Duke. Anything in between get partial scores, and the closer you are the higher score you will get. For example, picking 9 would yield a score that is pretty close to 10 if the person goes to Duke. If, however, she goes to Douche, you won't get much, but you will get a small partial score. If the evidence does not suggest one way or another, 5 will get the highest score."
+    },
+    "problems": [
+      {
+            "setup": ["You come across three students, whom we will call A, B, and C. You ask A: 'Do you go to Duke or Douche?' Unfortunately, A has been partying too much and is slurring her words. You can't quite make out what she's saying, so you ask B: 'What did A say?' B replies: 'She said she's a Douche student.' At this point, C jumps in and says: 'Don't believe B; it's a lie!'"],
+            "question": [
+                ["Is A a Duke student?", 5],["Is C a Duke student?", 10]
+            ]
+        },
+         {
+            "setup": ["You come across three students, whom we will call A, B, and C. You ask A: 'Between you three (A, B, and C), how many of you go to Douche?' Unfortunately, A has been partying too much and is slurring her words. You can't quite make out what she's saying, so you ask B: 'What did A say?' B replies: 'She said exactly two of us go to Douche.' At this point, C jumps in and says: 'Don't believe B; it's a lie!'"],
+            "question": [
+                ["Is C is Duke student?", 10]
+            ]
+        },
+        {
+           "setup": ["You come across two students, A and B. A says: 'Both of us go to Douche University.'"],
+           "question": [
+               ["Is A is Duke student?", 0],["Is B a Duke student?", 10]
+           ]
+       },{
+          "setup": ["You come across two students, A and B. A says: 'At least one of us is a Douche student.'"],
+          "question": [
+              ["Is A is Duke student?", 10],["Is B a Duke student?", 0]
+          ]
+      },
+      {
+         "setup": ["You come across two students, A and B. A says: 'We go to the same university.'"],
+         "question": [
+             ["Is A is Duke student?", 5],["Is B a Duke student?", 10]
+         ]
+     },
+     {
+        "setup": ["You come across two students who are lazily lying in the sun. You ask each of them if the other student is a Duke student. They both give you a yes/no answer."],
+        "question": [
+            ["Are their answer necessarily the same?", 10]
+        ]
+    },
+    {
+       "setup": ["You come across just one student that you know you have met before; however, due to the inhumane amount of drugs you have been doing, all you can remember is that her name is either Marie or Mary. You ask her what her name is, and she answers: 'Mary'."],
+       "question": [
+           ["Is she a Douche Student?", 0]
+       ]
+   },
+   {
+      "setup": ["You came across three students, A, B and C. A says: 'Exactly one of us goes to Douche.' B says: 'Exactly two of us are Douche students.' C says: 'All of us go to Douche University'."],
+      "question": [
+          ["Is A a Duke Student?", 0],["Is B a Duke Student?", 10],["Is C a Duke Student?", 0]
+      ]
+  }
 
-  },
-  "question":[["From a scale between 1 to 10, how certain are you that C is a Duke? 0 would mean that C is definitely not a duke (which is the same as saying C is definitely a douche) and 10 means C is definitely a Duke",0],["From a scale between 1 to 10, how strongly do you think that we find out what A is for sure? 0 means 'we can't find out for sure without more information'. 1 means 'we can find out for sure.'",0]]
+      ]
+
+
+
 }

@@ -1,3 +1,117 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var makeAlert = function(location, direction, text, code){ //direction: a= above, b=below
+  /////This takes care of the HTML
+  var tag;
+  if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
+          $(location).prev().remove();
+        }
+      if (direction == "b" && $(location).next().hasClass("alert")){
+          $(location).next().remove();
+        }
+  }
+  else if (code == 1){tag = "alert-success";}
+  else if (code == 2){tag = "alert-info";}
+  else if (code == 3){tag = "alert-warning"}
+  else{tag = "alert-danger"}
+  var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
+
+  if (direction == "a"){
+    if ($(location).prev().hasClass("alert")) {
+      $(location).prev().remove();
+    }
+    $(location).before(html);
+    }
+
+  if (direction == "b"){
+    if ($(location).next().hasClass("alert")) {
+      $(location).next().remove();
+    }
+    $(location).after(html);
+    }
+
+  }
+
+ module.exports = makeAlert;
+},{}],2:[function(require,module,exports){
+var makeCard = function makeCard(id) {
+    html = '<div class="card" id = "card'+id + '"><div class="card-header" id = header' + id + '></div>'
+    html += '<div class="card-block" id = "block' + id + '"></div>'
+    html += '<div class= "card-footer" id = footer' + id + '></div>'
+    html += '</div>'
+
+    return html;
+}
+
+
+var makeModal = function makeModal(id) {
+
+    var button = '<button class="btn btn-primary" data-toggle="modal" data-target=".modalcontainer' + id + '" id = modalbutton' + id + '>Modal</button>';
+
+
+
+    var content = '<div class="modal fade modalcontainer' + id + '" tabindex="-1" role="dialog" aria-labelledby="modalheader' + id + '" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content" id = "modalcontent' + id + '"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="modaltitle' + id + '">Modal title</h4></div><div class ="modal-body" id = "modalmain' + id + '"</div></div></div></div>';
+    return [button, content];
+
+}
+
+
+module.exports = {
+    makeCard: makeCard,
+    makeModal: makeModal
+};
+
+},{}],3:[function(require,module,exports){
+var randomize = {
+  oneNumber: function(n){
+     return Math.floor(Math.random()* n) + 1
+  },
+  drawOneRandomFromSet: function(set) {
+        return  set[Math.floor(Math.random()* set.length)];
+        },
+
+  shuffle: function(arr) {
+    var currentI = arr.length, tempValue, randomI;
+
+    while (0!== currentI){
+      randomI = Math.floor(Math.random() * currentI);
+          currentI -= 1;
+
+          tempValue = arr[currentI];
+          arr[currentI] = arr[randomI];
+          arr[randomI] = tempValue;
+        }
+
+        return arr;
+      },
+    chooceProbabilistically: function(set, probability){
+
+    var n = Math.random();
+    var low = 0;
+    var outcome;
+    for (var i = 0; i<set.length;i++){
+      if (low<n&&n<probability[i]){
+        low = probability[i];
+        outcome = set[i];
+      }
+    }
+      return outcome;
+    },
+
+    sample: function(set, n){
+    	var newSet = randomize.shuffle(set);
+    	var output =[];
+    	for (var i= 0; i<n; i++){
+    		output.push(newSet.pop());
+    	}
+    	return output;
+    }
+
+  }
+
+module.exports = randomize;
+
+},{}],4:[function(require,module,exports){
 $(function() {
 
     var makeAlert = require('./mods/alert.js')
@@ -174,3 +288,5 @@ $(function() {
 
 
 });
+
+},{"./mods/alert.js":1,"./mods/bootstrap.js":2,"./mods/randomize.js":3}]},{},[4]);
