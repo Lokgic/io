@@ -41,7 +41,7 @@ $(function() {
 
 	function ask(q){
 		//prepare Q nd A
-   		var question = '<p class = "lead">Prove the following, and then evaluate your derivation by comparing it to the model answer. DO NOT use derived rules or rules of replament unless the problem is marked with a "*". <button class="btn btn-sm btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">See Model Answer</button></p>';
+   		var question = '<p class = "lead">Prove the following, and then evaluate your derivation by comparing it to the model answer. DO NOT use derived rules or rules of replacement unless the problem is marked with a "*". <button class="btn btn-sm btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">See Model Answer</button></p>';
    		//Detect special setup
 
    		//Print Q and A
@@ -70,7 +70,7 @@ $(function() {
 			    	updateProgress(answered, perfectScore, score);
 
 		    } else{
-		    	makeAlert($main, "a","Nice job. Remember to check with Lok if you are not sure",1);
+		    	makeAlert($main, "a","Nice job. Remember to check with Lok if you are not sure about your answer!",1);
 			    	$main.addClass("card-success");
 			    	$next.attr("disabled", false);
 			    	score += 1;
