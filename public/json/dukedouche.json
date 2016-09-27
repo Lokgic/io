@@ -1,9 +1,10 @@
 {
     "setup": {
-        "Background": "Springbreak is upon us and a large group of Duke students have decided to spend the week on a relatively unknown island called Logicland. Unfortunately, students from a rival school called Douche University found out about this. Determined to not let Duke students have the island all for themselves, a large group of Douche students decide to go there as well. Now, this usually peaceful island is full of college students looking for good times. Douche students like to pose as Duke students (can you really blame them?). Unfortunately, there is no way to tell them apart by appearances. However, the following fact is absolutely certain: Duke students always tell the truth and Douche students always lie. You also know that on the island everyone goes to one of the two schools, but not both. So if someone doesn't go to Duke, then they must go to Douche, and vice versa.",
-        "Goal": "Your job is to answer the questions about the people you meet on the island based on evidence presented to you, using .  For instance, many of the questions will ask you how strong do you believe that a certain person is a Duke student. If you are absolute sure that the student goes to Duke, then you should pick 10. On the other hand, if you are sure that the student goes to Douche, then you should pick 0.",
+        "Background": "Springbreak is upon us and a large group of Duke students have decided to spend the week on a relatively unknown island called Logicland. Unfortunately, students from a rival school called Douche University found out about this. Determined to not let Duke students have the island all for themselves, a large group of Douche students decide to go there as well. Now, this usually peaceful island is full of college students looking for good times. Douche students like to pose as Duke students (can you really blame them?). Unfortunately, there is no way to tell them apart by appearances. However, the following fact is absolutely certain: Duke students always tell the truth and Douche students always lie (that is, only states falsehood). You also know that on the island everyone goes to one of the two schools, but not both. So if someone doesn't go to Duke, then they must go to Douche, and vice versa.",
+        "Goal": "Your job is to answer the questions about the people you meet on the island based on evidence presented to you, using .  For instance, many of the questions will ask you how strong do you believe that a certain person is a Duke student. If you are absolutely sure that the student goes to Duke, then you should pick 10. On the other hand, if you are sure that the student goes to Douche, then you should pick 0.",
         "Uncertain Answer": "You can use values in between to indicate the degrees of uncertainty. For instance, if you feel that you have no evidence at all to answer one way or another, you can pick 5, which says that you are 50-50. On the other hand, if you are not absolutely sure but you believe the person is more likely to be a Duke student, then you can pick something between 6 and 9, depending on how much evidence you think you have.",
-        "Score Calculation": "Your score depends on how good your guesses are. 1 and 0 get you the highest score, but also the highest penalty. Suppose you were asked if a student goes to Duke. You get no point if the person is in fact a Douche student but you answered absolutely that she goes to Duke, but you get maximum possible score if she does go to Duke. Anything in between get partial scores, and the closer you are the higher score you will get. For example, picking 9 would yield a score that is pretty close to 10 if the person goes to Duke. If, however, she goes to Douche, you won't get much, but you will get a small partial score. If the evidence does not suggest one way or another, 5 will get the highest score."
+        "Score Calculation": "Your score depends on how good your guesses are. 10 and 0 get you the maximum possible score, but also the highest penalty (so riskier). Suppose you were asked if a student goes to Duke. You will be penalized if the person is in fact a Douche student but you answered absolutely(0) that she goes to Duke, but you get maximum possible score if she does go to Duke. Anything in between get partial scores, and the closer you are the higher score you will get. For example, picking 9 would yield a score that is pretty close to 10 if the person goes to Duke. If, however, she goes to Douche, you won't get much, but you will get a small partial score. If the evidence does not suggest one way or another, 5 will get the highest score.",
+        "Passing": "You need a score of 100 or above to pass this assignment. The highest possible score is 150."
     },
     "problems": [
       {
@@ -15,7 +16,7 @@
          {
             "setup": ["You come across three students, whom we will call A, B, and C. You ask A: 'Between you three (A, B, and C), how many of you go to Douche?' Unfortunately, A has been partying too much and is slurring her words. You can't quite make out what she's saying, so you ask B: 'What did A say?' B replies: 'She said exactly two of us go to Douche.' At this point, C jumps in and says: 'Don't believe B; it's a lie!'"],
             "question": [
-                ["Is C is Duke student?", 10]
+                ["Is B a Duke student?",0],["Is C a Duke student?", 10]
             ]
         },
         {
@@ -38,7 +39,7 @@
      {
         "setup": ["You come across two students who are lazily lying in the sun. You ask each of them if the other student is a Duke student. They both give you a yes/no answer."],
         "question": [
-            ["Are their answer necessarily the same?", 10]
+            ["Will they give the same answer?", 10]
         ]
     },
     {

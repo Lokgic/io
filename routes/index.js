@@ -454,6 +454,19 @@ router.post('/wason', function(req, res, next){
 		return res.send(response);}
 });
 
+router.post('/logicland', function(req, res, next){
+
+
+	if (req.session.userId){
+		User.getName(req.session.userId, function (err, name){
+
+			Leader.update(name, "logicland", req.body.score, function(err, response){
+				return res.send(response);
+				})
+			})
+	}else{
+		return res.send(response);}
+});
 
 
 router.post('/ranking', function(req, res, next){

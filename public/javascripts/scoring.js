@@ -44,9 +44,9 @@ var makeCard = function makeCard(id) {
 }
 
 
-var makeModal = function makeModal(id) {
+var makeModal = function makeModal(id, button) {
 
-    var button = '<button class="btn btn-primary" data-toggle="modal" data-target=".modalcontainer' + id + '" id = modalbutton' + id + '>Modal</button>';
+    var button = '<button class="btn btn-primary" data-toggle="modal" data-target=".modalcontainer' + id + '" id = modalbutton' + id + '>'+ button + '</button>';
 
 
 
@@ -62,6 +62,36 @@ module.exports = {
 };
 
 },{}],3:[function(require,module,exports){
+var draw = function drawHTML(game, location){
+		ping(game, function(data){
+			var html = '<table class="table table-hover"><thead class="thead-inverse"><tr><th>#</th><th>Name</th><th>Score</th></tr></thead><tbody>';
+			var k = 1;
+			for (object in data){
+				html += '<tr><th score="row"> ' + k + '</th>';
+				html += '<td class = "lead">' + data[object].name +'</td>';
+				html += '<td class = "lead">' + data[object].score +'</td>'
+				
+				html += '</tr>'
+				k++;
+			}
+			html += '</tbody></table>'
+			location.html(html);
+		})
+	}
+
+var ping = function ping(game, callback){
+		jQuery.post("../ranking", {game:game}, function (res){
+			return callback(res);
+		})
+	}
+
+
+var all = {
+	draw: draw,
+	ping: ping
+}
+module.exports = all;
+},{}],4:[function(require,module,exports){
 var randomize = {
   oneNumber: function(n){
      return Math.floor(Math.random()* n) + 1
@@ -111,11 +141,12 @@ var randomize = {
 
 module.exports = randomize;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 $(function() {
-
+    var leaderboard = require('./mods/leaderboard.js')
     var makeAlert = require('./mods/alert.js')
     var randomize = require('./mods/randomize.js')
+    $leaderboard = $('#leaderboard');
     var bootstrap = require('./mods/bootstrap.js')
     var $left = $('#left');
     var currentQuestion;
@@ -126,6 +157,7 @@ $(function() {
     var $submit = $('#submit');
     var score = 0;
     var finished = false;
+    var passing = 100;
     $.getJSON('../json/dukedouche.json')
         .done(function(data) {
             doStuff(data);
@@ -134,11 +166,11 @@ $(function() {
         });
 
     function doStuff(data) {
-
+        leaderboard.draw("logicland", $leaderboard);
         var id = "instruction";
-        var modal = bootstrap.makeModal(id);
+        var modal = bootstrap.makeModal(id, "?");
 
-        $left.append(modal[0]);;
+
         $('body').append(modal[1]);
         $('#modaltitle' + id).text("Logicland: Instruction");
         for (section in data.setup) {
@@ -177,6 +209,7 @@ $(function() {
             }
             $('#footerdd').append(buttonHTML);
             $('#footerdd').append(nextHTML);
+            $('#footerdd').append(modal[0]);;
 
 
             activateSubmit(q);
@@ -231,9 +264,28 @@ $(function() {
             }
 
             function ending(){
+              score = Math.round(score*10);
               $('#headerdd').text("Result");
-              $('#blockdd').html('<p class = "lead">Your score is ' + (score*10) + '. </p>');
-              makeAlert('#carddd',"b", "Click next to restart",3);
+              $('#blockdd').html('<p class = "lead">Your score is ' + score + '. </p>');
+              var output = "";
+              if (score > 50){
+      				jQuery.post("../logicland", {score:score}, function(res){
+      				    	leaderboard.draw("logicland", $leaderboard);
+      				      });
+      				}
+              leaderboard.draw("logicland", $leaderboard);
+      				if (score >= passing){
+      				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 3}, function(res){
+      				       output += "You passed! "+res;
+      				       makeAlert('#carddd', "b",output, 1);
+      				      });
+        					}else{
+                    output += "Unfortunately, you need " +passing + " to pass this assignment. Press Next to restart."
+        					 makeAlert('#carddd', "b",output, 4);
+        					  leaderboard.draw("logicland", $leaderboard);
+
+        					}
+
             }
 
 
@@ -254,7 +306,7 @@ $(function() {
         }
         else if (ans == 0.5){
           if (choice == 0.5) return 1;
-          else return 0;
+          else return -0.05;
         }
           return l-r;
         }
@@ -264,14 +316,13 @@ $(function() {
     function makeDropdown(id, q) {
 
 
-        html = '<div class="form-group" id = form+'
-        id + ' >';
+        html = '<div class="form-group" id = form'+   id + ' >';
         html += '<label for="' + id + '">' + q + '</label>';
         html += '<select class="form-control" id="' + id + '">'
         for (var i = 0; i < 11; i++) {
-          if (i == 0) var k = i + " Certainly not"
-          else if (i == 10 ) var k = i + " Certainly"
-          else if (i == 5 ) var k = i + " No evidence to suggest one way or another"
+          if (i == 0) var k = i + " Certainly not";
+          else if (i == 10 ) var k = i + " Certainly";
+          else if (i == 5 ) var k = i + " No evidence to suggest one way or another";
           else k = i;
           html += '<option value = "' + i + '">' + k + '</option>';
         }
@@ -289,4 +340,4 @@ $(function() {
 
 });
 
-},{"./mods/alert.js":1,"./mods/bootstrap.js":2,"./mods/randomize.js":3}]},{},[4]);
+},{"./mods/alert.js":1,"./mods/bootstrap.js":2,"./mods/leaderboard.js":3,"./mods/randomize.js":4}]},{},[5]);

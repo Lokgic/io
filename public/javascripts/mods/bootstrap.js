@@ -8,9 +8,9 @@ var makeCard = function makeCard(id) {
 }
 
 
-var makeModal = function makeModal(id) {
+var makeModal = function makeModal(id, button) {
 
-    var button = '<button class="btn btn-primary" data-toggle="modal" data-target=".modalcontainer' + id + '" id = modalbutton' + id + '>Modal</button>';
+    var button = '<button class="btn btn-primary" data-toggle="modal" data-target=".modalcontainer' + id + '" id = modalbutton' + id + '>'+ button + '</button>';
 
 
 
