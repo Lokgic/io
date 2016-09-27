@@ -27,7 +27,7 @@
             ["\\(\\{A \\to B, \\neg B \\} \\vdash \\neg A\\)", "Derived"],
             ["Biconditional Elimination","Basic"],
             ["Conditional Introduction", "Hypothetical"],
-            ["Biconditional Introduction","Basic"]],
+            ["Biconditional Introduction","Hypothetical"]],
             "possibleAnswers": ["Basic", "Derived", "Replacement", "Hypothetical"]
           },
           "3" : { "title": "SL Rule Applications",
