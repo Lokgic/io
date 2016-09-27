@@ -30,7 +30,7 @@
             ["Biconditional Introduction","Basic"]],
             "possibleAnswers": ["Basic", "Derived", "Replacement", "Hypothetical"]
           },
-          "3" : { "title": "SL Rulee Applications",
+          "3" : { "title": "SL Rule Applications",
           "mathjax": true,
           "moduleNo": 3,
           "section": "III",
