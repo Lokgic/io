@@ -16,7 +16,7 @@ var LeaderSchema = new Schema({
       required: true,
       trim: true,
     },
-    
+
   record: [RecordSchema]
 });
 
@@ -69,34 +69,11 @@ LeaderSchema.statics.update  = function update(name, game, score, callback){
 	        	leaderboard.save();
 	        	return callback(null, "added because less than 10");
 		 		}else{
-		 			// scores = [];
-		 			// for (var i = 0; i <boardLength;i++ ){
-		 			// 	// console.log(leaderboard.record[i].score)
-		 			// 	scores.push(leaderboard.record[i].score);
-		 			// }
-		 			// scores.sort();
-		 			// console.log(scores);
+
 		 				var min = leaderboard.record[leaderboard.record.length - 1].score;
 		 				console.log(min)
 		 			if (min < score){
-		 				// for (unit in leaderboard.record){
-		 				// 	if(leaderboard.record[unit].score === min){
-		 				// 		leaderboard.record.splice(unit,1);
-		 				// 		leaderboard.record.push(rec);
-		 				// 		leaderboard.record.sort(function(a,b){
-		 				// 			if (a.score > b.score){
-							// 			return -1;
-							// 		}else if (b.score>a.score){
-							// 			return 1;
-							// 		} else{
-							// 			return 0;
-							// 		}
-							// 			 						}
-		 				// 			)
-					  //       	leaderboard.save();
-					  //       	return callback(null, "added because higher");
-		 				// 	}
-		 				// }
+		 			
 		 				leaderboard.record.pop();
 		 				leaderboard.record.push(rec);
 		 				leaderboard.record.sort(function(a,b){
@@ -115,12 +92,12 @@ LeaderSchema.statics.update  = function update(name, game, score, callback){
 		 			return callback(null, "score not high enough")
 		 		}
 		 		}
-		 	
+
 
 	 	}
-	 	
 
-	 	
+
+
 	 })
 }
 
