@@ -8,11 +8,10 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
 var app = express();
-var config = require('./config/config.js')
 //mongodb connection
 
 
-mongoose.connect(config.mongo.url);
+mongoose.connect(process.env.mlab);
 var db = mongoose.connection;
 
 //mongo error
@@ -96,7 +95,7 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(process.env.PORT || 3000, function () {
-
+  console.log(process.env.PORT);
 });
 
 module.exports = app;
