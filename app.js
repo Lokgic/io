@@ -12,7 +12,7 @@ var config = require('./config/config.js')
 //mongodb connection
 
 
-mongoose.connect("config.mongo.url");
+mongoose.connect(config.mongo.url);
 var db = mongoose.connection;
 
 //mongo error
