@@ -8,12 +8,11 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
 var app = express();
-
-
+var config = require('./config/config.js')
 //mongodb connection
 
 
-mongoose.connect("mongodb://lokgic:WAuS8Pi4X37y4@ds021986-a0.mlab.com:21986,ds021986-a1.mlab.com:21986/lokgicio?replicaSet=rs-ds021986")
+mongoose.connect(config.mongo.url);
 var db = mongoose.connection;
 
 //mongo error
@@ -92,12 +91,12 @@ app.use(function(err, req, res, next) {
 // listen on port 3000
 
 // app.listen(3000, function () {
-  
+
 // });
 
 
 app.listen(process.env.PORT || 3000, function () {
-  
+
 });
 
 module.exports = app;
