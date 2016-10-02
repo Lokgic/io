@@ -12,7 +12,7 @@ var config = require('./config/config.js')
 //mongodb connection
 
 
-mongoose.connect("mongodb://lokgicio:ZqA7yQ3kZyUiV@ds021986-a0.mlab.com:21986,ds021986-a1.mlab.com:21986/lokgicio?replicaSet=rs-ds021986");
+mongoose.connect("config.mongo.url");
 var db = mongoose.connection;
 
 //mongo error
