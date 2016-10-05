@@ -8,6 +8,26 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
 var app = express();
+// var sql = require('./sql')
+
+//mysql connection
+
+// var cred = {
+//   host     :  process.env.mysqlhost,
+//   user     : process.env.mysqluser,
+//   password : process.env.mysqlpassword,
+//   database : process.env.mysqldatabase
+// };
+
+// sql.connect(cred, function(err) {
+//   if (err) {
+//     console.log('Unable to connect to MySQL.')
+//     process.exit(1)
+//   } else {
+//     console.log('connected');
+//   }
+// })
+
 //mongodb connection
 
 

@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 var Leader = require('../models/leader');
 var mid = require('../middleware');
-
+// var mysql  = require('mysql');
 
 //for rendering index
 var syllabus = require('../public/json/syllabus.json');
@@ -283,7 +283,7 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 // MODULE ROUTES/
 // 1//
 
-router.get('/shh1', function(req, res, next){
+router.get('/shh1',  mid.requiresAdmin,function(req, res, next){
 	return res.render('solution', {title: 'Module One', file: "1"})
 });
 
@@ -312,7 +312,7 @@ router.get('/1/reading', function(req, res, next){
 // 2//
 
 
-router.get('/shh2', function(req, res, next){
+router.get('/shh2', mid.requiresAdmin, function(req, res, next){
 	return res.render('solution', {title: 'Module Two', file: "2"})
 });
 
@@ -354,7 +354,7 @@ router.get('/2/reading', function(req, res, next){
 // 3
 
 
-router.get('/shh3', function(req, res, next){
+router.get('/shh3', mid.requiresAdmin, function(req, res, next){
 		return res.render('solution', {title: 'Module Three', file: "3"})
 });
 
