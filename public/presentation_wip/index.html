@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Presentation on Lokgic.io</title>
+	<meta name="author" content="Lok" />
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="examples.css" /> -->
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 5em;
+		font-family: arial,helvetica;
+		color: #444;
+		margin:0;
+		padding:0;
+	}
+
+	h2{
+		font-size: 3em;
+		font-family: arial,helvetica;
+		color: #444;
+		margin:0;
+		padding:0;
+	}
+	.intro p{
+		color: #444;
+	}
+
+
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+
+
+	/* Defining each section background and styles
+	* --------------------------------------- */
+	#section0{
+		background: -webkit-gradient(linear, top left, bottom left, from(#4bbfc3), to(#7baabe));
+		background: -webkit-linear-gradient(#4BBFC3, #7BAABE);
+		background: linear-gradient(#4BBFC3,#7BAABE);
+	}
+
+	#section2{
+		/*background: -webkit-gradient(linear, top left, bottom left, from(#969ac6), to(#636F8F));
+		background: -webkit-linear-gradient(#969AC6, #636F8F);
+		background: linear-gradient(#969AC6,#636F8F);*/
+	}
+
+
+
+ 	/*Adding background for the slides
+	* --------------------------------------- */
+/*	#slide3, #slide5{
+		background: -webkit-gradient(linear, top left, bottom left, from(#7baabe), to(#969ac6));
+		background: -webkit-linear-gradient(#7BAABE, #969AC6);
+		background: linear-gradient(#7BAABE,#969AC6);
+	}
+	#slide1{
+		background: -webkit-gradient(linear, top left, bottom left, from(#92a1ca), to(#76c2bd));
+		background: -webkit-linear-gradient(#92a1ca, #76c2bd);
+		background: linear-gradient(#92a1ca,#76c2bd);
+	}*/
+	a {
+		text-decoration: none;
+		color: grey;
+	}
+	#graphs{
+		display: inline;
+	}
+	#slide4 img{
+		width: 40%;
+	}
+	#slide2, #slide4{
+		background-color: white;
+	}
+
+	/* Bottom menu
+	* --------------------------------------- */
+	#infoMenu li a {
+		color: #fff;
+	}
+	#menu li {
+		display:inline-block;
+		margin: 10px;
+		color: #000;
+		background:#fff;
+		background: rgba(255,255,255, 0.5);
+		-webkit-border-radius: 10px;
+	            border-radius: 10px;
+	}
+	#menu li.active{
+		background:#666;
+		background: rgba(0,0,0, 0.5);
+		color: #fff;
+	}
+	#menu li a{
+		text-decoration:none;
+		color: #000;
+	}
+	#menu li.active a:hover{
+		color: #000;
+	}
+	#menu li:hover{
+		background: rgba(255,255,255, 0.8);
+	}
+	#menu li a,
+	#menu li.active a{
+		padding: 9px 18px;
+		display:block;
+	}
+	#menu li.active a{
+		color: #fff;
+	}
+	#menu{
+		position:fixed;
+		top:0;
+		left:0;
+		height: 40px;
+		z-index: 70;
+		width: 100%;
+		padding: 0;
+		margin:0;
+	}
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="vendors/scrolloverflow.js"></script>
+
+	<script type="text/javascript" src="jquery.fullPage.js"></script>
+	<!-- <script type="text/javascript" src="examples.js"></script> -->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+					sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
+					anchors: ['intro','problem', 'keller', 'behavioral', 'future'],
+ 				menu: '#menu',
+			});
+		});
+
+
+
+	</script>
+
+</head>
+<body>
+
+	<ul id="menu">
+		<li data-menuanchor="intro"><a href="#intro">Introduction</a></li>
+		<li data-menuanchor="problem"><a href="#problem">Problem</a></li>
+		<li data-menuanchor="keller"><a href="#keller">Behaviorism</a></li>
+		<li data-menuanchor="behavioral"><a href="#behavioral">Decision Theory</a></li>
+		<li data-menuanchor="future"><a href="#future">Bayesianism</a></li>
+	</ul>
+
+
+
+<div id="fullpage">
+	<div class="section" id="section0">
+		<h2>WIP Fall 2016</h2>
+		<h1>Teaching Logic as an Empiricist</h1>
+		<p>"...empiricism is a celebration of a certain kind of freedom from oneself: one's own theoretical convictions, however much valued, must be always ready for a suspension...",</p><p> Bas van Fraassen, "Against Naturalized Epistemology"</p>
+
+	</div>
+	<div class="section" id="section1">
+	    <div class="slide" id="slide1"><h1>About Philosophy 150</h1></div>
+	    <div class="slide" id="slide2">
+					<h2>General Introduction to Logic</h2>
+					<h2>Freshmen Level Course</h2>
+					<h2>Requirement for Philosophy Majors</h2>
+					<h2>Not Required for Other Major</h2>
+					<h2>Not Crucial for General Education (CZ)</h2>
+					<h2>No Prerequisite</h2>
+				</div>
+			<div class="slide" id="slide3">
+				<h1>Who Takes Phil 150?</h1>
+			</div>
+			<div class="slide" id="slide4">
+
+				<img src="pie.png" alt="pie" />
+				<img src="major.png" alt="pie" />
+
+			</div>
+
+			<div class="slide" id="slide5">
+
+			<h1>Middle Ground?</h1><h2>Problem: the Snowball Effect!</h2>
+
+			</div>
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<div class="slide" id="slide1">
+				<h1>Psychological Behaviorism in Education</h1>
+				<h2>Fred S Keller (1899-1996)</h2>
+		</div>
+		<div class="slide" id="slide2">
+				<h2><u>The Keller Method</u></h2>
+				<h2>Learning as Operant Conditioning</h2>
+				<h2>Individual Pacing</h2>
+				<h2>Subject Divided Logically</h2>
+				<h2>Mastery Before Progression</h2>
+				<h2>Teacher as Reinforcer</h2>
+			</div>
+		<div class="slide" id="slide3">
+			<h1>Implementation 1</h1>
+			<h2><a href="http://www.lokgic.io/#modules">Conditionally Self-Paced Course Structure</a></h2>
+	</div>
+	<div class="slide" id="slide4">
+			<h1>Implementation 2</h1>
+			<h2><a href="http://www.lokgic.io/grading">Reinforcement of Active Learning Through Autonomy</a></h2>
+	</div>
+	<div class="slide" id="slide5">
+			<h1>Implementation 3 </h1>
+			<h2><a href="http://www.lokgic.io/2/">Mastery Based Progression</a></h2>
+	</div>
+		</div>
+	</div>
+
+
+	<div class="section" id="section3">
+		<div class="intro">
+			<div class="slide" id="slide1">
+				<h1>Behavioral Decision Theory</h1>
+				<h2>The Architecture of Motivation</h2>
+		</div>
+		<div class="slide" id="slide2">
+			<h1>Motivator 1: Cognitive Fluency</h1>
+			<p>Logic is hard enough. Learning it should be easy.</p>
+			<h2><a href="http://www.lokgic.io/2">An Integrated Open-Source Text</a></h2>
+	</div>
+	<div class="slide" id="slide3">
+			<h1>Motivator 2: Social Interaction</h1>
+			<h2><a href="http://www.lokgic.io/2/wason">Persistent Activities</a></h2>
+	</div>
+	<div class="slide" id="slide4">
+			<h1>Motivator 3: Data </h1>
+			<h2><a href="http://www.lokgic.io/profile/">Data as Motivator</a></h2>
+	</div>
+		</div>
+	</div>
+
+	<div class="section" id="section4">
+		<div class="intro">
+			<div class="slide" id="slide1">
+				<h1>Bayesianism</h1>
+				<h2>Enter the Probabilistic Dragon</h2>
+		</div>
+		<div class="slide" id="slide2">
+			<h1>Idea 1</h1>
+			<h2>Probabilistic Scoring Rules</h2>
+			<h2><a href="http://www.lokgic.io/3/logicland"> as an Alternative to Traditional Multiple Choice Grading</a></h2>
+	</div>
+	<div class="slide" id="slide3">
+			<h1>Idea 2 (In Progress)</h1>
+			<h2>Adaptive Quizzing Using Bayesian Statistics</h2>
+			<h3>Intuition: You Update Your Belief About a Student's Performance Using Test Result as Data</h3>
+	</div>
+	<div class="slide" id="slide4">
+			<h1>Idea 3</h1>
+			<h2>Calibration as a Tool Against Fluency illusions</h1>
+			<h3>Fluency illusions: Fluency with the Tool vs Mastery of its Content</h3>
+			<h3>Calibration: Knowing What You (Don't) Know</h3>
+	</div>
+	<div class="slide" id="slide5">
+			<h1>Your Thoughts?</h1>
+	</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+</body>
+</html>
