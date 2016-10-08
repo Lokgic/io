@@ -1,0 +1,24 @@
+body {
+  margin: 20%;
+}
+
+
+
+.ass {
+  padding: 8px;
+  border-bottom: 1px solid black;
+}
+
+.line {
+  padding: 8px;
+}
+
+.scope {
+  border-left: 1px solid black;
+
+  margin-left: 15px;
+}
+
+.just{
+  float: right;
+}
