@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+$(function () {
+
+  var current = "line1";
+  var pos = 0;
+	var seq = ["line1","line2","line6"];
+  for (var i = 2;i<11;i++){
+    $('#line'+i).addClass('invisible');
+  }
+  //  for (var i = 2;i<5;i++){
+  //   $('#scope'+i).addClass('invisible');
+  // }
+  // $('[data-toggle="tooltip"]').tooltip()
+  // $('[data-toggle="popover"]').popover('hide');
+  $('#'+current).popover('show');
+  // $('#2').popover('show');
+  $('#forward').on('click', function(){
+  	$('#'+ current).popover('hide');
+  	pos++;
+    current = seq[pos];
+ 	$('#'+current).removeClass('invisible');
+    $('#'+current).popover('show');
+  })
+})
+
+
+</script>
+</head>
+
+
+
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary"><</button>
+  <button id = "forward" type="button" class="btn btn-secondary">></button>
+
+
+</div>
+
+<div id = 'scope1' class = "scope">
+  <div id = "line1" class = "ass"data-toggle="popover" data-placement="right" title="Tooltip on top" data-content = "edsndadnasjdnjsd">  1. \((A \to B) \to \neg B\)<div class = "just" >Given</div></div>
+  <div  id = 'scope2' class = "scope">
+    <div id = "line2" class = "ass  " data-toggle="popover" data-placement="right" title="Tooltip on top" data-content = "edsndadnasjdnjsd">  2. \( B\)<div class = "just">Assumption</div></div>
+    <div  id = 'scope3' class = "scope">
+      <div id = "line3"class = "ass " data-toggle="popover" data-placement="right" title="Tooltip on top" data-content = "edsndadnasjdnjsd">  3. \(A \to B\)<div class = "just">Assumption</div></div>
+      <div id = "line4"class = "line">4. \(\neg B\)<div class = "just">\( 1, 3, \to E\)</div></div>
+      <div id = "line5"class = "line">5. \(B\)<div class = "just">\(2,R\)</div></div>
+    </div>
+    <div id = "line6"class = "line">6. \( \neg (A \to B)\)<div class = "just"> \(3-5, \neg I \)</div></div>
+    <div class = "scope"  id = 'scope4' >
+      <div id = "line7"class = "ass">7. \(A\)<div class = 'just'>Assumption</div></div>
+      <div id = "line8"class = "line">8. \(B\) <div class = "just">\(2, R\)</div></div>
+    </div>
+    <div id = "line9"class = "line">9. \(A \to B\)<div class= 'just'> \(7-8, \to I\)</div></div>
+  </div>
+  <div id = "line10"class ="line">10. \(\neg B\)<div class = 'just'> \(2-9, RAA\)</div></div>
+</div>
+
+
+
+
+
+</body>
+
+
+<footer>
+  <link rel="stylesheet" href="../css/proof.css">
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+</footer>
