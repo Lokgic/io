@@ -18,7 +18,13 @@
 		"title": "Sentence Logic: Proofs",
 				"symbol" :"⊥" ,
 		"description": "In this module, we are going to introduce a new method for checking for validity and other logical properties. This time our method is going to be purely syntactic. We won’t be at all concerned with what our symbols mean. We are just going to look at the way they are arranged. Our method here will be called a system of natural deduction. When you use a system of natural deduction, you won’t do it mechanically.",
-		"info":[["Practice Problems", "Much of the work will involve working through the problems. Be sure to work through <a href= '..\\pdf\\practice3.pdf'>the practice problems</a> before taking the tests. No solution is given for these problems, because they are intended for you work through and seek help from me in class. For the module quiz, problems with solutions will be given. Make sure that you are pretty comfortable with them before making an attempt at the quiz."]]
+		"info":[
+			["Practice Problems", 
+
+				"Much of the work will involve working through the problems. Be sure to work through <a href= '..\\pdf\\practice3.pdf'>the practice problems</a> before taking the tests. No solution is given for these problems, because they are intended for you work through and seek help from me in class. For the module quiz, problems with solutions will be given. Make sure that you are pretty comfortable with them before making an attempt at the quiz."],
+			["Natural Deduction Slides", 
+				"<a href = '..\\pdf\\ND1.pdf'>1</a>"]
+		]
 	},
 	"4":{
 		"moduleNo": 4,
