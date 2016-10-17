@@ -5168,7 +5168,7 @@ Predicate.prototype.toString = function (){
 }
 
 var Rule = function(parm){
-	this.quantifier  = randomize.drawOneRandomFromSet(["existential","universal"]);
+	this.quantifier  = randomize.drawOneRandomFromSet(["existential","universal","notall","none"]);
 
 	order = [];
 	for (i in parm){
@@ -5184,22 +5184,36 @@ var Rule = function(parm){
 Rule.prototype.toString = function(){
 	if (this.quantifier == "existential"){
 		return "Some cards have " + this.left.toString() + " on one side but " +  this.right.toString() + " on the other side."
-	} else {
-		return "All cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on another."
+	} else if (this.quantifier == "universal"){
+		return randomize.drawOneRandomFromSet([
+			"All cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on another.",
+			"Any card with " + this.left.toString() + " on one side has " + this.right.toString() + " on another.",
+			"For all cards, it is such that if one side is " + this.left.toString() + " then the other side is " + this.right.toString() + "."
+		])
+	} else if (this.quantifier == "notall"){
+		return randomize.drawOneRandomFromSet([
+			"Not all cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on the other side.",
+			"Some cards with " + this.left.toString() + " on one side does not have " + this.right.toString() + " on the other side."
 
+		])
+	} else if (this.quantifier == "none"){
+		return randomize.drawOneRandomFromSet([
+			"No cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on the other side.",
+			"Any card with "  + this.left.toString()  + " is guaranteed not to have " + this.right.toString() + " on the opposite side."
+		])
 	}
 }
 
 Rule.prototype.findAnswer = function(domain){
 	var ans = [];
-	if (this.quantifier == "existential"){
+	if (this.quantifier == "existential"|| this.quantifier == "none"){
 		for (object in domain){
 			// console.log(domain[object].face)
 			if (this.left.truthFunction(domain[object]) || this.right.truthFunction(domain[object])){
 				ans.push(domain[object].face)
 			}
 		}
-	} else {
+	} else if (this.quantifier == "universal" || this.quantifier == "notall"){
 		for (object in domain){
 			// console.log(this.right.negation(domain[object]));
 			if (this.left.truthFunction(domain[object]) || this.right.negation(domain[object])){
@@ -5221,7 +5235,7 @@ $(function(){
 	$cards = $('#cards');
 	$rule = $('#rule');
 	var score = 0;
-	var passing = 60;
+	var passing = 100;
 	var $button = $('#wasonbutton');
 	var $score = $('#score');
 	var $plus = $('#plus');
@@ -5242,60 +5256,6 @@ function printCards(domain){
 	html += '</div>'
 	return html;
 }
-
-// function makeRule(options){
-//
-// 	rule = [];
-// 	for (i in options){
-// 		rule.push(randomize.drawOneRandomFromSet(options[i]));
-// 	}
-// 	rule = randomize.shuffle(rule);
-// 	return rule;
-// }
-//
-// function printRule(rule){
-// 	var seed = randomize.drawOneRandomFromSet([1, 2, 3, 4, 5,6, 7,8]);
-// 	if (seed === 1) {return "if one side of the card is " + rule[0] + ", then the other side must be " + rule[1];}
-// 		else if (seed === 2) {return "one side of the card is " + rule[0] + " only if the other side is " + rule[1];}
-// 		else if (seed === 3) {return "a card cannot have " + rule[0] + " on one side without having " + rule[1] + " on another side";}
-// 		else if (seed === 4) {return "one side of card is " + rule[1] + " if it has " + rule[0] + " on another side";}
-// 		else if (seed === 5) {return "having "+ rule[1] + " on one side is a necessary condition for having " + rule[0] + " on the other side.";}
-// 		else if (seed === 6) {return "having "+ rule[0] + " on one side is a sufficient condition for having " + rule[1] + " on the other side.";}
-// 		else {return "having " + rule[0] + " on one side implies that the other side is " +rule [1]}
-//
-// }
-//
-// function makeAnswer(rule, cards){
-// 	var answer = [];
-// 	if (rule[0] === "an even number"|| rule[1] === "an odd number") {
-// 			for (var i = 0; i < cards.length; i++){
-// 				if (cards[i] % 2 === 0){answer.push(cards[i].toString())}
-// 			} //end for loop
-// 		} else if (rule[0] === "an odd number"|| rule[1] === "an even number") {
-// 			for (var i = 0; i < cards.length; i++){
-// 				if (cards[i] % 2 === 1){answer.push(cards[i].toString())}
-// 			} //end for loop
-// 		}
-//
-//
-// 	if (rule[0] === "a vowel"|| rule[1] === "a consonant") {
-// 			for (var i =0; i< cards.length;i++){
-// 				if (vowels.indexOf(cards[i])!= -1){
-// 					answer.push(cards[i]);
-// 				}
-// 			}
-//
-// 		} else if (rule[0] === "a consonant" || rule[1] === "a vowel") {
-// 			for (var i = 0; i < cards.length; i++){
-// 				if(consonants.indexOf(cards[i])!= -1){
-// 					answer.push(cards[i]);
-// 				}
-// 			}
-// 		}
-//
-//
-// 	return answer;
-// }
 
 function checkAnswer(answers){
 	var checked = $('.active', '.btn-group').children().text().split("");
