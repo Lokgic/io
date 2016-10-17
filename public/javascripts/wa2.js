@@ -127,7 +127,7 @@ Rule.prototype.toString = function(){
 	} else if (this.quantifier == "notall"){
 		return randomize.drawOneRandomFromSet([
 			"Not all cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on the other side.",
-			"Some cards with " + this.left.toString() + " on one side does not have " + this.right.toString() + " on the other side."
+			"At least one card with " + this.left.toString() + " on one side does not have " + this.right.toString() + " on the other side."
 
 		])
 	} else if (this.quantifier == "none"){
@@ -265,7 +265,7 @@ function Score(newScore){
 			current = new Universe(x);
 			$cards.html(printCards(current.domain));
 			rule = new Rule(possibility);
-			console.log(rule.findAnswer(current.domain))
+			// console.log(rule.findAnswer(current.domain))
 			// ans = makeAnswer(rule, current);
 			// console.log(ans);
 			$rule.html(rule.toString());
