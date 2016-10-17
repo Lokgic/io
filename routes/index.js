@@ -329,7 +329,7 @@ router.get('/2', function(req, res, next){
 
 router.get('/2/wason', function(req, res, next){
 
-	return res.render('wason');
+	return res.render('wason', {n:""});
 });
 
 
@@ -379,15 +379,34 @@ router.get('/3/logicland', function(req,res,next){
 	return res.render('scoring')
 });
 
-// router.get('/shh4', function(req, res, next){
-// 		return res.render('solution', {title: 'Module Three', file: "3"})
-// });
+router.get('/shh4',mid.requiresAdmin, function(req, res, next){
+		return res.render('solution', {title: 'Module Four', file: "4"})
+});
 
 router.get('/4', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
+return res.render('modules', {title: 'Module Four', file: "4", part: "reading"})
 });
+
+router.get('/4/reading', function(req, res, next){
+
+	return res.redirect('/4');
+});
+
+
+router.get('/4/concepts', function(req, res, next){
+
+	return res.render('modules', {title: 'Module Four', file: "4", part: "concepts"})
+});
+
+router.get('/4/quiz', function(req, res, next){
+	return res.render('modules', {title: 'Module Four', file: "4", part: "quiz"})
+});
+
+router.get('/4/wason2', function(req, res, next){
+
+	return res.render('wason', {n:"2"});
+});
+
 
 router.get('/5', function(req, res, next){
 	var err = new Error('Module not yet available.');

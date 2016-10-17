@@ -1,6 +1,10 @@
+var randomize = require('./randomize.js')
+
 var makeDropdownCard =  function makeDropdownCard(obj){
-  dropdownItems += '<option>Answer</option>';
-    var dropdownItems;
+      var possibleAns = randomize.shuffle(obj.possibleAnswers);
+      var dropdownItems;
+      dropdownItems += '<option>Answer</option>';
+
     for (var i = 0; i < obj.possibleAnswers.length; i++){
       dropdownItems += '<option value ="'+obj.possibleAnswers[i]+'">' + obj.possibleAnswers[i] + '</option>';
     }

@@ -1,0 +1,50 @@
+{
+    "Predicate": {
+        "term": "Predicate",
+        "df": "The basic unit of quantiﬁed logic; cannot be true or false on its own. Symbolized in QL as capitalized letters."
+    },
+    "Singular Term": {
+        "term": "Singular Term",
+        "df": "A word or phrase that refers to a speciﬁc person, place, or thing. Symbolized in QL as a,b,c..."
+    },
+    "definite description": {
+        "term": "Definite Description",
+        "df": "Something that picks out an individual by means of a unique description."
+    },
+    "Polyadic": {
+        "term": "Polyadic",
+        "df": "Predicates with more than one place."
+    },
+    "Quantifiers": {
+        "term": "Quantifiers",
+        "df": "The part of a sentence that denotes the quantity of something."
+    },
+    "Universal Quantifier": {
+        "term": "Universal Quantifier",
+        "df": "A symbol in QL, indicating that the variable under its scope can be substituted with any singular term from the domain of discourse."
+    },
+    "Existential Quantifier":{
+      "term": "Existential Quantifier",
+      "df": "A symbol in QL, indicating that there variable under its scope can be substituted with at least one singular term from the universe of discourse."
+    },
+    "Universe of Discourse":{
+      "term": "Universe of Discourse",
+      "df": "Denotes the set of objects we currently are talking about."
+    },
+    "Non-referring terms":{
+      "term": "Non-referring terms",
+      "df": "A term that does not pick out anything; poses a philosophical problem."
+    },
+    "Empty Predicates":{
+      "term": "Empty Predicates",
+      "df": "Does not apply to anything in the UD."
+    },
+    "Scope":{
+      "term": "Scope",
+      "df": "The formula that follows the quantiﬁer"
+    },
+    "a substitution instance":{
+      "term": "A Substitution Instance",
+      "df": "Made by replacing each occurrence of a variable with a constant."
+    }
+}

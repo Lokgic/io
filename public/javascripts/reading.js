@@ -34,9 +34,13 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
 
  module.exports = makeAlert;
 },{}],2:[function(require,module,exports){
+var randomize = require('./randomize.js')
+
 var makeDropdownCard =  function makeDropdownCard(obj){
-  dropdownItems += '<option>Answer</option>';
-    var dropdownItems;
+      var possibleAns = randomize.shuffle(obj.possibleAnswers);
+      var dropdownItems;
+      dropdownItems += '<option>Answer</option>';
+
     for (var i = 0; i < obj.possibleAnswers.length; i++){
       dropdownItems += '<option value ="'+obj.possibleAnswers[i]+'">' + obj.possibleAnswers[i] + '</option>';
     }
@@ -65,7 +69,7 @@ var makeDropdownCard =  function makeDropdownCard(obj){
 
 module.exports = makeDropdownCard;
 
-},{}],3:[function(require,module,exports){
+},{"./randomize.js":6}],3:[function(require,module,exports){
 var makefillCard = function makefillCard(obj){
   var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="card-block fillcard">';
   html += '<p class="font-italic">' + obj.instruction +'<p>';

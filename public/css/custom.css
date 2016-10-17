@@ -5,7 +5,7 @@
 
 p.lead{
 	text-align: justify;
-    
+
 }
 
 #percentbar{
@@ -48,7 +48,7 @@ p.lead{
 .introBlock{
 	margin-top: 5%;
 	margin-bottom: :5%;
-	
+
 }
 
 .profilehead{
@@ -80,7 +80,7 @@ p.lead{
 }
 
 #rule {
-	text-transform: capitalize;
+	/*text-transform: capitalize*/
 }
 .wason {
 	text-transform: capitalize;

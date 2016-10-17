@@ -1,0 +1,39 @@
+{
+
+  "1": {
+    "type": "dropdown",
+    "id": "quiz1_1",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li></ul>",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["Not everything in North Carolina is a Town", "¬ ∀ x(Ixn → Tx)"],
+      ["Anything that is in North Carolina is not a Town.", "∀ x(Ixn → ¬ Tx)"],
+      ["Anything that is not in North Carolina is a town.", "∀ x( ¬Ixn → Tx)"],
+      ["Everything is in North Carolina and is not a town.","∀ x ¬( Ixn → Tx)"],
+      ["Some universities are not in Durham.","∃ x (Ux ∧ ¬Ixd)"],
+      ["Being in Durham is a necessary condition for being a university.","∀ x (Ux → Ixd)"],
+      ["Being in Durham is a sufficient and necessary condition for being in North Carolina.","∀ x (Ixd ↔ Ixn)"],
+      ["Everything is such that it can be in North Carolina only if it is in Durham.","∀ x (Ixn → Ixd)"]
+    ],"possibleAnswers": ["¬ ∀ x(Ixn → Tx)","Cd","Idn","Ind","∃x(Sx ∧ Idx)","∀ x (Ixd → Ixn)","∀x (Ixd ∧ Ixn)","∃ x (Ixd → Ixn)","∀ x(Ixn → ¬ Tx)","∀ x( ¬Ixn → Tx)","∀ x ¬( Ixn → Tx)","∃ x (Ux ∧ ¬Ixd)","∀ x (Ux → Ixd)","∀ x (Ixd ↔ Ixn)","∀ x (Ixn → Ixd)"]
+  },
+  "2": {
+    "type": "dropdown",
+    "id": "quiz1_1",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li></ul>",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["Cd", "Durham is a city."],
+      ["Idn", "Durham is in North Carolina"],
+      ["Ind", "North Carolina is in Durham"],
+      ["∃x(Sx ∧ Idx)", "Durham is in a state."],
+      ["∀ x (Ixd → Ixn)", "Anything that is in Durham is in North Carolina"],
+      ["∀x (Ixd ∧ Ixn)", "Everything is in Durham and North Carolina."],
+      ["∃ x (Ixd → Ixn)", "This formula has no matching transcription."]
+    ],"possibleAnswers": ["Durham is a city.","Durham is in North Carolina","North Carolina is in Durham","Durham is in a state.","Anything that is in Durham is in North Carolina","Everything is in Durham and North Carolina.","This formula has no matching transcription."]
+  }
+
+
+
+}

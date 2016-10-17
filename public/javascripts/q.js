@@ -167,11 +167,14 @@ $(function() {
 
 
     function askDropdown(obj) {
+			var possibleAns = randomize.shuffle(obj.possibleAnswers);
     	//create list of possibilities
-	 dropdownItems += '<option>Answer</option>';
-        var dropdownItems;
-        for (var i = 0; i < obj.possibleAnswers.length; i++){
-          dropdownItems += '<option value ="'+obj.possibleAnswers[i]+'">' + obj.possibleAnswers[i] + '</option>';
+			var dropdownItems;
+
+			dropdownItems += '<option>Answer</option>';
+
+        for (var i = 0; i < possibleAns.length; i++){
+          dropdownItems += '<option value ="'+possibleAns[i]+'">' + possibleAns[i] + '</option>';
         }
 
 
