@@ -30,7 +30,7 @@
 		"moduleNo": 4,
 		"title": "Quantified Logic: Syntax",
 		"symbol" :"∀" ,
-		"description": "This chapter introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms."
+		"description": "This module introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms."
 	},
 	"5":{
 		"moduleNo": 5,
@@ -48,7 +48,7 @@
 		"moduleNo": 7,
 		"title": "Quantified Logic: Advanced Deduction ",
 		"symbol" :"∃" ,
-		"description": "Natural Deduction in earnest! In this module we will work on the most complex derivations in this course. We use our system of derivation to prove theorems involving quantifiers and predicates. We also add two rules of proof to deal with identity."
+		"description": "Natural deduction in earnest! In this module we will work on the most complex derivations in this course. We use our system of derivation to prove theorems involving quantifiers and predicates. We also add two rules of proof to deal with identity."
 	},
 	"8":{
 		"moduleNo": 8,

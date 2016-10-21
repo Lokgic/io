@@ -2,8 +2,8 @@
 
   "1": {
     "type": "dropdown",
-    "id": "quiz1_1",
-    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li></ul>",
+    "id": "quiz4_1",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li><li>UD: all things</li></ul>",
     "question": "",
     "setuptype": "list",
     "questions": [
@@ -19,8 +19,8 @@
   },
   "2": {
     "type": "dropdown",
-    "id": "quiz1_1",
-    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li></ul>",
+    "id": "quiz4_2",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Cx : x is a city</li><li>Ixy: x is in y</li><li>Sx: x is a state.</li><li>Tx: x is a town</li><li>Ux: x is a university.</li><li>d: Durham</li><li>n: North Carolina</li><li>UD: all things</li></ul>",
     "question": "",
     "setuptype": "list",
     "questions": [
@@ -32,6 +32,40 @@
       ["∀x (Ixd ∧ Ixn)", "Everything is in Durham and North Carolina."],
       ["∃ x (Ixd → Ixn)", "This formula has no matching transcription."]
     ],"possibleAnswers": ["Durham is a city.","Durham is in North Carolina","North Carolina is in Durham","Durham is in a state.","Anything that is in Durham is in North Carolina","Everything is in Durham and North Carolina.","This formula has no matching transcription."]
+  },
+  "3": {
+    "type": "dropdown",
+    "id": "quiz4_3",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Lxy : x loves y</li><li>Jxyz: x is jealous of y's relation with z</li><li>UD: people</li><li>a: Alex, b: Bob</li></ul>",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["Everyone loves his or her siblings.", "∀x∀y(Sxy → Lxy)"],
+      ["Everyone hates each other because everyone is a sibling of everyone.", "∀x∀y(Sxy ∧ Hxy)"],
+      ["Someone is jealous of Bob’s relationship with Alex, and  also hates Bob.", "∃x(Jxba ∧ Hxb)"],
+      ["Someone is jealous of Bob’s relationship with Alex, and  someone hates Bob.", "∃x∃y(Jxba ∧ Hyb)"],
+      ["Anyone who has a sibling loves everyone.", "∀x∀y∀z(Sxy → Lxz)"],
+      ["Some people are siblings of someone they love.", "∃x∃y(Sxy ∧ Lxy)"],
+      ["No one is a sibling of anyone.", "∀x∀y¬Sxy"],
+      ["Not everyone is a sibling of everyone.", "¬∀x∀ySxy"]
+    ],"possibleAnswers": ["∀x∀y(Sxy → Lxy)","∀x∀y(Sxy ∧ Hxy)","∃x(Jxba ∧ Hxb)","∃x∃y(Jxba ∧ Hyb)","∀x∀y∀z(Sxy → Lxz)","∃x∃y(Sxy ∧ Lxy)","∀x∀y¬Sxy","¬∀x∀ySxy"]
+  },
+  "4": {
+    "type": "dropdown",
+    "id": "quiz4_4",
+    "instruction": "Given the following translation key, translate the sentences below.<ul><li>Lxy : x loves y</li><li>Jxyz: x is jealous of y's relation with z</li><li>UD: people</li></ul>",
+    "question": "",
+    "setuptype": "list",
+    "questions": [
+      ["∀x∃y(Sxy ∧ Hxy)", "Everyone hates at least one of their siblings."],
+      ["∃x∀y(Sxy ∧ Hxy)", "Someone hates all of their siblings."],
+      ["∀y∃x(Sxy ∧ Hxy)", "Everyone is hated by at least one of their siblings."],
+      ["∃x¬∀y(Sxy → Hxy)", "Someone doesn't hate all of their siblings."],
+      ["∃x∀y¬(Sxy → Hxy)", "Someone is a sibling of everyone but doesn't hate everyone."],
+      ["∃x∀y∀z(Hxy → Lxy))", "Someone hates anyone who loves everyone."],
+      ["∀x∃Lxy", "Everyone loves someone."],
+      ["∃x∀Lxy", "Someone is loved by everyone."]
+    ],"possibleAnswers": ["Everyone hates at least one of their siblings.","Someone hates all of their siblings.","Everyone is hated by at least one of their siblings.","Someone doesn't hate all of their siblings.","Someone is a sibling of everyone but doesn't hate everyone.","Everyone loves someone.","Someone is loved by everyone.","Everyone hates someone they love.", "Someone hates anyone who loves everyone."]
   }
 
 
