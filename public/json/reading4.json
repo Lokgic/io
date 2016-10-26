@@ -28,7 +28,7 @@
             ["\\(\\neg Cj \\to Aj\\)","Joey is an adult unless he's a child."],
             ["\\(\\neg Aj \\vee \\neg Aa\\)", "Joey and Allison are not both adults"]
         ],
-        "possibleAnswers": ["Joey is a child.", "If Caroline is a friend of Joey, then Joey is a friend of Caroline.", "Joey is a friend of Caroline only if Caroline is a friend of Joey.", "Joey is shorter or the same height as Rob","Joey and Alison are friend", "Joey and Caroline are siblings.","Carline and Joey are not friends","Molly is neither older nor taller than Rob","Joey is an adult unless he's a child.","Joey and Allison are not both adults"]
+        "possibleAnswers": ["Joey is a child.", "If Caroline is a friend of Joey, then Joey is a friend of Caroline.", "Joey is a friend of Caroline only if Caroline is a friend of Joey.", "Joey is shorter or the same height as Rob","Joey and Alison are friend", "Joey and Caroline are siblings.","Carline and Joey are not friends","Carline is neither older nor taller than Rob","Joey is an adult unless he's a child.","Joey and Allison are not both adults"]
     },
     "3":{
         "title": "Quantifier Translation",
