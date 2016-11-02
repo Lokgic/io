@@ -409,10 +409,14 @@ router.get('/4/wason2', function(req, res, next){
 
 
 router.get('/5', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
+return res.render('modules', {title: 'Module Five', file: "5", part: "reading"})
 });
+
+router.get('/5/reading', function(req, res, next){
+
+	return res.redirect('/5');
+});
+
 
 router.get('/6', function(req, res, next){
 	var err = new Error('Module not yet available.');

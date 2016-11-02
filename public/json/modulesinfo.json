@@ -36,7 +36,8 @@
 		"moduleNo": 5,
 		"title": "Quantified Logic: Basic Deduction",
 		"symbol" :"⊢" ,
-		"description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation."
+		"description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation.",
+		"info":[["Practice Exercises","Your test will be very similar to the practice exercises at the end of the text. You must master them in order to pass the test."]]
 	},
 	"6":{
 		"moduleNo": 6,
