@@ -62,9 +62,9 @@
       ["∀y∃x(Sxy ∧ Hxy)", "Everyone is hated by at least one of their siblings."],
       ["∃x¬∀y(Sxy → Hxy)", "Someone doesn't hate all of their siblings."],
       ["∃x∀y¬(Sxy → Hxy)", "Someone is a sibling of everyone but doesn't hate everyone."],
-      ["∃x∀y∀z(Hxy → Lxy))", "Someone hates anyone who loves everyone."],
+      ["∃x∀y∀z(Hxy → Lyz))", "Someone only hates people who love everyone."],
       ["∀x∃Lxy", "Everyone loves someone."],
-      ["∃x∀Lxy", "Someone is loved by everyone."]
+      ["∃x∀Lyx", "Someone is loved by everyone."]
     ],"possibleAnswers": ["Everyone hates at least one of their siblings.","Someone hates all of their siblings.","Everyone is hated by at least one of their siblings.","Someone doesn't hate all of their siblings.","Someone is a sibling of everyone but doesn't hate everyone.","Everyone loves someone.","Someone is loved by everyone.","Everyone hates someone they love.", "Someone hates anyone who loves everyone."]
   }
 

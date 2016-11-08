@@ -3,7 +3,7 @@
       "moduleNo": 4,
       "section": "I",
       "label": "reading_1",
-    "id": "wason2", 
+    "id": "wason2",
   "method": "game",
    "instruction": "Click to link below to play a randomized version of the Wason Selection Task, which tests your understanding of quantifiers. You will need to obtain a certain score to pass."},
 
@@ -49,7 +49,7 @@
             ["\\(\\exists x (Rx \\wedge \\neg Ax)\\)", "There are reptiles which are not alligators."],
             [ "\\(\\forall x ((Mx \\wedge Lbx)\\to Zx)\\)", "Bob only loves the monkeys that live at the zoo."],
             ["\\(\\forall x ((Mx \\wedge Zx)\\to Lbx)\\)","Bob loves all the monkeys that live at the zoo."],
-            ["\\(\\exists x (Mx \\wedge  \\neg Lbx)\\)", "There is a monkey that loves Bob, but sadly Bob does not reciprocate this love."]
+            ["\\(\\exists x ((Mx \\wedge  Lxb) \\wedge \\neg Lbx)\\)", "There is a monkey that loves Bob, but sadly Bob does not reciprocate this love."]
         ],
         "possibleAnswers": ["All the monkeys that Amos loves love him back.", "Every monkey that Cleo loves is also loved by Amos.", "Amos loves any monkey that loves him back.", "Cleo loves all monkeys that love Amos.","No alligator is a reptile.", "Not every alligator is a reptile.","There are reptiles which are not alligators.","Bob only loves the monkeys that live at the zoo.","Bob loves all the monkeys that live at the zoo.","There is a monkey that loves Bob, but sadly Bob does not reciprocate this love."]
     }

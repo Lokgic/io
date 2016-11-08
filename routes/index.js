@@ -376,7 +376,7 @@ router.get('/3/quiz', function(req, res, next){
 });
 
 router.get('/3/logicland', function(req,res,next){
-	return res.render('scoring')
+	return res.render('scoring', {title: "logicland"})
 });
 
 router.get('/shh4',mid.requiresAdmin, function(req, res, next){
@@ -415,6 +415,10 @@ return res.render('modules', {title: 'Module Five', file: "5", part: "reading"})
 router.get('/5/reading', function(req, res, next){
 
 	return res.redirect('/5');
+});
+
+router.get('/5/logicland2', function(req,res,next){
+	return res.render('scoring', {title: "logicland2"})
 });
 
 

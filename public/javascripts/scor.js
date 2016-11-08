@@ -13,8 +13,12 @@ $(function() {
     var $submit = $('#submit');
     var score = 0;
     var finished = false;
-    var passing = 100;
-    $.getJSON('../json/dukedouche.json')
+  var mid =  $("title").text();
+  console.log(mid)
+if (mid == "logicland") var passing = 100;
+else if (mid == "logicland2") var passing = 125;
+
+    $.getJSON('../json/'+mid + '.json')
         .done(function(data) {
             doStuff(data);
         }).fail(function() {
@@ -22,7 +26,7 @@ $(function() {
         });
 
     function doStuff(data) {
-        leaderboard.draw("logicland", $leaderboard);
+        leaderboard.draw(mid, $leaderboard);
         var id = "instruction";
         var modal = bootstrap.makeModal(id, "?");
 
@@ -49,7 +53,7 @@ $(function() {
 
 
         function ask(q) {
-            makeAlert('#carddd',"b", "Choose the number that best represents your estimate, and then press Next to continue",3);
+            makeAlert('#carddd',"b", "Choose the number that best represents your estimate, and then press Next to continue. You need at least a score of " + passing + " to pass.",3);
             $('#headerdd').html('<h4> Encounter ' + index + '</h4>');
             $('#blockdd').text(q.setup);
             if (q.question.length == 1) ans = q.question[0][1];
