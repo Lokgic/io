@@ -9,7 +9,7 @@
       {
             "setup": ["Suppose you interviewed all students on the island, and they all say to you: 'Everyone goes to the same school.' Evaluate your certainty for the statements below. 10 means certainty true and 0 certainty false."],
             "question": [
-                ["Everyone goes to the same school", 10],["Everyone goes to Duke",10]
+                ["Everyone goes to the same school", 10],["Everyone goes to Duke",10],["Some people go to Duke",10]
             ]
         },
          {
@@ -19,38 +19,38 @@
             ]
         },
         {
-           "setup": ["Suppose you spoke to all students on the island, except for one, who passed out from drinking. They all said: Everyone goes to Douche University here.", "The next day, you are able to talk to the passed out student. You ask: Is it true that everyone goes to Douche here?","The student gave a yes or no answer."],
+           "setup": ["Suppose you spoke to all students on the island, except for one, who passed out from drinking. They all said: Everyone goes to Douche University here.", "The next day, you are able to talk to the passed out student. You ask: Is it true that everyone goes to Douche here? The student gave a yes or no answer."],
            "question": [
-               ["Is the drunk student Duke student?", 10],["Every goes to Duke", 0], ["Everyone goes to the same school", 0]
+               ["Is the drunk student a Duke student?", 10],["Every goes to Duke", 0], ["Everyone goes to the same school", 0]
            ]
        },{
           "setup": ["Imagine that you are interested in the drinking habit of students on the island. You interviewed all of them and they all said the same thing: “All Duke students drink.” What do we know?"],
           "question": [
-              ["Everyone goes to the same school.", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 10], ["Some people drink", 10],["Some Duke students drink", 10]
+              ["Everyone goes to the same school", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 10], ["Some people drink", 10],["Some Duke students drink", 10]
           ]
       },
       {
          "setup": ["Imagine that you are interested in the drinking habit of students on the island. You interviewed all of them and they all said the same thing: Some Douche students drink. What do we know?"],
          "question": [
-            ["Everyone goes to the same school.", 10],["Everyone is a Duke student", 0], ["Everyone drinks", 0], ["Some people drink", 0]
+            ["Everyone goes to the same school", 10],["Everyone is a Duke student", 0], ["Everyone drinks", 0], ["Some people drink", 0]
          ]
      },
      {
        "setup": ["Imagine that you are interested in the drinking habit of students on the island. You interviewed all of them and they all said the same thing: If I drink, then everyone drinks. What do we know?"],
        "question": [
-          ["Everyone goes to the same school.", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 5], ["Some people drink", 5]
+          ["Everyone goes to the same school", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 5], ["Some people drink", 5]
        ]
     },
     {
       "setup": ["Imagine that you are interested in the drinking habit of students on the island. You interviewed all of them and they all said the same thing: If someone drinks, then I drink. What do we know?"],
       "question": [
-         ["Everyone goes to the same school.", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 5], ["Some people drink", 5]
+         ["Everyone goes to the same school", 10],["Everyone is a Duke student", 10], ["Everyone drinks", 5], ["Some people drink", 5]
        ]
    },
    {
      "setup": ["Imagine that you are interested in the drinking habit of students on the island. You interviewed all of them and they all said the same thing: Some people drink, but I don't. What do we know?"],
      "question": [
-        ["Everyone goes to the same school.", 10],["Everyone is a Duke student", 0], ["Everyone drinks", 5], ["Some people drink", 5]
+        ["Everyone goes to the same school", 10],["Everyone is a Duke student", 0], ["Everyone drinks", 5], ["Some people drink", 5]
       ]
   }
 

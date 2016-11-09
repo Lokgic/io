@@ -1,0 +1,26 @@
+{
+    "Universal elimination": {
+        "term": "Universal elimination",
+        "df": "If you have ∀xAx, it is legitimate to infer that anything is an A. You can infer Aa, Ab, Az, Ad 3 — in short, you can infer Ac for any constant c ."
+    },
+    "Existential introduction": {
+        "term": "Existential Introduction",
+        "df": "If you know that something is an A — for instance, if you have Aa available in the proof - you are allowed to infer an existential claim without a sub-derivation."
+    },
+    "Universal Introduction": {
+        "term": "Universal Introduction",
+        "df": "We are allowed to infer an universal claim from a constant c as long as c is arbitrary."
+    },
+    "Existential Elimination": {
+        "term": "Existential Elimination",
+        "df": "From an existential claim, we are allowed to make an assumption based on that claim, as long as we replace the relevant variables with a new constant."
+    },
+    "Arbitrariness": {
+        "term": "Arbitrariness",
+        "df": "A situation in which a constant can interchanged without loss of information."
+    },
+    "Quantiﬁer Negation": {
+        "term": "Quantiﬁer Negation",
+        "df": "A rule of replacement, which allows us to manipulate statements involving negations and quantifiers."
+    }
+}

@@ -46,7 +46,7 @@ var makeDropdownCard =  function makeDropdownCard(obj){
     }
 
     var html = '<div class="card" id ="'+ obj.id + '"><h1 class="card-header display-4">' + obj.section +". " + obj.title +  '</h1><div class="p-x-2 card-block dropdowncard">';
-    html += '<p class="font-italic">' + obj.instruction +'<p>';
+    html += '<div class ="lead m-b-1">' + obj.instruction +'</div>';
  	 html += '<form>';
 
      for (var i = 0;i<obj.questions.length;i++){

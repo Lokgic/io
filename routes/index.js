@@ -417,10 +417,19 @@ router.get('/5/reading', function(req, res, next){
 	return res.redirect('/5');
 });
 
+router.get('/5/concepts', function(req, res, next){
+
+	return res.render('modules', {title: 'Module Five', file: "5", part: "concepts"})
+});
+
+
 router.get('/5/logicland2', function(req,res,next){
 	return res.render('scoring', {title: "logicland2"})
 });
 
+router.get('/5/quiz', function(req, res, next){
+	return res.render('modules', {title: 'Module Five', file: "5", part: "quiz"})
+});
 
 router.get('/6', function(req, res, next){
 	var err = new Error('Module not yet available.');
@@ -508,6 +517,21 @@ router.post('/logicland', function(req, res, next){
 	}else{
 		return res.send(response);}
 });
+
+router.post('/logicland2', function(req, res, next){
+
+
+	if (req.session.userId){
+		User.getName(req.session.userId, function (err, name){
+
+			Leader.update(name, "logicland2", req.body.score, function(err, response){
+				return res.send(response);
+				})
+			})
+	}else{
+		return res.send(response);}
+});
+
 
 
 router.post('/ranking', function(req, res, next){

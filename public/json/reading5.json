@@ -10,48 +10,52 @@
     },
 
     "2": {
-        "title": "Rules Classification",
+        "title": "Justification 1",
         "mathjax": true,
-        "moduleNo": 3,
+        "moduleNo": 5,
         "section": "II",
         "label": "reading_2",
-        "id": "rule_classification",
+        "id": "QL_justify1",
         "method": "dropdown",
-        "instruction": "Determine if each of the following is a basic rule, a derived rule, a replacement rule, or a hypothetical rule (one that requires a sub-derivation)",
+        "instruction": "<p> Pick a justiﬁcation (rule and line numbers) for each line of proof.</p><img src ='..\\img\\module5\\reading1.png' class='m-x-auto img-fluid'>",
         "questions": [
-            ["Reiteration", "Basic"],
-            ["\\((A\\to B), A \\vdash B\\)", "Basic"],
-            ["\\(\\{A \\vee B, A \\vee C, B\\vee C\\}\\vdash C\\)", "Derived"],
-            ["Double Negation", "Replacement"],
-            ["Disjunction Elimination", "Basic"],
-            ["DeMorgan's Law", "Replacement"],
-            ["Contraposition", "Replacement"],
-            ["Reductio Ad Absurdum", "Hypothetical"],
-            ["\\(\\{A \\to B, \\neg B \\} \\vdash \\neg A\\)", "Derived"],
-            ["Biconditional Elimination", "Basic"],
-            ["Conditional Introduction", "Hypothetical"],
-            ["Biconditional Introduction", "Hypothetical"]
+            ["Line 1", "Premise"],
+            ["Line 2", "Premise"],
+            ["Line 3", "∀E 1"],
+            ["Line 4", "∃I 2"],
+            ["Line 5", "→E 3,4"],
+            ["Line 6", "∀E 5"],
+            ["Line 7", "∀E 1"],
+            ["Line 8", "∃I 2"],
+            ["Line 9", "→E 7,8"],
+            ["Line 10", "∀E 9"],
+            ["Line 11", "∀I 10"]
         ],
-        "possibleAnswers": ["Basic", "Derived", "Replacement", "Hypothetical"]
+        "possibleAnswers": ["Premise", "∀E 1", "∃I 2", "→E 3,4", "∀E 5", "→E 7,8", "∀E 9", "∀I 10", "∀E 3", "→E 5", "Assumption: ∃E 2", "∀E 7", "∧I 6,9", "∃I 9","∃E 7-10"]
     },
-    "3": {
-        "title": "SL Rule Applications",
-        "mathjax": true,
-        "moduleNo": 3,
-        "section": "III",
-        "label": "reading_3",
-        "id": "sl_checkusage",
-        "method": "dropdown",
-        "instruction": "Some of the following arguments are legitimate instances of our six basic inference rules. The others are either invalid arguments or valid arguments that are still illegitimate because they would take multiple steps using our basic inference rules. For those that are legitimate, mark the rule that they are instances of. Mark those that are not 'Not a basic inference.'",
-        "questions": [
-            ["\\(R\\vee C \\vdash S\\)", "Not a basic inference"],
-            ["\\((A\\to B) \\vee (B \\to A), A \\to B \\vdash B \\to A\\)", "Not a basic inference"],
-            ["\\(((X \\wedge Y) \\leftrightarrow (Z \\wedge W)), (Z\\wedge W) \\vdash X \\wedge Y\\)", "Biconditional Elimination"],
-            ["\\(((L \\to M) \\to N) \\to O, L \\vdash M\\)", "Not a basic inference"],
-            ["\\((P \\wedge (Q \\vee R)) \\vdash R\\)", "Not a basic inference"],
-            ["\\(P\\wedge (Q \\wedge R) \\vdash P\\)", "Conjunction Elimination"],
-            ["\\(A, B \\wedge C \\vdash  (A \\wedge B )\\wedge  C\\)", "Conjunction Introduction"]
-        ],
-        "possibleAnswers": ["Not a basic inference", "Conjunction Introduction", "Conjunction Elimination", "Conditional Elimination", "Biconditional Elimination", "Disjunction Elimination", "Reiteration"]
-    }
+
+        "3": {
+            "title": "Justification 2",
+            "mathjax": true,
+            "moduleNo": 5,
+            "section": "II",
+            "label": "reading_2",
+            "id": "QL_justify2",
+            "method": "dropdown",
+            "instruction": "<p> Pick a justiﬁcation (rule and line numbers) for each line of proof.</p><img src ='..\\img\\module5\\reading2.png' class='m-x-auto img-fluid'>",
+            "questions": [
+                ["Line 1", "Premise"],
+                ["Line 2", "Premise"],
+                ["Line 3", "Premise"],
+                ["Line 4", "∀E 3"],
+                ["Line 5", "∀E 1"],
+                ["Line 6", "→E 5"],
+                ["Line 7", "Assumption: ∃E 2"],
+                ["Line 8", "∀E 7"],
+                ["Line 9", "∧I 6,9"],
+                ["Line 10", "∃I 9"],
+                ["Line 11", "∃E 7-10"]
+            ],
+            "possibleAnswers": ["Premise", "∀E 1", "∃I 2", "→E 3,4", "∀E 5", "→E 7,8", "∀E 9", "∀I 10", "∀E 3", "→E 5", "Assumption: ∃E 2", "∀E 7", "∧I 6,9", "∃I 9","∃E 7-10"]
+        }
 }

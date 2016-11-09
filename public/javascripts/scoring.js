@@ -158,9 +158,17 @@ $(function() {
     var score = 0;
     var finished = false;
   var mid =  $("title").text();
-  console.log(mid)
-if (mid == "logicland") var passing = 100;
-else if (mid == "logicland2") var passing = 125;
+  var label = "reading_1";
+  
+if (mid == "logicland") {
+  var passing = 100;
+  var modNo = 3
+}
+else if (mid == "logicland2"){
+  var passing = 250;
+  var modNo = 5
+}
+
 
     $.getJSON('../json/'+mid + '.json')
         .done(function(data) {
@@ -273,20 +281,20 @@ else if (mid == "logicland2") var passing = 125;
               $('#blockdd').html('<p class = "lead">Your score is ' + score + '. </p>');
               var output = "";
               if (score > 50){
-      				jQuery.post("../logicland", {score:score}, function(res){
-      				    	leaderboard.draw("logicland", $leaderboard);
+      				jQuery.post("../" + mid, {score:score}, function(res){
+      				    	leaderboard.draw(mid, $leaderboard);
       				      });
       				}
-              leaderboard.draw("logicland", $leaderboard);
+              leaderboard.draw(mid, $leaderboard);
       				if (score >= passing){
-      				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 3}, function(res){
+      				    jQuery.post("../report", {passed: true, label: label, moduleNo: modNo}, function(res){
       				       output += "You passed! "+res;
       				       makeAlert('#carddd', "b",output, 1);
       				      });
         					}else{
                     output += "Unfortunately, you need " +passing + " to pass this assignment. Press Next to restart."
         					 makeAlert('#carddd', "b",output, 4);
-        					  leaderboard.draw("logicland", $leaderboard);
+        					  leaderboard.draw(mid, $leaderboard);
 
         					}
 
