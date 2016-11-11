@@ -26,6 +26,12 @@ var CardObj = function(face){
 	this.consonant = false;
 	this.even = false;
 	this.odd = false;
+	if (chance.bool()){
+		this.color = "danger"
+	} else{
+		this.color ="info"
+	}
+
 	if (isNaN(parseInt(face))){
 		this.type = 'letter';
 		if (vowels.indexOf(face)!=-1){
@@ -45,7 +51,7 @@ var CardObj = function(face){
 			this.odd = true;
 		}
 	}
-	this.html =	'<label class="btn btn-outline-primary wason text-xs-center" value = ' + this.face + '><input type="checkbox" autocomplete="off"><h1 class = "display-1">' + this.face + '</h1></label>';
+	this.html =	'<button type = "button" class="btn wason text-xs-center btn-' + this.color + '" value = ' + this.face + ' disabled><h1 class = "display-1">' + this.face + '</h1></button>';
 }
 
 var Universe = function(n){
@@ -57,7 +63,6 @@ var Universe = function(n){
 				n--;
 			}
 	}
-
 }
 
 Universe.prototype.contains = function(obj){
@@ -68,7 +73,6 @@ Universe.prototype.contains = function(obj){
 	}
 	return false;
 }
-
 
 var Predicate = function(name){
 	this.name = name;
@@ -84,7 +88,6 @@ Predicate.prototype.truthFunction = function(obj){
 }
 
 Predicate.prototype.negation = function(obj){
-	// console.log(obj.type + " vs " + this.type);
 	 if (obj.type != this.type) return false
 	 else if (obj[this.name]) return false;
 	 else return true;
@@ -102,17 +105,31 @@ Predicate.prototype.toString = function (){
 }
 
 var Rule = function(parm){
-	this.quantifier  = randomize.drawOneRandomFromSet(["existential","universal","notall","none"]);
+	this.quantifier  = randomize.drawOneRandomFromSet(["some","all","notall","none"]);
 
 	order = [];
 	for (i in parm){
 		order.push(randomize.drawOneRandomFromSet(parm[i]));
 	}
 	order = randomize.shuffle(order);
-	this.left = new Predicate(order[0]);
-	this.right =  new Predicate(order[1]);
+	if (chance.bool({likelihood: 10})){
+		this.left = new Rule(parm)
+	} else{
+		this.left = new Predicate(order[0]);
+	}
+	if (chance.bool({likelihood:10})){
+		this.right = new Rule(parm)
+	} else{
+		this.right =  new Predicate(order[1]);
+	}
+	this.connective  = randomize.drawOneRandomFromSet(["and","or","implies","iff"])
 
 
+
+}
+
+Rule.prototype.interpret = function(ud){
+	
 }
 
 Rule.prototype.toString = function(){
@@ -193,8 +210,6 @@ function printCards(domain){
 
 function checkAnswer(answers){
 	var checked = $('.active', '.btn-group').children().text().split("");
-	// console.log(checked);
-	// console.log(answers);
 	if (answers.length == 0){
 		if (checked.length == 0) return true;
 		else return false;
@@ -229,14 +244,6 @@ function Score(newScore){
 	$score.text('Your Score: ' + score);
 }
 
-// function initCards (n){
-// 		var allcards = [];
-// 		allcards = allcards.concat(vowels);
-// 		allcards = allcards.concat(consonants);
-// 		allcards = allcards.concat(number);
-// 		var output = randomize.sample(allcards, n);
-// 		return output;
-// 		}
 
 	var $cards = $('#cards');
 
@@ -244,15 +251,9 @@ function Score(newScore){
 	var x = 6;
 
 	var current = new Universe(x);
-	// console.log(current.findAnswer);
 	$cards.html(printCards(current.domain));
 
-	// test = new Rule(possibility);
-	// console.log(test);
-	// test.findAnswer(current.domain);
-	// for (card in current.domain){
-	// 	console.log(test.left.truthFunction(current.domain[card]));
-	// }
+
 	var rule = new Rule(possibility);
 	ans = rule.findAnswer(current.domain);
 	$rule.html(rule.toString());
@@ -265,9 +266,6 @@ function Score(newScore){
 			current = new Universe(x);
 			$cards.html(printCards(current.domain));
 			rule = new Rule(possibility);
-			// console.log(rule.findAnswer(current.domain))
-			// ans = makeAnswer(rule, current);
-			// console.log(ans);
 			$rule.html(rule.toString());
 			reset = false;
 			alert($head,"b","Which card(s) must you turn over in order to verify the statement below?",3);

@@ -438,6 +438,14 @@ router.get('/6', function(req, res, next){
 });
 
 
+router.get('/6/wason3', function(req, res, next){
+
+	return res.render('wason', {n:"3"});
+});
+
+
+
+
 router.get('/7', function(req, res, next){
 	var err = new Error('Module not yet available.');
 				err.status = 401;
