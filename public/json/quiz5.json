@@ -18,7 +18,7 @@
   "3": {
     "type": "dropdown",
     "id": "quiz5_3",
-    "instruction": "Given the following translation key, translate the sentences below.",
+    "instruction": "For each derivation, determine if the inference is permissible using all available laws.",
     "question": "",
     "setuptype": "list",
     "questions": [
