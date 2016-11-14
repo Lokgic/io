@@ -7,7 +7,7 @@ var vowels = ['a','e','i','o','u'];
 var consonants = ['b', 'h' ,'p', 'z', 'g'];
 var number = [2,3,4,5,6,7,8,9]
 var all = 'aeiou' + 'bhpzg' + 23456789
-var id = "wason2"
+var id = "wason3"
 
 var CardObj = function(face){
 	if(face == undefined){
@@ -76,11 +76,13 @@ Universe.prototype.contains = function(obj){
 
 var Predicate = function(name){
 	this.name = name;
-	if (name == "even" || name == "odd"){
-		this.type = 'number';
-	} else {
-		this.type = 'letter';
-	}
+	// if (name == "even" || name == "odd"){
+	// 	this.type = 'number';
+	// } else if (name == "vowel" || name =="consonant"){
+	// 	this.type = 'letter';
+	// } else if (name == "danger"){
+	//
+	// }
 }
 
 Predicate.prototype.truthFunction = function(obj){
@@ -102,6 +104,26 @@ Predicate.prototype.toString = function (){
 		else if (this.name == "vowel") return prefix + "a vowel letter";
 		else if (this.name == "consonant") return prefix + "a consonant letter";
 
+}
+
+function buildExtension(u){
+		output = {
+			danger: [],
+			info: [],
+			even:[],
+			odd:[],
+			vowel:[],
+			consonant:[]
+		};
+		for (object in u ){
+			// console.log(object)
+			output[u[object].color].push(u[object].face)
+			if (u[object].even) output.even.push(u[object].face);
+			else if (u[object].odd) output.odd.push(u[object].face)
+			else if (u[object].vowel) output["vowel"].push(u[object].face)
+			else if (u[object].consonant) output.consonant.push(u[object].face)
+		}
+		return output;
 }
 
 var Rule = function(parm){
@@ -129,7 +151,11 @@ var Rule = function(parm){
 }
 
 Rule.prototype.interpret = function(ud){
-	
+	if (this.quantifier == "some"){
+		if (this.connective == "or"){
+
+		}
+	}
 }
 
 Rule.prototype.toString = function(){
@@ -251,6 +277,8 @@ function Score(newScore){
 	var x = 6;
 
 	var current = new Universe(x);
+	console.log(current)
+	console.log(buildExtension(current.domain))
 	$cards.html(printCards(current.domain));
 
 
