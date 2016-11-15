@@ -15,8 +15,8 @@ block content
 						.col-md-12.h3#rule
 					.row.m-y-1
 						.col-md-12#cards
-						.col-md-12
-							button.btn.btn-primary.btn-block.m-y-3(type='button')#wasonbutton Button
+						.col-md-12#buttarea
+							button.btn.btn-primary.btn-block.m-t-3(type='button')#wasonbutton Button
 			.col-lg-4
 				h1.display-4.text-xs-center.m-b-3 Leaderboard
 				.container.text-xs-center.m-t-3#leaderboard
@@ -25,5 +25,6 @@ block content
 
 
 block extrafooter
+	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
 	script(src='../javascripts/wason'+n+'.js')
 	link(rel="stylesheet", type="text/css", href="../css/wason.css")

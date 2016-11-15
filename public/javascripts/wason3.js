@@ -5014,6 +5014,25 @@ var all = {
 }
 module.exports = all;
 },{}],4:[function(require,module,exports){
+var mathJax = {
+  load: function () {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+  },
+  reload: function(id){
+    id = id || "";
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
+
+  }
+}
+
+
+
+module.exports = mathJax;
+
+},{}],5:[function(require,module,exports){
 var randomize = {
   oneNumber: function(n){
      return Math.floor(Math.random()* n) + 1
@@ -5063,10 +5082,11 @@ var randomize = {
 
 module.exports = randomize;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var alert = require('./mods/alert.js')
 var randomize = require('./mods/randomize.js')
 var leaderboard = require('./mods/leaderboard.js')
+var mathjax = require('./mods/mathjax.js')
 var Chance = require('chance')
 var chance = new Chance();
 var vowels = ['a','e','i','o','u'];
@@ -5074,8 +5094,12 @@ var consonants = ['b', 'h' ,'p', 'z', 'g'];
 var number = [2,3,4,5,6,7,8,9]
 var all = 'aeiou' + 'bhpzg' + 23456789
 var id = "wason3"
+var face = ["even", "odd","consonant", "vowel"];
+var color = ["danger", "info"]
+mathjax.load();
 
 var CardObj = function(face){
+
 	if(face == undefined){
 		face = chance.string({length: 1, pool: all});
 	} else if (face == "even"){
@@ -5142,13 +5166,13 @@ Universe.prototype.contains = function(obj){
 
 var Predicate = function(name){
 	this.name = name;
-	// if (name == "even" || name == "odd"){
-	// 	this.type = 'number';
-	// } else if (name == "vowel" || name =="consonant"){
-	// 	this.type = 'letter';
-	// } else if (name == "danger"){
-	//
-	// }
+	if (name == "even" || name == "odd"){
+		this.type = 'number';
+	} else if (name == "info" || name =="danger"){
+		this.type = 'color';
+	} else {
+		this.type = 'letter'
+	}
 }
 
 Predicate.prototype.truthFunction = function(obj){
@@ -5174,6 +5198,7 @@ Predicate.prototype.toString = function (){
 
 function buildExtension(u){
 		output = {
+			u: [],
 			danger: [],
 			info: [],
 			even:[],
@@ -5183,6 +5208,7 @@ function buildExtension(u){
 		};
 		for (object in u ){
 			// console.log(object)
+			output.u.push(u[object].face)
 			output[u[object].color].push(u[object].face)
 			if (u[object].even) output.even.push(u[object].face);
 			else if (u[object].odd) output.odd.push(u[object].face)
@@ -5192,59 +5218,124 @@ function buildExtension(u){
 		return output;
 }
 
-var Rule = function(parm){
+var Rule = function(){
 	this.quantifier  = randomize.drawOneRandomFromSet(["some","all","notall","none"]);
+	// this.quantifier  = randomize.drawOneRandomFromSet(["none"]);
+	var f = randomize.drawOneRandomFromSet(face)
 
-	order = [];
-	for (i in parm){
-		order.push(randomize.drawOneRandomFromSet(parm[i]));
-	}
-	order = randomize.shuffle(order);
-	if (chance.bool({likelihood: 10})){
-		this.left = new Rule(parm)
-	} else{
-		this.left = new Predicate(order[0]);
-	}
-	if (chance.bool({likelihood:10})){
-		this.right = new Rule(parm)
-	} else{
-		this.right =  new Predicate(order[1]);
-	}
-	this.connective  = randomize.drawOneRandomFromSet(["and","or","implies","iff"])
 
+	var draw = randomize.shuffle(["left", "right"]);
+
+
+			this[draw.pop()] = new Predicate(f);
+
+			this[draw.pop()] = new Predicate(randomize.drawOneRandomFromSet(["danger", "info"]));
+
+
+
+	this.connective  = randomize.drawOneRandomFromSet(["and","or","implies"])
+// this.connective  = randomize.drawOneRandomFromSet(["or"])
 
 
 }
 
 Rule.prototype.interpret = function(ud){
+	// console.log(this.left);
 	if (this.quantifier == "some"){
-		if (this.connective == "or"){
+		return exi(this.connective, this.left.name, this.right.name)
+	}else if (this.quantifier =="all"){
 
-		}
+		return uni(this.connective, this.left.name, this.right.name)
+
+	} else if (this.quantifier == "notall"){
+		return !uni(this.connective, this.left.name, this.right.name)
+	}else if (this.quantifier == "none"){
+		return !exi(this.connective, this.left.name, this.right.name)
 	}
+
+	function exi(connective, left, right){
+		// console.log(ud)
+		// console.log(ud.danger)
+			if (connective == "or"){
+					if (ud[left].length != 0 || ud[right]!= 0) return true;
+					else return false;
+			} else if (connective == "and"){
+				for (obj in ud[left]){
+					for (o in ud.u){
+						if(ud[left].indexOf(ud.u[o]) != -1 && ud[right].indexOf(ud.u[o]) != -1 ){
+							return true;
+						}
+					}
+				}
+				return false;
+			} else if (connective == "implies"){
+					if (ud[left].length < ud.u.length || ud[right].length != 0){
+
+						return true;
+					} else return false;
+			}
+
+	}
+
+	function uni(connective, left, right){
+
+		if (connective == "or"){
+				for (o in ud.u){
+	// left.name].indexOf(ud.u[o])  + " " + ud[this.right.name].indexOf(ud.u[o]) )
+					if (ud[left].indexOf(ud.u[o]) == -1 && ud[right].indexOf(ud.u[o]) == -1 ){
+						return false;
+					}
+				}return true;
+		}else if (connective == "and"){
+				for (o in ud.u){
+					if (ud[left].indexOf(ud.u[o]) == -1 || ud[right].indexOf(ud.u[o]) == -1 ){
+						return false;
+					}
+				}return true;
+		}else if (connective == "implies"){
+				for (o in ud.u){
+					if (ud[left].indexOf(ud.u[o]) != -1 && ud[right].indexOf(ud.u[o]) == -1 ){
+						return false;
+					}
+				}return true;
+			}
+	}
+
 }
 
 Rule.prototype.toString = function(){
-	if (this.quantifier == "existential"){
-		return "Some cards have " + this.left.toString() + " on one side but " +  this.right.toString() + " on the other side."
-	} else if (this.quantifier == "universal"){
-		return randomize.drawOneRandomFromSet([
-			"All cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on another.",
-			"Any card with " + this.left.toString() + " on one side has " + this.right.toString() + " on another.",
-			"For all cards, it is such that if one side is " + this.left.toString() + " then the other side is " + this.right.toString() + "."
-		])
-	} else if (this.quantifier == "notall"){
-		return randomize.drawOneRandomFromSet([
-			"Not all cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on the other side.",
-			"At least one card with " + this.left.toString() + " on one side does not have " + this.right.toString() + " on the other side."
+	v = randomize.drawOneRandomFromSet(["x","y","z","w"])
+	if (this.quantifier == "none"){
+	 q = "\\neg \\exists " + v;
+ } else if (this.quantifier == "all"){
+	q = "\\forall "+ v;
+} else if (this.quantifier == "notall"){
+	q = "\\neg \\forall "+ v;
+}else if (this.quantifier == "some"){
+	q = "\\exists "+ v;
+ }
+	if (this.connective == "and"){
+		c = "\\wedge"
+	} else 	if (this.connective == "or"){
+			c = "\\vee"
+		} else if (this.connective == "implies"){
+			c = "\\to"
+		}
+	if (this.left.name == "even") l ="E" + v;
+	else if (this.left.name == "odd") l ="O" + v;
+	else if (this.left.name == "consonant") l ="C" + v;
+	else if (this.left.name == "vowel") l ="V" + v;
+	else if (this.left.name == "info") l ="B"+ v;
+	else if (this.left.name == "danger") l ="R"+ v;
 
-		])
-	} else if (this.quantifier == "none"){
-		return randomize.drawOneRandomFromSet([
-			"No cards with " + this.left.toString() + " on one side have " + this.right.toString() + " on the other side.",
-			"Any card with "  + this.left.toString()  + " is guaranteed not to have " + this.right.toString() + " on the opposite side."
-		])
-	}
+	if (this.right.name == "even") r ="E"+ v;
+	else if (this.right.name == "odd") r ="O"+ v;
+	else if (this.right.name == "consonant") r ="C"+ v;
+	else if (this.right.name == "vowel") r ="V"+ v;
+	else if (this.right.name == "info") r ="B"+ v;
+	else if (this.right.name == "danger") r ="R"+ v;
+
+	return "\\(" + q + "(" + l + " "+ c + " " +r + ")\\)"
 }
 
 Rule.prototype.findAnswer = function(domain){
@@ -5285,6 +5376,10 @@ $(function(){
 	var $minus = $('#minus');
 	var $numOfCards = $('#numOfCards');
 	var secondChance = 0;
+	var $buttarea = $('#buttarea')
+	$button.text("True")
+	$buttarea.append("<button class = 'btn btn-danger btn-block 'type='button' id = 'false'>False </button>");
+	var $falseb = $('#false')
 
 
 
@@ -5322,11 +5417,12 @@ function checkAnswer(answers){
 
 function generalInstruction(){
 	var html = "<h4>Instruction</h4>"
- html +=' <p>Each card below has a number on one side and a letter on the other. </p>'
-html += '<p><em>Your task is to turn over the <strong>minimum</strong> number of cards required to determine whether the statement is true or false.</em></p>'
-html += '<p>Choose by clicking the card(s) and then press "Button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
+ html +=' <p>Each card below has a number on one side and a letter on the other. They are either blue or red.</p>'
+html += '<p>Your task is to determine if the QL statement given is true or false.</p>'
+html += '<p>Choose by clicking the "True" or "False button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
 html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards by pressing + or -. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
+html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'
 
 	alert($head, "b", html,2);
 }
@@ -5335,34 +5431,44 @@ function Score(newScore){
 	score = newScore;
 	$score.text('Your Score: ' + score);
 }
-
+generalInstruction();
 
 	var $cards = $('#cards');
 
-	var possibility = [["even", "odd"], ["consonant", "vowel"]];
+
 	var x = 6;
 
 	var current = new Universe(x);
-	console.log(current)
-	console.log(buildExtension(current.domain))
+	// console.log(current)
+	ex = (buildExtension(current.domain))
+
 	$cards.html(printCards(current.domain));
 
 
-	var rule = new Rule(possibility);
-	ans = rule.findAnswer(current.domain);
+	var rule = new Rule(face);
+	// console.log(rule);
+	// 	console.log(rule.interpret(ex))
+
+	ans = rule.interpret(ex);
+	console.log(ans)
 	$rule.html(rule.toString());
+	mathjax.reload("rule")
 
 	var reset = false;
 	Score(0);
-	generalInstruction();
+
+
 
 	function resetCards(){
 			current = new Universe(x);
 			$cards.html(printCards(current.domain));
-			rule = new Rule(possibility);
+			rule = new Rule(face);
+			ans = rule.interpret(ex);
+			console.log(ans)
 			$rule.html(rule.toString());
 			reset = false;
-			alert($head,"b","Which card(s) must you turn over in order to verify the statement below?",3);
+			mathjax.reload("rule")
+			alert($head,"b","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'",3);
 
 	}
 
@@ -5385,11 +5491,21 @@ function Score(newScore){
 
 
 	$button.on('click', function (){
+		buttonRes(true);
+	})
+
+	$falseb.on('click', function (){
+		buttonRes(false);
+	})
+
+	function buttonRes(button){
+		if (button == ans) correct = true;
+		else correct = false;
 		if (reset == false){
 			reset = true;
-			if (checkAnswer(rule.findAnswer(current.domain))){
+			if (correct){
 				Score(score + x);
-				alert($head, "b","This is correct! Press the button to continue", 2);
+				alert($head, "b","This is correct! Press any button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
 			} else if (secondChance == 1){
 				alert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
@@ -5400,145 +5516,37 @@ function Score(newScore){
 				var output = "This is incorrect! Your final score is "+ score + ". Press the button to restart. See if you made it on the leaderboard.";
 				if (score > 0){
 				jQuery.post("../"+id, {score:score}, function(res){
-				    	leaderboard.draw(id, $leaderboard);
-				      });
+							leaderboard.draw(id, $leaderboard);
+							});
 				}
 				if (score >= passing){
-				    jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 4}, function(res){
-				       output += "You passed! "+res;
-				       alert($head, "b",output, 1);
-				      });
-				    	Score(0);
-  					}else{
-  					 alert($head, "b",output, 4);
-  					  Score(0);
-  					  leaderboard.draw(id, $leaderboard);
+						jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 4}, function(res){
+							 output += "You passed! "+res;
+							 alert($head, "b",output, 1);
+							});
+							Score(0);
+						}else{
+						 alert($head, "b",output, 4);
+							Score(0);
+							leaderboard.draw(id, $leaderboard);
 
-  					}
+						}
 
 
 			}
 		} else{
 			resetCards();
 		}
-	})
-	leaderboard.draw("wason2", $leaderboard);
+	}
+
+
+
+	leaderboard.draw(id, $leaderboard);
 
 
 }) //end
 
-},{"./mods/alert.js":2,"./mods/leaderboard.js":3,"./mods/randomize.js":4,"chance":1}],6:[function(require,module,exports){
-'use strict'
-
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
-}
-
-init()
-
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-
-  // base64 is 4/3 + up to two characters of the original data
-  arr = new Arr(len * 3 / 4 - placeHolders)
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
-
-  var L = 0
-
-  for (i = 0, j = 0; i < l; i += 4, j += 3) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
-  }
-
-  parts.push(output)
-
-  return parts.join('')
-}
-
-},{}],7:[function(require,module,exports){
+},{"./mods/alert.js":2,"./mods/leaderboard.js":3,"./mods/mathjax.js":4,"./mods/randomize.js":5,"chance":1}],7:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -7331,7 +7339,118 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":6,"ieee754":8,"isarray":9}],8:[function(require,module,exports){
+},{"base64-js":8,"ieee754":9,"isarray":10}],8:[function(require,module,exports){
+'use strict'
+
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+function init () {
+  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  for (var i = 0, len = code.length; i < len; ++i) {
+    lookup[i] = code[i]
+    revLookup[code.charCodeAt(i)] = i
+  }
+
+  revLookup['-'.charCodeAt(0)] = 62
+  revLookup['_'.charCodeAt(0)] = 63
+}
+
+init()
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+
+  // base64 is 4/3 + up to two characters of the original data
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+},{}],9:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -7417,11 +7536,11 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}]},{},[5]);
+},{}]},{},[6]);
