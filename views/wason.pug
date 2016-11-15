@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
 	.container-fluid.p-t-3.m-t-3
 		.row
 			.col-lg-8
@@ -25,6 +26,6 @@ block content
 
 
 block extrafooter
-	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
+
 	script(src='../javascripts/wason'+n+'.js')
 	link(rel="stylesheet", type="text/css", href="../css/wason.css")

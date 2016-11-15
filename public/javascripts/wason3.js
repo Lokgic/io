@@ -5024,7 +5024,6 @@ var mathJax = {
   reload: function(id){
     id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-
   }
 }
 
@@ -5220,7 +5219,7 @@ function buildExtension(u){
 
 var Rule = function(){
 	this.quantifier  = randomize.drawOneRandomFromSet(["some","all","notall","none"]);
-	// this.quantifier  = randomize.drawOneRandomFromSet(["none"]);
+	// this.quantifier  = randomize.drawOneRandomFromSet(["all"]);
 	var f = randomize.drawOneRandomFromSet(face)
 
 
@@ -5280,6 +5279,7 @@ Rule.prototype.interpret = function(ud){
 	function uni(connective, left, right){
 
 		if (connective == "or"){
+			console.log(ud);
 				for (o in ud.u){
 	// left.name].indexOf(ud.u[o])  + " " + ud[this.right.name].indexOf(ud.u[o]) )
 					if (ud[left].indexOf(ud.u[o]) == -1 && ud[right].indexOf(ud.u[o]) == -1 ){
@@ -5338,26 +5338,6 @@ Rule.prototype.toString = function(){
 	return "\\(" + q + "(" + l + " "+ c + " " +r + ")\\)"
 }
 
-Rule.prototype.findAnswer = function(domain){
-	var ans = [];
-	if (this.quantifier == "existential"|| this.quantifier == "none"){
-		for (object in domain){
-			// console.log(domain[object].face)
-			if (this.left.truthFunction(domain[object]) || this.right.truthFunction(domain[object])){
-				ans.push(domain[object].face)
-			}
-		}
-	} else if (this.quantifier == "universal" || this.quantifier == "notall"){
-		for (object in domain){
-			// console.log(this.right.negation(domain[object]));
-			if (this.left.truthFunction(domain[object]) || this.right.negation(domain[object])){
-				ans.push(domain[object].face);
-			}
-		}
-	}
-
-	return ans;
-}
 
 
 $(function(){
@@ -5380,6 +5360,7 @@ $(function(){
 	$button.text("True")
 	$buttarea.append("<button class = 'btn btn-danger btn-block 'type='button' id = 'false'>False </button>");
 	var $falseb = $('#false')
+	$('#wasonhead').text("QL Interpretation")
 
 
 
@@ -5393,26 +5374,6 @@ function printCards(domain){
 
 	html += '</div>'
 	return html;
-}
-
-function checkAnswer(answers){
-	var checked = $('.active', '.btn-group').children().text().split("");
-	if (answers.length == 0){
-		if (checked.length == 0) return true;
-		else return false;
-	}
-	for (answer in answers){
-		if (checked.indexOf(answers[answer])== -1){
-			return false;
-		}
-	}
-
-	for (check in checked){
-		if (answers.indexOf(checked[check])== -1){
-			return false;
-		}
-	}
-	return true;
 }
 
 function generalInstruction(){
@@ -5461,6 +5422,7 @@ generalInstruction();
 
 	function resetCards(){
 			current = new Universe(x);
+			ex = (buildExtension(current.domain))
 			$cards.html(printCards(current.domain));
 			rule = new Rule(face);
 			ans = rule.interpret(ex);
@@ -5505,7 +5467,7 @@ generalInstruction();
 			reset = true;
 			if (correct){
 				Score(score + x);
-				alert($head, "b","This is correct! Press any button to continue", 2);
+				alert($head, "b","This is correct! Press the red or blue button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
 			} else if (secondChance == 1){
 				alert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
@@ -5513,7 +5475,7 @@ generalInstruction();
 				reset = false;
 			}
 			else {
-				var output = "This is incorrect! Your final score is "+ score + ". Press the button to restart. See if you made it on the leaderboard.";
+				var output = "This is incorrect! Your final score is "+ score + ". Press the red or blue button to restart. See if you made it on the leaderboard.";
 				if (score > 0){
 				jQuery.post("../"+id, {score:score}, function(res){
 							leaderboard.draw(id, $leaderboard);

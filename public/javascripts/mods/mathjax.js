@@ -8,7 +8,6 @@ var mathJax = {
   reload: function(id){
     id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-
   }
 }
 
