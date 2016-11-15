@@ -11,9 +11,10 @@ var all = 'aeiou' + 'bhpzg' + 23456789
 var id = "wason3"
 var face = ["even", "odd","consonant", "vowel"];
 var color = ["danger", "info"]
+
 mathjax.load();
 
-var CardObj = function(face){
+var CardObj = function(face, color){
 
 	if(face == undefined){
 		face = chance.string({length: 1, pool: all});
@@ -31,10 +32,13 @@ var CardObj = function(face){
 	this.consonant = false;
 	this.even = false;
 	this.odd = false;
-	if (chance.bool()){
-		this.color = "danger"
-	} else{
-		this.color ="info"
+	if (color == undefined){
+		if (chance.bool()){
+			this.color = "danger"
+		} else{
+			this.color ="info"
+	}}else {
+		this.color = color;
 	}
 
 	if (isNaN(parseInt(face))){
@@ -60,13 +64,55 @@ var CardObj = function(face){
 }
 
 var Universe = function(n){
+	var weights = {
+		odd: 0,
+		even: 0,
+		vowel: 0,
+		consonant: 0,
+	}
+	// var oddWeight = 0;
+	// var evenWeight = 0;
+	// var vowelWeight = 0;
+	// var consonantWeight = 0;
+	// var infoRate = 0;
+	// var dangerRate = 0;
+	var count = 100;
+	for (w in weights){
+		if (count != 0){
+			weights[w] = chance.integer({min: 0, max: count});
+			count = count - weights[w]
+		}
+	}
+
+
+		weights.danger = chance.integer({min: 0, max: 100}),
+		weights.info = 100 - weights.danger
+	console.log(weights)
+	//
+	//
+	// evenWeight = chance.integer({min: 0, max: count});
+	// count = count - evenWeight;
+	// if (count > 0) {
+	// 	oddWeight = chance.integer({min: 0, max: count});
+	// 	count = count - oddWeight
+	// }
+	// var oddWeight = chance.integer({min: 0, max: count});
+	// 	else var oddWeight = 0;
+
 	this.domain = {};
 	while (n>0){
-			var temp = new CardObj;
-			if (!this.contains(temp)){
-				this.domain[temp.face] = temp;
+
+			var temp = new CardObj(
+
+				chance.weighted(['odd','even','vowel', 'consonant'], [weights.odd, weights.even,weights.vowel, weights.consonant]),
+
+			chance.weighted(['info', 'danger'],[weights.info, weights.danger])
+
+		);
+
+				this.domain[n] = temp;
 				n--;
-			}
+
 	}
 }
 
@@ -238,15 +284,15 @@ Rule.prototype.toString = function(){
 			c = "\\to"
 		}
 	if (this.left.name == "even") l ="E" + v;
-	else if (this.left.name == "odd") l ="O" + v;
-	else if (this.left.name == "consonant") l ="C" + v;
+	else if (this.left.name == "odd") l ="\\neg E" + v;
+	else if (this.left.name == "consonant") l ="\\neg V" + v;
 	else if (this.left.name == "vowel") l ="V" + v;
 	else if (this.left.name == "info") l ="B"+ v;
 	else if (this.left.name == "danger") l ="R"+ v;
 
 	if (this.right.name == "even") r ="E"+ v;
-	else if (this.right.name == "odd") r ="O"+ v;
-	else if (this.right.name == "consonant") r ="C"+ v;
+	else if (this.right.name == "odd") r ="\\neg E"+ v;
+	else if (this.right.name == "consonant") r ="\\neg V"+ v;
 	else if (this.right.name == "vowel") r ="V"+ v;
 	else if (this.right.name == "info") r ="B"+ v;
 	else if (this.right.name == "danger") r ="R"+ v;
@@ -264,6 +310,7 @@ $(function(){
 	$leaderboard = $('#leaderboard');
 	$cards = $('#cards');
 	$rule = $('#rule');
+	$numOfCards = $('#numOfCards')
 	var score = 0;
 	var passing = 100;
 	var $button = $('#wasonbutton');
@@ -277,7 +324,8 @@ $(function(){
 	$buttarea.append("<button class = 'btn btn-danger btn-block 'type='button' id = 'false'>False </button>");
 	var $falseb = $('#false')
 	$('#wasonhead').text("QL Interpretation")
-
+	$plus.remove();
+	$minus.remove();
 
 
 
@@ -297,9 +345,9 @@ function generalInstruction(){
  html +=' <p>Each card below has a number on one side and a letter on the other. They are either blue or red.</p>'
 html += '<p>Your task is to determine if the QL statement given is true or false.</p>'
 html += '<p>Choose by clicking the "True" or "False button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
-html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards by pressing + or -. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
+html += '<p>The number of cards changes randomly for each trial. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
-html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'
+html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Vx: x is a vowel card.</p>'
 
 	alert($head, "b", html,2);
 }
@@ -313,8 +361,9 @@ generalInstruction();
 	var $cards = $('#cards');
 
 
-	var x = 6;
-
+	var x
+	x = chance.integer({min: 2, max: 10})
+	$numOfCards.text('# of Cards: ' +x)
 	var current = new Universe(x);
 	// console.log(current)
 	ex = (buildExtension(current.domain))
@@ -337,7 +386,11 @@ generalInstruction();
 
 
 	function resetCards(){
-			current = new Universe(x);
+
+
+		   x = chance.integer({min: 2, max: 10})
+			$numOfCards.text('# of Cards: ' + x)
+			var current = new Universe(x);
 			ex = (buildExtension(current.domain))
 			$cards.html(printCards(current.domain));
 			rule = new Rule(face);
@@ -345,27 +398,12 @@ generalInstruction();
 			console.log(ans)
 			$rule.html(rule.toString());
 			reset = false;
-			mathjax.reload("rule")
-			alert($head,"b","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'",3);
 
+			alert($head,"b","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card,  Vx: x is a vowel card.</p>'",3);
+			mathjax.reload("rule")
 	}
 
-	$plus.on('click', function (){
-		if (x < 18)	{
-			x++;
-			resetCards();
-			$numOfCards.text("# of Cards : " + x);
-		}
 
-	})
-
-	$minus.on('click', function (){
-		if (x > 1) {
-			x--;
-			resetCards();
-			$numOfCards.text("# of Cards : " + x);
-		}
-	})
 
 
 	$button.on('click', function (){
@@ -398,7 +436,7 @@ generalInstruction();
 							});
 				}
 				if (score >= passing){
-						jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 4}, function(res){
+						jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 6}, function(res){
 							 output += "You passed! "+res;
 							 alert($head, "b",output, 1);
 							});
