@@ -431,16 +431,22 @@ router.get('/5/quiz', function(req, res, next){
 	return res.render('modules', {title: 'Module Five', file: "5", part: "quiz"})
 });
 
-router.get('/6', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
-});
+// router.get('/6', function(req, res, next){
+// 	var err = new Error('Module not yet available.');
+// 				err.status = 401;
+// 				return next(err);
+// });
 
 
 router.get('/6/wason3', function(req, res, next){
 
 	return res.render('wason', {n:"3"});
+});
+
+router.get('/6', function(req, res, next){
+	var lesson = require('../public/json/lesson6.json');
+	console.log(lesson)
+	return res.render('lesson', {title:"Module Six", content:lesson});
 });
 
 

@@ -1,0 +1,69 @@
+{
+  "1":{
+    "title": "Creating models in Quantified Logic",
+    "content":{
+      "a": {
+        "type": "p",
+        "substance":"In module 2 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings for all the non-logical parts of a sentence, in this case, the sentence letters. These were called non-logical because their meaning was not fixed by the rules of SL. The logical part of the language was the system of connectives and parentheses. As it turned out, the logical parts of our language were truth functional: the meaning of the larger sentences built up with the connectives and parentheses was simply a function of the truth of the smaller parts. Because the system of sentential connectives and parentheses is truth functional, our semantic system only needed to look at one aspect of the meaning of the sentence letters, their truth value. Thus an interpretation of a sentence in SL simply turned out to be a truth assignment on the sentence letters. That's why you spent module 2 merrily writing Ts and Fs under sentence letters. Each little row of Ts and Fs represented one way of assigning meaning to a sentence or argument, and all the little rows in the truth table represented all the possible ways of assigning meaning to the sentence or argument (at least as far as truth was concerned.)"},
+        "b": {
+          "type": "p",
+          "substance":"In this chapter we are going to develop similar methods for QL. Because QL is a more complicated system than SL developing semantics for QL will be much more complicated, and there will be greater limitations for what we can do with these methods."},
+          "c":{
+            "type": "link",
+            "url": "../6/wason3",
+            "title": "Intuitive QL interpretation",
+            "description":"To get an intuitive taste of QL semantics, the first reading quiz will ask you to determine the truth value of a given QL proposition, based on the cards presented to you."
+          }
+        }
+
+
+  },
+  "2":{
+    "title": "Basic Models",
+    "content":{
+        "a":{
+          "type":"p",
+          "substance":"The first thing we need to do is to find an equivalent in QL of a little row of Ts and Fs beneath a sentence in SL. We called this little row of Ts and Fs an interpretation, because it gave one aspect of the meaning of the parts of the sentence, namely their truth values. To come up with an interpretation of a sentence in QL, we will need to look at more than the truth or falsity of sentences, though. We have, after all, broken open the atomic sentence to look at its subatomic parts, and now we will need to assign meaning to these parts. The way to start is to look at the symbolization keys we created when we were translating sentences in and out of QL. The symbolization key contained a universe of discourse (UD), a meaning for each predicate, and an object picked out by each term. For example:"
+        },
+        "b":{
+          "type":"list",
+          "content":["\\(UD\\): comic book characters",
+                    "\\(Fx\\): x fights crime",
+                    "\\(b\\): Batman",
+                    "\\(w\\): Bruce Wayne"]
+        },
+        "c":{
+          "type":"p",
+          "substance":"Given this symbolization key, we can translate sentences like this"
+        },
+        "d":{
+          "type":"list",
+          "content":["\\(Fb\\): Batman fights crime", "\\(Fw\\): Bruce Wayne fights crime.","\\(Fb \\to Fw\\): If Batman fights crime, then Bruce Wayne fights crime."]
+        },
+        "e":{
+          "type":"p",
+          "substance":"This symbolization key, along with some basic knowledge of superhero stories, gives us enough information to figure out that the sentence Fb is true. (Notice that the sentence Fb is not true just because of the interpretation. The way we interpret the sentence, plus the way the world is, makes the sentence true.)"
+        },
+        "f":{
+          "type":"p",
+          "substance":"This is the information we need to develop an interpretation of sentences in QL. We are not just assigning truth values anymore. We need to get deeper into meaning here, and look at the reference of the parts of the sentence. Reference is an aspect of meaning that deals with the way bits of language pick out or identify objects in the real world. For our purposes the real world is the universe of discourse, the set of objects we are talking about. To explain how a singular term like $b$ refers, we need only point out the member of the UD it refers to, in this case, Batman. In more technical terms, Batman is the referent of B. For our purposes it is enough to define a referent like this: the referent of a term in QL is the unique object picked out by that term. "
+        },
+        "g":{
+          "type":"p",
+          "substance":"(Notice that here to explain what b refers to, I have been forced to simply use another singular term in another language, the name ``Batman.'' To really pick out the object referred to, I would need to draw your attention to something in the actual world, for instance by holding up a comic book and pointing at the character on the cover.)"
+        },
+        "h":{
+          "type":"p",
+          "substance":"We want to use similar methods to talk about the meaning of predicates. To do this we will talk about the extension of a predicate. The extension of a predicate is the set of objects in the UD that the predicate applies to. So if b is in the extension of the predicate $F$ then the sentence Fb is true."
+        },
+        "i":{
+          "type":"p",
+          "substance":"(Identifying the extension of a predicate like F again forces us to rely on another language, English. We can say that the extension of F includes Batman, Superman, Green Lantern, etc. The situation is worse because F has an indefinitely large extension, so we have relied on the English predicate 'fights crime' to describe it.)"
+        }
+    }
+
+
+  }
+
+
+}

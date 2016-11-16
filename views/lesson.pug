@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	.container.p-t-3.m-t-3
+			for section in content
+				h1 #{section.title}
+				for x in section.content
+					if x.type == "p"
+						p #{x.substance}
+					if x.type == "list"
+						ul
+							for y in x.content
+								li #{y}
+					if x.type == "link"
+						h3 #{x.title}
+						p #{x.description}
+						a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
+
+
+
+
+block extrafooter
+	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
