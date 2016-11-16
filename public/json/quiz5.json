@@ -22,7 +22,7 @@
     "question": "",
     "setuptype": "list",
     "questions": [
-      ["<img src ='..\\img\\module5\\quiz5_3_1.png' class='img-fluid'>", "Permissible"],
+      ["<img src ='..\\img\\module5\\quiz5_3_1.png' class='img-fluid'>", "Impermissible"],
       ["<img src ='..\\img\\module5\\quiz5_3_2.png' class='img-fluid'>", "Impermissible"],
       ["<img src ='..\\img\\module5\\quiz5_3_3.png' class='img-fluid'>", "Permissible"],
       ["<img src ='..\\img\\module5\\quiz5_3_4.png' class='img-fluid'>", "Impermissible"]
