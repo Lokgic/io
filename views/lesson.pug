@@ -1,23 +1,54 @@
 extends layout
 
-block content
-	.container.p-t-3.m-t-3
-			for section in content
-				h1 #{section.title}
-				for x in section.content
-					if x.type == "p"
-						p #{x.substance}
-					if x.type == "list"
-						ul
-							for y in x.content
-								li #{y}
-					if x.type == "link"
-						h3 #{x.title}
-						p #{x.description}
-						a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
 
+block content
+	.container-fluid.p-x-0
+		row
+			.col-lg-2.col-md-12.p-l-0.p-r-0.collapse.in#sidebar
+				h3.display-3.text-xs-center.text-muted#icon #{moduleNum}
+				.list-group.panel
+					- var i = 1
+					for section in content
+						if "section"+i == sectionNum
+							- var securl = "menu" + i
+							a(href = "#"+ securl data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse
+								- var title = i + " " +section["1"].sectionname
+								span #{title}
+							.collapse.in(id = securl)
+								- var j = 1
+								for sub in section
+									- var stitle = i + "." + j + " " + sub.title
+									- j = j+ 1
+									a(href="/"+moduleNum + "/" +section["1"].sectionNum + "#"+sub.title data-parent="#menu"+section["1"].sectionId).list-group-item
+										small.text-muted #{stitle}
+						else
+							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse
+								- var title = i + " " +section["1"].sectionname
+								span #{title}
+						- i = i + 1
+			main.col-lg-8.col-md-12.p-l-2.p-t-2
+				for section in content[sectionNum]
+					h1(id = section.title) #{section.title}
+					for x in section.content
+						if x.type == "p"
+							for pa in x.substance
+								p #{pa}
+						if x.type == "list"
+							ul.list-group
+								for y in x.content
+									li.list-group-item #{y}
+						if x.type == "link"
+							p #{x.description}
+							a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
+						if x.type == "listHead"
+							ul.list-group
+								for y in x.content
+									li.list-group-item.lead #{y[0]}
+										small.text-muted.m-x-1 #{y[1]}
+			.right.col-lg-2.hidden-md-down
 
 
 
 block extrafooter
 	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
+	link(rel="stylesheet", type="text/css", href="../css/lesson.css")
