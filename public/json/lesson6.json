@@ -15,7 +15,7 @@
             }
         },
         "2": {
-            "title": "Task: Interpretation w/ Cards",
+            "title": "Ex.1: Interpretation w/ Cards",
             "content": {
                 "a": {
                     "type": "link",
@@ -88,6 +88,43 @@
 
         },
         "4": {
+            "id": "reading2",
+            "title": "Ex.2: Models with Single-Placed Predicates",
+            "content": {
+                "a": {
+                    "type": "p",
+                    "substance": ["Determine whether each sentence is true or false in the model given."]
+                },
+                "b": {
+                    "type": "listHead",
+                    "content": [
+                        ["UD", "{Bernie, Clinton}"],
+                        ["extension(A)", "{Bernie, Clinton}"],
+                        ["extension(B)", "{Bernie}"],
+                        ["extension(N)", "{}"],
+                        ["referent(c)", "Clinton"]
+                    ]
+                },
+                "c": {
+                    "type": "check",
+                    "questions": [
+                        ["\\(Bc\\)", false],
+                        ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
+                        ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
+                        ["\\(\\forall x Ax\\)", true],
+                        ["\\(\\forall x \\neg Bx\\)", false],
+                        ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
+                        ["\\(\\exists x (Ax \\to Nx)\\)", false],
+                        ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
+                        ["\\(\\exists Bx \\to \\forall x Ax\\)", true]
+
+                    ]
+                }
+            }
+
+        },
+
+        "5": {
             "title": "Models for multiplace predicates",
             "content": {
                 "a": {

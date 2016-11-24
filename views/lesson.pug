@@ -45,6 +45,18 @@ block content
 								for y in x.content
 									li.list-group-item.lead #{y[0]}
 										small.text-muted.m-x-1 #{y[1]}
+						if x.type == "check"
+							.card
+								ul.list-group.list-group-flush
+									- for (var i = 0;i<x.questions.length;i++)
+										li.list-group-item
+											.form-check
+											label.form-check-label
+												input.form-check-input(type="checkbox" id = x.id + "-"+i value = id = x.id + "-"+i)
+												p #{x.questions[i][0]}
+									button(type="button").btn-primary.btn.btn-block Submit Answers
+
+
 			.right.col-lg-2.hidden-md-down
 
 
