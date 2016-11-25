@@ -144,26 +144,7 @@
                 },
                 "c": {
                     "type": "ex",
-                    "id": "a",
-                    "questions": [
-                        ["\\(Bc\\)", false],
-                        ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
-                        ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
-                        ["\\(\\forall x Ax\\)", true],
-                        ["\\(\\forall x \\neg Bx\\)", false],
-                        ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
-                        ["\\(\\exists x (Ax \\to Nx)\\)", false],
-                        ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
-                        ["\\(\\exists x Bx \\to \\forall x Ax\\)", true],
-                        ["\\(Rbc\\)", true],
-                        ["\\(Rcb \\to Rcc\\)",true],
-                        ["\\((Rcc \\vee Rcb)\\)", false],
-                        ["\\( \\exists x \\exists x Rxx\\)", true],
-                        ["\\( \\exists  x Rxx \\)", false],
-                        ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
-                        ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)",true]
-
-                    ]
+                    "id": "reading_2"
                 }
             }
 
@@ -356,33 +337,63 @@
                     "substance": ["Can we show an argument to be valid using models?"]
                 }
             }
+        },
+        "6": {
+
+            "title": "Ex.3: Using Models to Show Logical Properties",
+            "content": {
+                "a": {
+                    "type": "p",
+                    "substance": ["Select the QL statements where the given logical property holds."]
+                },
+                "b": {
+                    "type": "ex",
+                    "id": "reading_3"
+                }
+            }
+
         }
     },
-    "ex":{
-      "s":false,
-      "a": {
-          "type": "check",
-          "id": "reading2",
-          "questions": [
-              ["\\(Bc\\)", false],
-              ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
-              ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
-              ["\\(\\forall x Ax\\)", true],
-              ["\\(\\forall x \\neg Bx\\)", false],
-              ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
-              ["\\(\\exists x (Ax \\to Nx)\\)", false],
-              ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
-              ["\\(\\exists x Bx \\to \\forall x Ax\\)", true],
-              ["\\(Rbc\\)", true],
-              ["\\(Rcb \\to Rcc\\)",true],
-              ["\\((Rcc \\vee Rcb)\\)", false],
-              ["\\( \\exists x \\exists x Rxx\\)", true],
-              ["\\( \\exists  x Rxx \\)", false],
-              ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
-              ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)",true]
+    "ex": {
+        "reading_2": {
+            "type": "check",
+            "id": "reading_2",
+            "questions": [
+                ["\\(Bc\\)", false],
+                ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
+                ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
+                ["\\(\\forall x Ax\\)", true],
+                ["\\(\\forall x \\neg Bx\\)", false],
+                ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
+                ["\\(\\exists x (Ax \\to Nx)\\)", false],
+                ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
+                ["\\(\\exists x Bx \\to \\forall x Ax\\)", true],
+                ["\\(Rbc\\)", true],
+                ["\\(Rcb \\to Rcc\\)", true],
+                ["\\((Rcc \\vee Rcb)\\)", false],
+                ["\\( \\exists x \\exists y Rxy\\)", true],
+                ["\\( \\exists  x Rxx \\)", false],
+                ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
+                ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)", true]
 
-          ]
-      }
+            ]
+        },
+        "reading_3": {
+            "type": "check",
+            "id": "reading_3",
+            "questions": [
+                ["Contingent? \\(\\exists x Txh \\)", true],
+                ["Contingent? \\(Pm \\wedge \\neg \\forall x Px\\)", true],
+                ["Contingent? \\(\\forall x Jz \\leftrightarrow \\exists y Jy\\)", true],
+                ["Logically Equivalent? \\(\\exists x Px \\to Qc, \\exists x (Px \\to Qc)\\)", false],
+                ["Logically Equivalent? \\(\\forall x (Px \\to \\neg Qx), \\exists x (Px \\wedge \\neg Qx)\\)", false],
+                ["Logically Equivalent? \\(\\forall x (Px \\to  Qx), \\exists x (Px \\wedge Qx)\\)", false],
+                ["Valid? \\(\\forall x (Ax \\to Bx) \\vDash \\exists Bx\\)", false],
+                ["Invalid? \\(\\exists x (Px \\to  Qx) \\vDash \\exists x Px\\)", true],
+                ["Valid? \\(\\{\\exists x (Ex \\wedge  Fx) , \\exists x Fx \\to \\exists x Gx\\} \\vDash \\exists x (Ex \\wedge Gx)\\)", false]
+
+            ]
+        }
     }
 
 }
