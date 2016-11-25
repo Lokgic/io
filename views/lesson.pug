@@ -26,7 +26,9 @@ block content
 								- var title = i + " " +section["1"].sectionname
 								span #{title}
 						- i = i + 1
-			main.col-lg-8.col-md-12.p-l-2.p-t-2
+			main.col-lg-8.col-md-12
+				.jumbotron.m-y-3
+					h2.display-1.text-xs-center #{content[sectionNum]["1"].sectionname}
 				for section in content[sectionNum]
 					h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
 					for x in section.content
