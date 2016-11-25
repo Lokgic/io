@@ -28,11 +28,11 @@ block content
 						- i = i + 1
 			main.col-lg-8.col-md-12.p-l-2.p-t-2
 				for section in content[sectionNum]
-					h3.display-3.m-a-1.text-xs-center(id = section.title) #{section.title}
+					h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
 					for x in section.content
 						if x.type == "p"
 							for pa in x.substance
-								p.lead.text-justify #{pa}
+								p.lead.text-justify.m-y-2 #{pa}
 						if x.type == "list"
 							ul.list-group
 								for y in x.content

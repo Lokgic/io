@@ -437,6 +437,10 @@ router.get('/5/quiz', function(req, res, next){
 // 				return next(err);
 // });
 
+router.get('/6/', function(req, res, next){
+
+	return res.redirect('/6/1');
+});
 
 router.get('/6/wason3', function(req, res, next){
 
