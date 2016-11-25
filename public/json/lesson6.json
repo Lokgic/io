@@ -87,44 +87,8 @@
 
 
         },
+
         "4": {
-            "id": "reading2",
-            "title": "Ex.2: Models with Single-Placed Predicates",
-            "content": {
-                "a": {
-                    "type": "p",
-                    "substance": ["Determine whether each sentence is true or false in the model given."]
-                },
-                "b": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{Bernie, Clinton}"],
-                        ["extension(A)", "{Bernie, Clinton}"],
-                        ["extension(B)", "{Bernie}"],
-                        ["extension(N)", "{}"],
-                        ["referent(c)", "Clinton"]
-                    ]
-                },
-                "c": {
-                    "type": "check",
-                    "questions": [
-                        ["\\(Bc\\)", false],
-                        ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
-                        ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
-                        ["\\(\\forall x Ax\\)", true],
-                        ["\\(\\forall x \\neg Bx\\)", false],
-                        ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
-                        ["\\(\\exists x (Ax \\to Nx)\\)", false],
-                        ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
-                        ["\\(\\exists Bx \\to \\forall x Ax\\)", true]
-
-                    ]
-                }
-            }
-
-        },
-
-        "5": {
             "title": "Models for multiplace predicates",
             "content": {
                 "a": {
@@ -157,6 +121,52 @@
                     ]
                 }
             }
+        },
+
+        "5": {
+
+            "title": "Ex.2: Interpretation using a Model",
+            "content": {
+                "a": {
+                    "type": "p",
+                    "substance": ["Determine whether each sentence is true or false in the model given. Check all sentences that are true."]
+                },
+                "b": {
+                    "type": "listHead",
+                    "content": [
+                        ["UD", "{Bart, Carl}"],
+                        ["extension(A)", "{Bart, Carl}"],
+                        ["extension(B)", "{Bart}"],
+                        ["extension(N)", "{}"],
+                        ["extension(R)", "{<Bart, Carl>}"],
+                        ["referent(c)", "Carl"]
+                    ]
+                },
+                "c": {
+                    "type": "ex",
+                    "id": "a",
+                    "questions": [
+                        ["\\(Bc\\)", false],
+                        ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
+                        ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
+                        ["\\(\\forall x Ax\\)", true],
+                        ["\\(\\forall x \\neg Bx\\)", false],
+                        ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
+                        ["\\(\\exists x (Ax \\to Nx)\\)", false],
+                        ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
+                        ["\\(\\exists x Bx \\to \\forall x Ax\\)", true],
+                        ["\\(Rbc\\)", true],
+                        ["\\(Rcb \\to Rcc\\)",true],
+                        ["\\((Rcc \\vee Rcb)\\)", false],
+                        ["\\( \\exists x \\exists x Rxx\\)", true],
+                        ["\\( \\exists  x Rxx \\)", false],
+                        ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
+                        ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)",true]
+
+                    ]
+                }
+            }
+
         }
     },
     "section2": {
@@ -347,6 +357,32 @@
                 }
             }
         }
+    },
+    "ex":{
+      "s":false,
+      "a": {
+          "type": "check",
+          "id": "reading2",
+          "questions": [
+              ["\\(Bc\\)", false],
+              ["\\(Ac \\leftrightarrow \\neg Nc\\)", true],
+              ["\\(Nc \\to (Ac \\vee Bc)\\)", true],
+              ["\\(\\forall x Ax\\)", true],
+              ["\\(\\forall x \\neg Bx\\)", false],
+              ["\\(\\exists x (Ax \\wedge Bx)\\)", true],
+              ["\\(\\exists x (Ax \\to Nx)\\)", false],
+              ["\\(\\forall x (Nx \\vee \\neg Nx)\\)", true],
+              ["\\(\\exists x Bx \\to \\forall x Ax\\)", true],
+              ["\\(Rbc\\)", true],
+              ["\\(Rcb \\to Rcc\\)",true],
+              ["\\((Rcc \\vee Rcb)\\)", false],
+              ["\\( \\exists x \\exists x Rxx\\)", true],
+              ["\\( \\exists  x Rxx \\)", false],
+              ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
+              ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)",true]
+
+          ]
+      }
     }
 
 }

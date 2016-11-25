@@ -21,7 +21,7 @@ block content
 									- j = j+ 1
 									a(href="/"+moduleNum + "/" +section["1"].sectionNum + "#"+sub.title data-parent="#menu"+section["1"].sectionId).list-group-item
 										small.text-muted #{stitle}
-						else
+						else if i != Object.keys(content).length
 							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse
 								- var title = i + " " +section["1"].sectionname
 								span #{title}
@@ -45,16 +45,18 @@ block content
 								for y in x.content
 									li.list-group-item.lead #{y[0]}
 										small.text-muted.m-x-1 #{y[1]}
-						if x.type == "check"
-							.card
-								ul.list-group.list-group-flush
-									- for (var i = 0;i<x.questions.length;i++)
-										li.list-group-item
-											.form-check
-											label.form-check-label
-												input.form-check-input(type="checkbox" id = x.id + "-"+i value = id = x.id + "-"+i)
-												p #{x.questions[i][0]}
-									button(type="button").btn-primary.btn.btn-block Submit Answers
+						if x.type == "ex"
+							- y = content.ex[x.id]
+							if y.type == "check"
+								.container-fluid
+									.row
+										- for (var i = 0;i<y.questions.length;i++)
+											.col-md-12.col-lg-6
+												.form-check
+												label.form-check-label
+													input.form-check-input(type="checkbox" id = y.id + "-"+i value = id = y.id + "-"+i)
+													p #{y.questions[i][0]}
+									button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id).btn-primary.btn.btn-block.readingbutt Submit Answers
 
 
 			.right.col-lg-2.hidden-md-down
@@ -63,4 +65,5 @@ block content
 
 block extrafooter
 	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
+	script(src='../javascripts/lessonreadingsrc.js')
 	link(rel="stylesheet", type="text/css", href="../css/lesson.css")

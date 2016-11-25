@@ -8,13 +8,15 @@
 
 @media (min-width:993px) {
   main{
-    margin-left: 300px;
+    margin-left: 25%;
+    margin-top: 100px;
 
   }
 
   #sidebar {
     position: fixed;
     height: 100%;
+    width: 20%
 
 
 
@@ -25,9 +27,7 @@
 
 }
 
-main{
-  margin-top: 60px;
-}
+
 #sidebar {
 
     padding-top: 60px;
