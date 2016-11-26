@@ -355,13 +355,13 @@
         }
     },
     "ex": {
-        "reading_1":{
-          "section" : "1",
-          "title": "Ex.1: Interpretation w/ Cards"
+        "reading_1": {
+            "section": "1",
+            "title": "Ex.1: Interpretation w/ Cards"
         },
         "reading_2": {
             "section": "1",
-            "title":"Ex.2: Interpretation using a Model",
+            "title": "Ex.2: Interpretation using a Model",
             "type": "check",
             "id": "reading_2",
             "questions": [
@@ -385,8 +385,8 @@
             ]
         },
         "reading_3": {
-            "section":"2",
-            "title":"Ex.3: Using Models to Show Logical Properties",
+            "section": "2",
+            "title": "Ex.3: Using Models to Show Logical Properties",
             "type": "check",
             "id": "reading_3",
             "questions": [
@@ -402,23 +402,23 @@
 
             ]
         },
-        "concepts":{
-          "section":"concepts",
-          "title":"Quiz: Concepts",
-          "terms":[
-            ["reference","An aspect of meaning that deals with the way bits of language pick out or identify objects in the real world."],
-            ["referent","The unique object picked out by a term in QL."],
-            ["extension","The set of objects in the UD that a predicate applies to."],
-            ["empty set","A set with no members in it"],
-            ["model","An interpretation consists of a set that is the universe of discourse, individual members of that set that are the referents of the singular terms in the sentences or arguments, and subsets of the universe of discourse which are the extensions of the predicates used in the sentences or arguments."],
-            ["ordered pair","a set with two members, except that the order matters."],
-            ["semantic tautology", "A QL sentence that is true in every model."],
-            ["semantic contradiction", "A QL sentence that is false in every model."],
-            ["semantic contingency", "A QL sentence that true in some model and is false in some model."],
-            ["semantic consistency","Given a set of sentences, there is at least one model in which all of the sentences are true."],
-            ["semantic inconsistency","Given a set of sentences, there is no model in which all of the sentences are true."],
-            ["semantic validity","Given an argument, there is no model in which the premises are true, but conclusion false."]
-          ]
+        "concepts": {
+            "section": "concepts",
+            "title": "Quiz: Concepts",
+            "terms": [
+                ["reference", "An aspect of meaning that deals with the way bits of language pick out or identify objects in the real world."],
+                ["referent", "The unique object picked out by a term in QL."],
+                ["extension", "The set of objects in the UD that a predicate applies to."],
+                ["empty set", "A set with no members in it"],
+                ["model", "An interpretation consists of a set that is the universe of discourse, individual members of that set that are the referents of the singular terms in the sentences or arguments, and subsets of the universe of discourse which are the extensions of the predicates used in the sentences or arguments."],
+                ["ordered pair", "a set with two members, except that the order matters."],
+                ["semantic tautology", "A QL sentence that is true in every model."],
+                ["semantic contradiction", "A QL sentence that is false in every model."],
+                ["semantic contingency", "A QL sentence that is true in some model and is false in some model."],
+                ["semantic consistency", "Given a set of sentences, there is at least one model in which all of the sentences are true."],
+                ["semantic inconsistency", "Given a set of sentences, there is no model in which all of the sentences are true."],
+                ["semantic validity", "Given an argument, there is no model in which the premises are true, but conclusion false."]
+            ]
         }
     }
 

@@ -5980,11 +5980,20 @@
 $(function()
 {
 var interact = require("interact.js")
+var makeAlert = require('./mods/alert.js')
 var $area = $('.area')
+var $l = $('#l')
+var $r = $('#r')
 var $ans = $('#ans')
 var moduleNum = $('#icon').html();
 var randomize = require('./mods/randomize.js')
 var answers = []
+var corrected = []
+var $modal = $('.modal')
+
+$('#restart').on("click", function(){
+  location.reload();
+})
 // console.log(moduleNum)
 function loadJSON(callback){
         $.getJSON('../json/lesson'+moduleNum + '.json')
@@ -5998,26 +6007,35 @@ loadJSON(function(err, data){
   var terms = []
   var out = []
   for (term in data.ex.concepts.terms){
-    terms.push(data.ex.concepts.terms[term][0])
-    answers.push(data.ex.concepts.terms[term][1])
-    out.push(data.ex.concepts.terms[term][1])
+    // terms.push(data.ex.concepts.terms[term][0])
+    answers.push(data.ex.concepts.terms[term])
+    // out.push(data.ex.concepts.terms[term][1])
   }
   // terms = randomize.shuffle(terms);
-  console.log(answers)
-  out = randomize.shuffle(out);
-  for (term in terms){
-    $area.prepend("<div class = 'draggable drag-drop' id = '" +term +"'>" + terms[term] + "</div>")
+  // console.log(answers)
+  answers = randomize.shuffle(answers);
 
-  }
-  for (term in out){
-
-    $ans.append("<div class = 'dropzone'>" + out[term] + "</div>")
-  }
+  $ans.text(answers[0][1])
+  $ans.attr("value",answers[0][1])
+  // for (term in terms){
+  //   $l.append("<div class = 'draggable drag-drop col-sm-12' id = '" +term +"'>" + terms[term] + "</div>")
+  //
+  // }
+  // for (term in out){
+  //
+  //   $ans.append("<div class = 'dropzone'>" + out[term] + "</div>")
+  // }
 
 })
 
 
-
+function makeResult(){
+  html = "<h3> Correct Answer(s)</h1>";
+  for (var i = 0;i<corrected.length;i++){
+    html += "<p class='def lead'>" + corrected[i][0] +"</p><p>" +corrected[i][1]+ "</p>"
+  }
+  $('.modal-body').append(html);
+}
 
 interact('.draggable')
   .draggable({
@@ -6025,7 +6043,7 @@ interact('.draggable')
     inertia: false,
     // keep the element within the area of it's parent
     restrict: {
-      restriction: "parent",
+      restriction: ".area",
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -6096,10 +6114,38 @@ interact('.dropzone').dropzone({
     // event.relatedTarget.textContent = 'Dragged out';
   },
   ondrop: function (event) {
-    event.relatedTarget.setAttribute("value",event.target.textContent)
-    // console.log(answers);
-    // event.relatedTarget.textContent = 'Dropped';
-    // event.target.
+    event.relatedTarget.setAttribute("value",event.target.textContent);
+    event.relatedTarget.classList.add("chosen");
+
+    if (event.relatedTarget.textContent == answers[0][0]){
+      // console.log(answers)
+      $('.chosen').remove();
+      // console.log(answers.length)
+      if (typeof answers !== 'undefined' && answers.length > 1){
+      corrected.push(answers.shift());
+      $ans.text(answers[0][1])
+      $ans.attr("value",answers[0][1])
+      makeAlert($('.jumbotron'), "b", "This is correct! Continue dragging the correct definition to complete this quiz.",2)
+    } else{
+      jQuery.post("/report", {label: "concepts", moduleNo: moduleNum}, function(res){
+        $('.modal-body').append("<p class = 'lead'>You have completed this section! " + res +"</p>") ;
+        makeResult();
+        $modal.modal('toggle')
+
+           });
+
+
+
+    }
+
+      // console.log(answers)
+
+    } else{
+      event.target.classList.remove('dropzone');
+        $('.modal-body').append("<p class = 'lead'>Opps, that wasn't correct. You have matched the concepts below corrected. Press Restart to try again.</p>" )
+      makeResult();
+      $modal.modal('toggle')
+    }
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
@@ -6108,20 +6154,46 @@ interact('.dropzone').dropzone({
   }
 });
 
-$('#butt').on('click',function(){
-  console.log(answers)
-  for (var i = 0; i<answers.length;i++){
-    // console.log($("#"+i).attr("value"))
-    if ($("#"+i).attr("value")!= answers[i]){
-      return console.log(false);
-    }
+
+
+})
+
+},{"./mods/alert.js":3,"./mods/randomize.js":4,"interact.js":1}],3:[function(require,module,exports){
+var makeAlert = function(location, direction, text, code){ //direction: a= above, b=below
+  /////This takes care of the HTML
+  var tag;
+  if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
+          $(location).prev().remove();
+        }
+      if (direction == "b" && $(location).next().hasClass("alert")){
+          $(location).next().remove();
+        }
   }
-return console.log(true);
-})
+  else if (code == 1){tag = "alert-success";}
+  else if (code == 2){tag = "alert-info";}
+  else if (code == 3){tag = "alert-warning"}
+  else{tag = "alert-danger"}
+  var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
-})
+  if (direction == "a"){
+    if ($(location).prev().hasClass("alert")) {
+      $(location).prev().remove();
+    }
+    $(location).before(html);
+    }
 
-},{"./mods/randomize.js":3,"interact.js":1}],3:[function(require,module,exports){
+  if (direction == "b"){
+    if ($(location).next().hasClass("alert")) {
+      $(location).next().remove();
+    }
+    $(location).after(html);
+    }
+
+  }
+
+ module.exports = makeAlert;
+},{}],4:[function(require,module,exports){
 var randomize = {
   oneNumber: function(n){
      return Math.floor(Math.random()* n) + 1

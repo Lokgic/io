@@ -41,10 +41,23 @@ block content
 				if sectionNum == "sectionconcepts"
 					.jumbotron.m-y-3
 						h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Concepts
-						p.lead.text-xs-center Instruction: Drag each concept into the box containing the corresponding definition.
-					button(id = "butt" type="button").btn-primary.btn.btn-block Submit Answers
-					.area
-						#ans
+						p.lead.text-xs-center Instruction: Drag the matching concept into the box containing the given definition. Complete this quiz by matching all concepts. You will have to resrart for any incorrect answer. 
+					.modal.fade.result
+						.modal-dialog.modal-dialog
+							.modal-content
+								.modal-header
+									h4.modal-title Result
+								.modal-body
+								.modal-footer
+									a.btn.btn-secondary(role ="button")#restart Restart
+					.card-group
+						.card.text-xs-center
+							for term in content.ex.concepts.terms
+								.draggable.drag-drop.m-a-1.lead.def #{term[0]}
+						.card#r.dropzone.text-xs-center
+							h4#ans
+
+
 				else
 					.jumbotron.m-y-3
 						h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
