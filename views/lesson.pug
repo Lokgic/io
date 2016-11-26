@@ -25,40 +25,59 @@ block content
 							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse
 								- var title = i + " " +section["1"].sectionname
 								span #{title}
+						else if i == Object.keys(content).length
+							a(href = "#ex" data-toggle="collapse" aria-expanded="false" aria-controls=seurl).list-group-item.collapse
+								span Module Exercises
+							.collapse(id = "ex")
+								for sub in section
+									if sub.section == "concepts"
+										- var url = "/" + moduleNum + "/concepts"
+									else
+										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
+									a(href=url).list-group-item
+										small.text-muted #{sub.title}
 						- i = i + 1
 			main.col-lg-8.col-md-12
-				.jumbotron.m-y-3
-					h2.display-1.text-xs-center #{content[sectionNum]["1"].sectionname}
-				for section in content[sectionNum]
-					h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
-					for x in section.content
-						if x.type == "p"
-							for pa in x.substance
-								p.lead.text-justify.m-y-2 #{pa}
-						if x.type == "list"
-							ul.list-group
-								for y in x.content
-									li.list-group-item #{y}
-						if x.type == "link"
-							p.lead.text-justify.m-y-2 #{x.description}
-							a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
-						if x.type == "listHead"
-							ul.list-group
-								for y in x.content
-									li.list-group-item.lead #{y[0]}
-										small.text-muted.m-x-1 #{y[1]}
-						if x.type == "ex"
-							- y = content.ex[x.id]
-							if y.type == "check"
-								.container-fluid
-									.row
-										- for (var i = 0;i<y.questions.length;i++)
-											.col-md-12.col-lg-6
-												.form-check
-												label.form-check-label
-													input.form-check-input(type="checkbox" id = y.id + "-"+i value = i)
-													p #{y.questions[i][0]}
-									button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block.readingbutt Submit Answers
+				if sectionNum == "sectionconcepts"
+					.jumbotron.m-y-3
+						h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Concepts
+						p.lead.text-xs-center Instruction: Drag each concept into the box containing the corresponding definition.
+					button(id = "butt" type="button").btn-primary.btn.btn-block Submit Answers
+					.area
+						#ans
+				else
+					.jumbotron.m-y-3
+						h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
+					for section in content[sectionNum]
+						h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
+						for x in section.content
+							if x.type == "p"
+								for pa in x.substance
+									p.lead.text-justify.m-y-2 #{pa}
+							if x.type == "list"
+								ul.list-group
+									for y in x.content
+										li.list-group-item #{y}
+							if x.type == "link"
+								p.lead.text-justify.m-y-2 #{x.description}
+								a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
+							if x.type == "listHead"
+								ul.list-group
+									for y in x.content
+										li.list-group-item.lead #{y[0]}
+											small.text-muted.m-x-1 #{y[1]}
+							if x.type == "ex"
+								- y = content.ex[x.id]
+								if y.type == "check"
+									.container-fluid
+										.row
+											- for (var i = 0;i<y.questions.length;i++)
+												.col-md-12.col-lg-6
+													.form-check
+													label.form-check-label
+														input.form-check-input(type="checkbox" id = y.id + "-"+i value = i)
+														p #{y.questions[i][0]}
+										button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block.readingbutt Submit Answers
 
 
 			.right.col-lg-2.hidden-md-down
@@ -67,5 +86,8 @@ block content
 
 block extrafooter
 	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
-	script(src='../javascripts/lessonreading.js')
+	if sectionNum == "sectionconcepts"
+		script(src='../javascripts/lessonconcepts.js')
+	else
+		script(src='../javascripts/lessonreading.js')
 	link(rel="stylesheet", type="text/css", href="../css/lesson.css")

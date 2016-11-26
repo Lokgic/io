@@ -447,17 +447,21 @@ router.get('/6/wason3', function(req, res, next){
 	return res.render('wason', {n:"3"});
 });
 
-router.get('/6/1', function(req, res, next){
+router.get(t = '/6/*', function(req, res, next){
+	var moduleNum = req.path.split('/')[1]
+	var sectionNum = req.path.split('/')[2]
+	console.log(req.path);
 	var lesson = require('../public/json/lesson6.json');
 
-	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section1", moduleNum:6});
+	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
 
-router.get('/6/2', function(req, res, next){
-	var lesson = require('../public/json/lesson6.json');
 
-	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section2", moduleNum:6});
-});
+// router.get('/6/2', function(req, res, next){
+// 	var lesson = require('../public/json/lesson6.json');
+//
+// 	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section2", moduleNum:6});
+// });
 
 
 router.get('/7', function(req, res, next){
