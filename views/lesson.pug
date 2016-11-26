@@ -32,65 +32,87 @@ block content
 								for sub in section
 									if sub.section == "concepts"
 										- var url = "/" + moduleNum + "/concepts"
+									else if sub.section == "quiz"
+										- var url = "/" + moduleNum + "/quiz"
 									else
 										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
 									a(href=url).list-group-item
 										small.text-muted #{sub.title}
 						- i = i + 1
 			main.col-lg-8.col-md-12
-				if sectionNum == "sectionconcepts"
-					.jumbotron.m-y-3
-						h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Concepts
-						p.lead.text-xs-center Instruction: Drag the matching concept into the box containing the given definition. Complete this quiz by matching all concepts. You will have to resrart for any incorrect answer. 
-					.modal.fade.result
-						.modal-dialog.modal-dialog
-							.modal-content
-								.modal-header
-									h4.modal-title Result
-								.modal-body
-								.modal-footer
-									a.btn.btn-secondary(role ="button")#restart Restart
-					.card-group
-						.card.text-xs-center
-							for term in content.ex.concepts.terms
-								.draggable.drag-drop.m-a-1.lead.def #{term[0]}
-						.card#r.dropzone.text-xs-center
-							h4#ans
+				case sectionNum
+					when "sectionconcepts"
+						.jumbotron.m-y-3
+							h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Concepts
+							p.lead.text-xs-center Instruction: Drag the matching concept into the box containing the given definition. Complete this quiz by matching all concepts. You will have to resrart for any incorrect answer.
+						.modal.fade.result
+							.modal-dialog.modal-dialog
+								.modal-content
+									.modal-header
+										h4.modal-title Result
+									.modal-body
+									.modal-footer
+										a.btn.btn-secondary(role ="button")#restart Restart
+						.card-group
+							.card.text-xs-center
+								for term in content.ex.concepts.terms
+									.draggable.drag-drop.m-a-1.lead.def #{term[0]}
+							.card#r.dropzone.text-xs-center
+								h4#ans
+					when "sectionquiz"
+						case moduleNum
+							when "6"
+								.container.m-t-3.text-xs-center
+									.jumbotron.m-y-3
+										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Models
+										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below
+									button.btn.btn-primary.btn-block.m-y-2 Submit
+									table.table.table-bordered.table-inverse
+										thead
+											tr
+												th .
+												each i in [1,2,3,4,5]
+													td(id = "model"+i) model. #{i}
+										tbody
+											each i in [1,2,3,4,5]
+												tr
+													th(id = "statement"+i scope = "row") QL#{i}
+													each j in [1,2,3,4,5]
+														td(id = i+"_"+j) #{i}_#{j}
 
-
-				else
-					.jumbotron.m-y-3
-						h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
-					for section in content[sectionNum]
-						h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
-						for x in section.content
-							if x.type == "p"
-								for pa in x.substance
-									p.lead.text-justify.m-y-2 #{pa}
-							if x.type == "list"
-								ul.list-group
-									for y in x.content
-										li.list-group-item #{y}
-							if x.type == "link"
-								p.lead.text-justify.m-y-2 #{x.description}
-								a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
-							if x.type == "listHead"
-								ul.list-group
-									for y in x.content
-										li.list-group-item.lead #{y[0]}
-											small.text-muted.m-x-1 #{y[1]}
-							if x.type == "ex"
-								- y = content.ex[x.id]
-								if y.type == "check"
-									.container-fluid
-										.row
-											- for (var i = 0;i<y.questions.length;i++)
-												.col-md-12.col-lg-6
-													.form-check
-													label.form-check-label
-														input.form-check-input(type="checkbox" id = y.id + "-"+i value = i)
-														p #{y.questions[i][0]}
-										button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block.readingbutt Submit Answers
+					default
+						.jumbotron.m-y-3
+							h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
+						for section in content[sectionNum]
+							h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
+							for x in section.content
+								if x.type == "p"
+									for pa in x.substance
+										p.lead.text-justify.m-y-2 #{pa}
+								if x.type == "list"
+									ul.list-group
+										for y in x.content
+											li.list-group-item #{y}
+								if x.type == "link"
+									p.lead.text-justify.m-y-2 #{x.description}
+									a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
+								if x.type == "listHead"
+									ul.list-group
+										for y in x.content
+											li.list-group-item.lead #{y[0]}
+												small.text-muted.m-x-1 #{y[1]}
+								if x.type == "ex"
+									- y = content.ex[x.id]
+									if y.type == "check"
+										.container-fluid
+											.row
+												- for (var i = 0;i<y.questions.length;i++)
+													.col-md-12.col-lg-6
+														.form-check
+														label.form-check-label
+															input.form-check-input(type="checkbox" id = y.id + "-"+i value = i)
+															p #{y.questions[i][0]}
+											button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block.readingbutt Submit Answers
 
 
 			.right.col-lg-2.hidden-md-down

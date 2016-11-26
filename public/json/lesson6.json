@@ -419,6 +419,10 @@
                 ["semantic inconsistency", "Given a set of sentences, there is no model in which all of the sentences are true."],
                 ["semantic validity", "Given an argument, there is no model in which the premises are true, but conclusion false."]
             ]
+        },
+        "quiz": {
+            "section": "quiz",
+            "title": "Quiz: Models"
         }
     }
 

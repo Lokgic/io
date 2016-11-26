@@ -284,15 +284,15 @@ Rule.prototype.toString = function(){
 			c = "\\to"
 		}
 	if (this.left.name == "even") l ="E" + v;
-	else if (this.left.name == "odd") l ="\\neg E" + v;
-	else if (this.left.name == "consonant") l ="\\neg V" + v;
+	else if (this.left.name == "odd") l ="O" + v;
+	else if (this.left.name == "consonant") l ="C" + v;
 	else if (this.left.name == "vowel") l ="V" + v;
 	else if (this.left.name == "info") l ="B"+ v;
 	else if (this.left.name == "danger") l ="R"+ v;
 
 	if (this.right.name == "even") r ="E"+ v;
-	else if (this.right.name == "odd") r ="\\neg E"+ v;
-	else if (this.right.name == "consonant") r ="\\neg V"+ v;
+	else if (this.right.name == "odd") r ="O"+ v;
+	else if (this.right.name == "consonant") r ="C"+ v;
 	else if (this.right.name == "vowel") r ="V"+ v;
 	else if (this.right.name == "info") r ="B"+ v;
 	else if (this.right.name == "danger") r ="R"+ v;
@@ -347,7 +347,8 @@ html += '<p>Your task is to determine if the QL statement given is true or false
 html += '<p>Choose by clicking the "True" or "False button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
 html += '<p>The number of cards changes randomly for each trial. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
-html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Vx: x is a vowel card.</p>'
+html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'
+html += '<p>UD: the cards below</p>'
 
 	alert($head, "b", html,2);
 }
