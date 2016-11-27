@@ -88,16 +88,6 @@ var Universe = function(n){
 		weights.danger = chance.integer({min: 0, max: 100}),
 		weights.info = 100 - weights.danger
 	console.log(weights)
-	//
-	//
-	// evenWeight = chance.integer({min: 0, max: count});
-	// count = count - evenWeight;
-	// if (count > 0) {
-	// 	oddWeight = chance.integer({min: 0, max: count});
-	// 	count = count - oddWeight
-	// }
-	// var oddWeight = chance.integer({min: 0, max: count});
-	// 	else var oddWeight = 0;
 
 	this.domain = {};
 	while (n>0){

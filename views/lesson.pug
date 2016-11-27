@@ -67,18 +67,25 @@ block content
 										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Models
 										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below
 									button.btn.btn-primary.btn-block.m-y-2 Submit
-									table.table.table-bordered.table-inverse
-										thead
-											tr
-												th .
-												each i in [1,2,3,4,5]
-													td(id = "model"+i) model. #{i}
-										tbody
-											each i in [1,2,3,4,5]
+									.table-responsive
+										table.table.table-bordered.table-inverse#table
+											thead
+												- var arr = [0,1,2,3]
 												tr
-													th(id = "statement"+i scope = "row") QL#{i}
-													each j in [1,2,3,4,5]
-														td(id = i+"_"+j) #{i}_#{j}
+													th UD
+													each i in arr
+														td(id = "ud"+i).lead model. #{i}
+												tr
+													th Extensions
+													each i in arr
+														td(id = "ext"+i).lead exten. #{i}
+											tbody
+												each i in arr
+													tr
+														th(id = "statement"+i scope = "row").lead QL#{i}
+														each j in arr
+															- var ij = i+"-"+j
+															td(id = ij).lead.tbutt ?
 
 					default
 						.jumbotron.m-y-3
@@ -123,6 +130,10 @@ block extrafooter
 	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
 	if sectionNum == "sectionconcepts"
 		script(src='../javascripts/lessonconcepts.js')
+	if sectionNum == "sectionquiz"
+		case moduleNum
+			when "6"
+				script(src='../javascripts/modelquiz.js')
 	else
 		script(src='../javascripts/lessonreading.js')
 	link(rel="stylesheet", type="text/css", href="../css/lesson.css")

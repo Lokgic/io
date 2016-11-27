@@ -28,7 +28,8 @@
     "mysql": "^2.11.1",
     "nodemon": "^1.10.0",
     "pug": "^2.0.0-beta5",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "underscore": "^1.8.3"
   },
   "engines": {
     "node": "*"

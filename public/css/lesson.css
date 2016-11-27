@@ -4,6 +4,9 @@
    height:100%;
 }*/
 
+td{
+  min-width: 200px;
+}
 .def{
   text-transform: capitalize;
 }
