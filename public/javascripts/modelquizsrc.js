@@ -34,29 +34,28 @@ $(function() {
       this.left.vars = ""
       this.right.vars = ""
       var quantifiersStr = "";
-      switch (option){
-        case option.name: {
 
+      o = [model.ud]
           for (var i = 0;i < this.left.place;i++){
 
-              this.left.vars += chance.pickone(model.ud)
+            this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
 
-          }
-          for (var i = 0;i < this.right.place;i++){
-              this.right.vars += chance.pickone(model.ud)
+        }
+        for (var i = 0;i < this.right.place;i++){
+            this.right.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
 
-          }
         }
 
-        default: {
+
           this.connective = chance.pickone(connectives)
           var leftStr = this.left.prefix+" " + this.left.letter + this.left.vars;
           var rightStr = this.right.prefix +" "+  this.right.letter + this.right.vars;
           this.string = this.prefix +" "+ quantifiersStr + " ( "+leftStr + " "+ this.connective +" "+ rightStr+ " ) "
 
-        }
-        console.log(option.name)
-        console.log(this)
+
+        // 
+        // console.log(option.name)
+        // console.log(this)
 
       }
       //
@@ -88,7 +87,7 @@ $(function() {
 
 
 
-    }
+
 
     Proposition.prototype.evaluate = function(model){
 
