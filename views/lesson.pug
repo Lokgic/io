@@ -65,27 +65,26 @@ block content
 								.container.m-t-3.text-xs-center
 									.jumbotron.m-y-3
 										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Models
-										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below
+										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below (Under Construction)
 									button.btn.btn-primary.btn-block.m-y-2 Submit
 									.table-responsive
 										table.table.table-bordered.table-inverse#table
 											thead
-												- var arr = [0,1,2,3]
+												- var s_arr = [0,1,2,3]
+												- var ext_arr = [0]
 												tr
-													th UD
-													each i in arr
-														td(id = "ud"+i).lead model. #{i}
+													th(id = "ud0" colspan = ext_arr.length+1).h4.text-xs-center model. UD: #{i}
 												tr
-													th Extensions
-													each i in arr
-														td(id = "ext"+i).lead exten. #{i}
+													th
+													each i in ext_arr
+														td(id = "ext"+i).lead.text-xs-center  exten. #{i}
 											tbody
-												each i in arr
+												each i in s_arr
 													tr
-														th(id = "statement"+i scope = "row").lead QL#{i}
-														each j in arr
+														th(id = "statement"+i scope = "row").lead.text-xs-center  QL#{i}
+														each j in  ext_arr
 															- var ij = i+"-"+j
-															td(id = ij).lead.tbutt ?
+															td(id = ij).lead.tbutt.text-xs-center.display-4 ?
 
 					default
 						.jumbotron.m-y-3

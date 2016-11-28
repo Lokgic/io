@@ -3,7 +3,17 @@
    width: 45%;
    height:100%;
 }*/
+.tbutt:hover{
+  background: grey;
+}
 
+.true{
+  background: #314b63;
+}
+
+.false{
+  background:#524343;
+}
 td{
   min-width: 200px;
 }
