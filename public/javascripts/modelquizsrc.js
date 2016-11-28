@@ -1,5 +1,5 @@
 $(function() {
-    var difficulty = 1;
+
     var Chance = require('chance')
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
@@ -17,6 +17,14 @@ $(function() {
     var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
     var buttNextState = "checkAnswer";
+    var di= 0;
+    var le ={
+      "0":{
+        negatedAtomic: 0.005,
+        negatedComplex: 0.1,
+        prediatesNum:[0.7,0.3,0]
+      }
+    }
 
 
     var Proposition = function(model, option){
@@ -26,18 +34,18 @@ $(function() {
       this.left = {
         letter: left.letter,
         place: left.place,
-        negated: chance.bool({likelihood: 10})
+        negated: chance.bool(le[di].negatedAtomic)
       }
       this.right = {
         letter: right.letter,
         place: right.place,
-        negated: chance.bool({likelihood: 10})
+        negated: chance.bool(le[di].negatedAtomic)
       }
       if (this.left.negated) this.left.prefix = negation
         else this.left.prefix = ""
       if (this.right.negated ) this.right.prefix = negation
         else this.right.prefix = ""
-      this.negated = chance.bool({likelihood: 10})
+      this.negated = chance.bool(le[di].negatedComplex)
       if (this.negated) this.prefix = negation
         else this.prefix = ""
       this.totalPlace = this.left.place + this.right.place;
@@ -64,7 +72,7 @@ $(function() {
 
         this.allVars = allVars;
         this.quantifiers = {}
-        console.log(quantifiersOptions)
+
         for (v in allVars){
 
           this.quantifiers[allVars[v]] = {
@@ -244,14 +252,11 @@ $(function() {
 
 
 
-    function initTable(diff) {
-
+    function initTable() {
         var ysize = $('.tbutt').last().attr("id").split("-")[0];
         var size = $('.tbutt').last().attr("id").split("-")[1];
         var all = [];
-        if (diff == 1) w = [.95, 0.05, 0]
-        if (diff == 2) w = [0, 2,0]
-        if (diff == 3) w = [0.05, 0.7, 0]
+
         pLetter = randomPickset(predicates, chance.integer({
             min: 1,
             max: 4
@@ -261,7 +266,7 @@ $(function() {
         for (p in pLetter) {
           temp = {
             letter: pLetter[p],
-            place: chance.weighted([1, 2, 3], w),
+            place: chance.weighted([1, 2, 3], le[di].prediatesNum),
             vars:[]
           }
           predicates_pickedForModel[pLetter[p]] = temp;
@@ -490,6 +495,7 @@ $(function() {
 
 
     function resetTable(){
+      makeAlert($('.jumbotron'), "b","",0)
       var last = $('.tbutt').last().attr("id").split("-");
 
       for (var i = 0; i <= last[0]; i++) {
