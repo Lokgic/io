@@ -1,6 +1,8 @@
 $(function() {
+    var difficulty = 1;
     var Chance = require('chance')
     var _ = require('underscore')
+    var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
     var chance = new Chance();
     var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
@@ -12,18 +14,19 @@ $(function() {
     var conditional = '\\to'
     var conjunction = '\\wedge'
     var disjunction = '\\vee'
-    var quantifiers = [exists, forall]
+    var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
+    var buttNextState = "checkAnswer";
 
 
     var Proposition = function(model, option){
       var o = [variables, model.ud]
-      left = model.predicates[chance.pickone(Object.keys(predicates))];
-      right = model.predicates[chance.pickone(Object.keys(predicates))];
+      left = model.predicates[chance.pickone(Object.keys(model.predicates))];
+      right = model.predicates[chance.pickone(Object.keys(model.predicates))];
       this.left = {
         letter: left.letter,
         place: left.place,
-        negated: chance.bool({likelihood: 100})
+        negated: chance.bool({likelihood: 10})
       }
       this.right = {
         letter: right.letter,
@@ -38,7 +41,7 @@ $(function() {
       if (this.negated) this.prefix = negation
         else this.prefix = ""
       this.totalPlace = this.left.place + this.right.place;
-      // console.log(0< this.totalPlace)
+
       this.left.vars = ""
       this.right.vars = ""
       var quantifiersStr = "";
@@ -61,17 +64,18 @@ $(function() {
 
         this.allVars = allVars;
         this.quantifiers = {}
+        console.log(quantifiersOptions)
         for (v in allVars){
-          // console.log(allVars[v])
+
           this.quantifiers[allVars[v]] = {
             variable: allVars[v],
-            quantifier: chance.pickone(quantifiers)
+            quantifier: chance.pickone(quantifiersOptions)
           }
-          // console.log(this.quantifiers[allVars[v]])
+
           this.prefix += this.quantifiers[allVars[v]].quantifier + " "+ allVars[v]
         }
 
-        // console.log(allVars)
+
         this.connective = chance.pickone(connectives)
         var leftStr = this.left.prefix+" " + this.left.letter + this.left.vars;
         var rightStr = this.right.prefix +" "+  this.right.letter + this.right.vars;
@@ -79,7 +83,7 @@ $(function() {
 
 
 
-        // console.log(option.name)
+
 
 
       }
@@ -90,14 +94,13 @@ $(function() {
     }
 
     Proposition.prototype.connectiveInterpret = function(model, l,r){
-      // console.log(self.left.negated)
+
       v = []
       v[0] = getVal(model, self.left.letter, l)
       v[1] = getVal(model, self.right.letter, r)
 
       if (self.left.negated) v[0] = !v[0]
       if (self.right.negated) v[1] = !v[1]
-// console.log(v + ' so ' + (v[0] || v[1]))
       switch (self.connective){
         case conjunction: return (v[0] && v[1]);
         case conditional: return (!v[0] || v[1]);
@@ -111,7 +114,7 @@ $(function() {
     Proposition.prototype.evaluate = function(model){
 
         var self = this;
-        // console.log(self)
+
 
         quantifiers = this.quantifiers;
         left = this.left;
@@ -134,15 +137,14 @@ $(function() {
           i = 0;
           if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
-          // console.log(quantifier)
+
           out = _[quantifier](model.ud, function(x){
           targetVar = allVars[i]
 
           sub_L[i+1] = substite(sub_L[i], targetVar,x)
           sub_R[i+1] = substite(sub_R[i], targetVar,x)
           if (check.onlyConstant(sub_L[i+1]) && check.onlyConstant(sub_R[i+1])){
-            // console.log(sub_L[i+1])
-            // console.log(sub_R[i+1])
+
 
             return connectiveInterpret(model, sub_L[i+1],sub_R[i+1])
           }
@@ -150,7 +152,7 @@ $(function() {
           i += 1;
           if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
-          // console.log(quantifier)
+
           out2 = _[quantifier](model.ud, function(y){
             targetVar = allVars[i];
             sub_L[i+1] = substite(sub_L[i], targetVar,y)
@@ -175,7 +177,7 @@ $(function() {
               })
               return out2;
         }.bind(this))
-        // console.log(out)
+
 
         if (self.negated) return !out;
           else return out;
@@ -240,7 +242,7 @@ $(function() {
     }
 
 
-    initTable(2)
+
 
     function initTable(diff) {
 
@@ -254,14 +256,15 @@ $(function() {
             min: 1,
             max: 4
         }));
-        predicates = {};
+
+        predicates_pickedForModel = {};
         for (p in pLetter) {
           temp = {
             letter: pLetter[p],
             place: chance.weighted([1, 2, 3], w),
             vars:[]
           }
-          predicates[pLetter[p]] = temp;
+          predicates_pickedForModel[pLetter[p]] = temp;
         }
 
 
@@ -276,7 +279,7 @@ $(function() {
 
 
         for (var i = 0; i <= size; i++) {
-            all.push(makeModel(ud, predicates, diff))
+            all.push(makeModel(ud, predicates_pickedForModel, diff))
         }
 
         for (var i = 0; i <= size; i++) {
@@ -285,20 +288,30 @@ $(function() {
             for (p in all[i].predicates) {
                 html += all[i].predicates[p].string
             }
-            // console.log(html)
+
             $('#ext' + i).html(html)
         }
+
         props = []
 
         for (var i = 0; i<=ysize;i++){
           var temp = new Proposition(all[0],{name: true});
           props.push(temp);
           $('#statement'+i).text("\\(" + temp.string +"\\)");
-          // console.log(temp)
-          // console.log(temp.evaluate(all[0]))
+
         }
-        // console.log(all[0])
+        console.log(props)
+
         mathjax.reload("table");
+        var toReturn = []
+        for (col in props){
+          var tempRowArr = []
+          for (row in all){
+            tempRowArr.push(props[col].evaluate(all[row])+"")
+          }
+          toReturn.push(tempRowArr)
+        }
+        return toReturn;
 
 
     }
@@ -308,6 +321,7 @@ $(function() {
 
 
     function randomPickset(arr, max, min) {
+
         if (max > arr.length) {
             max = arr.length;
         }
@@ -326,19 +340,10 @@ $(function() {
             max: max
         }))
     }
-    // test = randomPickset(predicates,1,500)
-    // console.log(test)
+
 
     function makeModel(ud, predicates, diff) {
-        // var max
-        // var min
-        // if (diff == 1) {
-        //     max = 10;
-        //     min = 3
-        // } else if (diff == 2) {
-        //     min = 3;
-        //     max = chance.weighted([4, 5, 6], [.7, .15, .15])
-        // }
+
         var model = {}
         model.predicates = {};
         model.ud = ud;
@@ -383,7 +388,7 @@ $(function() {
                     }
                     ex.push(temp)
                 }
-                // console.log(ex)
+
             } else if (option == "all") {
                 for (x in ud) {
                     for (y in ud) {
@@ -393,15 +398,15 @@ $(function() {
 
                             for (z in ud) {
                                 newtemp = temp + ud[z]
-                                    // console.log(newtemp)
+
                                 ex.push(newtemp)
                             }
                         } else ex.push(temp)
-                            // console.log(ex)
+
                     }
                 }
             } else {
-                // console.log(ud)
+
                 n = chance.integer({
                     min: 1,
                     max: chance.integer({
@@ -423,8 +428,7 @@ $(function() {
                         for (var j = 0; j < out.place; j++) {
                             pair += chance.pickone(ud)
                         }
-                        // console.log(pair);
-                        // console.log(ex.indexOf(pair) != -1)
+
                     }
 
                     ex.push(pair);
@@ -459,31 +463,79 @@ $(function() {
 
 
 
-    function getTableValues() {
+    function getTableValues(ans) {
         var last = $('.tbutt').last().attr("id").split("-");
         var truthValues = [];
         for (var i = 0; i <= last[0]; i++) {
             var temp = []
             for (var j = 0; j <= last[1]; j++) {
-                temp[j] = $("#" + i + "-" + j).text()
+                temp[j] = $("#" + i + "-" + j).attr("value")
             }
             truthValues[i] = temp;
         }
+        // console.log("check")
+        // console.log(truthValues)
+        // console.log("against")
+        // console.log(ans)
 
-        console.log(truthValues)
+        if (_.isEqual(truthValues,ans)){
+            makeAlert($('.jumbotron'), "b", "This is correct! Input: " + truthValues + " answer: " + ans+ ". Click submit again for next problem.",2)
+        } else{
+          makeAlert($('.jumbotron'), "b", "This is incorrect! Input: " + truthValues + " answer: " + ans + ". Click submit again for next problem.",4)
+        }
+
+
+
     }
 
+
+    function resetTable(){
+      var last = $('.tbutt').last().attr("id").split("-");
+
+      for (var i = 0; i <= last[0]; i++) {
+          for (var j = 0; j <= last[1]; j++) {
+              $temp = $("#" + i + "-" + j)
+              $temp.removeClass("true");
+              $temp.removeClass("false");
+              $temp.text("?")
+          }
+      }
+
+    }
     $('.tbutt').on('click', function() {
         if ($(this).text() == "T") {
           $(this).text("F")
+          $(this).attr("value", false)
           $(this).addClass("false")
           $(this).removeClass("true")
         } else {
           $(this).text("T")
+          $(this).attr("value", true)
           $(this).addClass("true")
           $(this).removeClass("false")
         }
     })
 
-    $('button').on('click', getTableValues);
+    var currentAnswers = initTable(difficulty);
+    console.log(currentAnswers)
+    $('button').on('click', function(){
+
+        switch (buttNextState){
+        case "checkAnswer":{
+          getTableValues(currentAnswers);
+          buttNextState = "newTable"
+          break;
+        }
+        case "newTable":{
+          resetTable()
+          currentAnswers = initTable(difficulty);
+              console.log(currentAnswers)
+          buttNextState ="checkAnswer"
+          break;
+        }
+      }
+
+
+
+    });
 })

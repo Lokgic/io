@@ -4948,7 +4948,7 @@
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":5}],2:[function(require,module,exports){
+},{"buffer":7}],2:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -6500,8 +6500,10 @@
 
 },{}],3:[function(require,module,exports){
 $(function() {
+    var difficulty = 1;
     var Chance = require('chance')
     var _ = require('underscore')
+    var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
     var chance = new Chance();
     var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
@@ -6513,18 +6515,19 @@ $(function() {
     var conditional = '\\to'
     var conjunction = '\\wedge'
     var disjunction = '\\vee'
-    var quantifiers = [exists, forall]
+    var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
+    var buttNextState = "checkAnswer";
 
 
     var Proposition = function(model, option){
       var o = [variables, model.ud]
-      left = model.predicates[chance.pickone(Object.keys(predicates))];
-      right = model.predicates[chance.pickone(Object.keys(predicates))];
+      left = model.predicates[chance.pickone(Object.keys(model.predicates))];
+      right = model.predicates[chance.pickone(Object.keys(model.predicates))];
       this.left = {
         letter: left.letter,
         place: left.place,
-        negated: chance.bool({likelihood: 100})
+        negated: chance.bool({likelihood: 10})
       }
       this.right = {
         letter: right.letter,
@@ -6539,7 +6542,7 @@ $(function() {
       if (this.negated) this.prefix = negation
         else this.prefix = ""
       this.totalPlace = this.left.place + this.right.place;
-      // console.log(0< this.totalPlace)
+
       this.left.vars = ""
       this.right.vars = ""
       var quantifiersStr = "";
@@ -6562,17 +6565,18 @@ $(function() {
 
         this.allVars = allVars;
         this.quantifiers = {}
+        console.log(quantifiersOptions)
         for (v in allVars){
-          // console.log(allVars[v])
+
           this.quantifiers[allVars[v]] = {
             variable: allVars[v],
-            quantifier: chance.pickone(quantifiers)
+            quantifier: chance.pickone(quantifiersOptions)
           }
-          // console.log(this.quantifiers[allVars[v]])
+
           this.prefix += this.quantifiers[allVars[v]].quantifier + " "+ allVars[v]
         }
 
-        // console.log(allVars)
+
         this.connective = chance.pickone(connectives)
         var leftStr = this.left.prefix+" " + this.left.letter + this.left.vars;
         var rightStr = this.right.prefix +" "+  this.right.letter + this.right.vars;
@@ -6580,7 +6584,7 @@ $(function() {
 
 
 
-        // console.log(option.name)
+
 
 
       }
@@ -6591,14 +6595,13 @@ $(function() {
     }
 
     Proposition.prototype.connectiveInterpret = function(model, l,r){
-      // console.log(self.left.negated)
+
       v = []
       v[0] = getVal(model, self.left.letter, l)
       v[1] = getVal(model, self.right.letter, r)
 
       if (self.left.negated) v[0] = !v[0]
       if (self.right.negated) v[1] = !v[1]
-// console.log(v + ' so ' + (v[0] || v[1]))
       switch (self.connective){
         case conjunction: return (v[0] && v[1]);
         case conditional: return (!v[0] || v[1]);
@@ -6612,7 +6615,7 @@ $(function() {
     Proposition.prototype.evaluate = function(model){
 
         var self = this;
-        // console.log(self)
+
 
         quantifiers = this.quantifiers;
         left = this.left;
@@ -6635,15 +6638,14 @@ $(function() {
           i = 0;
           if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
-          // console.log(quantifier)
+
           out = _[quantifier](model.ud, function(x){
           targetVar = allVars[i]
 
           sub_L[i+1] = substite(sub_L[i], targetVar,x)
           sub_R[i+1] = substite(sub_R[i], targetVar,x)
           if (check.onlyConstant(sub_L[i+1]) && check.onlyConstant(sub_R[i+1])){
-            // console.log(sub_L[i+1])
-            // console.log(sub_R[i+1])
+
 
             return connectiveInterpret(model, sub_L[i+1],sub_R[i+1])
           }
@@ -6651,7 +6653,7 @@ $(function() {
           i += 1;
           if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
-          // console.log(quantifier)
+
           out2 = _[quantifier](model.ud, function(y){
             targetVar = allVars[i];
             sub_L[i+1] = substite(sub_L[i], targetVar,y)
@@ -6676,7 +6678,7 @@ $(function() {
               })
               return out2;
         }.bind(this))
-        // console.log(out)
+
 
         if (self.negated) return !out;
           else return out;
@@ -6741,7 +6743,7 @@ $(function() {
     }
 
 
-    initTable(2)
+
 
     function initTable(diff) {
 
@@ -6755,14 +6757,15 @@ $(function() {
             min: 1,
             max: 4
         }));
-        predicates = {};
+
+        predicates_pickedForModel = {};
         for (p in pLetter) {
           temp = {
             letter: pLetter[p],
             place: chance.weighted([1, 2, 3], w),
             vars:[]
           }
-          predicates[pLetter[p]] = temp;
+          predicates_pickedForModel[pLetter[p]] = temp;
         }
 
 
@@ -6777,7 +6780,7 @@ $(function() {
 
 
         for (var i = 0; i <= size; i++) {
-            all.push(makeModel(ud, predicates, diff))
+            all.push(makeModel(ud, predicates_pickedForModel, diff))
         }
 
         for (var i = 0; i <= size; i++) {
@@ -6786,20 +6789,30 @@ $(function() {
             for (p in all[i].predicates) {
                 html += all[i].predicates[p].string
             }
-            // console.log(html)
+
             $('#ext' + i).html(html)
         }
+
         props = []
 
         for (var i = 0; i<=ysize;i++){
           var temp = new Proposition(all[0],{name: true});
           props.push(temp);
           $('#statement'+i).text("\\(" + temp.string +"\\)");
-          // console.log(temp)
-          // console.log(temp.evaluate(all[0]))
+
         }
-        // console.log(all[0])
+        console.log(props)
+
         mathjax.reload("table");
+        var toReturn = []
+        for (col in props){
+          var tempRowArr = []
+          for (row in all){
+            tempRowArr.push(props[col].evaluate(all[row])+"")
+          }
+          toReturn.push(tempRowArr)
+        }
+        return toReturn;
 
 
     }
@@ -6809,6 +6822,7 @@ $(function() {
 
 
     function randomPickset(arr, max, min) {
+
         if (max > arr.length) {
             max = arr.length;
         }
@@ -6827,19 +6841,10 @@ $(function() {
             max: max
         }))
     }
-    // test = randomPickset(predicates,1,500)
-    // console.log(test)
+
 
     function makeModel(ud, predicates, diff) {
-        // var max
-        // var min
-        // if (diff == 1) {
-        //     max = 10;
-        //     min = 3
-        // } else if (diff == 2) {
-        //     min = 3;
-        //     max = chance.weighted([4, 5, 6], [.7, .15, .15])
-        // }
+
         var model = {}
         model.predicates = {};
         model.ud = ud;
@@ -6884,7 +6889,7 @@ $(function() {
                     }
                     ex.push(temp)
                 }
-                // console.log(ex)
+
             } else if (option == "all") {
                 for (x in ud) {
                     for (y in ud) {
@@ -6894,15 +6899,15 @@ $(function() {
 
                             for (z in ud) {
                                 newtemp = temp + ud[z]
-                                    // console.log(newtemp)
+
                                 ex.push(newtemp)
                             }
                         } else ex.push(temp)
-                            // console.log(ex)
+
                     }
                 }
             } else {
-                // console.log(ud)
+
                 n = chance.integer({
                     min: 1,
                     max: chance.integer({
@@ -6924,8 +6929,7 @@ $(function() {
                         for (var j = 0; j < out.place; j++) {
                             pair += chance.pickone(ud)
                         }
-                        // console.log(pair);
-                        // console.log(ex.indexOf(pair) != -1)
+
                     }
 
                     ex.push(pair);
@@ -6960,36 +6964,119 @@ $(function() {
 
 
 
-    function getTableValues() {
+    function getTableValues(ans) {
         var last = $('.tbutt').last().attr("id").split("-");
         var truthValues = [];
         for (var i = 0; i <= last[0]; i++) {
             var temp = []
             for (var j = 0; j <= last[1]; j++) {
-                temp[j] = $("#" + i + "-" + j).text()
+                temp[j] = $("#" + i + "-" + j).attr("value")
             }
             truthValues[i] = temp;
         }
+        // console.log("check")
+        // console.log(truthValues)
+        // console.log("against")
+        // console.log(ans)
 
-        console.log(truthValues)
+        if (_.isEqual(truthValues,ans)){
+            makeAlert($('.jumbotron'), "b", "This is correct! Input: " + truthValues + " answer: " + ans+ ". Click submit again for next problem.",2)
+        } else{
+          makeAlert($('.jumbotron'), "b", "This is incorrect! Input: " + truthValues + " answer: " + ans + ". Click submit again for next problem.",4)
+        }
+
+
+
     }
 
+
+    function resetTable(){
+      var last = $('.tbutt').last().attr("id").split("-");
+
+      for (var i = 0; i <= last[0]; i++) {
+          for (var j = 0; j <= last[1]; j++) {
+              $temp = $("#" + i + "-" + j)
+              $temp.removeClass("true");
+              $temp.removeClass("false");
+              $temp.text("?")
+          }
+      }
+
+    }
     $('.tbutt').on('click', function() {
         if ($(this).text() == "T") {
           $(this).text("F")
+          $(this).attr("value", false)
           $(this).addClass("false")
           $(this).removeClass("true")
         } else {
           $(this).text("T")
+          $(this).attr("value", true)
           $(this).addClass("true")
           $(this).removeClass("false")
         }
     })
 
-    $('button').on('click', getTableValues);
+    var currentAnswers = initTable(difficulty);
+    console.log(currentAnswers)
+    $('button').on('click', function(){
+
+        switch (buttNextState){
+        case "checkAnswer":{
+          getTableValues(currentAnswers);
+          buttNextState = "newTable"
+          break;
+        }
+        case "newTable":{
+          resetTable()
+          currentAnswers = initTable(difficulty);
+              console.log(currentAnswers)
+          buttNextState ="checkAnswer"
+          break;
+        }
+      }
+
+
+
+    });
 })
 
-},{"./mods/mathjax.js":4,"chance":1,"underscore":2}],4:[function(require,module,exports){
+},{"./mods/alert.js":4,"./mods/mathjax.js":5,"chance":1,"underscore":2}],4:[function(require,module,exports){
+var makeAlert = function(location, direction, text, code){ //direction: a= above, b=below
+  /////This takes care of the HTML
+  var tag;
+  if (code == 0){
+	if (direction == "a"&& $(location).prev().hasClass("alert")){
+          $(location).prev().remove();
+        }
+      if (direction == "b" && $(location).next().hasClass("alert")){
+          $(location).next().remove();
+        }
+  }
+  else if (code == 1){tag = "alert-success";}
+  else if (code == 2){tag = "alert-info";}
+  else if (code == 3){tag = "alert-warning"}
+  else{tag = "alert-danger"}
+  var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
+
+  if (direction == "a"){
+    if ($(location).prev().hasClass("alert")) {
+      $(location).prev().remove();
+    }
+    $(location).before(html);
+    }
+
+  if (direction == "b"){
+    if ($(location).next().hasClass("alert")) {
+      $(location).next().remove();
+    }
+    $(location).after(html);
+    }
+
+  }
+
+ module.exports = makeAlert;
+},{}],5:[function(require,module,exports){
 var mathJax = {
   load: function () {
   var script = document.createElement("script");
@@ -7007,7 +7094,118 @@ var mathJax = {
 
 module.exports = mathJax;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+'use strict'
+
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+function init () {
+  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  for (var i = 0, len = code.length; i < len; ++i) {
+    lookup[i] = code[i]
+    revLookup[code.charCodeAt(i)] = i
+  }
+
+  revLookup['-'.charCodeAt(0)] = 62
+  revLookup['_'.charCodeAt(0)] = 63
+}
+
+init()
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+
+  // base64 is 4/3 + up to two characters of the original data
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+},{}],7:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -8800,118 +8998,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":6,"ieee754":7,"isarray":8}],6:[function(require,module,exports){
-'use strict'
-
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
-}
-
-init()
-
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-
-  // base64 is 4/3 + up to two characters of the original data
-  arr = new Arr(len * 3 / 4 - placeHolders)
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
-
-  var L = 0
-
-  for (i = 0, j = 0; i < l; i += 4, j += 3) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
-  }
-
-  parts.push(output)
-
-  return parts.join('')
-}
-
-},{}],7:[function(require,module,exports){
+},{"base64-js":6,"ieee754":8,"isarray":9}],8:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -8997,7 +9084,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
