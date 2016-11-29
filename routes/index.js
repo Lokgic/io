@@ -450,7 +450,7 @@ router.get('/6/wason3', function(req, res, next){
 router.get(t = '/6/*', function(req, res, next){
 	var moduleNum = req.path.split('/')[1]
 	var sectionNum = req.path.split('/')[2]
-	console.log(req.path);
+
 	var lesson = require('../public/json/lesson6.json');
 
 	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
@@ -477,7 +477,7 @@ router.get('/7/', function(req, res, next){
 router.get(t = '/7/*', function(req, res, next){
 	var moduleNum = req.path.split('/')[1]
 	var sectionNum = req.path.split('/')[2]
-	console.log(req.path);
+
 	var lesson = require('../public/json/lesson7.json');
 
 	return res.render('lesson', {title:"Module Seven", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});

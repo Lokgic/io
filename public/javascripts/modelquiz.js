@@ -6502,11 +6502,12 @@
 $(function() {
 
     //////Modules
-    var Chance = require('chance')
+
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
-    mathjax.load()
+    // mathjax.load()
+    var Chance = require('chance')
     var chance = new Chance();
 
     //preloading variables for stringbuilding
@@ -6521,12 +6522,26 @@ $(function() {
     var disjunction = '\\vee'
     var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
+    var newDifficulty = false;
+//Module specific settings
+    var di;
+    switch ($('title').attr('value')){
+      case "7":  di = 3
+      break;
+      default:  di= 0;
+
+    }
+
+
+
+
+
+
 
     //States initialization
-    var buttNextState = "checkAnswer";
-    var di= 1;
     var score = 0;
     var toPass = 15;
+    var buttNextState = "checkAnswer";
     var le ={
       "0":{
         negatedAtomic: 5,
@@ -6555,6 +6570,33 @@ $(function() {
         extensionOptions:["all", "self", "mixed", "none"],
         extensionDistribution:[0.1,0.3,0.3,0.3], //4
         predicatesVariableConstantRatio:[.3,.7]
+      },
+      "3":{
+        negatedAtomic: 20,
+        negatedComplex: 30,
+        predicatesDistribution:[0.3,0.6,.1],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.1,0.4,0.4], //4
+        predicatesVariableConstantRatio:[.2,.8]
+      },
+      "4":{
+        negatedAtomic: 50,
+        negatedComplex: 50,
+        predicatesDistribution:[0.1,0.6,.3],
+        constantsDistribution: {mean:6, dev:2},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.1,0.5,0.2], //4
+        predicatesVariableConstantRatio:[.1,.9]
+      },
+      "5":{
+        negatedAtomic: 20,
+        negatedComplex: 50,
+        predicatesDistribution:[0.2,0.4,.4],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.4,0.1,0.3,0.1], //4
+        predicatesVariableConstantRatio:[.8,.2]
       }
     }
     // console.log(normal({}))
@@ -7045,9 +7087,12 @@ $(function() {
     }
 
     function updateScore(){
-      if (score<5) di = 0;
-      else if (score >4 && score <10) di = 1;
-      else di = 2;
+
+      if (newDifficulty) {
+        di += 1;
+        newDifficulty = false
+      }
+
       $('#description').text("Difficulty Level: " + di);
       $('#score').text("Score: " + score);
     }
@@ -7067,9 +7112,10 @@ $(function() {
         }
       }
     })
+    // console.log(di)
     updateScore();
     var currentAnswers = initTable();
-    console.log(currentAnswers)
+    // console.log(currentAnswers)
     $('button').on('click', function(){
 
         switch (buttNextState){
@@ -7088,6 +7134,7 @@ $(function() {
               }
               default:  {
                 score += 1;
+                if (score == 10 || score == 5) newDifficulty = true;
                 buttNextState = "newTable"
                 makeAlert($('.jumbotron'), "b", "This is correct! You need solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
               }
@@ -7102,7 +7149,7 @@ $(function() {
           resetTable()
           currentAnswers = initTable();
           mathjax.reload("table");
-              console.log(currentAnswers)
+              // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
         }
@@ -7111,7 +7158,7 @@ $(function() {
           resetTable()
           currentAnswers = initTable();
           mathjax.reload("table");
-              console.log(currentAnswers)
+              // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
         }
@@ -7178,7 +7225,14 @@ var mathJax = {
   reload: function(id){
     id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-  }
+  },
+  config: function(){
+    MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+    }}
+  );
+}
 }
 
 

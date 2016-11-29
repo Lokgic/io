@@ -58,14 +58,14 @@
     },
     "7": {
         "moduleNo": 7,
-        "title": "Quantified Logic: Identity ",
+        "title": "Identity: Introduction",
         "symbol": "∃",
-        "description": "The notion of identity holds an important place in both philosophy and mathematics. The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. There are many complex English statements that can be elegantly translated using identity. We also add two rules of deduction to deal with identity and look at how to capture the identity relation in models."
+        "description": "The notion of identity holds an important place in both philosophy and mathematics. The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. There are many complex English statements that can be elegantly translated using identity. We will also venture briefly into the realm of philosophy, and discuss the very idea of a 'definite description,' made famous by the English philosopher Bertrand Russell."
     },
     "8": {
         "moduleNo": 8,
-        "title": "Review",
+        "title": "Identity: Deduction and Semantics",
         "symbol": "∴",
-        "description": "Formal logic in earnest! In this module we will work on the most complex derivations in this course. We use our system of derivation to prove theorems involving quantifiers and predicates. We will also transcribe complex arguments into English, and then prove their invalidity using models"
+        "description": "Formal logic in earnest! In this module we will work on the most complex derivations in this course. We complete our system of proofs with two rules of deduction to deal with identity. We will also transcribe complex arguments into English, and then prove their invalidity using models"
     }
 }

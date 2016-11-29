@@ -71,7 +71,7 @@
         },
 
         "2": {
-            "title": "Ex 1: Easy Translations with Identity",
+            "title": "Ex 1: Beginning Translations with Identity",
             "content": {
                 "a":{
                   "type":"p",
@@ -137,7 +137,27 @@
 
                     "Sentence A can also be approached in another way. It means that any apples that there are on the table must be the selfsame apple, so it can be translated as $\\forall x\\forall y[(Ax \\wedge Ay) \\to x=y]$. The two translations are logically equivalent, so both are correct.",
 
-                    "In a similar way, sentence B can be translated in two equivalent ways. It can be paraphrased as, ``It is not the case that there are three or more distinct apples'', so it can be translated as the negation of sentence 3. Using universal quantifiers, it can also be translated as $$\\forall x\\forall y\\forall z[(Ax \\wedge Ay \\wedge Az) \\to (x=y \\vee x=z \\vee y=z)].$$"
+                    "In a similar way, sentence B can be translated in two equivalent ways. It can be paraphrased as, ``It is not the case that there are three or more distinct apples'', so it can be translated as the negation of sentence 3. Using universal quantifiers, it can also be translated as $$\\forall x\\forall y\\forall z[(Ax \\wedge Ay \\wedge Az) \\to (x=y \\vee x=z \\vee y=z)].$$",
+
+                    "The examples above are sentences about apples, but the logical structure of the sentences translates mathematical inequalities like $a\\geq 3$, $a \\leq 2$, and so on. We also want to be able to translate statements of equality which say exactly how many things there are. For example:",
+
+                    "$$\\text{C. There is exactly one apple on the table.}$$",
+                    "$$\\text{D. There are exactly two apples on the table.}$$",
+
+
+
+                  "Sentence C can be paraphrased as, ``There is at least one apple on the table, and there is at most one apple on the table.'' This is just the conjunction of sentence 1 and sentence A $\\exists x Ax \\wedge \\forall x\\forall y [(Ax \\wedge Ay) \\to x=y]$. This is a somewhat complicated way of going about it. It is perhaps more straightforward to paraphrase sentence A as ``There is a thing which is the only apple on the table.'' Thought of in this way, the sentence can be translated $\\exists x[Ax \\wedge \\neg\\exists y(Ay \\wedge x\\neq y)]$.",
+
+                "Similarly, sentence B may be paraphrased as, ``There are two different apples on the table, and these are the only apples on the table.'' This can be translated as $\\exists x\\exists y[Ax \\wedge Ay \\wedge x\\neq y \\wedge \\neg\\exists z(Az \\wedge x\\neq z \\wedge y\\neq z)]$.",
+
+                "Finally, consider this sentence:",
+                "$$\\text{E. There are at most two things on the table.}$$",
+
+                "It might be tempting to add a predicate so that $Tx$ would mean ``$x$ is a thing on the table.'' However, this is unnecessary. Since the UD is the set of things on the table, all members of the UD are on the table. If we want to talk about a thing on the table, we need only use a quantifier. Sentence E can be symbolized like sentence D (which said that there were at most two apples), but leaving out the predicate entirely. That is, sentence E can be translated as $\\forall x \\forall y \\forall z(x=y \\vee x=z \\vee y=z)$."
+
+
+
+
                 ]
 
               }
@@ -172,7 +192,7 @@
     "section3":{
 
       "1": {
-        "sectionname": "Identity in philosophy of language",
+        "sectionname": "Identity in Philosophy of Language",
         "sectionNum": "3",
           "title": "Definite Descriptions",
           "content": {
@@ -185,7 +205,7 @@
 
                       "$$1. \\text{The present king of France is bald.}$$",
 
-                      "The phrase 'the present king of France is bald' supposed to pick out an individual by means of a definite description.However, there was no king of France in 1905 and there is none now.Since the description is a non - referring term, we cannot just define a constant to mean ``the present king of France '' and translate the sentence as\\(Kf\\). ",
+                      "The phrase 'the present king of France is bald' supposed to pick out an individual by means of a definite description.However, there was no king of France in 1905 and there is none now.Since the description is a non - referring term, we cannot just define a constant to mean ``the present king of France '' and translate the sentence as \\(Kf\\). ",
 
                       "Russell's idea was that sentences that contain definite descriptions have a different logical structure than sentences that contain proper names, even though they share the same grammatical form. What do we mean when we use an unproblematic, referring description, like ``the highest peak in Washington state''? We mean that there is such a peak, because we could not talk about it otherwise. We also mean that it is the only such peak. If there was another peak in Washington state of exactly the same height as Mount Rainier, then Mount Rainier would not be the highest peak.",
 
@@ -211,29 +231,52 @@
                   ]
               }
           }
+      },
+      "2": {
+          "title": "Ex 3: Translations with Definite Descriptions",
+          "content": {
+              "a":{
+                "type":"p",
+                "substance":["Using the symbolization key given, translate each English-language sentence into QL, by dragging the correct translation into the grey box."]
+              },
+              "b":{
+                "type":"listHead",
+                "content":[
+                  ["UD", "animals"],
+                  ["Bx", "x is in Farm Brown's field."],
+                  ["Hx","x is a horse."],
+                  ["Wx", "x has wings."],
+                  ["Px", "x is a Pegasus"]
+                ]
+              },
+              "c": {
+                  "type": "ex",
+                  "id": "reading_3"
+              }
+          }
       }
     },
     "ex": {
         "reading_1": {
             "mathjax": true,
             "section": "1",
-            "title": "reading 1",
+            "title": "Ex 1: Beginning Translations with Identity",
             "type": "dragMatch",
             "id": "reading_1",
             "pairs": [
                 ["\\(Sh \\wedge \\forall x (Vx \\to \\neg Sx)\\)","Hofthor is a spy, but no vegetarian is a spy."],
                 ["\\( \\forall x (Ki \\wedge (Kx \\to x=i) )\\)","Only Ingmar knows the combination to the safe."],
                 ["\\(\\neg Ki \\to \\neg \\exists x (Kx)\\)","No one knows the combination to the safe unless Ingmar does."],
-                ["\\(\\exists x (Kx \\wedge \\forall y (Ky \\to (x=y \\wedge \\neg Sy)))  \\)","The person who knows the combination to the safe is not a spy."],
-                ["\\(\\forall x (Tih \\wedge (Tix \\wedge x = h))\\)","Ingmar trusts Hofthor, but no one else."],
-                ["\\(\\exists x \\forall y ((Kx \\wedge Vx )\\wedge (Ky \\to x = y))\\)","The person who knows the combination to the safe is a vegetarian."]
+                ["\\(\\exists x (Kx \\wedge  (x=h \\wedge \\neg Sx)))  \\)","Hofthor is someone who knows the combination to the safe but is not a spy."],
+                ["\\(\\forall x (Tih \\wedge (Tix \\to x = h))\\)","Ingmar trusts Hofthor, but no one else."],
+                ["\\(\\forall x  ((Kx \\wedge Vx )\\to (x = i))\\)","Any vegetarian who knows the combination to the safe is Ingmor."]
             ]
         },
 
         "reading_2": {
             "mathjax": true,
             "section": "2",
-            "title": "Translations with Identity and Quantity",
+            "title": "Ex.2 Translations with Identity and Quantity",
             "type": "dragMatch",
             "id": "reading_2",
             "pairs": [
@@ -243,6 +286,37 @@
                 ["\\( \\forall x \\forall y \\forall z ((Jx \\wedge Jy \\wedge Jz) \\to (x \\neq y \\vee x \\neq z \\vee y \\neq z)) \\)","There are at most two one-eyed jacks."],
                 ["\\(\\exists x \\exists y (Ox \\wedge Jx \\wedge Oy \\wedge Jy \\wedge (\\forall z (Oz \\wedge Jz) \\to (z = x \\vee z = y)))\\)","There are two one-eyed jacks."]
             ]
+        },
+
+        "reading_3": {
+            "mathjax": true,
+            "section": "3",
+            "title": "Ex. 3Translations with Definite Descriptions",
+            "type": "dragMatch",
+            "id": "reading_3",
+            "pairs": [
+                ["$\\exists x ((Px \\wedge Wx \\wedge Hx)\\wedge \\neg \\exists y (Wy \\wedge  Hy \\wedge x \\neq y))$","The Pegasus is a winged horse."],
+                ["$\\exists x (Bx \\wedge \\neg Hx \\wedge \\neg \\exists u  (Bu \\wedge x \\neq u) ) )$","The animal in Farmer Brown's field is not a horse."],
+                ["$\\exists x (Hx \\wedge Bx \\wedge \\neg Wx \\wedge \\neg \\exists w (Hw \\wedge Bw \\wedge w \\neq x))$","The horse in Farmer Brown's field does not have wings"],
+                ["$\\forall x ((Hx \\wedge Wx) \\to Px)$","A winged horse is a pegasus."],
+                ["$\\exists x ((Hx \\wedge Wx)\\wedge\\neg Px)$","Not every winged horse is a pegasus."],
+                ["$\\exists z \\exists w(Pz \\wedge \\forall x (Px \\to z=x)\\wedge (Bw \\wedge \\neg \\exists u(Bu \\wedge u\\neq w))\\wedge w \\neq z )$","The Pegasus is not the animal in Farmer Brown's field."]
+            ]
+        },
+        "concepts": {
+            "section": "concepts",
+            "title": "Quiz: Concepts",
+            "terms": [
+                ["wide-scope negation", "negates the entire sentence"],
+                ["narrow-scope negation", "negates a part of the sentence"],
+                ["An existence claim about ", "To assert that there is something that is x."],
+                ["A uniqueness claim about ", "To assert that there is only one x."],
+                ["A predication claim", "To make a claim about the property held by the object in question."]
+            ]
+        },
+        "quiz": {
+            "section": "quiz",
+            "title": "Quiz: Models II"
         }
     }
 }

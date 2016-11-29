@@ -1,12 +1,13 @@
 extends layout
 block extrahead
-	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
-	script.
+	script(type="text/x-mathjax-config").
 		MathJax.Hub.Config({
 		tex2jax: {
 			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
 		}}
 		);
+	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+
 
 
 block content
@@ -70,10 +71,11 @@ block content
 								h4#ans
 					when "sectionquiz"
 						case moduleNum
+							when "7"
 							when "6"
 								.container.m-t-3.text-xs-center
 									.jumbotron.m-y-3
-										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Models
+										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz #{moduleNum}: Models
 										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below - click the corresponding box to choose between T and F. You will have to resrart for any incorrect answer. Get a score of 15 to pass.
 										p.display-4#score
 										p#description
@@ -82,6 +84,7 @@ block content
 										table.table.table-bordered.table-inverse#table
 											thead
 												- var s_arr = [0,1,2,3]
+												- if (mouduleNum == "7") s_arr.push(4)
 												- var ext_arr = [0]
 												tr
 													th.h2.text-xs-center UD:
@@ -154,6 +157,7 @@ block content
 
 
 block extrafooter
+
 	if plugin == "dragMatch"
 		script(src='../javascripts/dragmatch.js')
 	if sectionNum == "sectionconcepts"
@@ -161,6 +165,7 @@ block extrafooter
 	if sectionNum == "sectionquiz"
 		case moduleNum
 			when "6"
+			when "7"
 				script(src='../javascripts/modelquiz.js')
 	else
 		script(src='../javascripts/lessonreading.js')
