@@ -456,6 +456,10 @@ router.get(t = '/6/*', function(req, res, next){
 	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
 
+router.get('/7/', function(req, res, next){
+
+	return res.redirect('/7/1');
+});
 
 // router.get('/6/2', function(req, res, next){
 // 	var lesson = require('../public/json/lesson6.json');
@@ -464,10 +468,19 @@ router.get(t = '/6/*', function(req, res, next){
 // });
 
 
-router.get('/7', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
+// router.get('/7', function(req, res, next){
+// 	var err = new Error('Module not yet available.');
+// 				err.status = 401;
+// 				return next(err);
+// });
+
+router.get(t = '/7/*', function(req, res, next){
+	var moduleNum = req.path.split('/')[1]
+	var sectionNum = req.path.split('/')[2]
+	console.log(req.path);
+	var lesson = require('../public/json/lesson7.json');
+
+	return res.render('lesson', {title:"Module Seven", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
 
 router.get('/8', function(req, res, next){
