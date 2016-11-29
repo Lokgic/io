@@ -1,10 +1,14 @@
 $(function() {
 
+    //////Modules
     var Chance = require('chance')
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
+    mathjax.load()
     var chance = new Chance();
+
+    //preloading variables for stringbuilding
     var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
     var variables = ['x','y']
     var predicates = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
@@ -16,36 +20,66 @@ $(function() {
     var disjunction = '\\vee'
     var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
+
+    //States initialization
     var buttNextState = "checkAnswer";
-    var di= 0;
+    var di= 1;
+    var score = 0;
+    var toPass = 15;
     var le ={
       "0":{
-        negatedAtomic: 0.005,
-        negatedComplex: 0.1,
-        prediatesNum:[0.7,0.3,0]
+        negatedAtomic: 5,
+        negatedComplex: 10,
+        predicatesDistribution:[0.7,0.3,0], //how many place
+        constantsDistribution: {mean:3, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.2,.8]
+      },
+
+      "1":{
+        negatedAtomic: 20,
+        negatedComplex: 20,
+        predicatesDistribution:[0.4,0.6,0],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.3,.7]
+      },
+      "2":{
+        negatedAtomic: 20,
+        negatedComplex: 40,
+        predicatesDistribution:[0.3,0.6,.1],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.3,.7]
       }
     }
+    // console.log(normal({}))
 
-
-    var Proposition = function(model, option){
-      var o = [variables, model.ud]
+    var Proposition = function(model){
+      var o = {
+        variables: variables,
+        constants : model.ud
+      }
       left = model.predicates[chance.pickone(Object.keys(model.predicates))];
       right = model.predicates[chance.pickone(Object.keys(model.predicates))];
       this.left = {
         letter: left.letter,
         place: left.place,
-        negated: chance.bool(le[di].negatedAtomic)
+        negated: chance.bool({likelihood:le[di].negatedAtomic})
       }
       this.right = {
         letter: right.letter,
         place: right.place,
-        negated: chance.bool(le[di].negatedAtomic)
+        negated: chance.bool({likelihood:le[di].negatedAtomic})
       }
       if (this.left.negated) this.left.prefix = negation
         else this.left.prefix = ""
       if (this.right.negated ) this.right.prefix = negation
         else this.right.prefix = ""
-      this.negated = chance.bool(le[di].negatedComplex)
+      this.negated = chance.bool({likelihood:le[di].negatedComplex})
       if (this.negated) this.prefix = negation
         else this.prefix = ""
       this.totalPlace = this.left.place + this.right.place;
@@ -56,12 +90,16 @@ $(function() {
 
 
           for (var i = 0;i < this.left.place;i++){
+            //
+            // this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
 
-            this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
+
+          this.left.vars += chance.pickone(o[chance.weighted(["variables", "constants"],le[di].predicatesVariableConstantRatio)])
+
 
         }
         for (var i = 0;i < this.right.place;i++){
-            this.right.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
+            this.right.vars += chance.pickone(o[chance.weighted(["variables", "constants"],le[di].predicatesVariableConstantRatio)])
 
         }
 
@@ -266,25 +304,22 @@ $(function() {
         for (p in pLetter) {
           temp = {
             letter: pLetter[p],
-            place: chance.weighted([1, 2, 3], le[di].prediatesNum),
+            place: chance.weighted([1, 2, 3], le[di].predicatesDistribution),
             vars:[]
           }
           predicates_pickedForModel[pLetter[p]] = temp;
         }
 
 
-        if (diff == 1) {
-            udmax = 10;
-            udmin = 3
-        } else if (diff == 2) {
-            udmin = 2;
-            udmax = chance.weighted([3, 4, 5], [.7, .15, .15])
-        }
-        ud = randomPickset(constants, udmax, udmin).sort();
 
+            // udmin = 2;
+            // udmax = chance.weighted(le[di].constantsNum, le[di].constantsDistribution)
+
+        // ud = randomPickset(constants, udmax, udmin).sort();
+        ud = chance.pickset(constants, Math.round(chance.normal(le[di].constantsDistribution))).sort()
 
         for (var i = 0; i <= size; i++) {
-            all.push(makeModel(ud, predicates_pickedForModel, diff))
+            all.push(makeModel(ud, predicates_pickedForModel))
         }
 
         for (var i = 0; i <= size; i++) {
@@ -300,14 +335,14 @@ $(function() {
         props = []
 
         for (var i = 0; i<=ysize;i++){
-          var temp = new Proposition(all[0],{name: true});
+          var temp = new Proposition(all[0]);
           props.push(temp);
           $('#statement'+i).text("\\(" + temp.string +"\\)");
 
         }
-        console.log(props)
+        // console.log(props)
 
-        mathjax.reload("table");
+
         var toReturn = []
         for (col in props){
           var tempRowArr = []
@@ -347,21 +382,21 @@ $(function() {
     }
 
 
-    function makeModel(ud, predicates, diff) {
+    function makeModel(ud, predicates) {
 
         var model = {}
         model.predicates = {};
         model.ud = ud;
 
         for (p in predicates) {
-            model.predicates[predicates[p].letter] = initPredicate(predicates[p].letter, model.ud, diff, predicates[p].place);
+            model.predicates[predicates[p].letter] = initPredicate(predicates[p].letter, model.ud, predicates[p].place);
         }
         return model;
     }
 
 
 
-    function initPredicate(p, ud, diff, place) {
+    function initPredicate(p, ud, place) {
 
         out = {
             "letter": p,
@@ -374,9 +409,8 @@ $(function() {
             string = '<p>' + p + ' : { ' + ex.join(' , ') + ' }</p>'
 
         } else {
-            if (out.place == 2) w = [0.2, 0.25, 0.25, 0.2]
-            else w = [0.01, 0.19, 0.5, 0.3]
-            option = chance.weighted(["all", "self", "mixed", "none"], w);
+
+            option = chance.weighted(le[di].extensionOptions, le[di].extensionDistribution);
 
             if (option == "none") {
 
@@ -475,19 +509,17 @@ $(function() {
             var temp = []
             for (var j = 0; j <= last[1]; j++) {
                 temp[j] = $("#" + i + "-" + j).attr("value")
+                $("#" + i + "-" + j).removeClass("true");
+                $("#" + i + "-" + j).removeClass("false");
+                if (temp[j] == ans[i][j]) toAdd = 'correct'
+                else if (temp[j] == undefined || temp[j] == "") toAdd = 'missing'
+                else toAdd = 'wrong'
+                $("#" + i + "-" + j).addClass(toAdd)
             }
             truthValues[i] = temp;
         }
-        // console.log("check")
-        // console.log(truthValues)
-        // console.log("against")
-        // console.log(ans)
 
-        if (_.isEqual(truthValues,ans)){
-            makeAlert($('.jumbotron'), "b", "This is correct! Input: " + truthValues + " answer: " + ans+ ". Click submit again for next problem.",2)
-        } else{
-          makeAlert($('.jumbotron'), "b", "This is incorrect! Input: " + truthValues + " answer: " + ans + ". Click submit again for next problem.",4)
-        }
+        return _.isEqual(truthValues,ans);
 
 
 
@@ -501,14 +533,26 @@ $(function() {
       for (var i = 0; i <= last[0]; i++) {
           for (var j = 0; j <= last[1]; j++) {
               $temp = $("#" + i + "-" + j)
-              $temp.removeClass("true");
-              $temp.removeClass("false");
+              $temp.attr('value',"")
+              $temp.removeClass("correct");
+              $temp.removeClass("wrong");
+              $temp.removeClass("missing");
               $temp.text("?")
           }
       }
 
     }
+
+    function updateScore(){
+      if (score<5) di = 0;
+      else if (score >4 && score <10) di = 1;
+      else di = 2;
+      $('#description').text("Difficulty Level: " + di);
+      $('#score').text("Score: " + score);
+    }
+
     $('.tbutt').on('click', function() {
+      if (buttNextState == 'checkAnswer'){
         if ($(this).text() == "T") {
           $(this).text("F")
           $(this).attr("value", false)
@@ -520,27 +564,58 @@ $(function() {
           $(this).addClass("true")
           $(this).removeClass("false")
         }
+      }
     })
-
-    var currentAnswers = initTable(difficulty);
+    updateScore();
+    var currentAnswers = initTable();
     console.log(currentAnswers)
     $('button').on('click', function(){
 
         switch (buttNextState){
         case "checkAnswer":{
-          getTableValues(currentAnswers);
-          buttNextState = "newTable"
+          if(getTableValues(currentAnswers)){
+            switch (score){
+              case (toPass - 1):{
+                score += 1;
+                buttNextState = "startover";
+                jQuery.post("/report", {moduleNo: $('title').attr('value'), label : "quiz"}, function(res){
+                makeAlert($('.jumbotron'), "b", "You have passed this quiz! " + res ,1)
+
+              });
+
+                break;
+              }
+              default:  {
+                score += 1;
+                buttNextState = "newTable"
+                makeAlert($('.jumbotron'), "b", "This is correct! You need solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
+              }
+            }
+          } else{
+            buttNextState = "startover"
+            makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! Incorrect answers are marked red, missing answers orange, and correct  answers blue. Press Submit to try again." ,4)
+          }
           break;
         }
         case "newTable":{
           resetTable()
-          currentAnswers = initTable(difficulty);
+          currentAnswers = initTable();
+          mathjax.reload("table");
+              console.log(currentAnswers)
+          buttNextState ="checkAnswer"
+          break;
+        }
+        case "startover":{
+          score = 0;
+          resetTable()
+          currentAnswers = initTable();
+          mathjax.reload("table");
               console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
         }
       }
-
+      updateScore();
 
 
     });

@@ -3,8 +3,21 @@
    width: 45%;
    height:100%;
 }*/
+.correct{
+  background-color:#2196f3;
+  color:grey;
+}
+.missing{
+  background-color:#ff9800;
+  color:grey;
+}
+.wrong{
+  background-color: #e91e63;
+  color:grey;
+}
 .tbutt:hover{
-  background: grey;
+  background: white;
+  color:black;
 }
 
 .true{

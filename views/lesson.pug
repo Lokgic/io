@@ -65,7 +65,9 @@ block content
 								.container.m-t-3.text-xs-center
 									.jumbotron.m-y-3
 										h2.display-3.text-xs-center.m-t-3#conceptshead(value = moduleNum) Quiz: Models
-										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below (Under Construction)
+										p.lead.text-xs-center Instruction: Provide the correct truth values for propositions below - click the corresponding box to choose between T and F. You will have to resrart for any incorrect answer. Get a score of 15 to pass.
+										p.display-4#score
+										p#description
 									button.btn.btn-primary.btn-block.m-y-2 Submit
 									.table-responsive
 										table.table.table-bordered.table-inverse#table
@@ -73,9 +75,10 @@ block content
 												- var s_arr = [0,1]
 												- var ext_arr = [0]
 												tr
-													th(id = "ud0" colspan = ext_arr.length+1).h4.text-xs-center model. UD: #{i}
+													th.h2.text-xs-center UD:
+													th(id = "ud0" colspan = ext_arr.length).h4.text-xs-center model. Domain of Discourse: #{i}
 												tr
-													th
+													td.h2.text-xs-center Extension(s):
 													each i in ext_arr
 														td(id = "ext"+i).lead.text-xs-center  exten. #{i}
 											tbody
@@ -126,7 +129,6 @@ block content
 
 
 block extrafooter
-	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
 	if sectionNum == "sectionconcepts"
 		script(src='../javascripts/lessonconcepts.js')
 	if sectionNum == "sectionquiz"

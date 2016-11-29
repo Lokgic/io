@@ -4948,7 +4948,7 @@
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":7}],2:[function(require,module,exports){
+},{"buffer":6}],2:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -6501,11 +6501,15 @@
 },{}],3:[function(require,module,exports){
 $(function() {
 
+    //////Modules
     var Chance = require('chance')
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
+    mathjax.load()
     var chance = new Chance();
+
+    //preloading variables for stringbuilding
     var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
     var variables = ['x','y']
     var predicates = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
@@ -6517,36 +6521,66 @@ $(function() {
     var disjunction = '\\vee'
     var quantifiersOptions = [exists, forall]
     var connectives = [conditional,conjunction,disjunction]
+
+    //States initialization
     var buttNextState = "checkAnswer";
-    var di= 0;
+    var di= 1;
+    var score = 0;
+    var toPass = 15;
     var le ={
       "0":{
-        negatedAtomic: 0.005,
-        negatedComplex: 0.1,
-        prediatesNum:[0.7,0.3,0]
+        negatedAtomic: 5,
+        negatedComplex: 10,
+        predicatesDistribution:[0.7,0.3,0], //how many place
+        constantsDistribution: {mean:3, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.2,.8]
+      },
+
+      "1":{
+        negatedAtomic: 20,
+        negatedComplex: 20,
+        predicatesDistribution:[0.4,0.6,0],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.3,.7]
+      },
+      "2":{
+        negatedAtomic: 20,
+        negatedComplex: 40,
+        predicatesDistribution:[0.3,0.6,.1],
+        constantsDistribution: {mean:4, dev:1},
+        extensionOptions:["all", "self", "mixed", "none"],
+        extensionDistribution:[0.1,0.3,0.3,0.3], //4
+        predicatesVariableConstantRatio:[.3,.7]
       }
     }
+    // console.log(normal({}))
 
-
-    var Proposition = function(model, option){
-      var o = [variables, model.ud]
+    var Proposition = function(model){
+      var o = {
+        variables: variables,
+        constants : model.ud
+      }
       left = model.predicates[chance.pickone(Object.keys(model.predicates))];
       right = model.predicates[chance.pickone(Object.keys(model.predicates))];
       this.left = {
         letter: left.letter,
         place: left.place,
-        negated: chance.bool(le[di].negatedAtomic)
+        negated: chance.bool({likelihood:le[di].negatedAtomic})
       }
       this.right = {
         letter: right.letter,
         place: right.place,
-        negated: chance.bool(le[di].negatedAtomic)
+        negated: chance.bool({likelihood:le[di].negatedAtomic})
       }
       if (this.left.negated) this.left.prefix = negation
         else this.left.prefix = ""
       if (this.right.negated ) this.right.prefix = negation
         else this.right.prefix = ""
-      this.negated = chance.bool(le[di].negatedComplex)
+      this.negated = chance.bool({likelihood:le[di].negatedComplex})
       if (this.negated) this.prefix = negation
         else this.prefix = ""
       this.totalPlace = this.left.place + this.right.place;
@@ -6557,12 +6591,16 @@ $(function() {
 
 
           for (var i = 0;i < this.left.place;i++){
+            //
+            // this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
 
-            this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
+
+          this.left.vars += chance.pickone(o[chance.weighted(["variables", "constants"],le[di].predicatesVariableConstantRatio)])
+
 
         }
         for (var i = 0;i < this.right.place;i++){
-            this.right.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
+            this.right.vars += chance.pickone(o[chance.weighted(["variables", "constants"],le[di].predicatesVariableConstantRatio)])
 
         }
 
@@ -6767,25 +6805,22 @@ $(function() {
         for (p in pLetter) {
           temp = {
             letter: pLetter[p],
-            place: chance.weighted([1, 2, 3], le[di].prediatesNum),
+            place: chance.weighted([1, 2, 3], le[di].predicatesDistribution),
             vars:[]
           }
           predicates_pickedForModel[pLetter[p]] = temp;
         }
 
 
-        if (diff == 1) {
-            udmax = 10;
-            udmin = 3
-        } else if (diff == 2) {
-            udmin = 2;
-            udmax = chance.weighted([3, 4, 5], [.7, .15, .15])
-        }
-        ud = randomPickset(constants, udmax, udmin).sort();
 
+            // udmin = 2;
+            // udmax = chance.weighted(le[di].constantsNum, le[di].constantsDistribution)
+
+        // ud = randomPickset(constants, udmax, udmin).sort();
+        ud = chance.pickset(constants, Math.round(chance.normal(le[di].constantsDistribution))).sort()
 
         for (var i = 0; i <= size; i++) {
-            all.push(makeModel(ud, predicates_pickedForModel, diff))
+            all.push(makeModel(ud, predicates_pickedForModel))
         }
 
         for (var i = 0; i <= size; i++) {
@@ -6801,14 +6836,14 @@ $(function() {
         props = []
 
         for (var i = 0; i<=ysize;i++){
-          var temp = new Proposition(all[0],{name: true});
+          var temp = new Proposition(all[0]);
           props.push(temp);
           $('#statement'+i).text("\\(" + temp.string +"\\)");
 
         }
-        console.log(props)
+        // console.log(props)
 
-        mathjax.reload("table");
+
         var toReturn = []
         for (col in props){
           var tempRowArr = []
@@ -6848,21 +6883,21 @@ $(function() {
     }
 
 
-    function makeModel(ud, predicates, diff) {
+    function makeModel(ud, predicates) {
 
         var model = {}
         model.predicates = {};
         model.ud = ud;
 
         for (p in predicates) {
-            model.predicates[predicates[p].letter] = initPredicate(predicates[p].letter, model.ud, diff, predicates[p].place);
+            model.predicates[predicates[p].letter] = initPredicate(predicates[p].letter, model.ud, predicates[p].place);
         }
         return model;
     }
 
 
 
-    function initPredicate(p, ud, diff, place) {
+    function initPredicate(p, ud, place) {
 
         out = {
             "letter": p,
@@ -6875,9 +6910,8 @@ $(function() {
             string = '<p>' + p + ' : { ' + ex.join(' , ') + ' }</p>'
 
         } else {
-            if (out.place == 2) w = [0.2, 0.25, 0.25, 0.2]
-            else w = [0.01, 0.19, 0.5, 0.3]
-            option = chance.weighted(["all", "self", "mixed", "none"], w);
+
+            option = chance.weighted(le[di].extensionOptions, le[di].extensionDistribution);
 
             if (option == "none") {
 
@@ -6976,19 +7010,17 @@ $(function() {
             var temp = []
             for (var j = 0; j <= last[1]; j++) {
                 temp[j] = $("#" + i + "-" + j).attr("value")
+                $("#" + i + "-" + j).removeClass("true");
+                $("#" + i + "-" + j).removeClass("false");
+                if (temp[j] == ans[i][j]) toAdd = 'correct'
+                else if (temp[j] == undefined || temp[j] == "") toAdd = 'missing'
+                else toAdd = 'wrong'
+                $("#" + i + "-" + j).addClass(toAdd)
             }
             truthValues[i] = temp;
         }
-        // console.log("check")
-        // console.log(truthValues)
-        // console.log("against")
-        // console.log(ans)
 
-        if (_.isEqual(truthValues,ans)){
-            makeAlert($('.jumbotron'), "b", "This is correct! Input: " + truthValues + " answer: " + ans+ ". Click submit again for next problem.",2)
-        } else{
-          makeAlert($('.jumbotron'), "b", "This is incorrect! Input: " + truthValues + " answer: " + ans + ". Click submit again for next problem.",4)
-        }
+        return _.isEqual(truthValues,ans);
 
 
 
@@ -7002,14 +7034,26 @@ $(function() {
       for (var i = 0; i <= last[0]; i++) {
           for (var j = 0; j <= last[1]; j++) {
               $temp = $("#" + i + "-" + j)
-              $temp.removeClass("true");
-              $temp.removeClass("false");
+              $temp.attr('value',"")
+              $temp.removeClass("correct");
+              $temp.removeClass("wrong");
+              $temp.removeClass("missing");
               $temp.text("?")
           }
       }
 
     }
+
+    function updateScore(){
+      if (score<5) di = 0;
+      else if (score >4 && score <10) di = 1;
+      else di = 2;
+      $('#description').text("Difficulty Level: " + di);
+      $('#score').text("Score: " + score);
+    }
+
     $('.tbutt').on('click', function() {
+      if (buttNextState == 'checkAnswer'){
         if ($(this).text() == "T") {
           $(this).text("F")
           $(this).attr("value", false)
@@ -7021,27 +7065,58 @@ $(function() {
           $(this).addClass("true")
           $(this).removeClass("false")
         }
+      }
     })
-
-    var currentAnswers = initTable(difficulty);
+    updateScore();
+    var currentAnswers = initTable();
     console.log(currentAnswers)
     $('button').on('click', function(){
 
         switch (buttNextState){
         case "checkAnswer":{
-          getTableValues(currentAnswers);
-          buttNextState = "newTable"
+          if(getTableValues(currentAnswers)){
+            switch (score){
+              case (toPass - 1):{
+                score += 1;
+                buttNextState = "startover";
+                jQuery.post("/report", {moduleNo: $('title').attr('value'), label : "quiz"}, function(res){
+                makeAlert($('.jumbotron'), "b", "You have passed this quiz! " + res ,1)
+
+              });
+
+                break;
+              }
+              default:  {
+                score += 1;
+                buttNextState = "newTable"
+                makeAlert($('.jumbotron'), "b", "This is correct! You need solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
+              }
+            }
+          } else{
+            buttNextState = "startover"
+            makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! Incorrect answers are marked red, missing answers orange, and correct  answers blue. Press Submit to try again." ,4)
+          }
           break;
         }
         case "newTable":{
           resetTable()
-          currentAnswers = initTable(difficulty);
+          currentAnswers = initTable();
+          mathjax.reload("table");
+              console.log(currentAnswers)
+          buttNextState ="checkAnswer"
+          break;
+        }
+        case "startover":{
+          score = 0;
+          resetTable()
+          currentAnswers = initTable();
+          mathjax.reload("table");
               console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
         }
       }
-
+      updateScore();
 
 
     });
@@ -7064,11 +7139,14 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
   }else{
     switch(code){
       case 1: tag = "alert-success";
+      break;
       case 2: tag = "alert-info";
+      break;
       case 3: tag = "alert-warning"
+      break;
       case 4: tag = "alert-danger"
     }
-
+    console.log(tag)
   var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
   if (direction == "a"){
@@ -7108,117 +7186,6 @@ var mathJax = {
 module.exports = mathJax;
 
 },{}],6:[function(require,module,exports){
-'use strict'
-
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
-}
-
-init()
-
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-
-  // base64 is 4/3 + up to two characters of the original data
-  arr = new Arr(len * 3 / 4 - placeHolders)
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
-
-  var L = 0
-
-  for (i = 0, j = 0; i < l; i += 4, j += 3) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
-  }
-
-  parts.push(output)
-
-  return parts.join('')
-}
-
-},{}],7:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -9011,7 +8978,118 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":6,"ieee754":8,"isarray":9}],8:[function(require,module,exports){
+},{"base64-js":7,"ieee754":8,"isarray":9}],7:[function(require,module,exports){
+'use strict'
+
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+function init () {
+  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  for (var i = 0, len = code.length; i < len; ++i) {
+    lookup[i] = code[i]
+    revLookup[code.charCodeAt(i)] = i
+  }
+
+  revLookup['-'.charCodeAt(0)] = 62
+  revLookup['_'.charCodeAt(0)] = 63
+}
+
+init()
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+
+  // base64 is 4/3 + up to two characters of the original data
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+},{}],8:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
