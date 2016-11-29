@@ -15,7 +15,6 @@ var $modal = $('.modal')
 $('#restart').on("click", function(){
   location.reload();
 })
-// console.log(moduleNum)
 function loadJSON(callback){
         $.getJSON('../json/lesson'+moduleNum + '.json')
         .done(function(data){
@@ -28,24 +27,13 @@ loadJSON(function(err, data){
   var terms = []
   var out = []
   for (term in data.ex.concepts.terms){
-    // terms.push(data.ex.concepts.terms[term][0])
     answers.push(data.ex.concepts.terms[term])
-    // out.push(data.ex.concepts.terms[term][1])
   }
-  // terms = randomize.shuffle(terms);
-  // console.log(answers)
+
   answers = randomize.shuffle(answers);
 
   $ans.text(answers[0][1])
   $ans.attr("value",answers[0][1])
-  // for (term in terms){
-  //   $l.append("<div class = 'draggable drag-drop col-sm-12' id = '" +term +"'>" + terms[term] + "</div>")
-  //
-  // }
-  // for (term in out){
-  //
-  //   $ans.append("<div class = 'dropzone'>" + out[term] + "</div>")
-  // }
 
 })
 

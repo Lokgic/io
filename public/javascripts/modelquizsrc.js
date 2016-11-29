@@ -1,11 +1,12 @@
 $(function() {
 
     //////Modules
-    var Chance = require('chance')
+
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
     mathjax.load()
+    var Chance = require('chance')
     var chance = new Chance();
 
     //preloading variables for stringbuilding

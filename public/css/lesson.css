@@ -42,7 +42,7 @@ td{
 }
 
 #r{
-  padding: 30% 5px;
+  padding: 15px;
   z-index: -1;
 }
 
@@ -71,7 +71,8 @@ td{
 
 .drag-drop {
   display: inline-block;
-  /*min-width: 40px;*/
+  max-width: 80%;
+  word-wrap: break-word;
   /*width:100%;*/
   padding: 2em 0.5em;
   width: auto;

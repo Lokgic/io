@@ -1,7 +1,16 @@
 extends layout
+block extrahead
+	script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
+	script.
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		}}
+		);
 
 
 block content
+	- var plugin
 	.container-fluid.p-x-0
 		row
 			.col-lg-2.col-md-12.p-l-0.p-r-0.collapse.in#sidebar
@@ -122,6 +131,22 @@ block content
 															input.form-check-input(type="checkbox" id = y.id + "-"+i value = i)
 															p #{y.questions[i][0]}
 											button(id = "butt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block.readingbutt Submit Answers
+									if y.type == "dragMatch"
+										- plugin = "dragMatch"
+										#dragMatch(value = x.id)
+											.card#r.dropzone.text-xs-center
+												h4#ans
+											.card.text-xs-center
+												for pair in content.ex[x.id].pairs
+													.draggable.drag-drop.m-a-1.lead.def(value = content.ex[x.id].pairs.indexOf(pair)) #{pair[0]}
+										.modal.fade.result
+											.modal-dialog.modal-dialog
+												.modal-content
+													.modal-header
+														h4.modal-title Result
+													.modal-body
+													.modal-footer
+														a.btn.btn-secondary(role ="button")#restart Restart
 
 
 			.right.col-lg-2.hidden-md-down
@@ -129,6 +154,8 @@ block content
 
 
 block extrafooter
+	if plugin == "dragMatch"
+		script(src='../javascripts/dragmatch.js')
 	if sectionNum == "sectionconcepts"
 		script(src='../javascripts/lessonconcepts.js')
 	if sectionNum == "sectionquiz"
