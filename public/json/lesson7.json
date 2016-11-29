@@ -1,0 +1,248 @@
+{
+    "section1": {
+        "1": {
+            "sectionname": "Identity",
+            "sectionNum": "1",
+            "title": "Identity in Logic",
+            "content": {
+                "a": {
+                    "type": "p",
+                    "substance": ["Consider this sentence:"
+
+                    ]
+                },
+                "b": {
+                    "type": "list",
+                    "content": [
+                        ["Pavel owes money to everyone else."]
+                    ]
+                },
+                "c": {
+                    "type": "p",
+                    "substance": [
+                        "Let the UD be people; this will allow us to translate ``everyone'' as a universal quantifier. Let \\(Oxy\\) mean ``\\(x\\) owes money to \\(y\\),'' and let \\(p\\) mean Pavel. Now we can symbolize sentence \ref{else1} as \\(\\forall x Opx\\). Unfortunately, this translation has some odd consequences. It says that Pavel owes money to every member of the UD, including Pavel; it entails that Pavel owes money to himself. However, sentence \ref{else1} does not say that Pavel owes money to himself; he owes money to everyone else. This is a problem, because \\(\\forall x Opx\\) is the best translation we can give of this sentence into QL.",
+
+                        "The solution is to add another symbol to QL. The symbol \\(=\\) is a two-place predicate. Since it has a special logical meaning, we write it a bit differently: For two terms \\(t_1\\) and \\(t_2\\), \\(t_1=t_2\\) is an atomic formula.",
+
+                        "The predicate \\(x=y\\) means ``\\(x\\) is identical to \\(y\\).'' This does not mean merely that \\(x\\) and \\(y\\) are indistinguishable or that all of the same predicates are true of them. Rather, it means that \\(x\\) and \\(y\\) are the very same thing.",
+
+                        "When we write \\(x \\neq y\\), we mean that \\(x\\) and \\(y\\) are not identical. There is no reason to introduce this as an additional predicate. Instead, \\(x \\neq y\\) is an abbreviation of \\(\\neg(x = y)\\).",
+
+                        "Now suppose we want to symbolize this sentence:"
+                    ]
+                },
+                "d": {
+                    "type": "list",
+                    "content": [
+                        "Pavel is Mister Checkov."
+                    ]
+                },
+                "e": {
+                    "type": "p",
+                    "substance": [
+                        "Let the constant \\(c\\) mean Mister Checkov. The sentence above can be symbolized as \\(p=c\\). This means that the constants \\(p\\) and \\(c\\) both refer to the same guy.",
+
+                        "This is all well and good, but how does it help with sentence ' Pavel owes money to everyone else.'? That sentence can be paraphrased as, ``Everyone who is not Pavel is owed money by Pavel.'' This is a sentence structure we already know how to symbolize: ``For all \\(x\\), if \\(x\\) is not Pavel, then \\(x\\) is owed money by Pavel.'' In QL with identity, this becomes \\(\\forall x (x\\neq p \\to Opx)\\).",
+
+                        "In addition to sentences that use the word ``else,'' identity will be helpful when symbolizing some sentences that contain the words ``besides'' and ``only.'' Consider these examples:"
+
+
+
+                    ]
+                },
+                "f": {
+                    "type": "list",
+                    "content": [
+                        "No one besides Pavel owes money to Hikaru",
+                        "Only Pavel owes Hikaru money."
+                    ]
+                },
+                "g": {
+                    "type": "p",
+                    "substance": [
+                        "We add the constant \\(h\\), which means Hikaru.",
+
+                        "'No one besides Pavel owes money to Hikaru.' can be paraphrased as, ``No one who is not Pavel owes money to Hikaru.'' This can be translated as \\(\\neg\\exists x(x\\neq p \\wedge Oxh)\\).",
+
+                        "'Only Pavel owes Hikaru money.' can be paraphrased as, ``Pavel owes Hikaru and no one besides Pavel owes Hikaru money.'' We have already translated one of the conjuncts, and the other is straightforward. The sentence becomes \\(Oph \\wedge \\neg\\exists x(x\\neq p \\wedge Oxh)\\)."
+                    ]
+                }
+            }
+        },
+
+        "2": {
+            "title": "Ex 1: Easy Translations with Identity",
+            "content": {
+                "a":{
+                  "type":"p",
+                  "substance":["Using the symbolization key given, translate each English-language sentence into QL with identity. The last sentence is ambiguous and can be translated two ways; you should provide both translations, by dragging the correct translation into the grey box."]
+                },
+                "b":{
+                  "type":"listHead",
+                  "content":[
+                    ["UD", "people"],
+                    ["Kx", "x knows the combination to the safe."],
+                    ["Sx","x is a spy."],
+                    ["Vx", "x is a vegetarian."],
+                    ["Txy","x trusts y."],
+                    ["h","Hofthor."],
+                    ["i","Ingmar."]
+                  ]
+                },
+                "c": {
+                    "type": "ex",
+                    "id": "reading_1"
+                }
+            }
+        }
+
+    },
+    "section2":{
+      "1" : {
+        "sectionname": "Identity and Quantity",
+        "sectionNum": "2",
+          "title": "Expressing Specific Quantities in Logic",
+          "content": {
+              "a": {
+                  "type": "p",
+                  "substance": [
+                      "We can also use identity to say how many things there are of a particular kind. For example, consider these sentences:",
+
+                      "$$\\text{1. There is at least one apple on the table.}$$",
+
+                      "$$\\text{2. There are at least two apples on the table.}$$",
+
+                      "$$\\text{3. There are at least three apples on the table.}$$",
+
+                      "Let  UD: {x| x is on the table}, which reads the domain of discourse is the set that includes 'all x is such that x is on the table', and let \\(Ax\\) mean ``\\(x\\) is an apple.''",
+
+                      "Sentence 1 does not require identity. It can be translated adequately as \\(\\exists x Ax\\): There is some apple on the table---perhaps many, but at least one.",
+
+                      "It might be tempting to also translate sentence 2 without identity. Yet consider the sentence \\(\\exists x \\exists y(Ax \\wedge Ay)\\). It means that there is some apple \\(x\\) in the UD and some apple \\(y\\) in the UD. Since nothing precludes \\(x\\) and \\(y\\) from picking out the same member of the UD, this would be true even if there were only one apple. In order to make sure that there are two different apples, we need an identity predicate. Sentence 2 needs to say that the two apples that exist are not identical, so it can be translated as \\(\\exists x \\exists y(Ax \\wedge Ay \\wedge x\\neq y)\\).",
+
+                      "Sentence 3 requires talking about three different apples. It can be translated as \\(\\exists x \\exists y\\exists z(Ax \\wedge Ay \\wedge Az \\wedge x\\neq y \\wedge y\\neq z \\wedge x \\neq z)\\).",
+
+                      "Continuing in this way, we could translate ``There are at least n apples on the table.'' for any n."
+                  ]
+              },
+              "b":{
+                "type": "p",
+                "substance":[
+                  "Now consider these sentences",
+                  "$$\\text{A. There is at most one apple on the table.}$$",
+
+                    "$$\\text{B. There are at most two apples on the table.}$$",
+
+                    "Sentence A can be paraphrased as, ``It is not the case that there are at least two apples on the table.'' This is just the negation of sentence B: $$\\neg \\exists x \\exists y(Ax \\wedge Ay \\wedge x\neq y)$$",
+
+                    "Sentence A can also be approached in another way. It means that any apples that there are on the table must be the selfsame apple, so it can be translated as $\\forall x\\forall y[(Ax \\wedge Ay) \\to x=y]$. The two translations are logically equivalent, so both are correct.",
+
+                    "In a similar way, sentence B can be translated in two equivalent ways. It can be paraphrased as, ``It is not the case that there are three or more distinct apples'', so it can be translated as the negation of sentence 3. Using universal quantifiers, it can also be translated as $$\\forall x\\forall y\\forall z[(Ax \\wedge Ay \\wedge Az) \\to (x=y \\vee x=z \\vee y=z)].$$"
+                ]
+
+              }
+          }
+      },
+      "2": {
+          "title": "Ex 2: Translations with Identity and Quantity",
+          "content": {
+              "a":{
+                "type":"p",
+                "substance":["Using the symbolization key given, translate each English-language sentence into QL, by dragging the correct translation into the grey box."]
+              },
+              "b":{
+                "type":"listHead",
+                "content":[
+                  ["UD", "cards in a standard deck"],
+                  ["Bx", "x is black."],
+                  ["Cx","x is a club."],
+                  ["Jx", "x is a jack."],
+                  ["Ox", "x is one-eyed"],
+                  ["Wx","x is wild."]
+                ]
+              },
+              "c": {
+                  "type": "ex",
+                  "id": "reading_2"
+              }
+          }
+      }
+
+    },
+    "section3":{
+
+      "1": {
+        "sectionname": "Identity in philosophy of language",
+        "sectionNum": "3",
+          "title": "Definite Descriptions",
+          "content": {
+              "a": {
+                  "type": "p",
+                  "substance": [
+                      "Recall that a constant of QL must refer to some member of the UD. This constraint allows us to avoid the problem of non-referring terms. Given a UD that included only actually existing creatures but a constant \\(c\\) that meant ``chimera'' (a mythical creature), sentences containing \\(c\\) would become impossible to evaluate.",
+
+                      "The most widely influential solution to this problem was introduced by Bertrand Russell in 1905. Russell asked how we should understand this sentence:",
+
+                      "$$1. \\text{The present king of France is bald.}$$",
+
+                      "The phrase 'the present king of France is bald' supposed to pick out an individual by means of a definite description.However, there was no king of France in 1905 and there is none now.Since the description is a non - referring term, we cannot just define a constant to mean ``the present king of France '' and translate the sentence as\\(Kf\\). ",
+
+                      "Russell's idea was that sentences that contain definite descriptions have a different logical structure than sentences that contain proper names, even though they share the same grammatical form. What do we mean when we use an unproblematic, referring description, like ``the highest peak in Washington state''? We mean that there is such a peak, because we could not talk about it otherwise. We also mean that it is the only such peak. If there was another peak in Washington state of exactly the same height as Mount Rainier, then Mount Rainier would not be the highest peak.",
+
+                      "According to this analysis, the sentence in question is saying three things. First, it makes an existence claim: There is some present king of France. Second, it makes a uniqueness claim: This guy is the only present king of France. Third, it makes a claim of predication: This guy is bald.",
+
+                      "In order to symbolize definite descriptions in this way, we need the identity predicate. Without it, we could not translate the uniqueness claim which (according to Russell) is implicit in the definite description.",
+
+                      "Let the UD be {x | x is a living person}, let \\(Fx\\) mean ``\\(x\\) is the present king of France,'' and let \\(Bx\\) mean ``\\(x\\) is bald.'' The sentence  can then be translated as \\(\\exists x[Fx \\wedge \\neg\\exists y(Fy \\wedge x\\neq y) \\wedge Bx]\\). This says that there is some guy who is the present king of France, he is the only present king of France, and he is bald.",
+
+                      "Understood in this way, the sentence is meaningful but false. It says that this guy exists, but he does not.",
+
+                      "The problem of non-referring terms is most vexing when we try to translate negations. So consider this sentence:",
+
+                      "$$\\text{2. The present king of France is not bald.}$$",
+
+                      "According to Russell, this sentence is ambiguous in English. It could mean either of two things: a:  It is not the case that the present king of France is bald, or b: The present king of France is non-bald.",
+
+                      "Sentence a is called a wide-scope negation, because it negates the entire sentence. It can be translated as \\(\\neg \\exists x [Fx \\wedge \\wedge \\exists y(Fy \\wedge x\\neq y) \\wedge Bx]\\). This does not say anything about the present king of France, but rather says that some sentence about the present king of France is false. Since 2 if false, sentence a is true.",
+
+                      " Sentence 2 b says something about the present king of France.It says that he lacks the property of baldness.Like sentence 1, it makes an existence claim and a uniqueness claim;it just denies the claim of predication.This is called narrow - scope negation.It can be translated as\\(\\exists x[Fx\\wedge\\neg\\exists y(Fy\\wedge x\\neq y)\\wedge\\neg Bx]\\).Since there is no present king of France, this sentence is false.",
+
+                      "Russell's theory of definite descriptions resolves the problem of non-referring terms and also explains why it seemed so paradoxical. Before we distinguished between the wide-scope and narrow-scope negations, it seemed that sentences like 2 should be both true and false. By showing that such sentences are ambiguous, Russell showed that they are true understood one way but false understood another way."
+                  ]
+              }
+          }
+      }
+    },
+    "ex": {
+        "reading_1": {
+            "mathjax": true,
+            "section": "1",
+            "title": "reading 1",
+            "type": "dragMatch",
+            "id": "reading_1",
+            "pairs": [
+                ["\\(Sh \\wedge \\forall x (Vx \\to \\neg Sx)\\)","Hofthor is a spy, but no vegetarian is a spy."],
+                ["\\( \\forall x (Ki \\wedge (Kx \\to x=i) )\\)","Only Ingmar knows the combination to the safe."],
+                ["\\(\\neg Ki \\to \\neg \\exists x (Kx)\\)","No one knows the combination to the safe unless Ingmar does."],
+                ["\\(\\exists x (Kx \\wedge \\forall y (Ky \\to (x=y \\wedge \\neg Sy)))  \\)","The person who knows the combination to the safe is not a spy."],
+                ["\\(\\forall x (Tih \\wedge (Tix \\wedge x = h))\\)","Ingmar trusts Hofthor, but no one else."],
+                ["\\(\\exists x \\forall y ((Kx \\wedge Vx )\\wedge (Ky \\to x = y))\\)","The person who knows the combination to the safe is a vegetarian."]
+            ]
+        },
+
+        "reading_2": {
+            "mathjax": true,
+            "section": "2",
+            "title": "Translations with Identity and Quantity",
+            "type": "dragMatch",
+            "id": "reading_2",
+            "pairs": [
+                ["\\( \\exists x \\exists y ((Cx \\wedge Cy)\\wedge \\forall z (Cz \\to x = z \\vee y=z))\\)","There are at exactly two clubs."],
+                ["\\( \\exists x \\exists y (Cx \\wedge Cy \\wedge  ( x\\neq y) )\\)","There are at least two clubs."],
+                ["\\(\\exists x \\exists y (Jx \\wedge Ox \\wedge  Jy \\wedge Oy \\wedge ( x\\neq y) ) \\)","There is more than one one-eyed jack."],
+                ["\\( \\forall x \\forall y \\forall z ((Jx \\wedge Jy \\wedge Jz) \\to (x \\neq y \\vee x \\neq z \\vee y \\neq z)) \\)","There are at most two one-eyed jacks."],
+                ["\\(\\exists x \\exists y (Ox \\wedge Jx \\wedge Oy \\wedge Jy \\wedge (\\forall z (Oz \\wedge Jz) \\to (z = x \\vee z = y)))\\)","There are two one-eyed jacks."]
+            ]
+        }
+    }
+}
