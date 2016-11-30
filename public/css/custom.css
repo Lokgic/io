@@ -13,6 +13,14 @@ p.lead{
 	'background-image': 'none',
 }
 
+
+.blink {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
+}
 .btn-primary{
 	background-color: #333E48;
 	border-color: #333E48;
