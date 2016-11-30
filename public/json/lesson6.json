@@ -33,11 +33,11 @@
                     "substance": ["The first thing we need to do is to find an equivalent in QL of a little row of Ts and Fs beneath a sentence in SL. We called this little row of Ts and Fs an interpretation, because it gave one aspect of the meaning of the parts of the sentence, namely their truth values. To come up with an interpretation of a sentence in QL, we will need to look at more than the truth or falsity of sentences, though. We have, after all, broken open the atomic sentence to look at its subatomic parts, and now we will need to assign meaning to these parts. The way to start is to look at the symbolization keys we created when we were translating sentences in and out of QL. The symbolization key contained a universe of discourse (UD), a meaning for each predicate, and an object picked out by each term. For example:"]
                 },
                 "b": {
-                    "type": "list",
-                    "content": ["\\(UD\\): comic book characters",
-                        "\\(Fx\\): x fights crime",
-                        "\\(b\\): Batman",
-                        "\\(w\\): Bruce Wayne"
+                    "type": "p",
+                    "substance": ["$$\\text{UD: comic book characters}$$",
+                        "$$Fx: \\text{x fights crime}$$",
+                        "$$b: \\text{Batman}$$",
+                        "$$w: \\text{Bruce Wayne}$$"
                     ]
                 },
                 "c": {
@@ -46,7 +46,7 @@
                 },
                 "d": {
                     "type": "list",
-                    "content": ["\\(Fb\\): Batman fights crime", "\\(Fw\\): Bruce Wayne fights crime.", "\\(Fb \\to Fw\\): If Batman fights crime, then Bruce Wayne fights crime."]
+                    "substance": ["\\(Fb\\): Batman fights crime", "\\(Fw\\): Bruce Wayne fights crime.", "\\(Fb \\to Fw\\): If Batman fights crime, then Bruce Wayne fights crime."]
                 },
                 "e": {
                     "type": "p",
@@ -65,18 +65,18 @@
                 },
                 "l": {
                     "type": "list",
-                    "content": ["UD: Peopel who played as part of the Three Stooges", "Hx: x had head hair", "Mister Fine"]
+                    "substance": ["UD: Peopel who played as part of the Three Stooges", "Hx: x had head hair", "Mister Fine"]
                 },
                 "m": {
                     "type": "p",
                     "substance": ["What is the model that corresponds to this interpretation? There were six people who played as part of the Three Stooges over the years, so the UD will have six members: Larry Fine, Moe Howard, Curly Howard, Shemp Howard, Joe Besser, and Curly Joe DeRita. Curly, Joe, and Curly Joe were the only completely bald stooges. The result is this model:"]
                 },
                 "n": {
-                    "type": "list",
-                    "content": [
-                        "UD = {Larry, Curry, Moe, Shemp, Joe, Curly Joe}",
-                        "extension(H) = {Larry, Moe, Shemp}",
-                        "referent(f) = Larry"
+                    "type": "p",
+                    "substance": [
+                        "$$UD = \\{Larry, Curry, Moe, Shemp, Joe, Curly Joe\\}$$",
+                        "$$H = \\{Larry, Moe, Shemp\\}$$",
+                        "$$f = Larry$$"
                     ]
                 },
                 "o": {
@@ -97,7 +97,7 @@
                 },
                 "b": {
                     "type": "list",
-                    "content": ["UD: whole numbers less than 10", "Ex: x is even.", "Nx: x is negative.", "Lxy: x is less than y.", "Txyz: x times y equals z "]
+                    "substance": ["UD: whole numbers less than 10", "Ex: x is even.", "Nx: x is negative.", "Lxy: x is less than y.", "Txyz: x times y equals z "]
                 },
                 "c": {
                     "type": "p",
@@ -112,7 +112,7 @@
                 },
                 "g": {
                     "type": "list",
-                    "content": ["{<1,2>,<1,3>....<2,3>,<2,4>,....<3,4>, <3,5>,...<8,9>}"]
+                    "substance": ["{<1,2>,<1,3>....<2,3>,<2,4>,....<3,4>, <3,5>,...<8,9>}"]
                 },
                 "h": {
                     "type": "p",
@@ -132,14 +132,14 @@
                     "substance": ["Determine whether each sentence is true or false in the model given. Check all sentences that are true."]
                 },
                 "b": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{Bart, Carl}"],
-                        ["extension(A)", "{Bart, Carl}"],
-                        ["extension(B)", "{Bart}"],
-                        ["extension(N)", "{}"],
-                        ["extension(R)", "{<Bart, Carl>}"],
-                        ["referent(c)", "Carl"]
+                    "type": "p",
+                    "substance": [
+                        "$$UD, \\{Bart, Carl\\}$$",
+                        "$$A: \\{Bart, Carl\\}$$",
+                        "$$B: \\{Bart\\}$$",
+                        "$$N: \\{\\}$$",
+                        "$$R: \\{<Bart, Carl>\\}$$",
+                        "$$c: Carl$$"
                     ]
                 },
                 "c": {
@@ -167,7 +167,7 @@
                 },
                 "b": {
                     "type": "list",
-                    "content": [
+                    "substance": [
                         "A semantic tautology in QL is a sentence \\(\\mathcal{A}\\) that is true in every model; i.e.,  \\(\\vDash \\mathcal{A}\\).",
 
                         "A semantic contradiction in QL is a sentence \\mathcal{A} that is false in every model; i.e., \\(\\vDash \\neg \\mathcal{A}\\).",
@@ -208,12 +208,12 @@
                     ]
                 },
                 "b": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{\\(\\alpha\\)}"],
-                        ["extension(A)", "{\\(<\\alpha, \\alpha>\\)}"],
-                        ["extension(B)", "\\(\\emptyset\\)"],
-                        ["referent(d)", "\\(\\alpha\\)"]
+                    "type": "p",
+                    "substance": [
+                        "$$UD=\\{\\alpha\\}$$",
+                        "$$A=\\{<\\alpha, \\alpha>\\}$$",
+                        "$$B=\\emptyset$$",
+                        "$$d=\\alpha$$"
                     ]
                 },
                 "c": {
@@ -225,7 +225,7 @@
                 },
                 "d": {
                     "type": "list",
-                    "content": [
+                    "substance": [
                         "UD: Paris", "Axy: x is in the same country as y", "d: the City of Light"
                     ]
                 },
@@ -239,12 +239,12 @@
                     ]
                 },
                 "g": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{\\(\\alpha\\)}"],
-                        ["extension(A)", "{\\(<\\alpha, \\alpha>\\)}"],
-                        ["extension(B)", "{\\(\\alpha\\)}"],
-                        ["referent(d)", "\\(\\alpha\\)"]
+                    "type": "p",
+                    "substance": [
+                        "$$UD={\\alpha}$$",
+                        "$$A={<\\alpha, \\alpha>}$$",
+                        "$$B={\\alpha}$$",
+                        "$$d=\\alpha$$"
 
                     ]
                 },
@@ -270,10 +270,10 @@
                     ]
                 },
                 "b": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{\\(\\alpha,\\beta\\)}"],
-                        ["extension(S)", "\\(\\alpha\\)"]
+                    "type": "p",
+                    "substance": [
+                        "$$UD=\\{\\alpha,\\beta\\}$$",
+                        "$$S=\\alpha$$"
                     ]
                 },
                 "c": {
@@ -293,11 +293,11 @@
                     "substance": ["Suppose I wanted to show that the set of sentences \\(\\{\\exists x Fx, \\exists x \\neg Fx, \\forall x Gx\\}\\) is consistent. For this to be the case, we need at least one model where all three sentences are true. In this case that means having one object in our UD that is \\(F\\) and one that is not \\(F\\), and we need both of them to be \\(G\\). This would do the trick."]
                 },
                 "b": {
-                    "type": "listHead",
-                    "content": [
-                        ["UD", "{\\(\\alpha, \\beta\\)}"],
-                        ["extension(F)", "{\\(\\alpha\\)}"],
-                        ["extension(G)", "{\\(\\alpha, \\beta\\)}"]
+                    "type": "p",
+                    "substance": [
+                        "$$Ud=\\{\\alpha, \\beta\\}$$",
+                        "$$F=\\{\\alpha\\}$$",
+                        "$$G=\\{\\alpha, \\beta\\}$$"
                     ]
                 },
                 "c": {
@@ -315,21 +315,21 @@
                 },
                 "b": {
                     "type": "list",
-                    "content": ["\\( (Rc \\wedge K_1 c)\\wedge Tc\\)", "\\( \\therefore Tc \\wedge K_2 c\\)"]
+                    "substance": ["\\( (Rc \\wedge K_1 c)\\wedge Tc\\)", "\\( \\therefore Tc \\wedge K_2 c\\)"]
                 },
                 "c": {
                     "type": "p",
                     "substance": ["In order to show that it is invalid, we need to show that there is some model in which the premises are true and the conclusion is false. We can construct such a model deliberately. Here is one way to do it:"]
                 },
                 "d": {
-                    "type": "listHead",
-                    "content": [
-                        ["\\(UD\\)", "{\\(\\alpha\\)}"],
-                        ["\\(extension(T)\\)", "{\\(\\alpha\\)}"],
-                        ["\\(extension(K_1)\\)", "{\\(\\alpha\\)}"],
-                        ["\\(extension(K_2)\\)", "{\\(\\)}"],
-                        ["\\(extension(R)\\)", "{\\(\\alpha\\)}"],
-                        ["\\(referent(K_1)\\)", "\\(\\alpha\\)"]
+                    "type": "p",
+                    "substance": [
+                        "$$UD = \\{\\alpha\\}$$",
+                        "$$T = \\{\\alpha\\}$$",
+                        "$$K_1 = \\{\\alpha\\}$$",
+                        "$$K_2 = \\{ \\}$$",
+                        "$$R = \\{\\alpha\\}$$",
+                        "$$c =\\alpha$$"
                     ]
                 },
                 "e": {

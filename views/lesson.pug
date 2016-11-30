@@ -112,19 +112,24 @@ block content
 						for section in content[sectionNum]
 							h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
 							for x in section.content
+								- console.log(x)
 								if x.type == "p"
-									for pa in x.substance
-										p.lead.text-justify.m-y-2 #{pa}
+									if x.center
+										for pa in x.substance
+											p.h4.text-xs-center.m-y-2 #{pa}
+									else
+										for pa in x.substance
+											p.lead.text-justify.m-y-2 #{pa}
 								if x.type == "list"
 									ul.list-group
-										for y in x.content
+										for y in x.substance
 											li.list-group-item #{y}
 								if x.type == "link"
 									p.lead.text-justify.m-y-2 #{x.description}
 									a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
 								if x.type == "listHead"
 									ul.list-group
-										for y in x.content
+										for y in x.substance
 											li.list-group-item.lead #{y[0]}
 												small.text-muted.m-x-1 #{y[1]}
 								if x.type == "ex"
