@@ -1,3 +1,4 @@
+
 nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 	.container
 		button.navbar-toggler.hidden-sm-up(type = "button" data-toggle ="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation")  	&#8872;
@@ -23,9 +24,16 @@ nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 					a.nav-link(href='/grading') Course Logistics
 				li.nav-item
 					a.nav-link(href='/profile') Profile
-				li.nav-item.pull-md-right
-					if currentUser
-						div
-							a.btn.btn-outline-secondary(href='/logout') Log out
-					else
+				if currentUser
+					li.nav-item.pull-md-right
+						a.btn.btn-primary.btn-block(href='/logout') Logout
+					li.nav-item.pull-md-right#userStatus.hidden-md-down
+							- var n = 0
+							while n <48
+								button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
+								- n = n + 1
+				else
+					li.nav-item.pull-md-right
 						a.btn.btn-warning.btn-block(href='/login').blink Click to Login
+extrafooter
+	link(rel="stylesheet", type="text/css", href="../css/status.css")

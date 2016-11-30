@@ -360,7 +360,7 @@
             "title": "Ex.1: Interpretation w/ Cards"
         },
         "reading_2": {
-            "section": "1",
+            "section": "2",
             "title": "Ex.2: Interpretation using a Model",
             "type": "check",
             "id": "reading_2",
@@ -379,13 +379,13 @@
                 ["\\((Rcc \\vee Rcb)\\)", false],
                 ["\\( \\exists x \\exists y Rxy\\)", true],
                 ["\\( \\exists  x Rxx \\)", false],
-                ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", true],
-                ["\\(\\forall x \\forall y \\forall z [(Rxy \\wedge Ryz) \\to Rxz] \\)", true]
+                ["\\( \\forall x \\forall y (Rxy \\vee Ryx)\\)", false],
+                ["\\(\\forall x \\forall y \\forall z [(Rxz \\wedge Ryz) \\to Rxy] \\)", false]
 
             ]
         },
         "reading_3": {
-            "section": "2",
+            "section": "3",
             "title": "Ex.3: Using Models to Show Logical Properties",
             "type": "check",
             "id": "reading_3",

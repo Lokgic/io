@@ -107,6 +107,36 @@ progress{
 }
 
 
+@media (max-width:767px){
+  .list-group-item{
+    display: inline;
+    width: 30%;
+  }
+}
+@media (min-width:767px) {
+  main{
+    margin-left: 20%;
+    margin-right: 2%;
+    margin-top: 40px;
+    width: 100%;
+
+  }
+
+  #sidebar {
+    position: fixed;
+    height: 100%;
+    width: 8%
+
+
+  }
+
+  #right{
+    width: 0px;
+  }
+
+
+}
+
 @media (min-width:993px) {
   main{
     margin-left: 25%;
@@ -118,10 +148,6 @@ progress{
     position: fixed;
     height: 100%;
     width: 20%
-
-
-
-
 
 
   }
@@ -168,7 +194,7 @@ progress{
 
 /* closed state */
 #sidebar .list-group .list-group-item[aria-expanded="false"]::after {
-  content: "⇓";
+  content: "◻";
   /*font-family: FontAwesome;*/
   display: inline;
   text-align: right;
@@ -183,7 +209,7 @@ progress{
 #sidebar .list-group .list-group-item[aria-expanded="true"]::after {
   /*content: " \f0da";*/
   /*font-family: FontAwesome;*/
-  content: "⇑";
+  content: "◼";
   display: inline;
   text-align: right;
   padding-left: 5px;

@@ -48,6 +48,8 @@ router.get('/stat' , function(req,res,next){
 
 })
 
+
+
 router.get('/adm', mid.requiresAdmin , function(req,res,next){
 
 
@@ -122,6 +124,58 @@ router.post('/reportTest',mid.requiresAdmin, function(req, res, next){
 
 });
 
+
+
+
+//GET /progress
+router.post('/progress', mid.requiresLogin, function(req, res, next){
+
+
+
+	User.getProfile(req.session.userId, function (err, result){
+
+		if (err){
+				return next(err);
+
+				return res.send(result);
+			} else {return res.send(result.record);
+			//
+			//
+			//
+			// 	var completed = result.record.length;
+			// 	modules = [];
+			//         for (var i = 0; i<8; i++){
+			//           modules[i] = {};
+			//         }
+			//
+			//         for (var i =0; i<result.record.length;i++ ){
+			//           modules[result.record[i].moduleNo - 1][result.record[i].label] = true;
+			//
+			//         }
+			//
+			//        // console.log(modules)
+			// 	for (var i = 0; i < modules.length; i++){
+			// 		var readingCount = 0;
+			// 		if (modules[i].reading_1) readingCount++
+			// 		if (modules[i].reading_2) readingCount++
+			// 		if (modules[i].reading_3) readingCount++
+			// 		modules[i].name = "Module " + (i+1);
+			// 		modules[i].readingCount = readingCount;
+			// 		modules[i].moduleNo = (i+1);
+			// 		if (readingCount == 3) modules[i].reading = true;
+			//
+			// 	}
+			//
+			// 	completed =  Math.trunc(100*completed/(modules.length * 6))
+			// 	// console.log(modules);
+			// 					// console.log(completed);
+			// 	var box;
+			// 	if (result.box == undefined) box = false;
+			// 		else box = result.box;
+			// 	 return res.render('profile',{box:box, title: 'Student Profile', name:result.name, random: result.random, record:modules, completed:completed});
+			}
+	})
+});
 
 //GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next){
