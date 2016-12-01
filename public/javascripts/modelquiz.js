@@ -6896,7 +6896,7 @@ $(function() {
         }
         return toReturn;
 
-
+        mathjax.reload("table");
     }
 
 
@@ -7115,7 +7115,6 @@ $(function() {
     // console.log(di)
     updateScore();
     var currentAnswers = initTable();
-    mathjax.reload("table");
     // console.log(currentAnswers)
     $('button').on('click', function(){
 
@@ -7149,7 +7148,6 @@ $(function() {
         case "newTable":{
           resetTable()
           currentAnswers = initTable();
-          mathjax.reload("table");
               // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
@@ -7158,7 +7156,6 @@ $(function() {
           score = 0;
           resetTable()
           currentAnswers = initTable();
-          mathjax.reload("table");
               // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
