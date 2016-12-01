@@ -15,7 +15,7 @@
             }
         },
         "2": {
-            "title": "Ex.1: Interpretation w/ Cards",
+            "title": "Reading Ex. 1: Interpretation w/ Cards",
             "content": {
                 "a": {
                     "type": "link",
@@ -125,7 +125,7 @@
 
         "5": {
 
-            "title": "Ex.2: Interpretation using a Model",
+            "title": "Reading Ex. 2: Interpretation using a Model",
             "content": {
                 "a": {
                     "type": "p",
@@ -340,7 +340,7 @@
         },
         "6": {
 
-            "title": "Ex.3: Using Models to Show Logical Properties",
+            "title": "Reading Ex. 3: Using Models to Show Logical Properties",
             "content": {
                 "a": {
                     "type": "p",
@@ -357,11 +357,11 @@
     "ex": {
         "reading_1": {
             "section": "1",
-            "title": "Ex.1: Interpretation w/ Cards"
+            "title": "Reading Ex. 1: Interpretation w/ Cards"
         },
         "reading_2": {
-            "section": "1",
-            "title": "Ex.2: Interpretation using a Model",
+            "section": "2",
+            "title": "Reading Ex. 2: Interpretation using a Model",
             "type": "check",
             "id": "reading_2",
             "questions": [
@@ -385,8 +385,8 @@
             ]
         },
         "reading_3": {
-            "section": "2",
-            "title": "Ex.3: Using Models to Show Logical Properties",
+            "section": "3",
+            "title": "Reading Ex. 3: Using Models to Show Logical Properties",
             "type": "check",
             "id": "reading_3",
             "questions": [
@@ -404,7 +404,7 @@
         },
         "concepts": {
             "section": "concepts",
-            "title": "Quiz: Concepts",
+            "title": "Concepts Matching",
             "terms": [
                 ["reference", "An aspect of meaning that deals with the way bits of language pick out or identify objects in the real world."],
                 ["referent", "The unique object picked out by a term in QL."],

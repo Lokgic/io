@@ -71,7 +71,7 @@
         },
 
         "2": {
-            "title": "Ex 1: Beginning Translations with Identity",
+            "title": "Reading Ex. 1: Beginning Translations with Identity",
             "content": {
                 "a":{
                   "type":"p",
@@ -165,7 +165,7 @@
           }
       },
       "2": {
-          "title": "Ex 2: Translations with Identity and Quantity",
+          "title": "Reading Ex. 2: Translations with Identity and Quantity",
           "content": {
               "a":{
                 "type":"p",
@@ -235,7 +235,7 @@
           }
       },
       "2": {
-          "title": "Ex 3: Translations with Definite Descriptions",
+          "title": "Reading Ex. 3: Translations with Definite Descriptions",
           "content": {
               "a":{
                 "type":"p",
@@ -263,7 +263,7 @@
         "reading_1": {
             "mathjax": true,
             "section": "1",
-            "title": "Ex 1: Beginning Translations with Identity",
+            "title": "Reading Ex. 1: Beginning Translations with Identity",
             "type": "dragMatch",
             "id": "reading_1",
             "pairs": [
@@ -284,7 +284,7 @@
         "reading_2": {
             "mathjax": true,
             "section": "2",
-            "title": "Ex.2 Translations with Identity and Quantity",
+            "title": "Reading Ex. 2: Translations with Identity and Quantity",
             "type": "dragMatch",
             "id": "reading_2",
             "pairs": [
@@ -299,7 +299,7 @@
         "reading_3": {
             "mathjax": true,
             "section": "3",
-            "title": "Ex. 3Translations with Definite Descriptions",
+            "title": "Reading Ex. 3: Translations with Definite Descriptions",
             "type": "dragMatch",
             "id": "reading_3",
             "pairs": [
@@ -313,7 +313,7 @@
         },
         "concepts": {
             "section": "concepts",
-            "title": "Quiz: Concepts",
+            "title": "Concepts Matching",
             "terms": [
                 ["wide-scope negation", "negates the entire sentence"],
                 ["narrow-scope negation", "negates a part of the sentence"],

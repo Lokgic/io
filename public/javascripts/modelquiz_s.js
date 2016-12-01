@@ -5,7 +5,7 @@ $(function() {
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
-    // mathjax.load()
+
     var Chance = require('chance')
     var chance = new Chance();
 
@@ -614,6 +614,7 @@ $(function() {
     // console.log(di)
     updateScore();
     var currentAnswers = initTable();
+    mathjax.reload("table");
     // console.log(currentAnswers)
     $('button').on('click', function(){
 

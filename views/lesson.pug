@@ -49,12 +49,12 @@ block content
 									else if sub.section == "quiz"
 										- var url = "/" + moduleNum + "/quiz"
 									else if sub.section == "testSample"
-										-var url = "../pdf/" + moduleNum + "testsample.pdf"
+										- var url = "../pdf/" + moduleNum + "testsample.pdf"
 									else
 										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
 									a(href=url).list-group-item.p-y-0.text-xs-right
 										small.text-muted.hidden-md-down.text-xs-right #{sub.title}
-										small.text-muted.hidden-lg-up #{sub.section[0]}
+										small.text-muted.hidden-lg-up #{sub.title[0]}
 						- i = i + 1
 			main.col-md-8.col-sm-12
 				case sectionNum
