@@ -6506,7 +6506,7 @@ $(function() {
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
-
+    mathjax.reload();
     var Chance = require('chance')
     var chance = new Chance();
 
@@ -6885,7 +6885,7 @@ $(function() {
         }
         // console.log(props)
 
-
+        mathjax.reload("table");
         var toReturn = []
         for (col in props){
           var tempRowArr = []
@@ -6896,7 +6896,7 @@ $(function() {
         }
         return toReturn;
 
-        mathjax.reload("table");
+
     }
 
 
