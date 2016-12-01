@@ -28,10 +28,10 @@ nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 					li.nav-item.pull-md-right
 						a.btn.btn-primary.btn-block(href='/logout') Logout
 					li.nav-item.pull-md-right#userStatus.hidden-md-down
-							- var n = 0
-							while n <48
-								button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
-								- n = n + 1
+						- var n = 0
+						while n <48
+							button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
+							- n = n + 1
 				else
 					li.nav-item.pull-md-right
 						a.btn.btn-warning.btn-block(href='/login').blink Click to Login

@@ -1,4 +1,4 @@
-.bar{
+.bar {
 	background-color: #CCCCCC;
 	display: inline;
 	height: 40px;
@@ -20,4 +20,17 @@
 
 .progressBar_title{
 	position: absolute;
+
+}
+
+.bar:hover{
+	opacity: 0.3;
+}
+
+#status_percent{
+
+	border-width: 0px;
+	display:inline;
+	background-color: inherit;
+
 }

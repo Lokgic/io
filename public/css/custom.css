@@ -1,31 +1,3 @@
-.bar{
-	background-color: #CCCCCC;
-	display: inline;
-	height: 40px;
-	width: 6px;
-	cursor: pointer;
-	position: relative;
-	border: 0;
-	opacity: 0.9;
-	padding: 0
-}
-
-#userStatus{
-	height: 100%
-}
-
-.progressBar_passed{
-	background-color: #003366;
-}
-
-.progressBar_title{
-	position: absolute;
-
-}
-
-.bar:hover{
-	opacity: 0.3;
-}
 
 .jumbotron{
 	background:#333E48;
