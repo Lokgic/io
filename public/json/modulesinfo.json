@@ -39,7 +39,13 @@
         "moduleNo": 4,
         "title": "Quantified Logic: Syntax",
         "symbol": "∀",
-        "description": "This module introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms."
+        "description": "This module introduces a logical language called QL. It is a version of quantified logic, because it introduces words like all and some, which tell us about quantities. Quantified logic is also sometimes called predicate logic, because the basic units of the language are predicates and terms.",
+        "info":[
+
+        ["Test Sample",
+            "Be sure to check out the<a href = '../pdf/4testsample.pdf'> the sample test here.</a> The actual test has the same format. Expect similar degree of difficulty. Use it to judge whether you are prepared well enough for the test."
+        ]
+        ]
     },
     "5": {
         "moduleNo": 5,
@@ -47,7 +53,7 @@
         "symbol": "⊢",
         "description": "For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifier. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation.",
         "info": [
-            ["Practice Exercises", "Your test will be very similar to the practice exercises at the end of the text. You must master them in order to pass the test."]
+            ["Practice Exercises", "Your test will be very similar to the practice exercises at the end of the text. You must master them in order to pass the test. There will be 5 derivations on the exam (no theorems)."]
         ]
     },
     "6": {

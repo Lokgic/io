@@ -360,7 +360,7 @@
             "title": "Ex.1: Interpretation w/ Cards"
         },
         "reading_2": {
-            "section": "2",
+            "section": "1",
             "title": "Ex.2: Interpretation using a Model",
             "type": "check",
             "id": "reading_2",
@@ -385,7 +385,7 @@
             ]
         },
         "reading_3": {
-            "section": "3",
+            "section": "2",
             "title": "Ex.3: Using Models to Show Logical Properties",
             "type": "check",
             "id": "reading_3",
@@ -423,6 +423,10 @@
         "quiz": {
             "section": "quiz",
             "title": "Quiz: Models I"
+        },
+        "testsample": {
+            "section": "testSample",
+            "title": "Test: Sample"
         }
     }
 

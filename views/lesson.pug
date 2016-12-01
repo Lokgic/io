@@ -48,6 +48,8 @@ block content
 										- var url = "/" + moduleNum + "/concepts"
 									else if sub.section == "quiz"
 										- var url = "/" + moduleNum + "/quiz"
+									else if sub.section == "testSample"
+										-var url = "../pdf/" + moduleNum + "testsample.pdf"
 									else
 										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
 									a(href=url).list-group-item.p-y-0.text-xs-right
@@ -111,8 +113,8 @@ block content
 							h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
 						for section in content[sectionNum]
 							h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
+							- console.log(section)
 							for x in section.content
-								- console.log(x)
 								if x.type == "p"
 									if x.center
 										for pa in x.substance
