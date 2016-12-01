@@ -383,7 +383,7 @@ router.get('/2', function(req, res, next){
 
 router.get('/2/wason', function(req, res, next){
 
-	return res.render('wason', {n:""});
+	return res.render('wason', {wa_n:""});
 });
 
 
@@ -458,7 +458,7 @@ router.get('/4/quiz', function(req, res, next){
 
 router.get('/4/wason2', function(req, res, next){
 
-	return res.render('wason', {n:"2"});
+	return res.render('wason', {wa_n:"2"});
 });
 
 
@@ -498,7 +498,7 @@ router.get('/6/', function(req, res, next){
 
 router.get('/6/wason3', function(req, res, next){
 
-	return res.render('wason', {n:"3"});
+	return res.render('wason', {wa_n:"3"});
 });
 
 router.get(t = '/6/*', function(req, res, next){
