@@ -28,7 +28,6 @@ nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 					li.nav-item.pull-md-right
 						a.btn.btn-primary.btn-block(href='/logout') Logout
 					li.nav-item.pull-md-right#userStatus.hidden-md-down
-<<<<<<< HEAD
 							- var n = 0
 							while n <48
 								button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
@@ -41,13 +40,6 @@ nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 								button.grade_bar(id = "grade_bp" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: B+</p><p lead> Required: Module 7</p>" data-html= "true") &nbsp;
 								button.grade_bar(id = "grade_am" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A-</p><p lead> Required: All Module 8 Exercises</p>" data-html= "true") &nbsp;
 								button.grade_bar(id = "grade_a" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A</p><p lead> Required: Test 8</p>" data-html= "true") &nbsp;
-
-=======
-						- var n = 0
-						while n <48
-							button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
-							- n = n + 1
->>>>>>> ae7ad32c746b38a3bf75fee49a2332cb4f0bfac0
 				else
 					li.nav-item.pull-md-right
 						a.btn.btn-warning.btn-block(href='/login').blink Click to Login
