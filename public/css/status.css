@@ -13,11 +13,64 @@
 #userStatus{
 	height: 100%
 }
-
+.bar:hover, .grade_bar:hover{
+	opacity: 0.3;
+}
 .progressBar_passed{
-	background-color: #003366;
+	background-color: #0099CC;
 }
 
 .progressBar_title{
 	position: absolute;
+}
+
+.grade_bar{
+	display:inline;
+	border: 0;
+	height: 10px;
+	padding:0px;
+
+}
+.gradeScale{
+	padding:0px;
+
+}
+
+#grade_f{
+	background-color: #B7AFA3;
+		width: 108;
+}
+
+#grade_d{
+	background-color: #E8D0A9;
+	width: 36px;
+
+}
+
+#grade_c{
+	background-color: #F5FAFA;
+	width: 36px;
+
+}
+
+#grade_b{
+	background-color: #C1DAD6;
+	width: 36px;
+
+}
+#grade_bp{
+	background-color: #ACD1E9;
+	width: 36px;
+
+}
+#grade_am{
+	background-color:#6D929B;
+	width: 30px;
+
+}
+
+#grade_a{
+	background-color:  #0099CC;
+	width: 6px;
+
 }

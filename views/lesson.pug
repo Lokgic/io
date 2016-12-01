@@ -21,7 +21,7 @@ block content
 					for section in content
 						if "section"+i == sectionNum
 							- var securl = "menu" + i
-							a(href = "#"+ securl data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0
+							a(href = "#"+ securl data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0.text-xs-right
 								- var title = i + " " +section["1"].sectionname
 								span.hidden-md-down #{title}
 								span.hidden-lg-up #{i}
@@ -30,18 +30,18 @@ block content
 								for sub in section
 									- var stitle = i + "." + j + " " + sub.title
 									- j = j+ 1
-									a(href="/"+moduleNum + "/" +section["1"].sectionNum + "#"+sub.title data-parent="#menu"+section["1"].sectionId).list-group-item.p-y-0
+									a(href="/"+moduleNum + "/" +section["1"].sectionNum + "#"+sub.title data-parent="#menu"+section["1"].sectionId).list-group-item.p-y-0.text-xs-right
 										small.text-muted.hidden-md-down #{stitle}
 										small.text-muted.hidden-lg-up #{i + "." + j}
 						else if i != Object.keys(content).length
-							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse.p-y-0
+							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse.p-y-0.text-xs-right
 								- var title = i + " " +section["1"].sectionname
 								span.hidden-md-down #{title}
 								span.hidden-lg-up #{i}
 						else if i == Object.keys(content).length
-							a(href = "#ex" data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0
+							a(href = "#ex" data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0.text-xs-right
 								span.hidden-md-down #{i} Module Exercises
-								span.hidden-lg-up Ex
+								span.hidden-lg-up X
 							.collapse.in(id = "ex")
 								for sub in section
 									if sub.section == "concepts"
@@ -50,8 +50,8 @@ block content
 										- var url = "/" + moduleNum + "/quiz"
 									else
 										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
-									a(href=url).list-group-item.p-y-0
-										small.text-muted.hidden-md-down #{sub.title}
+									a(href=url).list-group-item.p-y-0.text-xs-right
+										small.text-muted.hidden-md-down.text-xs-right #{sub.title}
 										small.text-muted.hidden-lg-up #{sub.section[0]}
 						- i = i + 1
 			main.col-md-8.col-sm-12

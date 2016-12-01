@@ -32,6 +32,15 @@ nav.navbar.navbar-dark.bg-inverse.navbar-fixed-top
 							while n <48
 								button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
 								- n = n + 1
+							.gradeScale
+								button.grade_bar(id = "grade_f" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: F</p><p lead> Test 3 or less</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_d" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: D</p><p lead> Required: Module 4</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_c" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: C</p><p lead> Required: Module 5</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_b" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: b</p><p lead> Required: Module 6</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_bp" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: B+</p><p lead> Required: Module 7</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_am" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A-</p><p lead> Required: All Module 8 Exercises</p>" data-html= "true") &nbsp;
+								button.grade_bar(id = "grade_a" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A</p><p lead> Required: Test 8</p>" data-html= "true") &nbsp;
+
 				else
 					li.nav-item.pull-md-right
 						a.btn.btn-warning.btn-block(href='/login').blink Click to Login
