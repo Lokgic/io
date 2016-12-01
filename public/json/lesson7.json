@@ -13,7 +13,7 @@
                 },
                 "b": {
                     "type": "list",
-                    "content": [
+                    "substance": [
                         ["Pavel owes money to everyone else."]
                     ]
                 },
@@ -33,7 +33,7 @@
                 },
                 "d": {
                     "type": "list",
-                    "content": [
+                    "substance": [
                         "Pavel is Mister Checkov."
                     ]
                 },
@@ -52,7 +52,7 @@
                 },
                 "f": {
                     "type": "list",
-                    "content": [
+                    "substance": [
                         "No one besides Pavel owes money to Hikaru",
                         "Only Pavel owes Hikaru money."
                     ]
@@ -78,15 +78,16 @@
                   "substance":["Using the symbolization key given, translate each English-language sentence into QL with identity. The last sentence is ambiguous and can be translated two ways; you should provide both translations, by dragging the correct translation into the grey box."]
                 },
                 "b":{
-                  "type":"listHead",
-                  "content":[
-                    ["UD", "people"],
-                    ["Kx", "x knows the combination to the safe."],
-                    ["Sx","x is a spy."],
-                    ["Vx", "x is a vegetarian."],
-                    ["Txy","x trusts y."],
-                    ["h","Hofthor."],
-                    ["i","Ingmar."]
+                  "type":"p",
+                  "center":"true",
+                  "substance":[
+                    "UD: people",
+                    "Kx: x knows the combination to the safe.",
+                    "Sx: x is a spy.",
+                    "Vx: x is a vegetarian.",
+                    "Txy: x trusts y.",
+                    "h: Hofthor.",
+                    "i: Ingmar."
                   ]
                 },
                 "c": {
@@ -171,14 +172,15 @@
                 "substance":["Using the symbolization key given, translate each English-language sentence into QL, by dragging the correct translation into the grey box."]
               },
               "b":{
-                "type":"listHead",
-                "content":[
-                  ["UD", "cards in a standard deck"],
-                  ["Bx", "x is black."],
-                  ["Cx","x is a club."],
-                  ["Jx", "x is a jack."],
-                  ["Ox", "x is one-eyed"],
-                  ["Wx","x is wild."]
+                "type":"p",
+                "center":true,
+                "substance":[
+                  "UD:cards in a standard deck",
+                  "Bx:x is black.",
+                  "Cx:x is a club.",
+                  "Jx:x is a jack.",
+                  "Ox:x is one-eyed",
+                  "Wx:x is wild."
                 ]
               },
               "c": {
@@ -240,13 +242,14 @@
                 "substance":["Using the symbolization key given, translate each English-language sentence into QL, by dragging the correct translation into the grey box."]
               },
               "b":{
-                "type":"listHead",
-                "content":[
-                  ["UD", "animals"],
-                  ["Bx", "x is in Farm Brown's field."],
-                  ["Hx","x is a horse."],
-                  ["Wx", "x has wings."],
-                  ["Px", "x is a Pegasus"]
+                "type":"p",
+                "center": true,
+                "substance":[
+                  "UD: animals",
+                  "Bx: x is in Farm Brown's field.",
+                  "Hx: x is a horse.",
+                  "Wx: x has wings.",
+                  "Px: x is a Pegasus"
                 ]
               },
               "c": {
@@ -269,7 +272,12 @@
                 ["\\(\\neg Ki \\to \\neg \\exists x (Kx)\\)","No one knows the combination to the safe unless Ingmar does."],
                 ["\\(\\exists x (Kx \\wedge  (x=h \\wedge \\neg Sx)))  \\)","Hofthor is someone who knows the combination to the safe but is not a spy."],
                 ["\\(\\forall x (Tih \\wedge (Tix \\to x = h))\\)","Ingmar trusts Hofthor, but no one else."],
-                ["\\(\\forall x  ((Kx \\wedge Vx )\\to (x = i))\\)","Any vegetarian who knows the combination to the safe is Ingmor."]
+                ["\\(\\forall x  ((Kx \\wedge Vx )\\to (x = i))\\)","Any vegetarian who knows the combination to the safe is Ingmor."],
+                ["$$\\forall x \\forall y ((Txy \\wedge Sy) \\to x = h)$$", "No one but Hofthor trusts spies."],
+                ["$$\\forall x \\forall y ((Txy \\wedge Vy) \\to x = h)$$","Hofthor is the only spy who trusts vegetarians."],
+                ["$$\\forall x \\forall y ((Txy \\wedge Sx) \\to x = y)$$","Spies trust no one but themselves."],
+                ["$$\\forall x \\forall y ((Txy \\wedge Vx) \\to x \\neg y)$$","Every vegetarian trusts everyone except herself."],
+                ["$$\\forall x  (\\neg \\exists y Txy \\to \\forall z \\neg Tzx)$$","No one trusts anyone who trusts no one."]
             ]
         },
 
