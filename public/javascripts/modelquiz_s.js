@@ -23,7 +23,7 @@ $(function() {
     var conjunction = '\\wedge'
     var disjunction = '\\vee'
     var quantifiersOptions = [exists, forall]
-    var connectives = [conjunction]
+    var connectives = [conjunction, conditional, disjunction]
     var newDifficulty = false;
 //Module specific settings
     var di;
