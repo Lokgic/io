@@ -392,11 +392,11 @@
             "questions": [
                 ["Contingent? \\(\\exists x Txh \\)", true],
                 ["Contingent? \\(Pm \\wedge \\neg \\forall x Px\\)", true],
-                ["Contingent? \\(\\forall x Jz \\leftrightarrow \\exists y Jy\\)", true],
+                ["Contingent? \\(\\forall z Jz \\leftrightarrow \\exists y Jy\\)", true],
                 ["Logically Equivalent? \\(\\exists x Px \\to Qc, \\exists x (Px \\to Qc)\\)", false],
                 ["Logically Equivalent? \\(\\forall x (Px \\to \\neg Qx), \\exists x (Px \\wedge \\neg Qx)\\)", false],
                 ["Logically Equivalent? \\(\\forall x (Px \\to  Qx), \\exists x (Px \\wedge Qx)\\)", false],
-                ["Valid? \\(\\forall x (Ax \\to Bx) \\vDash \\exists Bx\\)", false],
+                ["Valid? \\(\\forall x (Ax \\to Bx) \\vDash \\exists x Bx\\)", false],
                 ["Invalid? \\(\\exists x (Px \\to  Qx) \\vDash \\exists x Px\\)", true],
                 ["Valid? \\(\\{\\exists x (Ex \\wedge  Fx) , \\exists x Fx \\to \\exists x Gx\\} \\vDash \\exists x (Ex \\wedge Gx)\\)", false]
 
