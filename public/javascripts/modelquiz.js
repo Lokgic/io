@@ -6502,7 +6502,7 @@
 $(function() {
 
     //////Modules
-
+    // var debug = true;
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
@@ -6894,6 +6894,13 @@ $(function() {
           }
           toReturn.push(tempRowArr)
         }
+
+        if (debug){
+          console.log("Model is")
+          console.log(all[0])
+          console.log("Answer is " +toReturn)
+
+        }
         return toReturn;
 
 
@@ -7046,6 +7053,7 @@ $(function() {
 
 
     function getTableValues(ans) {
+
         var last = $('.tbutt').last().attr("id").split("-");
         var truthValues = [];
         for (var i = 0; i <= last[0]; i++) {
@@ -7061,7 +7069,11 @@ $(function() {
             }
             truthValues[i] = temp;
         }
-
+        if (debug){
+          console.log("input: " + truthValues);
+          console.log("answer is " + ans)
+          console.log("returning " + _.isEqual(truthValues,ans))
+        }
         return _.isEqual(truthValues,ans);
 
 

@@ -288,11 +288,11 @@
             "type": "dragMatch",
             "id": "reading_2",
             "pairs": [
-                ["\\( \\exists x \\exists y ((Cx \\wedge Cy)\\wedge \\forall z (Cz \\to x = z \\vee y=z))\\)","There are at exactly two clubs."],
+                ["\\( \\exists x \\exists y ((Cx \\wedge Cy \\wedge x \\neq y)\\wedge \\forall z (Cz \\to (x = z \\vee y=z))\\)","There are at exactly two clubs."],
                 ["\\( \\exists x \\exists y (Cx \\wedge Cy \\wedge  ( x\\neq y) )\\)","There are at least two clubs."],
                 ["\\(\\exists x \\exists y (Jx \\wedge Ox \\wedge  Jy \\wedge Oy \\wedge ( x\\neq y) ) \\)","There is more than one one-eyed jack."],
-                ["\\( \\forall x \\forall y \\forall z ((Jx \\wedge Jy \\wedge Jz) \\to (x \\neq y \\vee x \\neq z \\vee y \\neq z)) \\)","There are at most two one-eyed jacks."],
-                ["\\(\\exists x \\exists y (Ox \\wedge Jx \\wedge Oy \\wedge Jy \\wedge (\\forall z (Oz \\wedge Jz) \\to (z = x \\vee z = y)))\\)","There are two one-eyed jacks."]
+                ["\\( \\forall x \\forall y \\forall z ((Jx \\wedge Jy \\wedge Jz \\wedge Ox \\wedge Oy \\wedge Oz) \\to (x = y \\vee x = z \\vee y = z)) \\)","There are at most two one-eyed jacks."],
+                ["\\(\\exists x \\exists y (Ox \\wedge Jx \\wedge Oy \\wedge Jy \\wedge (\\forall z (Oz \\wedge Jz) \\to (z = x \\vee z = y)))\\)","There are less than three one-eyed jacks."]
             ]
         },
 

@@ -71,13 +71,13 @@ td{
 
 .drag-drop {
   display: inline-block;
-  max-width: 80%;
+  /*max-width: 80%;*/
   word-wrap: break-word;
   /*width:100%;*/
   padding: 2em 0.5em;
   width: auto;
-  color: #fff;
-  background-color: #2a546f;
+  color: #000;
+  background-color: #0099cc;
   border: solid 2px #fff;
   border-radius: 10px;
 
