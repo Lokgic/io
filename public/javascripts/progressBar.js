@@ -35,6 +35,7 @@ jQuery.post("/progress",  function(res){
 
   }
     for (record in res){
+
       n = 0;
 
 
@@ -73,7 +74,10 @@ jQuery.post("/progress",  function(res){
 
       $('#bar_'+n).tooltip('hide')
           .attr('data-original-title', title)
-
+      if (record == res.length - 1 && ($('title').text() == "Home" || $('title').text() == "Student Profile") && $( window ).width() >985)   {
+        $('#bar_'+n).tooltip('toggle')
+        setTimeout(function(){ $('#bar_'+n).tooltip('toggle') }, 2500);
+      }
     }
 
      });
