@@ -6501,8 +6501,11 @@
 },{}],3:[function(require,module,exports){
 $(function() {
 
-    //////Modules
     var debug = true;
+
+
+    //////Modules
+
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
@@ -6521,7 +6524,7 @@ $(function() {
     var conjunction = '\\wedge'
     var disjunction = '\\vee'
     var quantifiersOptions = [exists, forall]
-    var connectives = [conditional,conjunction,disjunction]
+    var connectives = [conjunction]
     var newDifficulty = false;
 //Module specific settings
     var di;
@@ -6572,22 +6575,22 @@ $(function() {
         predicatesVariableConstantRatio:[.3,.7]
       },
       "3":{
-        negatedAtomic: 20,
-        negatedComplex: 30,
-        predicatesDistribution:[0.3,0.6,.1],
+        negatedAtomic: 0,
+        negatedComplex: 0,
+        predicatesDistribution:[0.25,0.7,.05],
         constantsDistribution: {mean:4, dev:1},
         extensionOptions:["all", "self", "mixed", "none"],
-        extensionDistribution:[0.1,0.1,0.4,0.4], //4
-        predicatesVariableConstantRatio:[.2,.8]
+        extensionDistribution:[0.15,0.2,0.6,0.5], //4
+        predicatesVariableConstantRatio:[.7,0.3]
       },
       "4":{
-        negatedAtomic: 50,
+        negatedAtomic: 60,
         negatedComplex: 50,
-        predicatesDistribution:[0.1,0.6,.3],
+        predicatesDistribution:[0.1,0.05,.4],
         constantsDistribution: {mean:6, dev:2},
         extensionOptions:["all", "self", "mixed", "none"],
-        extensionDistribution:[0.1,0.1,0.5,0.2], //4
-        predicatesVariableConstantRatio:[.1,.9]
+        extensionDistribution:[0.05,0.05,0.85,0.05], //4
+        predicatesVariableConstantRatio:[.05,.95]
       },
       "5":{
         negatedAtomic: 20,
@@ -6595,8 +6598,8 @@ $(function() {
         predicatesDistribution:[0.2,0.4,.4],
         constantsDistribution: {mean:4, dev:1},
         extensionOptions:["all", "self", "mixed", "none"],
-        extensionDistribution:[0.4,0.1,0.3,0.1], //4
-        predicatesVariableConstantRatio:[.8,.2]
+        extensionDistribution:[0.05,0.05,0.85,0.05], //4
+        predicatesVariableConstantRatio:[0.95,0.05]
       }
     }
     // console.log(normal({}))
@@ -6723,42 +6726,60 @@ $(function() {
 
 
 
-          i = 0;
-          if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
+
+          if (quantifiers[allVars[0]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
 
           out = _[quantifier](model.ud, function(x){
-          targetVar = allVars[i]
-
-          sub_L[i+1] = substite(sub_L[i], targetVar,x)
-          sub_R[i+1] = substite(sub_R[i], targetVar,x)
-          if (check.onlyConstant(sub_L[i+1]) && check.onlyConstant(sub_R[i+1])){
-
-
-            return connectiveInterpret(model, sub_L[i+1],sub_R[i+1])
+          targetVar = allVars[0]
+          var ud_index = 0
+          var place_index =0
+          sub_L[place_index+1] = substite(sub_L[place_index], targetVar,x)
+          sub_R[place_index+1] = substite(sub_R[place_index], targetVar,x)
+          if(debug){
+            console.log("sub " + place_index +1 )
+            console.log(sub_L)
+            console.log(sub_R)
           }
+          if (check.onlyConstant(sub_L[place_index+1]) && check.onlyConstant(sub_R[place_index+1])){
 
-          i += 1;
-          if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
+
+            return connectiveInterpret(model, sub_L[place_index+1],sub_R[place_index+1])
+          }
+          place_index += 1;
+          ud_index += 1;
+          if (quantifiers[allVars[ud_index]].quantifier == forall) quantifier = "every"
             else quantifier = "some"
 
           out2 = _[quantifier](model.ud, function(y){
-            targetVar = allVars[i];
-            sub_L[i+1] = substite(sub_L[i], targetVar,y)
-            sub_R[i+1] = substite(sub_R[i], targetVar,y)
-            if (check.onlyConstant(sub_L[i+1]) && check.onlyConstant(sub_R[i+1])){
-              return connectiveInterpret(model, sub_L[i+1],sub_R[i+1])
+            targetVar = allVars[ud_index];
+            sub_L[place_index+1] = substite(sub_L[place_index], targetVar,y)
+            sub_R[place_index+1] = substite(sub_R[place_index], targetVar,y)
+            if(debug){
+              console.log("sub " + place_index +1 )
+              console.log(sub_L)
+              console.log(sub_R)
             }
 
-            i += 1;
-            if (quantifiers[allVars[i]].quantifier == forall) quantifier = "every"
+
+            if (check.onlyConstant(sub_L[place_index+1]) && check.onlyConstant(sub_R[place_index+1])){
+              return connectiveInterpret(model, sub_L[place_index+1],sub_R[place_index+1])
+            }
+            ud_index += 1;
+            place_index +=  1;
+            if (quantifiers[allVars[ud_index]].quantifier == forall) quantifier = "every"
               else quantifier = "some"
             out3 = _[quantifier](model.ud, function(z){
-              targetVar = allVars[i];
-              sub_L[i+1] = substite(sub_L[i], targetVar,z)
-              sub_R[i+1] = substite(sub_R[i], targetVar,z)
-              if (check.onlyConstant(sub_L[i+1]) && check.onlyConstant(sub_R[i+1])){
-                return connectiveInterpret(model, sub_L[i+1],sub_R[i+1])
+              targetVar = allVars[ud_index];
+              sub_L[place_index+1] = substite(sub_L[place_index], targetVar,z)
+              sub_R[place_index+1] = substite(sub_R[place_index], targetVar,z)
+              if(debug){
+                console.log("sub " + place_index +1 )
+                console.log(sub_L)
+                console.log(sub_R)
+              }
+              if (check.onlyConstant(sub_L[place_index+1]) && check.onlyConstant(sub_R[place_index+1])){
+                return connectiveInterpret(model, sub_L[place_index+1],sub_R[place_index+1])
               }
 
                   })
@@ -7102,6 +7123,7 @@ $(function() {
 
       if (newDifficulty) {
         di += 1;
+        if (di == 4) variables.push('w');
         newDifficulty = false
       }
 
@@ -7125,6 +7147,149 @@ $(function() {
       }
     })
     // console.log(di)
+
+
+////////
+
+//                 function  debug_fun(){
+//
+//
+//
+//                         var debug_ud = ["o","p","r","t"]
+//                         var debug_b = ["oo","pp","ro","rt","tr"]
+//                         var debug_p = {
+//                           left : {
+//                             letter: "B",
+//                             place: 2,
+//                             negated: false,
+//                             vars: "yr"
+//
+//                           },
+//                           right :{
+//                             letter: "B",
+//                             place: 2,
+//                             negated: false,
+//                             vars:"xx"
+//                           },
+//                           AllVars: ["x","y"],
+//                           quantifiers: {
+//                             x:{
+//                               variable: "x",
+//                               quantifier: exists
+//                             },
+//                             y:{
+//                               variable:'y',
+//                               quantifier: forall
+//                             }
+//
+//                           },
+//                           connective: conjunction
+//
+//                         }
+//
+//
+//                       quantifiers = debug_p.quantifiers;
+//                       left = debug_p.left;
+//                       right = debug_p.right;
+//                       connective = debug_p.connective
+//                       allVars = ["x","y"]
+//                       sub_L = [debug_p.left.vars];
+//                       sub_R = [debug_p.right.vars];
+//                       numVars = allVars.length;
+//                       function connectiveInterpret (l,r){
+//
+//                         v = []
+//                         v[0] = _.contains(debug_b, l)
+//                         v[1] = _.contains(debug_b, r)
+//                         console.log(l + " " + r)
+//                         console.log( v[0] && v[1])
+//                            return (v[0] && v[1]);
+//
+//                       }
+//
+//                       if (check.onlyConstant(sub_L[0]) && check.onlyConstant(sub_R[0])){
+//                         out = connectiveInterpret(model, sub_L[0],sub_R[0])
+//                         if (self.negated) return !out;
+//                           else return out;
+//                       }
+//
+//
+//
+//
+//
+//                         if (quantifiers[allVars[0]].quantifier == forall) quantifier = "every"
+//                           else quantifier = "some"
+//
+//
+//
+// ////////
+//
+//                         out = _[quantifier](debug_ud, function(x){
+//
+//                         var i = 0;
+//                         var j = 0
+//                         targetVar = allVars[i]
+//                         sub_L[j+1] = substite(sub_L[j], targetVar,x)
+//                         sub_R[j+1] = substite(sub_R[j], targetVar,x)
+//                         console.log("stage 1")
+//                         console.log(sub_L)
+//                         console.log(sub_R)
+//                         if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
+//
+//
+//                           return connectiveInterpret( sub_L[j+1],sub_R[j+1])
+//                         }
+//
+//                         i += 1;
+//                         j += 1;
+//                         if (quantifiers[allVars[i]].quantifier == forall && i < numVars) quantifier = "every"
+//                           else quantifier = "some"
+//
+//                         out2 = _[quantifier](debug_ud, function(y){
+//                           targetVar = allVars[i];
+//                           sub_L[j+1] = substite(sub_L[j], targetVar,y)
+//                           sub_R[j+1] = substite(sub_R[j], targetVar,y)
+//                           console.log("stage " + j + 1)
+//                           console.log(sub_L)
+//                           console.log(sub_R)
+//                           if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
+//                             return connectiveInterpret( sub_L[j+1],sub_R[j+1])
+//                           }
+//                           j+=1;
+//                           i += 1;
+//                           if (quantifiers[allVars[i]].quantifier == forall && i < numVars) quantifier = "every"
+//                             else quantifier = "some"
+//                           out3 = _[quantifier](debug_ud, function(z){
+//                             targetVar = allVars[i];
+//                             sub_L[j+1] = substite(sub_L[j], targetVar,z)
+//                             sub_R[j+1] = substite(sub_R[j], targetVar,z)
+//                             if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
+//                               return connectiveInterpret(sub_L[j+1],sub_R[j+1])
+//                             }
+//
+//                                 })
+//                                 return out3;
+//                             })
+//                             console.log("out2 = "+out2)
+//                             return out2;
+//                       })
+//                       return out;
+//                   }
+//
+//                   return console.log("debug: " + debug_fun())
+//
+//
+//
+//               ///
+//
+//
+//
+
+
+
+
+
+
     updateScore();
     var currentAnswers = initTable();
     // console.log(currentAnswers)
@@ -7175,6 +7340,10 @@ $(function() {
       }
       updateScore();
 
+
+
+
+///////
 
     });
 })
