@@ -1,7 +1,7 @@
 $(function() {
 
     //////Modules
-    // var debug = true;
+    var debug = true;
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
