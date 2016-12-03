@@ -6,7 +6,7 @@ var ConceptsQuiz =function makeConceptsQuiz(n, q, allDfs){
   var html = '<div class="card" id = conceptsQCard'+ n + '><h1 class="card-header display-4">' + q.term +  '</h1><div class="card-block qcard">';
 
 
-  html += '<div class="btn-group-vertical definitions" data-toggle="buttons">'; 
+  html += '<div class="btn-group-vertical definitions" data-toggle="buttons">';
  var answers = [];
  answers.push(q.df);  //makes 5 answer. push the right answer first
  while (answers.length<5){ //add 4 other random answers from allDfs
@@ -48,7 +48,7 @@ var checkConceptsAnswers = function checkConceptsAnswers(quiz){
     $submit.html("Reset quiz");
     $submit.removeClass('btn-primary');
     $submit.addClass('btn-warning')
-    
+
     makeAlert($('#conceptscard'),'b' , "You got " + score +" out of "+ quiz.length + ". Press 'Reset' to retry", 4);
     conceptsReset = true;
   } else{

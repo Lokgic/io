@@ -649,5 +649,16 @@ router.post('/ranking', function(req, res, next){
 	})
 });
 
+router.get('/test/grid', function(req,res,next){
+		return res.render('grid');
+
+})
+
+router.post('/processing/grid', function(req,res,next){
+	grid = require("../js/grid_back.js")
+	var model  = new grid.Model()
+	return res.send(model)
+
+})
 
 module.exports = router;

@@ -645,6 +645,8 @@ $(function() {
         }
       }
     })
+
+
     // console.log(di)
 
 
@@ -789,7 +791,7 @@ $(function() {
 
 
 
-    updateScore();
+  updateScore();
     var currentAnswers = initTable();
     // console.log(currentAnswers)
     $('button').on('click', function(){

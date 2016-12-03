@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
+  .container-fluid.p-t-3.m-t-3
+    .row
+      .col-lg-4
+        table.table.table-bordered
+          tbody
+            each i in [0,1,2]
+              tr
+                each j in [0,1,2]
+                  - id = i + "_" +j
+                  td(id =id ) #{id}
+      .col-lg-8
+          h1.display-4.text-xs-center.m-b-3 Leaderboard
+          .container.text-xs-center.m-t-3#leaderboard
+
+
+
+
+block extrafooter
+
+  script(src='../javascripts/grid.js')
