@@ -325,6 +325,10 @@
         "quiz": {
             "section": "quiz",
             "title": "Quiz: Models II"
+        },
+        "testsample": {
+            "section": "testSample",
+            "title": "Test: Sample"
         }
     }
 }
