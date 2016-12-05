@@ -1,3 +1,6 @@
+
+
+
 var Chance = require('chance')
 var test = require('tape')
 
@@ -7,7 +10,7 @@ var vowel = ['a','e','i','o','u'];
 var consonant = ['b', 'h' ,'p', 'z', 'g',"j","k"];
 var letter = _.union(vowel, consonant)
 var even = ["2","4","6","8"]
-var odd = ['1','3','5','7']
+var odd = ['3','5','7','9']
 var number = _.union(even, odd)
 var all = _.union(letter, number)
 var allObjects = {
@@ -19,15 +22,25 @@ var allObjects = {
   odd: odd,
   all: all
 }
+var kind = {
+  number: ["even", "odd"],
+  letter: ["vowel", "consonant"]
+}
 
+var relation = {
+  x: ["left", "right", "sameRow"],
+  y: ["above", "under", "sameCol"]
+}
 
-var weight = [.25,.25,.25,.25]
+var quantifiers = ["every", "some"]
+var wp = [0.35, 0.35, 0.3]
+var prefix = ["atMost","atLeast","exactly"]
 var rows  = 3;
 var cols =3
 var numOfCards = rows*cols
 
-
-
+//number of objects
+var wo = [0.4, 0.4,0.2]
 
 
 var CardObj = function(face, color){
@@ -50,11 +63,26 @@ var CardObj = function(face, color){
 
 }
 
+var checkQuantity = function(how, set,q){
+  if (how == "atLeast") return set.length >= q;
+  else if (how == "atMost") return set.length <= q;
+  else if (how == "exactly") return set.length == q
+}
+
+var Statement = function(){
+  var options = chance.shuffle(_.union(kind.number, kind.letter));
+  this.prefix = chance.weighted(prefix, wp)
+  this.quantifier_1 = chance.weighted([1,2,3],wo)
+  this.kind_1= options.pop();
+  this.relation = chance.pickone(relation[chance.pickone(["x","y"])]);
+  this.quantifier_2 = chance.pickone(quantifiers)
+  this.kind_2=options.pop();
+}
 
 
 var is = {
   number:function(input){
-    return _.contains(allObjects.letter, input)
+    return _.contains(allObjects.number, input)
   },
   letter:function(input){
     return _.contains(allObjects.letter, input)
@@ -113,14 +141,12 @@ var is = {
 
     for(row in grid){
       if (grid[row].indexOf(x) != -1) {
-        for (col in grid[row]) {
-         xcol = grid[row][col].indexOf(x)
-        }
+
+         xcol = grid[row].indexOf(x)
+
       }
       if (grid[row].indexOf(y) != -1) {
-        for (col in grid[row]) {
-         ycol = grid[row][col].indexOf(y)
-        }
+         ycol = grid[row].indexOf(y)
       }
     }
     return xcol < ycol
@@ -129,41 +155,48 @@ var is = {
 
     for(row in grid){
       if (grid[row].indexOf(x) != -1) {
-        for (col in grid[row]) {
-         xcol = grid[row][col].indexOf(x)
-        }
+
+         xcol = grid[row].indexOf(x)
+
       }
       if (grid[row].indexOf(y) != -1) {
-        for (col in grid[row]) {
-         ycol = grid[row][col].indexOf(y)
-        }
+         ycol = grid[row].indexOf(y)
       }
     }
-    return xcol > ycol
+    return xcol >ycol
   }
 }
 var allPredicates = _.allKeys(is)
 
 
 
-var Model = function(){
-  var pool = chance.pickset(allObjects.all , numOfCards);
-  var grid = []
-  var index = 0;
-  for (var i = 0; i < rows;i++){
-    grid[i] = []
-    for (var j = 0;j<cols;j++){
-      grid[i][j] = pool[index]
-      index += 1;
+var Model = function(grid,ud){
+
+  if (ud == undefined) {
+    if (grid!= undefined) ud = _.flatten(grid)
+    else ud = chance.pickset(allObjects.all , numOfCards);
+  } else ud = chance.shuffle(ud)
+
+
+  if (grid == undefined){
+
+    var grid = []
+    var index = 0;
+    for (var i = 0; i < rows;i++){
+      grid[i] = []
+      for (var j = 0;j<cols;j++){
+        grid[i][j] = ud[index]
+        index += 1;
+      }
     }
-
-
   }
-  this.ud = pool.sort()
+
+  this.ud = ud.sort()
   this.grid = grid;
   for (pLetter in allPredicates){
     this[allPredicates[pLetter]] = buildExtension(this.grid, this.ud, allPredicates[pLetter])
   }
+
 
 }
 
@@ -184,20 +217,199 @@ function buildExtension(grid, ud, predicate){
 
 }
 
-module.exports.Model = Model;
-// test
-// testmode = new Model()
-// console.log(test)
-// console.log(allObjects.all)
-// function printGrid(x){
-//   console.log(x[0])
-//   console.log(x[1])
-//   console.log(x[2])
+
+
+function printGrid(x){
+  console.log(x[0])
+  console.log(x[1])
+  console.log(x[2])
+
+}
+
+function generateStatements(n,model){
+  problemSet = []
+  for (var i = 0;i<n;i++){
+    prob = []
+    stat = new Statement()
+    prob.push(stat)
+    if (model!=undefined) prob.push(evaluate(prob[0],model))
+    problemSet.push(prob)
+  }
+  return problemSet;
+}
+
+
+function evaluate(stat, model){
+
+
+  filteredSet = _.filter(model[stat.kind_1], function(x){
+    return _[stat.quantifier_2](model[stat.kind_2], function(y){return is[stat.relation](x, y, model.grid)})
+
+  })
+
+  return checkQuantity(stat.prefix, filteredSet, stat.quantifier_1)
+
+
+}
+
+var debug = true
+
+if (debug){
+test('evaluation', function(t){
+
+
+  t.plan(11)
+  ud = ['b', 'h', 'a','e','i','2','4','5','7']
+  grid = [
+            ['2','a','7'],
+            ['4','e','5'],
+            ['6','i','9']
+  ]
+  model = new Model(grid)
+  console.log(generateStatements(12,model))
+  printGrid(model.grid)
+
+
+
+        stat = {
+
+          prefix : "atLeast",
+          quantifier_1 : 1,
+          kind_1: "vowel",
+            relation :"under",
+          quantifier_2 :"some",
+          kind_2: "even"
+        }
+
+
+        t.assert(evaluate(stat, model))
+
+      stat = {
+
+        prefix : "atMost",
+        quantifier_1 : 10,
+        kind_1: "number",
+          relation :"under",
+        quantifier_2 :"some",
+        kind_2: "even"
+      }
+
+
+      t.assert(evaluate(stat, model))
+
+    stat = {
+
+      prefix : "exactly",
+      quantifier_1 : 4,
+      kind_1: "number",
+        relation :"under",
+      quantifier_2 :"some",
+      kind_2: "even"
+    }
+
+
+    t.assert(evaluate(stat, model))
+
+
+  stat = {
+
+    prefix : "atLeast",
+    quantifier_1 : 1,
+    kind_1: "even",
+      relation :"left",
+    quantifier_2 :"every",
+    kind_2: "vowel"
+  }
+
+
+  t.assert(evaluate(stat, model))
+
+
+
+    stat2 = {
+
+      prefix : "atLeast",
+      quantifier_1 : 1,
+      kind_1: "vowel",
+        relation :"right",
+      quantifier_2 :"every",
+      kind_2: "even"
+    }
+
+    t.assert(evaluate(stat2, model))
+
+        stat2 = {
+
+          prefix : "exactly",
+          quantifier_1 : 3,
+          kind_1: "vowel",
+            relation :"right",
+          quantifier_2 :"every",
+          kind_2: "even"
+        }
+
+        t.assert(evaluate(stat2, model))
+
+        stat2 = {
+
+          prefix : "exactly",
+          quantifier_1 : 2,
+          kind_1: "vowel",
+            relation :"above",
+          quantifier_2 :"some",
+          kind_2: "even"
+        }
+
+        t.assert(evaluate(stat2, model))
+        stat2 = {
+
+          prefix : "atMost",
+          quantifier_1 : 3,
+          kind_1: "vowel",
+            relation :"above",
+          quantifier_2 :"some",
+          kind_2: "even"
+        }
+
+        t.assert(evaluate(stat2, model))
+        stat2 = {
+
+          prefix : "exactly",
+          quantifier_1 : 3,
+          kind_1: "number",
+            relation :"left",
+          quantifier_2 :"every",
+          kind_2: "vowel"
+        }
+
+        t.assert(evaluate(stat2, model))
+
+        stat2 = {
+
+          prefix : "exactly",
+          quantifier_1 : 3,
+          kind_1: "number",
+            relation :"right",
+          quantifier_2 :"every",
+          kind_2: "letter"
+        }
+
+        t.assert(evaluate(stat2, model))
+
+        stat2 = {
+
+          prefix : "atLeast",
+          quantifier_1 : 4,
+          kind_1: "number",
+            relation :"above",
+          quantifier_2 :"some",
+          kind_2: "letter"
+        }
+
+        t.assert(evaluate(stat2, model))
+})}
+// }//
 //
-// }
-
-
-
 //
 // test('trying out a model', function(t){
 //
@@ -205,31 +417,17 @@ module.exports.Model = Model;
 //   t.plan(4)
 //   model = new Model()
 //   printGrid(model.grid)
-//   // console.log(model)
-// //   console.log(   _.every(model.ud, function(x){
-// //       return _.some(model.ud, function(y){
-// //         // console.log("is" +x+ "above" + y+ isAbove(x,y, model.grid))
-// //         return isAbove(x,y, model.grid)})
-// //     })
-// // )
+  // var stat = new Statement()
+  // console.log(stat)
+  //
+  // test = _.filter(model[stat.kind_1], function(x){
+  //   return _[stat.quantifier_2](model[stat.kind_2], function(y){return is[stat.relation](x, y, model.grid)})
+  //
+  // })
+  //
+//   // console.log(stat.quantifier_1+" " + stat.kind_1 + "   is  " + stat.relation + " " + stat.quantifier_2 + "  " + stat.kind_2 + " "+ test)
 //
-//   p ="sameRow"
-//   pE = buildExtension(model.grid, model.ud,p)
-//   checkp = _.every(pE, function(x){
-//
-//     return is[p](x[0],x[1],model.grid)
-//   })
-//
-// console.log("something v is under something?")
-// console.log(_.some(model.vowel, function(x){
-//   return _.some(model.under, function(y){
-//     // console.log(y[0]+ " vs "  +x)
-//     return y[0] == x
-//   })
-// }))
-//
-//
-//   var checkCon = _.every(model.consonants, function(x) {
+//   var checkCon = _.every(model.consonant, function(x) {
 //     return is.consonant(x)
 //   })
 //
@@ -256,3 +454,5 @@ module.exports.Model = Model;
 //   })
 //   t.equal(actual, true, "grid defined")
 // })
+module.exports.Model = Model;
+module.exports.generateStatements = generateStatements

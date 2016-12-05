@@ -1,20 +1,76 @@
 extends layout
 
+block extrahead
+  script(type="text/x-mathjax-config").
+    MathJax.Hub.Config({
+      tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+      }}
+      );
+  script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+
+
+
+
+
 block content
-  script(type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML")
-  .container-fluid.p-t-3.m-t-3
+  .container-fluid.p-t-3.m-t-3.m-x-3
     .row
-      .col-lg-4
-        table.table.table-bordered
+      .col-lg-4.col-md-12
+        .card
+          .card-header Quantity Statement Interpretation
+          .card-block
+            h4.card-title Instruction
+            p.card-text Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its values.
+            p Notes: Spatial predicates do not imply “directly”.
+            p Complete 5 Tables to complete this quiz
+            button(type ="button").btn.btn-secondary.btn-block Click here to submit your answers
+      .col-lg-4.col-md-12
+        table.table.table-inverse.table-hover.table-bordered#grid.display-4.text-xs-center
           tbody
             each i in [0,1,2]
               tr
                 each j in [0,1,2]
                   - id = i + "_" +j
                   td(id =id ) #{id}
-      .col-lg-8
-          h1.display-4.text-xs-center.m-b-3 Leaderboard
-          .container.text-xs-center.m-t-3#leaderboard
+      .col-lg-4.col-md-12
+        .card
+          .card-header Symbols:
+          .card-block
+            h4 UD: things in the grid.
+            .col-md-6.col-sm-12
+              ul
+                li V: x is a vowel.
+                li C: ....a consonant.
+                li L: ....a letter.
+                li N: ....a number.
+                li E: ....even.
+                li O: ..... odd.
+
+            .col-md-6.col-sm-12
+              ul
+                li U: x is under y.
+                li A: ....above....
+                li L: ...left of...
+                li R: ...right of..
+                li X: x is in the same row as y
+                li Y: ...........same column ..
+      .col-lg-12.col-md-12#problems
+        .table-responsive
+          table.table.table-striped.table-bordered
+            thead.thead-inverse
+              tr
+                th.text-xs-center #
+                th.text-xs-center QL Expression
+                th.text-xs-center True/False?
+            tbody
+              each k in [1,2,3,4,5,6]
+                tr(id = k)
+                  th(scope = "row") #{k}
+                  td.answer.lead.text-xs-center Click
+                  td.ql QL#{k}
+
+
 
 
 

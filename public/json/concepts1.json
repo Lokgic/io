@@ -1,15 +1,15 @@
 {
-  "Argument" : {"term": "Argument", 
+  "Argument" : {"term": "Argument",
           "df": "a connected series of statements designed to convince an audience of another statement"
           },
-   "Artificial" : {"term": "Artificial language", 
+   "Artificial" : {"term": "Artificial language",
           "df": "A language that was consciously developed by identifiable individuals for some purpose."
           },
-    "Cogent": {"term":"Cogent", 
+    "Cogent": {"term":"Cogent",
     	"df" : "A property of arguments that holds when the argument is strong and the premises are true."
     },
     "Conclusion": {
-    	"term":"Conclusion", 
+    	"term":"Conclusion",
     	"df": "the statement that an argument is trying to convince an audience of."
     },
     "Consistency":{
@@ -30,7 +30,7 @@
     },
     "Explanation":{
     	"term":"Explanation",
-    	"df": "A kind of reasoning where reasons are used to provide a greater understanding of something that is already known. "
+    	"df": "A kind of reasoning where reasons are used to provide a greater understanding of something that is already known."
     },
     "Formal logic":{
     	"term":"Formal logic ",
@@ -98,9 +98,9 @@
         "term":"Middle term",
         "df": "The one term in an Aristotelian syllogism that does not appear in the conclusion."
     }
-    
-    
-    
+
+
+
 
 
 

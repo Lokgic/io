@@ -1,0 +1,306 @@
+{
+    "section1": {
+        "1": {
+            "sectionname": "Identity: Semantics",
+            "sectionNum": "1",
+            "title": "Models for Identity",
+            "content": {
+              "a":{
+                "type":"p",
+                "substance":[
+                  "Identity is a special predicate of QL. We write it a bit differently than other two-place predicates: $x=y$ instead of $Ixy$. We also do not need to include it in a symbolization key. The sentence $x=y$ always means $x$ is identical to $y$,'  and it cannot be interpreted to mean anything else. In the same way, when you construct a model, you do not get to pick and choose which ordered pairs go into the extension of the identity predicate. It always contains just the ordered pair of each object in the UD with itself.",
+
+                  "The sentence $\\forall x Ixx$, which contains an ordinary two-place predicate, is contingent. Whether it is true for an interpretation depends on how you interpret $I$, and whether it is true in a model depends on the extension of $I$.",
+
+                  "The sentence $\\forall x x=x$ is a tautology. The extension of identity will always make it true.",
+
+                  "Notice that although identity always has the same interpretation, it does not always have the same extension. The extension of identity depends on the UD. If the UD in a model is the set {Doug}, then $extension(=)$ in that model is {$<$Doug, Doug$>$}. If the UD is the set {Doug, Omar}, then $extension(=)$ in that model is {$<$Doug, Doug$>$, $<$Omar, Omar$>$}. And so on.",
+
+                  "If the referent of two constants is the same, then anything which is true of one is true of the other. For example, if $referent(a)=referent(b)$, then $Aa \\leftrightarrow Ab$, $Ba\\leftrightarrow Bb$, $Ca\\leftrightarrow Cb$, $Rca\\leftrightarrow Rcb$, $\\forall x Rxa\\leftrightarrow \\forall x Rxb$, and so on for any two sentences containing $a$ and $b$. In metaphysics, this is called principle of the indiscernibility of identicals",
+
+                  "In our system, the reverse of this principle is not true. It is possible that anything which is true of $a$ is also true of $b$, yet for $a$ and $b$ still to have different referents. This may seem puzzling, but it is easy to construct a model that shows this. Consider this model:",
+
+                  "$$UD: \\{Rosencrantz, Guildenstern\\}$$",
+
+                  "$$a: Rosencrantz$$",
+
+                  "$$b: Guildenstern$$",
+
+                  "$$= : \\{ <Rosencrantz,Rosencrantz>,<Guildenstern,Guildenstern>\\}$$",
+
+                  "$$\\text{For all predicates }P, extension(P) = \\emptyset$$",
+
+                  "This specifies an extension for every predicate of QL: All the infinitely-many predicates are empty. This means that both $Aa$ and $Ab$ are false, and they are equivalent; both $Ba$ and $Bb$ are false; and so on for any two sentences that contain $a$ and $b$. Yet $a$ and $b$ refer to different things. We have written out the extension of identity to make this clear: The ordered pair $<referent(a),referent(b)>$ is not in it. In this model, $a=b$ is false and $a\\neq b$ is true."
+                ]
+              }
+            }
+        },
+
+        "2": {
+            "title": "Reading Ex. 1: Models with Identity",
+            "content": {
+                "a":{
+                  "type":"p",
+                  "substance":["Determine whether each sentence is true or false in the model given. Check all sentences that are true."]
+                },
+                "b":{
+                  "type":"p",
+                  "center":"true",
+                  "substance":[
+                    "$$UD: {1,2,3,4,5,6....}\\text{(all positive integers)}$$",
+                    "$$E: \\{x:\\text{ x is even}\\}$$",
+                    "$$G: \\{(x,y): \\text{x is greater than y}\\}$$",
+                    "$$O: \\{x: \\text{x is odd}\\}$$",
+                    "$$P: \\{(x,y,z): x +y = z\\}$$"
+
+                  ]
+                },
+                "c": {
+                    "type": "ex",
+                    "id": "reading_1"
+                }
+            }
+        }
+
+    },
+    "section2":{
+      "1" : {
+        "sectionname": "Proofs with Identity",
+        "sectionNum": "2",
+          "title": "Rules for Identity",
+          "content": {
+              "a": {
+                  "type": "p",
+                  "substance": ["The identity predicate is not part of QL, but we add it when we need to symbolize certain sentences. For proofs involving identity, we add two rules of proof.",
+
+                    "Suppose you know that many things that are true of $a$ are also true of $b$. For example: $Aa\\wedge Ab$, $Ba\\wedge Bb$, $\\neg Ca\\wedge\\neg Cb$, $Da\\wedge Db$, $\\neg Ea\\wedge\\neg Eb$, and so on. This would not be enough to justify the conclusion $a=b$. In general, there are no sentences that do not already contain the identity predicate that could justify the conclusion $a=b$. This means that the identity introduction rule will not justify $a=b$ or any other identity claim containing two different constants.",
+
+                    "However, it is always true that $a=a$. In general, no premises are required in order to conclude that something is identical to itself. So this will be the identity introduction rule, abbreviated =I:",
+
+                    "$$c = c \\quad =I$$",
+
+                    "Notice that the =I rule does not require referring to any prior lines of the proof. For any constant c, you can write $c=c$ on any point with only the =I rule as justification.",
+
+                    "If you have shown that $a=b$, then anything that is true of $a$ must also be true of $b$. For any sentence with $a$ in it, you can replace some or all of the occurrences of $a$ with $b$ and produce an equivalent sentence. For example, if you already know $Raa$, then you are justified in concluding $Rab$, $Rba$, $Rbb$. Recall that $A[a|b]$ is the sentence produced by replacing a in A  with b. This is not the same as a substitution instance, because b may replace some or all occurrences of a. The identity elimination rule =E justifies replacing terms with other terms that are identical to it:"
+                  ]
+                }
+
+          }
+      },
+      "2": {
+          "title": "Reading Ex. 2: Using Identity Elimination",
+          "content": {
+              "a":{
+                "type":"p",
+                "substance":["The proof below makes use of identity elimination. Provide the justifications to get a sense of how the rule is used."]
+              },
+              "b": {
+                  "type": "ex",
+                  "id": "reading_2"
+              }
+          }
+      }
+
+    },
+    "section3":{
+      "1": {
+          "sectionNum": 3,
+          "sectionname": "Practice Problems for Test 8",
+          "title": "Reading Ex 3: Using Identity Introduction",
+          "content": {
+              "a":{
+                "type":"p",
+                "substance":["The proof below makes use of identity introduction. Provide the justifications to get a sense of how the rule is used."]
+              },
+              "b": {
+                  "type": "ex",
+                  "id": "reading_3"
+              }
+          }
+      },
+      "2":{
+        "title": "Sample Problems for Test 8",
+        "content":{
+          "a":{
+            "type":"p",
+            "substance":[
+              "For the last test, you will be asked to prove QL statements using models and deduction. Expect one to two problems from each category",
+              "Prove the following derivations using deduction. You can use all rules.",
+
+              "$\\{Pa \\vee Qb, Qb \\to b=c, \\neg Pa\\}\\vdash Qc$",
+
+              "$\\{m=n \\vee n=o, An\\}\\vdash Am \\vee Ao$",
+
+              "$\\{\\forall x x=m, Rma\\}\\vdash \\exists x Rxx$",
+
+              "$\\neg \\exists x x \\neq m \\vdash \\forall x\\forall y (Px \\to Py)$",
+
+              "Prove the following theorems using deduction.",
+
+              "$\\vdash \\exists x (Fx \\to \\forall y Fy)$",
+
+              "$\\vdash \\forall x \\forall y \\forall z Gxyz \\to \\forall x \\forall y \\forall z (Gxyz \\to Gzyx)$",
+
+              "$\\vdash \\forall x \\exists y (Ax \\vee By) \\to \\exists y \\forall x (Ax \\vee By)$",
+
+              "$ \\vdash a \\neq c \\to (a \\neq b \\vee b \\\neq c)$",
+
+              "$\\vdash \\forall x \\forall y \\forall z (( x = y \\wedge y =z)\\to x =z)$",
+
+              "Transcribe the following argument and prove, using models, that it's invalid.",
+
+              "$$UD: Martians$$ - you can interpret this set in anyway you like, i.e., you can stipulate how many Martians there are, but it cannot be empty.",
+
+              "$$Lxy: \\text{x loves y}$$",
+
+              "$$Pxy: \\text{x is the parent of y}$$",
+
+              "1. Every Martian has exactly two parents. Therefore every Martian has exactly four grandparents.",
+
+              "2. No Martian has exactly three parents. All Martians have more than one parent. Therefore, all Martians have two parents."
+
+
+            ]
+          }
+        }
+      }
+
+    },
+    "ex": {
+      "reading_1": {
+          "section": "1",
+          "title": "Reading Ex. 1: Models with Identity",
+          "type": "check",
+          "id": "reading_1",
+          "questions": [
+              ["$$\\exists x \\forall y (x = y \\to Gxy)$$", false],
+              ["$$\\forall x\\exists y\\neg x = y$$", false],
+              ["$$\\forall x \\exists y (Oy \\to Gyx)$$", true],
+              ["$$\\forall x \\exists y \\forall z [(Gyx \\wedge Guz) \\to \\neg x =z]$$", true],
+              ["$$\\exists w [Ew \\wedge \\forall y (Oy \\to \\neg w = y)]$$", true],
+              ["$$\\forall y \\forall z [(Oy \\wedge y =z \\to \\neg Ez]$$", true],
+              ["$$\\exists z \\exists w (z=w \\wedge Gzw)$$", false],
+              ["$$\\forall x \\forall y \\exists z [(Pxyz \\wedge \\neg x = z) \\wedge \\neg y  = z]$$", true],
+              ["$$ \\forall x \\forall y (Pxyy \\vee   \\neg x = y)$$",false]
+
+            ]
+            },
+      "reading_2": {
+          "mathjax": true,
+          "section": "2",
+          "title": "Reading Ex. 2: Using Identity Elimination",
+          "type": "proofFill",
+          "id": "reading_2",
+          "lines": [
+
+              [1,"$\\forall x \\forall y x = y$", "Assumption"],
+              [1, "$\\exists x Bx$","Assumption"],
+              [1, "$\\forall x  (Bx \\to \\neg Cs)$","Assumption", true],
+              [2, "$Be$", "Assumption",true],
+              [2, "$\\forall y e =y$","∀E 1"],
+              [2,"$e = f$ ", "∀E 5"],
+              [2, "$Bf$", "=E 6, 4"],
+              [2, "$Bf \\to \\neg Cf$", "∀E 3"],
+              [2, "$\\neg Cf$", "→E 8, 7"],
+              [1, "$\\neg Cf$", "∃E 2, 4–9"],
+              [1, "$\\forall x \\neg Cx$", "∀I 10"],
+              [1, "$\\neg \\exists Cx$", "QN 11"]
+
+          ]
+      },
+
+        "reading_3": {
+          "mathjax": true,
+          "section": "3",
+          "title": "Reading Ex. 3: Using Identity Introduction",
+          "type": "proofFill",
+          "id": "reading_3",
+          "lines": [
+
+              [2,"$b = b$", "Assumption", true],
+              [2, "$\\forall y y = y$","=I"],
+              [2, "$c = c$","2 ∀E"],
+              [2, "$c=b$", "1, 3 =E"],
+              [1, "$b = c \\to c = b$","1-4 →I"],
+              [1,"$\\forall y (b = y \\to y=b)$ ", "5 ∀I"],
+              [1, "$\\forall z \\forall y ( z = y \\to y = z)$", "6 ∀I"]
+
+          ]
+        },
+        "concepts": {
+            "section": "concepts",
+            "title": "Concepts Matching",
+            "terms": [
+                ["wide-scope negation", "negates the entire sentence"],
+                ["narrow-scope negation", "negates a part of the sentence"],
+                ["An existence claim about ", "To assert that there is something that is x."],
+                ["A uniqueness claim about ", "To assert that there is only one x."],
+                ["A predication claim", "To make a claim about the property held by the object in question."],
+                ["Universal elimination", "If you have ∀xAx, it is legitimate to infer that anything is an A. You can infer Aa, Ab, Az, Ad 3 — in short, you can infer Ac for any constant c ."],
+                ["Existential Introduction",
+                "If you know that something is an A — for instance, if you have Aa available in the proof - you are allowed to infer an existential claim without a sub-derivation."],
+                ["Universal Introduction",
+                 "We are allowed to infer an universal claim from a constant c as long as c is arbitrary."],
+                ["Arbitrariness",
+                 "A situation in which a constant can interchanged without loss of information."],
+                ["Quantifier Negation",
+                 "A rule of replacement, which allows us to manipulate statements involving negations and quantifiers."],
+                ["Predicate",
+                 "The basic unit of quantified logic; cannot be true or false on its own. Symbolized in QL as capitalized letters."],
+                ["Definite Description",
+                 "Something that picks out an individual by means of a unique description."],
+                ["Quantifiers",
+                 "The part of a sentence that denotes the quantity of something."],
+                ["Universal Quantifier",
+                 "A symbol in QL, indicating that the variable under its scope can be substituted with any singular term from the domain of discourse."],
+                ["A Substitution Instance",
+                 "Made by replacing each occurrence of a variable with a constant."],
+                ["Constructive Dilemma",
+                 "{A ∨ B, A → C, B → C}⊢C"],
+                ["Destructive Dilemma",
+                 "{¬B ∨ ¬C, A → C, A → C}⊢¬A"],
+                 ["Conditional Elimination",
+                  "{A, A → B}⊢B"],
+                 ["Biconditional Elimination",
+                  "{A ↔ B, B} ⊢ A"],
+                 ["Modus Tollens",
+                  "A → B, ¬ B ⊢ ¬ A"],
+                 ["Contraposition",
+                  "A → B ≡ ¬B → ¬A"],
+                ["Idempotence",
+                 "A ∨ A ⊢ A or A⊢ A ∧ A"],
+                ["Biconditional Exportation",
+                 "A ↔ B ≡ {A →B, B → A}"],
+                ["Material Implication",
+                 "(A→B) ≡ (¬A∨B), or (A ∨ B) ≡ (¬A → B)"],
+                [ "Antecedent",
+                 "The sentence to the left of a conditional"],
+                ["Atomic sentence",
+                 "A sentence that does not have any sentences as proper parts."],
+                ["Conditional",
+                 "The symbol →, used to represent words and phrases that function like the English phrase “if . . . then.” "],
+                ["Consequent",
+                 "The sentence to the right of a conditional. "],
+                ["Metavariables",
+                 "A variable in the metalanguage that can represent any sentence in the object language. "],
+
+                ["Argument",
+                         "a connected series of statements designed to convince an audience of another statement"],
+
+                ["Consistency",
+              	 "A property possessed by a set of sentences when they can all be true at the same time, but are not necessarily so."],["Deductive",
+              	 "A style of arguing where one attempts to use valid arguments."],
+                ["Truth Value",
+              	 "The status of a statement with relationship to truth. In our context, this means the status of a statement as true or false"],
+                ["Premise",
+              	 "a statement in an argument that provides evidence for the conclusion"],
+                 ["Formal logic ",
+               	"A way of studying logic that achieves content neutrality by replacing parts of the arguments being studied with abstract symbols. Often this will involve the construction of full formal languages."],
+                ["Explanation",
+              	"A kind of reasoning where reasons are used to provide a greater understanding of something that is already known."],
+                ["Invalid", "A property of arguments that holds when the premises do not force the truth of the conclusion."]
+
+            ]
+        }
+    }
+}

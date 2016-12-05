@@ -515,18 +515,7 @@ router.get('/7/', function(req, res, next){
 	return res.redirect('/7/1');
 });
 
-// router.get('/6/2', function(req, res, next){
-// 	var lesson = require('../public/json/lesson6.json');
-//
-// 	return res.render('lesson', {title:"Module Six", content:lesson, sectionNum: "section2", moduleNum:6});
-// });
 
-
-// router.get('/7', function(req, res, next){
-// 	var err = new Error('Module not yet available.');
-// 				err.status = 401;
-// 				return next(err);
-// });
 
 router.get(t = '/7/*', function(req, res, next){
 	var moduleNum = req.path.split('/')[1]
@@ -537,10 +526,17 @@ router.get(t = '/7/*', function(req, res, next){
 	return res.render('lesson', {title:"Module Seven", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
 
-router.get('/8', function(req, res, next){
-	var err = new Error('Module not yet available.');
-				err.status = 401;
-				return next(err);
+router.get('/8/', function(req, res, next){
+
+	return res.redirect('/8/1');
+});
+router.get(t = '/8/*', function(req, res, next){
+	var moduleNum = req.path.split('/')[1]
+	var sectionNum = req.path.split('/')[2]
+
+	var lesson = require('../public/json/lesson8.json');
+
+	return res.render('lesson', {title:"Module Eight", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
 
 
@@ -657,7 +653,16 @@ router.get('/test/grid', function(req,res,next){
 router.post('/processing/grid', function(req,res,next){
 	grid = require("../js/grid_back.js")
 	var model  = new grid.Model()
-	return res.send(model)
+
+	var statements = grid.generateStatements(6,model)
+console.log(statements)
+	problem = {
+		model:model,
+		statements: statements
+	}
+
+
+	return res.send(problem)
 
 })
 
