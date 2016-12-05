@@ -651,6 +651,7 @@ router.get('/test/grid', function(req,res,next){
 })
 
 router.post('/processing/grid', function(req,res,next){
+	console.log("wh")
 	grid = require("../js/grid_back.js")
 	var model  = new grid.Model()
 

@@ -1,8 +1,5 @@
-
-
-
 var Chance = require('chance')
-var test = require('tape')
+
 
 var chance = new Chance();
 var _ = require('underscore');
@@ -252,9 +249,10 @@ function evaluate(stat, model){
 
 }
 
-var debug = true
+var debug = false
 
 if (debug){
+  var test = require('tape')
 test('evaluation', function(t){
 
 
