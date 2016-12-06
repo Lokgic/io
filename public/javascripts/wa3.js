@@ -12,6 +12,7 @@ var id = "wason3"
 var face = ["even", "odd","consonant", "vowel"];
 var color = ["danger", "info"]
 
+var $button = $('#wasonbutton');
 mathjax.load();
 
 var CardObj = function(face, color){
@@ -87,7 +88,7 @@ var Universe = function(n){
 
 		weights.danger = chance.integer({min: 0, max: 100}),
 		weights.info = 100 - weights.danger
-	console.log(weights)
+	// console.log(weights)
 
 	this.domain = {};
 	while (n>0){
@@ -303,7 +304,7 @@ $(function(){
 	$numOfCards = $('#numOfCards')
 	var score = 0;
 	var passing = 100;
-	var $button = $('#wasonbutton');
+
 	var $score = $('#score');
 	var $plus = $('#plus');
 	var $minus = $('#minus');
@@ -332,15 +333,15 @@ function printCards(domain){
 
 function generalInstruction(){
 	var html = "<h4>Instruction</h4>"
- html +=' <p>Each card below has a number on one side and a letter on the other. They are either blue or red.</p>'
+ html +=' <p>UNLIKE PREVIOUS WASON EXERCISE, THESE CARDS ARE ONE-SIDED.</p>'
 html += '<p>Your task is to determine if the QL statement given is true or false.</p>'
-html += '<p>Choose by clicking the "True" or "False button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
+html += '<p>Choose by clicking the "True" or "False" button. You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
 html += '<p>The number of cards changes randomly for each trial. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
-html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'
-html += '<p>UD: the cards below</p>'
+html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card. </p>'
+html += '<p>UD: Cards given</p>'
 
-	alert($head, "b", html,2);
+	alert($button, "a", html,2);
 }
 
 function Score(newScore){
@@ -367,7 +368,7 @@ generalInstruction();
 	// 	console.log(rule.interpret(ex))
 
 	ans = rule.interpret(ex);
-	console.log(ans)
+	// console.log(ans)
 	$rule.html(rule.toString());
 	mathjax.reload("rule")
 
@@ -386,11 +387,11 @@ generalInstruction();
 			$cards.html(printCards(current.domain));
 			rule = new Rule(face);
 			ans = rule.interpret(ex);
-			console.log(ans)
+			// console.log(ans)
 			$rule.html(rule.toString());
 			reset = false;
 
-			alert($head,"b","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card,  Vx: x is a vowel card.</p>'",3);
+			alert($button,"a","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card. UD: Cards given </p><p>Is the given QL statement true or false?'</p>",3);
 			mathjax.reload("rule")
 	}
 
@@ -412,10 +413,10 @@ generalInstruction();
 			reset = true;
 			if (correct){
 				Score(score + x);
-				alert($head, "b","This is correct! Press the red or blue button to continue", 2);
+				alert($button, "a","This is correct! Press the red or blue button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
 			} else if (secondChance == 1){
-				alert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
+				alert($button, "a","<h4>ARE YOU SURE?</h4>", 3);
 				secondChance = 3;
 				reset = false;
 			}
@@ -429,11 +430,11 @@ generalInstruction();
 				if (score >= passing){
 						jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 6}, function(res){
 							 output += "You passed! "+res;
-							 alert($head, "b",output, 1);
+							 alert($button, "a",output, 1);
 							});
 							Score(0);
 						}else{
-						 alert($head, "b",output, 4);
+						 alert($button, "a",output, 4);
 							Score(0);
 							leaderboard.draw(id, $leaderboard);
 

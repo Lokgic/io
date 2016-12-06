@@ -4953,17 +4953,26 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
   /////This takes care of the HTML
   var tag;
   if (code == 0){
-	if (direction == "a"&& $(location).prev().hasClass("alert")){
-          $(location).prev().remove();
+	if (direction == "a"){
+        // $(location).prev().html("");
+          $(location).prev('.alert').remove();
         }
-      if (direction == "b" && $(location).next().hasClass("alert")){
-          $(location).next().remove();
+      if (direction == "b"){
+          // $(location).next().html("")
+          $(location).next('.alert').remove();
         }
-  }
-  else if (code == 1){tag = "alert-success";}
-  else if (code == 2){tag = "alert-info";}
-  else if (code == 3){tag = "alert-warning"}
-  else{tag = "alert-danger"}
+
+  }else{
+    switch(code){
+      case 1: tag = "alert-success";
+      break;
+      case 2: tag = "alert-info";
+      break;
+      case 3: tag = "alert-warning"
+      break;
+      case 4: tag = "alert-danger"
+    }
+    console.log(tag)
   var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
   if (direction == "a"){
@@ -4978,11 +4987,12 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
       $(location).next().remove();
     }
     $(location).after(html);
-    }
+    }}
 
   }
 
  module.exports = makeAlert;
+
 },{}],3:[function(require,module,exports){
 var draw = function drawHTML(game, location){
 		ping(game, function(data){
@@ -5024,7 +5034,14 @@ var mathJax = {
   reload: function(id){
     id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
-  }
+  },
+  config: function(){
+    MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+    }}
+  );
+}
 }
 
 
@@ -5096,6 +5113,7 @@ var id = "wason3"
 var face = ["even", "odd","consonant", "vowel"];
 var color = ["danger", "info"]
 
+var $button = $('#wasonbutton');
 mathjax.load();
 
 var CardObj = function(face, color){
@@ -5171,17 +5189,7 @@ var Universe = function(n){
 
 		weights.danger = chance.integer({min: 0, max: 100}),
 		weights.info = 100 - weights.danger
-	console.log(weights)
-	//
-	//
-	// evenWeight = chance.integer({min: 0, max: count});
-	// count = count - evenWeight;
-	// if (count > 0) {
-	// 	oddWeight = chance.integer({min: 0, max: count});
-	// 	count = count - oddWeight
-	// }
-	// var oddWeight = chance.integer({min: 0, max: count});
-	// 	else var oddWeight = 0;
+	// console.log(weights)
 
 	this.domain = {};
 	while (n>0){
@@ -5397,7 +5405,7 @@ $(function(){
 	$numOfCards = $('#numOfCards')
 	var score = 0;
 	var passing = 100;
-	var $button = $('#wasonbutton');
+
 	var $score = $('#score');
 	var $plus = $('#plus');
 	var $minus = $('#minus');
@@ -5426,15 +5434,15 @@ function printCards(domain){
 
 function generalInstruction(){
 	var html = "<h4>Instruction</h4>"
- html +=' <p>Each card below has a number on one side and a letter on the other. They are either blue or red.</p>'
+ html +=' <p>UNLIKE PREVIOUS WASON EXERCISE, THESE CARDS ARE ONE-SIDED.</p>'
 html += '<p>Your task is to determine if the QL statement given is true or false.</p>'
-html += '<p>Choose by clicking the "True" or "False button". You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
+html += '<p>Choose by clicking the "True" or "False" button. You have to start over if you make a mistake. Get the score of ' + passing + ' or above to pass the section.</p>'
 html += '<p>The number of cards changes randomly for each trial. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
 html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
-html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card.</p>'
-html += '<p>UD: the cards below</p>'
+html += '<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card. </p>'
+html += '<p>UD: Cards given</p>'
 
-	alert($head, "b", html,2);
+	alert($button, "a", html,2);
 }
 
 function Score(newScore){
@@ -5461,7 +5469,7 @@ generalInstruction();
 	// 	console.log(rule.interpret(ex))
 
 	ans = rule.interpret(ex);
-	console.log(ans)
+	// console.log(ans)
 	$rule.html(rule.toString());
 	mathjax.reload("rule")
 
@@ -5480,11 +5488,11 @@ generalInstruction();
 			$cards.html(printCards(current.domain));
 			rule = new Rule(face);
 			ans = rule.interpret(ex);
-			console.log(ans)
+			// console.log(ans)
 			$rule.html(rule.toString());
 			reset = false;
 
-			alert($head,"b","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card,  Vx: x is a vowel card.</p>'",3);
+			alert($button,"a","'<p>Rx: x is red, Bx: x is blue, Ex: x is an even card, Ox: x is an odd card, Cx: x is a consonant card, Vx: x is a vowel card. UD: Cards given </p><p>Is the given QL statement true or false?'</p>",3);
 			mathjax.reload("rule")
 	}
 
@@ -5506,10 +5514,10 @@ generalInstruction();
 			reset = true;
 			if (correct){
 				Score(score + x);
-				alert($head, "b","This is correct! Press the red or blue button to continue", 2);
+				alert($button, "a","This is correct! Press the red or blue button to continue", 2);
 				if (score >= 40 && secondChance ==0) secondChance = 1;
 			} else if (secondChance == 1){
-				alert($head, "b","<h4>ARE YOU SURE?</h4>", 3);
+				alert($button, "a","<h4>ARE YOU SURE?</h4>", 3);
 				secondChance = 3;
 				reset = false;
 			}
@@ -5523,11 +5531,11 @@ generalInstruction();
 				if (score >= passing){
 						jQuery.post("../report", {passed: true, label: "reading_1", moduleNo: 6}, function(res){
 							 output += "You passed! "+res;
-							 alert($head, "b",output, 1);
+							 alert($button, "a",output, 1);
 							});
 							Score(0);
 						}else{
-						 alert($head, "b",output, 4);
+						 alert($button, "a",output, 4);
 							Score(0);
 							leaderboard.draw(id, $leaderboard);
 
