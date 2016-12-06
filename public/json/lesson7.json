@@ -123,6 +123,7 @@
 
                       "Sentence 3 requires talking about three different apples. It can be translated as \\(\\exists x \\exists y\\exists z(Ax \\wedge Ay \\wedge Az \\wedge x\\neq y \\wedge y\\neq z \\wedge x \\neq z)\\).",
 
+
                       "Continuing in this way, we could translate ``There are at least n apples on the table.'' for any n."
                   ]
               },
@@ -134,7 +135,7 @@
 
                     "$$\\text{B. There are at most two apples on the table.}$$",
 
-                    "Sentence A can be paraphrased as, ``It is not the case that there are at least two apples on the table.'' This is just the negation of sentence B: $$\\neg \\exists x \\exists y(Ax \\wedge Ay \\wedge x\neq y)$$",
+                    "Sentence A can be paraphrased as, ``It is not the case that there are at least two apples on the table.'' This is just the negation of sentence B: $$\\neg \\exists x \\exists y(Ax \\wedge Ay \\wedge x \\neq y)$$",
 
                     "Sentence A can also be approached in another way. It means that any apples that there are on the table must be the selfsame apple, so it can be translated as $\\forall x\\forall y[(Ax \\wedge Ay) \\to x=y]$. The two translations are logically equivalent, so both are correct.",
 
@@ -164,7 +165,40 @@
               }
           }
       },
-      "2": {
+      "2":{
+        "title": "Complex Statements Involving Identity",
+        "content": {
+          "a":{
+            "type":"p",
+            "substance":[
+              "There are occasions (for instance, in quizzes and tests) where we have to talk about not only the quantity of some objects, but also their relations to something else. Consider the following statement:",
+
+              "$$\\text{At least two apples are next to some oranges.}$$",
+              "How should we proceed? It might help to first change the English sentence to a more logic-friendly form before tackling the QL. To begin we note that we are essentially talking about three objects: unique orange A, unique orange B, and at least one orange. Thus, we can say. Since we are committing into their existence, we can say:",
+
+              "$$\\text{There exist at least two apples and at least one orange such that these apples are next to these oranges.}$$",
+
+              "From here, we can begin our translation by writing out the quantifiers and assigning variables to things we want to talk about:",
+
+              "$$\\exists x \\exists y \\exists z \\text{ x is an apple y is an apple, x and y are not the same, and they are next to some orange z}$$",
+
+              "From this 'pseudo-QL' statement, it is a small step to complete the translation, by adding the predicates:",
+              "$$\\exists x \\exists y \\exists z (Ax \\wedge By \\wedge x \\neq y \\wedge Oz \\wedge Nxz \\wedge Nyz)$$",
+
+              "Note that there is some ambiguity in the English: our QL statement says that there are some orange that is next to both of these apples. But the original statement does not necessarily say that - it could mean that for each of these apples, it is next to some orange, but these are not necessarily the same one. Apple A can be next to orange B but not orange C, and apple D can be next to C but not B. To accommodate this possibility, we can add another existential quantifier to allow the interpretation that there are two different oranges",
+
+              "$$\\exists x \\exists y \\exists z \\exists w (Ax \\wedge By \\wedge x \\neq y \\wedge Oz \\wedge Nxz \\wedge Nyw \\wedge Ow)$$",
+
+              "Here we don't say that $z \\neq w$ because we don't know for sure they are not the same; we just merely allow the possibility. Note that we can also translate the same sentence conditionally:",
+
+              "$$\\exists x \\exists y  (Ax \\wedge By \\wedge x \\neq y \\wedge \\forall z (z = x \\vee z =y) \\to \\exists w (Ow \\wedge Nzw) )$$",
+
+              "This one says: there are at least two distinct oranges such that if we have anything that is identical to one of them, then it will be next to some orange. Clearly, no one speaks this way in real life, but logically it expresses the same idea."
+            ]
+          }
+        }
+      },
+      "3": {
           "title": "Reading Ex. 2: Translations with Identity and Quantity",
           "content": {
               "a":{
