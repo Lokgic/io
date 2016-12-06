@@ -4948,7 +4948,7 @@
 })();
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":6}],2:[function(require,module,exports){
+},{"buffer":5}],2:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -6507,10 +6507,11 @@ var some = " \\exists "
 var every = " \\forall "
 var and = " \\wedge "
 var or = " \\vee "
+var $butt = $('#gridbutt');
 var implies = " \\to "
 var neq = " \\neq "
 var eq = " = "
-var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\theta ', ' \\psi ']
+var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\lambda ', ' \\psi ']
 var predicates = {
     vowel: "V",
     left: "L",
@@ -6541,40 +6542,68 @@ var connectives = {
     implies: implies
 }
 $(function() {
+    var currentAnswers
 
-    function getTableValues(expected){
+    function updateScore(){
+      $("#score").text(score)
+    }
+
+    function resetTable(){
+      $('.answer').text("Click").css('background-color',"white")
+
+    }
+
+    function getTableValues(){
       ans = []
       for (var i = 0;i<6;i++){
-        ans.push($('#'+(i+1)).children('.answer').text() == expected[i])
+        ans.push($('#'+(i+1)).children('.answer').attr("value") == (currentAnswers[i] +""))
+        // console.log($('#'+(i+1)).children('.answer').attr("value") +" vs " + (currentAnswers[i] +""))
       }
+
       return ans
     }
 
-    function newGrid(callback){
-      jQuery.post("../processing/grid", function(problem) {
-          console.log(problem)
-          var solutions = []
-          model = problem.model
-          statements = problem.statements
-          for (row in model.grid) {
-              for (col in model.grid[row]) {
-                  // console.log(row+"_"+col)
-                  $("#" + row + "_" + col).text(model.grid[row][col])
-              }
-          }
+    function printReadingInfo(callback){
+          $.getJSON('../json/modulesinfo.json')
+          .done(function(data){
+          callback(null, data);
+       }).fail(function(){$body.append('Failed to Load Quiz')});
 
-          for (var i = 0; i < statements.length; i++){
-            $('#'+(i+1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
-            solutions.push(statements[i][1])
-          }
+      }
+
+    function loadGrid(callback){
+      jQuery.post("../processing/grid")
+      .done(function(data){
+          callback(null, data);
+      }).fail(function(){$body.append('Failed to Load Quiz')})
+    };
 
 
+      loadGrid(function(err, problem){
+        currentAnswers = printGrid(problem)
 
-          callback(solutions);
-      });
+      })
 
-    }
 
+      function printGrid(problem){
+        var solutions = []
+        model = problem.model
+        statements = problem.statements
+        for (row in model.grid) {
+            for (col in model.grid[row]) {
+                // console.log(row+"_"+col)
+                $("#" + row + "_" + col).text(model.grid[row][col])
+            }
+        }
+
+        for (var i = 0; i < statements.length; i++){
+          $('#'+(i+1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
+          solutions.push(statements[i][1])
+        }
+        console.log(solutions)
+        mathjax.reload();
+        return solutions
+      }
 
     function makeParts(s) {
         var varNeeded = s.quantifier_1
@@ -6639,7 +6668,7 @@ $(function() {
         output = arrVar[0] + e +backref
         if (arrVar.length >= 2){
           for (var i = 1;i<arrVar.length;i++){
-            output += arrVar[i] + e +backref
+            output += conn + arrVar[i] + e +backref
             }
           }
           return output;
@@ -6661,7 +6690,10 @@ $(function() {
         atMost: function(s) {
 
             parts = makeParts(s);
+            console.log(parts)
             // console.log(parts)
+            parts.relations.push(predicates[s.kind_1] + parts.backref)
+            parts.relations.push(predicates[s.relation] + parts.backref + parts.subject)
             conseq = createEq(_.union(parts.v_1, [parts.backref]), eq, or)
             qPrefix = parts.quantifiers_ID + parts.quantifier_backref + parts.quantifier_relations
 
@@ -6679,7 +6711,7 @@ $(function() {
             // console.log(parts)
 
             if (s.quantifier_1 == 1){
-              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + quantifiers[s.quantifier_2] + parts.subject+"("+parts.relations + and + parts.property_2 +"))]$"
+              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + quantifiers[s.quantifier_2] + parts.subject+"("+ predicates[s.relation] + parts.v_1[0]+ parts.subject + and + parts.property_2 +"))]$"
             }else{
               return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + parts.quantifier_backref+  "(" + string_backref[s.prefix](parts,s) + implies + quantifiers[s.quantifier_2] + parts.subject+"("+parts.relations + and + parts.property_2 +"))]$"
             }
@@ -6784,9 +6816,6 @@ $(function() {
 
       var buttNextState = 'checkAnswer'
 
-    newGrid(function(solutions){
-        $('button').on('click', buttonFunction(solutions));
-    })
 
 
 
@@ -6808,17 +6837,21 @@ $(function() {
 
     // $('#1').children(".ql").text(print[test.prefix](test))
     mathjax.reload()
-    function buttonFunction(ans){
+
+    $butt.on('click',function(){
 
       switch (buttNextState){
       case "checkAnswer":{
-        if(!_.contains(getTableValues(ans), false)){
+        result = getTableValues(currentAnswers)
+        if(!_.contains(result, false)){
           switch (score){
             case (toPass - 1):{
               score += 1;
+
               buttNextState = "startover";
               jQuery.post("/report", {moduleNo: $('title').attr('value'), label : "quiz"}, function(res){
-              makeAlert($('.jumbotron'), "b", "You have passed this quiz! " + res ,1)
+              $butt.text("You have passed this quiz! "+ res)
+              buttColor("green")
 
             });
 
@@ -6827,21 +6860,31 @@ $(function() {
             default:  {
               score += 1;
               buttNextState = "newTable"
-              console.log('corret`')
+              $butt.text("This is correct! Click to continue.")
+              buttColor("green")
 
             }
           }
         } else{
           buttNextState = "startover"
-          console.log('wrong')
+          $butt.text("This is incorrect! Click to restart.")
+          buttColor("red")
+          for (i in result){
+            n = parseInt(i) + 1
+            if (!result[i]) $('#'+n).children('.answer').css('background-color','red')
+          }
         }
         break;
       }
       case "newTable":{
         buttNextState ="checkAnswer"
-        newGrid(function(solutions){
-            $('button').on('click', buttonFunction(solutions));
+        $butt.text("Press here to submit your answers.")
+        resetTable()
+        buttColor("white")
+        loadGrid(function(err, problem){
+          currentAnswers = printGrid(problem)
         })
+
         // currentAnswers = initTable();
             // console.log(currentAnswers)
 
@@ -6849,17 +6892,34 @@ $(function() {
       }
       case "startover":{
         score = 0;
+        $butt.text("Press here to submit your ansers.")
+        resetTable()
+        buttColor("white")
         buttNextState ="checkAnswer"
-        newGrid(function(solutions){
-            $('button').on('click', buttonFunction(solutions));
+        loadGrid(function(err, problem){
+          currentAnswers = printGrid(problem)
         })
+
             // console.log(currentAnswers)
 
         break;
       }
 
-    }}
+    }
+  updateScore()
+  })
 
+    function buttColor(color){
+      switch(color){
+        case "green": tag = "btn-success";
+        break;
+        case "red": tag = "btn-danger";
+        break;
+        case "white": tag = "btn-secondary"
+      }
+      $butt.removeClass().addClass('btn btn-block '+tag)
+
+    }
 
 
 
@@ -6891,117 +6951,6 @@ var mathJax = {
 module.exports = mathJax;
 
 },{}],5:[function(require,module,exports){
-'use strict'
-
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-function init () {
-  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-  for (var i = 0, len = code.length; i < len; ++i) {
-    lookup[i] = code[i]
-    revLookup[code.charCodeAt(i)] = i
-  }
-
-  revLookup['-'.charCodeAt(0)] = 62
-  revLookup['_'.charCodeAt(0)] = 63
-}
-
-init()
-
-function toByteArray (b64) {
-  var i, j, l, tmp, placeHolders, arr
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
-
-  // base64 is 4/3 + up to two characters of the original data
-  arr = new Arr(len * 3 / 4 - placeHolders)
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
-
-  var L = 0
-
-  for (i = 0, j = 0; i < l; i += 4, j += 3) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
-  }
-
-  parts.push(output)
-
-  return parts.join('')
-}
-
-},{}],6:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -8794,7 +8743,118 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":5,"ieee754":7,"isarray":8}],7:[function(require,module,exports){
+},{"base64-js":6,"ieee754":7,"isarray":8}],6:[function(require,module,exports){
+'use strict'
+
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+function init () {
+  var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  for (var i = 0, len = code.length; i < len; ++i) {
+    lookup[i] = code[i]
+    revLookup[code.charCodeAt(i)] = i
+  }
+
+  revLookup['-'.charCodeAt(0)] = 62
+  revLookup['_'.charCodeAt(0)] = 63
+}
+
+init()
+
+function toByteArray (b64) {
+  var i, j, l, tmp, placeHolders, arr
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // the number of equal signs (place holders)
+  // if there are two placeholders, than the two characters before it
+  // represent one byte
+  // if there is only one, then the three characters before it represent 2 bytes
+  // this is just a cheap hack to not do indexOf twice
+  placeHolders = b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+
+  // base64 is 4/3 + up to two characters of the original data
+  arr = new Arr(len * 3 / 4 - placeHolders)
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  l = placeHolders > 0 ? len - 4 : len
+
+  var L = 0
+
+  for (i = 0, j = 0; i < l; i += 4, j += 3) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
+    arr[L++] = (tmp >> 16) & 0xFF
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  if (placeHolders === 2) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[L++] = tmp & 0xFF
+  } else if (placeHolders === 1) {
+    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[L++] = (tmp >> 8) & 0xFF
+    arr[L++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var output = ''
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    output += lookup[tmp >> 2]
+    output += lookup[(tmp << 4) & 0x3F]
+    output += '=='
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
+    output += lookup[tmp >> 10]
+    output += lookup[(tmp >> 4) & 0x3F]
+    output += lookup[(tmp << 2) & 0x3F]
+    output += '='
+  }
+
+  parts.push(output)
+
+  return parts.join('')
+}
+
+},{}],7:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1

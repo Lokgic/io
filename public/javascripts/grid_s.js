@@ -6,10 +6,11 @@ var some = " \\exists "
 var every = " \\forall "
 var and = " \\wedge "
 var or = " \\vee "
+var $butt = $('#gridbutt');
 var implies = " \\to "
 var neq = " \\neq "
 var eq = " = "
-var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\theta ', ' \\psi ']
+var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\lambda ', ' \\psi ']
 var predicates = {
     vowel: "V",
     left: "L",
@@ -40,40 +41,68 @@ var connectives = {
     implies: implies
 }
 $(function() {
+    var currentAnswers
 
-    function getTableValues(expected){
+    function updateScore(){
+      $("#score").text(score)
+    }
+
+    function resetTable(){
+      $('.answer').text("Click").css('background-color',"white")
+
+    }
+
+    function getTableValues(){
       ans = []
       for (var i = 0;i<6;i++){
-        ans.push($('#'+(i+1)).children('.answer').text() == expected[i])
+        ans.push($('#'+(i+1)).children('.answer').attr("value") == (currentAnswers[i] +""))
+        // console.log($('#'+(i+1)).children('.answer').attr("value") +" vs " + (currentAnswers[i] +""))
       }
+
       return ans
     }
 
-    function newGrid(callback){
-      jQuery.post("../processing/grid", function(problem) {
-          console.log(problem)
-          var solutions = []
-          model = problem.model
-          statements = problem.statements
-          for (row in model.grid) {
-              for (col in model.grid[row]) {
-                  // console.log(row+"_"+col)
-                  $("#" + row + "_" + col).text(model.grid[row][col])
-              }
-          }
+    function printReadingInfo(callback){
+          $.getJSON('../json/modulesinfo.json')
+          .done(function(data){
+          callback(null, data);
+       }).fail(function(){$body.append('Failed to Load Quiz')});
 
-          for (var i = 0; i < statements.length; i++){
-            $('#'+(i+1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
-            solutions.push(statements[i][1])
-          }
+      }
+
+    function loadGrid(callback){
+      jQuery.post("../processing/grid")
+      .done(function(data){
+          callback(null, data);
+      }).fail(function(){$body.append('Failed to Load Quiz')})
+    };
 
 
+      loadGrid(function(err, problem){
+        currentAnswers = printGrid(problem)
 
-          callback(solutions);
-      });
+      })
 
-    }
 
+      function printGrid(problem){
+        var solutions = []
+        model = problem.model
+        statements = problem.statements
+        for (row in model.grid) {
+            for (col in model.grid[row]) {
+                // console.log(row+"_"+col)
+                $("#" + row + "_" + col).text(model.grid[row][col])
+            }
+        }
+
+        for (var i = 0; i < statements.length; i++){
+          $('#'+(i+1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
+          solutions.push(statements[i][1])
+        }
+        console.log(solutions)
+        mathjax.reload();
+        return solutions
+      }
 
     function makeParts(s) {
         var varNeeded = s.quantifier_1
@@ -138,7 +167,7 @@ $(function() {
         output = arrVar[0] + e +backref
         if (arrVar.length >= 2){
           for (var i = 1;i<arrVar.length;i++){
-            output += arrVar[i] + e +backref
+            output += conn + arrVar[i] + e +backref
             }
           }
           return output;
@@ -160,7 +189,10 @@ $(function() {
         atMost: function(s) {
 
             parts = makeParts(s);
+            console.log(parts)
             // console.log(parts)
+            parts.relations.push(predicates[s.kind_1] + parts.backref)
+            parts.relations.push(predicates[s.relation] + parts.backref + parts.subject)
             conseq = createEq(_.union(parts.v_1, [parts.backref]), eq, or)
             qPrefix = parts.quantifiers_ID + parts.quantifier_backref + parts.quantifier_relations
 
@@ -178,7 +210,7 @@ $(function() {
             // console.log(parts)
 
             if (s.quantifier_1 == 1){
-              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + quantifiers[s.quantifier_2] + parts.subject+"("+parts.relations + and + parts.property_2 +"))]$"
+              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + quantifiers[s.quantifier_2] + parts.subject+"("+ predicates[s.relation] + parts.v_1[0]+ parts.subject + and + parts.property_2 +"))]$"
             }else{
               return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + parts.quantifier_backref+  "(" + string_backref[s.prefix](parts,s) + implies + quantifiers[s.quantifier_2] + parts.subject+"("+parts.relations + and + parts.property_2 +"))]$"
             }
@@ -283,9 +315,6 @@ $(function() {
 
       var buttNextState = 'checkAnswer'
 
-    newGrid(function(solutions){
-        $('button').on('click', buttonFunction(solutions));
-    })
 
 
 
@@ -307,17 +336,21 @@ $(function() {
 
     // $('#1').children(".ql").text(print[test.prefix](test))
     mathjax.reload()
-    function buttonFunction(ans){
+
+    $butt.on('click',function(){
 
       switch (buttNextState){
       case "checkAnswer":{
-        if(!_.contains(getTableValues(ans), false)){
+        result = getTableValues(currentAnswers)
+        if(!_.contains(result, false)){
           switch (score){
             case (toPass - 1):{
               score += 1;
+
               buttNextState = "startover";
               jQuery.post("/report", {moduleNo: $('title').attr('value'), label : "quiz"}, function(res){
-              makeAlert($('.jumbotron'), "b", "You have passed this quiz! " + res ,1)
+              $butt.text("You have passed this quiz! "+ res)
+              buttColor("green")
 
             });
 
@@ -326,21 +359,31 @@ $(function() {
             default:  {
               score += 1;
               buttNextState = "newTable"
-              console.log('corret`')
+              $butt.text("This is correct! Click to continue.")
+              buttColor("green")
 
             }
           }
         } else{
           buttNextState = "startover"
-          console.log('wrong')
+          $butt.text("This is incorrect! Click to restart.")
+          buttColor("red")
+          for (i in result){
+            n = parseInt(i) + 1
+            if (!result[i]) $('#'+n).children('.answer').css('background-color','red')
+          }
         }
         break;
       }
       case "newTable":{
         buttNextState ="checkAnswer"
-        newGrid(function(solutions){
-            $('button').on('click', buttonFunction(solutions));
+        $butt.text("Press here to submit your answers.")
+        resetTable()
+        buttColor("white")
+        loadGrid(function(err, problem){
+          currentAnswers = printGrid(problem)
         })
+
         // currentAnswers = initTable();
             // console.log(currentAnswers)
 
@@ -348,17 +391,34 @@ $(function() {
       }
       case "startover":{
         score = 0;
+        $butt.text("Press here to submit your ansers.")
+        resetTable()
+        buttColor("white")
         buttNextState ="checkAnswer"
-        newGrid(function(solutions){
-            $('button').on('click', buttonFunction(solutions));
+        loadGrid(function(err, problem){
+          currentAnswers = printGrid(problem)
         })
+
             // console.log(currentAnswers)
 
         break;
       }
 
-    }}
+    }
+  updateScore()
+  })
 
+    function buttColor(color){
+      switch(color){
+        case "green": tag = "btn-success";
+        break;
+        case "red": tag = "btn-danger";
+        break;
+        case "white": tag = "btn-secondary"
+      }
+      $butt.removeClass().addClass('btn btn-block '+tag)
+
+    }
 
 
 

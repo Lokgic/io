@@ -259,6 +259,21 @@
           }
       }
     },
+    "section4":{
+      "1": {
+          "sectionNum":4,
+          "sectionname":"Quantity Interpretation with Physical Model",
+          "title": "Quiz",
+          "content": {
+              "a": {
+                  "type": "link",
+                  "url": "../7/quiz",
+                  "title": "Quantity Interpretation with Physical Model",
+                  "description": "For Quiz 7, you will be asked to interpret QL based on a physical model. It is highly recommended that you becomes familiar with this format, for Test 7 shares the basic format. (See sample test on the menu.)"
+              }
+          }
+      }
+    },
     "ex": {
         "reading_1": {
             "mathjax": true,
@@ -324,7 +339,7 @@
         },
         "quiz": {
             "section": "quiz",
-            "title": "Quiz: Models II"
+            "title": "Quiz: Quantity Interpretation"
         },
         "testsample": {
             "section": "testSample",

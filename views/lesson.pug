@@ -78,7 +78,6 @@ block content
 								h4#ans
 					when "sectionquiz"
 						case moduleNum
-							when "7"
 							when "6"
 								.container.m-t-3.text-xs-center
 									.jumbotron.m-y-3
@@ -128,7 +127,7 @@ block content
 											li.list-group-item #{y}
 								if x.type == "link"
 									p.lead.text-justify.m-y-2 #{x.description}
-									a.btn.btn-secondary.btn.lead.p-x-a(href = x.url role ="button") #{x.title} &rArr;
+									a.btn.btn-secondary.btn.btn-block.lead.m-a-3(href = x.url role ="button") #{x.title} &rArr;
 								if x.type == "listHead"
 									ul.list-group
 										for y in x.substance

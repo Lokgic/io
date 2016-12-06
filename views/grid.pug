@@ -24,8 +24,11 @@ block content
             p.card-text Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its values.
             p Notes: Spatial predicates do not imply “directly”.
             p Complete 5 Tables to complete this quiz
-            button(type ="button").btn.btn-secondary.btn-block Click here to submit your answers
+            p.lead.text-xs-center Current Score:
+              span#score 0
       .col-lg-4.col-md-12
+        .card
+          .card-header.lead.text-xs-center UD: Things in the grid below
         table.table.table-inverse.table-hover.table-bordered#grid.display-4.text-xs-center
           tbody
             each i in [0,1,2]
@@ -37,7 +40,6 @@ block content
         .card
           .card-header Symbols:
           .card-block
-            h4 UD: things in the grid.
             .col-md-6.col-sm-12
               ul
                 li V: x is a vowel.
@@ -56,13 +58,14 @@ block content
                 li X: x is in the same row as y
                 li Y: ...........same column ..
       .col-lg-12.col-md-12#problems
-        .table-responsive
-          table.table.table-striped.table-bordered
+        button(type ="button").btn.btn-secondary.btn-block#gridbutt Click here to submit your answers
+        .table-responsive.m-t-1
+          table.table.table-bordered
             thead.thead-inverse
               tr
                 th.text-xs-center #
+                th.text-xs-center T/F?
                 th.text-xs-center QL Expression
-                th.text-xs-center True/False?
             tbody
               each k in [1,2,3,4,5,6]
                 tr(id = k)

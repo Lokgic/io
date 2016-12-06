@@ -517,6 +517,11 @@ router.get('/7/', function(req, res, next){
 
 
 
+router.get('/7/quiz', function(req,res,next){
+		return res.render('grid',{title:"Module Seven", moduleNum:7});
+
+})
+
 router.get(t = '/7/*', function(req, res, next){
 	var moduleNum = req.path.split('/')[1]
 	var sectionNum = req.path.split('/')[2]
@@ -525,6 +530,12 @@ router.get(t = '/7/*', function(req, res, next){
 
 	return res.render('lesson', {title:"Module Seven", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
 });
+
+router.get('/grid', function(req,res,next){
+		return res.render('grid');
+
+})
+
 
 router.get('/8/', function(req, res, next){
 
@@ -645,18 +656,14 @@ router.post('/ranking', function(req, res, next){
 	})
 });
 
-router.get('/test/grid', function(req,res,next){
-		return res.render('grid');
-
-})
 
 router.post('/processing/grid', function(req,res,next){
-	console.log("wh")
+
 	grid = require("../js/grid_back.js")
 	var model  = new grid.Model()
 
 	var statements = grid.generateStatements(6,model)
-console.log(statements)
+// console.log(statements)
 	problem = {
 		model:model,
 		statements: statements
