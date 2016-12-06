@@ -44,11 +44,11 @@ $(function() {
     var currentAnswers
 
     function updateScore(){
-      $("#score").text(score)
+      $("#score").text(" " +score)
     }
 
     function resetTable(){
-      $('.answer').text("Click").css('background-color',"white")
+      $('.answer').text("Click").css('background-color',"white").attr("value","")
 
     }
 
@@ -99,7 +99,7 @@ $(function() {
           $('#'+(i+1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
           solutions.push(statements[i][1])
         }
-        console.log(solutions)
+        // console.log(solutions)
         mathjax.reload();
         return solutions
       }
@@ -189,7 +189,7 @@ $(function() {
         atMost: function(s) {
 
             parts = makeParts(s);
-            console.log(parts)
+            // console.log(parts)
             // console.log(parts)
             parts.relations.push(predicates[s.kind_1] + parts.backref)
             parts.relations.push(predicates[s.relation] + parts.backref + parts.subject)
