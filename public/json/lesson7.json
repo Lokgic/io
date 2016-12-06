@@ -189,9 +189,9 @@
 
               "$$\\exists x \\exists y \\exists z \\exists w (Ax \\wedge By \\wedge x \\neq y \\wedge Oz \\wedge Nxz \\wedge Nyw \\wedge Ow)$$",
 
-              "Here we don't say that $z \\neq w$ because we don't know for sure they are not the same; we just merely allow the possibility. Note that we can also translate the same sentence conditionally:",
+              "Here we don't say that $z \\neq w$ because we don't know for sure if they are not the same; we allow the possibility. Note that we can also translate the same sentence conditionally:",
 
-              "$$\\exists x \\exists y  (Ax \\wedge By \\wedge x \\neq y \\wedge \\forall z (z = x \\vee z =y) \\to \\exists w (Ow \\wedge Nzw) )$$",
+              "$$\\exists x \\exists y  [Ax \\wedge By \\wedge x \\neq y \\wedge \\forall z ((z = x \\vee z =y) \\to \\exists w (Ow \\wedge Nzw) )]$$",
 
               "This one says: there are at least two distinct oranges such that if we have anything that is identical to one of them, then it will be next to some orange. Clearly, no one speaks this way in real life, but logically it expresses the same idea."
             ]
