@@ -21,7 +21,7 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
       break;
       case 4: tag = "alert-danger"
     }
-    console.log(tag)
+    // console.log(tag)
   var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
   if (direction == "a"){

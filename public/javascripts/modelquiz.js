@@ -6501,7 +6501,7 @@
 },{}],3:[function(require,module,exports){
 $(function() {
 
-    var debug = true;
+    var debug = false;
 
 
     //////Modules
@@ -7148,146 +7148,6 @@ $(function() {
     })
 
 
-    // console.log(di)
-
-
-////////
-
-//                 function  debug_fun(){
-//
-//
-//
-//                         var debug_ud = ["o","p","r","t"]
-//                         var debug_b = ["oo","pp","ro","rt","tr"]
-//                         var debug_p = {
-//                           left : {
-//                             letter: "B",
-//                             place: 2,
-//                             negated: false,
-//                             vars: "yr"
-//
-//                           },
-//                           right :{
-//                             letter: "B",
-//                             place: 2,
-//                             negated: false,
-//                             vars:"xx"
-//                           },
-//                           AllVars: ["x","y"],
-//                           quantifiers: {
-//                             x:{
-//                               variable: "x",
-//                               quantifier: exists
-//                             },
-//                             y:{
-//                               variable:'y',
-//                               quantifier: forall
-//                             }
-//
-//                           },
-//                           connective: conjunction
-//
-//                         }
-//
-//
-//                       quantifiers = debug_p.quantifiers;
-//                       left = debug_p.left;
-//                       right = debug_p.right;
-//                       connective = debug_p.connective
-//                       allVars = ["x","y"]
-//                       sub_L = [debug_p.left.vars];
-//                       sub_R = [debug_p.right.vars];
-//                       numVars = allVars.length;
-//                       function connectiveInterpret (l,r){
-//
-//                         v = []
-//                         v[0] = _.contains(debug_b, l)
-//                         v[1] = _.contains(debug_b, r)
-//                         console.log(l + " " + r)
-//                         console.log( v[0] && v[1])
-//                            return (v[0] && v[1]);
-//
-//                       }
-//
-//                       if (check.onlyConstant(sub_L[0]) && check.onlyConstant(sub_R[0])){
-//                         out = connectiveInterpret(model, sub_L[0],sub_R[0])
-//                         if (self.negated) return !out;
-//                           else return out;
-//                       }
-//
-//
-//
-//
-//
-//                         if (quantifiers[allVars[0]].quantifier == forall) quantifier = "every"
-//                           else quantifier = "some"
-//
-//
-//
-// ////////
-//
-//                         out = _[quantifier](debug_ud, function(x){
-//
-//                         var i = 0;
-//                         var j = 0
-//                         targetVar = allVars[i]
-//                         sub_L[j+1] = substite(sub_L[j], targetVar,x)
-//                         sub_R[j+1] = substite(sub_R[j], targetVar,x)
-//                         console.log("stage 1")
-//                         console.log(sub_L)
-//                         console.log(sub_R)
-//                         if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
-//
-//
-//                           return connectiveInterpret( sub_L[j+1],sub_R[j+1])
-//                         }
-//
-//                         i += 1;
-//                         j += 1;
-//                         if (quantifiers[allVars[i]].quantifier == forall && i < numVars) quantifier = "every"
-//                           else quantifier = "some"
-//
-//                         out2 = _[quantifier](debug_ud, function(y){
-//                           targetVar = allVars[i];
-//                           sub_L[j+1] = substite(sub_L[j], targetVar,y)
-//                           sub_R[j+1] = substite(sub_R[j], targetVar,y)
-//                           console.log("stage " + j + 1)
-//                           console.log(sub_L)
-//                           console.log(sub_R)
-//                           if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
-//                             return connectiveInterpret( sub_L[j+1],sub_R[j+1])
-//                           }
-//                           j+=1;
-//                           i += 1;
-//                           if (quantifiers[allVars[i]].quantifier == forall && i < numVars) quantifier = "every"
-//                             else quantifier = "some"
-//                           out3 = _[quantifier](debug_ud, function(z){
-//                             targetVar = allVars[i];
-//                             sub_L[j+1] = substite(sub_L[j], targetVar,z)
-//                             sub_R[j+1] = substite(sub_R[j], targetVar,z)
-//                             if (check.onlyConstant(sub_L[j+1]) && check.onlyConstant(sub_R[j+1])){
-//                               return connectiveInterpret(sub_L[j+1],sub_R[j+1])
-//                             }
-//
-//                                 })
-//                                 return out3;
-//                             })
-//                             console.log("out2 = "+out2)
-//                             return out2;
-//                       })
-//                       return out;
-//                   }
-//
-//                   return console.log("debug: " + debug_fun())
-//
-//
-//
-//               ///
-//
-//
-//
-
-
 
 
 
@@ -7374,7 +7234,7 @@ var makeAlert = function(location, direction, text, code){ //direction: a= above
       break;
       case 4: tag = "alert-danger"
     }
-    console.log(tag)
+    // console.log(tag)
   var html = "<div class='alert " + tag +  " alert-dismissible fade in m-x-1' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+text+"</div>";
 
   if (direction == "a"){
