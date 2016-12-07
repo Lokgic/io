@@ -143,7 +143,7 @@
 
               "$\\vdash \\forall x \\exists y (Ax \\vee By) \\to \\exists y \\forall x (Ax \\vee By)$",
 
-              "$ \\vdash a \\neq c \\to (a \\neq b \\vee b \\\neq c)$",
+              "$ \\vdash a \\neq c \\to (a \\neq b \\vee b \\neq c)$",
 
               "$\\vdash \\forall x \\forall y \\forall z (( x = y \\wedge y =z)\\to x =z)$",
 
@@ -157,8 +157,9 @@
 
               "1. Every Martian has exactly two parents. Therefore every Martian has exactly four grandparents.",
 
-              "2. No Martian has exactly three parents. All Martians have more than one parent. Therefore, all Martians have two parents."
+              "2. No Martian has exactly three parents. All Martians have more than one parent. Therefore, all Martians have two parents.",
 
+              "Note: x is a grandparent of y can be understood as $\\exists x \\exists y \\exists z (Pxz \\wedge Pzy)$ Other that this, ASSUME WE KNOW NOTHING ABOUT MARTIAN BIOLOGY! Approach the problem on pure logical terms - using models. "
 
             ]
           }
