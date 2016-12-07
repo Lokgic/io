@@ -29,5 +29,8 @@ head
     link(rel='stylesheet', href='../css/custom.css')
     if currentUser
       script(src="../javascripts/progressBar.js")
+    script.
+       $('[data-toggle="tooltip"]').tooltip()
+
 
   block extrafooter

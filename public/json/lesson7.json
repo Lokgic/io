@@ -185,7 +185,7 @@
               "From this 'pseudo-QL' statement, it is a small step to complete the translation, by adding the predicates:",
               "$$\\exists x \\exists y \\exists z (Ax \\wedge By \\wedge x \\neq y \\wedge Oz \\wedge Nxz \\wedge Nyz)$$",
 
-              "Note that there is some ambiguity in the English: our QL statement says that there are some orange that is next to both of these apples. But the original statement does not necessarily say that - it could mean that for each of these apples, it is next to some orange, but these are not necessarily the same one. Apple A can be next to orange B but not orange C, and apple D can be next to C but not B. To accommodate this possibility, we can add another existential quantifier to allow the interpretation that there are two different oranges",
+              "Note that there is some ambiguity in the English: our QL statement says that there is some orange that is next to both of these apples. But the original statement does not necessarily say that - it could mean that for each of these apples, it is next to some orange, but these are not necessarily the same one. Apple A can be next to orange B but not orange C, and apple D can be next to C but not B. To accommodate this possibility, we can add another existential quantifier to allow the interpretation that there are two different oranges",
 
               "$$\\exists x \\exists y \\exists z \\exists w (Ax \\wedge By \\wedge x \\neq y \\wedge Oz \\wedge Nxz \\wedge Nyw \\wedge Ow)$$",
 
@@ -193,7 +193,7 @@
 
               "$$\\exists x \\exists y  [Ax \\wedge By \\wedge x \\neq y \\wedge \\forall z ((z = x \\vee z =y) \\to \\exists w (Ow \\wedge Nzw) )]$$",
 
-              "This one says: there are at least two distinct oranges such that if we have anything that is identical to one of them, then it will be next to some orange. Clearly, no one speaks this way in real life, but logically it expresses the same idea."
+              "This one says: there are at least two distinct oranges such that if we have anything that is identical to one of them, then it will be next to some orange. Clearly, no one talks this way in real life ( except for pretentious logicians) but it expresses the same idea."
             ]
           }
         }
@@ -294,10 +294,38 @@
       }
     },
     "section4":{
-      "1": {
-          "sectionNum":4,
-          "sectionname":"Quantity Interpretation with Physical Model",
-          "title": "Quiz",
+      "1":{
+        "sectionNum":4,
+        "sectionname":"Quantity Statements Involving Definite Descriptions",
+        "title":"A Harder Example",
+        "content":{
+          "a":{
+            "type":"p",
+            "substance":[
+              "Perhaps the most challenging statements to translate are ones that involve both definite descriptions and quantity. But recall that definite descriptions are basically just 'exectly one' statements, so they are not really different. But things can get messy pretty quickly. For instance, consider this monstrosity",
+              "$$\\text{The friend of Lily, who knew everyone she dated, liked none of them }$$",
+
+              "To begin, we need to decide on how to understand the English statement itself. For instance, what do 'who' and 'she' refer to? Multiple interpretations, as long as they are reasonably close to the original, are often permissible - we just have to be clear about our decision. Here, the use of 'the' signals the presence of a definite description. This means that we can understand the predicate 'x knew everyone she dated' as a unique description of this friend. From this, we can make the interpretation the friend in question knew everyone Lily dated. In other words: there exists exactly one person x such that x is a friend of Lily and x knows everyone Lily dated, and x liked none of the people Lily dated. It's a mouth full, but its logical structure is more apparent. One possible translation is as follows. Hover over parts of the QL sentence for explanations."
+            ]
+          },
+          "b":{
+            "type":"tooltip",
+            "substance":[
+              ["$\\exists x$", "Quantifier for the existence of the friend x"],
+              ["$[Fxl \\wedge $","x is a friend of Lily"],
+              ["$\\neg \\exists y$", "To deny the existence of a certain type of person"],
+              ["$(Dyl \\wedge Kxy \\wedge Lxy)$","What doesn't exist? Someone that dated Lily and known by x but liked by x."],
+              ["$\\wedge$","At this point, we have some friend x of Lily knew and disliked everyone Lily dated. We still need to specify that there is exactly one x who knew all of Lily's friend"],
+              ["$\\forall z ((Fzl \\wedge \\forall w (Dwl \\to  Kwy))$","For anyone z, if z is a friend of Lily and z knew every Lily dated, then...."],
+              ["$\\to x$", "We are back-referencing the x we talked about earlier, which is fine because x is still bound by the very first existential quantifier. "],
+              [" $ =z)]$",".. z is just x. In other words, there exists only one person that fits that description."]
+            ]
+          }
+        }
+      },
+      "2": {
+
+          "title": "Quiz: Quantity Interpretation with Physical Model",
           "content": {
               "a": {
                   "type": "link",

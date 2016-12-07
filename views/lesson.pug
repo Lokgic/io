@@ -165,6 +165,8 @@ block content
 										- plugin = "proofFill"
 										button(id = "proofbutt" + y.id type="button" value = moduleNum + "-"+ y.id + "-" + y.type).btn-primary.btn.btn-block Submit Answers
 										#proofFill(value = x.id).container.m-x-3.p-y-3
+								if x.type == 'tooltip'
+									include tooltip
 
 
 

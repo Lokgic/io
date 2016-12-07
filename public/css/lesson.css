@@ -3,6 +3,12 @@
    width: 45%;
    height:100%;
 }*/
+
+.lessontooltip {
+  border-width: 0;
+  padding: 1px;
+  margin: 0px 2px;
+}
 .correct{
   background-color:#2196f3;
   color:grey;
