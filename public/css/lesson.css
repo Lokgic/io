@@ -9,6 +9,10 @@
   padding: 1px;
   margin: 0px 2px;
 }
+
+.lessontooltip:hover{
+  font-size: 2em;
+}
 .correct{
   background-color:#2196f3;
   color:grey;

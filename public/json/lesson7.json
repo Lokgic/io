@@ -303,7 +303,7 @@
             "type":"p",
             "substance":[
               "Perhaps the most challenging statements to translate are ones that involve both definite descriptions and quantity. But recall that definite descriptions are basically just 'exectly one' statements, so they are not really different. But things can get messy pretty quickly. For instance, consider this monstrosity",
-              "$$\\text{The friend of Lily, who knew everyone she dated, liked none of them }$$",
+              "$$\\text{The friend of Lily,} \\text{ who knew everyone she dated,} \\text{ liked none of them }$$",
 
               "To begin, we need to decide on how to understand the English statement itself. For instance, what do 'who' and 'she' refer to? Multiple interpretations, as long as they are reasonably close to the original, are often permissible - we just have to be clear about our decision. Here, the use of 'the' signals the presence of a definite description. This means that we can understand the predicate 'x knew everyone she dated' as a unique description of this friend. From this, we can make the interpretation the friend in question knew everyone Lily dated. In other words: there exists exactly one person x such that x is a friend of Lily and x knows everyone Lily dated, and x liked none of the people Lily dated. It's a mouth full, but its logical structure is more apparent. One possible translation is as follows. Hover over parts of the QL sentence for explanations."
             ]
