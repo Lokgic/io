@@ -214,7 +214,7 @@ $(function() {
             if (s.quantifier_1 == 1){
               return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + quantifiers[s.quantifier_2] + parts.subject+"("+ predicates[s.relation] + parts.v_1[0]+ parts.subject + connectives[s.quantifier_2] + parts.property_2 +")]$"
             }else{
-              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + parts.quantifier_backref+  "(" + string_backref[s.prefix](parts,s) + implies + quantifiers[s.quantifier_2] + parts.subject+"("+parts.relations + connectives[s.quantifier_2] + parts.property_2 +"))]$"
+              return "$" + parts.quantifiers_ID + "[" + string_neq[s.prefix](parts, s)  + string_property_1[s.prefix](parts, s)  + and + parts.quantifier_backref+  "(" + string_backref[s.prefix](parts,s) + implies + quantifiers[s.quantifier_2] + parts.subject+"("+ parts.property_2+ connectives[s.quantifier_2] + parts.relations  +"))]$"
             }
 
 
