@@ -537,6 +537,7 @@ router.get('/grid', function(req,res,next){
 })
 
 
+
 router.get('/8/', function(req, res, next){
 
 	return res.redirect('/8/1');
@@ -544,7 +545,6 @@ router.get('/8/', function(req, res, next){
 router.get(t = '/8/*', function(req, res, next){
 	var moduleNum = req.path.split('/')[1]
 	var sectionNum = req.path.split('/')[2]
-
 	var lesson = require('../public/json/lesson8.json');
 
 	return res.render('lesson', {title:"Module Eight", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
@@ -674,4 +674,21 @@ router.post('/processing/grid', function(req,res,next){
 
 })
 
+
+router.post('/processing/model_id', function(req,res,next){
+
+	model_id = require("../js/model_id_gen.js")
+	var model  = new model_id.initModel()
+
+	var statements = model_id.makeProblemSet(model,4)
+// console.log(statements)
+	problem = {
+		model:model,
+		statements: statements
+	}
+
+
+	return res.send(problem)
+
+})
 module.exports = router;

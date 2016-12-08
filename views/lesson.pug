@@ -78,6 +78,7 @@ block content
 								h4#ans
 					when "sectionquiz"
 						case moduleNum
+							when "8"
 							when "6"
 								.container.m-t-3.text-xs-center
 									.jumbotron.m-y-3
@@ -90,7 +91,7 @@ block content
 										table.table.table-bordered.table-inverse#table
 											thead
 												- var s_arr = [0,1,2,3]
-												- if (mouduleNum == "7") s_arr.push(4)
+												- if (mouduleNum == "8") s_arr.push(4)
 												- var ext_arr = [0]
 												tr
 													th.h2.text-xs-center UD:
@@ -98,7 +99,12 @@ block content
 												tr
 													td.h2.text-xs-center Extension(s):
 													each i in ext_arr
-														td(id = "ext"+i).lead.text-xs-center  exten. #{i}
+														td(id = "ext0").lead.text-xs-center  exten.
+												if moduleNum == "8"
+													tr
+														td.h2.text-xs-center Referent(s):
+														each i in ext_arr
+															td(id = "ref0").lead.text-xs-center  ref. #{i}
 											tbody
 												each i in s_arr
 													tr
@@ -186,8 +192,9 @@ block extrafooter
 	if sectionNum == "sectionquiz"
 		case moduleNum
 			when "6"
-			when "7"
 				script(src='../javascripts/modelquiz.js')
+			when "8"
+				script(src='../javascripts/modelquiz_id.js')
 	else
 		script(src='../javascripts/lessonreading.js')
 	link(rel="stylesheet", type="text/css", href="../css/lesson.css")
