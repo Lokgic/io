@@ -29,8 +29,8 @@ function generateUD(n){
 var level ={
   "0":{
     identityProb:[0.5,0.5],
-    negatedAtomic: 5,
-    negatedComplex: 50,
+    negatedAtomic: 0,
+    negatedComplex: 0,
     predicatesDistribution:[.5,35,0], //how many place
     constantsDistribution: {mean:4, dev:1},
     objectsDistribution: {mean:3, dev:0.5},
@@ -393,8 +393,8 @@ function connectiveInterpret(model, l,r,p){
 }
 
 function recursion(p, model, sub_L, sub_R, targetVar){
-  // console.log(sub_L)
-  // console.log(sub_R)
+  console.log("what")
+  console.log(p)
   quantifiers = p.quantifiers;
   left = p.left;
   right = p.right;
@@ -437,15 +437,45 @@ function recursion(p, model, sub_L, sub_R, targetVar){
 }
 
 
-function eval(p, model){
+function eval(p, model, sub_L, sub_R, targetVar){
   // console.log(sub_L)
   // console.log(sub_R)
-    output = recursion(p, model)
+  quantifiers = p.quantifiers;
+  left = p.left;
+  right = p.right;
+  connective = p.connective
+  allVars = p.allVars;
+  referents = model.referents
+  if (sub_L == undefined|| sub_R == undefined){
+    sub_L = substite.stringToSet(p.left.vars,referents);
+    sub_R = substite.stringToSet(p.right.vars,referents);
+  }
+  // console.log(check.noVariables(sub_L))
+  if (check.noVariables(sub_L) && check.noVariables(sub_R)){
+
+    out = connectiveInterpret(model, sub_L,sub_R,p)
+    // console.log("here? " + !out )
+    if (p.negated) return !out;
+      else return out;
+  }
+
+  if (targetVar == undefined){
+    targetVar = allVars[0]
+  }
+// console.log(targetVar)
+  if (quantifiers[targetVar].quantifier == every) quantifier = "every"
+    else quantifier = "some"
+
+   return out = _[quantifier](model.ud, function(object){
+
+    sub_L2 = substite.varToObject(sub_L, targetVar,object)
+    sub_R2 = substite.varToObject(sub_R, targetVar,object)
+
     // console.log(eval(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar)+1]))
     // return 0;
-    // console.log(output)
-    if (p.qnegated) return !output
-    else return output
+    return eval(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar)+1])
+
+  })
 
   }
 
@@ -560,7 +590,7 @@ testModel = {
   names: [ 'g', 'n', 'p', 'r' ] }
 
 // console.log(makeProblemSet(testModel,4))
-    var debug = false
+    var debug = true
 
   if (debug){
       var test = require('tape')
@@ -634,7 +664,7 @@ testModel = {
                quantifiers: { z: { variable: 'z', quantifier: '\\exists' }, x: { variable: 'x', quantifier: '\\exists' }, y: { variable: 'y', quantifier: '\\exists' }  },
                connective: conjunction
                 }
-      t.plan(9)
+      t.plan(10)
       t.assert(!eval(pt, testModel))
       t.assert(eval(pt2, testModel))
       t.assert(eval(pt3, testModel))
@@ -669,20 +699,47 @@ testModel = {
             connective: conjunction
              }
 
-         pt9 = { left: { letter: 'id', place: 2, negated: false, prefix: '', vars: 'xe' },
-             right: { letter: 'T', place: 2, negated: false, prefix: '', vars: 'ye' },
-             qnegated: true,
+         pt9 = { left: { letter: 'id', place: 2, negated: false, prefix: '', vars: 'xx' },
+             right: { letter: 'id', place: 2, negated: false, prefix: '', vars: 'yy' },
+             qnegated: false,
              negated:false,
              prefix: '\\exists x\\exists z',
              totalPlace: 4,
              allVars: [ 'y', 'x'],
-             quantifiers: { x: { variable: 'x', quantifier: '\\exists' }, y: { variable: 'y', quantifier: '\\exists' }  },
+             quantifiers: { x: { variable: 'x', quantifier: '\\forall' }, y: { variable: 'y', quantifier: '\\forall' }  },
              connective: conjunction
               }
               t.assert(eval(pt8, testModel2))
 
-t.assert(!eval(pt9, testModel2))
+              t.assert(eval(pt9, testModel2))
 
+              testModel3 = {
+                 referents:   { b: { name: 'b', referent: 'Vanuatu' },
+                 i: { name: 'i', referent: 'Maldives' },
+                   o: { name: 'o', referent: 'Vanuatu' },
+                 },
+                extensions:
+                 {
+                   D:
+                    { letter: 'T',
+                      place: 2,
+                      string: '<p>D : { Dominican Republic , Laos , Paraguay }</p>',
+                      extension: [['Maldives','Maldives'],['North Korea','North Korea'],['Vanuatu','Vanuatu']] } },
+                ud: [ 'North Korea', 'Maldives', 'Vanuatu' ],
+                names: [ 'b', 'i', 'o' ] }
+
+
+                pt10 = { left: { letter: 'id', place: 2, negated: false, prefix: '', vars: 'yb' },
+                    right: { letter: 'id', place: 2, negated: false, prefix: '', vars: 'zy' },
+                    qnegated: false,
+                    negated:false,
+                    prefix: '\\exists x\\exists z',
+                    totalPlace: 4,
+                    allVars: [ 'y', 'z'],
+                    quantifiers: { y: { variable: 'y', quantifier: '\\exists' }, z: { variable: 'z', quantifier: '\\forall' }  },
+                    connective: disjunction
+                     }
+                     t.assert(eval(pt10,testModel3))
     })
   }
 
