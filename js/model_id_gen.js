@@ -590,7 +590,7 @@ testModel = {
   names: [ 'g', 'n', 'p', 'r' ] }
 
 // console.log(makeProblemSet(testModel,4))
-    var debug = true
+    var debug = false
 
   if (debug){
       var test = require('tape')
