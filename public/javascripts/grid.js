@@ -6868,8 +6868,8 @@ $(function() {
             }
           }
         } else{
-          buttNextState = "startover"
-          $butt.text("This is incorrect! Click to restart.")
+          buttNextState = "newTable"
+          $butt.text("This is incorrect! Click to continue. You can keep on trying without losing your current score until you reach the score of 5.")
           buttColor("red")
           for (i in result){
             n = parseInt(i) + 1

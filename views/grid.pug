@@ -23,7 +23,7 @@ block content
             h4.card-title Instruction
             p.card-text Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its value.
             p Spatial predicates do not always imply “directly”! For instance, an object from a different column can still be above another object as long as it occupies a higher row.
-            p Complete 5 Tables to complete this quiz.
+            p Complete 5 Tables to complete this quiz. You won't have to restart for each mistake.
             p.lead.text-xs-center Current Score:
               span#score
       .col-lg-4.col-md-12
@@ -67,7 +67,7 @@ block content
                 th.text-xs-center T/F?
                 th.text-xs-center QL Expression
             tbody
-              each k in [1,2,3,4,5,6]
+              each k in [1,2,3,4]
                 tr(id = k)
                   th(scope = "row") #{k}
                   td.answer.lead.text-xs-center Click

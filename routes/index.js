@@ -662,7 +662,7 @@ router.post('/processing/grid', function(req,res,next){
 	grid = require("../js/grid_back.js")
 	var model  = new grid.Model()
 
-	var statements = grid.generateStatements(6,model)
+	var statements = grid.generateStatements(4,model)
 // console.log(statements)
 	problem = {
 		model:model,
