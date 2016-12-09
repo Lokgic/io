@@ -159,7 +159,9 @@
 
               "2. No Martian has exactly three parents. All Martians have more than one parent. Therefore, all Martians have two parents.",
 
-              "Note: x is a grandparent of y can be understood as $\\exists x \\exists y \\exists z (Pxz \\wedge Pzy)$ Other that this, ASSUME WE KNOW NOTHING ABOUT MARTIAN BIOLOGY! Approach the problem on pure logical terms - using models. "
+              "Note: x is a grandparent of y can be understood as $\\exists x \\exists y \\exists z (Pxz \\wedge Pzy)$ Other that this, ASSUME WE KNOW NOTHING ABOUT MARTIAN BIOLOGY! Approach these problems $logically$ - using models. ",
+
+              "Note 2: Keep in mind that your goal is to prove that these arguments are $invalid$, but its validity has to do with how you interpret them. If the English is vague, make sure your translation is invalid based on your model."
 
             ]
           }
