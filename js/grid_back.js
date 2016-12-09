@@ -30,7 +30,7 @@ var relation = {
 }
 
 var quantifiers = ["every", "some"]
-var wp = [0.35, 0.35, 0.3]
+var wp = [0.99, 0, 0]
 var prefix = ["atMost","atLeast","exactly"]
 var rows  = 3;
 var cols =3

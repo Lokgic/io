@@ -6697,9 +6697,9 @@ $(function() {
             parts.relations.push(predicates[s.kind_1] + parts.backref)
             parts.relations.push(predicates[s.relation] + parts.backref + parts.subject)
             conseq = createEq(_.union(parts.v_1, [parts.backref]), eq, or)
-            qPrefix = parts.quantifiers_ID + parts.quantifier_backref + parts.quantifier_relations
+            qPrefix = parts.quantifiers_ID + parts.quantifier_backref
 
-            antecedent  = "("+createConnective(_.union(parts.relations, [parts.property_2], parts.property_1),and) +")"
+            antecedent  = "(" + parts.quantifier_relations +createConnective(_.union(parts.relations, [parts.property_2], parts.property_1),and) +")"
 
             // console.log(conseq)
             return "$" + qPrefix+ "[" +antecedent + implies + "(" + conseq+")]$"

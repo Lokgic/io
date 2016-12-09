@@ -663,7 +663,7 @@ router.post('/processing/grid', function(req,res,next){
 	var model  = new grid.Model()
 
 	var statements = grid.generateStatements(4,model)
-// console.log(statements)
+console.log(statements)
 	problem = {
 		model:model,
 		statements: statements
