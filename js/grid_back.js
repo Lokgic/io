@@ -30,7 +30,7 @@ var relation = {
 }
 
 var quantifiers = ["every", "some"]
-var wp = [0.99, 0, 0]
+var wp = [0.4,.4,.2]
 var prefix = ["atMost","atLeast","exactly"]
 var rows  = 3;
 var cols =3
@@ -61,6 +61,7 @@ var CardObj = function(face, color){
 }
 
 var checkQuantity = function(how, set,q){
+  // console.log(set)
   if (how == "atLeast") return set.length >= q;
   else if (how == "atMost") return set.length <= q;
   else if (how == "exactly") return set.length == q
@@ -244,11 +245,35 @@ function evaluate(stat, model){
 
   })
 
+
+
   return checkQuantity(stat.prefix, filteredSet, stat.quantifier_1)
 
 
 }
 
+
+ud = ['b', 'h', 'a','e','i','1','3','5','7']
+grid = [
+          ['b','h','k'],
+          ['3','e','5'],
+          ['6','j','1']
+]
+// model = new Model(grid)
+// console.log(generateStatements(12,model))
+// printGrid(model.grid)
+
+stat = {
+
+  prefix : "atMost",
+  quantifier_1 : 1,
+  kind_1: "vowel",
+    relation :"above",
+  quantifier_2 :"some",
+  kind_2: "consonant"
+}
+// console.log(stat)
+// console.log(evaluate(stat, model))
 var debug = false
 
 if (debug){
@@ -259,12 +284,12 @@ test('evaluation', function(t){
   t.plan(11)
   ud = ['b', 'h', 'a','e','i','2','4','5','7']
   grid = [
-            ['2','a','7'],
+            ['t','a','7'],
             ['4','e','5'],
             ['6','i','9']
   ]
   model = new Model(grid)
-  console.log(generateStatements(12,model))
+  // console.log(generateStatements(12,model))
   printGrid(model.grid)
 
 

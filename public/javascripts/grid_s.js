@@ -42,6 +42,9 @@ var connectives = {
     every: implies,
     some: and
 }
+
+var datapoint = {}
+
 $(function() {
     var currentAnswers
 
@@ -82,7 +85,10 @@ $(function() {
 
       loadGrid(function(err, problem){
         currentAnswers = printGrid(problem)
-
+        // console.log(problem)
+        datapoint.model = problem.model;
+        datapoint.statements = problem.statements;
+        datapoint.result = []
       })
 
 
@@ -90,10 +96,10 @@ $(function() {
         var solutions = []
         model = problem.model
         statements = problem.statements
-        for (row in model.grid) {
-            for (col in model.grid[row]) {
+        for (row in model) {
+            for (col in model[row]) {
                 // console.log(row+"_"+col)
-                $("#" + row + "_" + col).text(model.grid[row][col])
+                $("#" + row + "_" + col).text(model[row][col])
             }
         }
 
@@ -344,7 +350,9 @@ $(function() {
       switch (buttNextState){
       case "checkAnswer":{
         result = getTableValues(currentAnswers)
-        console.log(result)
+        datapoint.result = result
+        // console.log(datapoint)
+        sendDataPoint(datapoint);
         if(!_.contains(result, false)){
           switch (score){
             case (toPass - 1):{
@@ -364,6 +372,7 @@ $(function() {
               buttNextState = "newTable"
               $butt.text("This is correct! Click to continue.")
               buttColor("green")
+
 
             }
           }
@@ -423,6 +432,18 @@ $(function() {
 
     }
 
+function sendDataPoint(){
+  tosend =  {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint}
 
+
+  // console.log(tosend)
+  // jQuery.post("/data", {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint.model}, function(res){
+  $.ajax({
+      url: '/data',
+      type: 'POST',
+      contentType: 'application/json',
+      data:JSON.stringify(tosend)
+})
+}
 
 })

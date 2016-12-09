@@ -71,9 +71,9 @@ LeaderSchema.statics.update  = function update(name, game, score, callback){
 		 		}else{
 
 		 				var min = leaderboard.record[leaderboard.record.length - 1].score;
-		 				console.log(min)
+            // le.log(min)
 		 			if (min < score){
-		 			
+
 		 				leaderboard.record.pop();
 		 				leaderboard.record.push(rec);
 		 				leaderboard.record.sort(function(a,b){

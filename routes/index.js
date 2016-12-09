@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var TestingData = require('../models/data');
 var Leader = require('../models/leader');
 var mid = require('../middleware');
 // var mysql  = require('mysql');
@@ -213,6 +214,7 @@ router.get('/profile', mid.requiresLogin, function(req, res, next){
 					if (readingCount == 3) modules[i].reading = true;
 
 				}
+
 
 				completed =  Math.trunc(100*completed/(modules.length * 6))
 				// console.log(modules);
@@ -576,16 +578,32 @@ router.post('/report', function(req, res, next){
 });
 
 
+router.post('/data', function(req, res, next){
+
+// console.log(req.body)
+	if (req.session &&  req.session.userId) {
+
+		User.getName(req.session.userId, function (err, name){
+			datapoint = req.body.datapoint;
+			datapoint.uid = name;
+// console.log(datapoint)
+			TestingData.update(req.body.moduleNo, req.body.label, datapoint, function(err, passed){
+				console.log(err)
+				return res.send(passed);
+			})
+			})
+
+
+
+
+	}
+});
+
 router.post('/wason', function(req, res, next){
 
 
 	if (req.session.userId){
-		User.getName(req.session.userId, function (err, name){
 
-			Leader.update(name, "wason", req.body.score, function(err, response){
-				return res.send(response);
-				})
-			})
 	}else{
 		return res.send(response);}
 });
@@ -663,9 +681,11 @@ router.post('/processing/grid', function(req,res,next){
 	var model  = new grid.Model()
 
 	var statements = grid.generateStatements(4,model)
-console.log(statements)
+// console.log(statements)
+	var modelMin = model.grid
+
 	problem = {
-		model:model,
+		model:modelMin,
 		statements: statements
 	}
 
