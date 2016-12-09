@@ -1686,7 +1686,7 @@ $(function() {
 
       $('#description').text("Difficulty Level: " + diff);
       $('#score').text("Score: " + score);
-      $('#secondchance').text("Chance: Left: "+ " " + (errorAllowed - error))
+      $('#secondchance').text("Chance Left: "+ " " + (errorAllowed - error))
     }
 
     $('.tbutt').on('click', function() {
@@ -1733,7 +1733,7 @@ $(function() {
                 score += 1;
                 if (score == 10 || score == 5) newDifficulty = true;
                 buttNextState = "newTable"
-                makeAlert($('.jumbotron'), "b", "This is correct! You need solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
+                makeAlert($('.jumbotron'), "b", "This is correct! You need to solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
               }
             }
           } else{
@@ -1785,10 +1785,6 @@ $(function() {
       }
       updateScore();
 
-
-
-
-///////
 
     });
 })

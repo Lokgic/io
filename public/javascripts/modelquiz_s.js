@@ -34,7 +34,8 @@ $(function() {
 
     }
 
-
+    var error = 0;
+    var errorAllowed = 2;
 
 
 
@@ -628,6 +629,7 @@ $(function() {
 
       $('#description').text("Difficulty Level: " + di);
       $('#score').text("Score: " + score);
+      $('#secondchance').text("Chance Left: "+ " " + (errorAllowed - error))
     }
 
     $('.tbutt').on('click', function() {
@@ -674,12 +676,26 @@ $(function() {
                 score += 1;
                 if (score == 10 || score == 5) newDifficulty = true;
                 buttNextState = "newTable"
-                makeAlert($('.jumbotron'), "b", "This is correct! You need solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
+                makeAlert($('.jumbotron'), "b", "This is correct! You need to solve " + (toPass - score) + " more table(s) to pass this quiz." ,2)
               }
             }
           } else{
-            buttNextState = "startover"
-            makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! Incorrect answers are marked red, missing answers orange, and correct  answers blue. Press Submit to try again." ,4)
+            switch(error){
+              case (errorAllowed):{
+                buttNextState = "startover"
+                makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! You have reached the maximum number of errors allowed. Press Submit to try again." ,4)
+                break;
+              }
+              default: {
+                error += 1
+                buttNextState = "newTable"
+                makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! You have " + (errorAllowed - error) + " chance(s) left before having to restart. Incorrect answers are marked red." ,4)
+              }
+
+            }
+
+
+
           }
           break;
         }
@@ -692,6 +708,7 @@ $(function() {
         }
         case "startover":{
           score = 0;
+          error = 0;
           resetTable()
           currentAnswers = initTable();
               // console.log(currentAnswers)

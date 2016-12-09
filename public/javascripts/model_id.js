@@ -1,1 +1,0 @@
-console.error("Error: Cannot find module '/Users/lok/gitstuff/io/public/javascripts/model_id_s.js' from '/Users/lok/gitstuff/io/public/javascripts'");
