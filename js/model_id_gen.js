@@ -28,14 +28,36 @@ function generateUD(n){
 
 var level ={
   "0":{
+    identityProb:[0.2,0.8],
+    negatedAtomic: 0,
+    negatedComplex: 0,
+    predicatesDistribution:[.5,.5,0], //how many place
+    constantsDistribution: {mean:7, dev:1},
+    objectsDistribution: {mean:3, dev:0.5},
+    extensionOptions:["all", "self", "mixed", "none"],
+    extensionDistribution:[.2,0.2,.5,.1], //4
+    predicatesVariableConstantRatio:[0,1]
+  },
+  "1":{
     identityProb:[0.5,0.5],
     negatedAtomic: 0,
     negatedComplex: 0,
-    predicatesDistribution:[.5,35,0], //how many place
+    predicatesDistribution:[.5,.5,0], //how many place
+    constantsDistribution: {mean:3, dev:1},
+    objectsDistribution: {mean:5, dev:0.5},
+    extensionOptions:["all", "self", "mixed", "none"],
+    extensionDistribution:[.2,0.2,.3,.3], //4
+    predicatesVariableConstantRatio:[.3,0.7]
+  },
+  "2":{
+    identityProb:[0.5,0.5],
+    negatedAtomic: 0,
+    negatedComplex: 0,
+    predicatesDistribution:[.5,.35,0.15], //how many place
     constantsDistribution: {mean:4, dev:1},
     objectsDistribution: {mean:3, dev:0.5},
     extensionOptions:["all", "self", "mixed", "none"],
-    extensionDistribution:[.2,0.3,.3,.2], //4
+    extensionDistribution:[.3,0.2,.4,.1], //4
     predicatesVariableConstantRatio:[.5,.5]
   }
 }
@@ -45,7 +67,7 @@ var id ={
   place:2
 }
 
-var diff = 0;
+var diff;
 //////MODEL RELATED STUFF
 function randomPickset(arr, max, min) {
 
@@ -68,7 +90,8 @@ function randomPickset(arr, max, min) {
     }))
 }
 
-function initModel(){
+function initModel(d){
+  diff = d;
   pLetter = randomPickset(predicates, chance.integer({
       min: 1,
       max: 4

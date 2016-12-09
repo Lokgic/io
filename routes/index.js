@@ -678,8 +678,7 @@ router.post('/processing/grid', function(req,res,next){
 router.post('/processing/model_id', function(req,res,next){
 
 	model_id = require("../js/model_id_gen.js")
-	var model  = new model_id.initModel()
-
+	var model  = new model_id.initModel(req.body.diff)
 	var statements = model_id.makeProblemSet(model,4)
 // console.log(statements)
 	problem = {

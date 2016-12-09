@@ -302,6 +302,10 @@
                 ["Invalid", "A property of arguments that holds when the premises do not force the truth of the conclusion."]
 
             ]
+        },
+        "quiz": {
+            "section": "quiz",
+            "title": "Quiz: Models w/ Identity"
         }
     }
 }

@@ -1,9 +1,9 @@
 $(function() {
 
-    var debug = false;
+    var debug = true;
 
     //////Modules
-
+    var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
     var mathjax = require('./mods/mathjax.js')
     mathjax.reload();
@@ -11,16 +11,18 @@ $(function() {
 
     var newDifficulty = false;
 //Module specific settings
-    var di;
+    var diff = 0;
 
     //States initialization
     var score = 0;
+    var error = 0;
+    var errorAllowed = 2;
     var toPass = 15;
     var buttNextState = "checkAnswer";
-    var currentProblem
+    var currentAnswers
 
     function loadModel(callback){
-      jQuery.post("../processing/model_id")
+      jQuery.post("../processing/model_id",{diff:diff})
       .done(function(data){
           callback(null, data);
       }).fail(function(){$body.append('Failed to Load Quiz')})
@@ -28,7 +30,9 @@ $(function() {
 
     loadModel(function(err, data){
       console.log(data)
-      currentProblem = initTable(data)
+      currentAnswers = initTable(data)
+
+
     })
 
     function initTable(data) {
@@ -54,7 +58,7 @@ $(function() {
 
           var toReturn = []
         for (var i = 0; i<data.statements.length;i++){
-          toReturn.push(data.statements[i][1])
+          toReturn.push(data.statements[i][1] +"")
           $('#statement'+i).text("\\(" + data.statements[i][0].string +"\\)");
         }
         // console.log(props)
@@ -75,24 +79,27 @@ $(function() {
 
     function getTableValues(ans) {
 
-        var last = $('.tbutt').last().attr("id").split("-");
+        var last = $('.tbutt').last().attr("id").split("-")[0];
+
         var truthValues = [];
-        for (var i = 0; i <= last[0]; i++) {
-            var temp = []
-            for (var j = 0; j <= last[1]; j++) {
-                temp[j] = $("#" + i + "-" + j).attr("value")
+        j =0
+        for (var i = 0; i <= last; i++) {
+
+            var temp
+                temp = $("#" + i + "-" + j).attr("value")
                 $("#" + i + "-" + j).removeClass("true");
                 $("#" + i + "-" + j).removeClass("false");
-                if (temp[j] == ans[i][j]) toAdd = 'correct'
-                else if (temp[j] == undefined || temp[j] == "") toAdd = 'missing'
+                if (temp == (ans[i] +"")) toAdd = 'correct'
+                else if (temp == undefined || temp == "") toAdd = 'missing'
                 else toAdd = 'wrong'
                 $("#" + i + "-" + j).addClass(toAdd)
-            }
             truthValues[i] = temp;
         }
         if (debug){
-          console.log("input: " + truthValues);
-          console.log("answer is " + ans)
+          console.log("input: ");
+          console.log(truthValues)
+          console.log("answer is ")
+          console.log(ans)
           console.log("returning " + _.isEqual(truthValues,ans))
         }
         return _.isEqual(truthValues,ans);
@@ -122,13 +129,13 @@ $(function() {
     function updateScore(){
 
       if (newDifficulty) {
-        di += 1;
-        if (di == 4) variables.push('w');
+        diff += 1;;
         newDifficulty = false
       }
 
-      $('#description').text("Difficulty Level: " + di);
+      $('#description').text("Difficulty Level: " + diff);
       $('#score').text("Score: " + score);
+      $('#secondchance').text("Chance: Left: "+ " " + (errorAllowed - error))
     }
 
     $('.tbutt').on('click', function() {
@@ -153,7 +160,7 @@ $(function() {
 
 
   updateScore();
-    var currentAnswers = initTable();
+    // var currentAnswers = initTable();
     // console.log(currentAnswers)
     $('button').on('click', function(){
 
@@ -179,22 +186,47 @@ $(function() {
               }
             }
           } else{
-            buttNextState = "startover"
-            makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! Incorrect answers are marked red, missing answers orange, and correct  answers blue. Press Submit to try again." ,4)
+            switch(error){
+              case (errorAllowed):{
+                buttNextState = "startover"
+                makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! You have reached the maximum number of errors allowed. Press Submit to try again." ,4)
+                break;
+              }
+              default: {
+                error += 1
+                buttNextState = "newTable"
+                makeAlert($('.jumbotron'), "b", "Unfortunately this isn't quite right! You have " + (errorAllowed - error) + " chance(s) left before having to restart. Incorrect answers are marked red." ,4)
+              }
+
+            }
+
+
           }
           break;
         }
         case "newTable":{
           resetTable()
-          currentAnswers = initTable();
+          loadModel(function(err, data){
+
+            currentAnswers = initTable(data)
+
+
+          })
+
               // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
         }
         case "startover":{
           score = 0;
+          error = 0
           resetTable()
-          currentAnswers = initTable();
+          loadModel(function(err, data){
+
+            currentAnswers = initTable(data)
+
+
+          })
               // console.log(currentAnswers)
           buttNextState ="checkAnswer"
           break;
