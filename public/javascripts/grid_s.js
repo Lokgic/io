@@ -56,7 +56,7 @@ $(function() {
 
     function getTableValues(){
       ans = []
-      for (var i = 0;i<6;i++){
+      for (var i = 0;i<4;i++){
         ans.push($('#'+(i+1)).children('.answer').attr("value") == (currentAnswers[i] +""))
         // console.log($('#'+(i+1)).children('.answer').attr("value") +" vs " + (currentAnswers[i] +""))
       }
@@ -344,6 +344,7 @@ $(function() {
       switch (buttNextState){
       case "checkAnswer":{
         result = getTableValues(currentAnswers)
+        console.log(result)
         if(!_.contains(result, false)){
           switch (score){
             case (toPass - 1):{
