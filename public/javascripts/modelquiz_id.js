@@ -1552,7 +1552,7 @@
 $(function() {
 
     var debug = true;
-
+    var datapoint = {}
     //////Modules
     var _ = require('underscore')
     var makeAlert = require('./mods/alert.js')
@@ -1575,12 +1575,20 @@ $(function() {
     function loadModel(callback){
       jQuery.post("../processing/model_id",{diff:diff})
       .done(function(data){
+        datapoint.model = data.model;
+        datapoint.problems = []
+        datapoint.answers = []
+        for (st in data.statements){
+          datapoint.problems.push(data.statements[st][0])
+          datapoint.answers.push(data.statements[st][1])
+        }
           callback(null, data);
       }).fail(function(){$body.append('Failed to Load Quiz')})
     };
 
     loadModel(function(err, data){
-      console.log(data)
+
+
       currentAnswers = initTable(data)
 
 
@@ -1602,7 +1610,7 @@ $(function() {
             for (r in data.model.referents){
               htmlr +="<p>"+ data.model.referents[r].name + ": " + data.model.referents[r].referent + "</p>"
             }
-            console.log(htmlr)
+            // console.log(htmlr)
             $('#ref0').html(htmlr)
 
 
@@ -1616,7 +1624,7 @@ $(function() {
 
         mathjax.reload("table");
 
-        console.log(toReturn)
+        // console.log(toReturn)
 
         return toReturn;
 
@@ -1653,6 +1661,13 @@ $(function() {
           console.log(ans)
           console.log("returning " + _.isEqual(truthValues,ans))
         }
+
+        datapoint.result = []
+        for (v in truthValues){
+          datapoint.result.push(_.isEqual(truthValues[v],ans[v]))
+        }
+
+        sendDataPoint();
         return _.isEqual(truthValues,ans);
 
 
@@ -1686,7 +1701,7 @@ $(function() {
 
       $('#description').text("Difficulty Level: " + diff);
       $('#score').text("Score: " + score);
-      $('#secondchance').text("Chance Left: "+ " " + (errorAllowed - error))
+      $('#secondchance').text("Chance(s) Left: "+ " " + (errorAllowed - error))
     }
 
     $('.tbutt').on('click', function() {
@@ -1787,6 +1802,22 @@ $(function() {
 
 
     });
+
+    function sendDataPoint(){
+      tosend =  {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint}
+
+
+
+      $.ajax({
+          url: '/data',
+          type: 'POST',
+          contentType: 'application/json',
+          data:JSON.stringify(tosend)
+    })
+    }
+
+
+
 })
 
 },{"./mods/alert.js":3,"./mods/mathjax.js":4,"underscore":1}],3:[function(require,module,exports){

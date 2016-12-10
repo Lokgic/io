@@ -436,8 +436,7 @@ function sendDataPoint(){
   tosend =  {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint}
 
 
-  // console.log(tosend)
-  // jQuery.post("/data", {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint.model}, function(res){
+
   $.ajax({
       url: '/data',
       type: 'POST',

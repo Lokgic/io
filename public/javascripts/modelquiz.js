@@ -6503,7 +6503,7 @@ $(function() {
 
     var debug = false;
 
-
+    var datapoint = {}
     //////Modules
 
     var _ = require('underscore')
@@ -6896,23 +6896,31 @@ $(function() {
 
             $('#ext' + i).html(html)
         }
+        datapoint = {
+          model: all[0],
+          problems:[],
+          answers:[]
+
+        }
 
         props = []
 
         for (var i = 0; i<=ysize;i++){
           var temp = new Proposition(all[0]);
           props.push(temp);
+          datapoint.problems.push(temp)
           $('#statement'+i).text("\\(" + temp.string +"\\)");
 
         }
         // console.log(props)
-
         mathjax.reload("table");
         var toReturn = []
         for (col in props){
           var tempRowArr = []
           for (row in all){
-            tempRowArr.push(props[col].evaluate(all[row])+"")
+            val = props[col].evaluate(all[row])+""
+            datapoint.answers.push(val)
+            tempRowArr.push(val)
           }
           toReturn.push(tempRowArr)
         }
@@ -6923,6 +6931,7 @@ $(function() {
           console.log("Answer is " +toReturn)
 
         }
+
         return toReturn;
 
 
@@ -7096,6 +7105,13 @@ $(function() {
           console.log("answer is " + ans)
           console.log("returning " + _.isEqual(truthValues,ans))
         }
+
+        datapoint.result = []
+        for (v in truthValues){
+          datapoint.result.push(_.isEqual(truthValues[v],ans[v]))
+        }
+
+        sendDataPoint();
         return _.isEqual(truthValues,ans);
 
 
@@ -7130,7 +7146,7 @@ $(function() {
 
       $('#description').text("Difficulty Level: " + di);
       $('#score').text("Score: " + score);
-      $('#secondchance').text("Chance Left: "+ " " + (errorAllowed - error))
+      $('#secondchance').text("Chance(s) Left: "+ " " + (errorAllowed - error))
     }
 
     $('.tbutt').on('click', function() {
@@ -7158,6 +7174,7 @@ $(function() {
     var currentAnswers = initTable();
     // console.log(currentAnswers)
     $('button').on('click', function(){
+      console.log(buttNextState)
 
         switch (buttNextState){
         case "checkAnswer":{
@@ -7225,6 +7242,21 @@ $(function() {
 ///////
 
     });
+
+    function sendDataPoint(){
+      tosend =  {moduleNo: $('title').attr('value'), label : "quiz", datapoint: datapoint}
+
+
+
+      $.ajax({
+          url: '/data',
+          type: 'POST',
+          contentType: 'application/json',
+          data:JSON.stringify(tosend)
+    })
+    }
+
+
 })
 
 },{"./mods/alert.js":4,"./mods/mathjax.js":5,"chance":1,"underscore":2}],4:[function(require,module,exports){
