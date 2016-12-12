@@ -181,7 +181,7 @@
               ["$$\\forall x \\exists y (Oy \\to Gyx)$$", true],
               ["$$\\forall x \\exists y \\forall z [(Gyx \\wedge Guz) \\to \\neg x =z]$$", true],
               ["$$\\exists w [Ew \\wedge \\forall y (Oy \\to \\neg w = y)]$$", true],
-              ["$$\\forall y \\forall z [(Oy \\wedge y =z \\to \\neg Ez]$$", true],
+              ["$$\\forall y \\forall z [(Oy \\wedge y =z) \\to \\neg Ez]$$", true],
               ["$$\\exists z \\exists w (z=w \\wedge Gzw)$$", false],
               ["$$\\forall x \\forall y \\exists z [(Pxyz \\wedge \\neg x = z) \\wedge \\neg y  = z]$$", true],
               ["$$ \\forall x \\forall y (Pxyy \\vee   \\neg x = y)$$",false]
