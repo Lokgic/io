@@ -26,7 +26,7 @@
 
                         "The predicate \\(x=y\\) means ``\\(x\\) is identical to \\(y\\).'' This does not mean merely that \\(x\\) and \\(y\\) are indistinguishable or that all of the same predicates are true of them. Rather, it means that \\(x\\) and \\(y\\) are the very same thing.",
 
-                        "When we write \\(x \\neq y\\), we mean that \\(x\\) and \\(y\\) are not identical. There is no reason to introduce this as an additional predicate. Instead, \\(x \\neq y\\) is an abbreviation of \\(\\neg(x = y)\\).",
+                        "When we write \\(x \\neq y\\), we mean that \\(x\\) and \\(y\\) are not identical. There is no reason to introduce this as an additional predicate. Instead, \\(x \\neq y\\) is an abbreviation of \\(\\neg x = y\\). $\\neg x = y$ might look a bit funny, and you might be tempted to write $\\neg (x = y)$, but that's technically incorrect. Keep in mind that '=' is really just a special symbol for a predicate - other syntactical rules governing predicates apply to it as well. Just as we don't write $\\neg (Ixy)$, we also don't add parentheses to $\\neg x = y$. Also don't forget that the negation is not attached to the the variables - neither the variables ('x' and 'y') nor the identity symbol '=' is a by itself a statement in QL. ",
 
                         "Now suppose we want to symbolize this sentence:"
                     ]
