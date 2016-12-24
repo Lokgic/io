@@ -21,6 +21,11 @@ router.get('/about_text', function(req, res, next){
 	return res.render('about_text');
 })
 
+router.get('/syl', function(req, res, next){
+	return res.render('syl');
+})
+
+
 // roll
 
 router.get('/roll', function(req, res, next){
