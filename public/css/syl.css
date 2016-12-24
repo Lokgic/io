@@ -1,0 +1,36 @@
+body {
+     margin:0;
+     position:fixed;
+     top:0;right:0;bottom:0;left:0;
+     font-family: Helvetica, Arial;
+   }
+   #con {
+     position: relative;
+     z-index: 100;
+   }
+   #content{
+     height:3000px;
+   }
+   #sticky {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     z-index: 50;
+     background-color: #0A3542;
+   }
+   .panel {
+     width: 100%;
+     padding-left: 20px;
+     padding-top: 50vh;
+     padding-bottom: 50vh;
+   }
+   .panel p {
+     padding-right: 50%;
+   }
+   .panel:first-child {
+     padding-top: 35vh;
+   }
+   .panel:last-child {
+     padding-bottom: 45vh;
+   }
