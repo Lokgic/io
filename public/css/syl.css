@@ -34,3 +34,8 @@ body {
    .panel:last-child {
      padding-bottom: 45vh;
    }
+
+
+   path {
+     stroke: #fff;
+   }
