@@ -1,5 +1,5 @@
 {
-    "section1": {
+    "1": {
         "1": {
             "sectionname": "Identity: Semantics",
             "sectionNum": "1",
@@ -63,7 +63,7 @@
         }
 
     },
-    "section2":{
+    "2":{
       "1" : {
         "sectionname": "Proofs with Identity",
         "sectionNum": "2",
@@ -102,7 +102,7 @@
       }
 
     },
-    "section3":{
+    "3":{
       "1": {
           "sectionNum": 3,
           "sectionname": "Practice Problems for Test 8",

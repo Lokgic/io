@@ -4,26 +4,45 @@
    height:100%;
 }*/
 
+
+
+.argument hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    background-color: #333; /* Modern Browsers */
+}
 .lessonSectionTitle hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    background-color: #333; /* Modern Browsers */
+}
+
+.lessonSectionTitle{
+  margin-top: 150px;
+  margin-bottom: 100px;
+  font-family: 'Abril Fatface', cursive;
+}
+
+.lessonSubTitle {
+  /*background-color: grey;*/
+margin-top: 100px;
+margin-bottom: 100px;
+width: 100%;
+}
+
+
+.lessonSubTitle hr {
     border: none;
     height: 2px;
     /* Set the hr color */
     background-color: #333; /* Modern Browsers */
 }
 
-.lessonSectionTitle{
-  margin-top: 100px;
-  margin-bottom: 100px;
-  font-family: 'Abril Fatface', cursive;
-}
-
-.lessonSubTitle {
-margin-top: 100px;
-margin-bottom: 100px;
-}
-
-main{
+.page{
   background: white;
+  max-width: 1110;
 
 }
 
@@ -33,9 +52,9 @@ p {
   margin-bottom: 40px;
 }
 
-body{
+/*body{
   background-color: #eee;
-}
+}*/
 
 .lessontooltip {
   border-width: 0;

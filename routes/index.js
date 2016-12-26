@@ -554,8 +554,26 @@ router.get(t = '/8/*', function(req, res, next){
 	var sectionNum = req.path.split('/')[2]
 	var lesson = require('../public/json/lesson8.json');
 
-	return res.render('lesson', {title:"Module Eight", content:lesson, sectionNum: "section" + sectionNum, moduleNum:moduleNum});
+	return res.render('lesson', {title:"Module Eight", content:lesson, sectionNum: sectionNum, moduleNum:moduleNum});
 });
+
+
+
+
+
+router.get(t = '/test', function(req, res, next){
+	// var moduleNum = req.path.split('/')[1]
+	// var sectionNum = req.path.split('/')[2]
+	var lesson = require('../public/json/lesson1.json');
+
+	return res.render('page', {title:"Module One", content:lesson, sectionNum: 1, moduleNum:1});
+});
+
+
+
+
+
+
 
 
 //100
@@ -563,6 +581,10 @@ router.get(t = '/8/*', function(req, res, next){
 router.get('/debug', function(req, res, next){
 	return res.render('modules', {title: 'Module Debug', file: "debug"})
 });
+
+
+
+
 
 
 

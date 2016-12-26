@@ -1,5 +1,6 @@
 extends layout
 block extrahead
+	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
 	script(type="text/x-mathjax-config").
 		MathJax.Hub.Config({
 		tex2jax: {
@@ -12,51 +13,7 @@ block extrahead
 
 block content
 	- var plugin
-	.container-fluid.p-x-0
-		row
-			.col-md-2.col-sm-12.p-l-0.p-r-0.collapse.in#sidebar
-				h3.display-3.text-xs-center.text-muted#icon #{moduleNum}
-				.list-group.panel
-					- var i = 1
-					for section in content
-						if "section"+i == sectionNum
-							- var securl = "menu" + i
-							a(href = "#"+ securl data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0.text-xs-right
-								- var title = i + " " +section["1"].sectionname
-								span.hidden-md-down #{title}
-								span.hidden-lg-up #{i}
-							.collapse.in(id = securl)
-								- var j = 1
-								for sub in section
-									- var stitle = i + "." + j + " " + sub.title
-									- j = j+ 1
-									a(href="/"+moduleNum + "/" +section["1"].sectionNum + "#"+sub.title data-parent="#menu"+section["1"].sectionId).list-group-item.p-y-0.text-xs-right
-										small.text-muted.hidden-md-down #{stitle}
-										small.text-muted.hidden-lg-up #{i + "." + j}
-						else if i != Object.keys(content).length
-							a(href = "/"+ moduleNum +"/"+i aria-expanded="false").list-group-item.collapse.p-y-0.text-xs-right
-								- var title = i + " " +section["1"].sectionname
-								span.hidden-md-down #{title}
-								span.hidden-lg-up #{i}
-						else if i == Object.keys(content).length
-							a(href = "#ex" data-toggle="collapse" aria-expanded="true" aria-controls=seurl).list-group-item.collapse.p-y-0.text-xs-right
-								span.hidden-md-down #{i} Module Exercises
-								span.hidden-lg-up X
-							.collapse.in(id = "ex")
-								for sub in section
-									if sub.section == "concepts"
-										- var url = "/" + moduleNum + "/concepts"
-									else if sub.section == "quiz"
-										- var url = "/" + moduleNum + "/quiz"
-									else if sub.section == "testSample"
-										- var url = "../pdf/" + moduleNum + "testsample.pdf"
-									else
-										- var url = "/"+moduleNum + "/" +sub.section + "#"+sub.title
-									a(href=url).list-group-item.p-y-0.text-xs-right
-										small.text-muted.hidden-md-down.text-xs-right #{sub.title}
-										small.text-muted.hidden-lg-up #{sub.title[0]}
-						- i = i + 1
-			main.col-md-8.col-sm-12
+			main.container.p-a-3
 				case sectionNum
 					when "sectionconcepts"
 						.jumbotron.m-y-3
@@ -115,10 +72,12 @@ block content
 															td(id = ij).lead.tbutt.text-xs-center.display-4 ?
 
 					default
-						.jumbotron.m-y-3
-							h2.display-2.text-xs-center #{content[sectionNum]["1"].sectionname}
+						.lessonSectionTitle
+							h1 #{moduleNum}.#{sectionNum}
+							hr
+							h1 #{content[sectionNum]["1"].sectionname}
 						for section in content[sectionNum]
-							h3.display-3.m-y-3.text-xs-center(id = section.title) #{section.title}
+							h2.lessonSubTitle.text-xs-center(id = section.title) #{section.title}
 							//- - console.log(section)
 							for x in section.content
 								if x.type == "p"
@@ -127,7 +86,7 @@ block content
 											p.h4.text-xs-center.m-y-2 #{pa}
 									else
 										for pa in x.substance
-											p.lead.text-justify.m-y-2 #{pa}
+											p.text-justify #{pa}
 								if x.type == "list"
 									ul.list-group
 										for y in x.substance

@@ -1,0 +1,60 @@
+extends pagelayout
+mixin paragraphs(set)
+	for par in set
+		p.text-justify #{par}
+
+mixin argument(premises, conclusion)
+	.argument.m-a-3.p-x-2.text-justify
+		for premise in premises
+			p #{premise}
+		hr
+		p #{conclusion}
+block extrahead
+	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
+
+block content
+	- var plugin
+			main.container.p-a-0.page
+				case sectionNum
+					when "sectionconcepts"
+					when "sectionquiz"
+					default
+						.lessonSectionTitle
+							h1 #{moduleNum}.#{sectionNum}
+							hr
+							h1 #{content[sectionNum]["1"].sectionname}
+						p #{content[sectionNum]["1"].sectionDescription}
+						for section in content[sectionNum]
+							.lessonSubTitle(id = section.title)
+								h4 #{section.title}
+								hr
+							for x in section.content
+								case x.type
+									when "p"
+										+paragraphs(x.substance)
+									when "half"
+										.card-group(id = x.id).p-a-0.half
+											for col in x.substance
+												.card(style = "border : 0px;")
+													case col.type
+														when "p"
+																+paragraphs(col.substance)
+														when "argument"
+																+argument(col.premises, col.conclusion)
+									when "scroll"
+										.container-fluid.scroll
+
+
+
+
+block extrafooter
+	link(rel="stylesheet", type="text/css", href="../css/page.css")
+	script(type="text/x-mathjax-config").
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		}}
+		);
+	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="../javascripts/scrollArgument.js")

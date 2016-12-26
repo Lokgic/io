@@ -1,0 +1,91 @@
+
+{
+  "name": "String Instrument",
+  "children":[
+    {
+      "name":"Bowed",
+      "children":[
+        {
+          "name": "Violin",
+          "children":[
+            "Violin",
+            "Viola",
+            "Cello",
+            "Double Bass"
+          ]
+        },
+        {
+          "name": "Gamba",
+          "children":[
+            "Pardessus de viole",
+            "Dessus",
+            "Taille",
+            "Bass",
+            "Violone"
+          ]
+        }
+      ]
+    },
+    {"name": "Plucked",
+      "children":[
+        {
+          "name": "Guitar",
+          "children":[
+            {"name": "Acoustic Guitar",
+              "children": [
+                {
+                  "name": "Nylon/Gut Stringed",
+                  "children":[
+                    {"name": "Vihuela"},
+                    {"name": "Gittern"},
+                    {"name": "Baroque"},
+                    {"name": "Romantic"},
+                    {"name": "Classical",
+                    "children": [
+                      {"name": "Flamenco"},
+                      {"name": "Spanish"}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Steel Stringed",
+                  "children":[
+                    {"name": "Folk/Flat-top"},
+                    {"name": "Resonator"},
+                    {"name": "Archtop"},
+                    {"name": "Selmer/Maccaferri"},
+                    {"name": "Battente"},
+                    {"name": "Lap Steel"},
+                    {"name": "Lap Slide"},
+                    {"name": "Lyre-guitar"}
+                  ]
+                },
+                {
+                  "name": "Acoustic Bass Guitar"
+                }
+              ]
+            },
+            {"name": "Electric Guitar",
+              "children": [
+                {"name": "Solid Body"},
+                {"name": "Semi-Hollow"},
+                {"name": "Hollow-Body"},
+                {"name": "Electric-Acoustic"},
+                {"name": "Double-neck"},
+                {"name": "Electric Bass"},
+                {"name": "Bass/Guitar Hybrid"}
+              ]
+            }
+          ]
+        },
+        {"name":"Lute",
+        "children":[
+          {"name":"Theorbo"},
+          {"name":"Oud"},
+          {"name":"Medieval"}
+          ]}
+      ]
+    }
+  ]
+}
