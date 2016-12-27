@@ -4,8 +4,16 @@
    height:100%;
 }*/
 
+#m1c1s1 {
+  height: 2000px;
+}
 
-
+.text p{
+  margin-bottom: 300px;
+}
+.blockquote {
+  font-size: 0.8em;
+}
 .argument hr {
     border: none;
     height: 1px;
@@ -30,6 +38,7 @@
 margin-top: 100px;
 margin-bottom: 100px;
 width: 100%;
+font-family: 'Abril Fatface', cursive;
 }
 
 
@@ -42,7 +51,7 @@ width: 100%;
 
 .page{
   background: white;
-  max-width: 1110;
+  max-width: 1350;
 
 }
 

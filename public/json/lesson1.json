@@ -5,12 +5,26 @@
         "sectionNum": "1",
         "sectionDescription": "Logic is a part of the study of human reason, the ability we have to think abstractly, solve problems, explain the things that we know, and infer new knowledge on the basis of evidence. Traditionally, logic has focused on the last of these items, the ability to make inferences on the basis of evidence, by evaluating the deductive validity of arguments. This section explains briefly what this means.",
         "title": "Logic as the systematic evaluation of arguments",
+        "quote":{
+          "lines":[
+            "M: An argument isn't just contradiction.",
+            "O: Well! it CAN be!",
+            "M: No it can't! An argument is a connected series of statements intended to establish a proposition.",
+            "O: No it isn't!",
+            "M: Yes it is! 'tisn't just contradiction."
+          ],
+          "source":{
+          "name":  "Monty Python",
+          "title":"Argument Clinic"
+            }
+        },
         "content":{
           "a":{
             "type":"p",
             "substance":[
 
-              "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people disagree."
+              "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people disagree.",
+              "A logical argument is structured to give someone a reason to believe some conclusion. Suppose you are wondering if you friend Bob plays the guitar. You can't quite remember exactly what he plays, but you do recall that he uses a bow. Since you know that guitars are plucked and not bowed, you conclude that Bob indeed does not play the guitar. "
             ]
           },
           "b":{
@@ -18,26 +32,28 @@
             "substance":
                   [{
                     "type": "p",
-              "substance":  ["A logical argument is structured to give someone a reason to believe some conclusion. To the right is a basic argument.",
+              "substance":  [
 
-                "In the argument above, sentences $P_1-P_3$ are the evidence. We call these the premises. The word therefore' indicates that the final sentence, marked with a C, is the conclusion of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else. You might wonder what the murder weapon is, and then mentally rule out each item, leaving only the candlestick. On the other hand, you might use reasoning like this while talking to someone else, to convince them that the murder weapon is the candlestick. (Perhaps you are playing as a team.) Either way the structure of the reasoning is the same. "]
+                "We can reconstruct the line of thought as an argument, like the one to the right. We call the two sentences above line premises. The word 'therefore' signifies that the sentence below the line is the $conclusion$ of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else.  Sometimes you might work things verbally. This is fine because the business of logic is to carry out what the philosopher Rudolf Carnap calls 'rational reconstructions:' we evaluate the rationality of inferences by making a attempt to frame it in a logical structure."]
 
               },
               {
                 "type": "argument",
-                "premises":["$P_1$: Bob plays an instrument of the violin family.",
-                "$P_2$: Bob plays neither the cello nor the viola"],
-                "conclusion":"$C$: So Bob plays either the violin or the double bass."
+                "premises":["1: Bob plays a bowed instrument.",
+                "2: Guitars are not bowed instruments"],
+                "conclusion":"Therefore, Bob does not play the guitar"
               }
             ]
           },
           "e":{
-            "type":"scroll"
+            "type":"scroll",
+            "eventId":"m1c1s1"
+
           },
           "d":{
             "type": "p",
             "substance":[
-              "We can define logic then more precisely as the part of the study of reasoning that focuses on argument. In more casual situations, we will follow ordinary practice and use the word ``logic'' to either refer to the business of studying human reason or the thing being studied, that is, human reasoning itself. While logic focuses on argument, other disciplines, like decision theory and cognitive science, deal with other aspects of human reasoning, like abstract thinking and problem solving more generally. Logic, as the study of argument, has been pursued for thousands of years by people from civilizations all over the globe. The initial motivation for studying logic is generally practical. Given that we use arguments and make inferences all the time, it only makes sense that we would want to learn to do these things better.  Once people begin to study logic, however, they quickly realize that it is a fascinating topic in its own right. Thus the study of logic quickly moves from being a practical business to a theoretical endeavor people pursue for its own sake. ",
+              "We can define logic more precisely as the part of the study of reasoning that focuses on argument. In more casual situations, we will follow ordinary practice and use the word ``logic'' to either refer to the business of studying human reason or the thing being studied, that is, human reasoning itself. While logic focuses on argument, other disciplines, like decision theory and cognitive science, deal with other aspects of human reasoning, like abstract thinking and problem solving more generally. Logic, as the study of argument, has been pursued for thousands of years by people from civilizations all over the globe. The initial motivation for studying logic is generally practical. Given that we use arguments and make inferences all the time, it only makes sense that we would want to learn to do these things better.  Once people begin to study logic, however, they quickly realize that it is a fascinating topic in its own right. Thus the study of logic quickly moves from being a practical business to a theoretical endeavor people pursue for its own sake. ",
 
               "Whether we are pursuing logical for practical or theoretical reasons, our focus is on argument. The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. The violin example earlier was convincing partly because we know that there are exactly four members of the violin family. However, the kind of reasoning used in that example was just the process of elimination. Process of elimination can be applied to any subject. Suppose a group of friends is deciding which restaurant to eat at, and there are six restaurants in town. If you could rule out five of the possibilities, you would use an argument just like the one above to decide where to eat. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for."
 
