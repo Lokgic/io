@@ -5207,11 +5207,9 @@ $(function(){
 
 
 
-
-
-  width = $canvas.width()
-  height = width
-  radius = (Math.min(width, height) / 4);
+  var width
+  var height
+  var radius
 
   var bowedColor = "#7E8959"
 
@@ -5220,9 +5218,12 @@ $(function(){
   var guitarColor = "#7E6B71"
   var bobColor = "#B25538"
   var lineScale,
-      firstScale;
+      firstScale,
+      vennEulerScale,
+      vennOScale,
+      vennSScale;
   function setDimensions(){
-      width = $canvas.width()
+      width = $('main').width()/2
       height = width
       radius = (Math.min(width, height) / 4);
      bowedX = width/3
@@ -5233,8 +5234,8 @@ $(function(){
      guitarY = 1.3*height/2
      bobX = bowedX/2
      bobY = bowedY
-     freezePoint = $canvas.position().top + ($canvas.height()/2) - (window.innerHeight/2)
 
+     freezePoint = tp('#t1')
 
 
      firstScale = d3.scaleLinear()
@@ -5243,7 +5244,7 @@ $(function(){
                       .clamp(true)
      lineYScale = d3.scaleLinear()
                       .domain([tp('#t1'),tp('#t2')])
-                      .range([bobY, bobY - radius - 30])
+                      .range([bobY, bobY - radius])
                       .clamp(true)
       lineOScale = d3.scaleLinear()
                        .domain([tp('#t2'),tp('#t3')-300])
@@ -5270,7 +5271,18 @@ $(function(){
                      .range([bobX, width/2])
                      .clamp(true)
 
-
+    vennEulerScale = d3.scaleLinear()
+              .domain([tp('#t5')+200, tp('#t6')])
+              .range([6,3])
+              .clamp(true)
+    vennOScale = d3.scaleLinear()
+             .domain([tp('#t5')+200, tp('#t6')])
+             .range([0.7,0])
+             .clamp(true)
+    vennSScale = d3.scaleLinear()
+                   .domain([tp('#t5')+200, tp('#t6')])
+                   .range([1,10])
+                   .clamp(true)
 
      freezePoint2 = tp('#t5')
 
@@ -5278,39 +5290,72 @@ $(function(){
   var svg = d3.select("#m1c1s1 .animation").append("svg")
     .attr("width", width)
     .attr("height", height)
-  setDimensions();
-// console.log(freezePoint)
 
 
+    function graphicInit(){
 
-  svg.append('g').attr('class','bigCircles').append("circle").attr("r",radius).attr("cx",bowedX).attr("cy", bowedY).style('fill', bowedColor)
-  svg.append('text').attr('class','bigCircles').text('Bowed').attr("dx",bowedX - 40).attr("dy", bowedY).style('fill','black')
-  svg.append('g').attr('class','bigCircles').append("circle").attr("r",radius).attr("cx",pluckedX).attr("cy", pluckedY).style('fill',pluckedColor)
-  svg.append("text").attr('class','bigCircles').text("Plucked").attr("dx",pluckedX - 30).attr("dy", pluckedY).style('fill','black')
-  d3.selectAll('.bigCircles').transition().style('opacity', 0)
-  svg.append('g').append('line')
-              .attr('class', 'bobLabel').
-              attr('id', "bobLine")
-                .attr("x1", bobX)
-                .attr("y1",bobY)
-                .attr("x2", bobX)
-                .attr("y2",bobY )
-                .attr("stroke-width", 1)
-                .attr("stroke","black")
-  svg.append('text')
-    .text("Premise 1: Bob plays a bowed instrument.")
-    .attr('class', "bobLabel")
-    .attr('id', "bobName")
-    .attr("dx",bobX - 40)
-    .attr("dy", bobY - radius-40)
-    .style('opacity',0)
-  svg.append("g").append("circle").attr('id', 'bob').attr("r",radius/8).attr("cx",bobX).attr("cy",bobY ).style('fill', bobColor).attr('opacity', 0)
+        bowedCircle = svg.append('g').attr('class','bigCircles').attr('id','bowedCircle').append("circle").attr("r",radius).attr("cx",bowedX).attr("cy", bowedY).style('fill', bowedColor)
+        bowedText =  svg.append('text').attr('class','bigCircles').text('Bowed').attr("dx",bowedX - 40).attr("dy", bowedY).style('fill','black')
+        pluckedCircle = svg.append('g').attr('class','bigCircles').attr('id','pluckedCircle').append("circle").attr("r",radius).attr("cx",pluckedX).attr("cy", pluckedY).style('fill',pluckedColor)
+        pluckedText = svg.append("text").attr('class','bigCircles').text("Plucked").attr("dx",pluckedX - 30).attr("dy", pluckedY).style('fill','black')
+        d3.selectAll('.bigCircles').transition().style('opacity', 0)
+        bobLine = svg.append('g').append('line')
+                    .attr('class', 'bobLabel').
+                    attr('id', "bobLine")
+                      .attr("x1", bobX)
+                      .attr("y1",bobY)
+                      .attr("x2", bobX)
+                      .attr("y2",bobY )
+                      .attr("stroke-width", 1)
+                      .attr("stroke","black")
+        bobText = svg.append('text')
+          .text("Premise 1: Bob plays a bowed instrument.")
+          .attr('class', "bobLabel")
+          .attr('id', "bobName")
+          .attr("dx",bobX - 40)
+          .attr("dy", bobY - radius-40)
+          .style('opacity',0)
+        svg.append("g").append("circle").attr('id', 'bob').attr("r",radius/8).attr("cx",bobX).attr("cy",bobY ).style('fill', bobColor).attr('opacity', 0)
 
 
-      var guitar = svg
+      guitarCircle = svg
                 .append("g").attr('id','guitarStuff').attr('opacity',0)
                 .append("circle").attr("r",radius/3).attr("cx",width/2).attr("cy", bobY).style('fill',guitarColor).attr('id', 'guitar')
-      var guitarText = d3.select('#guitarStuff').append("text").text("Guitar").attr("dx",width/2).attr("dy", bobY).style('fill','black')
+      guitarText = d3.select('#guitarStuff').append("text").text("Guitar").attr("dx",width/2).attr("dy", bobY).style('fill','black')
+
+
+    }
+
+    function resize(){
+      setDimensions();
+      setSVGsize();
+      sticky()
+      d3.selectAll('.bigCircles circle').attr('r', radius)
+      bowedCircle.attr('r', radius).attr("cx",bowedX).attr("cy", bowedY)
+      bowedText.attr("dx",bowedX - 30).attr("dy", bowedY)
+      pluckedCircle.attr('r', radius).attr("cx",pluckedX).attr("cy", pluckedY)
+      pluckedText.attr("dx",pluckedX - 40).attr("dy", pluckedY)
+        bobLine .attr("x1", bobX)
+                 .attr("y1",bobY)
+                 .attr("x2", bobX)
+                  .attr("y2", lineYScale(scrollTop))
+      bobText.attr("dx",bobX - 40)
+        .attr("dy", bobY - radius-40)
+      guitarText.attr('dy', bobY)
+      guitarCircle.attr('cy', bobY)
+      graphics()
+      chart.width(width)
+    }
+
+    function setSVGsize(){
+      $('svg', $canvas)
+      .css('width', width)
+      .css('height', height)
+    }
+  setDimensions();
+  graphicInit();
+// console.log(freezePoint)
+
 
 
 
@@ -5318,6 +5363,9 @@ $(function(){
     // console.log(firstScale(scrollTop))
     d3.selectAll('.bigCircles').transition().duration(500).style('opacity', firstScale(scrollTop))
    d3.select("#bobLine")
+                 .attr("x1", bobX)
+                 .attr("y1",bobY)
+                 .attr("x2", bobX)
                   .attr("y2", lineYScale(scrollTop))
     d3.select('#bobName')
                   .style('opacity',bobNameScale(scrollTop))
@@ -5328,6 +5376,7 @@ $(function(){
    d3.select('#bob')
             .style('opacity',bobScale(scrollTop))
             .attr('cx',bobXScale(scrollTop))
+            .attr('cy',bobY)
     d3.select('#guitarStuff').style('opacity',guitarOScale(scrollTop))
     d3.select('#guitarStuff').attr("transform",'translate(' + guitarXScale(scrollTop) + ')')
 
@@ -5337,27 +5386,19 @@ $(function(){
 // var svg2 = d3.select("#m1c1s2 .animation").append("svg")
 //   .attr("width", width)
 //   .attr("height", height)
-  var vennEulerScale = d3.scaleLinear()
-             .domain([tp('#t5')+200, tp('#t6')])
-             .range([6,3])
-             .clamp(true)
-  var vennOScale = d3.scaleLinear()
-            .domain([tp('#t5')+200, tp('#t6')])
-            .range([0.7,0])
-            .clamp(true)
-  var vennSScale = d3.scaleLinear()
-                  .domain([tp('#t5')+200, tp('#t6')])
-                  .range([1,10])
-                  .clamp(true)
+
   var sets = [ {sets: ['Plucked'], size: 12},
            {sets: ['Guitar'], size: 6},
          {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
 
-  var chart = venn.VennDiagram()
+
+  var chart = venn.VennDiagram().width(width)
   vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
   $('path','g[data-venn-sets = "Plucked"]').css('fill', pluckedColor).css('fill-opacity',0.7).css('stroke', pluckedColor).css('stroke-opacity',0.7).css("stroke-width", 1)
   $('path','g[data-venn-sets = "Guitar"]').css('fill', guitarColor).css('fill-opacity',0.7).css('stroke', guitarColor).css('stroke-opacity',0.7)
+  console.log(vennD.selectAll('path'))
 
+  // vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
 
 
   function graphics2(){
@@ -5365,7 +5406,7 @@ $(function(){
                  {sets: ['Guitar'], size: 6},
                  {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
                  console.log(vennOScale(scrollTop))
-    venn = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
+    vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
      d3.selectAll("#m1c1s2 .venn-circle path").style('fill-opacity', vennOScale(scrollTop)).style("stroke-width", vennSScale(scrollTop))
 
      d3.select('#m1c1s2 .venn-intersection').append('text').text('2').style('fill', 'black').style('fill-opaicty',1).attr('dx', 200)
@@ -5374,34 +5415,42 @@ $(function(){
   // console.log(d3.selectAll("#m1c1s2 .venn-circle path").)
   //real time stuff
 
-  var status
-  function sticky(e,point){
+
+  function sticky(){
+
+
     if (scrollTop > freezePoint && scrollTop < tp('#t4')){
+
       $canvas.css('position','fixed')
-        .css('top',   440)
-        .css('left',  640)
+        .css('top',   window.innerHeight/2 - $canvas.height()/2)
+        .css('left',  window.innerWidth/2)
+        setSVGsize()
     } else if (scrollTop <freezePoint){
+
       $canvas.css('position','absolute')
         .css('top',   $('#t1').offset().top - $canvas.height()/2)
-        .css('left',  640)
+        .css('left',  window.innerWidth/2)
+        setSVGsize()
+
     } else if (scrollTop >tp('#t4')){
       $canvas.css('position','absolute')
         .css('top',   $('#t4').offset().top - $canvas.height()/2)
-        .css('left',  640)
+        .css('left',  window.innerWidth/2)
+        setSVGsize()
     }
 
     if (scrollTop > freezePoint2 && scrollTop < tp('#t8')){
       $canvas2.css('position','fixed')
-        .css('top',   440)
-        .css('left',  640)
+        .css('top',   window.innerHeight/2 - $canvas2.height()/2)
+        .css('left',  window.innerWidth/2)
     } else if (scrollTop <freezePoint2){
       $canvas2.css('position','absolute')
         .css('top',   $('#t5').offset().top - $canvas2.height()/3)
-        .css('left',  640)
+        .css('left',  window.innerWidth/2)
     } else if (scrollTop >tp('#t8')){
       $canvas2.css('position','absolute')
         .css('top',   $('#t8').offset().top - $canvas2.height()/3)
-        .css('left',  640)
+        .css('left',  window.innerWidth/2)
     }
 
   }
@@ -5469,7 +5518,7 @@ $(function(){
 }
 
   window.requestAnimationFrame(render)
-  window.onresize = setDimensions
+  window.onresize = resize
 
 
 
