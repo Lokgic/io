@@ -3,6 +3,23 @@
    width: 45%;
    height:100%;
 }*/
+/*
+circle {
+  fill: rgb(31, 119, 180);
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.leaf circle {
+  fill: #ff7f0e;
+  fill-opacity: 1;
+}*/
+
+#logicize text{
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 0.8em;
+}
 
 #m1c1s1 {
   height: 2000px;

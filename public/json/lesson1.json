@@ -34,7 +34,7 @@
                     "type": "p",
               "substance":  [
 
-                "We can reconstruct the line of thought as an argument, like the one to the right. We call the two sentences above line premises. The word 'therefore' signifies that the sentence below the line is the $conclusion$ of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else.  Sometimes you might work things verbally. This is fine because the business of logic is to carry out what the philosopher Rudolf Carnap calls 'rational reconstructions:' we evaluate the rationality of inferences by making a attempt to frame it in a logical structure."]
+                "We can reconstruct this line of thought as an argument, like the one to the right. We call the two sentences above line premises. The word 'therefore' signifies that the sentence below the line is the $conclusion$ of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else.  Sometimes you might work things verbally. This is fine because the business of logic is to carry out what the philosopher Rudolf Carnap calls 'rational reconstructions:' we evaluate the rationality of inferences by making a attempt to frame it in a logical structure."]
 
               },
               {
@@ -47,13 +47,19 @@
           },
           "e":{
             "type":"scroll",
-            "eventId":"m1c1s1"
+            "eventId":"m1c1s1",
+            "substance":[
+              ["t1","First, consider a circle that contains all plucked intruments and another one that contains all bowed instruments."],
+              ["t2", "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
+              ["t3", "Not quite - since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
+              ["t4", "This is exactly why the second premise is important: it tells us that guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
+            ]
 
           },
           "d":{
             "type": "p",
             "substance":[
-              "We can define logic more precisely as the part of the study of reasoning that focuses on argument. In more casual situations, we will follow ordinary practice and use the word ``logic'' to either refer to the business of studying human reason or the thing being studied, that is, human reasoning itself. While logic focuses on argument, other disciplines, like decision theory and cognitive science, deal with other aspects of human reasoning, like abstract thinking and problem solving more generally. Logic, as the study of argument, has been pursued for thousands of years by people from civilizations all over the globe. The initial motivation for studying logic is generally practical. Given that we use arguments and make inferences all the time, it only makes sense that we would want to learn to do these things better.  Once people begin to study logic, however, they quickly realize that it is a fascinating topic in its own right. Thus the study of logic quickly moves from being a practical business to a theoretical endeavor people pursue for its own sake. ",
+              "This example showcases a core idea in formal logic: some inferences are $true-preserving$:",
 
               "Whether we are pursuing logical for practical or theoretical reasons, our focus is on argument. The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. The violin example earlier was convincing partly because we know that there are exactly four members of the violin family. However, the kind of reasoning used in that example was just the process of elimination. Process of elimination can be applied to any subject. Suppose a group of friends is deciding which restaurant to eat at, and there are six restaurants in town. If you could rule out five of the possibilities, you would use an argument just like the one above to decide where to eat. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for."
 
@@ -63,18 +69,33 @@
         }
     },
     "2":{
-      "title": "The structure of an argument",
+      "title": "Euler and Venn diagrams",
       "content":{
         "a":{
           "type": "p",
           "substance":[
-            "So far we have defined logic as the study of argument and outlined its relationship to related fields. To go any further, we are going to need a more precise definition of what exactly an argument is. We have said that an argument is not simply two people disagreeing; it is an attempt to prove something using evidence. More specifically, an argument is composed of sentences. In logic, we define a sentence as a unit of language that can be true or false. To put it another way, it is some combination of words or symbols that have been put together in a way that lets someone agree or disagree with it.",
-
-            "As a result, 'sentences' in this text does not include questions, commands, exclamations, or sentence fragments. Someone who asks a question like 'Does the grass need to be mowed?' is typically not claiming that anything is true or false. (Sometimes people make sentences and disguise them as questions, for instance if they were trying to hint that the lawn needs to be mowed. These are generally called rhetorical questions, and we will leave the study of them to the rhetoricians.) Generally, questions will not count as sentences, but {answers will. What is this course about?' is not a sentence. 'No one knows what this course is about,' is a sentence.",
-
-            "For annoying (but plausible) philosophical reasons, some philosophers describe the components of argument as 'propositions,' or `assertions,' and we will use these terms sometimes as well.  There is actually a great deal of disagreement about what the differences between all of these things are and which term is best used to describe parts of arguments. However, none of that makes a difference for this textbook. We could have used any of the other terms in this text, and it wouldn't change anything."
+            "In 1880 English logician John Venn published two essays on the use of diagrams with circles to represent categorical propositions, like the ones in our Bob example. Venn noted that the best use of such diagrams so far had come from the brilliant Swiss mathematician Leonhard Euler, but they still had many problems, which Venn felt could be solved by bringing in some ideas about logic from his fellow English logician George Boole. Although Venn only claimed to be building on the long logical tradition he traced, since his time these kinds of circle diagrams have been known as Venn diagrams. While they might not be as elegant and powerful as some of the tools we will learn later on, they are still useful in evaluating arguments. Let us begin by distinguishing between Euler and Venn's diagrams."
 
           ]
+        },
+        "b":{
+          "type":"scroll",
+          "eventId":"m1c1s2",
+          "substance":[
+            ["t5","It is clear from the figure that all guitars are in fact plucked instruments. And outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent ``All $S$ is $P$.'' Technically speaking what we have here are better referred as Euler diagrams."],
+            ["t6", "Venn pointed out that the circles in an Euler diagram like ours don't just say that 'All guitars are plucked instruments' They also say that it is not true that All plucked instruments are guitars'. But we don't necessarily know that if we have only asserted 'All guitars are plucked instrument.' It leaves it open whether the guitar circle should be smaller than or the same size as the plucked circle. This is a good instinct in logic - do not assume anything is true unless it's explicitly stated."],
+            ["t7", "In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles. This means that we always have spaces available to represent the four possible ways the terms can combine:"],
+            ["t8", "Describe Venn here"]
+          ]
+
+        }
+      }
+    },
+    "3":{
+      "title": "Logicize",
+      "content":{
+        "a":{
+          "type": "logicize"
         }
       }
     }
