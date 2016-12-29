@@ -49,7 +49,7 @@
             "type":"scroll",
             "eventId":"m1c1s1",
             "substance":[
-              ["t1","First, consider a circle that contains all plucked intruments and another one that contains all bowed instruments."],
+              ["t1","First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
               ["t2", "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
               ["t3", "Not quite - since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
               ["t4", "This is exactly why the second premise is important: it tells us that guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
@@ -59,7 +59,7 @@
           "d":{
             "type": "p",
             "substance":[
-              "This example showcases a core idea in formal logic: some inferences are $true-preserving$:",
+              "This example showcases a core idea in formal logic: some inferences are $truth-preserving$:",
 
               "Whether we are pursuing logical for practical or theoretical reasons, our focus is on argument. The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. The violin example earlier was convincing partly because we know that there are exactly four members of the violin family. However, the kind of reasoning used in that example was just the process of elimination. Process of elimination can be applied to any subject. Suppose a group of friends is deciding which restaurant to eat at, and there are six restaurants in town. If you could rule out five of the possibilities, you would use an argument just like the one above to decide where to eat. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for."
 
@@ -82,10 +82,10 @@
           "type":"scroll",
           "eventId":"m1c1s2",
           "substance":[
-            ["t5","It is clear from the figure that all guitars are in fact plucked instruments. And outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent ``All $S$ is $P$.'' Technically speaking what we have here are better referred as Euler diagrams."],
-            ["t6", "Venn pointed out that the circles in an Euler diagram like ours don't just say that 'All guitars are plucked instruments' They also say that it is not true that All plucked instruments are guitars'. But we don't necessarily know that if we have only asserted 'All guitars are plucked instrument.' It leaves it open whether the guitar circle should be smaller than or the same size as the plucked circle. This is a good instinct in logic - do not assume anything is true unless it's explicitly stated."],
-            ["t7", "In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles. This means that we always have spaces available to represent the four possible ways the terms can combine:"],
-            ["t8", "Describe Venn here"]
+            ["t5","It is clear from the figure that all guitars are in fact plucked instruments. And outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."],
+            ["t6", "What's wrong with Euler diagrams? Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments' They also say that it is not true that All plucked instruments are guitars'. But we don't necessarily know that if we have only asserted 'All guitars are plucked instrument.' It leaves it open whether the guitar circle should be smaller than or the same size as the plucked circle. In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles."],
+            ["t7", " This means that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
+            ["t8", " We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ``All plucked instruments are guitars,'' we are asserting that nothing can exist that is in the plucked instruments circle unless it is also in the guitars circle. So we shade out the part of the plucked instruments circle that doesn't overlap with guitars."]
           ]
 
         }

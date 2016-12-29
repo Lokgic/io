@@ -79,7 +79,9 @@ $(function(){
      bobX = bowedX/2
      bobY = bowedY
      freezePoint = $canvas.position().top + ($canvas.height()/2) - (window.innerHeight/2)
-     point = $canvas.offset().top + $canvas.height() - window.innerHeight
+
+
+
      firstScale = d3.scaleLinear()
                       .domain([startPoint,tp('#t1')])
                       .range([0,0.6])
@@ -115,8 +117,8 @@ $(function(){
 
 
 
-     freezePoint2 = $canvas2.position().top + ($canvas2.height()/2) - (window.innerHeight/2)
-     point = $canvas2.offset().top + $canvas2.height() - window.innerHeight
+     freezePoint2 = tp('#t5')
+
   }
   var svg = d3.select("#m1c1s1 .animation").append("svg")
     .attr("width", width)
@@ -157,18 +159,6 @@ $(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   function graphics(){
     // console.log(firstScale(scrollTop))
     d3.selectAll('.bigCircles').transition().duration(500).style('opacity', firstScale(scrollTop))
@@ -192,56 +182,94 @@ $(function(){
 // var svg2 = d3.select("#m1c1s2 .animation").append("svg")
 //   .attr("width", width)
 //   .attr("height", height)
-
+  var vennEulerScale = d3.scaleLinear()
+             .domain([tp('#t5')+200, tp('#t6')])
+             .range([6,3])
+             .clamp(true)
+  var vennOScale = d3.scaleLinear()
+            .domain([tp('#t5')+200, tp('#t6')])
+            .range([0.7,0])
+            .clamp(true)
+  var vennSScale = d3.scaleLinear()
+                  .domain([tp('#t5')+200, tp('#t6')])
+                  .range([1,10])
+                  .clamp(true)
   var sets = [ {sets: ['Plucked'], size: 12},
-               {sets: ['Guitar'], size: 6},
-               {sets: ['Plucked','Guitar'], size: 6}];
-  var sets2 = [ {sets: ['Plucked'], size: 12},
-               {sets: ['Guitar'], size: 6},
-               {sets: ['Plucked','Guitar'], size: 3}];
+           {sets: ['Guitar'], size: 6},
+         {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
+
   var chart = venn.VennDiagram()
-  venn = d3.select("#m1c1s2 .animation").datum(sets).call(chart);
-  $('path','g[data-venn-sets = "Plucked"]').css('fill', pluckedColor).css('fill-opacity',0.7)
-  $('path','g[data-venn-sets = "Guitar"]').css('fill', guitarColor).css('fill-opacity',0.7)
-  venn = d3.select("#m1c1s2 .animation").datum(sets2).call(chart);
+  vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
+  $('path','g[data-venn-sets = "Plucked"]').css('fill', pluckedColor).css('fill-opacity',0.7).css('stroke', pluckedColor).css('stroke-opacity',0.7).css("stroke-width", 1)
+  $('path','g[data-venn-sets = "Guitar"]').css('fill', guitarColor).css('fill-opacity',0.7).css('stroke', guitarColor).css('stroke-opacity',0.7)
+
+
+
+  function graphics2(){
+    sets = [ {sets: ['Plucked'], size: 12},
+                 {sets: ['Guitar'], size: 6},
+                 {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
+                 console.log(vennOScale(scrollTop))
+    venn = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
+     d3.selectAll("#m1c1s2 .venn-circle path").style('fill-opacity', vennOScale(scrollTop)).style("stroke-width", vennSScale(scrollTop))
+
+     d3.select('#m1c1s2 .venn-intersection').append('text').text('2').style('fill', 'black').style('fill-opaicty',1).attr('dx', 200)
+  }
+
   // console.log(d3.selectAll("#m1c1s2 .venn-circle path").)
   //real time stuff
 
   var status
-  function sticky(e){
-    var ePos = (e.offset())
-    e.css('position','fixed')
-      .css('top',  ePos.top - $(window).scrollTop() )
-      .css('left',  ePos.left - $(window).scrollLeft())
+  function sticky(e,point){
+    if (scrollTop > freezePoint && scrollTop < tp('#t4')){
+      $canvas.css('position','fixed')
+        .css('top',   440)
+        .css('left',  640)
+    } else if (scrollTop <freezePoint){
+      $canvas.css('position','absolute')
+        .css('top',   $('#t1').offset().top - $canvas.height()/2)
+        .css('left',  640)
+    } else if (scrollTop >tp('#t4')){
+      $canvas.css('position','absolute')
+        .css('top',   $('#t4').offset().top - $canvas.height()/2)
+        .css('left',  640)
+    }
+
+    if (scrollTop > freezePoint2 && scrollTop < tp('#t8')){
+      $canvas2.css('position','fixed')
+        .css('top',   440)
+        .css('left',  640)
+    } else if (scrollTop <freezePoint2){
+      $canvas2.css('position','absolute')
+        .css('top',   $('#t5').offset().top - $canvas2.height()/3)
+        .css('left',  640)
+    } else if (scrollTop >tp('#t8')){
+      $canvas2.css('position','absolute')
+        .css('top',   $('#t8').offset().top - $canvas2.height()/3)
+        .css('left',  640)
+    }
 
   }
 
-  function unstick(e){
-    temp = e.offset()
-    // console.log(tempLeft)
-    e.css('position','absolute')
-            .css('top',temp.top)
-            .css('left',temp.left)
-  }
 
 
   var render = function() {
     // in case page start within the frozen area (eg reloading)
-    if (scrollTop > startPoint && scrollTop<tp('#t4') && status == undefined){
-      var ePos = ($canvas.position())
-      $canvas.css('position','fixed')
-        .css('top', window.innerHeight/5)
-        .css('left',  ePos.left - $(window).scrollLeft())
-        status = "frozen"
-
-
-    }
+    // if (window.scrollTop > startPoint && scrollTop<tp('#t4') && status == undefined){
+    //   var ePos = ($canvas.position())
+    //   $canvas.css('position','fixed')
+    //     .css('top', window.innerHeight/5)
+    //     .css('left',  ePos.left - $(window).scrollLeft())
+    //     status = "frozen"
+    //
+    //
+    // }
 
 
   // Don't re-render if scroll didn't change
   if (scrollTop !== newScrollTop) {
-    console.log(status)
 
+    console.log(newScrollTop)
 
     if (newScrollTop < startPoint) status = "initial"
 
@@ -249,26 +277,36 @@ $(function(){
     // Graphics Code Goes Here
     scrollTop = newScrollTop;
 
-   graphics()
-
-    if ((newScrollTop > freezePoint && status == "initial")|| (newScrollTop < tp('#t4') && status == "done")) {
-      sticky($canvas);
-      status = "frozen"
-    } else if (status == 'frozen' && (newScrollTop > tp('#t4') || newScrollTop<freezePoint)){
-      unstick($canvas)
-      if (newScrollTop > tp('#t4')) status = "done"
-      else if (newScrollTop<freezePoint) status = "initial"
-
-    }
-
-
-    if (scrollTop > freezePoint2 && status == "done"){
-      sticky($canvas2)
-      status = "frozen2";
-    } else if (scrollTop < freezePoint2 && status == "frozen2"){
-      unstick($canvas2)
-      status = "done";
-    }
+    graphics()
+    graphics2()
+    sticky();
+    //
+    // if ((newScrollTop > freezePoint && status == "initial")|| (newScrollTop < tp('#t4') && status == "done")) {
+    //   status = "frozen"
+    //   sticky($canvas,freezePoint);
+    //
+    // } else if (status == 'frozen' && (newScrollTop > tp('#t4') || newScrollTop<=tp('#t1') )){
+    //   console.log("tp1 " + tp('#t1'))
+    //
+    //   if (newScrollTop > tp('#t4')) {
+    //     unstick($canvas, tp('#t4') + height/2)
+    //     status = "done"
+    //   }
+    //   else if (newScrollTop<=tp('#t1')) {
+    //     status = "initial"
+    //     unstick($canvas, tp('#t1') + height/2)
+    //   }
+    //
+    // }
+    //
+    //
+    // if (scrollTop > freezePoint2 && status == "done"){
+    //   sticky($canvas2,freezePoint2)
+    //   status = "frozen2";
+    // } else if (scrollTop < freezePoint2 && status == "frozen2"){
+    //   unstick($canvas2)
+    //   status = "done";
+    // }
 
 
   }
