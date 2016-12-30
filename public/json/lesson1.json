@@ -50,7 +50,7 @@
             "eventId":"m1c1s1",
             "substance":[
               ["t1","First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
-              ["t2", "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
+              ["t2", "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. This can be represent by a smaller circle situated within the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
               ["t3", "Not quite - since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
               ["t4", "This is exactly why the second premise is important: it tells us that guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
             ]
