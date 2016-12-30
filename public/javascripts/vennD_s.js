@@ -68,7 +68,9 @@ $(function(){
       firstScale,
       vennEulerScale,
       vennOScale,
-      vennSScale;
+      vennSScale,
+      nums,
+      chart;
   function setDimensions(){
       width = $('main').width()/2
       height = width
@@ -138,16 +140,36 @@ $(function(){
               .domain([tp('#t5')+200, tp('#t6')])
               .range([6,3])
               .clamp(true)
+
+    vennEulerScale2 = d3.scaleLinear()
+              .domain([tp('#t5')+200, tp('#t6')])
+              .range([6,12])
+              .clamp(true)
     vennOScale = d3.scaleLinear()
              .domain([tp('#t5')+200, tp('#t6')])
              .range([0.7,0])
              .clamp(true)
-    vennSScale = d3.scaleLinear()
-                   .domain([tp('#t5')+200, tp('#t6')])
-                   .range([1,10])
+    vennInterScale = d3.scaleLinear()
+                   .domain([tp('#t7'), tp('#t8')])
+                   .range([0,1])
                    .clamp(true)
-
+   vennGuitarScale = d3.scaleLinear()
+                  .domain([tp('#t7'), tp('#t8')])
+                  .range([255,130])
+                  .clamp(true)
+      numScale = d3.scaleLinear()
+                     .domain([tp('#t6')+200, tp('#t7')])
+                     .range([0,0.7])
+                     .clamp(true)
      freezePoint2 = tp('#t5')
+     chart = venn.VennDiagram().width(width)
+      nums = [
+       {"num":"1","dx":width/3, "dy": chart.height()/2},
+       {"num":"2","dx":width/2,"dy": chart.height()/2},
+       {"num":"3","dx":2*width/3,"dy": chart.height()/2},
+       {"num":"4","dx":width*.9,"dy": chart.height()*.1}
+     ]
+
 
   }
   var svg = d3.select("#m1c1s1 .animation").append("svg")
@@ -201,6 +223,7 @@ $(function(){
       guitarText = d3.select('#guitarStuff').append("text").text("Guitar").attr("dx",width/2).attr("dy", bobY).style('fill','black')
 
 
+
     }
 
     function resize(){
@@ -224,6 +247,12 @@ $(function(){
         bobCircle.attr("r",radius/8)
       graphics()
       chart.width(width)
+      // numText.select('text.num')
+      //     .data(nums,function(d){
+      //       return d})
+      //     .enter()
+      //     .attr('dx',function(d){return d.dx}).attr('dy', function(d){return d.dy})
+
       // console.log(guitarCircle)
     }
 
@@ -271,31 +300,50 @@ $(function(){
 //   .attr("height", height)
 
   var sets = [ {sets: ['Plucked'], size: 12},
-           {sets: ['Guitar'], size: 6},
+           {sets: ['Guitar'], size: vennEulerScale2(scrollTop)},
          {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
 
 
-  var chart = venn.VennDiagram().width(width)
+
   vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
-  $('path','g[data-venn-sets = "Plucked"]').css('fill', pluckedColor).css('fill-opacity',0.7).css('stroke', pluckedColor).css('stroke-opacity',0.7).css("stroke-width", 1)
-  $('path','g[data-venn-sets = "Guitar"]').css('fill', guitarColor).css('fill-opacity',0.7).css('stroke', guitarColor).css('stroke-opacity',0.7)
+  $('path','g[data-venn-sets = "Plucked"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', pluckedColor).css('stroke-opacity',0.7).css("stroke-width", 2)
+  $('path','g[data-venn-sets = "Guitar"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', guitarColor).css('stroke-opacity',0.7).css("stroke-width", 2)
+  $('path','g[data-venn-sets = "Plucked_Guitar"]').css('fill', "white").css('fill-opacity',0).css("stroke-width", 2)
   // console.log(vennD.selectAll('path'))
 
+
+  numText = vennD.select('svg').selectAll('text.nums')
+      .data(nums,function(d){
+        return d})
+      .enter()
+      .append('text').attr('class','nums').text(function(d){
+        return d.num})
+      .attr('dx',function(d){return d.dx}).attr('dy', function(d){return d.dy})
+      .style('font-size','1.5em').style('opacity',0)
+  // vennD.select('svg').append('text').text("2").attr('dx', chart.width()/2).attr('dy', chart.height()/2)
+  // vennD.select('svg').append('text').text("1").attr('dx', chart.width()/3).attr('dy', chart.height()/2)
+  // vennD.select('svg').append('text').text("3").attr('dx', 2*chart.width()/3).attr('dy', chart.height()/2)
+  // vennD.select('svg').append('text').text("4").attr('dx', chart.width()*.9).attr('dy', chart.height()*.1)
   // vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
 
 
   function graphics2(){
+    numText.style('opacity', numScale(scrollTop))
     sets = [ {sets: ['Plucked'], size: 12},
-                 {sets: ['Guitar'], size: 6},
+                 {sets: ['Guitar'], size: vennEulerScale2(scrollTop)},
                  {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
                 //  console.log(vennOScale(scrollTop))
     vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
-     d3.selectAll("#m1c1s2 .venn-circle path").style('fill-opacity', vennOScale(scrollTop)).style("stroke-width", vennSScale(scrollTop))
+    d3.select('g[data-venn-sets = "Plucked_Guitar"]').select('path').style('fill-opacity', vennInterScale(scrollTop))
+    rgb = Math.round(vennGuitarScale(scrollTop))
+    d3.select('g[data-venn-sets = "Guitar"]').select('path').style('fill',"rgb("+rgb+","+rgb+','+rgb+")")
+    // console.log("rgb("+vennGuitarScale(scrollTop)+","+vennGuitarScale(scrollTop)+','+vennGuitarScale(scrollTop)+")")
+// console.log(d3.select('g[data-venn-sets = "Guitar"]').select('path'))
 
-     d3.select('#m1c1s2 .venn-intersection').append('text').text('2').style('fill', 'black').style('fill-opaicty',1).attr('dx', 200)
+
   }
 
-  // console.log(d3.selectAll("#m1c1s2 .venn-circle path").)
+
   //real time stuff
 
 
@@ -341,22 +389,12 @@ $(function(){
 
 
   var render = function() {
-    // in case page start within the frozen area (eg reloading)
-    // if (window.scrollTop > startPoint && scrollTop<tp('#t4') && status == undefined){
-    //   var ePos = ($canvas.position())
-    //   $canvas.css('position','fixed')
-    //     .css('top', window.innerHeight/5)
-    //     .css('left',  ePos.left - $(window).scrollLeft())
-    //     status = "frozen"
-    //
-    //
-    // }
 
 
   // Don't re-render if scroll didn't change
   if (scrollTop !== newScrollTop) {
 
-    console.log(newScrollTop)
+    // console.log(newScrollTop)
 
     if (newScrollTop < startPoint) status = "initial"
 
@@ -367,33 +405,7 @@ $(function(){
     graphics()
     graphics2()
     sticky();
-    //
-    // if ((newScrollTop > freezePoint && status == "initial")|| (newScrollTop < tp('#t4') && status == "done")) {
-    //   status = "frozen"
-    //   sticky($canvas,freezePoint);
-    //
-    // } else if (status == 'frozen' && (newScrollTop > tp('#t4') || newScrollTop<=tp('#t1') )){
-    //   console.log("tp1 " + tp('#t1'))
-    //
-    //   if (newScrollTop > tp('#t4')) {
-    //     unstick($canvas, tp('#t4') + height/2)
-    //     status = "done"
-    //   }
-    //   else if (newScrollTop<=tp('#t1')) {
-    //     status = "initial"
-    //     unstick($canvas, tp('#t1') + height/2)
-    //   }
-    //
-    // }
-    //
-    //
-    // if (scrollTop > freezePoint2 && status == "done"){
-    //   sticky($canvas2,freezePoint2)
-    //   status = "frozen2";
-    // } else if (scrollTop < freezePoint2 && status == "frozen2"){
-    //   unstick($canvas2)
-    //   status = "done";
-    // }
+
 
 
   }
@@ -404,40 +416,5 @@ $(function(){
   window.onresize = resize
 
 
-
-  // .attr("x1", bobX).attr("y1",bobY).attr("x2", bobX).attr("y2",bobY - radius).attr("stroke-width", 2).attr("stroke","black")
-  // var bobLabel = svg.append('text').text("What Bob plays").attr("dx",bobX - 20).attr("dy", bobY - radius-10).style('fill', "black")
-
-
-
-
-  // d3.json("/json/guitar.json", function(error, root){
-  //   if (error) throw error;
-  //   root = d3.hierarchy(root).sum(function(d) { return 1; })
-  //   diameter = $('#logicize').width()
-  //   format = d3.format(",d");
-  //   logsvg = d3.select('#logicize').append('svg').attr('width',diameter).attr('height',diameter)
-  //   var pack = d3.pack()
-  //   .size([diameter, diameter]);
-  //   console.log(pack(root).descendants())
-  //
-  //   g = logsvg.append("g")
-  //
-  //   var node = g.selectAll(".node")
-  //   .data(pack(root).descendants())
-  //   .enter().append("g")
-  //     .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
-  //     .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  //
-  // node.append("title")
-  //     .text(function(d) { return d.data.name + "\n" + format(d.value); });
-  //
-  // node.append("circle")
-  //     .attr("r", function(d) { return d.r; });
-  //
-  // node.filter(function(d) { return !d.children; }).append("text")
-  //     .attr("dy", "0.3em").attr("transform", "translate(-40)")
-  //     .text(function(d) { return d.data.name });
-  // })
 
 })

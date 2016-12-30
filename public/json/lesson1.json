@@ -45,11 +45,22 @@
               }
             ]
           },
+          "c":{
+            "type": "p",
+            "substance":[
+              "This example showcases a core idea in formal logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true. This kind of inference is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
+              "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
+
+              "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. The argument is valid if, when you pretend the premises are true, you also have to pretend the conclusion is true."
+            ]
+
+          },
+
           "e":{
             "type":"scroll",
             "eventId":"m1c1s1",
             "substance":[
-              ["t1","First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
+              ["t1","One way in which we can think about validity is by representing an argument like the one above in a graphical form that accentuates its logical structure. First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
               ["t2", "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. This can be represent by a smaller circle situated within the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
               ["t3", "Not quite - since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
               ["t4", "This is exactly why the second premise is important: it tells us that guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
@@ -59,9 +70,7 @@
           "d":{
             "type": "p",
             "substance":[
-              "This example showcases a core idea in formal logic: some inferences are $truth-preserving$:",
-
-              "Whether we are pursuing logical for practical or theoretical reasons, our focus is on argument. The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. The violin example earlier was convincing partly because we know that there are exactly four members of the violin family. However, the kind of reasoning used in that example was just the process of elimination. Process of elimination can be applied to any subject. Suppose a group of friends is deciding which restaurant to eat at, and there are six restaurants in town. If you could rule out five of the possibilities, you would use an argument just like the one above to decide where to eat. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for."
+              "Diagrams like these are immensely useful in the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so in what follows we will discuss them more thoroughly."
 
 
             ]
@@ -82,10 +91,10 @@
           "type":"scroll",
           "eventId":"m1c1s2",
           "substance":[
-            ["t5","It is clear from the figure that all guitars are in fact plucked instruments. And outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."],
-            ["t6", "What's wrong with Euler diagrams? Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments' They also say that it is not true that All plucked instruments are guitars'. But we don't necessarily know that if we have only asserted 'All guitars are plucked instrument.' It leaves it open whether the guitar circle should be smaller than or the same size as the plucked circle. In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles."],
-            ["t7", " This means that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
-            ["t8", " We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ``All plucked instruments are guitars,'' we are asserting that nothing can exist that is in the plucked instruments circle unless it is also in the guitars circle. So we shade out the part of the plucked instruments circle that doesn't overlap with guitars."]
+            ["t5","Consider this diagram represent the claim that all guitars are plucked instruments. Outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."],
+            ["t6", "What's wrong with Euler diagrams? Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While that might be the case, the goal of the diagram is to accurately represent the statement 'All guitars are plucked instrument.' It should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles."],
+            ["t7", " The advantage of this is that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
+            ["t8", " We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ''All guitars are plucked instruments,'' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."]
           ]
 
         }
