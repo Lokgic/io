@@ -15,20 +15,43 @@ circle {
   fill: #ff7f0e;
   fill-opacity: 1;
 }*/
+/*m1c1*/
+#moods  path{
+  fill: white;
+}
+#un  g[data-venn-sets = "S_P"] path{
+  fill: grey;
+}
+
+#ua  g[data-venn-sets = "S"] path{
+  fill: grey;
+}
 
 
+.argument {
+  max-width: 400px;
+}
 
 #logicize text{
   font-family: 'Titillium Web', sans-serif;
   font-size: 0.8em;
 }
 
-#m1c1s1 {
+/*#m1c1s1 {
   height: 2000px;
-}
+}*/
 
-.text p{
+/*.text p{
   margin-bottom: 300px;
+}*/
+
+
+.scrollText {
+  border-width: medium;
+  border-style: groove;;
+  border-radius: 20px;
+  font-size: 1.2em;
+  background-color: #ddd;
 }
 .blockquote {
   font-size: 0.8em;

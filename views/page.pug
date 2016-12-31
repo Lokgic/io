@@ -2,7 +2,10 @@ extends pagelayout
 mixin paragraphs(set)
 	for par in set
 		p.text-justify #{par}
-
+mixin paragraphsEscaped(set)
+	for par in set
+		p.text-justify
+			!= par
 mixin argument(premises, conclusion)
 	.argument.m-x-3.m-y-1.text-justify
 		for premise in premises
@@ -44,6 +47,8 @@ block content
 								case x.type
 									when "p"
 										+paragraphs(x.substance)
+									when "ps"
+										+paragraphsEscaped(x.substance)
 									when "half"
 										.card-group(id = x.id).p-a-0.half
 											for col in x.substance
@@ -54,16 +59,21 @@ block content
 														when "argument"
 																+argument(col.premises, col.conclusion)
 									when "scroll"
-										.container-fluid.scroll.p-a-0(id = x.eventId)
+										.container.scroll.p-a-0.m-x-0(id = x.eventId style="margin-bottom:300px;")
 											- var first = true
 											.col-sm-6.text.p-a-0
 												for t in x.substance
-													p(id = t[0] style = "margin-top:300px") #{t[1]}
+													p.scrollText.text-justify.p-a-1(id = t[0] style = "margin-top:250px") #{t[1]}
 
 
 											.col-sm-6.animation.p-a-0
 									when "logicize"
 										#logicize logicize
+									when "argument"
+											+argument(x.premises, x.conclusion)
+									when "event"
+										p.text-xs-center.lead #{x.title}
+										div(id = x.eventId).container
 
 
 

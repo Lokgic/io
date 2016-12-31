@@ -57,7 +57,7 @@ $(function(){
   var width
   var height
   var radius
-
+  var scrollAnimationDuration = 200;
   var bowedColor = "#7E8959"
 
   var pluckedColor = "#C9AC68"
@@ -70,7 +70,9 @@ $(function(){
       vennOScale,
       vennSScale,
       nums,
-      chart;
+      chart,
+      moodsChart,
+      moodWidth;
   function setDimensions(){
       width = $('main').width()/2
       height = width
@@ -85,26 +87,26 @@ $(function(){
      bobY = bowedY
 
      freezePoint = tp('#t1')
-
+     slideDuration = 250
 
      firstScale = d3.scaleLinear()
-                      .domain([startPoint,tp('#t1')])
+                      .domain([startPoint,tp('#t1')-slideDuration])
                       .range([0,0.6])
                       .clamp(true)
      lineYScale = d3.scaleLinear()
-                      .domain([tp('#t1'),tp('#t2')])
+                      .domain([tp('#t1'),tp('#t2')-slideDuration])
                       .range([bobY, bobY - 1.2*radius])
                       .clamp(true)
       lineOScale = d3.scaleLinear()
-                       .domain([tp('#t2'),tp('#t3')-250])
+                       .domain([tp('#t2'),tp('#t3')-slideDuration])
                        .range([1, 0])
                        .clamp(true)
      p2TextOScale = d3.scaleLinear()
-                      .domain([tp('#t3'),tp('#t4')-250])
+                      .domain([tp('#t3'),tp('#t4')-slideDuration])
                       .range([0, 0.8])
                       .clamp(true)
     p2LineYScale = d3.scaleLinear()
-                     .domain([tp('#t3'),tp('#t4')])
+                     .domain([tp('#t3'),tp('#t4')-slideDuration])
                      .range([bobY - 1.2*radius, bobY - radius/5])
                      .clamp(true)
    p2LineXScale = d3.scaleLinear()
@@ -112,55 +114,56 @@ $(function(){
                     .range([width*0.7, width/2+radius])
                     .clamp(true)
     cLineYScale = d3.scaleLinear()
-                     .domain([tp('#t3'),tp('#t4')])
+                     .domain([tp('#t3'),tp('#t4')-slideDuration])
                      .range([bobY + 1.4*radius, bobY])
                      .clamp(true)
      bobNameScale = d3.scaleLinear()
-                      .domain([tp('#t1'),tp('#t2'),tp('#t3')-300])
+                      .domain([tp('#t1'),tp('#t2')-slideDuration,tp('#t3')-slideDuration])
                       .range([0, 0.8,0])
                       .clamp(true)
       bobScale = d3.scaleLinear()
-                       .domain([tp('#t1'),tp('#t2')])
+                       .domain([tp('#t1'),tp('#t2')-slideDuration])
                        .range([0, 0.7])
                        .clamp(true)
      guitarOScale = d3.scaleLinear()
-                      .domain([tp('#t2'),tp('#t3')])
+                      .domain([tp('#t2'),tp('#t3')-slideDuration])
                       .range([0, 0.6])
                       .clamp(true)
     guitarXScale = d3.scaleLinear()
-                     .domain([tp('#t3'),tp('#t4')])
+                     .domain([tp('#t3'),tp('#t4')-slideDuration])
                      .range([0, radius])
                      .clamp(true)
     bobXScale = d3.scaleLinear()
-                     .domain([tp('#t2'),tp('#t3')])
+                     .domain([tp('#t2'),tp('#t3')-slideDuration])
                      .range([bobX, width/2])
                      .clamp(true)
 
     vennEulerScale = d3.scaleLinear()
-              .domain([tp('#t5')+200, tp('#t6')])
+              .domain([tp('#t5')+200, tp('#t6')-slideDuration])
               .range([6,3])
               .clamp(true)
 
     vennEulerScale2 = d3.scaleLinear()
-              .domain([tp('#t5')+200, tp('#t6')])
+              .domain([tp('#t5')+200, tp('#t6')-slideDuration])
               .range([6,12])
               .clamp(true)
     vennOScale = d3.scaleLinear()
-             .domain([tp('#t5')+200, tp('#t6')])
+             .domain([tp('#t5')+200, tp('#t6')-slideDuration])
              .range([0.7,0])
              .clamp(true)
     vennInterScale = d3.scaleLinear()
-                   .domain([tp('#t7'), tp('#t8')])
+                   .domain([tp('#t7'), tp('#t8')-slideDuration])
                    .range([0,1])
                    .clamp(true)
    vennGuitarScale = d3.scaleLinear()
-                  .domain([tp('#t7'), tp('#t8')])
+                  .domain([tp('#t7'), tp('#t8')-slideDuration])
                   .range([255,130])
                   .clamp(true)
       numScale = d3.scaleLinear()
-                     .domain([tp('#t6')+200, tp('#t7')])
+                     .domain([tp('#t6')+200, tp('#t7')-slideDuration])
                      .range([0,0.7])
                      .clamp(true)
+
      freezePoint2 = tp('#t5')
      chart = venn.VennDiagram().width(width)
       nums = [
@@ -175,6 +178,15 @@ $(function(){
   var svg = d3.select("#m1c1s1 .animation").append("svg")
     .attr("width", width)
     .attr("height", height)
+
+  function Oscale(s,e,max){
+    max = (max == null)? 0.7 :max
+    output = d3.scaleLinear()
+                     .domain([tp(s),tp(e)-slideDuration])
+                     .range([0, max])
+                     .clamp(true)
+      return output(scrollTop)
+    }
 
 
     function graphicInit(){
@@ -247,13 +259,34 @@ $(function(){
         bobCircle.attr("r",radius/8)
       graphics()
       chart.width(width)
-      // numText.select('text.num')
-      //     .data(nums,function(d){
-      //       return d})
-      //     .enter()
-      //     .attr('dx',function(d){return d.dx}).attr('dy', function(d){return d.dy})
+      d3.selectAll('.nums').remove()
+      d3.selectAll('#X').remove()
 
-      // console.log(guitarCircle)
+      conclusionText.attr("dx",width/2 - radius).attr("dy", bobY + 1.5*radius )
+      c = [{x:width/2 ,y: bobY + 1.4*radius},{x:width/2  ,y: cLineYScale(scrollTop) }]      //
+      // line = d3.line().x(function(d){return d.x}).y(function(d){return d.y})
+      cline.attr('d',line(c))
+
+
+      graphics2TextAdd()
+
+      moodWidth = $('#moods .col-md-6').width()
+      moodsChart = venn.VennDiagram().width(moodWidth)
+      moodsVenn = d3.selectAll("#moods .col-md-6")
+            .datum([
+              {sets:["S"],size:3},
+              {sets:["P"],size:3},
+              {sets:["S", "P"],size:1}
+                ]).call(moodsChart)
+
+
+      pnText.transition().duration(1500).attr('dx',moodWidth/2).attr('dy',$('svg','#pa').height()/2)
+
+      paText.transition().duration(1500).attr('dx',moodWidth/4).attr('dy',$('svg','#pa').height()/2)
+      $canvas3.html("")
+      chart3 = venn.VennDiagram().height(width).width(width).duration(scrollAnimationDuration)
+      venn3Init()
+
     }
 
     function setSVGsize(){
@@ -268,29 +301,29 @@ $(function(){
   function graphics(){
     b = [{x: width*0.7, y: bobY - 1.2*radius},{x: p2LineXScale(scrollTop) , y: p2LineYScale(scrollTop)}]
     c = [{x:width/2 ,y: bobY + 1.4*radius},{x:width/2  ,y: cLineYScale(scrollTop) }]
-    p2line.transition().duration(300).attr('d',line(b))
-    cline.transition().duration(300).attr('d',line(c))
+    p2line.transition().duration(scrollAnimationDuration).attr('d',line(b))
+    cline.transition().duration(scrollAnimationDuration).attr('d',line(c))
     // console.log(firstScale(scrollTop))
-    p2text.transition().duration(300).style('opacity',p2TextOScale(scrollTop))
-    conclusionText.transition().duration(300).style('opacity',p2TextOScale(scrollTop))
-    d3.selectAll('.bigCircles').transition().duration(300).style('opacity', firstScale(scrollTop))
+    p2text.transition().duration(scrollAnimationDuration).style('opacity',p2TextOScale(scrollTop))
+    conclusionText.transition().duration(scrollAnimationDuration).style('opacity',p2TextOScale(scrollTop))
+    d3.selectAll('.bigCircles').transition().duration(scrollAnimationDuration).style('opacity', firstScale(scrollTop))
    d3.select("#bobLine")
                  .attr("x1", bobX)
                  .attr("y1",bobY)
                  .attr("x2", bobX)
                   .attr("y2", lineYScale(scrollTop))
-    d3.select('#bobName').transition().duration(300)
+    d3.select('#bobName').transition().duration(scrollAnimationDuration)
                   .style('opacity',bobNameScale(scrollTop))
-    d3.selectAll('#bobLine').transition().duration(300)
+    d3.selectAll('#bobLine').transition().duration(scrollAnimationDuration)
       .style('opacity', lineOScale(scrollTop))
 
       // console.log("ls" + lineOScale(scrollTop))
-   d3.select('#bob').transition().duration(300)
+   d3.select('#bob').transition().duration(scrollAnimationDuration)
             .style('opacity',bobScale(scrollTop))
             .attr('cx',bobXScale(scrollTop))
             .attr('cy',bobY)
     d3.select('#guitarStuff').style('opacity',guitarOScale(scrollTop))
-    d3.select('#guitarStuff').transition().duration(300).attr("transform",'translate(' + guitarXScale(scrollTop) + ')')
+    d3.select('#guitarStuff').transition().duration(scrollAnimationDuration).attr("transform",'translate(' + guitarXScale(scrollTop) + ')')
 
   }
 //second animation
@@ -306,27 +339,86 @@ $(function(){
 
 
   vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
-  $('path','g[data-venn-sets = "Plucked"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', pluckedColor).css('stroke-opacity',0.7).css("stroke-width", 2)
-  $('path','g[data-venn-sets = "Guitar"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', guitarColor).css('stroke-opacity',0.7).css("stroke-width", 2)
-  $('path','g[data-venn-sets = "Plucked_Guitar"]').css('fill', "white").css('fill-opacity',0).css("stroke-width", 2)
-  // console.log(vennD.selectAll('path'))
+  $('path','g[data-venn-sets = "Plucked"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', "black").css('stroke-opacity',1).css("stroke-width", 5)
+  $('path','g[data-venn-sets = "Guitar"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', "black").css('stroke-opacity',1).css("stroke-width", 5)
+  $('path','g[data-venn-sets = "Plucked_Guitar"]').css('fill', "white").css('fill-opacity',0).css("stroke-width", 5)
+function graphics2TextAdd(){
 
-
-  numText = vennD.select('svg').selectAll('text.nums')
+  numText = vennD.select('svg').selectAll('text .nums')
       .data(nums,function(d){
         return d})
       .enter()
       .append('text').attr('class','nums').text(function(d){
         return d.num})
       .attr('dx',function(d){return d.dx}).attr('dy', function(d){return d.dy})
-      .style('font-size','1.5em').style('opacity',0)
-  // vennD.select('svg').append('text').text("2").attr('dx', chart.width()/2).attr('dy', chart.height()/2)
-  // vennD.select('svg').append('text').text("1").attr('dx', chart.width()/3).attr('dy', chart.height()/2)
-  // vennD.select('svg').append('text').text("3").attr('dx', 2*chart.width()/3).attr('dy', chart.height()/2)
-  // vennD.select('svg').append('text').text("4").attr('dx', chart.width()*.9).attr('dy', chart.height()*.1)
-  // vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
+      .style('font-size','1.5em')
+
+    vennD.select('svg')
+    .append('text')
+    .attr('id',"x")
+    .text("X")
+    .attr('dx', chart.width()/2 - 1.35*(chart.width()/2 - chart.width()/3)/2)
+    .attr('dy', chart.height()/2)
+    .style('font-size','3em')
+    .style('opacity',  Oscale("#t8","#t9"))
 
 
+}
+
+
+ graphics2TextAdd()
+
+
+  //third
+  chart3 = venn.VennDiagram().height(width).width(width).duration(scrollAnimationDuration)
+  canvas3 = d3.select('#m1c1s3 .animation')
+  $canvas3 = $('.animation', '#m1c1s3')
+  sets3 = [
+    {sets: ['Dogs'], size: 4},
+   {sets: ['Mammals'], size: 4},
+   {sets: ['Vertebrates'], size: 4},
+   {sets: ['Mammals',"Vertebrates"], size: 1},
+   {sets: ['Mammals',"Dogs"], size: 1},
+   {sets: ['Vertebrates',"Dogs"], size: 1},
+   {sets: ['Vertebrates',"Dogs","Mammals"], size: 1},
+
+  ]
+
+
+  function graphic3(){
+      d3.select('g[data-venn-sets = "Mammals"] path').style('fill-opacity',Oscale('#t10','#t11'))
+      d3.select('g[data-venn-sets = "Dogs"] path').style('fill-opacity',Oscale('#t11','#t12'))
+
+  }
+
+    function venn3Init(){
+
+      venn3 = canvas3.datum(sets3).call(chart3)
+      venn3.selectAll('path').style("fill", 'white')
+          .style('fill-opacity',0)
+          .style('stroke', "black")
+          .style('stroke-opacity',1)
+          .style('stroke-width',3)
+
+        d3.select('g[data-venn-sets = "Mammals"] path').style('fill', '#999').style('fill-opacity',Oscale('#t10','#t11'))
+        d3.select('g[data-venn-sets = "Dogs"] path').style('fill', '#999').style('fill-opacity',Oscale('#t11','#t12'))
+        d3.select('g[data-venn-sets = "Vertebrates_Dogs_Mammals"] path').style('fill', 'white').style('fill-opacity',1)
+        d3.select('g[data-venn-sets = "Mammals_Vertebrates"] path').style('fill', 'white').style('fill-opacity',1)
+
+    }
+
+  venn3Init()
+// canvas3.select('svg').append('g').append('path').attr('d',attr).style('fill','black').style('fill-opacity',0.2)
+
+
+
+
+  // $('path','g[data-venn-sets = "Mammals"]').css('fill', "grey")
+// chart3 = venn.VennDiagram().width(width-50).duration(scrollAnimationDuration)
+//       venn3 = canvas3.datum(sets3).call(chart3)
+//   canvas3.attr('id','chart3i')
+//
+// canvas3.transition().duration(3000).attr('id','chart3ii')
   function graphics2(){
     numText.style('opacity', numScale(scrollTop))
     sets = [ {sets: ['Plucked'], size: 12},
@@ -337,7 +429,11 @@ $(function(){
     d3.select('g[data-venn-sets = "Plucked_Guitar"]').select('path').style('fill-opacity', vennInterScale(scrollTop))
     rgb = Math.round(vennGuitarScale(scrollTop))
     d3.select('g[data-venn-sets = "Guitar"]').select('path').style('fill',"rgb("+rgb+","+rgb+','+rgb+")")
+    d3.select('#x').style('opacity',Oscale("#t8","#t9"))
+
+
     // console.log("rgb("+vennGuitarScale(scrollTop)+","+vennGuitarScale(scrollTop)+','+vennGuitarScale(scrollTop)+")")
+
 // console.log(d3.select('g[data-venn-sets = "Guitar"]').select('path'))
 
 
@@ -349,44 +445,78 @@ $(function(){
 
   function sticky(){
 
+    //
+    // if (scrollTop > freezePoint && scrollTop < tp('#t4')){
+    //
+    //   $canvas.css('position','fixed')
+    //     .css('top',   window.innerHeight/2 - $canvas.height()/2)
+    //     .css('left',  window.innerWidth/2)
+    //     setSVGsize()
+    // } else if (scrollTop <freezePoint){
+    //
+    //   $canvas.css('position','absolute')
+    //     .css('top',   $('#t1').offset().top - $canvas.height()/2)
+    //     .css('left',  window.innerWidth/2)
+    //     setSVGsize()
+    //
+    // } else if (scrollTop >tp('#t4')){
+    //   $canvas.css('position','absolute')
+    //     .css('top',   $('#t4').offset().top - $canvas.height()/2)
+    //     .css('left',  window.innerWidth/2)
+    //     setSVGsize()
+    // }
+    //
+    // if (scrollTop > freezePoint2 && scrollTop < tp('#t9')){
+    //   $canvas2.css('position','fixed')
+    //     .css('top',   window.innerHeight/2 - $canvas2.height()/2)
+    //     .css('left',  window.innerWidth/2)
+    // } else if (scrollTop <freezePoint2){
+    //   $canvas2.css('position','absolute')
+    //     .css('top',   $('#t5').offset().top - $canvas2.height()/3)
+    //     .css('left',  window.innerWidth/2)
+    // } else if (scrollTop >tp('#t9')){
+    //   $canvas2.css('position','absolute')
+    //     .css('top',   $('#t9').offset().top - $canvas2.height()/3)
+    //     .css('left',  window.innerWidth/2)
+    // }
 
-    if (scrollTop > freezePoint && scrollTop < tp('#t4')){
+    // if (scrollTop > tp('#t10') && scrollTop < tp('#t13')){
+    //   $canvas3.css('position','fixed')
+    //     .css('top',   window.innerHeight/2 - $canvas3.height()/2)
+    //     .css('left',  window.innerWidth/2)
+    // } else if (scrollTop <tp('#t10')){
+    //   $canvas3.css('position','absolute')
+    //     .css('top',   $('#t10').offset().top - $canvas3.height()/3)
+    //     .css('left',  window.innerWidth/2)
+    // } else if (scrollTop >tp('#t13')){
+    //   $canvas3.css('position','absolute')
+    //     .css('top',   $('#t13').offset().top - $canvas2.height()/3)
+    //     .css('left',  window.innerWidth/2)
+    // }
+    freezePoints('#t1','#t4',$canvas)
 
-      $canvas.css('position','fixed')
-        .css('top',   window.innerHeight/2 - $canvas.height()/2)
-        .css('left',  window.innerWidth/2)
-        setSVGsize()
-    } else if (scrollTop <freezePoint){
-
-      $canvas.css('position','absolute')
-        .css('top',   $('#t1').offset().top - $canvas.height()/2)
-        .css('left',  window.innerWidth/2)
-        setSVGsize()
-
-    } else if (scrollTop >tp('#t4')){
-      $canvas.css('position','absolute')
-        .css('top',   $('#t4').offset().top - $canvas.height()/2)
-        .css('left',  window.innerWidth/2)
-        setSVGsize()
-    }
-
-    if (scrollTop > freezePoint2 && scrollTop < tp('#t8')){
-      $canvas2.css('position','fixed')
-        .css('top',   window.innerHeight/2 - $canvas2.height()/2)
-        .css('left',  window.innerWidth/2)
-    } else if (scrollTop <freezePoint2){
-      $canvas2.css('position','absolute')
-        .css('top',   $('#t5').offset().top - $canvas2.height()/3)
-        .css('left',  window.innerWidth/2)
-    } else if (scrollTop >tp('#t8')){
-      $canvas2.css('position','absolute')
-        .css('top',   $('#t8').offset().top - $canvas2.height()/3)
-        .css('left',  window.innerWidth/2)
-    }
-
+    freezePoints('#t5','#t9',$canvas2)
+    freezePoints('#t10','#t13',$canvas3)
   }
 
-
+  function freezePoints(startdiv, enddiv,canvasJQ){
+    start = tp(startdiv)
+    end = tp(enddiv)
+    if (scrollTop > start && scrollTop <end){
+      canvasJQ.css('position','fixed')
+        .css('top',   window.innerHeight/2 - canvasJQ.height()/2)
+        .css('left',  window.innerWidth/2)
+    } else if (scrollTop <start){
+      canvasJQ.css('position','absolute')
+        .css('top',   $(startdiv).offset().top - canvasJQ.height()/3)
+        .css('left',  window.innerWidth/2)
+    } else if (scrollTop >end){
+      canvasJQ.css('position','absolute')
+        .css('top',   $(enddiv).offset().top - canvasJQ.height()/3)
+        .css('left',  window.innerWidth/2)
+    }
+    setSVGsize()
+  }
 
   var render = function() {
 
@@ -404,6 +534,7 @@ $(function(){
 
     graphics()
     graphics2()
+    graphic3()
     sticky();
 
 
@@ -414,6 +545,48 @@ $(function(){
 
   window.requestAnimationFrame(render)
   window.onresize = resize
+
+
+//static
+  moods = d3.select('#moods')
+
+  moodsName = ["Universal Affirmative","Universal Negative","Particular Affirmative","Particular Negative"]
+  moodsStatement = ["All S are P", "All S are not P", "Some S are P", "Some S are not P"]
+  moodsLabel = ["ua","un","pa","pn"]
+  for (i in moodsLabel){
+    moods.append('div').attr('class','col-md-6').attr('id',moodsLabel[i])
+    moods.select('#'+moodsLabel[i]).append('p').attr('class','text-xs-center m-y-0').text(moodsName[i])
+  }
+moodWidth = $('#moods .col-md-6').width()
+moodsChart = venn.VennDiagram().width(moodWidth).duration(scrollAnimationDuration)
+moodsVenn = d3.selectAll("#moods .col-md-6")
+      .datum([
+        {sets:["S"],size:3},
+        {sets:["P"],size:3},
+        {sets:["S", "P"],size:1}
+          ]).call(moodsChart)
+
+moodsVenn.selectAll('path').style("fill", null)
+    .style('fill-opacity',1)
+    .style('stroke', "black")
+    .style('stroke-opacity',1)
+    .style('stroke-width',3)
+
+
+
+for (i in moodsStatement){
+
+  moods.select('#'+moodsLabel[i]).append('p').attr('class','text-xs-center m-b-3').text('"' + moodsStatement[i] + '"')
+}
+d3.selectAll("#moods text").style("font-size", "2em")
+
+
+
+paText = d3.select('#pa').select('svg').append('text').text('X').attr('dx',moodWidth/2).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+
+pnText = d3.select('#pn').select('svg').append('text').text('X').attr('dx',moodWidth/4).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+
+
 
 
 

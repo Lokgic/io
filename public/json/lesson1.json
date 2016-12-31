@@ -83,7 +83,7 @@
         "a":{
           "type": "p",
           "substance":[
-            "In 1880 English logician John Venn published two essays on the use of diagrams with circles to represent categorical propositions, like the ones in our Bob example. Venn noted that the best use of such diagrams so far had come from the brilliant Swiss mathematician Leonhard Euler, but they still had many problems, which Venn felt could be solved by bringing in some ideas about logic from his fellow English logician George Boole. Although Venn only claimed to be building on the long logical tradition he traced, since his time these kinds of circle diagrams have been known as Venn diagrams. While they might not be as elegant and powerful as some of the tools we will learn later on, they are still useful in evaluating arguments. Let us begin by distinguishing between Euler and Venn's diagrams."
+            "In 1880 English logician John Venn published two essays on the use of diagrams with circles to represent categorical propositions, like the ones in our Bob example. Venn noted that the best use of such diagrams so far had come from the brilliant Swiss mathematician Leonhard Euler, but they still had many problems, which Venn felt could be solved by bringing in some ideas about logic from his fellow English logician George Boole. Although Venn only claimed to be building on the long logical tradition he traced, since his time these kinds of circle diagrams have been known as Venn diagrams. While they might not be as elegant and powerful as some of the tools we will learn later on, they are still useful in evaluating arguments."
 
           ]
         },
@@ -94,13 +94,65 @@
             ["t5","Consider this diagram represent the claim that all guitars are plucked instruments. Outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."],
             ["t6", "What's wrong with Euler diagrams? Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While that might be the case, the goal of the diagram is to accurately represent the statement 'All guitars are plucked instrument.' It should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. In response to this, Venn suggested that to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles."],
             ["t7", " The advantage of this is that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
-            ["t8", " We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ''All guitars are plucked instruments,'' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."]
+            ["t8", " We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ''All guitars are plucked instruments,'' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."],
+
+            ["t9","We put an X in a region, when we want to say that something exists in it. Since the argument also states that Bob plays a bowed instrument, it means that there should be an X somewhere in that circle. Since the argument is indifferent in respect to whether or not this instrument is also plucked - we put the X right on the border. Like before, we see that Bob's instrument cannot possibly be a guitar. Unlike before, however, we don't implicitly deny the possibility of a non-guitar plucked instrument."]
+
           ]
 
         }
       }
     },
     "3":{
+      "title": "Aristotelian logic and categorical statements",
+      "content":{
+        "a":{
+          "type":"ps",
+          "substance":["The premise 'all guitars are plucked instruments' is an example of what logicians call a <a href='https://en.wikipedia.org/wiki/Categorical_proposition' target='_blank'>categorical statement</a>. For most of the history of logic in the West, the focus has been on arguments that rely extensively on those statements called <a href = 'https://en.wikipedia.org/wiki/Syllogism' target='_blank'>categorical syllogism </a>. Aristotle began the study of this kind of argument in his book the <i>Prior Analytics</i> (c.350 BCE). While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, it will give a you taste of the sort of stuff we will be doing for the rest of the course.",
+          "A categorical syllogism is a two-premise argument composed of categorical statements. There are actually all kinds of two-premise arguments using categorical statements, but Aristotle only looked at arguments where each statement is in one of the 'moods' of categorical statement. Each mood is a combination of two quantities and two qualities. A quantity of a categorical statement can be either universal - applying to everything in a category, particular - at least one thing in a category. Each categorical statement is also said to have either an affirmative or a negative quality. 'All guitars are plucked' is an instance of a universal affirmation - it makes a positive claim that everything that in the category of guitars. 'No guitar is bowed' would be a instance of universal negation. Some guitars are bowed would be an instance of a 'particular affirmation', and so on."]
+        },
+        "b":{
+          "type":"event",
+          "eventId":"moods",
+          "title":"Basic Categorical Statements in Venn Diagrams"
+        },
+        "c":{
+          "type":"ps",
+          "substance":[
+            "If a region of a Venn diagram is blank, if it is neither shaded nor has an x in it, it could go either way. Maybe such things exist, maybe they do not.  Notice that when we draw diagrams for the two universal forms, A and E, we do not draw any x's. For these forms we are only ruling out possibilities, not asserting that things actually exist. This is part of what Venn learned from Boole. The proposition, ``All guitars are plucked instruments,'' denies the existence of any guitar that is not a plucked, but it does not assert the existence of some guitar that is a plucked. That probably reads like gibberish - guitars obviously do exist.",
+
+            "The reason for this is to accommodate categorical statements about things that don't exist, for instance 'All unicorns have one horn.' This seems like a true statement, but unicorns don't exist. Perhaps what we mean by 'All unicorns have one horn' is that <i>if</i> a unicorn existed, <i>then</i> it would have one horn. But if we interpret the statement about unicorns that way, shouldn't we also interpret the statement about dogs that way? Really all we mean when we say ``All dogs are mammals'' is that if there were dogs, then they would be mammals. It takes an extra assertion to point out that dogs do, in fact, exist.",
+
+            "The issue we are discussing here is called existential import. A sentence is said to have existential import if it asserts the existence of the things it is talking about. Until Boole, universal-affirmative statements were often interpreted as having existential import. You might find that more intuitive, but if you interpret all universal-affirmative statements with existential import, they are always false when you are talking about things that don't exist. So, 'All unicorns have one horn' is false in the traditional interpretation. On the other hand, in the modern interpretation all statements about things that don't exist are true. 'All unicorns have one horn' simply asserts that there are no multi-horned unicorns, and this is true because there are no unicorns at all. We call this vacuous truth. Something is vacuously true if it is true simply because it is about things that don't exist. Note that all statements about nonexistent things become vacuously true if you assume they have no existential import, even a statement like ``All unicorns have more than one horn.'' A statement like this simply rules out the existence of unicorns with one horn or fewer, and these don't exist because unicorns don't exist. This is a complicated issue that will come up again starting in later sections when we consider conditional statements in this module, and predicate logic later.",
+            "A categorical syllogism consists of two categorical statements as premises, and one as conclusion. The logical relations between these statements are based certain terms they share. For instance, consider this argument:"
+          ]
+        },
+        "d":{
+          "type":"argument",
+          "premises":["P1. All mammals are vertebrates.","P2. All dogs are mammals."],
+          "conclusion":"C. All dogs are vertebrates."
+        },
+        "e":{
+          "type":"p",
+          "substance":[
+            "Notice how the statements in this argument overlap each other. Each statement shares a term with the other two. Premise 2 shares a term with the conclusion and another with Premise 1. Thus there are only three terms spread across the three statements. Each of the three statements can take one of four categorical mood. This gives us $4 \\times 4 \\times 4,$ or 64 possibilities. In addition to varying the kind of statements we use in an Aristotelian syllogism, we can also vary the placement of the terms involved. The combination of 64 moods and 4 figures gives us a total of 256 possible Aristotelian syllogisms. Most of these are valid, but a good chunk of them are. We won't go through every single syllogism like a good medieval logician, but we should be able to analyze them using Venn diagram."
+          ]
+        },
+        "f":{
+          "type":"scroll",
+          "eventId":"m1c1s3",
+          "substance":[
+            ["t10","Since each syllogism involves three terms, we need 3 overlapping circles."],
+            ["t11","Premise 1 states: all mammals are vertebrates, so we grey out the the area of the mammal circle that does not overlap with the vertebrate circle."],
+            ["t12","Premise 2 states: all dogs are mammals, so we grey out the the area of the dog circle that does not overlap with the mammal circle. Note that part of the circle was greyed already due to premise 1."],
+            ["t13","Does the conclusion 'all dogs are vertebrates' follow? Upon examining this Venn diagram, we can see that if we greyed out areas in accordance to the premises, the only white area left in the dog circle also overlaps with the vertebrate circle. This represents the idea of an valid argument as one with premises that, if true, would make the conclusion true as well."]
+
+          ]
+
+        }
+      }
+    },
+    "4":{
       "title": "Logicize",
       "content":{
         "a":{
