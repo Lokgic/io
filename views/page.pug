@@ -68,8 +68,9 @@ block content
 
 											.col-sm-6.animation.p-a-0
 									when "logicize"
-										#vennLog
-											.container
+										.row
+											#userInput.col-sm-4 User input
+											#vennLog.col-sm-8
 									when "argument"
 											+argument(x.premises, x.conclusion)
 									when "event"

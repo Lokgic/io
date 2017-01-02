@@ -543,7 +543,7 @@ function graphics2TextAdd(){
   //logicize
 
   logicizeChart = venn.VennDiagram().width($('main').width()).height(2*window.innerHeight/3)
-  canvasL = d3.select('#vennLog .container').attr('id', 'bottomDiv')
+  canvasL = d3.select('#vennLog').attr('id', 'bottomDiv')
 
   function loadJSON(type, callback){
       $.getJSON('../json/' + type + '.json')
@@ -569,7 +569,7 @@ function graphics2TextAdd(){
         if (output.indexOf(temp) == -1) output.push(temp)
       }
       output = chance.shuffle(output)
-      console.log(output)
+      // console.log(output)
       var choices = {}
       var cross = {}
        choices.a = output[0]
@@ -625,7 +625,7 @@ function graphics2TextAdd(){
 
       vennL = canvasL.datum(setsL).call(logicizeChart)
 
-      exBut = canvasL.append('button').text('button').attr('id','exBut')
+      exBut = d3.select('#userInput').append('button').text('button').attr('id','exBut')
 
       var existence = false
       vennL.selectAll('path').style('fill','white')    .style('stroke', "black")
@@ -665,14 +665,6 @@ function graphics2TextAdd(){
 
 
                 dim = (some=="d")? "0" :vennL.select('g[data-venn-sets="'+choices[some]+'"]  path').attr('d')
-                // if(cross["1"] == undefined){
-                //   cross["1"] = canvasL.select('svg').append('path').attr('d',getBorderLoc(dim,some)).style('stroke','#6D929B')
-                //       .style('stroke-opacity',1)
-                //       .style('stroke-width',7)
-                //       .style('fill-opacity',1)
-                // } else{
-                //   cross["1"].transition().duration(300).attr('d',getBorderLoc(dim,some))
-                // }
                 break;
 
               }
