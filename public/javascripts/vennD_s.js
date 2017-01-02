@@ -1,4 +1,6 @@
 var venn = require("venn.js")
+var Chance = require('chance')
+var chance = new Chance();
 var text1 = "First, consider a circle that contains all plucked intruments and another one that contains all bowed instruments."
 
 var text2 = "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"
@@ -14,6 +16,7 @@ var text4 =  "This is exactly why the second premise is important: it tells us t
 
   $canvas = $('.animation', '#m1c1s1');
   $canvas2 = $('.animation', '#m1c1s2');
+
 var bobLabel,
     bobLine,
     bobText,
@@ -73,6 +76,7 @@ $(function(){
       chart,
       moodsChart,
       moodWidth;
+
   function setDimensions(){
       width = $('main').width()/2
       height = width
@@ -259,8 +263,7 @@ $(function(){
         bobCircle.attr("r",radius/8)
       graphics()
       chart.width(width)
-      d3.selectAll('.nums').remove()
-      d3.selectAll('#X').remove()
+
 
       conclusionText.attr("dx",width/2 - radius).attr("dy", bobY + 1.5*radius )
       c = [{x:width/2 ,y: bobY + 1.4*radius},{x:width/2  ,y: cLineYScale(scrollTop) }]      //
@@ -342,8 +345,10 @@ $(function(){
   $('path','g[data-venn-sets = "Plucked"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', "black").css('stroke-opacity',1).css("stroke-width", 5)
   $('path','g[data-venn-sets = "Guitar"]').css('fill', "white").css('fill-opacity',0.7).css('stroke', "black").css('stroke-opacity',1).css("stroke-width", 5)
   $('path','g[data-venn-sets = "Plucked_Guitar"]').css('fill', "white").css('fill-opacity',0).css("stroke-width", 5)
-function graphics2TextAdd(){
 
+function graphics2TextAdd(){
+  d3.selectAll('.nums').remove()
+  d3.selectAll('#X').remove()
   numText = vennD.select('svg').selectAll('text .nums')
       .data(nums,function(d){
         return d})
@@ -352,15 +357,23 @@ function graphics2TextAdd(){
         return d.num})
       .attr('dx',function(d){return d.dx}).attr('dy', function(d){return d.dy})
       .style('font-size','1.5em')
+      .style('opacity',Oscale("#t6","#t7",1))
+    xPos = []
+   temp =  d3.select('g[data-venn-sets="Guitar"] path').attr('d').split(' ')
+  //  console.log(temp)
+   xPos[0] = parseInt(temp[1]) + parseInt(temp[4])
+   xPos[1] = parseInt(temp[2])
+  //  console.log(xPos)
 
     vennD.select('svg')
     .append('text')
     .attr('id',"x")
     .text("X")
-    .attr('dx', chart.width()/2 - 1.35*(chart.width()/2 - chart.width()/3)/2)
-    .attr('dy', chart.height()/2)
+    .attr('dx', xPos[0])
+    .attr('dy', xPos[1])
     .style('font-size','3em')
     .style('opacity',  Oscale("#t8","#t9"))
+    .style('transform','translate(-.35em)')
 
 
 }
@@ -408,17 +421,7 @@ function graphics2TextAdd(){
     }
 
   venn3Init()
-// canvas3.select('svg').append('g').append('path').attr('d',attr).style('fill','black').style('fill-opacity',0.2)
 
-
-
-
-  // $('path','g[data-venn-sets = "Mammals"]').css('fill', "grey")
-// chart3 = venn.VennDiagram().width(width-50).duration(scrollAnimationDuration)
-//       venn3 = canvas3.datum(sets3).call(chart3)
-//   canvas3.attr('id','chart3i')
-//
-// canvas3.transition().duration(3000).attr('id','chart3ii')
   function graphics2(){
     numText.style('opacity', numScale(scrollTop))
     sets = [ {sets: ['Plucked'], size: 12},
@@ -432,9 +435,6 @@ function graphics2TextAdd(){
     d3.select('#x').style('opacity',Oscale("#t8","#t9"))
 
 
-    // console.log("rgb("+vennGuitarScale(scrollTop)+","+vennGuitarScale(scrollTop)+','+vennGuitarScale(scrollTop)+")")
-
-// console.log(d3.select('g[data-venn-sets = "Guitar"]').select('path'))
 
 
   }
@@ -445,54 +445,6 @@ function graphics2TextAdd(){
 
   function sticky(){
 
-    //
-    // if (scrollTop > freezePoint && scrollTop < tp('#t4')){
-    //
-    //   $canvas.css('position','fixed')
-    //     .css('top',   window.innerHeight/2 - $canvas.height()/2)
-    //     .css('left',  window.innerWidth/2)
-    //     setSVGsize()
-    // } else if (scrollTop <freezePoint){
-    //
-    //   $canvas.css('position','absolute')
-    //     .css('top',   $('#t1').offset().top - $canvas.height()/2)
-    //     .css('left',  window.innerWidth/2)
-    //     setSVGsize()
-    //
-    // } else if (scrollTop >tp('#t4')){
-    //   $canvas.css('position','absolute')
-    //     .css('top',   $('#t4').offset().top - $canvas.height()/2)
-    //     .css('left',  window.innerWidth/2)
-    //     setSVGsize()
-    // }
-    //
-    // if (scrollTop > freezePoint2 && scrollTop < tp('#t9')){
-    //   $canvas2.css('position','fixed')
-    //     .css('top',   window.innerHeight/2 - $canvas2.height()/2)
-    //     .css('left',  window.innerWidth/2)
-    // } else if (scrollTop <freezePoint2){
-    //   $canvas2.css('position','absolute')
-    //     .css('top',   $('#t5').offset().top - $canvas2.height()/3)
-    //     .css('left',  window.innerWidth/2)
-    // } else if (scrollTop >tp('#t9')){
-    //   $canvas2.css('position','absolute')
-    //     .css('top',   $('#t9').offset().top - $canvas2.height()/3)
-    //     .css('left',  window.innerWidth/2)
-    // }
-
-    // if (scrollTop > tp('#t10') && scrollTop < tp('#t13')){
-    //   $canvas3.css('position','fixed')
-    //     .css('top',   window.innerHeight/2 - $canvas3.height()/2)
-    //     .css('left',  window.innerWidth/2)
-    // } else if (scrollTop <tp('#t10')){
-    //   $canvas3.css('position','absolute')
-    //     .css('top',   $('#t10').offset().top - $canvas3.height()/3)
-    //     .css('left',  window.innerWidth/2)
-    // } else if (scrollTop >tp('#t13')){
-    //   $canvas3.css('position','absolute')
-    //     .css('top',   $('#t13').offset().top - $canvas2.height()/3)
-    //     .css('left',  window.innerWidth/2)
-    // }
     freezePoints('#t1','#t4',$canvas)
 
     freezePoints('#t5','#t9',$canvas2)
@@ -510,9 +462,9 @@ function graphics2TextAdd(){
       canvasJQ.css('position','absolute')
         .css('top',   $(startdiv).offset().top - canvasJQ.height()/3)
         .css('left',  window.innerWidth/2)
-    } else if (scrollTop >end){
+    } else if (scrollTop >(end+60)){
       canvasJQ.css('position','absolute')
-        .css('top',   $(enddiv).offset().top - canvasJQ.height()/3)
+        .css('top',   $(enddiv).offset().top - canvasJQ.height()/3+60)
         .css('left',  window.innerWidth/2)
     }
     setSVGsize()
@@ -536,6 +488,7 @@ function graphics2TextAdd(){
     graphics2()
     graphic3()
     sticky();
+    graphics2TextAdd()
 
 
 
@@ -557,36 +510,310 @@ function graphics2TextAdd(){
     moods.append('div').attr('class','col-md-6').attr('id',moodsLabel[i])
     moods.select('#'+moodsLabel[i]).append('p').attr('class','text-xs-center m-y-0').text(moodsName[i])
   }
-moodWidth = $('#moods .col-md-6').width()
-moodsChart = venn.VennDiagram().width(moodWidth).duration(scrollAnimationDuration)
-moodsVenn = d3.selectAll("#moods .col-md-6")
-      .datum([
-        {sets:["S"],size:3},
-        {sets:["P"],size:3},
-        {sets:["S", "P"],size:1}
-          ]).call(moodsChart)
+  moodWidth = $('#moods .col-md-6').width()
+  moodsChart = venn.VennDiagram().width(moodWidth).duration(scrollAnimationDuration)
+  moodsVenn = d3.selectAll("#moods .col-md-6")
+        .datum([
+          {sets:["S"],size:3},
+          {sets:["P"],size:3},
+          {sets:["S", "P"],size:1}
+            ]).call(moodsChart)
 
-moodsVenn.selectAll('path').style("fill", null)
-    .style('fill-opacity',1)
-    .style('stroke', "black")
-    .style('stroke-opacity',1)
-    .style('stroke-width',3)
+  moodsVenn.selectAll('path').style("fill", null)
+      .style('fill-opacity',1)
+      .style('stroke', "black")
+      .style('stroke-opacity',1)
+      .style('stroke-width',3)
 
 
 
-for (i in moodsStatement){
+  for (i in moodsStatement){
 
-  moods.select('#'+moodsLabel[i]).append('p').attr('class','text-xs-center m-b-3').text('"' + moodsStatement[i] + '"')
+    moods.select('#'+moodsLabel[i]).append('p').attr('class','text-xs-center m-b-3').text('"' + moodsStatement[i] + '"')
+  }
+  d3.selectAll("#moods text").style("font-size", "2em")
+
+
+
+  paText = d3.select('#pa').select('svg').append('text').text('X').attr('dx',moodWidth/2).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+
+  pnText = d3.select('#pn').select('svg').append('text').text('X').attr('dx',moodWidth/4).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+
+
+  //logicize
+
+  logicizeChart = venn.VennDiagram().width($('main').width()).height(2*window.innerHeight/3)
+  canvasL = d3.select('#vennLog .container').attr('id', 'bottomDiv')
+
+  function loadJSON(type, callback){
+      $.getJSON('../json/' + type + '.json')
+      .done(function(data){
+      callback(null, data);
+   }).fail(function(){console.log('Failed to Load Quiz')});
+  }
+
+  function initVennL(){
+    var some = ""
+    loadJSON('dogs', function(error, dogs){
+
+
+      output = []
+      if (chance.bool({likelihood:15})) output.push("dogs")
+      if (chance.bool({likelihood:15})) output.push("animals")
+      if (chance.bool({likelihood:15})) output.push("mammals")
+      if (chance.bool({likelihood:15})) output.push("canines")
+
+      while (output.length <3){
+        var temp = chance.pickone(dogs.children)
+        temp = (chance.bool({likelihood:50}))? temp.name: chance.pickone(temp.children);
+        if (output.indexOf(temp) == -1) output.push(temp)
+      }
+      output = chance.shuffle(output)
+      console.log(output)
+      var choices = {}
+      var cross = {}
+       choices.a = output[0]
+       choices.b = output[1]
+       choices.c = output[2]
+      var a = choices.a
+      var b = choices.b
+      var c = choices.c
+      setsL = [
+        {sets: [a], size: 4,clicked:false},
+       {sets: [b], size: 4,clicked:false},
+       {sets: [c], size: 4,clicked:false},
+       {sets: [a,b], size: 1,clicked:false},
+       {sets: [a,c], size: 1,clicked:false},
+       {sets: [b,c], size: 1,clicked:false},
+       {sets: [a,b,c], size: 1,clicked:false},
+
+      ]
+
+      function getCrossLoc(dim,direction){
+        var crossStr = "m 10 10 l -20 -20 m 10 10 m -10 10 l 20 -20"
+        cir ={}
+        cir.cx = parseFloat(dim.split(' ')[1])
+        cir.cy = parseFloat(dim.split(' ')[2])
+        cir.ab = (parseFloat(dim.split(' ')[10]) - cir.cy)/3
+        cir.radius = parseFloat(dim.split(' ')[4]) *-1
+
+        // console.log("M " + $('#vennLog svg').width()/2 + " " + $('#vennLog svg').height()/2   + " " + crossStr)
+        if (direction == "a") direction = "right"
+        else if (direction == "b") direction = "left"
+        else if (direction == "c") direction = "bottom"
+        else if (direction == "d") return "M " + $('#vennLog svg').width()/2 + " " + $('#vennLog svg').height()/2   + " " + crossStr
+        else if (direction == a +"_"+b) return "M " +cir.cx + " " + cir.cy  + " m 0 " +cir.ab + " "+ crossStr
+        else if (direction == a +"_"+c || direction == b +"_"+c ) return "M " +cir.cx + " " + cir.cy  + " m 0 -" +(cir.radius/2) + " "+ crossStr
+        else return "M " +cir.cx + " " + cir.cy  + " " + crossStr
+        // console.log(dim.split(' '))
+
+
+        cir.left = "M " +cir.cx + " " + cir.cy + " m -" + Math.sqrt(cir.radius*cir.radius - radius/2 * radius/2) + " -" +  radius/2 + " " + crossStr
+
+        cir.right = "M " +cir.cx + " " + cir.cy + " m " + Math.sqrt(cir.radius*cir.radius - radius/2 * radius/2) + " -" +  radius/2 + " " + crossStr
+
+        cir.bottom = "M " +cir.cx + " " + cir.cy + " m 0 "    +  cir.radius + " " + crossStr
+
+        // console.log("output " + str)
+
+
+        return cir[direction]
+
+        // d= "M 588.2238280114467 237.25892100262183 m 192.55 -111  m 20 20 l -40 -40 m 20 20 m -20 20 l 40 -40"
+      }
+
+
+      vennL = canvasL.datum(setsL).call(logicizeChart)
+
+      exBut = canvasL.append('button').text('button').attr('id','exBut')
+
+      var existence = false
+      vennL.selectAll('path').style('fill','white')    .style('stroke', "black")
+          .style('stroke-opacity',1)
+          .style('stroke-width',10)
+          .style('fill-opacity',1)
+
+      exBut.on('click',function(){
+        existence = (existence == false)?true :false;
+      })
+
+      vennL.selectAll("g")
+        .on("click", function(d, i) {
+          console.log(d)
+          if (!existence){
+            if (!d.clicked){
+              d3.select(this).select('path').style('fill','#ccc').style('fill-opacity',1)
+              d.clicked = true
+
+            }else{
+              d3.select(this).select('path').style('fill','white').style('fill-opacity',1)
+              d.clicked = false
+            }
+          } else if (existence){
+            var dim
+          switch(d.sets.length){
+            case (3): {
+                centerLoop ={
+                  "a":"b",
+                  "b":"c",
+                  "c":"d",
+                  "d":"a"
+                }
+
+                if (some.length == 1)  some = centerLoop[some]
+                else  some = "d"
+
+
+                dim = (some=="d")? "0" :vennL.select('g[data-venn-sets="'+choices[some]+'"]  path').attr('d')
+                // if(cross["1"] == undefined){
+                //   cross["1"] = canvasL.select('svg').append('path').attr('d',getBorderLoc(dim,some)).style('stroke','#6D929B')
+                //       .style('stroke-opacity',1)
+                //       .style('stroke-width',7)
+                //       .style('fill-opacity',1)
+                // } else{
+                //   cross["1"].transition().duration(300).attr('d',getBorderLoc(dim,some))
+                // }
+                break;
+
+              }
+              case (2):{
+                some =  d.sets[0]+"_"+d.sets[1]
+                if (some == a+"_"+b) dim = vennL.select('g[data-venn-sets="'+some+'"]  path').attr('d')
+                else if (some == a+"_"+c) dim = vennL.select('g[data-venn-sets="'+a+'"]  path').attr('d')
+                else  dim = vennL.select('g[data-venn-sets="'+b+'"]  path').attr('d')
+                console.log(dim)
+                console.log(some)
+
+                break;
+
+              }
+              case (1): {
+                some =  d.sets[0]
+                dim = vennL.select('g[data-venn-sets="'+some+'"]  path').attr('d')
+                console.log(some)
+                break;
+              }
+
+            }
+            if(cross["1"] == undefined){
+              cross["1"] = canvasL.select('svg').append('path').attr('d',getCrossLoc(dim,some)).style('stroke','#6D929B')
+                  .style('stroke-opacity',1)
+                  .style('stroke-width',7)
+                  .style('fill-opacity',1)
+            } else{
+              cross["1"].transition().duration(300).attr('d',getCrossLoc(dim,some))
+            }
+          }
+        })
+        .on('mouseover',function(){
+          var hoverColor = "#3399ff"
+          if (!existence) {
+             d3.select(this).select('path').transition().style('fill',hoverColor)
+          } else {
+            d3.select(this).select('path').style('stroke',hoverColor)
+          }
+        })
+        .on('mouseout',function(d){
+          if (!existence){
+            var tempColor = (!d.clicked)? "white":"#ccc";
+            d3.select(this).select('path').transition().style('fill',tempColor)
+          } else{
+            d3.select(this).select('path').style('stroke','black')
+
+          }
+        })
+        console.log(test = new Syllogism(a,b,c))
+        console.log(test)
+    })
+  }
+
+  initVennL()
+
+terms = {
+  middle:"",
+  major:"",
+  minor:""
+
 }
-d3.selectAll("#moods text").style("font-size", "2em")
 
 
 
-paText = d3.select('#pa').select('svg').append('text').text('X').attr('dx',moodWidth/2).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+valid = ['AAA1','EAE1','EIO1','AII1','AEE2','EAE2','EIO2','AOO2','IAI3','OAO3','AII3','AEE4','IAI4','EIO4']
 
-pnText = d3.select('#pn').select('svg').append('text').text('X').attr('dx',moodWidth/4).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
+function generateSyl(){
+  mood = ['A','E','I','O']
+  figure = ['1','2','3','4']
+  if (chance.bool({likelihood:30})) return chance.pickone(valid)
+  else return chance.pickone(mood) + chance.pickone(mood) + chance.pickone(mood) + chance.pickone(figure)
+}
+
+function checkValidity(syl){
+
+  o = valid.indexOf(syl)
+  console.log(o)
+  return (o != -1)
+}
+
+ function Syllogism(p, s, m){
+  this.form =  generateSyl(),
+  this.valid = checkValidity(this.form)
+  this.figure = this.form[3]
+  this.p1mood = this.form[0]
+  this.p2mood = this.form[1]
+  this.cmood = this.form[2]
+  this.c = [s,p]
+  switch (this.figure) {
+    case "1": {
+      this.p1 = [m,p]
+      this.p2 = [s,m]
+      break;
+    }
+    case "2": {
+      this.p1 = [p,m]
+      this.p2 = [s,m]
+      break;
+
+    }
+    case "3": {
+      this.p1 = [m,p]
+      this.p2 = [m,s]
+      break;
+
+    }
+    case "4": {
+      this.p1 = [p,m]
+      this.p2 = [m,s]
+      break;
+
+    }
+
+  }
+  var placeholder = ['p1','p2','c']
+  for (p in placeholder){
+    if (this[placeholder[p]+"mood"] == "A") this[placeholder[p]+"str"] = "All " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+    else if (this[placeholder[p]+"mood"] == "E") this[placeholder[p]+"str"] = "No " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+    else if (this[placeholder[p]+"mood"] == "I") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+    else if (this[placeholder[p]+"mood"] == "O") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are not" +this[placeholder[p]][1]
+
+  }
 
 
+}
+
+
+// moods:{
+//   "P1":"",
+//   "P2":"",
+//   "C":""
+// }
+//
+// figures:{
+//
+// }
+//
+// argument = {
+//   form:"AAA1"
+// }
 
 
 

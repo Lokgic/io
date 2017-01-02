@@ -1,0 +1,86 @@
+{
+  "name":"dogs",
+  "children":[
+    {
+      "name": "working dogs",
+      "children":[
+        "Akita",
+        "Alaskan Malamutes",
+        "Anatolian Shepard Dogs",
+        "Boxers",
+        "Great Danes",
+        "Great Pyrenees",
+        "Rottweilers",
+        "Samoyeds",
+        "Siberian Huskies",
+        "St. Bernards"
+
+      ]
+    },
+    {
+      "name":"toy dogs",
+      "children":[
+        "Chihuahua",
+        "Maltese",
+        "Pekingese",
+        "Pomeranian",
+        "Poodle",
+        "Pug",
+        "Shih Tzu"
+      ]
+    },
+    {
+      "name":"herding dogs",
+      "children":[
+        "Australian Cattle Dog",
+        "Australian Shepherd",
+        "Belgian Malinois",
+        "Border Collies",
+        "Collies",
+        "German Shepards",
+        "Corgis",
+        "Shetland Sheepdog",
+        "Swedish Vallhunds"
+      ]
+    },
+    {
+      "name":"non-sporting dogs",
+      "children":[
+        "American Eskimos",
+        "Boston Terriers",
+        "Bulldogs",
+        "Chow-Chows",
+        "Finnish Spitz",
+        "Shiba Inu"
+
+      ]
+    },
+    {
+      "name":"sporting dogs",
+      "children":[
+        "American Water Spaniels",
+        "Flat-Coated Retrievers",
+        "Golden Retrievers",
+        "Labrador Retrievers",
+        "Pointers",
+        "Sussex Spaniel"
+      ]
+
+    },
+    {
+      "name":"hounds",
+      "children":[
+        "Afghan Hounds",
+        "American English Coonhounds",
+        "Basenjis",
+        "Beagles",
+        "Bloodhounds",
+        "Dachshunds",
+        "Greyhounds",
+        "Irish Wolfhounds",
+        "Rhodesian Ridgeback"
+      ]
+    }
+
+  ]
+}
