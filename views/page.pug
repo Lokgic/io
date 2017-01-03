@@ -68,8 +68,15 @@ block content
 
 											.col-sm-6.animation.p-a-0
 									when "logicize"
+										h3.logInstruction Determine if the following syllogism is valid, and provide the correct Venn diagram.
 										.row
-											#userInput.col-sm-4 User input
+											#userInput.col-sm-4
+												.argument.m-x-3.m-y-1.text-justify#sylProblem
+												button(type = "button").btn.btn-outline-teal.m-a-1.btn-block#exBut Add Object 1
+												button(type = "button").btn.btn-outline-blue.m-a-1.btn-block#exBut2 Add Object 2
+												button(type = "button").invisible.btn.btn-purple.m-a-1.text-xs-center#delObj Delete Current Object
+
+												button(type = "button").btn.btn-greyish.m-a-1.btn-block#answer Submit Answer
 											#vennLog.col-sm-8
 									when "argument"
 											+argument(x.premises, x.conclusion)

@@ -737,4 +737,16 @@ router.post('/processing/model_id', function(req,res,next){
 	return res.send(problem)
 
 })
+
+router.post('/processing/*', function(req,res,next){
+
+	var generatorID = req.path.split('/')[2]
+	generator = require("../js/"+generatorID+"_gen.js")
+	var output  = new generator.makeStuff()
+console.log(output)
+
+
+	return res.send(output)
+
+})
 module.exports = router;

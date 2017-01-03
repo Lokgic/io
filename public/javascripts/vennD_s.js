@@ -1,6 +1,5 @@
 var venn = require("venn.js")
-var Chance = require('chance')
-var chance = new Chance();
+
 var text1 = "First, consider a circle that contains all plucked intruments and another one that contains all bowed instruments."
 
 var text2 = "Premise 1 tells that whatever instrument Bob plays belongs to the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"
@@ -542,8 +541,8 @@ function graphics2TextAdd(){
 
   //logicize
 
-  logicizeChart = venn.VennDiagram().width($('main').width()).height(2*window.innerHeight/3)
-  canvasL = d3.select('#vennLog').attr('id', 'bottomDiv')
+  logicizeChart = venn.VennDiagram().width($('#vennLog').width()).height(2*window.innerHeight/3)
+  canvasL = d3.select('#vennLog')
 
   function loadJSON(type, callback){
       $.getJSON('../json/' + type + '.json')
@@ -553,31 +552,31 @@ function graphics2TextAdd(){
   }
 
   function initVennL(){
-    var some = ""
-    loadJSON('dogs', function(error, dogs){
 
+    loadSyl( function(error, dogs){
+      premise1 = d3.select('#sylProblem').append('p').attr('id','p1')
+      premise2 = d3.select('#sylProblem').append('p').attr('id','p2')
+      conclusion = d3.select('#sylProblem').append('p').attr('id','con')
+      premise1.text("Premise 1: "+dogs.p1str)
+      premise2.text("Premise 2: "+dogs.p2str)
+      conclusion.text("Conclusion: "+dogs.cstr)
+      console.log(dogs)
 
-      output = []
-      if (chance.bool({likelihood:15})) output.push("dogs")
-      if (chance.bool({likelihood:15})) output.push("animals")
-      if (chance.bool({likelihood:15})) output.push("mammals")
-      if (chance.bool({likelihood:15})) output.push("canines")
-
-      while (output.length <3){
-        var temp = chance.pickone(dogs.children)
-        temp = (chance.bool({likelihood:50}))? temp.name: chance.pickone(temp.children);
-        if (output.indexOf(temp) == -1) output.push(temp)
-      }
-      output = chance.shuffle(output)
-      // console.log(output)
-      var choices = {}
       var cross = {}
-       choices.a = output[0]
-       choices.b = output[1]
-       choices.c = output[2]
-      var a = choices.a
-      var b = choices.b
-      var c = choices.c
+
+
+      var a = dogs.terms.m
+      var b = dogs.terms.p
+      var c = dogs.terms.s
+      terms = {
+        a:a,
+        b:b,
+        c:c
+      }
+      var  cCenter = a+"_"+b+"_"+c
+      var  cRight = "-" + a+"_"+b+"_"+c
+      var  cLeft = a+"-"+b+"_"+c
+      var  cBottom = a+"_"+b+"-"+c
       setsL = [
         {sets: [a], size: 4,clicked:false},
        {sets: [b], size: 4,clicked:false},
@@ -588,8 +587,8 @@ function graphics2TextAdd(){
        {sets: [a,b,c], size: 1,clicked:false},
 
       ]
-
       function getCrossLoc(dim,direction){
+
         var crossStr = "m 10 10 l -20 -20 m 10 10 m -10 10 l 20 -20"
         cir ={}
         cir.cx = parseFloat(dim.split(' ')[1])
@@ -598,12 +597,16 @@ function graphics2TextAdd(){
         cir.radius = parseFloat(dim.split(' ')[4]) *-1
 
         // console.log("M " + $('#vennLog svg').width()/2 + " " + $('#vennLog svg').height()/2   + " " + crossStr)
-        if (direction == "a") direction = "right"
-        else if (direction == "b") direction = "left"
-        else if (direction == "c") direction = "bottom"
-        else if (direction == "d") return "M " + $('#vennLog svg').width()/2 + " " + $('#vennLog svg').height()/2   + " " + crossStr
+        if (direction == cRight) direction = "right"
+        else if (direction == cLeft) direction = "left"
+        else if (direction == cBottom) direction = "bottom"
+        else if (direction == cCenter) return "M " + $('#vennLog svg').width()/2 + " " + $('#vennLog svg').height()/2   + " " + crossStr
         else if (direction == a +"_"+b) return "M " +cir.cx + " " + cir.cy  + " m 0 " +cir.ab + " "+ crossStr
         else if (direction == a +"_"+c || direction == b +"_"+c ) return "M " +cir.cx + " " + cir.cy  + " m 0 -" +(cir.radius/2) + " "+ crossStr
+        else if (direction == "+" + a +"_"+c ||direction =="+" + b +"_"+c) return "M " +cir.cx + " " + cir.cy  + " m 0 -" + cir.radius + " " + crossStr
+        else if (direction == "+" + a +"_"+b ||direction =="-" + a +"_"+b) return (direction == "+" + a +"_"+b)? "M " +cir.cx + " " + cir.cy  + " m " + cir.radius +" 0 "+ " " + crossStr :  "M " +cir.cx + " " + cir.cy  + " m -" + cir.radius +" 0 "+ " " + crossStr
+        else if (direction == "-"+a+"_"+c) return "M " +cir.cx + " " + cir.cy + " m -" +  radius + " " + Math.sqrt(cir.radius*cir.radius - radius * radius) +" "+ crossStr
+        else if (direction == "-"+b+"_"+c) return "M " +cir.cx + " " + cir.cy + " m " +  radius + " " + Math.sqrt(cir.radius*cir.radius - radius * radius) +" "+ crossStr
         else return "M " +cir.cx + " " + cir.cy  + " " + crossStr
         // console.log(dim.split(' '))
 
@@ -624,23 +627,103 @@ function graphics2TextAdd(){
 
 
       vennL = canvasL.datum(setsL).call(logicizeChart)
+      vennL.selectAll('.label').style('font-size','1.5em').style('text-transform','capitalize')
+      var obj = [
 
-      exBut = d3.select('#userInput').append('button').text('button').attr('id','exBut')
+      ]
+      var objI
 
-      var existence = false
+
+
+      exBut = d3.select('#exBut')
+      exBut2 = d3.select('#exBut2')
+      delBut = d3.select('#delObj')
+      answer = d3.select('#answer')
+      var mode = "shade"
       vennL.selectAll('path').style('fill','white')    .style('stroke', "black")
           .style('stroke-opacity',1)
           .style('stroke-width',10)
           .style('fill-opacity',1)
-
+      answer.on('click',function(){
+        console.log(obj)
+        console.log(setsL)
+      })
       exBut.on('click',function(){
-        existence = (existence == false)?true :false;
+        if (mode =="shade"){
+          objI = 0;
+          mode = "obj1"
+           $('#delObj').removeClass('invisible')
+          $('#exBut').removeClass('btn-outline-teal')
+          $('#exBut').addClass('btn-teal')
+          $('#exBut').text('Confirm Object 1')
+
+        }else if (mode == "obj2"){
+          objI = 0;
+          mode = "obj1"
+          $('#exBut').removeClass('btn-outline-teal')
+          $('#exBut').addClass('btn-teal')
+          $('#exBut').text('Confirm Object 1')
+        }
+        else {
+          mode = "shade"
+          $('#delObj').addClass('invisible')
+          $('#exBut').removeClass('btn-teal')
+          $('#exBut').addClass('btn-outline-teal')
+          $('#exBut').text('Edit Object 1')
+        }
+
+
+      })
+
+      exBut2.on('click',function(){
+        if (mode =="shade"){
+          objI = 1;
+          mode = "obj2"
+           $('#delObj').removeClass('invisible')
+          $('#exBut2').removeClass('btn-outline-blue')
+          $('#exBut2').addClass('btn-blue')
+          $('#exBut2').text('Confirm Object 2')
+        }
+        else if (mode == "obj1"){
+          objI = 1;
+          mode = "obj2"
+          $('#exBut2').removeClass('btn-outline-blue')
+          $('#exBut2').addClass('btn-blue')
+          $('#exBut2').text('Confirm Object 2')
+
+        }
+        else {
+          mode = "shade"
+          $('#delObj').addClass('invisible')
+          $('#exBut2').removeClass('btn-blue')
+          $('#exBut2').addClass('btn-outline-blue')
+          $('#exBut2').text('Edit Object 2')
+        }
+
+      })
+
+      delBut.on('click',function(){
+        if (cross[objI]){
+          obj.splice(objI, 1);
+          cross[objI].attr('d',"M -1000 -1000")
+        }
+
+        mode = "shade"
+        var targetBut = (objI == 0)? '#exBut' :'#exBut2'
+        var color = (objI == 0)? 'teal' :'blue'
+        $(targetBut).removeClass('btn-'+color)
+        $(targetBut).addClass('btn-outline-'+color)
+        $(targetBut).text('Add Object ' + (objI + 1))
+        $('#delObj').addClass('invisible')
+
+
+
       })
 
       vennL.selectAll("g")
         .on("click", function(d, i) {
-          console.log(d)
-          if (!existence){
+
+          if (mode=="shade"){
             if (!d.clicked){
               d3.select(this).select('path').style('fill','#ccc').style('fill-opacity',1)
               d.clicked = true
@@ -649,64 +732,75 @@ function graphics2TextAdd(){
               d3.select(this).select('path').style('fill','white').style('fill-opacity',1)
               d.clicked = false
             }
-          } else if (existence){
+          } else if (mode!="shade"){
             var dim
           switch(d.sets.length){
             case (3): {
                 centerLoop ={
-                  "a":"b",
-                  "b":"c",
-                  "c":"d",
-                  "d":"a"
+
                 }
-
-                if (some.length == 1)  some = centerLoop[some]
-                else  some = "d"
-
-
-                dim = (some=="d")? "0" :vennL.select('g[data-venn-sets="'+choices[some]+'"]  path').attr('d')
+                centerLoop[cCenter] =  cLeft
+                centerLoop[cLeft] =  cRight
+                centerLoop[cRight] =  cBottom
+                centerLoop[cBottom] =  cCenter
+                // console.log(centerLoop)
+                if (obj[objI]== cLeft || obj[objI]== cRight|| obj[objI]== cBottom||obj[objI]== cCenter)  obj[objI] = centerLoop[obj[objI]]
+                else  obj[objI] = cCenter
+                // console.log(obj)
+                if (obj[objI] == cRight) dim = vennL.select('g[data-venn-sets="'+a+'"]  path').attr('d')
+                else if (obj[objI] == cLeft) dim =  vennL.select('g[data-venn-sets="'+b+'"]  path').attr('d')
+                else if (obj[objI] == cBottom) dim = vennL.select('g[data-venn-sets="'+c+'"]  path').attr('d')
+                else dim = "0"
+                // console.log(dim)
+                // dim = (obj[objI]==a+"_"+b"_"+"_"+c)? "0" :vennL.select('g[data-venn-sets="'+terms[obj[objI]]+'"]  path').attr('d')
                 break;
 
               }
               case (2):{
-                some =  d.sets[0]+"_"+d.sets[1]
-                if (some == a+"_"+b) dim = vennL.select('g[data-venn-sets="'+some+'"]  path').attr('d')
-                else if (some == a+"_"+c) dim = vennL.select('g[data-venn-sets="'+a+'"]  path').attr('d')
-                else  dim = vennL.select('g[data-venn-sets="'+b+'"]  path').attr('d')
-                console.log(dim)
-                console.log(some)
+                if (obj[objI] ==  d.sets[0]+"_"+d.sets[1]) obj[objI] = "-"+ d.sets[0]+"_"+d.sets[1]
+                else obj[objI] = (obj[objI] ==  "-"+ d.sets[0]+"_"+d.sets[1]) ? obj[objI] = "+"+ d.sets[0]+"_"+d.sets[1]:  obj[objI] =  d.sets[0]+"_"+d.sets[1]
+
+
+                if (obj[objI] == a+"_"+b) dim = vennL.select('g[data-venn-sets="'+obj[objI]+'"]  path').attr('d')
+                else if (obj[objI] == a+"_"+c || obj[objI] == "+" + a+"_"+c || obj[objI] == "+" + a+"_"+b ) dim = vennL.select('g[data-venn-sets="'+a+'"]  path').attr('d')
+                else if (obj[objI] == b + "_" + c|| obj[objI] == "+"+b + "_" + c|| obj[objI] == "-" + a+"_"+b ) dim = vennL.select('g[data-venn-sets="'+b+'"]  path').attr('d')
+                else dim = vennL.select('g[data-venn-sets="'+c+'"]  path').attr('d')
+                // console.log(dim)
+                // console.log(obj[objI])
 
                 break;
 
               }
               case (1): {
-                some =  d.sets[0]
-                dim = vennL.select('g[data-venn-sets="'+some+'"]  path').attr('d')
-                console.log(some)
+                obj[objI] =  d.sets[0]
+                dim = vennL.select('g[data-venn-sets="'+obj[objI]+'"]  path').attr('d')
+                // console.log(obj[objI])
                 break;
               }
 
             }
-            if(cross["1"] == undefined){
-              cross["1"] = canvasL.select('svg').append('path').attr('d',getCrossLoc(dim,some)).style('stroke','#6D929B')
-                  .style('stroke-opacity',1)
+            console.log(obj)
+            var crossColor = (objI == 1)? "#478EB0" :"#028482"
+            if(cross[objI] == undefined){
+              cross[objI] = canvasL.select('svg').append('path').attr('d',getCrossLoc(dim,obj[objI])).style('stroke',crossColor)
+                  .style('stroke-opacity',.7)
                   .style('stroke-width',7)
                   .style('fill-opacity',1)
             } else{
-              cross["1"].transition().duration(300).attr('d',getCrossLoc(dim,some))
+              cross[objI].transition().duration(300).attr('d',getCrossLoc(dim,obj[objI]))
             }
           }
         })
         .on('mouseover',function(){
-          var hoverColor = "#3399ff"
-          if (!existence) {
+          var hoverColor = "#9FB3B6"
+          if (mode =="shade") {
              d3.select(this).select('path').transition().style('fill',hoverColor)
           } else {
             d3.select(this).select('path').style('stroke',hoverColor)
           }
         })
         .on('mouseout',function(d){
-          if (!existence){
+          if (mode =="shade"){
             var tempColor = (!d.clicked)? "white":"#ccc";
             d3.select(this).select('path').transition().style('fill',tempColor)
           } else{
@@ -714,99 +808,86 @@ function graphics2TextAdd(){
 
           }
         })
-        console.log(test = new Syllogism(a,b,c))
-        console.log(test)
+        // console.log(test = new Syllogism(a,b,c))
+        // console.log(test)
     })
   }
 
   initVennL()
 
-terms = {
-  middle:"",
-  major:"",
-  minor:""
-
-}
 
 
-
-valid = ['AAA1','EAE1','EIO1','AII1','AEE2','EAE2','EIO2','AOO2','IAI3','OAO3','AII3','AEE4','IAI4','EIO4']
-
-function generateSyl(){
-  mood = ['A','E','I','O']
-  figure = ['1','2','3','4']
-  if (chance.bool({likelihood:30})) return chance.pickone(valid)
-  else return chance.pickone(mood) + chance.pickone(mood) + chance.pickone(mood) + chance.pickone(figure)
-}
-
-function checkValidity(syl){
-
-  o = valid.indexOf(syl)
-  console.log(o)
-  return (o != -1)
-}
-
- function Syllogism(p, s, m){
-  this.form =  generateSyl(),
-  this.valid = checkValidity(this.form)
-  this.figure = this.form[3]
-  this.p1mood = this.form[0]
-  this.p2mood = this.form[1]
-  this.cmood = this.form[2]
-  this.c = [s,p]
-  switch (this.figure) {
-    case "1": {
-      this.p1 = [m,p]
-      this.p2 = [s,m]
-      break;
-    }
-    case "2": {
-      this.p1 = [p,m]
-      this.p2 = [s,m]
-      break;
-
-    }
-    case "3": {
-      this.p1 = [m,p]
-      this.p2 = [m,s]
-      break;
-
-    }
-    case "4": {
-      this.p1 = [p,m]
-      this.p2 = [m,s]
-      break;
-
-    }
-
-  }
-  var placeholder = ['p1','p2','c']
-  for (p in placeholder){
-    if (this[placeholder[p]+"mood"] == "A") this[placeholder[p]+"str"] = "All " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
-    else if (this[placeholder[p]+"mood"] == "E") this[placeholder[p]+"str"] = "No " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
-    else if (this[placeholder[p]+"mood"] == "I") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
-    else if (this[placeholder[p]+"mood"] == "O") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are not" +this[placeholder[p]][1]
-
-  }
-
-
-}
-
-
-// moods:{
-//   "P1":"",
-//   "P2":"",
-//   "C":""
+// valid = ['AAA1','EAE1','EIO1','AII1','AEE2','EAE2','EIO2','AOO2','IAI3','OAO3','AII3','AEE4','IAI4','EIO4']
+//
+// function generateSyl(){
+//   mood = ['A','E','I','O']
+//   figure = ['1','2','3','4']
+//   if (chance.bool({likelihood:30})) return chance.pickone(valid)
+//   else return chance.pickone(mood) + chance.pickone(mood) + chance.pickone(mood) + chance.pickone(figure)
 // }
 //
-// figures:{
+// function checkValidity(syl){
 //
+//   o = valid.indexOf(syl)
+//   // console.log(o)
+//   return (o != -1)
 // }
 //
-// argument = {
-//   form:"AAA1"
+//  function Syllogism(p, s, m){
+//   this.form =  generateSyl(),
+//   this.valid = checkValidity(this.form)
+//   this.figure = this.form[3]
+//   this.p1mood = this.form[0]
+//   this.p2mood = this.form[1]
+//   this.cmood = this.form[2]
+//   this.c = [s,p]
+//   switch (this.figure) {
+//     case "1": {
+//       this.p1 = [m,p]
+//       this.p2 = [s,m]
+//       break;
+//     }
+//     case "2": {
+//       this.p1 = [p,m]
+//       this.p2 = [s,m]
+//       break;
+//
+//     }
+//     case "3": {
+//       this.p1 = [m,p]
+//       this.p2 = [m,s]
+//       break;
+//
+//     }
+//     case "4": {
+//       this.p1 = [p,m]
+//       this.p2 = [m,s]
+//       break;
+//
+//     }
+//
+//   }
+//   var placeholder = ['p1','p2','c']
+//   for (p in placeholder){
+//     if (this[placeholder[p]+"mood"] == "A") this[placeholder[p]+"str"] = "All " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+//     else if (this[placeholder[p]+"mood"] == "E") this[placeholder[p]+"str"] = "No " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+//     else if (this[placeholder[p]+"mood"] == "I") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are " +this[placeholder[p]][1]
+//     else if (this[placeholder[p]+"mood"] == "O") this[placeholder[p]+"str"] = "Some " + this[placeholder[p]][0] +" are not" +this[placeholder[p]][1]
+//
+//   }
+//
+//
 // }
 
+function loadSyl(callback){
+  jQuery.post("../processing/syllogism")
+  .done(function(data){
+      callback(null, data);
+  }).fail(function(){$body.append('Failed to Load Quiz')})
+};
 
+loadSyl(function(e,d){
+  // console.log(d)
+})
 
 })

@@ -16,6 +16,54 @@ circle {
   fill-opacity: 1;
 }*/
 /*m1c1*/
+
+.btn-blue ,.btn-outline-blue:hover{
+  background-color: #478EB0;
+  color:white;
+  border-color:#478EB0
+}
+
+.btn-outline-blue {
+  background-color: white;
+  color:#478EB0;
+  border-color:#478EB0
+}
+
+.btn-greyish,.btn-outline-greyish:hover {
+  background-color: #9FB3B6;
+  color:white;
+  border-color:#9FB3B6
+}
+
+.btn-outline-greyish{
+  background-color: white;
+  color:#9FB3B6;
+  border-color:#9FB3B6
+}
+
+.btn-purple {
+  background-color: #7E82AD;
+  color:white;
+  border-color:#7E82AD
+}
+
+.btn-outline-purple, .btn-purple:hover{
+  background-color: white;
+  color:#7E82AD;
+  border-color:#7E82AD
+}
+
+.btn-teal, .btn-outline-teal:hover {
+  background-color: #028482;
+  color:white;
+  border-color:#028482
+}
+
+.btn-outline-teal{
+  background-color: white;
+  color:#028482;
+  border-color:#028482
+}
 #moods  path{
   fill: white;
 }
