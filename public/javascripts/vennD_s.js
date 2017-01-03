@@ -648,6 +648,7 @@ function graphics2TextAdd(){
         console.log(obj)
         console.log(setsL)
       })
+
       exBut.on('click',function(){
         if (mode =="shade"){
           objI = 0;
@@ -663,6 +664,9 @@ function graphics2TextAdd(){
           $('#exBut').removeClass('btn-outline-teal')
           $('#exBut').addClass('btn-teal')
           $('#exBut').text('Confirm Object 1')
+          $('#exBut2').removeClass('btn-blue')
+          $('#exBut2').addClass('btn-outline-blue')
+          $('#exBut2').text('Edit Object 1')
         }
         else {
           mode = "shade"
@@ -690,6 +694,9 @@ function graphics2TextAdd(){
           $('#exBut2').removeClass('btn-outline-blue')
           $('#exBut2').addClass('btn-blue')
           $('#exBut2').text('Confirm Object 2')
+          $('#exBut').removeClass('btn-teal')
+          $('#exBut').addClass('btn-outline-teal')
+          $('#exBut').text('Edit Object 1')
 
         }
         else {

@@ -82,6 +82,7 @@ function checkValidity(syl){
       diagram.area[m+"_"+p+"_"+s] = true
     }
   }
+  var  cCenter = m+"_"+p+"_"+s
   var index = 0
   for (mood in pMood){
     var pID= "p"+(parseInt(mood) + 1)
@@ -89,8 +90,20 @@ function checkValidity(syl){
       var words = sorter(this[pID],[m,p,s])
       diagram.objects[index].exists = true;
       var temp = words[0] + "_" + words[1]
-      if (this[temp]) diagram.objects[index].loc = m+"_"+p+"_"+s
-      else diagram.objects[index].loc = (diagram.area[m+"_"+p+"_"+s])? temp + "+" :temp + "-"
+      str = ""
+      if (!this.diagram.area[cCenter]) diagram.objects[index].loc = cCenter
+      else {
+        third = [m,p,s].indexOf(getThird(this.terms, this[pID]))
+
+        for (var i = 0; i <3;i++){
+          if (this[pID].indexOf([m,p,s][i]) != -1) str += ([m,p,s][i] == m)? m: "_" + [m,p,s][i]
+            else str += "-" +[m,p,s][i]
+
+        }
+        diagram.objects[index].loc = str
+      }
+
+
       index += 1;
 
 
@@ -99,8 +112,12 @@ function checkValidity(syl){
       diagram.objects[index].exists = true;
       var temp = this[pID][0]
       var third = getThird(this.terms, this[pID])
+      var temp2 = sorter([temp, third],[m,p,s])
+      var intersection = temp2[0]+"_"+temp2[1]
       console.log(temp + ' '+ third)
-      diagram.objects[index].loc = (diagram.area[third])? temp : temp +"-" +third
+      if (diagram.area[intersection]) diagram.objects[index].loc = temp
+      else diagram.objects[index].loc = (temp2[0] == temp)? "-" +intersection: "+"+intersection
+
       index += 1;
     }
   }
