@@ -68,16 +68,20 @@ block content
 
 											.col-sm-6.animation.p-a-0
 									when "logicize"
-										h3.logInstruction Determine if the following syllogism is valid, and provide the correct Venn diagram.
-										.row
-											#userInput.col-sm-4
-												.argument.m-x-3.m-y-1.text-justify#sylProblem
-												button(type = "button").btn.btn-outline-teal.m-a-1.btn-block#exBut Add Object 1
-												button(type = "button").btn.btn-outline-blue.m-a-1.btn-block#exBut2 Add Object 2
-												button(type = "button").invisible.btn.btn-purple.m-a-1.text-xs-center#delObj Delete Current Object
-
-												button(type = "button").btn.btn-greyish.m-a-1.btn-block#answer Submit Answer
-											#vennLog.col-sm-8
+										.container-fluid.panels
+											.row(id = x.eventId).text-xs-center
+												#userInput.leftPanel.col-md-2
+													button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Add Object 1
+													button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Add Object 2
+													button(type = "button").invisible.btn.btn-purple.m-y-1.text-xs-center#delObj Delete Current Object
+													p.m-y-0
+														span.m-x-1#scoretitle Current Score :
+														span#score 0
+												#vennLog.midpanel.col-md-8
+												.rightPanel.col-md-2
+													p.logInstruction.text-xs-center Instruction: Determine if the following syllogism is valid, and provide the correct Venn diagram.
+													.m-y-1.text-xs-center#sylProblem
+													button(type = "button").btn.btn-greyish.m-y-1.btn-block#answer.answerButt Submit Answer
 									when "argument"
 											+argument(x.premises, x.conclusion)
 									when "event"

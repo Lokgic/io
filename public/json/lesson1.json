@@ -156,7 +156,8 @@
       "title": "Logicize",
       "content":{
         "a":{
-          "type": "logicize"
+          "type": "logicize",
+          "eventId":"vennArgument"
         }
       }
     }

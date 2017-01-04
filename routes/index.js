@@ -738,6 +738,7 @@ router.post('/processing/model_id', function(req,res,next){
 
 })
 
+
 router.post('/processing/*', function(req,res,next){
 
 	var generatorID = req.path.split('/')[2]
@@ -747,6 +748,16 @@ console.log(output)
 
 
 	return res.send(output)
+
+})
+
+router.get('/logicize/*', function(req,res,next){
+
+	var logicize = req.path.split('/')[2]
+	var info = require('../public/json/logicizes.json');
+
+
+	return res.render('logicizeFS', {title:"Venn Diagram: Syllogism", logicize:logicize, info:info[logicize]});
 
 })
 module.exports = router;

@@ -1,0 +1,28 @@
+.logicizeFS{
+
+  background: white;
+  max-width: 1500px;
+    margin-bottom: 150px;
+
+}
+.logicizeTitle{
+  margin-top:150px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1em;
+
+}
+
+
+.logicizeTitle ul{
+  list-style: none;
+  display: inline;
+}
+
+.logicizeTitle li{
+
+  display: inline-block;;
+}
+
+.scoreDisplay{
+
+}

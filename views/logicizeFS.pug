@@ -1,0 +1,48 @@
+extends pagelayout
+
+block extrahead
+	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
+
+block content
+	main.container.logicizeFS
+		.logicizeTitle.m-b-2
+			h2.m-b-0 #{info.title}
+			hr.longLine
+
+			ul
+				li
+					p.logInstruction Determine if the following syllogism is valid, and provide the correct Venn diagram.
+				li.pull-xs-right
+					button.btn.btn-secondary.m-l-1 Instruction
+				li.pull-xs-right
+					button.btn.btn-secondary Score:&nbsp;
+						span#score 0
+		.row.text-xs-center
+			#userInput.leftPanel.col-lg-3.col-md-4
+				button(type = "button").btn.btn-secondary.m-y-1.m-r-2.btn-block#valid Argument Valid?
+				button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Add Object 1
+				button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Add Object 2
+				button(type = "button").invisible.btn.btn-purple.m-y-1.text-xs-center#delObj Delete Current Object
+				button(type = "button").btn.btn-greyish.m-y-1.btn-block#answer.answerButt Submit Answer
+			#vennLog.midpanel.col-lg-6.col-md-4
+			.rightPanel.col-lg-3.col-md-4
+				.m-y-1.text-justify#sylProblem
+
+
+
+
+
+
+block extrafooter
+	link(rel="stylesheet", type="text/css", href="../css/page.css")
+	link(rel="stylesheet", type="text/css", href="../css/logicize.css")
+	script(type="text/x-mathjax-config").
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		}}
+		);
+	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="../javascripts/"+logicize+".js")
+	script(src="../javascripts/autohidenav.js")

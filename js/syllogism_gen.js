@@ -87,11 +87,12 @@ function checkValidity(syl){
   for (mood in pMood){
     var pID= "p"+(parseInt(mood) + 1)
     if (pMood[mood] == "I"){
-      var words = sorter(this[pID],[m,p,s])
-      diagram.objects[index].exists = true;
-      var temp = words[0] + "_" + words[1]
+      var termsSorted = sorter(this[pID],[m,p,s])
+      // diagram.objects[index].exists = true;
+      var intersection = termsSorted[0] + "_" + termsSorted[1]
       str = ""
-      if (!this.diagram.area[cCenter]) diagram.objects[index].loc = cCenter
+      if (this.diagram.area[intersection]) diagram.objects[index] = cCenter
+      else if (this.diagram.area[cCenter]) diagram.objects[index] = intersection
       else {
         third = [m,p,s].indexOf(getThird(this.terms, this[pID]))
 
@@ -100,7 +101,7 @@ function checkValidity(syl){
             else str += "-" +[m,p,s][i]
 
         }
-        diagram.objects[index].loc = str
+        diagram.objects[index] = str
       }
 
 
@@ -109,14 +110,15 @@ function checkValidity(syl){
 
 
     } else if (pMood[mood] == "O"){
-      diagram.objects[index].exists = true;
-      var temp = this[pID][0]
+      // diagram.objects[index].exists = true;
+      var subject = this[pID][0]
       var third = getThird(this.terms, this[pID])
-      var temp2 = sorter([temp, third],[m,p,s])
+      var temp2 = sorter([subject, third],[m,p,s])
       var intersection = temp2[0]+"_"+temp2[1]
-      console.log(temp + ' '+ third)
-      if (diagram.area[intersection]) diagram.objects[index].loc = temp
-      else diagram.objects[index].loc = (temp2[0] == temp)? "-" +intersection: "+"+intersection
+      // console.log(temp + ' '+ third)
+      if (diagram.area[intersection]) diagram.objects[index] = subject
+      else if (!diagram.area[subject]) diagram.objects[index] = (temp2[0] == subject)? "-" +intersection: "+"+intersection
+      else diagram.objects[index] = intersection
 
       index += 1;
     }
@@ -141,15 +143,7 @@ function Diagram(m,p,s){
 
 
   this.objects = [
-    {
-      exists:false,
-      loc:""
-    },
-    {
-      exists:false,
-      loc:""
 
-    }
   ]
 
 
