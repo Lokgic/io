@@ -1,6 +1,26 @@
 var venn = require("venn.js")
+var objMessage = 'Click on the corresponding area on the Venn diagram to place an cross. Clicking on the overlapping repeatedly will toggle between borders. Click "Delete current object" to remove the cross.'
+$.notify.defaults({
+  globalPosition: 'bottom left',
+  style:"info"
+})
+var notifyLoc = "#logicizeNav"
+var notifyDir = "bottom-center"
+
+function endMessage(title, body){
+  $('#messageModal .modal-header').text(title)
+  $('#messageModal .modal-body').text(body)
+  $('#messageModal').modal()
+}
+
+
 
 $(function(){
+
+
+  // $.notify('Correct! Press submit again to continue.');
+
+
   var currentScore ;
 
     function loadJSON(type, callback){
@@ -27,16 +47,29 @@ $(function(){
       var setsL
       var vennL
       var mode = "shade"
+      var valid;
+
       initVennL()
 
       answer = d3.select('#answer')
       exBut = d3.select('#exBut')
       exBut2 = d3.select('#exBut2')
+      validBut = d3.select('#valid')
       premise1 = d3.select('#sylProblem').append('p').attr('id','p1')
       premise2 = d3.select('#sylProblem').append('p').attr('id','p2')
       conclusion = d3.select('#sylProblem').append('p').attr('id','con')
+
+      validBut = d3.select('#valid').on('click', function(){
+        if (valid){
+          valid = false
+        } else{
+          valid = true
+        }
+        validBut.text("Valid: "+valid)
+      })
+
       answer.on('click',function(){
-        console.log(obj)
+        // console.log(obj)
         if (ansButstatus == "answer"){
           var answerArea = {
 
@@ -54,62 +87,64 @@ $(function(){
             if (answerArea[objStr] != currentProblem.diagram.area[objStr]) areaCorrect = false
           }
           objAnswer = (obj.sort()[0] == currentProblem.diagram.objects.sort()[0] && obj.sort()[1] == currentProblem.diagram.objects.sort()[1]) ? true :false;
-          if (objAnswer&&areaCorrect) {
+
+          var validAnswer = (valid ==currentProblem.valid)
+          console.log(validAnswer)
+          if (objAnswer&&areaCorrect&&validAnswer) {
+            // console.log(validAnswer)
             currentScore+= 1;
             ansButstatus = "next"
+            $.notify('Correct! Press submit again to continue.', {
+            style: 'correctblue',
+            position: notifyDir
+          });
+
           } else{
+            endMessage("Logicize Result", "Your score is " + currentScore +".")
             currentScore = 0
-            ansButstatus = "next"
+            nextProblem();
           }
         }else if (ansButstatus == "next" ){
-          // $('#vennArgument').css('min-height',$('#vennArgument').height())
-          diagramSize = Math.min($('#vennLog').width(),window.innerHeight*0.8)
-          logicizeChart = venn.VennDiagram().height(diagramSize).width(diagramSize)
-          canvasL.select('svg').remove()
-          initVennL()
-          canvasL.transition().style('opacity',0).transition().style('opacity',1)
-
-          obj = []
-          exBut.text('Add Object 1')
-          exBut.text('Add Object 2')
-          ansButstatus = "answer"
+          nextProblem()
         }
-        console.log(ansButstatus)
+        // console.log(ansButstatus)
       updateScore()
-      console.log("obj " + objAnswer)
-      console.log("area " +areaCorrect)
+      // console.log("obj " + objAnswer)
+      // console.log("area " +areaCorrect)
 
 
       })
 
 
 
-
       exBut.on('click',function(){
         if (mode =="shade"){
+
           objI = 0;
           mode = "obj1"
            $('#delObj').removeClass('invisible')
           $('#exBut').removeClass('btn-outline-teal')
           $('#exBut').addClass('btn-teal')
-          $('#exBut').text('Confirm Object 1')
+          $.notify(objMessage)
+          // $('#exBut').text('Confirm Object 1')
 
         }else if (mode == "obj2"){
           objI = 0;
           mode = "obj1"
+          $.notify(objMessage)
           $('#exBut').removeClass('btn-outline-teal')
           $('#exBut').addClass('btn-teal')
-          $('#exBut').text('Confirm Object 1')
+          // $('#exBut').text('Confirm Object 1')
           $('#exBut2').removeClass('btn-blue')
           $('#exBut2').addClass('btn-outline-blue')
-          $('#exBut2').text('Edit Object 1')
+          // $('#exBut2').text('Edit Object 1')
         }
         else {
           mode = "shade"
           $('#delObj').addClass('invisible')
           $('#exBut').removeClass('btn-teal')
           $('#exBut').addClass('btn-outline-teal')
-          $('#exBut').text('Edit Object 1')
+          // $('#exBut').text('Edit Object 1')
         }
 
 
@@ -121,17 +156,21 @@ $(function(){
            $('#delObj').removeClass('invisible')
           $('#exBut2').removeClass('btn-outline-blue')
           $('#exBut2').addClass('btn-blue')
-          $('#exBut2').text('Confirm Object 2')
+          $.notify(objMessage)
+
+          // $('#exBut2').text('Confirm Object 2')
         }
         else if (mode == "obj1"){
           objI = 1;
           mode = "obj2"
           $('#exBut2').removeClass('btn-outline-blue')
           $('#exBut2').addClass('btn-blue')
-          $('#exBut2').text('Confirm Object 2')
+          // $('#exBut2').text('Confirm Object 2')
           $('#exBut').removeClass('btn-teal')
           $('#exBut').addClass('btn-outline-teal')
-          $('#exBut').text('Edit Object 1')
+          $.notify(objMessage)
+
+          // $('#exBut').text('Edit Object 1')
 
         }
         else {
@@ -139,10 +178,22 @@ $(function(){
           $('#delObj').addClass('invisible')
           $('#exBut2').removeClass('btn-blue')
           $('#exBut2').addClass('btn-outline-blue')
-          $('#exBut2').text('Edit Object 2')
+          // $('#exBut2').text('Edit Object 2')
         }
 
       })
+
+      function nextProblem(){
+        diagramSize = Math.min($('#vennLog').width(),window.innerHeight*0.8)
+        logicizeChart = venn.VennDiagram().height(diagramSize).width(diagramSize)
+        canvasL.select('svg').remove()
+        initVennL()
+        canvasL.transition().style('opacity',0).transition().style('opacity',1)
+        validBut.text("Argument valid?")
+        valid = ""
+        obj = []
+        ansButstatus = "answer"
+      }
       function initVennL(){
 
         loadSyl( function(error, dogs){
@@ -217,7 +268,8 @@ $(function(){
 
           })
           function getCrossLoc(dim,direction){
-
+            console.log(dim)
+            console.log(direction)
             var crossStr = "m 10 10 l -20 -20 m 10 10 m -10 10 l 20 -20"
             cir ={}
             cir.cx = parseFloat(dim.split(' ')[1])
@@ -233,9 +285,12 @@ $(function(){
             else if (direction == a +"_"+b) return "M " +cir.cx + " " + cir.cy  + " m 0 " +cir.ab + " "+ crossStr
             else if (direction == a +"_"+c || direction == b +"_"+c ) return "M " +cir.cx + " " + cir.cy  + " m 0 -" +(cir.radius/2) + " "+ crossStr
             else if (direction == "+" + a +"_"+c ||direction =="+" + b +"_"+c) return "M " +cir.cx + " " + cir.cy  + " m 0 -" + cir.radius + " " + crossStr
-            else if (direction == "+" + a +"_"+b ||direction =="-" + a +"_"+b) return (direction == "+" + a +"_"+b)? "M " +cir.cx + " " + cir.cy  + " m " + cir.radius +" 0 "+ " " + crossStr :  "M " +cir.cx + " " + cir.cy  + " m -" + cir.radius +" 0 "+ " " + crossStr
-            else if (direction == "-"+a+"_"+c) return "M " +cir.cx + " " + cir.cy + " m -" +  cir.radius + " " + Math.sqrt(cir.radius*cir.radius - cir.radius * cir.radius) +" "+ crossStr
-            else if (direction == "-"+b+"_"+c) return "M " +cir.cx + " " + cir.cy + " m " +  cir.radius + " " + Math.sqrt(cir.radius*cir.radius - cir.radius * cir.radius) +" "+ crossStr
+            else if (direction == "+" + a +"_"+b ||direction =="-" + a +"_"+b){
+              result = (direction == "+" + a +"_"+b)? "M " +cir.cx + " " + cir.cy  + " m " + cir.radius +" 0 "+ " " + crossStr :  "M " +cir.cx + " " + cir.cy  + " m -" + cir.radius +" 0 "+ " " + crossStr
+              return result
+            }
+            else if (direction == "-"+a+"_"+c) return "M " +cir.cx + " " + cir.cy + " m -" +  cir.radius/1.5 + " " + Math.sqrt(cir.radius*cir.radius - cir.radius/1.5 * cir.radius/1.5) +" "+ crossStr
+            else if (direction == "-"+b+"_"+c) return "M " +cir.cx + " " + cir.cy + " m " +  cir.radius/1.5 + " " + Math.sqrt(cir.radius*cir.radius - cir.radius/1.5 * cir.radius/1.5) +" "+ crossStr
             else return "M " +cir.cx + " " + cir.cy  + " " + crossStr
             // console.log(dim.split(' '))
 

@@ -4,25 +4,18 @@
   max-width: 1500px;
     margin-bottom: 150px;
 
+
 }
 .logicizeTitle{
   margin-top:150px;
   font-family: 'Titillium Web', sans-serif;
   font-size: 1em;
 
+
 }
 
-
-.logicizeTitle ul{
-  list-style: none;
-  display: inline;
-}
-
-.logicizeTitle li{
-
-  display: inline-block;;
-}
-
-.scoreDisplay{
-
+.logicizeTitle nav{
+margin-top:20px;
+  border-top: 2px solid grey;
+border-bottom:  2px solid grey;
 }

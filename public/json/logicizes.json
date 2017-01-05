@@ -1,6 +1,7 @@
 {
   "vennSyl":{
     "title": "Venn Diagrams and Syllogistic Validity",
+    "shortDescription":"Based on the given argument, complete the Venn diagram and determine its validity.",
     "eventId":"vennSyl"
   }
 }

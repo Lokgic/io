@@ -4,29 +4,38 @@ block extrahead
 	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
 
 block content
-	main.container.logicizeFS
+	main.container.logicizeFS.p-x-1
 		.logicizeTitle.m-b-2
 			h2.m-b-0 #{info.title}
-			hr.longLine
-
-			ul
-				li
-					p.logInstruction Determine if the following syllogism is valid, and provide the correct Venn diagram.
-				li.pull-xs-right
-					button.btn.btn-secondary.m-l-1 Instruction
-				li.pull-xs-right
-					button.btn.btn-secondary Score:&nbsp;
+			nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav
+				ul.nav.navbar-nav
+					li.nav-item
+						span.navbar-text.text-muted.hidden-md-down #{info.shortDescription}
+					li.nav-item.pull-xs-right
+						a.nav-link.p-y-0 Leaderboard
+					li.nav-item.pull-xs-right
+						a.nav-link.p-y-0 Instruction
+					li.nav-item.pull-xs-right
+						span.navbar-text Score : &nbsp;
 						span#score 0
 		.row.text-xs-center
+			.rightPanel.col-lg-3.col-md-4
+				.m-y-1.m-x-a.text-justify#sylProblem
+			#vennLog.midpanel.col-lg-6.col-md-4
 			#userInput.leftPanel.col-lg-3.col-md-4
 				button(type = "button").btn.btn-secondary.m-y-1.m-r-2.btn-block#valid Argument Valid?
-				button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Add Object 1
-				button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Add Object 2
+				button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Object 1
+				button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Object 2
 				button(type = "button").invisible.btn.btn-purple.m-y-1.text-xs-center#delObj Delete Current Object
 				button(type = "button").btn.btn-greyish.m-y-1.btn-block#answer.answerButt Submit Answer
-			#vennLog.midpanel.col-lg-6.col-md-4
-			.rightPanel.col-lg-3.col-md-4
-				.m-y-1.text-justify#sylProblem
+	.modal.fade(tabindex="-1" role="dialog" aria-labelledby="messageLabel" aria-hidden="true")#messageModal
+		.modal-dialog(role="document")
+			.modal-content
+				.modal-header
+					button.close(type="button" data-dismiss="modal" aria-label="Close")
+						span(aria-hidden="true") &times;
+					h4.modal-title#messageLabel Message Title
+				.modal-body X
 
 
 
@@ -44,5 +53,6 @@ block extrafooter
 		);
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="../javascripts/mods/notify.js")
 	script(src="../javascripts/"+logicize+".js")
 	script(src="../javascripts/autohidenav.js")
