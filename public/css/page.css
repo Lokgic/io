@@ -1,4 +1,30 @@
+.readingEx{
+  background: #90afc5;
+  height:800px;
 
+}
+
+.readingExQ{
+  background: #2A3132;
+  height:250px;
+
+}
+
+.readingExNum{
+  background: #90afc5;
+  height:50px;
+  margin-bottom: 50px
+
+}
+.subNav{
+margin-top:20px;
+  border-top: 2px solid grey;
+border-bottom:  2px solid grey;
+}
+
+.navBuffer{
+  margin-top: 150px;
+}
 
 .btn-blue ,.btn-outline-blue:hover{
   background-color: #478EB0;
@@ -93,6 +119,10 @@
     height: 4px;
     /* Set the hr color */
     background-color: #333; /* Modern Browsers */
+}
+
+text{
+  pointer-events:none;
 }
 
 .lessonSectionTitle{

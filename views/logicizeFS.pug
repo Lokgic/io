@@ -7,7 +7,7 @@ block content
 	main.container.logicizeFS.p-x-1
 		.logicizeTitle.m-b-2
 			h2.m-b-0 #{info.title}
-			nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav
+			nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav
 				ul.nav.navbar-nav
 					li.nav-item
 						span.navbar-text.text-muted.hidden-md-down #{info.shortDescription}
@@ -43,7 +43,6 @@ block content
 
 
 block extrafooter
-	link(rel="stylesheet", type="text/css", href="../css/page.css")
 	link(rel="stylesheet", type="text/css", href="../css/logicize.css")
 	script(type="text/x-mathjax-config").
 		MathJax.Hub.Config({

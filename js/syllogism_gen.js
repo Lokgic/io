@@ -186,7 +186,15 @@ function termsInit(json){
      return terms
 
   }
-console.log(new Syllogism(termsInit("dogs")))
+// console.log(new Syllogism(termsInit("dogs")))
 module.exports.makeStuff = function(){
   return new Syllogism( termsInit("dogs"));
+};
+
+module.exports.list = function(){
+  var toReturn = [];
+  for (var i = 0;i<10;i++){
+    toReturn.push(new Syllogism( termsInit("dogs")))
+  }
+  return toReturn
 };

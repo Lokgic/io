@@ -74,6 +74,12 @@
 
 
             ]
+          },
+          "f":{
+            "type":"readingEx",
+            "title": "Reading Exercise: Determining Validity",
+            "eventId":"reading1-1-1",
+            "instruction": "Make your best estimate as to whether the arguments presented below are valid."
           }
         }
     },
@@ -149,15 +155,6 @@
 
           ]
 
-        }
-      }
-    },
-    "4":{
-      "title": "Logicize",
-      "content":{
-        "a":{
-          "type": "logicize",
-          "eventId":"vennArgument"
         }
       }
     }

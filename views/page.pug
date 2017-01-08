@@ -85,10 +85,16 @@ block content
 									when "argument"
 											+argument(x.premises, x.conclusion)
 									when "event"
+									when "readingEx"
 										p.text-xs-center.lead #{x.title}
-										div(id = x.eventId).container
-
-
+										p.text-xs-center Instruction: #{x.instruction}
+										if x.type == "readingEx"
+											div(id = x.eventId).readingEx.m-a-0
+												p.readingExNum
+												.readingExQ
+												.readingExAns
+										else
+											div(id = x.eventId).container
 
 
 
@@ -102,5 +108,6 @@ block extrafooter
 		);
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="../javascripts/vennD.js")
 	script(src="../javascripts/autohidenav.js")

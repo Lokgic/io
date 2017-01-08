@@ -742,9 +742,18 @@ router.post('/processing/model_id', function(req,res,next){
 router.post('/processing/*', function(req,res,next){
 
 	var generatorID = req.path.split('/')[2]
+	var option = req.path.split('/')[3]
+	// console.log(option)
+	var output;
 	generator = require("../js/"+generatorID+"_gen.js")
-	var output  = new generator.makeStuff()
-console.log(output)
+	if (option == undefined){
+		 output  = new generator.makeStuff()
+	} else{
+		output  =  generator.list()
+		// console.log(output)
+	}
+
+// console.log(output)
 
 
 	return res.send(output)
