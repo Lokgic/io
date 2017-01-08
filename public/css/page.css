@@ -1,11 +1,17 @@
 .readingEx{
-  background: #90afc5;
+  background: white;
   height:800px;
 
 }
 
 .readingExQ{
-  background: #2A3132;
+  background: #2a3132;
+  height:250px;
+
+}
+
+.readingExQNum{
+  background: #90afc5;
   height:250px;
 
 }

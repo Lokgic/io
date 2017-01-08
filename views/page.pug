@@ -87,12 +87,15 @@ block content
 									when "event"
 									when "readingEx"
 										p.text-xs-center.lead #{x.title}
-										p.text-xs-center Instruction: #{x.instruction}
 										if x.type == "readingEx"
 											div(id = x.eventId).readingEx.m-a-0
-												p.readingExNum
-												.readingExQ
+												p.text-xs-center.p-t-3 Instruction: #{x.instruction}
+												.row.m-x-0
+													.readingExQNum.col-md-2
+													.readingExQ.col-md-10.p-a-1
 												.readingExAns
+												button(type = "button").btn.btn-greyish.m-y-1.btn-block.answerButt Submit Answer
+
 										else
 											div(id = x.eventId).container
 
@@ -109,5 +112,6 @@ block extrafooter
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
+	script(src="../javascripts/mods/notify.js")
 	script(src="../javascripts/vennD.js")
 	script(src="../javascripts/autohidenav.js")
