@@ -1,15 +1,15 @@
 $(function(){
   var grade = [
-        { title: "16", grade: "A+"},
-        { title: "15", grade: "A"},
+        { title: "18", grade: "A+"},
+        { title: "16", grade: "A"},
         { title: "14", grade: "A-"},
         { title: "13", grade: "B+"},
         { title: "12", grade: "B"},
         { title: "11", grade: "B-"},
-        { title: "10", grade: "B-"},
-        { title: "9", grade: "C+"},
-        { title: "8", grade: "C"},
-        { title: "7", grade: "C-"},
+        { title: "10", grade: "C+"},
+        { title: "9", grade: "C"},
+        { title: "8", grade: "C-"},
+        { title: "7", grade: "D+"},
         { title: "6", grade: "D"},
         { title: "<6", grade: "F"}
 
@@ -36,7 +36,7 @@ $(function(){
     var columns2 = [
       { head: 'Tasks ', cl: 'task',
         html: function(row) { return row.title; } },
-      
+
       { head: 'Available', cl: 'total',
         html: function(row) { return row.total; } }
       ];

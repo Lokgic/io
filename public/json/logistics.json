@@ -11,7 +11,7 @@
 },
   "Grading":{
     "title":"Grading",
-    "substance":["Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete 15 tasks by the end of the semester. From there, each drop in the number of tasks completed entails a drop in grade level - 14 tasks is A-, 13 B+, and so on. Anything below 6 is failing. An A+ would be given to those who completed 16. See 'Task/Grade Correlation.'"]
+    "substance":["Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete 16 tasks by the end of the semester. For an A-, you need 14 tasks. From there, each drop in the number of tasks completed entails a drop in grade level - 13 B+, 12 B, and so on. Anything below 6 is failing. An A+ would be given to those who completed 16. See 'Task/Grade Correlation.'"]
   },
 
   "Tasks":{
