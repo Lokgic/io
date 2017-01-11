@@ -16,13 +16,13 @@ $(function(){
     ];
 
     var task = [
-          { title: "Web exercises(each module)", worth: "1",total:4},
-          { title: "One problem-set", worth: "1",total:4},
-          { title: "Passing a test(P)", worth:1,total: 4},
-          { title: "Perfecting a test (P+)", worth:1,total: 4},
-          { title: "3 or less absences", worth:1,total: 1},
-          { title: "All Class Activity", worth:1,total: 1},
-          { title: "Logicize achievements", worth:1,total: "TBD"}
+          { title: "Web exercises (each module)",total:4},
+          { title: "One problem-set",total:4},
+          { title: "Passing a test (P)",total: 4},
+          { title: "Perfecting a test (P+)",total: 4},
+          { title: "3 or less absences",total: 1},
+          { title: "All Class Activity",total: 1},
+          { title: "Logicizes achievements",total: "TBD"}
 
       ];
 
