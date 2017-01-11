@@ -6,14 +6,25 @@ block content
   .jumbotron.jumbotron-fluid
     .container#jimbo
       blockquote.blockquote.lead#quote
-  .container-fluid
-    .col-sm-5.m-x-0
-      for slide in text
-        .slide(id = slide.id)
-          .slidebox
-            h4.slideTitle.text-xs-center #{slide.title}
-            p.slideText.text-justify(id = slide.id) #{slide.substance}
-    .col-sm-7.introAni.m-x-0
+  for section in text
+    if (section.textLoc == "left")
+      .container-fluid(id = section.id)
+        .col-sm-5.m-x-0
+          for slide in section.slides
+            .slide(id = slide.id)
+              .slidebox
+                h4.slideTitle.text-xs-center #{slide.title}
+                p.slideText.text-justify(id = slide.id) #{slide.substance}
+        .col-sm-7.introAni.m-x-0
+    else if (section.textLoc == "right")
+      .container-fluid(id = section.id).row
+        .col-sm-7.m-x-0.introAni
+        .col-sm-5.m-x-0.push-md-7
+          for slide in section.slides
+            .slide(id = slide.id)
+              .slidebox
+                h4.slideTitle.text-xs-center #{slide.title}
+                p.slideText.text-justify(id = slide.id) #{slide.substance}
 block extrafooter
   link(rel="stylesheet", type="text/css", href="../css/page.css")
   link(rel="stylesheet", type="text/css", href="../css/intro.css")

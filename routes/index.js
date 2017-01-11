@@ -33,6 +33,7 @@ router.get('/roll', function(req, res, next){
 })
 
 
+
 router.post('/stat' , function(req,res,next){
 
 		var roster = ["zalbert9@gmail.com","spencer.flynn49@gmail.com","vl25@duke.edu","jpp20@duke.edu","dyk@duke.edu","rk189@duke.edu","oneroyalace@gmail.com","lz114@duke.edu","haley.fisher@duke.edu", "aha19@duke.edu","bkc19@duke.edu","mts28@duke.edu","ec161@duke.edu","bac29@duke.edu"];
@@ -572,6 +573,10 @@ router.get(t = '/test', function(req, res, next){
 
 
 
+
+router.get('/logistics', function(req, res, next){
+	return res.render('logistics');
+})
 
 
 

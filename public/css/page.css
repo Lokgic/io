@@ -1,3 +1,14 @@
+#mainnavbar a{
+  color:#444C5C;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+#mainnavbar a:hover{
+  color:black;
+  border-bottom: 1px solid
+
+}
+
 .readingExResults{
   /*border: 1px solid grey;*/
   /*border-radius: 20px;*/

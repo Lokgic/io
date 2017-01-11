@@ -1,0 +1,34 @@
+extends pagelayout
+
+
+block extrahead
+	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
+
+block content
+		main.container.p-x-2.page
+			.lessonSectionTitle
+				hr
+				h1 Course Logisitcs
+			.lessonSubTitle
+				h4 Grading
+				hr
+			p Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete twelve tasks before the end of the semester.
+
+
+
+
+
+block extrafooter
+	link(rel="stylesheet", type="text/css", href="../css/page.css")
+	script(type="text/x-mathjax-config").
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		}}
+		);
+	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
+	script(src="../javascripts/mods/notify.js")
+	script(src="../javascripts/vennD.js")
+	script(src="../javascripts/autohidenav.js")

@@ -1,18 +1,40 @@
 {
-  "slide1":{
-    "id":"slide1",
-    "title":"How do we prove a proposition?",
-    "substance":"This question strikes at the heart of philosophy: can we ever be certain that we know something? Successfully or not, philosophers through the ages provided us multifarious answers to this difficult problem, none of which have provided the final solution. Be there as it may, the purpose of this course is to explore one venerable tradition - the method of deduction."
+  "section1":{
+    "id":"section1",
+    "textLoc": "left",
+    "slides":{
+      "slide1":{
+        "id":"slide1",
+        "title":"How do we prove a proposition?",
+        "substance":"This question strikes at the heart of philosophy: can we ever be certain that we know something? Successfully or not, philosophers through the ages provided us multifarious answers to this difficult problem, none of which have provided the final solution. Be there as it may, the purpose of this course is to explore one venerable tradition - the method of deduction."
+      },
+      "slide2":{
+        "id":"slide2",
+        "title":"Deductive logic",
+        "substance":"aims for indubitable certainty and calls for relentless precision. If the course is successful, the intellectual and aesthetic value of deductive proofs will magically emerge in front of your eyes from previously meaningless symbols... Some say that this induces a state of mind that is religious or even mystical. (However, such experience, no matter how profound, does not necessarily lead to a good grade.)"
+      },
+      "slide3":{
+        "id":"slide3",
+        "title":"Formal languages",
+        "substance":"are artificial systems developed by logicians to deal with philosophical and mathematical problems in a precise manner. From antiquity to our time, it was crucial to many intellectual developments. It is a core element in linguistics, computer science and, of course, philosophy. One would gain a better understanding of these fields simply by virtue of being familiar with logical notation."
+      }
+    }
   },
-  "slide2":{
-    "id":"slide2",
-    "title":"Deductive logic",
-    "substance":"aims for indubitable certainty and calls for relentless precision. If the course is successful, the intellectual and aesthetic value of deductive proofs will magically emerge in front of your eyes from previously meaningless symbols... Some say that this induces a state of mind that is religious or even mystical. (However, such experience, no matter how profound, does not necessarily lead to a good grade.)"
-  },
-  "slide3":{
-    "id":"slide3",
-    "title":"Formal languages",
-    "substance":"are artificial systems developed by logicians to deal with philosophical and mathematical problems in a precise manner. From antiquity to our time, it was crucial to many intellectual developments. It is a core element in linguistics, computer science and, of course, philosophy. One would gain a better understanding of these fields simply by virtue of being familiar with logical notation.\\(\\to\\)"
-
+  "section2":{
+    "id":"section2",
+    "textLoc":"right",
+    "slides":{
+      "slide4":{
+        "id":"slide4",
+        "title":"Conditionally self-paced progression:",
+        "substance":"In this course, it is up to you to decide when to turn in an assignment and take a test. There are several caveats for this, but ultimately the aim of this structure aims to accommodate the diversity of backgrounds and learning styles and to give the help and structure that suit each student's individual needs. It also embodies the principle that learning should be an active endeavor."
+      },
+      "slide5":{
+        "id":"slide5",
+        "title":"The course is divided into four modules",
+        "substance":"corresponding to four foundational topics in formal logic: sentence logic, predicate logic, natural deduction, and identity. Each module contains a set of online exercises, a problem set, and a test. They are done at your pace, and they are repeatable throughout the semester."
+      }
+    }
   }
+
 }
