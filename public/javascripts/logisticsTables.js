@@ -36,8 +36,7 @@ $(function(){
     var columns2 = [
       { head: 'Tasks ', cl: 'task',
         html: function(row) { return row.title; } },
-      { head: 'Worth', cl: 'worth',
-        html: function(row) { return row.worth; } },
+      
       { head: 'Available', cl: 'total',
         html: function(row) { return row.total; } }
       ];
