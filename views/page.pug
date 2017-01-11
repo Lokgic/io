@@ -13,6 +13,20 @@ mixin argument(premises, conclusion)
 		hr
 		p #{conclusion}
 
+mixin MC(x)
+	h4.text-xs-center.m-y-2 #{x.title}
+	nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+		ul.nav.navbar-nav
+			li.nav-item
+				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
+			li.nav-item.pull-xs-right
+				button.nav-link.p-y-0.confirmButt.btn-blue Confirm
+			li.nav-item.pull-xs-right
+				button.nav-link.p-y-0.nextButt.btn-blue Next
+			li.nav-item.pull-xs-right
+				span.problemNumDisplay
+
+
 
 mixin quote(lines,source)
 	blockquote.blockquote.m-t-1
@@ -64,40 +78,30 @@ block content
 											.col-sm-6.text.p-a-0
 												for t in x.substance
 													p.scrollText.text-justify.p-a-1(id = t[0] style = "margin-top:250px") #{t[1]}
-
-
 											.col-sm-6.animation.p-a-0
-									when "logicize"
-										.container-fluid.panels
-											.row(id = x.eventId).text-xs-center
-												#userInput.leftPanel.col-md-2
-													button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Object 1
-													button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Object 2
-													button(type = "button").invisible.btn.btn-purple.m-y-1.text-xs-center#delObj Delete Current Object
-													p.m-y-0
-														span.m-x-1#scoretitle Current Score :
-														span#score 0
-												#vennLog.midpanel.col-md-8
-												.rightPanel.col-md-2
-													p.logInstruction.text-xs-center Instruction: Determine if the following syllogism is valid, and provide the correct Venn diagram.
-													.m-y-1.text-xs-center#sylProblem
-													button(type = "button").btn.btn-greyish.m-y-1.btn-block#answer.answerButt Submit Answer
 									when "argument"
 											+argument(x.premises, x.conclusion)
 									when "event"
+										h4.text-xs-center.m-y-2 #{x.title}
+										div(id = x.eventId).container
 									when "readingEx"
-										p.text-xs-center.lead #{x.title}
-										if x.type == "readingEx"
-											div(id = x.eventId).readingEx.m-a-0
-												p.text-xs-center.p-t-3 Instruction: #{x.instruction}
-												.row.m-x-0
-													.readingExQNum.col-md-2
-													.readingExQ.col-md-10.p-a-1
-												.readingExAns
-												button(type = "button").btn.btn-greyish.m-y-1.btn-block.answerButt Submit Answer
+										if x.size == "half"
+											.row(id = x.eventId).m-y-3
+												.col-lg-6.p-y-2.p-r-2
+													+paragraphs(x.substance)
+												.col-lg-6.readingEx
+													+MC(x)
+													.readingExQ.text-xs-center
+													.readingExAns
+										if x.size == "whole"
+											.row(id = x.eventId).m-y-3.wholeMC
+												+MC(x)
+												.readingExQ.text-xs-center.col-lg-6
+												.readingExQ2.text-xs-center.col-lg-6
+												.readingExAns.col-lg-12
 
-										else
-											div(id = x.eventId).container
+
+
 
 
 

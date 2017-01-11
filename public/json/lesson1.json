@@ -56,7 +56,7 @@
 
           },
 
-          "e":{
+          "d":{
             "type":"scroll",
             "eventId":"m1c1s1",
             "substance":[
@@ -67,20 +67,30 @@
             ]
 
           },
-          "d":{
-            "type": "p",
+          "e":{
+            "type":"readingEx",
+            "title": "Reading Exercise: Determining Validity Intuitively",
+            "eventId":"reading1-1-1",
+            "size":"half",
+            "instruction": "Make your best estimate as to whether the arguments presented below are valid.",
             "substance":[
-              "Diagrams like these are immensely useful in the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so in what follows we will discuss them more thoroughly."
+              "Diagrams like these are immensely useful in the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so we will discuss them more thoroughly. Let us finish this section with a short exercise.",
+              "For the reading exercise 'Determining Validity Intuitively', try to find out if the argument given is valid, in the technical sense defined above: if the premises is true, must the conclusion be true as well?",
+              "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is false. Does that mean the argument is invalid?",
+              "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
+              "An argument that is valid, but does not contain true premises are called unsound arguments. A sound argument, on the other hand, is one where an argument is both valid, and has true premises.",
 
-
+              "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
             ]
           },
           "f":{
-            "type":"readingEx",
-            "title": "Reading Exercise: Determining Validity",
-            "eventId":"reading1-1-1",
-            "instruction": "Make your best estimate as to whether the arguments presented below are valid."
+            "type":"p",
+            "substance":[
+              "I hope by now you have gotten a sense of what validity means and how it could be something that is difficult to think about intuitively. Most of what we do here is to learn formal tools that allow us to evaluate the validity of complex arguments more efficiently and reliably. Venn diagrams, the topic of the next section, is one of them."
+            ]
+
           }
+
         }
     },
     "2":{
@@ -106,6 +116,13 @@
 
           ]
 
+        },
+        "c":{
+          "type":"readingEx",
+          "title": "Reading Exercise: Basic Venn Diagrams",
+          "eventId":"reading1-1-2",
+          "size":"whole",
+          "instruction": "Based on the given Venn Diagram, answer the corresponding question."
         }
       }
     },

@@ -1,19 +1,65 @@
+.readingExResults{
+  /*border: 1px solid grey;*/
+  /*border-radius: 20px;*/
+  padding: 1.5em;
+  /*color:black;*/
+  text-align: justify;
+  margin: 10px 0;
+  font-size: 0.8em;
+}
+
+.readingExResults p {
+  margin: 2px 0px;
+  /*color:black*/
+}
+
 .readingEx{
   background: white;
-  height:800px;
+  /*max-width: 50%;*/
+  border:1px solid grey;
+  border-radius: 20px;
 
 }
 
+.resultCorrect {
+  background-color: #336B87;
+  color:white;
+  padding: 5px 0px;
+  border: 1px solid grey;
+  border-radius: 5px;
+
+}
+
+.resultIncorrect {
+  background-color: #763626;
+  color:white;
+  padding: 5px 0px;
+  border: 1px solid grey;
+  border-radius: 5px;
+
+}
+
+
 .readingExQ{
-  background: #2a3132;
-  height:250px;
+  /*background: #eee;*/
+
+  margin-top: 40px;
+  padding: 20px 20px;
+  font-size: 1em
+  /*height:250px;*/
 
 }
 
 .readingExQNum{
-  background: #90afc5;
-  height:250px;
+  /*background: #90afc5;*/
+  /*height:250px;*/
 
+}
+
+.greyish {
+  background-color: #9FB3B6;
+  color:black;
+  /*border-color:#9FB3B6*/
 }
 
 .readingExNum{
@@ -31,6 +77,8 @@ border-bottom:  2px solid grey;
 .navBuffer{
   margin-top: 150px;
 }
+
+
 
 .btn-blue ,.btn-outline-blue:hover{
   background-color: #478EB0;

@@ -1,4 +1,6 @@
 var venn = require("venn.js")
+var readingExMC = require("./mods/readingExMC.js")
+
 
 var text1 = "First, consider a circle that contains all plucked intruments and another one that contains all bowed instruments."
 
@@ -539,160 +541,16 @@ function graphics2TextAdd(){
   pnText = d3.select('#pn').select('svg').append('text').text('X').attr('dx',moodWidth/4).attr('dy',$('svg','#pa').height()/2).style('fill','black').style('font-size','2.5em')
 
 
-  //readingEx
-
-  function readingExMC(problemSet){
-    var ansCol = d3.scaleSequential(d3.interpolateBlues)
-    // var ansCol = d3.scaleOrdinal()
-    //               .domain([0,5])
-    //               .range([''])
-    var scope = d3.select('#reading1-1-1')
-    var ansH = $('#reading1-1-1').height()/2
-    var ansW = $('#reading1-1-1').width()
-    var leftMargin = 50
-    var topMargin = 100
-    var answers = [
-      {"string":"This argument is valid.",
-    "value":true},
-    {"string":"This argument is invalid.",
-  "value":false},
-  {"string":"This cannot be determined without more information.",
-"value":null}
-
-    ]
-    var ansSVG = d3.select('.readingExAns')
-                    .append('svg')
-                    .attr('width', ansW)
-                    .attr('height', ansH)
-    var barH = ansH/(answers.length*2.5)
-    var barW = ansW/2
-    // var barH = 10
-    var selected
-    var chosenAnswer
-    ansSVG.selectAll('rect')
-            .data(answers)
-            .enter()
-            .append("rect")
-            .attr("x",  leftMargin)
-            .attr("id", function(d,i){return "bar"+i})
-            .attr("width", barW)
-            .attr("height", barH)
-            .attr("y", function(d,i){
-              return i*(ansH/(answers.length+3)) + topMargin
-            })
-            .attr("fill", function(d,i){
-              return ansCol(i/answers.length)
-            })
-          .on("mouseover",function(d){
-
-            d3.select(this).transition().duration(500).attr("width",  barW+barW/2 )
-                                        .style('fill','#c4dfe6')
-          })
-          .on("mouseout",function(d,i){
-            if (selected != i){
-              d3.select(this).transition().duration(500).attr("width",  barW  )
-                          .style("fill", ansCol(i/answers.length))
-            }
-
-          })
-          .on("click",function(d,i){
-            d3.select("#bar"+selected).transition().duration(500).attr("width",  barW  )
-                        .style("fill", ansCol(i/answers.length))
-            selected = i
-            chosenAnswer = d.value
-          })
-
-      ansSVG.selectAll("text")
-        .data(answers)
-        .enter()
-        .append('text')
-        .text(function(d){return d.string})
-        .attr("x",  leftMargin + barW/2)
-        .attr("y", function(d,i){
-          return (i*(ansH/(answers.length+3)) + topMargin) + barH/2 + 5
-        })
-        .style('fill', 'black')
-        .attr('font-family','Titillium Web')
-        .attr('font-size','20')
-        .attr('text-anchor', 'middle')
-
-
-
-      readingQ = d3.select('.readingExQ')
-      readingQNum = d3.select('.readingExQNum')
-      currentPi = 0
-      problemNumDisplay = readingQNum.append('h2').attr('class','display-1 text-xs-center m-a-3').text(currentPi+1)
-      readingQNum.append('p').attr('class','text-xs-center').text("out of " + problemSet.length)
-      currentP = sylToString(problemSet[currentPi])
-
-      readingQ.selectAll("p")
-        .data(currentP.str)
-        .enter()
-        .append('p')
-        .text(function(d,i){
-          return d
-        })
-        .style('color', 'white')
-        .style('font-family','Titillium Web')
-        .style('font-size','28')
-        .style('margin',"10 20")
-
-        answerButt = scope.select('.answerButt').attr("data","answer")
-        answerButt.on('click',function(d){
-          console.log(this)
-          if (d3.select(this).attr('data') == "answer"){
-            if (chosenAnswer == problemSet[currentPi].valid){
-              $.notify('Correct! Press submit again to continue.', {
-              style: 'correctblue',
-              position: "bottom center"
-            });
-          }else {
-            $.notify('Unfortunately this is wrong! Press submit again to continue.', {
-            style: 'incorred',
-            position: "bottom center"
-          });
-          }
-          d3.select(this).attr('data',"next")
-
-          }else{
-            d3.select(this).attr('data',"answer")
-            currentPi += 1
-            ansReset()
-            problemNumDisplay.text(currentPi + 1)
-            currentP = sylToString(problemSet[currentPi])
-            readingQ.selectAll("p")
-              .data(currentP.str)
-              .text(function(d,i){
-
-                return d
-
-              })
-          }
-
-          })
-
-
-
-          function ansReset(){
-
-            d3.selectAll('rect')
-            .data(answers)
-            .transition().duration(500)
-            .attr("width", barW)
-            .attr("fill", function(d,i){
-              return ansCol(i/answers.length)
-            })
-          }
-
-
-  }
 
 function sylToString(prob){
-  return {
+  output = {
     str:["Premise 1: "+prob.p1str, "Premise 2: "+prob.p2str, "Conlucsion: "+ prob.cstr],
-    ans:prob.valid,
-    form:prob.form
+    form:prob.form,
+    choices: ["Valid", "Invalid"]
   }
+
+  output.ans = (prob.valid)? "Valid" : "Invalid"
+  return output
 
 }
 
@@ -700,12 +558,35 @@ function loadSyl(callback){
   jQuery.post("../processing/syllogism/list")
   .done(function(data){
       callback(null, data);
-  }).fail(function(){$body.append('Failed to Load Quiz')})
+  }).fail()
 };
 
+
+function loadCats(callback){
+  jQuery.post("../processing/syllogism/cats")
+  .done(function(data){
+      callback(null, data);
+  }).fail(function(f){console.log(f)})
+};
+
+
+
+
 loadSyl(function(e,d){
-  console.log(d)
-  readingExMC(d)
+
+  var problemsSet = []
+  for (problem in d){
+    problemsSet.push(sylToString(d[problem]))
+  }
+  console.log(problemsSet)
+  readingExMC(problemsSet, '#reading1-1-1 .readingEx')
 })
+
+loadCats(function(e,d){
+  console.log(d)
+  readingExMC(d, '#reading1-1-2',"venn")
+})
+
+
 
 })

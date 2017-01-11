@@ -1,13 +1,12 @@
 Chance = require('chance')
 _ = require('underscore')
 chance = new Chance()
-valid = ['AAA1','EAE1','EIO1','AII1','AEE2','EAE2','EIO2','AOO2','IAI3','OAO3','AII3','AEE4','IAI4','EIO4']
-
+var valid = ['AAA1','EAE1','EIO1','AII1','AEE2','EAE2','EIO2','AOO2','IAI3','OAO3','AII3','AEE4','IAI4','EIO4']
 
 
 function generateSyl(){
-  mood = ['A','E','I','O']
-  figure = ['1','2','3','4']
+  var mood = ['A','E','I','O']
+  var figure = ['1','2','3','4']
   if (chance.bool({likelihood:30})) return chance.pickone(valid)
   else return chance.pickone(mood) + chance.pickone(mood) + chance.pickone(mood) + chance.pickone(figure)
 }
@@ -19,10 +18,48 @@ function checkValidity(syl){
   return (o != -1)
 }
 
+ function catStatement(terms){
+
+   s = terms.s;
+   p = terms.p;
+   this.s = s;
+   this.p = p;
+   var moods = chance.pickset(["A","E","I","O"],2)
+   this.realmood =  moods[0]
+   this.fakemood = moods[1]
+   var placeholder = ["real","fake"]
+   for (place in placeholder){
+     if (this[placeholder[place]+"mood"] == "A") this[placeholder[place]+"str"] = "All " + s +" are " +p+"."
+     else if (this[placeholder[place]+"mood"] == "E") this[placeholder[place]+"str"] = "No " + s +" are " +p +"."
+     else if (this[placeholder[place]+"mood"] == "I") this[placeholder[place]+"str"] = "Some " + s +" are " +p+"."
+     else if (this[placeholder[place]+"mood"] == "O") this[placeholder[place]+"str"] = "Some " + s +" are not " +p + "."
+   }
+   placeholder = ['realmood','fakemood']
+
+   var output = {
+     "A":s,
+     "E":s+"_"+p,
+     "I":s,
+     "O":s+"_"+p,
+   }
+   this.realD = output[this.realmood]
+   this.fakeD = output[this.fakemood]
+   placeholder = ['real','fake']
+   var tf = chance.bool()
+   this.diagram = chance.pickone(placeholder)
+   this.str = (tf)? ["The Venn diagram correctly represents the following statement: " , this[this.diagram +"str"]] : ["Which one of the statements is represented by the Venn diagram?"]
+   this.choices = (tf)? ["True", "False"]:[this.realstr, this.fakestr]
+
+
+   if (this.diagram == "real") this.ans = (tf)? "True" : this.realstr
+   else  this.ans = (tf)? "False" : this.fakestr
+
+ }
+
  function Syllogism(terms){
-  s = terms.s;
-  p = terms.p;
-  m = terms.m;
+  var s = terms.s;
+  var p = terms.p;
+  var m = terms.m;
   this.terms = terms;
   this.form =  generateSyl(),
   this.valid = checkValidity(this.form)
@@ -66,8 +103,8 @@ function checkValidity(syl){
 
   }
   this.diagram = new Diagram(m, p, s)
-  diagram = this.diagram;
-  pMood = this.p1mood + this.p2mood
+  var diagram = this.diagram;
+  var pMood = this.p1mood + this.p2mood
   for (mood in pMood){
     if (pMood[mood] == "A"){
       var pID= "p"+(parseInt(mood) + 1)
@@ -198,3 +235,16 @@ module.exports.list = function(){
   }
   return toReturn
 };
+
+module.exports.cats = function (){
+  var toReturn = [];
+  for (var i = 0;i<10;i++){
+    var k = new catStatement( termsInit("dogs"))
+    // console.log(k)
+    toReturn.push(k)
+  }
+  return toReturn
+};
+
+
+console.log(new catStatement(termsInit("dogs")))

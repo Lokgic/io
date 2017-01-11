@@ -285,7 +285,8 @@ router.get('/grading', function(req, res, next){
 
 /* GET home page. */
 router.get('/',  function(req, res, next) {
-  res.render('index', { title: 'Home' , sylList: sylList, modules: modulesList});
+	var introText = require('../public/json/intro.json')
+  res.render('intro',{text:introText});
 });
 
 
@@ -745,12 +746,12 @@ router.post('/processing/*', function(req,res,next){
 	var option = req.path.split('/')[3]
 	// console.log(option)
 	var output;
-	generator = require("../js/"+generatorID+"_gen.js")
+	var generator = require("../js/"+generatorID+"_gen.js")
 	if (option == undefined){
 		 output  = new generator.makeStuff()
 	} else{
-		output  =  generator.list()
-		// console.log(output)
+		output  =  generator[option]()
+		// if (option == "cats") console.log(output)
 	}
 
 // console.log(output)
