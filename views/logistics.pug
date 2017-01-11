@@ -7,12 +7,25 @@ block extrahead
 block content
 		main.container.p-x-2.page
 			.lessonSectionTitle
-				hr
-				h1 Course Logisitcs
-			.lessonSubTitle
-				h4 Grading
-				hr
-			p Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete twelve tasks before the end of the semester.
+				h1.text-xs-center Course Logisitcs
+			.row#logRow
+				.col-sm-7#logisticsLeft
+					for topic in syllabus
+						.logSection
+							h4(id = topic.title).logisticsLeftTitle #{topic.title}
+							for par in topic.substance
+								p.text-justify #{par}
+				.col-sm-5
+					.logisticsLeftTitle.text-xs-center Table of Content
+					ul#logTOC
+						for topic in syllabus
+							li
+								a(href="#"+topic.title) #{topic.title}
+					.logisticsLeftTitle.text-xs-center Task/Grade Correlation
+					#gradeTable
+					.logisticsLeftTitle.text-xs-center Task Worth
+					#taskTable
+
 
 
 
@@ -20,15 +33,8 @@ block content
 
 block extrafooter
 	link(rel="stylesheet", type="text/css", href="../css/page.css")
-	script(type="text/x-mathjax-config").
-		MathJax.Hub.Config({
-		tex2jax: {
-			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
-		}}
-		);
-	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	link(rel="stylesheet", type="text/css", href="../css/logistics.css")
 	script(src="https://d3js.org/d3.v4.min.js")
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
-	script(src="../javascripts/mods/notify.js")
-	script(src="../javascripts/vennD.js")
 	script(src="../javascripts/autohidenav.js")
+	script(src="../javascripts/logisticsTables.js")

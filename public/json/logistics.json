@@ -1,0 +1,51 @@
+{
+  "Grading":{
+    "title":"Grading",
+    "substance":["Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete 15 tasks before the end of the semester. From there, each drop in the number of tasks completed entails a drop in grade level - 14 tasks is A-, 13 B+, and so on. Anything below 6 is failing. An A+ would be given to those who completed 16. See 'Task/Grade Correlation.'"]
+  },
+
+  "Tasks":{
+    "title":"Tasks Calculation",
+    "substance":["There are four types of tasks: web exercises, problem-sets, tests, and a participation. Each of them have difference in how they contribute to your grade. See 'Task Worth' for more",
+    "In general, this basically means that you want to complete all online and written assignments,  do the best you can on the test, and make up the difference with participatory tasks. You can get credit for 4 of them."]
+  },
+  "Task Policies":{
+    "title":"Task Policies",
+    "substance":["In general, you are free to engage in the task whenever you like, inside or outside of class. The only restriction is that your task is only counted if you finished the test for the previous module (except for module 1 task, since there is no prior test). What is means practically is that you should pass the test for the module before engaging in the next. The materials in this course is progressively structured - you are unlikely to be able to do well in subsequent modules unless you finish the current one.",
+    "What this means is that to pass this class (D), at the minimal you have to pass the first two tests. "]
+  },
+  "Tests":{
+    "title":"Tests",
+    "substance":["You are required to finish a module's corresponding web exercises and problem-set before the test for the module. Though they are mandatory, you are encouraged to work of them in your own pace. Tests must be taken in a sequential manner - in general you are advised to work on the materials in the order presented, without jumping ahead. There are three possible grade for each test: P+/P/N. P+ and P are counted as passing, and N not passing. The difference between P+ and P is that the former is counted as completing two tasks: a test and a participatory task. In terms of grading, P+ corresponds to an perfect A and P is similar to B+. You are allowed to repeat each test as many times as you like, within the semester. Your grade will be replaced by the better grade.",
+    "The test are intended to be closed-book, but not strictly enforced. Due to the computational nature of logic, you would be at a disadvantage had you relied on the notes/books. That's punishment enough.When taking a test, you are welcome to take the test outside of our classroom for quietness. You are also allowed to put headphones on. "]
+  },
+  "Learning day and working day":{
+    "title":"Learning day and working day",
+    "substance":["After the first week of class, each Monday class is designated as a learning day and Wednesday testing day. During learning day, there will be occasionally lectures and/or activities, and then you are encouraged to engage in module materials in class and actively seek me out for assistance. That will also be the day when I return your test. Often I will discuss your test with you in detail, explaining my grading and providing guidance for future tests."," Testing only occurs during testing day. You can only take 1 test for each test day. I will spend the first 5 minute or so to deal with logistics, and then testing may commence. You are not required to take a test. As a matter of fact, I strongly discourage people from taking a test before they are ready, as their time would be better spent working with me or engaging in classwork."]
+  },
+  "Attendance Policy":{
+    "title":"Reward-based attendance policy",
+    "substance":["Attendance is not required in the traditional sense but better seen as rewarded; so, they still matter a lot in this class. Since you are only allowed to take a test on a testing day, by missing a class on that day you are effectively forfeiting an opportunity to take a test. Also, since two participatory tasks are attendance based, if you miss out on these opportunities, you will have to make it up doing other participatory tasks to make up the difference, or settle on a lower grade."]
+  },
+  "Tardiness and Leaving Class Early":{
+    "title": "Tardiness and Leaving Class Early",
+    "substance":["Since attendance is used as a reward or and not a requirement. I would be stricter about lateness and leaving class early. You will be counted as absence if you are more than 10 min late and leave class more than 10 min early."]
+  },"Class Format and Expectation":{
+    "title":"Class Format and Expectation",
+    "substance":[
+      "When there's no testing, conversation is permissible. You are however expected to mindful of other students and engage only in logic-related activities. I will ask you to leave the classroom if I find your behavior too disruptive."
+    ]
+  },
+  "Special accommodation":{
+    "title":"Special accommodation",
+    "substance":[
+      "Students requiring special accommodations should contact the Duke University Student Disability Access Office at (919) 668-1267 to explore possible coverage. For academic assistance available to all Duke undergraduate students, as well as additional services for students with learning disabilities and attention deficit disorder, please inquire with the Academic Resource Center at (919) 684-5917."
+    ]
+  },
+  "Honor code":{
+    "title":"Honor code",
+    "substance":[
+      "The Duke University Community Standard is in effect in this class, as it is in all classes at the university. Academic and personal integrity are serious matters, and will be treated as such in this course. Instructors and students alike are responsible for upholding both the spirit and the letter of the Standard. Students must understand its content and should clarify any questions they might have."
+    ]
+  }
+}

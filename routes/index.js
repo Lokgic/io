@@ -575,7 +575,8 @@ router.get(t = '/test', function(req, res, next){
 
 
 router.get('/logistics', function(req, res, next){
-	return res.render('logistics');
+	var syllabus = require('../public/json/logistics.json');
+	return res.render('logistics',{syllabus:syllabus});
 })
 
 
