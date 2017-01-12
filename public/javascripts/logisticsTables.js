@@ -1,17 +1,17 @@
 $(function(){
   var grade = [
-        { title: "18", grade: "A+"},
-        { title: "16", grade: "A"},
-        { title: "14", grade: "A-"},
-        { title: "13", grade: "B+"},
-        { title: "12", grade: "B"},
-        { title: "11", grade: "B-"},
-        { title: "10", grade: "C+"},
-        { title: "9", grade: "C"},
-        { title: "8", grade: "C-"},
-        { title: "7", grade: "D+"},
-        { title: "6", grade: "D"},
-        { title: "<6", grade: "F"}
+        { title: 18, grade: "A+"},
+        { title: 16, grade: "A"},
+        { title: 14, grade: "A-"},
+        { title: 13, grade: "B+"},
+        { title: 12, grade: "B"},
+        { title: 11, grade: "B-"},
+        { title: 10, grade: "C+"},
+        { title: 9, grade: "C"},
+        { title: 8, grade: "C-"},
+        { title: 7, grade: "D+"},
+        { title: 6, grade: "D"},
+        { title: 5, grade: "F"}
 
     ];
 
@@ -113,5 +113,66 @@ $(function(){
        var fmt = d3.format('02d');
        return function(l) { return Math.floor(l / 60) + ':' + fmt(l % 60) + ''; };
    }
+
+   var svg = d3.select("#gradeChart").append('svg'),
+       margin = {top: 20, right: 20, bottom: 30, left: 50},
+       width = 200
+       height = 200
+       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  //  var parseTime = d3.timeParse("%d-%b-%y");
+
+   var x = d3.scaleOrdinal()
+          .domain(["A+","A","A-","B+","B","B-","C+","C","C-","D+","D","F"])
+          .range([width,0]);
+
+   var y = d3.scaleLinear()
+          .domain([0,18])
+          .range([0, 200]);
+
+console.log(x("B"))
+
+
+   var line = d3.line()
+       .x(function(d) { return x(d.grade); })
+       .y(function(d) { return y(d.title); });
+
+
+
+
+
+
+     g.append("g")
+         .attr("class", "axis axis--x")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(x));
+
+     g.append("g")
+         .attr("class", "axis axis--y")
+         .call(d3.axisLeft(y))
+       .append("text")
+         .attr("fill", "#000")
+         .attr("transform", "rotate(-90)")
+         .attr("y", 6)
+         .attr("dy", "0.71em")
+         .style("text-anchor", "end")
+         .text("Price ($)");
+
+     g.append("path")
+         .datum(grade)
+         .attr("class", "line")
+         .attr("d", line);
+
+
+
+
+
+
+
+
+
+
+
+
 
 })
