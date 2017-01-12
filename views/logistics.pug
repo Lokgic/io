@@ -7,7 +7,7 @@ block extrahead
 block content
 		main.container.p-x-2.page
 			.lessonSectionTitle
-				h1.text-xs-center Course Logisitcs
+				h1.text-xs-center Course Logisitics
 			.row#logRow
 				.col-sm-7#logisticsLeft
 					for topic in syllabus
@@ -22,8 +22,9 @@ block content
 							li
 								a(href="#"+topic.title) #{topic.title}
 					.logisticsLeftTitle.text-xs-center Task/Grade Correlation
+					#gradeChart
 					#gradeTable
-					.logisticsLeftTitle.text-xs-center Task Worth
+					.logisticsLeftTitle.text-xs-center Tasks Available
 					#taskTable
 
 
