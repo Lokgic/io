@@ -1,23 +1,34 @@
-{
+{ "Class Info":{
+    "title":"Class Info",
+    "substance":[
+      "Instructor: Lok C. Chan",
+      "Email: lok dot chan at duke at edu",
+      "Office: West Duke Building 09D (basement)",
+      "Office Hours: By Appointment",
+      "Class Time: MW: 4:40 - 5:55",
+      "Location: Social Sciences 107"
+    ]
+},
   "Grading":{
     "title":"Grading",
-    "substance":["Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete 15 tasks before the end of the semester. From there, each drop in the number of tasks completed entails a drop in grade level - 14 tasks is A-, 13 B+, and so on. Anything below 6 is failing. An A+ would be given to those who completed 16. See 'Task/Grade Correlation.'"]
+    "substance":["Your grade is strictly determined by the number of tasks you have completed throughout the semester. To receive an A for this class, you need to complete 16 tasks by the end of the semester. For an A-, you need 14 tasks. From there, each drop in the number of tasks completed entails a drop in grade level - 13 B+, 12 B, and so on. Anything below 6 is failing. An A+ would be given to those who completed 16. See 'Task/Grade Correlation.'"]
   },
 
   "Tasks":{
     "title":"Tasks Calculation",
-    "substance":["There are four types of tasks: web exercises, problem-sets, tests, and a participation. Each of them have difference in how they contribute to your grade. See 'Task Worth' for more",
-    "In general, this basically means that you want to complete all online and written assignments,  do the best you can on the test, and make up the difference with participatory tasks. You can get credit for 4 of them."]
+    "substance":["There are four types of tasks: web exercises, problem-sets, tests, and a participation. Each of them have difference in how they contribute to your grade. See 'Tasks Available ' for more",
+    "Simply put, this means that, to get the grade you want, you should complete all web and written assignments, do the best you can on the tests, and make up the difference with participatory tasks. You can get credit for 4 of them. For instance if you would like an A you should plan on getting P+ on some of the tests, and keep an eye on possible participatory tasks."]
   },
   "Task Policies":{
     "title":"Task Policies",
-    "substance":["In general, you are free to engage in the task whenever you like, inside or outside of class. The only restriction is that your task is only counted if you finished the test for the previous module (except for module 1 task, since there is no prior test). What is means practically is that you should pass the test for the module before engaging in the next. The materials in this course is progressively structured - you are unlikely to be able to do well in subsequent modules unless you finish the current one.",
-    "What this means is that to pass this class (D), at the minimal you have to pass the first two tests. "]
+    "substance":["In general, you are free to engage in these tasks whenever you like, inside or outside of class. The only restriction is that your task is only counted if you finished the test for the previous module (except for module 1 task, since there is no prior test). What is means practically is that you should pass the test for the module before engaging in the next module. The materials in this course is progressively structured - you are unlikely to be able to do well in subsequent modules unless you finish the current one.",
+    "Consequently, to pass this class (getting a D), at the minimal you have to pass the first two tests. "]
   },
   "Tests":{
     "title":"Tests",
-    "substance":["You are required to finish a module's corresponding web exercises and problem-set before the test for the module. Though they are mandatory, you are encouraged to work of them in your own pace. Tests must be taken in a sequential manner - in general you are advised to work on the materials in the order presented, without jumping ahead. There are three possible grade for each test: P+/P/N. P+ and P are counted as passing, and N not passing. The difference between P+ and P is that the former is counted as completing two tasks: a test and a participatory task. In terms of grading, P+ corresponds to an perfect A and P is similar to B+. You are allowed to repeat each test as many times as you like, within the semester. Your grade will be replaced by the better grade.",
-    "The test are intended to be closed-book, but not strictly enforced. Due to the computational nature of logic, you would be at a disadvantage had you relied on the notes/books. That's punishment enough. When taking a test, you are welcome to take the test outside of our classroom for quietness. You are also allowed to use headphones. "]
+    "substance":["You are required to finish a module's corresponding web exercises and problem-set before taking the test for the module. Though these assignments are mandatory, you are encouraged to work of them in your own pace.",
+      "Tests must be taken in a sequential manner - in general you are advised to work on the materials in the order presented, without jumping ahead. There are three possible grade for each test: P+/P/N. P+ and P are counted as passing, and N not passing. The difference between P+ and P is that the former is counted as completing two tasks: a test and a participatory task, so you would getting two credits.","In terms of the difficulty of grading, P+ corresponds to an perfect A and P is similar to B+. You are allowed to repeat each test as many times as you like, within the semester. Your grade will be replaced by the better grade.",
+    "The tests are intended to be closed-book, though not strictly enforced. Due to the computational nature of logic, you would be at a disadvantage had you relied on the notes/books. You will likely to find that time is an important constraint for these tests and looking at notes or books will take up valuable test time. That's punishment enough. When taking a test, you are welcome to take the test outside of our classroom for quietness. You are also allowed to use headphones."]
   },
   "Learning day and working day":{
     "title":"Learning day and working day",
@@ -25,7 +36,11 @@
   },
   "Attendance Policy":{
     "title":"Reward-based attendance policy",
-    "substance":["Attendance is not required in the traditional sense but better seen as rewarded; so, they still matter a lot in this class. Since you are only allowed to take a test on a testing day, by missing a class on that day you are effectively forfeiting an opportunity to take a test. Also, since two participatory tasks are attendance based, if you miss out on these opportunities, you will have to make it up doing other participatory tasks to make up the difference, or settle on a lower grade."]
+    "substance":["Attendance is not required in the traditional sense but better seen as rewarded; so, they still matter a lot in this class. Since you are only allowed to take only one test on a testing day, by missing a class on that day you are effectively forfeiting an opportunity to take a test. Also, since two participatory tasks are attendance based, if you miss out on these opportunities, you will have to make it up doing other participatory tasks to make up the difference, or settle on a lower grade."]
+  },
+  "The Final":{
+    "title": "The Final",
+    "substance":["There is no 'final exam' in the traditional sense of the word; Instead,  the day of our finals will be our last testing taking day."]
   },
   "Tardiness and Leaving Class Early":{
     "title": "Tardiness and Leaving Class Early",
