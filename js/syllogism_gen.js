@@ -247,4 +247,4 @@ module.exports.cats = function (){
 };
 
 
-console.log(new catStatement(termsInit("dogs")))
+// console.log(new catStatement(termsInit("dogs")))

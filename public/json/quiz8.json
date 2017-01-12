@@ -1,9 +1,0 @@
-{
-  "0": {
-    "question": "Test",
-    "real": "real answer",
-    "fake": ["probable, true, false", "possible, false, true", "improbable, true, false"],
-    "type": "mc",
-    "id": "quiz1_1"
-  }
-  }
