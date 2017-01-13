@@ -5216,7 +5216,7 @@ $(function(){
           argument.text("")
           slide +=1;
           textInst.text("The first statement says that all dogs are animals. This means that we should grey out any area of the dog circle that doesnt overlap with the aniaml circle, signifying that no non-animal dogs exists.")
-          argument.text("Click on the corresponding areas to shade them. The tutorial will continue as long as all of the needed areas are shaded.")
+          argument.text("Click on the corresponding areas to shade them. The tutorial will continue as soon as all of the needed areas are shaded.")
           // iButton.text('See Instruction')
           var a = "Dogs"
           var button = [true,true]
