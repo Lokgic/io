@@ -24,7 +24,7 @@ $(function(){
     $('#messageModal .modal-body').html("")
     var a = "Dogs"
     var b = "Animals"
-    var c = "German Shepherd"
+    var c = "German Shepherds"
     instructionSet = [
       {sets: [a], size: 4,clicked:false},
      {sets: [b], size: 4,clicked:false},
@@ -44,7 +44,7 @@ $(function(){
     var instructionChart = venn.VennDiagram().height(iWidth).width(iWidth)
     // console.log(iWidth)
     var intro = "The goal of this 'logicize' (basically a logic exercise) is to determine whether a given categorical syllogism is valid by providing a correct Venn diagram representation of it."
-    argument.text("Click on the cricle below to continue and click outside of the window anytime to exit. You can always reopen this window by clicking the 'Instruction' button.")
+    argument.text("Click on the circle below to continue and click outside of the window anytime to exit. You can always reopen this window by clicking the 'Instruction' button.")
     textInst.text(intro)
     var introSet = [
       {sets: [a], size: 1},
@@ -71,14 +71,14 @@ $(function(){
               .style('stroke-opacity',1)
               .style('stroke-width',5)
               .style('fill-opacity',1)
-            textInst.text("Consider the follow argument. All dogs are aniamls. Some animals are German Shepherds. Therefore, some dogs are German Shepherds. ")
-            argument.text("Is it valid? It may sound valid to you, since these statements are all true - let's complete a Venn diagram to find out. Click on the Venn diagram to continue.")
+            textInst.text("Consider the follow argument. All dogs are animals. Some animals are German Shepherds. Therefore, some dogs are German Shepherds. ")
+            argument.text("Is it valid? It sounds plausible. To begin, these statements are all true - let's complete a Venn diagram to find out. Click on the Venn diagram to continue.")
             break;
         }
         case 2: {
           argument.text("")
           slide +=1;
-          textInst.text("The first statement says that all dogs are animals. This means that we should grey out any area of the dog circle that doesnt overlap with the aniaml circle, signifying that no non-animal dogs exists.")
+          textInst.text("The first statement says that all dogs are animals. This means that we should fill with grey the area of the dog circle that doesn't overlap with the animal circle, signifying that no non-animal dog exists.")
           argument.text("Click on the corresponding areas to shade them. The tutorial will continue as soon as all of the needed areas are shaded.")
           // iButton.text('See Instruction')
           var a = "Dogs"
@@ -93,7 +93,7 @@ $(function(){
           })
 
 
-          iVenn.select('g[data-venn-sets="'+a+'_German Shepherd"]').select('path').on('click',function(){
+          iVenn.select('g[data-venn-sets="'+a+'_German Shepherds"]').select('path').on('click',function(){
             if (button[1]){
               d3.select(this).transition().duration(600).style('fill','grey')
               slide += 1;
@@ -106,7 +106,7 @@ $(function(){
         case 5 :{
           var completed = false;
           slide += 1;
-          textInst.text("Well done - now onto premise 2: some animals are German Shepherd. This is an existential claim, to be represented by a cross in the diagram.")
+          textInst.text("Well done - now onto premise 2: some animals are German Shepherds. This is an existential claim, to be represented by a X in the diagram.")
           argument.text("Click on the 'Add Object' button")
           iButton = d3.select('#messageModal .modal-body').append('button').attr('class','btn btn-block btn-greyish p-a-1').text('Add Object')
           .on('click', function(){
@@ -115,14 +115,14 @@ $(function(){
               completed = true;
               // iButton.classed('btn-greyish',false).classed('btn-outline-greyish',true)
               iButton.classed('invisible',true)
-              textInst.text("Now clicking Venn diagram will place a 'X' in it instead of greying the area." )
+              textInst.text("Now clicking Venn diagram will place a 'X' in it instead of shading the area." )
               argument.text("Click on the corresponding area to represent the claim that something that is both a German Shepherd and an animal.")
               var iDim = iVenn.select(pickVennArea('Animals')).select(' path').attr('d')
               var iCir = getCirNum(iDim)
               var toCross =  "M " +cir.cx + " " + cir.cy  + " m 0 -" +(cir.radius/2) + " "+ crossStr
               var checkValidity = false
 
-              iVenn.select(pickVennArea('Animals_German Shepherd')).select('path').on('click',function(){
+              iVenn.select(pickVennArea('Animals_German Shepherds')).select('path').on('click',function(){
 
                 if (!checkValidity){
                   checkValidity = true
@@ -131,11 +131,11 @@ $(function(){
                         .style('stroke-width',7)
                         .style('fill-opacity',1)
                   textInst.text("Good job. Now think about this means for the conclusion: Some dogs are German Shepherd. Is the argument valid? You might be tempted to say yes because the conclusion itself is true, but that's not we are asking. Remember validity means: 'IF the premises are true, the conclusion must also be true.' Choose by picking on the corresponding button.")
-                  argument.text("The argument was: All dogs are aniamls. Some animals are German Shepherds. Therefore, some dogs are German Shepherds.")
+                  argument.text("The argument was: All dogs are animals. Some animals are German Shepherds. Therefore, some dogs are German Shepherds.")
                   var end = false;
                   iButton.classed('invisible', false).text('Valid').on('click', function(){
                     if (!end){
-                      textInst.text("That's incorrect. You might be tempted to pick this because these are all true statements, but remember that validity does not ask if the statements are actually true - they just ask what would happen if these statements were true. So the fact that they all happen to be true is irrelevant - as a matter of fact, an argument can contain all false statements and can still be a valid argument. If you look at the diagram, since the only place that has 'X' is the intersection between aniamls and German Shephards, and there is nothing in the premises that would reject the existence of a non-dog German Shephard animal.")
+                      textInst.text("That's incorrect. You might be tempted to pick this because these are all true statements, but remember that validity does not ask if the statements are actually true - they just ask what would happen if these statements were true. So the fact that they all happen to be true is irrelevant - as a matter of fact, an argument can contain all false statements and can still be a valid argument. If you look at the diagram, since the only place that has 'X' is the intersection between animals and German Shepherds, and there is nothing in the premises that would reject the existence of a non-dog German Shepherd animal.")
                       argument.text("Click on either of the button or the darken area outside of this window to close the tutorial.")
                       end = true
                     }else{
@@ -144,7 +144,7 @@ $(function(){
                   })
                   iButton2 = d3.select('#messageModal .modal-body').append('button').attr('class','btn btn-block btn-greyish p-a-1').text('Invalid').on('click', function(){
                     if (!end){
-                      textInst.text("That's correct! Even though these are all true statements, the Venn diagram clearly shows that it is still possble for the conclusion to be false even if the premises are true.")
+                      textInst.text("That's correct! Even though these are all true statements, the Venn diagram clearly shows that it is still possible for the conclusion to be false even if the premises are true.")
                       argument.text("Click on either of the button or the darken area outside of this window to close the tutorial.")
                       end = true
 
@@ -166,17 +166,17 @@ $(function(){
 
               })
 
-              iVenn.select(pickVennArea('Dogs_German Shepherd')).select('path').on('click',function(){
+              iVenn.select(pickVennArea('Dogs_German Shepherds')).select('path').on('click',function(){
 
               if (!checkValidity) textInst.text('This just says that some dogs is a German Shepherd. This is true but it does not capture that the premise is saying. This is close though since the premise does talk about German Shepherds.')
               })
 
-              iVenn.select(pickVennArea('German Shepherd')).select('path').on('click',function(){
+              iVenn.select(pickVennArea('German Shepherds')).select('path').on('click',function(){
               if (!checkValidity) textInst.text('This just says that something is a German Shepherd. This is very close though since the premise does talk about German Shepherds.')
 
               })
 
-              iVenn.select(pickVennArea('Dogs_Animals_German Shepherd')).select('path').on('click',function(){
+              iVenn.select(pickVennArea('Dogs_Animals_German Shepherds')).select('path').on('click',function(){
                 if (!checkValidity) textInst.text('This is saying a little more than what the premise is saying - it does not talk about anything being a dog in particular.')
 
               })
