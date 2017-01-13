@@ -8,28 +8,11 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
 var app = express();
-// var sql = require('./sql')
 
-//mysql connection
-
-// var cred = {
-//   host     :  process.env.mysqlhost,
-//   user     : process.env.mysqluser,
-//   password : process.env.mysqlpassword,
-//   database : process.env.mysqldatabase
-// };
-
-// sql.connect(cred, function(err) {
-//   if (err) {
-//     console.log('Unable to connect to MySQL.')
-//     process.exit(1)
-//   } else {
-//     console.log('connected');
-//   }
-// })
+// knex.insert({firstName: 'Tim'}).into('studentInfo');
 
 //mongodb connection
-
+// postgres://zvbsaaqbevecuo:ef87b554d97488e8d600b4d15c0acd38d02190ccd05006ae27211876e57459a3@ec2-107-22-236-252.compute-1.amazonaws.com:5432/d29nf9uuunnvne
 
 mongoose.connect(process.env.mlab);
 var db = mongoose.connection;

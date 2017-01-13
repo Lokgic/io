@@ -1,3 +1,13 @@
+.vennCircle .label{
+  fill:black;
+}
+
+#messageModal .modal-body{
+  display:block;
+  margin:auto;
+}
+
+
 #mainnavbar a{
   color:#444C5C;
   font-family: 'Titillium Web', sans-serif;
@@ -89,7 +99,18 @@ border-bottom:  2px solid grey;
   margin-top: 150px;
 }
 
+.btn-red ,.btn-outline-red:hover{
+  background-color: #EC5A57;
+  color:white;
+  border-color:#EC5A57
+}
 
+
+.btn-outline-red {
+  background-color: white;
+  color:#EC5A57;
+  border-color:#EC5A57
+}
 
 .btn-blue ,.btn-outline-blue:hover{
   background-color: #478EB0;

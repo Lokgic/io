@@ -555,7 +555,7 @@ function sylToString(prob){
 }
 
 function loadSyl(callback){
-  jQuery.post("../processing/syllogism/list")
+  jQuery.post("/processing/syllogism/list")
   .done(function(data){
       callback(null, data);
   }).fail()
@@ -563,7 +563,7 @@ function loadSyl(callback){
 
 
 function loadCats(callback){
-  jQuery.post("../processing/syllogism/cats")
+  jQuery.post("/processing/syllogism/cats")
   .done(function(data){
       callback(null, data);
   }).fail(function(f){console.log(f)})

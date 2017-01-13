@@ -12,30 +12,22 @@ block content
 					li.nav-item
 						span.navbar-text.text-muted.hidden-md-down #{info.shortDescription}
 					li.nav-item.pull-xs-right
-						a.nav-link.p-y-0 Leaderboard
+						a.nav-link.p-y-0#leaderboard(href = "#") Leaderboard
 					li.nav-item.pull-xs-right
-						a.nav-link.p-y-0 Instruction
+						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
 					li.nav-item.pull-xs-right
 						span.navbar-text Score : &nbsp;
 						span#score 0
 		.row.text-xs-center
-			.rightPanel.col-lg-3.col-md-4
-				.m-y-1.m-x-a.text-justify#sylProblem
-			#vennLog.midpanel.col-lg-6.col-md-4
-			#userInput.leftPanel.col-lg-3.col-md-4
-				button(type = "button").btn.btn-secondary.m-y-1.m-r-2.btn-block#valid Argument Valid?
-				button(type = "button").btn.btn-outline-teal.m-y-1.m-r-2#exBut Object 1
-				button(type = "button").btn.btn-outline-blue.m-y-1.m-r-2#exBut2 Object 2
-				button(type = "button").invisible.btn.btn-purple.m-y-1.text-xs-center#delObj Delete Current Object
-				button(type = "button").btn.btn-greyish.m-y-1.btn-block#answer.answerButt Submit Answer
+			include vennSyl
 	.modal.fade(tabindex="-1" role="dialog" aria-labelledby="messageLabel" aria-hidden="true")#messageModal
-		.modal-dialog(role="document")
+		.modal-dialog.modal-lg(role="document")
 			.modal-content
 				.modal-header
 					button.close(type="button" data-dismiss="modal" aria-label="Close")
 						span(aria-hidden="true") &times;
 					h4.modal-title#messageLabel Message Title
-				.modal-body X
+				.modal-body
 
 
 
