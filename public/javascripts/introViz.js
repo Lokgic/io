@@ -259,11 +259,11 @@ $(function(){
               togglePosition(d3.select('#section2 .introAni'), 0, 0)
           }
 
-          // if (scrollTop > midpoint('#slide4') + window.innerHeight/2){
-          //   click(section2Svg,partition(root).descendants()[1])
-          // } else if (scrollTop < midpoint('#slide4') + window.innerHeight/2){
-          //   click(section2Svg,partition(root).descendants()[0])
-          // }
+          if (scrollTop > midpoint('#slide4') + window.innerHeight/2){
+            click(section2Svg,partition(root).descendants()[1])
+          } else if (scrollTop < midpoint('#slide4') + window.innerHeight/2){
+            click(section2Svg,partition(root).descendants()[0])
+          }
 
         }
 
@@ -287,10 +287,10 @@ $(function(){
         var scopeStart = 'M '+xM +' '+yM
         var scope = []
          base.append('g').append('path').attr('d',scopeStart + " V "+(height -yM)).style('stroke','grey').style('stroke-width', 3)
-        
+
 
         // scope[1] = scopeline.append('path').attr('d','M '+xM +' '+(yM +ySpacing)+ " m " + xSpacing +" 0 V "+(height -yM)).style('stroke','grey').style('stroke-width', 3)
-      
+
         base.append('text').text('$Fx \\to Gx$').attr('x',xM+xSpacing).attr('y',yM+ySpacing).attr('font-size','25').style('opacity',1)
 
         var x = xM+xSpacing
@@ -300,12 +300,12 @@ $(function(){
 
         base.append('text').text(proof[1]).attr('x',xM+xSpacing+100).attr('y',yM+ySpacing+100).attr('font-size','25').style('opacity',1)
 
-        
+
         }
 
-        
-        makeProof()
 
+        // makeProof()
+        wheelInit()
         function wheelInit(){
 
               // navInfo = d3.select('#section2 .introAni')
