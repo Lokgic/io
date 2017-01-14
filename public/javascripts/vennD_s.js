@@ -143,15 +143,14 @@ $(function(){
                      .range([bobX, width/2])
                      .clamp(true)
 
-    vennEulerScale = d3.scaleLinear()
-              .domain([tp('#t5')+200, tp('#t6')-slideDuration])
-              .range([6,3])
-              .clamp(true)
-
-    vennEulerScale2 = d3.scaleLinear()
-              .domain([tp('#t5')+200, tp('#t6')-slideDuration])
+    vennEulerGuitarScale = d3.scaleThreshold()
+              .domain([tp('#t5')+slideDuration])
               .range([6,12])
-              .clamp(true)
+              // .clamp(true)
+
+    vennEulerGuitarPluckedScale = d3.scaleThreshold()
+              .domain([tp('#t5')+slideDuration,tp('#t6')+slideDuration])
+              .range([6,12,4])
     vennOScale = d3.scaleLinear()
              .domain([tp('#t5')+200, tp('#t6')-slideDuration])
              .range([0.7,0])
@@ -238,7 +237,7 @@ $(function(){
                 .append("g").attr('id','guitarStuff').attr('opacity',0)
                 .append("circle").attr("r",radius/3).attr("cx",width/2).attr("cy", bobY).style('fill',guitarColor)
       guitarText = d3.select('#guitarStuff').append("text").text("Guitar").attr("dx",width/2).attr("dy", bobY).style('fill','black')
-
+      // setSizeVenn2()
 
 
     }
@@ -337,8 +336,8 @@ $(function(){
 //   .attr("height", height)
 
   var sets = [ {sets: ['Plucked'], size: 12},
-           {sets: ['Guitar'], size: vennEulerScale2(scrollTop)},
-         {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
+           {sets: ['Guitar'], size: 6},
+         {sets: ['Plucked','Guitar'], size: 6}];
 
 
 
@@ -423,11 +422,28 @@ function graphics2TextAdd(){
 
   venn3Init()
 
+  // var guitarSize
+  // var Plucked_GuitarSize
+
+  // function setSizeVenn2(){
+  //   if (scrollTop < tp('#t5')+slideDuration){
+  //     guitarSize = 6
+  //     Plucked_GuitarSize = 6
+  //   } else if (scrollTop > tp('#t5')+slideDuration){
+  //     guitarSize = 12
+  //     Plucked_GuitarSize = 12
+  //
+  //   }
+  // }
+
+  // setSizeVenn2()
   function graphics2(){
     numText.style('opacity', numScale(scrollTop))
+    // setSizeVenn2()
+
     sets = [ {sets: ['Plucked'], size: 12},
-                 {sets: ['Guitar'], size: vennEulerScale2(scrollTop)},
-                 {sets: ['Plucked','Guitar'], size: vennEulerScale(scrollTop)}];
+                 {sets: ['Guitar'], size: vennEulerGuitarScale(scrollTop)},
+                 {sets: ['Plucked','Guitar'], size: vennEulerGuitarPluckedScale(scrollTop)}];
                 //  console.log(vennOScale(scrollTop))
     vennD = d3.select("#m1c1s2 .animation").datum(sets).call(chart)
     d3.select('g[data-venn-sets = "Plucked_Guitar"]').select('path').style('fill-opacity', vennInterScale(scrollTop))
@@ -489,7 +505,7 @@ function graphics2TextAdd(){
     graphics2()
     graphic3()
     sticky();
-    graphics2TextAdd()
+    // graphics2TextAdd()
 
 
 
@@ -578,12 +594,12 @@ loadSyl(function(e,d){
   for (problem in d){
     problemsSet.push(sylToString(d[problem]))
   }
-  console.log(problemsSet)
+  // console.log(problemsSet)
   readingExMC(problemsSet, '#reading1-1-1 .readingEx')
 })
 
 loadCats(function(e,d){
-  console.log(d)
+  // console.log(d)
   readingExMC(d, '#reading1-1-2',"venn")
 })
 

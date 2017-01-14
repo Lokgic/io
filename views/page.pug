@@ -73,12 +73,14 @@ block content
 														when "argument"
 																+argument(col.premises, col.conclusion)
 									when "scroll"
-										.container.scroll.p-a-0.m-x-0(id = x.eventId style="margin-bottom:300px;")
-											- var first = true
-											.col-sm-6.text.p-a-0
+										.container.scroll.p-a-0.m-x-0(id = x.eventId)
+											.col-sm-5.text.p-a-0.m-x-0
 												for t in x.substance
-													p.scrollText.text-justify.p-a-1(id = t[0] style = "margin-top:250px") #{t[1]}
-											.col-sm-6.animation.p-a-0
+													.slide
+														.slidebox
+															h4.slideTitle.text-xs-center #{t[1]}
+															p.text-justify.p-a-1(id = t[0]) #{t[2]}
+											.col-sm-6.animation.p-a-0.m-x-0
 									when "argument"
 											+argument(x.premises, x.conclusion)
 									when "event"

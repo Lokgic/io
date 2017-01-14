@@ -1,3 +1,27 @@
+
+.slide{
+
+  height: 100vh;
+  display:flex;
+  font-family:'Titillium Web', sans-serif;
+  font-size: 1em;
+
+}
+
+.slidebox{
+  margin:auto;
+  max-width:500px;
+}
+
+.slideTitle{
+  font-family:'Raleway', sans-serif;
+  font-size:1.8em;
+  /*border-bottom: 1px solid black;
+  margin-bottom: 15px;
+  margin-top: 10px;*/
+
+}
+
 .vennCircle .label{
   fill:black;
 }
