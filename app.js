@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
 var app = express();
+var passport = require('passport');
 
 // knex.insert({firstName: 'Tim'}).into('studentInfo');
 
@@ -21,14 +22,22 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console,'connection error'));
 
 //sessions for tracking logis
+// app.use(session({
+//   secret: 'lokgical',
+//   resave: true,
+//   saveUninitialized: false,
+//   store: new MongoStore({
+//   mongooseConnection: db
+//   })
+// }));
 app.use(session({
-  secret: 'lokgical',
-  resave: true,
-  saveUninitialized: false,
-  store: new MongoStore({
-  mongooseConnection: db
-  })
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash())
 
 //make user ID available in template
 
