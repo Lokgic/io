@@ -367,13 +367,14 @@ function graphics2TextAdd(){
 
     vennD.select('svg')
     .append('text')
-    .attr('id',"x")
+    .attr('id',"X")
     .text("X")
     .attr('dx', xPos[0])
     .attr('dy', xPos[1])
     .style('font-size','3em')
     .style('opacity',  Oscale("#t8","#t9"))
-    .style('transform','translate(-.35em)')
+    .attr('text-anchor',"middle")
+    // .style('transform','translate(-.35em)')
 
 
 }
@@ -422,21 +423,7 @@ function graphics2TextAdd(){
 
   venn3Init()
 
-  // var guitarSize
-  // var Plucked_GuitarSize
 
-  // function setSizeVenn2(){
-  //   if (scrollTop < tp('#t5')+slideDuration){
-  //     guitarSize = 6
-  //     Plucked_GuitarSize = 6
-  //   } else if (scrollTop > tp('#t5')+slideDuration){
-  //     guitarSize = 12
-  //     Plucked_GuitarSize = 12
-  //
-  //   }
-  // }
-
-  // setSizeVenn2()
   function graphics2(){
     numText.style('opacity', numScale(scrollTop))
     // setSizeVenn2()
@@ -505,7 +492,7 @@ function graphics2TextAdd(){
     graphics2()
     graphic3()
     sticky();
-    // graphics2TextAdd()
+    graphics2TextAdd()
 
 
 

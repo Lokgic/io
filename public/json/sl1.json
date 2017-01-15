@@ -40,7 +40,7 @@
               {
                 "type": "argument",
                 "premises":["1: Bob plays a bowed instrument.",
-                "2: Guitars are not bowed instruments"],
+                "2: All guitars are plucked instruments and not bowed"],
                 "conclusion":"Therefore, Bob does not play the guitar"
               }
             ]
@@ -48,7 +48,7 @@
           "c":{
             "type": "p",
             "substance":[
-              "This example showcases a core idea in formal logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
+              "This example showcases a core idea in formal logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
               "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
 
               "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. The argument is valid if, when you pretend the premises are true, you also have to pretend the conclusion is true."
@@ -63,7 +63,7 @@
               ["t1","Representing Validity","One way in which we can think about validity is by representing an argument like the one above in a graphical form that accentuates its logical structure. First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
               ["t2", "Premise 1","tells that whatever instrument Bob plays belongs to the bowed circle. This can be represent by a smaller circle situated within the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
               ["t3", "Not really!","Since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
-              ["t4", "What the second premise tells","guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
+              ["t4", "Premise 2 states that","guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
             ]
 
           },
@@ -108,12 +108,12 @@
           "type":"scroll",
           "eventId":"m1c1s2",
           "substance":[
-            ["t5","What's wrong with Euler diagrams?","Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While that might be the case, the goal of the diagram is to accurately represent the statement 'All guitars are plucked instrument.' In logic we do not want to assume any proposition that is not explicitly stated. This statement is unclear about whether all guitars and $only$ guitars are unplucked."],
-            ["t6", "Preserving ambiguity","So it should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. The problem however is that Euler diagrams cannot express that relation clear - either the two circles are of the size, or one is smaller. There is no way to express the ambiguity needed here. Furthermore, it is confusing to put one of the circles directly on top of the other, as shown by the diagram."],
+            ["t5","What's wrong with Euler diagrams?","Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While our background knowledge tells us that this is true, the goal of the diagram is to accurately represent the statement in question, not to impose external information. In logic we do not want to assume any proposition that is not explicitly stated. This statement is unclear about whether $all$ guitars or $only$ guitars are plucked. (What's the difference?)"],
+            ["t6", "Making ambiguity explicit","So it should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. The problem however is that Euler diagrams cannot express this relation clearly - either the two circles are of the size, or one is smaller. There is no way to express the ambiguity needed here. Furthermore, it is confusing to put one of the circles directly on top of the other, as shown by the diagram."],
             ["t7", "Venn's suggestion:","to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles. The advantage of this is that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
-            ["t8", "Claiming existence","We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ''All guitars are plucked instruments,'' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."],
+            ["t8", "Representing impossibilities","We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say ''All guitars are plucked instruments,'' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."],
 
-            ["t9","Representing existence","We put an X in a region, when we want to say that something exists in it. Since the argument also states that Bob plays a bowed instrument, it means that there should be an X somewhere in that circle. Since the argument is indifferent in respect to whether or not this instrument is also plucked - we put the X right on the border. Like before, we see that Bob's instrument cannot possibly be a guitar. Unlike before, however, we don't implicitly deny the possibility of a non-guitar plucked instrument."]
+            ["t9","Representing ambiguous entities","What if I want to say: Mary plays a plucked instrument? Now we are dealing with $existence$, and not just $possibilities$. To assert that a certain thing exists, we put an X in a region, so there should be an X somewhere in the plucked circle. Should we put the X in the overlapping area? We certainly don't know if Mary plays the guitar, but we also don't know if she does not play it. So we have another ambiguity here. To represent this we put the X right on the border, signifying that the statement is indifferent in respect to whether the instrument is also a guitar. (If Mary turns out to play something that is both a guitar and plucked, then the X would go in the overlapping area.)"]
 
           ]
 
@@ -132,7 +132,7 @@
       "content":{
         "a":{
           "type":"ps",
-          "substance":["The premise 'all guitars are plucked instruments' is an example of what logicians call a <a href='https://en.wikipedia.org/wiki/Categorical_proposition' target='_blank'>categorical statement</a>. For most of the history of logic in the West, the focus has been on arguments that rely extensively on those statements called <a href = 'https://en.wikipedia.org/wiki/Syllogism' target='_blank'>categorical syllogism </a>. Aristotle began the study of this kind of argument in his book the <i>Prior Analytics</i> (c.350 BCE). While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, it will give a you taste of the sort of stuff we will be doing for the rest of the course.",
+          "substance":["The premise 'all guitars are plucked instruments' is an example of what logicians call a <a href='https://en.wikipedia.org/wiki/Categorical_proposition' target='_blank'>categorical statement</a>. For most of the history of logic in the West, the focus has been on arguments that rely extensively on those statements called <a href = 'https://en.wikipedia.org/wiki/Syllogism' target='_blank'>categorical syllogism </a>. Aristotle began the study of this kind of argument in his book the <i>Prior Analytics</i> (c.350 BCE).",
           "A categorical syllogism is a two-premise argument composed of categorical statements. There are actually all kinds of two-premise arguments using categorical statements, but Aristotle only looked at arguments where each statement is in one of the 'moods' of categorical statement. Each mood is a combination of two quantities and two qualities. A quantity of a categorical statement can be either universal - applying to everything in a category, particular - at least one thing in a category. Each categorical statement is also said to have either an affirmative or a negative quality. 'All guitars are plucked' is an instance of a universal affirmation - it makes a positive claim that everything that in the category of guitars. 'No guitar is bowed' would be a instance of universal negation. Some guitars are bowed would be an instance of a 'particular affirmation', and so on."]
         },
         "b":{
@@ -175,6 +175,24 @@
 
         }
       }
+    },
+    "4":{
+        "title":"Wrapping up",
+        "content":{
+          "e":{
+            "type":"readingEx",
+            "title": "Reading Exercise: Concepts Review Quiz",
+            "eventId":"reading1-1-4",
+            "size":"half",
+            "instruction": "Match the following concepts.",
+            "substance":[
+              "Finish this section by completing the concepts review quiz. For this quiz, you have to answer all questions correctly to get credit. However you may try as many times as you like.",
+              "After familiarizing yourself with the ideas in the section, you should do the logicize <a href='/logicize/vennSyl'>Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
+              "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern  logic - the formal language of sentence logic."
+
+            ]
+          }
+        }
     }
   }
 }

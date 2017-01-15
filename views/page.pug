@@ -69,7 +69,7 @@ block content
 												.card(style = "border : 0px;")
 													case col.type
 														when "p"
-																+paragraphs(col.substance)
+																+paragraphsEscaped(col.substance)
 														when "argument"
 																+argument(col.premises, col.conclusion)
 									when "scroll"
@@ -90,7 +90,7 @@ block content
 										if x.size == "half"
 											.row(id = x.eventId).m-y-3
 												.col-lg-6.p-y-2.p-r-2
-													+paragraphs(x.substance)
+													+paragraphsEscaped(x.substance)
 												.col-lg-6.readingEx
 													+MC(x)
 													.readingExQ.text-xs-center
@@ -101,10 +101,6 @@ block content
 												.readingExQ.text-xs-center.col-lg-6
 												.readingExQ2.text-xs-center.col-lg-6
 												.readingExAns.col-lg-12
-
-
-
-
 
 
 block extrafooter
