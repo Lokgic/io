@@ -1,0 +1,14 @@
+extends pagelayout
+
+block content
+	.container-fluid#loginPage
+		#loginBox
+			h1.m-b-2.generalTitle LOGIN
+			form(method='POST' action='login')
+				div.form-group
+					label(for='email') Email
+					input.form-control(type='text id=email' placeholder='your@email.com' name='email')
+				div.form-group
+					label(for='password') Password
+					input.form-control(type='password' id = 'password' placeholder =  "password" name = 'password')
+				button.btn.btn-blue(type='submit') Submit

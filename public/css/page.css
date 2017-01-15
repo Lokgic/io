@@ -1,3 +1,6 @@
+body {
+  font-family:'Titillium Web', sans-serif;
+}
 
 .slide{
 
@@ -42,6 +45,22 @@
   border-bottom: 1px solid
 
 }
+
+
+#loginPage{
+  background:#ddd;
+  color:black;
+  height: 100vh;
+  display:flex;
+  font-family:'Raleway', sans-serif;
+  font-size: 1em;
+
+}
+
+#loginBox{
+  margin:auto;
+}
+
 
 .readingExResults{
   /*border: 1px solid grey;*/
@@ -129,12 +148,23 @@ border-bottom:  2px solid grey;
   border-color:#EC5A57
 }
 
-
+.red{
+  background-color: #EC5A57;
+  color:white;
+  border-color:#EC5A57
+}
 .btn-outline-red {
   background-color: white;
   color:#EC5A57;
   border-color:#EC5A57
 }
+
+.btn-blue:hover{
+  background-color: #79BEDB;
+  color:#666;
+  border-color:#79BEDB
+}
+
 
 .btn-blue ,.btn-outline-blue:hover{
   background-color: #478EB0;
@@ -233,6 +263,10 @@ border-bottom:  2px solid grey;
 
 text{
   pointer-events:none;
+}
+
+.generalTitle{
+  font-family: 'Raleway', sans-serif;
 }
 
 .lessonSectionTitle{

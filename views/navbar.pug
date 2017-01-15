@@ -1,5 +1,7 @@
-
-nav.navbar.navbar-fixed-top#mainnavbar
+-
+	if (!currentUser) userTag = "notLogged" 
+	else userTag = currentUser
+nav.navbar.navbar-fixed-top#mainnavbar(data = userTag)
 	.container
 		button.navbar-toggler.hidden-sm-up(type = "button" data-toggle ="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation")  	&#8872;
 		.collapse.navbar-toggleable-xs#exCollapsingNavbar2
@@ -13,26 +15,11 @@ nav.navbar.navbar-fixed-top#mainnavbar
 						.dropdown-menu
 							a.dropdown-item(href="/m/sl/1") 1.1 What is Logic?
 							a.dropdown-item(href="/logicize/vennSyl") Logicize: Venn Diagrams
-
-
-				li.nav-item.invisible
-					a.nav-link(href='/profile') Profile
 				if currentUser
-					li.nav-item.pull-md-right.invisible
-						a.btn.btn-primary.btn-block(href='/logout') Logout
-					li.nav-item.pull-md-right#userStatus.hidden-md-down
-							- var n = 0
-							while n <48
-								button.bar(id = "bar_" + n type="button" data-toggle="tooltip" data-placement="bottom" title="Incomplete" data-html= "true") &nbsp;
-								- n = n + 1
-							.gradeScale
-								button.grade_bar(id = "grade_f" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: F</p><p lead> Test 3 or less</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_d" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: D</p><p lead> Requirement: Module 4 Completion</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_c" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: C</p><p lead> Requirement: Module 5 Completion</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_b" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: B</p><p lead> Requirement: Module 6 Completion</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_bp" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class =  'lead text-xs-center'>Grade: B+</p><p lead> Requirement: Module 7 Completion</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_am" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A-</p><p lead> Requirement: Module 8 Exercises</p>" data-html= "true") &nbsp;
-								button.grade_bar(id = "grade_a" type="button" data-toggle="tooltip" data-placement="bottom" title="<p class = 'lead text-xs-center'>Grade: A</p><p lead> Requirement: Passing Test 8</p>" data-html= "true") &nbsp;
+					li.nav-item
+						a.nav-link(href='/profile') #{nickname}
+					li.nav-item.pull-md-right
+						a.nav-link(href='/logout') Logout
 				else
-					li.nav-item.pull-md-right.invisible
-						a.btn.btn-warning.btn-block(href='/login').blink Click to Login
+					li.nav-item.pull-md-right
+						a.nav-link(href='/login') Login

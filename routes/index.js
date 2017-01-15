@@ -3,22 +3,112 @@ var router = express.Router();
 var User = require('../models/user');
 
 var mid = require('../middleware');
-// var Student = require('../models/student')
+var student = require('../models/student')
 
 //for rendering index
 
 
+// student.authenticate("m1","abc",function(error, user){
+// 	if (error) console.log(error+ " err!")
+// 	else console.log(user)
+// })
+
+/* GET register */
+
+router.get('/register', mid.loggedOut, function(req, res, next){
+	return res.render('register', {title: 'Sign up'})
+});
 
 
-router.get('/syl', function(req, res, next){
-	return res.render('syl');
-})
+
+// REGISTER POST */
+
+router.post('/register', function(req, res, next){
+	
+	if (req.body.email&&
+		req.body.name &&
+		req.body.nickname &&
+		req.body.password &&
+		req.body.confirmPassword){
+		//password confirmation
+		if (req.body.password !== req.body.confirmPassword){
+			var err = new Error('Passwords do not match.')
+			err.status = 400;
+			return next(err);
+		}
+
+		//use schema's create to insert
+		var userData ={
+			email: req.body.email,
+			name: req.body.name,
+			nickname: req.body.nickname,
+			password: req.body.password
+		}
+
+		student.create(userData, function(error, user){
+			if (error){
+				return next(error);
+			}else{
+				console.log(user)
+				req.session.userId = user.id;
+				req.session.nickname = user.nickname
+				return res.redirect('/')
+			}
+		});
+
+
+	}else{
+		var err = new Error('All fields required!')
+		err.status = 400;
+		return next(err);
+	}
+});
 
 
 
+// Login stuff
+router.post('/login', function(req, res, next){
+
+	if (req.body.email && req.body.password){
+
+		student.authenticate(req.body.email, req.body.password, function(error, user){
+			
+			if (error || !user){
+				var err = new Error('Wrong email or password');
+				err.status = 401;
+				return next(err);
+			} else{
+				req.session.userId = user.id;
+				req.session.nickname = user.nickname;
+				return res.redirect('/')
+			}
+		});
+	}else {
+		var err = new Error('Email and passwords are both required.');
+		err.status = 401;
+		return next(err);
+	}
+});
 
 
+router.get('/login', mid.loggedOut, function(req, res,next){
+	return res.render('login', {title: 'Log in'});
+});
 
+
+//log out!
+
+router.get('/logout', function(req, res, next){
+	if (req.session){
+		req.session.destroy(function(err){
+			if (err){;
+				return next(err);
+			} else {
+				return res.redirect('/');
+			}
+		})
+	}
+});
 
 
 /* GET home page. */

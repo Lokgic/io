@@ -24,7 +24,10 @@ mixin MC(x)
 			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.nextButt.btn-blue Next
 			li.nav-item.pull-xs-right
-				span.problemNumDisplay
+				if (!currentUser) 
+					span.red Note: not currently logged in!
+				else
+					span.problemNumDisplay
 
 
 
@@ -35,7 +38,7 @@ mixin quote(lines,source)
 		footer.blockquote-footer #{source.name},
 			cite #{source.title}
 block extrahead
-	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
+	
 
 block content
 	- var plugin

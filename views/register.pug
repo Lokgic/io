@@ -1,24 +1,23 @@
-extends layout
+extends pagelayout
 
 block content
-	.container.p-t-2.m-t-3
-		.row
-			.col-md-6
-				h1.display-4.m-b-2 Sign up
-				form(method='POST' action='/register')
-					div.form-group
-						label(for='name') Name:
-						input#name.form-control(type='text', placeholder='first and last' name='name')
-					div.form-group
-						label(for='email') Email:
-						input#email.form-control(type='email', placeholder='name@email.com' name='email')
-					div.form-group
-						label(for='random') A random fact about you:
-						input#random.form-control(type='text', placeholder='I hate pickles' name='random')
-					div.form-group
-						label(for='pw') Password:
-						input#pw.form-control(type='password' name='password')
-					div.form-group
-						label(for='pw2') Confirm Password:
-						input#pw2.form-control(type='password' name='confirmPassword')
-					button.btn.btn-primary(type='submit') Sign up
+	.container-fluid#loginPage
+		#loginBox
+			h1.display-4.m-b-2 Register
+			form(method='POST' action='/register')
+				div.form-group
+					label(for='name') Name:
+					input#name.form-control(type='text', placeholder='first and last' name='name')
+				div.form-group
+					label(for='email') Email (used as login ID):
+					input#email.form-control(type='email', placeholder='logician@duke.edu' name='email')
+				div.form-group
+					label(for='nickname') Nickname:
+					input#nickname.form-control(type='text', placeholder='pickle' name='nickname')
+				div.form-group
+					label(for='pw') Password:
+					input#pw.form-control(type='password' name='password')
+				div.form-group
+					label(for='pw2') Confirm Password:
+					input#pw2.form-control(type='password' name='confirmPassword')
+				button.btn.btn-primary(type='submit') Register

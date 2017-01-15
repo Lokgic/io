@@ -1,5 +1,11 @@
 $(function(){
 
+  // jQuery.post("/login", {sid:"m1",password:"abc"}, function(res){
+
+  //     console.log(res)
+  // })
+
+
   var data = [
 	{"lname": "Carnap", "fname": "Rudolf", "source": "The Unity of Science",
 	"quote": 'Logic is the last scientific ingredient of Philosophy; its extraction leaves behind only a confusion of non-scientific, pseudo problems.'},
