@@ -180,9 +180,9 @@
         "title":"Wrapping up",
         "content":{
           "e":{
-            "type":"readingEx",
+            "type":"definition",
             "title": "Reading Exercise: Concepts Review Quiz",
-            "eventId":"reading1-1-4",
+            "eventId":"sl-1-def",
             "size":"half",
             "instruction": "Match the following concepts.",
             "substance":[

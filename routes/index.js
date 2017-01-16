@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 var mid = require('../middleware');
 var student = require('../models/student')
-
+var problem = require('../models/problem')
 //for rendering index
 
 
@@ -24,7 +24,7 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 // REGISTER POST */
 
 router.post('/register', function(req, res, next){
-	
+
 	if (req.body.email&&
 		req.body.name &&
 		req.body.nickname &&
@@ -72,7 +72,7 @@ router.post('/login', function(req, res, next){
 	if (req.body.email && req.body.password){
 
 		student.authenticate(req.body.email, req.body.password, function(error, user){
-			
+
 			if (error || !user){
 				var err = new Error('Wrong email or password');
 				err.status = 401;
@@ -152,6 +152,20 @@ router.get('/logistics', function(req, res, next){
 // grading reporting
 
 
+//get problems
+router.post('/problem/*', function(req,res,next){
+
+	var mod = req.path.split('/')[2]
+	var ch = req.path.split('/')[3]
+	var section = req.path.split('/')[4]
+	// console.log(mod + ch + section)
+	problem.get(mod,ch,section,function(re){
+		console.log(re)
+		return res.send(re)
+	})
+
+
+})
 
 router.post('/processing/*', function(req,res,next){
 

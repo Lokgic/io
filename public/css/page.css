@@ -1,3 +1,5 @@
+
+
 body {
   font-family:'Titillium Web', sans-serif;
 }
@@ -34,7 +36,7 @@ body {
   margin:auto;
 }
 
-
+/*Main Nav*/
 #mainnavbar a{
   color:#444C5C;
   font-family: 'Titillium Web', sans-serif;
@@ -46,7 +48,7 @@ body {
 
 }
 
-
+/*Login */
 #loginPage{
   background:#ddd;
   color:black;
@@ -62,6 +64,18 @@ body {
 }
 
 
+
+/*Quiz Stuff*/
+
+.mc{
+  border-width: 0;
+  width:100%;
+  display:block;
+  padding: .5em 1em;
+  color: black;
+  background: #9FB3B6;
+  margin-bottom: 1em;
+}
 .readingExResults{
   /*border: 1px solid grey;*/
   /*border-radius: 20px;*/
@@ -82,7 +96,7 @@ body {
   /*max-width: 50%;*/
   border:1px solid grey;
   border-radius: 20px;
-
+  padding:0;
 }
 
 .resultCorrect {

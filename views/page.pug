@@ -24,11 +24,20 @@ mixin MC(x)
 			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.nextButt.btn-blue Next
 			li.nav-item.pull-xs-right
-				if (!currentUser) 
+				if (!currentUser)
 					span.red Note: not currently logged in!
 				else
 					span.problemNumDisplay
 
+mixin drag(x)
+	h4.text-xs-center.m-y-2 #{x.title}
+	nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+		ul.nav.navbar-nav
+			li.nav-item
+				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
+				if (!currentUser)
+					span.red Note: not currently logged in!
+				span.problemNumDisplay
 
 
 mixin quote(lines,source)
@@ -38,7 +47,7 @@ mixin quote(lines,source)
 		footer.blockquote-footer #{source.name},
 			cite #{source.title}
 block extrahead
-	
+
 
 block content
 	- var plugin
@@ -91,15 +100,40 @@ block content
 										div(id = x.eventId).container
 									when "readingEx"
 										if x.size == "half"
-											.row(id = x.eventId).m-y-3
+											.row.m-y-3(id = x.eventId)
 												.col-lg-6.p-y-2.p-r-2
 													+paragraphsEscaped(x.substance)
-												.col-lg-6.readingEx
+												.col-lg-6.readingEx(class = x.class)
 													+MC(x)
 													.readingExQ.text-xs-center
 													.readingExAns
 										if x.size == "whole"
-											.row(id = x.eventId).m-y-3.wholeMC
+											.row(id = x.eventId class = x.class).m-y-3.wholeMC
+												+MC(x)
+												.readingExQ.text-xs-center.col-lg-6
+												.readingExQ2.text-xs-center.col-lg-6
+												.readingExAns.col-lg-12
+									when "definition"
+										- plugin = "dragMatch"
+										if x.size == "half"
+											.row.m-y-3
+												.col-lg-6.p-y-2.p-r-2
+													+paragraphsEscaped(x.substance)
+												.col-lg-6.readingEx.dragMatch(id = x.eventId)
+													+drag(x)
+													.card.dropzone.text-xs-center
+														p#dragQ
+													.card.text-xs-center#flyzone
+												.modal.fade.result
+													.modal-dialog.modal-dialog
+														.modal-content
+															.modal-header
+																h4.modal-title Result
+															.modal-body
+															.modal-footer
+																a.btn.btn-secondary(role ="button")#restart Restart
+										if x.size == "whole"
+											.row(id = x.eventId class = x.class).m-y-3.wholeMC
 												+MC(x)
 												.readingExQ.text-xs-center.col-lg-6
 												.readingExQ2.text-xs-center.col-lg-6
@@ -120,3 +154,4 @@ block extrafooter
 	script(src="/javascripts/mods/notify.js")
 	script(src="/javascripts/vennD.js")
 	script(src="/javascripts/autohidenav.js")
+	script(src="/javascripts/dragMatch.js")

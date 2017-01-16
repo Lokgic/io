@@ -1,0 +1,9 @@
+pid,type,question,answer,options,module,chapter,section
+argument,definition,Argument,a connected series of statements designed to convince an audience of another statements,,sl,1,def
+conclusion,definition,Conclusion,the statement that an argument is trying to convince an audience of.,,sl,1,def
+deduction,definition,Deductive,A style of arguing where one attempts to use valid arguments.,,sl,1,def
+invalid,definition,invalid,A property of arguments that holds when the premises do not force the truth of the conclusion. The opposite of valid.,,sl,1,def
+logic,definition,logic,the part of the study of reasoning that focuses on argument.,,sl,1,def
+premise,definition,Premise,a statement in an argument that provides evidence for the conclusion,,sl,1,def
+venndiagram,definition,Venn diagram,A diagram that represents categorical statements using circles that stand for classes.,,sl,1,def
+foromallogic,definition,Formal Logic,A way of studying logic that achieves content neutrality by replacing parts of the arguments being studied with abstract symbols. Often this will involve the construction of full formal languages.,,sl,1,def

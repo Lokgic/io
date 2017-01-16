@@ -49,8 +49,23 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
         d3.select(location).select(vennDiv).html("")
          drawVenn(location  + vennDiv, currentP)
 
+      },
+      "quiz":function(currentP){
+        var readingQuestion = scope.select('.readingExQ').selectAll('p').data([])
+        readingQuestion.exit()
+            .remove();
+
+      readingQuestion.data(currentP.question)
+          .enter()
+          .append('p')
+          .text(function(d, i) {
+              return d
+          })
+          .transition(tran)
+          .style('fill-opacity',1)
       }
     }
+
 
     function drawVenn(location, currentP){
       var readingChart = venn.VennDiagram()

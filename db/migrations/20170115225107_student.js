@@ -1,6 +1,6 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('student', (table) => {
-    table.increments();
+    table.increments('sid');
     table.string('nickname').unique().notNullable();
     table.string('name').notNullable();
     table.string('email').unique().notNullable();
