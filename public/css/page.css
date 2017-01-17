@@ -66,6 +66,51 @@ body {
 
 /*Quiz Stuff*/
 
+.binaryChoice-clicked{
+  margin-top: 10px;
+  background: rgba(71, 142, 222,0.6);
+  font-size: 1.2em;
+  border-radius: 10px;
+  margin: 10px 0px;
+  border: 0px;
+
+}
+.binaryChoice-clicked:hover{
+
+  background: rgba(71, 142, 222,0.9);
+
+}
+
+
+.binaryChoice-clicked2{
+  margin-top: 10px;
+  background: rgba(118, 54, 38,0.6);
+  font-size: 1.2em;
+  border-radius: 10px;
+  margin: 10px 0px;
+  border: 0px;
+
+}
+.binaryChoice-clicked2:hover{
+
+  background: rgba(118, 54, 38,0.9);
+
+}
+
+.binaryChoice-orignal{
+  margin-top: 10px;
+  background: rgba(222, 222, 222,0.6);
+  font-size: 1.2em;
+  border-radius: 10px;
+  margin: 10px 0px;
+  border: 0px;
+
+}
+.binaryChoice-orignal:hover{
+
+  background: rgba(159, 179, 182,0.9);
+
+}
 
 #dragQ{
   margin-top: 30px;
