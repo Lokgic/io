@@ -6064,7 +6064,7 @@ function makeResult(){
   incorrects.selectAll('div').data(incorrected).enter()
           .append('div').html(function(d){
 
-            return "<u>"+d.question+"</u></br>You chose "+d.input;
+            return "<u>"+d.question+"</u></br>You chose: "+d.input;
           })
     if (logged){
       var toRecord = []
@@ -6074,7 +6074,7 @@ function makeResult(){
               pid:problem.pid,
               type:problem.type,
               input:problem.answer,
-              correct:correct,
+              correct:true,
             }
          toRecord.push(datapoint)
       })
@@ -6084,7 +6084,7 @@ function makeResult(){
               pid:problem.pid,
               type:problem.type,
               input:problem.input,
-              correct:correct,
+              correct:false,
             }
          toRecord.push(datapoint)
       })
