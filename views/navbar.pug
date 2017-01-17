@@ -1,6 +1,7 @@
 -
-	if (!currentUser) userTag = "notLogged" 
+	if (!currentUser) userTag = "notLogged"
 	else userTag = currentUser
+	console.log(currentUser)
 nav.navbar.navbar-fixed-top#mainnavbar(data = userTag)
 	.container
 		button.navbar-toggler.hidden-sm-up(type = "button" data-toggle ="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation")  	&#8872;

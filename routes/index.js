@@ -79,10 +79,11 @@ router.post('/login', function(req, res, next){
 				return next(err);
 			} else{
 				// console.log(req.session)
-				req.session.userId = user.sid;
+
+				req.session.userId = user.uid;
 				req.session.nickname = user.nickname;
-				// console.log(req.session)
-				return res.redirect('/')
+
+				return res.redirect('/logistics')
 			}
 		});
 	}else {
@@ -110,6 +111,7 @@ router.get('/logout', function(req, res, next){
 			}
 		})
 	}
+	console.log(req.session)
 });
 
 

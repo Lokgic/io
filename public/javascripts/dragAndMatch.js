@@ -5985,6 +5985,7 @@ $(function()
 // var chance = new Chance();
 var interact = require("interact.js")
 var corrected = []
+var incorrected = []
 var help = require('./mods/helpers.js')
 // var randomize = require('./mods/randomize.js')
 
@@ -5997,11 +5998,15 @@ function reloadMathjax(id){
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
   }
 
+
+
 var quizDiv = d3.select('.dragMatch')
 var qId = quizDiv.attr('id')
+var modal = d3.select('#'+qId+'modal')
+
 var scope = d3.select('.dragMatch')
 var logged = ($('#mainnavbar').attr('data') == "notLogged")? false :true;
-var sid = $('#mainnavbar').attr('data')
+var uid = $('#mainnavbar').attr('data')
 var problemSet
 var currentProblem
 var qText;
@@ -6045,12 +6050,49 @@ loadProblems(qId.split('-')[0]+'/'+qId.split('-')[1] + '/' + qId.split('-')[2],f
 
 
 function makeResult(){
-  // console.log($('.modal-body'))
-  html = "<h3> Correct Answer(s)</h1>";
-  for (var i = 0;i<corrected.length;i++){
-    html += "<p class='def lead'>" + corrected[i].question+"</p><p>" +corrected[i].answer+ "</p>"
-  }
-  $('.modal-body').append(html);
+  console.log(corrected)
+  console.log(incorrected)
+  var corrects = modal.select('.modal-body').append('div')
+  corrects.append('h3').text('Correct Match(es)')
+  corrects.selectAll('div').data(corrected).enter()
+          .append('div').html(function(d){
+
+            return "<u>"+d.question+"</u></br>You chose: "+d.answer;
+          })
+  var incorrects = modal.select('.modal-body').append('div')
+  incorrects.append('h3').text('Incorrect Match(es)')
+  incorrects.selectAll('div').data(incorrected).enter()
+          .append('div').html(function(d){
+
+            return "<u>"+d.question+"</u></br>You chose "+d.input;
+          })
+    if (logged){
+      var toRecord = []
+      corrected.forEach(function(problem){
+        var datapoint = {
+              uid:uid,
+              pid:problem.pid,
+              type:problem.type,
+              input:problem.answer,
+              correct:correct,
+            }
+         toRecord.push(datapoint)
+      })
+      corrected.forEach(function(problem){
+        var datapoint = {
+              uid:uid,
+              pid:problem.pid,
+              type:problem.type,
+              input:problem.input,
+              correct:correct,
+            }
+         toRecord.push(datapoint)
+      })
+      console.log(toRecord)
+    }
+
+
+
   reloadMathjax()
 }
 
@@ -6135,8 +6177,8 @@ interact('.dropzone').dropzone({
     event.relatedTarget.classList.add("chosen");
     // console.log($(event.relatedTarget).attr('value') )
     // console.log(index )
-    console.log($(event.relatedTarget).attr('value')+ " vs " +currentProblem.answer)
-    if ($(event.relatedTarget).attr('value') == currentProblem.answer){
+    var userInput = $(event.relatedTarget).attr('value');
+    if (userInput == currentProblem.answer){
 
       $('.chosen').remove();
       // console.log(answers.length)
@@ -6160,7 +6202,9 @@ interact('.dropzone').dropzone({
 
     } else{
       event.target.classList.remove('dropzone');
-        $('.modal-body').append("<p class = 'lead'>Opps, that wasn't correct. You have matched the following correctly. Press Restart to try again.</p>" )
+        $('.modal-header').text("Opps, that wasn't correct. You have matched the following correctly. Press Restart to try again." )
+      currentProblem.input = userInput
+      incorrected.push(currentProblem);
       makeResult();
       $modal.modal('toggle')
     }
@@ -6187,6 +6231,19 @@ var alert = function(msg, color, location){
 
     $.notify(notifyMsg,notifyOption)
     }
+// var prepareAttempts = function(set,uid,correct){
+//   var output = []
+//   set.forEach(function(problem){
+//     var i = (correct)?
+//     var temp = {
+//       uid:uid,
+//       pid:problem.pid,
+//       type:problem.type,
+//       input:problem.input,
+//       correct:correct,
+//     }
+//   })
+// }
 
 module.exports.alert = alert;
 
