@@ -187,7 +187,7 @@
             "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
             "substance":[
               "Finish this section by completing the concepts review quiz. For this quiz, you have to answer all questions correctly to get credit. However you may try as many times as you like.",
-              "After familiarizing yourself with the ideas in the section, you should give the logical exercise (logicise) <a href='/logicize/vennSyl'>'Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
+              "After familiarizing yourself with the ideas in the section, you should do the logical exercise '(logicise') <a href='/logicize/vennSyl'>'Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
               "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern logic - the formal language of sentence logic."
 
             ]
