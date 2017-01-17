@@ -32,7 +32,6 @@ $('#restart').on("click", function(){
 function loadProblems(option,callback){
   jQuery.post("/problem/"+option)
   .done(function(data){
-    console.log(data)
       callback(null, data);
   }).fail(function(f){console.log(f)})
 };

@@ -49,8 +49,8 @@ router.post('/register', function(req, res, next){
 			if (error){
 				return next(error);
 			}else{
-				console.log(user)
-				req.session.userId = user.id;
+				// console.log(user)
+				req.session.userId = user.uid;
 				req.session.nickname = user.nickname
 				return res.redirect('/')
 			}
@@ -78,10 +78,10 @@ router.post('/login', function(req, res, next){
 				err.status = 401;
 				return next(err);
 			} else{
-				console.log(req.session)
+				// console.log(req.session)
 				req.session.userId = user.sid;
 				req.session.nickname = user.nickname;
-				console.log(req.session)
+				// console.log(req.session)
 				return res.redirect('/')
 			}
 		});
@@ -162,7 +162,7 @@ router.post('/problem/*', function(req,res,next){
 	var section = req.path.split('/')[4]
 	// console.log(mod + ch + section)
 	problem.get(mod,ch,section,function(re){
-		console.log(re)
+		// console.log(re)
 		return res.send(re)
 	})
 
