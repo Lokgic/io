@@ -24,7 +24,7 @@
     "debug": "~2.2.0",
     "express": "~4.14.0",
     "express-session": "^1.14.0",
-    "interact.js": "^1.2.6",
+    "interact.js": "^1.2.8",
     "knex": "^0.12.6",
     "mongoose": "^4.5.9",
     "morgan": "~1.7.0",

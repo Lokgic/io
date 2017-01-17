@@ -23,8 +23,8 @@
             "type":"p",
             "substance":[
 
-              "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people disagree.",
-              "A logical argument is structured to give someone a reason to believe some conclusion. Suppose you are wondering if you friend Bob plays the guitar. You can't quite remember exactly what he plays, but you do recall that he uses a bow. Since you know that guitars are plucked and not bowed, you conclude that Bob indeed does not play the guitar. "
+              "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word 'argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people contradicts or disagree with each other. .",
+              "An argument in this technical is a set of statements intended to provide someone a reason to believe one of the statements in that set, which we call a conclusion. Suppose you are wondering if you friend Bob plays the guitar. You can't quite remember exactly what he plays, but you do recall that he uses a bow. Since you know that guitars are plucked and not bowed, you conclude that Bob indeed does not play the guitar. "
             ]
           },
           "b":{
@@ -40,7 +40,7 @@
               {
                 "type": "argument",
                 "premises":["1: Bob plays a bowed instrument.",
-                "2: All guitars are plucked instruments and not bowed"],
+                "2: All guitars are plucked and not bowed"],
                 "conclusion":"Therefore, Bob does not play the guitar"
               }
             ]
@@ -48,10 +48,10 @@
           "c":{
             "type": "p",
             "substance":[
-              "This example showcases a core idea in formal logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
+              "This example showcases a core idea in logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
               "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
 
-              "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. The argument is valid if, when you pretend the premises are true, you also have to pretend the conclusion is true."
+              "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. (It also does not assert that they are false.)This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. This sounds pretty imprecise at the moment, but we will sharpen our understanding of validity as we go on."
             ]
 
           },
@@ -74,9 +74,9 @@
             "size":"half",
             "instruction": "Make your best estimate as to whether the arguments presented below are valid.",
             "substance":[
-              "Diagrams like these are immensely useful in the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so we will discuss them more thoroughly. Let us finish this section with a short exercise.",
+              "Diagrams like these are immensely useful at the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so we will discuss them more thoroughly. Let us finish this section with a short exercise.",
               "For the reading exercise 'Determining Validity Intuitively', try to find out if the argument given is valid, in the technical sense defined above: if the premises is true, must the conclusion be true as well?",
-              "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is false. Does that mean the argument is invalid?",
+              "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
               "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
               "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
 
@@ -143,9 +143,9 @@
         "c":{
           "type":"ps",
           "substance":[
-            "If a region of a Venn diagram is blank, if it is neither shaded nor has an x in it, it could go either way. Maybe such things exist, maybe they do not.  Notice that when we draw diagrams for the two universal forms, A and E, we do not draw any x's. For these forms we are only ruling out possibilities, not asserting that things actually exist. This is part of what Venn learned from Boole. The proposition, ``All guitars are plucked instruments,'' denies the existence of any guitar that is not a plucked, but it does not assert the existence of some guitar that is a plucked. That probably reads like gibberish - guitars obviously do exist.",
+            "If a region of a Venn diagram is blank - if it is neither shaded nor has an x in it - then it could go either way. Maybe such things exist, maybe they do not.  Notice that when we draw diagrams for the two universal forms, we do not draw any x's. For these forms we are only ruling out possibilities, not asserting that things actually exist. This is part of what Venn learned from Boole. The proposition, ``All guitars are plucked instruments,'' denies the existence of any guitar that is not a plucked, but it does not assert the existence of some guitar that is a plucked. That probably reads like gibberish - guitars obviously do exist. So what's the deal?",
 
-            "The reason for this is to accommodate categorical statements about things that don't exist, for instance 'All unicorns have one horn.' This seems like a true statement, but unicorns don't exist. Perhaps what we mean by 'All unicorns have one horn' is that <i>if</i> a unicorn existed, <i>then</i> it would have one horn. But if we interpret the statement about unicorns that way, shouldn't we also interpret the statement about dogs that way? Really all we mean when we say ``All dogs are mammals'' is that if there were dogs, then they would be mammals. It takes an extra assertion to point out that dogs do, in fact, exist.",
+            "The reason for this is to accommodate categorical statements about things that don't exist yet makes perfect sense, for instance 'All unicorns have one horn.' This seems like a true statement, but unicorns don't exist. Perhaps what we mean by 'All unicorns have one horn' is that <i>if</i> a unicorn existed, <i>then</i> it would have one horn. But if we interpret the statement about unicorns that way, shouldn't we also interpret the statement about dogs that way? Really all we mean when we say ``All dogs are mammals'' is that if there were dogs, then they would be mammals. It takes an extra assertion to point out that dogs do, in fact, exist.",
 
             "The issue we are discussing here is called existential import. A sentence is said to have existential import if it asserts the existence of the things it is talking about. Until Boole, universal-affirmative statements were often interpreted as having existential import. You might find that more intuitive, but if you interpret all universal-affirmative statements with existential import, they are always false when you are talking about things that don't exist. So, 'All unicorns have one horn' is false in the traditional interpretation. On the other hand, in the modern interpretation all statements about things that don't exist are true. 'All unicorns have one horn' simply asserts that there are no multi-horned unicorns, and this is true because there are no unicorns at all. We call this vacuous truth. Something is vacuously true if it is true simply because it is about things that don't exist. Note that all statements about nonexistent things become vacuously true if you assume they have no existential import, even a statement like ``All unicorns have more than one horn.'' A statement like this simply rules out the existence of unicorns with one horn or fewer, and these don't exist because unicorns don't exist. This is a complicated issue that will come up again starting in later sections when we consider conditional statements in this module, and predicate logic later.",
             "A categorical syllogism consists of two categorical statements as premises, and one as conclusion. The logical relations between these statements are based certain terms they share. For instance, consider this argument:"
@@ -181,14 +181,14 @@
         "content":{
           "e":{
             "type":"definition",
-            "title": "Reading Exercise: Concepts Review Quiz",
+            "title": "Reading Exercise: Definitions Review Quiz",
             "eventId":"sl-1-def",
             "size":"half",
-            "instruction": "Match the following concepts.",
+            "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
             "substance":[
               "Finish this section by completing the concepts review quiz. For this quiz, you have to answer all questions correctly to get credit. However you may try as many times as you like.",
-              "After familiarizing yourself with the ideas in the section, you should do the logicize <a href='/logicize/vennSyl'>Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
-              "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern  logic - the formal language of sentence logic."
+              "After familiarizing yourself with the ideas in the section, you should give the logical exercise (logicise) <a href='/logicize/vennSyl'>'Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
+              "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern logic - the formal language of sentence logic."
 
             ]
           }

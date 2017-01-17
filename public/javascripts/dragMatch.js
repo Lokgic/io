@@ -11018,14 +11018,14 @@ interact('.draggable')
     // call this function on every dragmove event
     onmove: dragMoveListener,
     // call this function on every dragend event
-    onend: function (event) {
-        console.log(event)
-      var textEl = event.target.querySelector('p');
-      textEl && (textEl.textContent =
-        'moved a distance of '
-        + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
-    }
+    // onend: function (event) {
+    //     console.log(event)
+    //   var textEl = event.target.querySelector('p');
+    //   textEl && (textEl.textContent =
+    //     'moved a distance of '
+    //     + (Math.sqrt(event.dx * event.dx +
+    //                  event.dy * event.dy)|0) + 'px');
+    // }
   });
 
   function dragMoveListener (event) {
@@ -11087,23 +11087,23 @@ interact('.dropzone').dropzone({
       console.log(answers)
       $('.chosen').remove();
       // console.log(answers.length)
-      corrected.push(currentProblem);
-      if (problemSet.length != 0){
-      currentProblem = problemSet.shift()
-      q.text(currentProblem.question).attr('data',currentProblem.question)
+      // corrected.push(currentProblem);
+      // if (problemSet.length != 0){
+      // currentProblem = problemSet.shift()
+      // q.text(currentProblem.question).attr('data',currentProblem.question)
       // makeAlert($('#dragMatch'), "a", "This is correct! Continue dragging the matching box to complete this quiz.",2)
-    } else{
-      jQuery.post("/report", {label: quizId, moduleNo: moduleNum}, function(res){
-        $('.modal-body').append("<p class = 'lead'>You have completed this section! " + res +"</p>") ;
-        makeResult();
-        $modal.modal('toggle')
-
-           });
-
-
-
-    }
-
+    // } else{
+    //   jQuery.post("/report", {label: quizId, moduleNo: moduleNum}, function(res){
+    //     $('.modal-body').append("<p class = 'lead'>You have completed this section! " + res +"</p>") ;
+    //     makeResult();
+    //     $modal.modal('toggle')
+    //
+    //        });
+    //
+    //
+    //
+    // }
+    //
       // console.log(answers)
 
     } else{

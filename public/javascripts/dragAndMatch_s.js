@@ -1,17 +1,17 @@
 $(function()
 {
 
-var Chance = require('chance')
-var chance = new Chance();
+// var Chance = require('chance')
+// var chance = new Chance();
 var interact = require("interact.js")
-
-
+var corrected = []
+var help = require('./mods/helpers.js')
 // var randomize = require('./mods/randomize.js')
 
 var $modal = $('.modal')
 var mathjax = false;
 var index;
-var pool = []
+// var pool = []
 function reloadMathjax(id){
     id = id || "";
     MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
@@ -32,6 +32,7 @@ $('#restart').on("click", function(){
 function loadProblems(option,callback){
   jQuery.post("/problem/"+option)
   .done(function(data){
+    console.log(data)
       callback(null, data);
   }).fail(function(f){console.log(f)})
 };
@@ -51,6 +52,7 @@ loadProblems(qId.split('-')[0]+'/'+qId.split('-')[1] + '/' + qId.split('-')[2],f
           }).text(function(d){
             return d.answer
           })
+    problemSet = _.shuffle(problemSet)
     currentProblem = problemSet.shift()
     qText = d3.select('#dragQ').text(currentProblem.question)
 
@@ -67,7 +69,7 @@ function makeResult(){
   // console.log($('.modal-body'))
   html = "<h3> Correct Answer(s)</h1>";
   for (var i = 0;i<corrected.length;i++){
-    html += "<p class='def lead'>" + corrected[i][0] +"</p><p>" +corrected[i][1]+ "</p>"
+    html += "<p class='def lead'>" + corrected[i].question+"</p><p>" +corrected[i].answer+ "</p>"
   }
   $('.modal-body').append(html);
   reloadMathjax()
@@ -79,8 +81,8 @@ interact('.draggable')
     inertia: false,
     // keep the element within the area of it's parent
     restrict: {
-      restriction: ".dragMatch",
-      endOnly: true,
+      restriction: "#sl-1-def",
+      endOnly: false,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
     // enable autoScroll
@@ -98,7 +100,7 @@ interact('.draggable')
     //                  event.dy * event.dy)|0) + 'px');
     // }
   });
-
+//
   function dragMoveListener (event) {
     var target = event.target,
         // keep the dragged position in the data-x/data-y attributes
@@ -114,12 +116,12 @@ interact('.draggable')
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
   }
-
-  // this is used later in the resizing and gesture demos
+//
+//   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
-/* The dragging code for '.draggable' from the demo above
- * applies to this demo as well so it doesn't have to be repeated. */
-// enable draggables to be dropped into this
+// /* The dragging code for '.draggable' from the demo above
+//  * applies to this demo as well so it doesn't have to be repeated. */
+// // enable draggables to be dropped into this
 interact('.dropzone').dropzone({
   // only accept elements matching this CSS selector
   // accept: '.yes-drop',
@@ -154,28 +156,28 @@ interact('.dropzone').dropzone({
     event.relatedTarget.classList.add("chosen");
     // console.log($(event.relatedTarget).attr('value') )
     // console.log(index )
+    console.log($(event.relatedTarget).attr('value')+ " vs " +currentProblem.answer)
     if ($(event.relatedTarget).attr('value') == currentProblem.answer){
-      console.log(answers)
+
       $('.chosen').remove();
       // console.log(answers.length)
-      // corrected.push(currentProblem);
-      // if (problemSet.length != 0){
-      // currentProblem = problemSet.shift()
-      // q.text(currentProblem.question).attr('data',currentProblem.question)
-      // makeAlert($('#dragMatch'), "a", "This is correct! Continue dragging the matching box to complete this quiz.",2)
-    // } else{
-    //   jQuery.post("/report", {label: quizId, moduleNo: moduleNum}, function(res){
-    //     $('.modal-body').append("<p class = 'lead'>You have completed this section! " + res +"</p>") ;
-    //     makeResult();
-    //     $modal.modal('toggle')
-    //
-    //        });
-    //
-    //
-    //
-    // }
-    //
-      // console.log(answers)
+      corrected.push(currentProblem);
+      var msg;
+        if (problemSet.length != 0){
+        currentProblem = problemSet.shift()
+
+        qText.text(currentProblem.question).attr('data',currentProblem.question)
+        msg = "This is correct! Continue dragging the matching box to complete this quiz."
+        help.alert(msg,'correctblue')
+        // makeAlert($('#dragMatch'), "a", "This is correct! Continue dragging the matching box to complete this quiz.",2)
+        } else{
+          $('.modal-body').append("<p class = 'lead'>You have completed this quiz!.</p>" )
+          makeResult();
+          $modal.modal('toggle')
+
+        }
+
+
 
     } else{
       event.target.classList.remove('dropzone');

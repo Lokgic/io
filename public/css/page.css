@@ -1,5 +1,4 @@
 
-
 body {
   font-family:'Titillium Web', sans-serif;
 }
@@ -67,6 +66,32 @@ body {
 
 /*Quiz Stuff*/
 
+
+#dragQ{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  /*text-transform: capitalize;*/
+}
+.draggable{
+  margin-top: 10px;
+  background: rgba(159, 179, 182,0.6);
+
+
+}
+
+
+
+.dragMatch .dropzone{
+  background: #464740;
+  color:white;
+
+}
+
+.dragMatch  .drop-target{
+  background: rgba(159, 179, 182,0.6);
+  color:black;
+
+}
 .mc{
   border-width: 0;
   width:100%;

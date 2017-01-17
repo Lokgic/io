@@ -78,8 +78,10 @@ router.post('/login', function(req, res, next){
 				err.status = 401;
 				return next(err);
 			} else{
-				req.session.userId = user.id;
+				console.log(req.session)
+				req.session.userId = user.sid;
 				req.session.nickname = user.nickname;
+				console.log(req.session)
 				return res.redirect('/')
 			}
 		});
