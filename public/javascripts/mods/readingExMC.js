@@ -1,6 +1,6 @@
 var venn = require("venn.js")
 var readingExMC = function readingExMC(problemSet,mainContainer,type) {
-
+    var uid = $('#mainnavbar').attr('data')
     var print = {
       "text":function(currentP){
         var readingQuestion = scope.select('.readingExQ').selectAll('p').data([])
@@ -93,7 +93,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
 
 
           toShade = 'g[data-venn-sets="'+ currentP.s +'"]'
-          console.log(toShade)
+          // console.log(toShade)
            readingVenn.select(toShade).select('path').style('fill','white').style('fill-opacity',1)
 
       } else if (targetMood == "A"){
@@ -102,7 +102,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
         readingVenn.select(toShade).select('path').style('fill','#999').style('fill-opacity',1)
 
           toShade = 'g[data-venn-sets="'+ currentP.s+"_"+ currentP.p+'"]'
-          console.log(toShade)
+          // console.log(toShade)
            readingVenn.select(toShade).select('path').style('fill','white').style('fill-opacity',1)
       } else if (targetMood == "I"){
         var h = $(location).height()
@@ -120,7 +120,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     if (type == undefined) type = "text"
 
     var scope = d3.select(mainContainer)
-    console.log(scope)
+    // console.log(scope)
     var leftMargin = 50
     var topMargin = 100
 
@@ -278,7 +278,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
 
 
 
-    // readingQ = scope.select('.readingExQ')
+    readingQ = scope.select('.readingExQ')
     currentPi = 0
     updateProblemNum(currentPi + 1, problemSet.length)
     currentP = problemSet[currentPi]
@@ -356,6 +356,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     }
 
     function createResult(outcome) {
+      console.log(outcome)
         if (type == "text"){
           var currentContainerHeight = $(mainContainer).height()
           $(mainContainer).css("height", currentContainerHeight).css('overflow', 'scroll')
@@ -365,7 +366,9 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
               .data(outcome)
               .enter()
               .append('div')
-              .attr('id',"result"+i)
+              .attr('id',function(d,i){
+                return "result"+i
+              })
               .attr('class', 'readingExResults')
               // .style('background-color', function(d) {
               //     return (d.correct) ? "#336B87" : "#763626"
@@ -395,14 +398,38 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
               console.log(i)
               print.venn(d,"#result"+i,true,true)
             })
-
-
-
           }
+
+          var toSend =[]
+          outcome.forEach(function(out){
+            toSend.push(structureData(out))
+          })
+            console.log(toSend)
+          $.ajax({
+           url: '/data/attempt',
+           type: 'POST',
+           contentType:'application/json',
+           data: JSON.stringify(toSend),
+           dataType:'json',
+           success: function(res){
+             //On ajax success do this
+
+             console.log("success message " + res)
+              }
+         });
+
     }
 
 
-
+    function structureData(point){
+      return {
+        uid:uid,
+        pid:point.form,
+        type:"categorical",
+        input:point.input,
+        correct:point.correct
+      }
+    }
 
 
 

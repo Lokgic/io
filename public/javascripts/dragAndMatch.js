@@ -6003,7 +6003,8 @@ function reloadMathjax(id){
 var quizDiv = d3.select('.dragMatch')
 var qId = quizDiv.attr('id')
 var modal = d3.select('#'+qId+'modal')
-
+var qInfo= qId.split('-')
+console.log(qInfo)
 var scope = d3.select('.dragMatch')
 var logged = ($('#mainnavbar').attr('data') == "notLogged")? false :true;
 var uid = $('#mainnavbar').attr('data')
@@ -6067,7 +6068,7 @@ function makeResult(){
             return "<u>"+d.question+"</u></br>You chose: "+d.input;
           })
     if (logged){
-      var toRecord = []
+      var data = []
       corrected.forEach(function(problem){
         var datapoint = {
               uid:uid,
@@ -6076,9 +6077,9 @@ function makeResult(){
               input:problem.answer,
               correct:true,
             }
-         toRecord.push(datapoint)
+         data.push(datapoint)
       })
-      corrected.forEach(function(problem){
+      incorrected.forEach(function(problem){
         var datapoint = {
               uid:uid,
               pid:problem.pid,
@@ -6086,9 +6087,21 @@ function makeResult(){
               input:problem.input,
               correct:false,
             }
-         toRecord.push(datapoint)
+         data.push(datapoint)
       })
-      console.log(toRecord)
+
+      $.ajax({
+       url: '/data/attempt',
+       type: 'POST',
+       contentType:'application/json',
+       data: JSON.stringify(data),
+       dataType:'json',
+       success: function(res){
+         //On ajax success do this
+
+         console.log("success message " + res)
+          }
+     });
     }
 
 
@@ -6192,9 +6205,27 @@ interact('.dropzone').dropzone({
         help.alert(msg,'correctblue')
         // makeAlert($('#dragMatch'), "a", "This is correct! Continue dragging the matching box to complete this quiz.",2)
         } else{
-          $('.modal-body').append("<p class = 'lead'>You have completed this quiz!.</p>" )
+          $('.modal-header').append("<p class = 'lead'>You have completed this quiz!</p>" )
           makeResult();
           $modal.modal('toggle')
+          var data = {
+            uid:uid,
+            module:qInfo[0],
+            chapter:qInfo[1],
+            section:qInfo[2]
+          }
+          $.ajax({
+           url: '/data/record',
+           type: 'POST',
+           contentType:'application/json',
+           data: JSON.stringify(data),
+           dataType:'json',
+           success: function(res){
+             //On ajax success do this
+
+             console.log("success message " + res)
+              }
+         });
 
         }
 

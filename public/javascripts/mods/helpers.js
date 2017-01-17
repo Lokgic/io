@@ -8,18 +8,9 @@ var alert = function(msg, color, location){
 
     $.notify(notifyMsg,notifyOption)
     }
-// var prepareAttempts = function(set,uid,correct){
-//   var output = []
-//   set.forEach(function(problem){
-//     var i = (correct)?
-//     var temp = {
-//       uid:uid,
-//       pid:problem.pid,
-//       type:problem.type,
-//       input:problem.input,
-//       correct:correct,
-//     }
-//   })
-// }
+var getUid = function(){
+  return $('#mainnavbar').attr('data')
+}
 
 module.exports.alert = alert;
+module.exports.getUid = getUid;

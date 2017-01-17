@@ -1,50 +1,44 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+// var Chance = require('chance')
+// var chance = new Chance()
+var _ = require('underscore')
+var pg = require('pg')
 
-
-var TestingDataSchema = new Schema({
-    id: {
-    type: String,
-    required: true,
-    trim: true,
-    },
-    mid: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    tid:{
-      type: String,
-      required: true,
-      trim: true
-    },
-  data: []
+pg.defaults.ssl = (process.env.test)? false : true
+pgurl = (process.env.test)?'postgres://localhost:5432/lok':process.env.DATABASE_URL
+// console.log(process.env.test)
+//pq connection
+var knex = require('knex')({
+  client: 'postgresql',
+  connection: pgurl,
+  searchPath: 'knex,public'
 });
 
 
 
-TestingDataSchema.statics.update  = function update(moduleNum, tid, datapoint, callback){
-  id = moduleNum+tid
 
-	 TestingData.findOne({id: id})
-	 	.exec(function (err, test){
-      if (test == null){
-        var newDP = {}
-        newDP.id = id
-        newDP.mid = moduleNum
-        newDP.tid = tid
-        newDP.data = [datapoint]
-        console.log(newDP)
-        TestingData.create(newDP)
-        return callback(null,"new test created")
-      } else{
-        test.data.push(datapoint)
-        test.save();
-        return callback(null, "data saved")
+
+
+module.exports.attempt = function(dataset, callback){
+
+	knex('attempt').insert(dataset)
+      .catch(function(error) {
+        return callback(error)
+      })
+      .then(function(){
+        return callback(null,"recorded")
+        })
+
       }
 
+module.exports.record = function(record, callback){
 
-    })}
+	knex('record').insert(record)
+      .catch(function(error) {
+        console.log(error)
+        return callback(error)
+      })
+      .then(function(){
+        return callback(null,"recorded")
+        })
 
-var TestingData = mongoose.model('TestingData', TestingDataSchema);
-module.exports = TestingData;
+      }

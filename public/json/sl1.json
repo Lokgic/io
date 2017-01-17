@@ -70,7 +70,7 @@
           "e":{
             "type":"readingEx",
             "title": "Reading Exercise: Determining Validity Intuitively",
-            "eventId":"reading1-1-1",
+            "eventId":"sl-1-1",
             "size":"half",
             "instruction": "Make your best estimate as to whether the arguments presented below are valid.",
             "substance":[
@@ -121,7 +121,7 @@
         "c":{
           "type":"readingEx",
           "title": "Reading Exercise: Basic Venn Diagrams",
-          "eventId":"reading1-1-2",
+          "eventId":"sl-1-2",
           "size":"whole",
           "instruction": "Based on the given Venn Diagram, answer the corresponding question."
         }

@@ -575,19 +575,19 @@ function loadCats(callback){
 
 
 
-loadSyl(function(e,d){
-
-  var problemsSet = []
-  for (problem in d){
-    problemsSet.push(sylToString(d[problem]))
-  }
-  // console.log(problemsSet)
-  readingExMC(problemsSet, '#reading1-1-1 .readingEx')
-})
+// loadSyl(function(e,d){
+//
+//   var problemsSet = []
+//   for (problem in d){
+//     problemsSet.push(sylToString(d[problem]))
+//   }
+//   console.log(problemsSet)
+//   readingExMC(problemsSet, '#sl-1-1 .readingEx')
+// })
 
 loadCats(function(e,d){
   // console.log(d)
-  readingExMC(d, '#reading1-1-2',"venn")
+  readingExMC(d, '#sl-1-2',"venn")
 })
 
 

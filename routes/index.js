@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-
+var data = require('../models/data')
 var mid = require('../middleware');
 var student = require('../models/student')
 var problem = require('../models/problem')
@@ -155,7 +155,18 @@ router.get('/logistics', function(req, res, next){
 
 // grading reporting
 
+router.post('/data/*', function(req,res,next){
+	var mode = req.path.split('/')[2]
+	console.log(req.body)
+	data[mode](req.body,function(error, response){
+		if (error) console.log(error)
+		else {
+			console.log(response)
+			res.sendStatus(200)
+		}
+	})
 
+})
 //get problems
 router.post('/problem/*', function(req,res,next){
 
