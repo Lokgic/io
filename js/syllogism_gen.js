@@ -230,7 +230,7 @@ module.exports.makeStuff = function(){
 
 module.exports.list = function(){
   var toReturn = [];
-  for (var i = 0;i<7;i++){
+  for (var i = 0;i<10;i++){
     toReturn.push(new Syllogism( termsInit("dogs")))
   }
   return toReturn

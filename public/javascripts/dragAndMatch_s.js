@@ -72,8 +72,9 @@ $(function() {
 
 
     function makeResult() {
-        console.log(corrected)
-        console.log(incorrected)
+        // console.log(corrected)
+        // console.log(incorrected)
+        modal.select('.modal-body').html("")
         var corrects = modal.select('.modal-body').append('div')
         corrects.append('h3').text('Correct Match(es)')
         corrects.selectAll('div').data(corrected).enter()

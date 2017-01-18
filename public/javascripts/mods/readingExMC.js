@@ -1,6 +1,13 @@
 var venn = require("venn.js")
 var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     var uid = $('#mainnavbar').attr('data')
+
+
+    var qId = mainContainer.slice(1)
+    var qInfo = qId.split('-')
+    console.log(qInfo)
+    var logged = ($('#mainnavbar').attr('data') == "notLogged") ? false : true;
+
     var print = {
       "text":function(currentP){
         var readingQuestion = scope.select('.readingExQ').selectAll('p').data([])
@@ -224,13 +231,14 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
             .attr('status', 'original')
             .attr('d', ansArc)
             .attr('fill', function(d, i) {
-                return colorScale(d.data);
+                return "grey";
             })
             .transition(tran)
             .attr('stroke-width', 30)
             .attr('stroke', 'white')
 
-        ansSVG.selectAll('path').on('mouseover', function(d, i) {
+        ansSVG.selectAll('path')
+            .on('mouseover', function(d, i) {
                 if (d3.select(this).attr('status') != 'clicked') wheelClick(this, d.data)
             })
             .on('mouseout', function(d, i) {
@@ -256,24 +264,46 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
 
     }
 
+    function recordCompletion(){
 
 
-    function wheelOriginalColor(target, d) {
+      var data = {
+          uid: uid,
+          module: qInfo[0],
+          chapter: qInfo[1],
+          section: qInfo[2]
+      }
+      $.ajax({
+          url: '/data/record',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          dataType: 'json',
+          success: function(res) {
+              //On ajax success do this
+              console.log(res)
+              console.log("success message " + res.message)
+          }
+      });
+    }
+
+
+    function wheelClick(target, d) {
 
         d3.select(target)
             .transition()
             .duration(200)
             .attr('fill', colorScale(d))
-            .attr('stroke-width', 30)
+            .attr('stroke-width', 10)
 
     }
 
-    function wheelClick(target, i) {
+    function wheelOriginalColor(target, i) {
         d3.select(target)
             .transition()
             .duration(200)
             .attr('fill', '#B7AFA3')
-            .attr('stroke-width', 10)
+            .attr('stroke-width', 30)
     }
 
 
@@ -284,15 +314,6 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     currentP = problemSet[currentPi]
     wheelTransition(currentP.choices)
     print[type](currentP)
-    // wheelTransition(currentP.choices)
-        // console.log(currentP)
-    // readingQ.selectAll("p")
-    //     .data(currentP.str)
-    //     .enter()
-    //     .append('p')
-    //     .text(function(d, i) {
-    //         return d
-    //     })
 
 
 
@@ -333,6 +354,8 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     })
 
     readingNextButt.on('click', function(d) {
+
+
         if (buttStatus == "next") {
             buttStatus = "answer"
             readingConfirmButt.style('color', "white")
@@ -356,10 +379,11 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
     }
 
     function createResult(outcome) {
-      console.log(outcome)
+        recordCompletion();
+      // console.log(outcome)
         if (type == "text"){
           var currentContainerHeight = $(mainContainer).height()
-          $(mainContainer).css("height", currentContainerHeight).css('overflow', 'scroll')
+          $(mainContainer).css("height", currentContainerHeight/2).css('overflow', 'scroll')
           readingQ.html('')
           scope.select('.readingExAns').html('')
           readingQ.selectAll('div')

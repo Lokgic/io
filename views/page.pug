@@ -20,7 +20,7 @@ mixin MC(x)
 			li.nav-item
 				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
 			li.nav-item.pull-xs-right
-				button.nav-link.p-y-0.confirmButt.btn-blue Confirm
+				button.nav-link.p-y-0.showAnswerButt.btn-blue.invisible Show Answer
 			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.nextButt.btn-blue Next
 			li.nav-item.pull-xs-right
@@ -98,15 +98,35 @@ block content
 									when "event"
 										h4.text-xs-center.m-y-2 #{x.title}
 										div(id = x.eventId).container
+									when "basicVenn"
+											.row(id = x.eventId class = x.class).m-y-3.wholeMC
+												h4.text-xs-center.m-y-2 #{x.title}
+												nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+													ul.nav.navbar-nav
+														li.nav-item
+															span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
+														li.nav-item.pull-xs-right
+															button.nav-link.p-y-0.confirmButt.btn-blue Confirm
+														li.nav-item.pull-xs-right
+															button.nav-link.p-y-0.nextButt.btn-blue Next
+														li.nav-item.pull-xs-right
+															if (!currentUser)
+																span.red Note: not currently logged in!
+															else
+																span.problemNumDisplay
+												.readingExQ.text-xs-center.col-lg-6
+												.readingExQ2.text-xs-center.col-lg-6
+												.readingExAns.col-lg-12
 									when "readingEx"
 										if x.size == "half"
-											.row.m-y-3
-												.col-lg-6.p-y-2.p-r-2
-													+paragraphsEscaped(x.substance)
-												.col-lg-6.readingEx(class = x.class id = x.eventId)
+											.p-a-0.m-r-0.m-l-0
+												.sideQuiz.readingEx.m-l-2.m-b-2(class = x.class id = x.eventId)
 													+MC(x)
 													.readingExQ.text-xs-center
+													.quizIntro
+														+paragraphs(x.intro)
 													.readingExAns
+												+paragraphsEscaped(x.substance)
 										if x.size == "whole"
 											.row(id = x.eventId class = x.class).m-y-3.wholeMC
 												+MC(x)
@@ -131,7 +151,6 @@ block content
 																h4.modal-title Result
 															.modal-body
 															.modal-footer
-																a.btn.btn-secondary(role ="button")#restart Restart
 										if x.size == "whole"
 											.row(id = x.eventId class = x.class).m-y-3.wholeMC
 												+MC(x)

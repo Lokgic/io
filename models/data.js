@@ -5,7 +5,8 @@ var pg = require('pg')
 
 pg.defaults.ssl = (process.env.test)? false : true
 pgurl = (process.env.test)?'postgres://localhost:5432/lok':process.env.DATABASE_URL
-// console.log(process.env.test)
+
+console.log(pgurl)
 //pq connection
 var knex = require('knex')({
   client: 'postgresql',

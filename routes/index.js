@@ -157,12 +157,26 @@ router.get('/logistics', function(req, res, next){
 
 router.post('/data/*', function(req,res,next){
 	var mode = req.path.split('/')[2]
-	console.log(req.body)
+	// console.log(req.body)
 	data[mode](req.body,function(error, response){
-		if (error) console.log(error)
+		if (error) {
+			var message
+			if (error.code == 23505){
+
+					message="Quiz already completed!"
+				}else{
+					message = "DB error"
+				}
+
+
+			res.send({message:message})
+		}
 		else {
 			console.log(response)
-			res.sendStatus(200)
+			var resp ={
+				message:response
+			}
+			res.send(resp)
 		}
 	})
 
