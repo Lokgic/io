@@ -217,13 +217,26 @@ router.post('/processing/*', function(req,res,next){
 
 })
 
-router.get('/logicize/*', function(req,res,next){
+router.post('/leaderboard/*',function(req,res,next){
+	var logicise = req.path.split('/')[2]
+	data.getRanking(logicise,function(d){
+		console.log(d)
+		res.send(d)
+	})
+})
 
-	var logicize = req.path.split('/')[2]
-	var info = require('../public/json/logicizes.json');
+
+router.get('/logicise/*', function(req,res,next){
 
 
-	return res.render('logicizeFS', {title:"Venn Diagram: Syllogism", logicize:logicize, info:info[logicize]});
+
+		var logicise = req.path.split('/')[2]
+		var info = require('../public/json/logicises.json');
+	return res.render('logicizeFS', { title:"Venn Diagram: Syllogism", logicise:logicise, info:info[logicise]});
+
+
+
+
 
 })
 module.exports = router;

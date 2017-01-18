@@ -57,3 +57,17 @@ module.exports.leader = function(lead, callback){
         })
 
       }
+
+
+module.exports.getRanking = function(name, callback){
+
+	knex.select('student.nickname','leader.score').from('leader').innerJoin('student','student.uid','leader.uid').orderBy('score','desc')
+      .catch(function(error) {
+        console.log(error)
+        return callback(error)
+      })
+      .then(function(tab){
+        return callback(tab)
+        })
+
+      }

@@ -257,50 +257,7 @@ $(function(){
                   })
                   .attr('fill','black')
                   .attr("text-anchor","end")
-              //     var pack = d3.pack()
-              //         .size([rWidth, rWidth])
-              //         .padding(1.5);
-              //     var root = {"name":"Result",
-              //                 "children":[
-              //                   {
-              //                     "name":"correct",
-              //                     "children":[]
-              //                   },
-              //                   {
-              //                     "name":"incorrect",
-              //                     "children":[]
-              //                   }
-              //                 ]
-              //         }
-
-              //      root = d3.hierarchy(root)
-              //     root.sum(function(d){return 1;})
-              //     // console.log(pack(root))
-              //     var node = svg.selectAll(".node")
-              //             .data(pack(root).leaves())
-              //             .enter().append("g")
-              //               .attr("class", "node")
-              //               .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-              //               node.append("circle")
-              //               .attr("id", function(d) { return d.id; })
-              //               .attr("r", function(d) { return d.r; })
-              //               .style("fill", function(d) { return 'black' });
-              //
-              // node.append("clipPath")
-              //     .attr("id", function(d) { return "clip-" + d.id; })
-              //   .append("use")
-              //     .attr("xlink:href", function(d) { return "#" + d.id; });
-
-
-
-                  // container.selectAll('div')
-                  //         .data(problemSet).enter()
-                  //         .append('div').attr('class',"smallAnswerBox")
-                  //           .html(function(d){
-                  //           var str = d.question[0]+"<br>"+d.question[1]+"<br>"+d.question[2]+"<br>"+"answer: "+d.answer+ "<br> You entered: "+d.input
-                  //           str += (d.correct) ? "&checkmark;": "&cross;";
-                  //           return str
-                  //         })
+              
 
                 }
 

@@ -1,6 +1,6 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('record', (table) => {
-    table.string('uid').notNullable();
+    table.integer('uid').notNullable();
     table.string('module').notNullable();
     table.string('chapter').notNullable();
     table.string('section').notNullable();

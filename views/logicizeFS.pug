@@ -4,7 +4,8 @@ block extrahead
 	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
 
 block content
-	main.container.logicizeFS.p-x-1
+	-console.log(ranking)
+	main.container.logicizeFS.p-x-1(id = logicise)
 		.logicizeTitle.m-b-2
 			h2.m-b-0 #{info.title}
 			nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav
@@ -12,12 +13,12 @@ block content
 					li.nav-item
 						span.navbar-text.text-muted.hidden-md-down #{info.shortDescription}
 					li.nav-item.pull-xs-right
-						a.nav-link.p-y-0#leaderboard(href = "#") Leaderboard
+						a.nav-link.p-y-0#leaderboardButt(href = "#") Leaderboard
 					li.nav-item.pull-xs-right
 						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
 					li.nav-item.pull-xs-right
 						span.navbar-text Passing Score: &nbsp;
-						span#passingscore 
+						span#passingscore
 					li.nav-item.pull-xs-right
 						span.navbar-text Score : &nbsp;
 						span#score 0
@@ -31,6 +32,10 @@ block content
 						span(aria-hidden="true") &times;
 					h4.modal-title#messageLabel Message Title
 				.modal-body
+	.sidenav#leaderboard
+		a.closebtn#leaderclose(href = "javascript:void(0)") &times;
+		h4.text-xs-center Leaderboard
+		#board
 
 
 
@@ -48,5 +53,7 @@ block extrafooter
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")
 	script(src="../javascripts/mods/notify.js")
-	script(src="../javascripts/"+logicize+".js")
+	script(src="../javascripts/"+logicise+".js")
 	script(src="../javascripts/autohidenav.js")
+	script(src="../javascripts/leaderboard.js")
+	link(rel="stylesheet", type="text/css", href="/css/leaderboard.css")
