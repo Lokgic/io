@@ -4,7 +4,7 @@
     {
       "name": "working dogs",
       "children":[
-        "Akita",
+        "Akitas",
         "Alaskan Malamutes",
         "Anatolian Shepard Dogs",
         "Boxers",
@@ -20,26 +20,26 @@
     {
       "name":"toy dogs",
       "children":[
-        "Chihuahua",
+        "Chihuahuas",
         "Maltese",
         "Pekingese",
-        "Pomeranian",
-        "Poodle",
-        "Pug",
+        "Pomeranians",
+        "Poodles",
+        "Pugs",
         "Shih Tzu"
       ]
     },
     {
       "name":"herding dogs",
       "children":[
-        "Australian Cattle Dog",
-        "Australian Shepherd",
+        "Australian Cattle Dogs",
+        "Australian Shepherds",
         "Belgian Malinois",
         "Border Collies",
         "Collies",
         "German Shepards",
         "Corgis",
-        "Shetland Sheepdog",
+        "Shetland Sheepdogs",
         "Swedish Vallhunds"
       ]
     },
@@ -51,7 +51,7 @@
         "Bulldogs",
         "Chow-Chows",
         "Finnish Spitz",
-        "Shiba Inu"
+        "Shiba Inus"
 
       ]
     },
@@ -63,7 +63,7 @@
         "Golden Retrievers",
         "Labrador Retrievers",
         "Pointers",
-        "Sussex Spaniel"
+        "Sussex Spaniels"
       ]
 
     },
@@ -78,7 +78,7 @@
         "Dachshunds",
         "Greyhounds",
         "Irish Wolfhounds",
-        "Rhodesian Ridgeback"
+        "Rhodesian Ridgebacks"
       ]
     }
 
