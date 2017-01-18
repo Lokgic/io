@@ -1,4 +1,6 @@
 var venn = require("venn.js")
+var help = require("./mods/helpers.js")
+
 var objMessage = 'Click on the corresponding area on the Venn diagram to place an cross. Clicking on the overlapping repeatedly will toggle between borders. Click the same button again to go back shading mode. Click "Delete current object" to remove the cross.'
 $.notify.defaults({
   globalPosition: 'bottom left',
@@ -18,6 +20,14 @@ function endMessage(title, body){
 
 
 $(function(){
+  var uid = help.getUid();
+  var logged = (uid == "notLogged")? false: true;
+  var mod = "sl";
+  var chapter = "logicise"
+  var section = "vennSyl"
+  var  toPass = 2;
+  var dataCollect = []
+  d3.select('#passingscore').text(toPass)
   var crossStr = "m 10 10 l -20 -20 m 10 10 m -10 10 l 20 -20"
   function showInstruction(){
     $('#messageModal .modal-header').text("Tutorial")
@@ -43,7 +53,7 @@ $(function(){
     var iWidth = 450
     var instructionChart = venn.VennDiagram().height(iWidth).width(iWidth)
     // console.log(iWidth)
-    var intro = "The goal of this 'logicize' (basically a logic exercise) is to determine whether a given categorical syllogism is valid by providing a correct Venn diagram representation of it."
+    var intro = "The goal of this 'logicise' (basically a logic exercise) is to determine whether a given categorical syllogism is valid by providing a correct Venn diagram representation of it."
     argument.text("Click on the circle below to continue and click outside of the window anytime to exit. You can always reopen this window by clicking the 'Instruction' button.")
     textInst.text(intro)
     var introSet = [
@@ -216,7 +226,7 @@ $(function(){
   })
 
   var currentScore ;
-
+  var data = []
   function getCirNum(dim){
     cir = {}
     cir.cx = parseFloat(dim.split(' ')[1])
@@ -249,7 +259,7 @@ $(function(){
       var setsL
       var vennL
       var mode = "shade"
-      var valid;
+      var valid = "";
 
       initVennL()
 
@@ -273,7 +283,7 @@ $(function(){
       })
 
       answer.on('click',function(){
-        // console.log(obj)
+
         if (ansButstatus == "answer"){
           var answerArea = {
 
@@ -292,9 +302,13 @@ $(function(){
           }
           objAnswer = (obj.sort()[0] == currentProblem.diagram.objects.sort()[0] && obj.sort()[1] == currentProblem.diagram.objects.sort()[1]) ? true :false;
 
-          var validAnswer = (valid ==currentProblem.valid)
-          console.log(validAnswer)
-          if (objAnswer&&areaCorrect&&validAnswer) {
+          var validAnswer = (valid ===currentProblem.valid)
+          var correct = objAnswer&&areaCorrect&&validAnswer;
+
+          // console.log(tempDP)
+          // console.log(valid + " vs " + currentProblem.valid)
+          // console.log("so " + validAnswer)
+          if (correct) {
             // console.log(validAnswer)
             currentScore+= 1;
             ansButstatus = "next"
@@ -302,11 +316,45 @@ $(function(){
             style: 'correctblue',
             position: notifyDir
           });
+          if (logged) {
+            var tempDP = {
+              uid:uid,
+              pid:currentProblem.form,
+              type: "vennSyl",
+              correct:correct,
+            }
+            tempDP.input = (valid)? "valid":"invalid"
+            dataCollect.push(tempDP)
+          }
 
-          } else{
-            endMessage("Logicize Result", "Your score is " + currentScore +".")
+
+
+        }else if (valid === ""){
+          help.alert("Don't forget about validity!","incorred")
+        } else{
+            var str = "That was incorrect. Your final score is " + currentScore +". You may press 'next' to restart the logicise."
+            if (currentScore >= toPass && logged) {
+              str += " You have passed the test."
+              if (logged) {
+                var tempDP = {
+                  uid:uid,
+                  pid:currentProblem.form,
+                  type: "vennSyl",
+                  correct:correct,
+                }
+                tempDP.input = (valid)? "valid":"invalid"
+                dataCollect.push(tempDP)
+                help.sendAttempts(dataCollect)
+              }
+              help.recordCompletion(uid,mod,chapter,section);
+              help.recordLeader(uid,section,currentScore);
+            }
             currentScore = 0
-            nextProblem();
+
+            // console.log(dataCollect)
+            // nextProblem();
+            endMessage("Logicise Result", str)
+            ansButstatus = "next"
           }
         }else if (ansButstatus == "next" ){
           nextProblem()

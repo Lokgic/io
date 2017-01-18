@@ -43,3 +43,17 @@ module.exports.record = function(record, callback){
         })
 
       }
+
+
+module.exports.leader = function(lead, callback){
+
+	knex('leader').insert(lead)
+      .catch(function(error) {
+        console.log(error)
+        return callback(error)
+      })
+      .then(function(){
+        return callback(null,"recorded")
+        })
+
+      }
