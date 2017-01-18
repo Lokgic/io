@@ -9,10 +9,10 @@ exports.seed = (knex, Promise) => {
     return Promise.all([
       // Inserts seed entries
       knex('student').insert({
-        nickname: 'admin',
-        email: 'admin@admin.com',
-        name:'admin',
-        password:bcrypt.hashSync("admin", 10)
+        nickname: 'test',
+        email: 'test@test.com',
+        name:'test',
+        password:bcrypt.hashSync("test", 10)
       }),
       knex('student').insert({
         nickname: 'm2',

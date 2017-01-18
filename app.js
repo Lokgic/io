@@ -10,26 +10,6 @@ var session = require('express-session')
 var app = express();
 
 
-// knex.insert({firstName: 'Tim'}).into('studentInfo');
-
-//mongodb connection
-// postgres://zvbsaaqbevecuo:ef87b554d97488e8d600b4d15c0acd38d02190ccd05006ae27211876e57459a3@ec2-107-22-236-252.compute-1.amazonaws.com:5432/d29nf9uuunnvne
-
-// mongoose.connect(process.env.mlab);
-// var db = mongoose.connection;
-
-//mongo error
-// db.on('error', console.error.bind(console,'connection error'));
-
-//sessions for tracking logis
-// app.use(session({
-//   secret: 'lokgical',
-//   resave: true,
-//   saveUninitialized: false,
-//   store: new MongoStore({
-//   mongooseConnection: db
-//   })
-// }));
 
 
 app.use(session({
@@ -40,12 +20,6 @@ app.use(session({
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }
 }));
 
-// app.use(session({
-//   store: new (require('connect-pg-simple')(session))(),
-//   secret: process.env.FOO_COOKIE_SECRET,
-//   resave: false,
-//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
-// }));
 
 //make user ID available in template
 

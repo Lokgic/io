@@ -5,3 +5,4 @@ node_modules
 # misc
 mock
 .DS_Store
+knexfile.js
