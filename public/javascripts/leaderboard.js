@@ -75,7 +75,7 @@ $(function(){
 
       var board = d3.select('#board')
       var svg = board.append('svg').attr('width',width).attr('height',height)
-      var color = d3.scaleOrdinal(d3.schemeCategory10);
+      var color = d3.scaleOrdinal(d3.schemeSet1);
 
 
   function ping(callback){

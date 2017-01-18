@@ -220,7 +220,7 @@ router.post('/processing/*', function(req,res,next){
 router.post('/leaderboard/*',function(req,res,next){
 	var logicise = req.path.split('/')[2]
 	data.getRanking(logicise,function(d){
-		console.log(d)
+		// console.log(d)
 		res.send(d)
 	})
 })
