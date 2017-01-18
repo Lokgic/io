@@ -25,7 +25,7 @@ $(function(){
   var mod = "sl";
   var chapter = "logicise"
   var section = "vennSyl"
-  var  toPass = 2;
+  var  toPass = 15;
   var dataCollect = []
   d3.select('#passingscore').text(toPass)
   var crossStr = "m 10 10 l -20 -20 m 10 10 m -10 10 l 20 -20"

@@ -15,6 +15,11 @@ $(function(){
 
   d3.select('#leaderboardButt').on('click',function(){
     ping(function(data){
+      if (data.length == 0){
+
+        return openNav();
+
+      }
       console.log(data)
       var yPadding = 30
       var barHeight = Math.min((height / data.length)*.80,50)
