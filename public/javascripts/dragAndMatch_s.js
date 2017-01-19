@@ -23,7 +23,7 @@ $(function() {
     var qId = quizDiv.attr('id')
     var modal = d3.select('#' + qId + 'modal')
     var qInfo = qId.split('-')
-    console.log(qInfo)
+    // console.log(qInfo)
     var scope = d3.select('.dragMatch')
     var logged = ($('#mainnavbar').attr('data') == "notLogged") ? false : true;
     var uid = $('#mainnavbar').attr('data')
@@ -208,7 +208,7 @@ $(function() {
             // remove the drop feedback style
             event.target.classList.remove('drop-target');
             event.relatedTarget.classList.remove('can-drop');
-            event.relatedTarget.setAttribute("value", "")
+            // event.relatedTarget.setAttribute("value", "")
                 // console.log(event.relatedTarget);
                 // event.relatedTarget.textContent = 'Dragged out';
         },

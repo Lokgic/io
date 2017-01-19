@@ -15,7 +15,7 @@ mixin argument(premises, conclusion)
 
 mixin MC(x)
 	h4.text-xs-center.m-y-2 #{x.title}
-	nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
 		ul.nav.navbar-nav
 			li.nav-item
 				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
@@ -31,7 +31,7 @@ mixin MC(x)
 
 mixin drag(x)
 	h4.text-xs-center.m-y-2 #{x.title}
-	nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
 		ul.nav.navbar-nav
 			li.nav-item
 				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
@@ -101,7 +101,7 @@ block content
 									when "basicVenn"
 											.row(id = x.eventId class = x.class).m-y-3.wholeMC
 												h4.text-xs-center.m-y-2 #{x.title}
-												nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav.m-b-2
+												nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
 													ul.nav.navbar-nav
 														li.nav-item
 															span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}

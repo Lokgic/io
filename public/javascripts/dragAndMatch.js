@@ -6003,7 +6003,7 @@ $(function() {
     var qId = quizDiv.attr('id')
     var modal = d3.select('#' + qId + 'modal')
     var qInfo = qId.split('-')
-    console.log(qInfo)
+    // console.log(qInfo)
     var scope = d3.select('.dragMatch')
     var logged = ($('#mainnavbar').attr('data') == "notLogged") ? false : true;
     var uid = $('#mainnavbar').attr('data')
@@ -6188,7 +6188,7 @@ $(function() {
             // remove the drop feedback style
             event.target.classList.remove('drop-target');
             event.relatedTarget.classList.remove('can-drop');
-            event.relatedTarget.setAttribute("value", "")
+            // event.relatedTarget.setAttribute("value", "")
                 // console.log(event.relatedTarget);
                 // event.relatedTarget.textContent = 'Dragged out';
         },
@@ -6273,6 +6273,69 @@ var getUid = function(){
   return $('#mainnavbar').attr('data')
 }
 
+module.exports.recordCompletion = function recordCompletion(uid,mod,chapter,section){
+  var data = {
+      uid: uid,
+      module: mod,
+      chapter: chapter,
+      section: section
+  }
+  $.ajax({
+      url: '/data/record',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      }
+  });
+}
+
+module.exports.recordLeader = function recordLeader(uid,logicise,score){
+  var data = {
+      uid: uid,
+      logicise: logicise,
+      score: score
+  }
+  $.ajax({
+      url: '/data/leader',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      }
+  });
+}
+
+module.exports.sendAttempts = function sendAttempts(dataSet){
+
+
+  // console.log(toSend)
+  $.ajax({
+      url: '/data/attempt',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(dataSet),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      },
+      error: function(res) {
+          //On ajax success do this
+        console.log(res)
+          console.log("error message " + res.message)
+      }
+  });
+}
 module.exports.alert = alert;
 module.exports.getUid = getUid;
 
