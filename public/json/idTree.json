@@ -1,0 +1,117 @@
+{
+  "name":"Identity and Reference",
+  "type":"module",
+  "children":[
+    {
+      "name":"Web Assignments",
+      "type":"task",
+      "children":[
+        {
+                "name": "Reading",
+                "type":"subtask",
+                "children": [{
+                    "name": "Identity in PL",
+                    "type":"chapter",
+                    "children": [{
+                        "name": "Beginning Translations with Identity",
+                        "type":"section"
+
+
+                    }, {
+                        "name": "Basic Venn Diagram",
+                        "type":"section"
+                    }, {
+                        "name": "Concepts review",
+                        "type":"section"
+                    }]
+                }, {
+                    "name": "Identity and Quantity",
+                    "type":"chapter",
+                    "children": [{
+                        "name": "Translations with Identity and Quantity",
+                        "type":"section"
+                    }]
+                }, {
+                    "name": "Definite Descriptions",
+                    "type":"chapter",
+                    "children": [{
+                        "name": "Translating Definite Descriptions",
+                        "type":"section"
+
+
+                    }, {
+                        "name": "Quantity Statements Involving Definite Descriptions",
+                        "type":"section"
+
+
+                    }]
+                },
+                {
+                    "name": "Models for Identity",
+                    "type":"chapter",
+                    "children": [{
+                        "name": "Mathematical Expressions in PL+",
+                        "type":"section"
+
+                    },
+                    {
+                      "name": "Proofs with Identity",
+                      "type":"chapter",
+                      "children": [{
+                          "name": "Using Identity Introduction and Elimination",
+                          "type":"section"
+
+                    }]
+                },
+                {
+                  "name": "Trees with Identity",
+                  "type":"chapter"
+
+                }
+              ]
+            }, {
+                "name": "Logicise",
+                "type":"subtask",
+
+                "children": [{
+                    "name": "Physical Model with Identity",
+                    "type":"chapter"
+
+
+                }, {
+                    "name": "Model Semantics with Identity",
+                    "type":"chapter"
+
+                }]
+            }
+      ]
+      }
+    ]
+  },
+  {
+    "name":"Problem Set 4",
+    "type":"task",
+
+    "children":[
+      {"name":"Translation",
+      "type":"subtask"
+    },
+      {"name":"Deduction",
+      "type":"subtask"
+
+      },
+      {"name":"Trees",
+         "type":"subtask"
+       },
+      {"name":"Evaluating Arguments",
+       "type":"subtask"
+     }
+    ]
+  },
+  {
+    "name":"Test 4",
+    "type":"task"
+
+  }
+]
+}

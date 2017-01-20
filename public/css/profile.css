@@ -20,3 +20,28 @@
   /*stroke: #ccc;*/
   /*stroke-width: 2px;*/
 }
+
+
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width:200px;
+    padding:  10px;
+    font: 12px sans-serif;
+    color:white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+
+div.tooltip.title {
+
+    font: 20px;
+  }
+
+  div.tooltip p {
+
+      margin: 3px 3px;
+    }

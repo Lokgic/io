@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
 var data = require('../models/data')
 var mid = require('../middleware');
 var student = require('../models/student')
@@ -155,7 +154,63 @@ router.get('/logistics', function(req, res, next){
 
 
 //100
+//get profile
+router.post('/profile/*', function(req,res,next){
+	var sl = require("../public/json/slTree.json")
+	var pl = require("../public/json/plTree.json")
+	var nd = require("../public/json/ndTree.json")
+	var id = require("../public/json/idTree.json")
+	var pa = require("../public/json/paTree.json")
+	var uid = req.path.split('/')[2]
+	var tree = {
+		"name":"Logic",
+		"type":"root",
+		"children":[
+			sl,
+			pl,
+			nd,
+			id,
+			pa
+		]
 
+	}
+	// console.log(tree)
+	// console.log(mod + ch + section)
+	data.getProfile(uid,function(re){
+		var treeSearch = require('../js/treeSearch.js')
+		// var _ = require('underscore.js')
+		var index = {
+			sl:0,
+			pl:1,
+			nd:2,
+			id:3,
+			pa:4
+		}
+		for (module in re){
+			if (re[module].length != 0){
+				for (record in re[module]){
+					var id = re[module][record].module + "-" + re[module][record].chapter + "-" +re[module][record].section;
+				var target = treeSearch.search(tree.children[index[re[module][record].module]],"id",id)
+				if (target != null) {
+					target.completed = true;
+					target.time = re[module][record].createdAt;
+				}
+				// console.log(target)
+				}
+			}
+			treeSearch.checkChildren(tree.children[0])
+			// console.log(tree.children[0])
+		}
+		// console.log(treeSearch(tree.children[0],'id','sl-1-1'))
+		// tree.children[0].children[0].completed = true;
+		// tree.children[0].completed = true;
+
+		tree.tasksList = treeSearch.searchTask(tree)
+		return res.send(tree)
+	})
+
+
+})
 
 // grading reporting
 
@@ -243,4 +298,7 @@ router.get('/logicise/*', function(req,res,next){
 
 
 })
+
+
+
 module.exports = router;

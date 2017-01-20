@@ -1,0 +1,97 @@
+{
+  "name":"Sentence Logic",
+  "type":"module",
+  "id":"sl",
+  "children":[
+    {
+      "name":"Web Assignments(SL)",
+      "type":"task",
+      "children":[
+        {
+                "name": "Reading",
+                "type":"subtask",
+                "children": [{
+                    "name": "Introduction: Validity and Venn Diagrams",
+                    "type":"chapter",
+                    "children": [{
+                        "name": "Evaluate Validity Intuitively",
+                        "type": "section",
+                        "completed": false,
+                        "id":"sl-1-1"
+                    }, {
+                        "name": "Basic Venn Diagram",
+                        "type": "section",
+                        "completed": false,
+                        "id":"sl-1-2"
+                    }, {
+                        "name": "Concepts review",
+                        "type": "section",
+                        "completed": false,
+                        "id":"sl-1-def"
+                    }]
+                }, {
+                    "name": "The formal language of SL",
+                    "type": "chapter",
+                    "children": []
+                }, {
+                    "name": "Core Concepts in Formal Logic",
+                    "type": "chapter",
+                    "children": []
+                },
+                {
+                    "name": "Conditionals",
+                    "type": "chapter",
+                    "children": []
+                },
+                {
+                    "name": "Truth Trees (Semantic Tableaux)",
+                    "type": "chapter",
+                    "children": []
+                }]
+            }, {
+                "name": "Logicise",
+                "type":"subtask",
+                "id":"logicise",
+                "children": [{
+                    "name": "Venn Diagram and Syllogistic Validity",
+                    "type": "chapter",
+                    "id":"sl-logicise-vennSyl"
+                }, {
+                    "name": "Wason Selection Task",
+                    "type": "chapter"
+                }, {
+                    "name": "Puzzles",
+                    "type": "chapter"
+                }, {
+                    "name": "Using Truth Trees",
+                    "type": "chapter"
+                }]
+            }
+      ]
+    },
+    {
+      "name":"Problem Set 1",
+      "type":"task",
+      "children":[
+        {
+          "name":"Arguments and Validity","type":"subtask","id":"sl-pset-1"
+        },
+        {
+          "name":"Translation","type":"subtask"
+        },
+        {
+          "name":"Conditionals","type":"subtask"
+        },
+        {
+          "name":"Truth Tables","type":"subtask"
+        },{
+          "name":"Semantic Tableaux","type":"subtask"
+        }
+      ]
+    },
+    {
+      "name":"Test 1",
+      "type":"task"
+    }
+  ]
+}

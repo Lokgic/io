@@ -18,7 +18,7 @@ var knex = require('knex')({
 // 		console.log("no such user found")
 // 	}
 // 	else if (d.length == 1) var result = bcrypt.compareSync('abc',d[0].password)
-  	
+
 //   	if (result){
 //   		console.log(d[0])
 //   	}else{
@@ -41,7 +41,7 @@ module.exports.authenticate = function(username, password, callback){
         return callback(err);
 	}
 	else if (d.length == 1) var result = bcrypt.compareSync(password,d[0].password)
-  	
+
   	if (result === true){
   		return callback(null, d[0]);
   		// console.log(d[0])
@@ -77,32 +77,4 @@ module.exports.create = function(u, callback){
         })
 
       })
-    }  
-
-
-
-
-
-
-
-
-
-
-
-//   User.findOne({email: email})
-//     .exec(function (error, user){
-//       if (error){
-//         return callback(error);
-//       } else if (!user){
-//         var err = new Error('No such user!');
-//         err.status = 401;
-//         return callback(err);
-//       }
-//       bcrypt.compare(password, user.password, function(error, result){
-//         if (result === true){
-//           return callback(null, user);
-//         } else {
-//           return callback();
-//         }
-//       })
-//     });
+    }

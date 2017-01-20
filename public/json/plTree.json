@@ -1,0 +1,64 @@
+{
+  "name":"Predicate Logic",
+  "type":"module",
+  "children":[
+    {
+      "name":"Web Assignments",
+      "type":"task",
+      "children":[
+        {
+                "name": "Reading",
+                "type":"subtask",
+                "children": [{
+                    "name": "Syntax",
+                    "type":"chapter",
+                    "children": []
+                }, {
+                    "name": "Translations",
+                    "type":"chapter",
+                    "children": []
+                }, {
+                    "name": "Model Semantics",
+                    "type":"chapter",
+                    "children": []
+                },
+                {
+                    "name": "Trees for PL",
+                    "type":"chapter",
+                    "children": []
+                }]
+            }, {
+                "name": "Logicise",
+                "type":"subtask",
+                "children": [{
+                    "name": "Wason with Quantities (English)",
+                    "type":"chapter"
+
+                }, {
+                    "name": "Wason Selection Task in PL",
+                    "type":"chapter"
+                }, {
+                    "name": "Puzzles with Quantities",
+                    "type":"chapter"
+                },
+                {"name":"Model Interpretation",
+                "type":"chapter"
+              },
+                 {
+                    "name": "Grid Game 1",
+                    "type":"chapter"
+                }]
+            }
+      ]
+    },
+    {
+      "name":"Problem Set 2",
+      "type":"task"
+    },
+    {
+      "name":"Test 2",
+      "type":"task"
+
+    }
+  ]
+}

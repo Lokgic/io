@@ -1,0 +1,74 @@
+ {
+  "name":"Natural Deduction",
+  "type":"module",
+  "children":[
+    {
+      "name":"Web Assignments",
+      "type":"task",
+      "children":[
+        {
+                "name": "Reading",
+                "type":"subtask",
+                "children": [{
+                    "name": "SL: Basic Rules of Inferences",
+                    "type":"chapter"
+
+
+                }, {
+                    "name": "SL: Hypothetical Rules of Inferences",
+                    "type":"chapter",
+
+                    "children": []
+                }, {
+                    "name": "SL: Proofs and Rules of Replacements",
+                    "type":"chapter",
+
+                    "children": []
+                },
+                {
+                    "name": "PL: Universal Elimination and Existential Introduction",
+                    "type":"chapter",
+
+                    "children": []
+                },
+                {
+                  "name": "PL: Universal Introduction and Existential Elimination",
+                  "type":"chapter",
+
+                  "children":[]
+                }
+              ]
+            }
+      ]
+    },
+    {
+      "name":"Problem Set 3",
+      "type":"task",
+      "children":[
+        {
+          "name": "SL Basic Derviations",
+          "type":"subtask"
+        },
+        {
+          "name": "SL Proofs and Rules of Replacements",
+          "type":"subtask"
+
+        },
+        {
+          "name":"PL Derviations",
+          "type":"subtask"
+
+        },
+        {
+          "name": "PL: Proofs",
+          "type":"subtask"
+
+        }
+      ]
+    },
+    {
+      "name":"Test 3",
+      "type":"task"
+    }
+  ]
+}

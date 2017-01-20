@@ -1,0 +1,20 @@
+{
+  "name":"Participatory",
+  "type":"module",
+  "children":[
+    {"name":"P+",
+    "type":"module",
+    "children":
+    [
+      {"name":"Test 1","type":"task"},
+      {"name":"Test 2","type":"task"},
+      {"name":"Test 3","type":"task"},
+      {"name":"Test 4","type":"task"}
+    ]
+  },
+    {"name": " < 3 Absences","type":"task"},
+    {"name": "Logicise Achievements", "type":"task"},
+    {"name": "In Class Activities", "type":"task"}
+
+  ]
+}

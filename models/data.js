@@ -16,6 +16,29 @@ var knex = require('knex')({
 
 
 
+module.exports.getProfile = function(uid, callback){
+
+	knex.select().from('record').where({'uid':uid})
+      .catch(function(error) {
+        console.log(error)
+        return callback(error)
+      })
+      .then(function(tab){
+        var toSend = {
+          "sl":[],
+          "pl":[],
+          "nd":[],
+          "id":[],
+          "pa":[]
+        }
+        for (datapoint in tab){
+          toSend[tab[datapoint].module].push(tab[datapoint])
+        }
+
+        return callback(toSend)
+        })
+
+      }
 
 
 
