@@ -19,6 +19,10 @@ router.get('/register', mid.loggedOut, function(req, res, next){
 	return res.render('register', {title: 'Sign up'})
 });
 
+router.get('/profile', function(req, res, next){
+	return res.render('profile')
+});
+
 
 
 // REGISTER POST */

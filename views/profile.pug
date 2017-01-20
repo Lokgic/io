@@ -1,27 +1,13 @@
 extends pagelayout
 
 block content
-	main.container.logicizeFS.p-x-1
-		#studentInfo.m-b-2.navBuffer
-			h2.m-b-0 Logic Ian
-			nav.navbar-light.navbar.navbar-full.p-x-0.subNav
-				ul.nav.navbar-nav
-					li.nav-item
-						span.navbar-text.text-muted.hidden-md-down#navInfo Subinfo
-					li.nav-item.pull-xs-right
-						a.nav-link.p-y-0 Graded Work
-					li.nav-item.pull-xs-right
-						a.nav-link.p-y-0 Graded Test
+	main#profileTree.m-a-0
 
-
-		.row.text-xs-center
-			#profileLeft.col-md-2
-			#profileMid.col-md-8
-			#profileRight.col-md-2
 
 block extrafooter
 	script(src="https://d3js.org/d3.v4.min.js")
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="../javascripts/mods/notify.js")
 	script(src="../javascripts/autohidenav.js")
-	script(src="../javascripts/profileDataViz.js")
+	script(src="../javascripts/classTree.js")
+	link(rel="stylesheet", type="text/css", href="/css/profile.css")
