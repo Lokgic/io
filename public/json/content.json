@@ -1,0 +1,15 @@
+{
+  "sl": [
+      {
+        "title":"What is Logic?",
+        "id":"1",
+        "url":"m/sl/1"
+      },
+      {
+        "title":"Logicise:Venn Diagrams and Syllogistic Validity",
+        "id":"vennSyl",
+        "url":"logicise/vennSyl"
+      }
+    ]
+
+}
