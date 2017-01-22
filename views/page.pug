@@ -13,6 +13,22 @@ mixin argument(premises, conclusion)
 		hr
 		p #{conclusion}
 
+mixin arg(premises, conclusion)
+	.arg.text-justify
+		-var i = 1
+		for premise in premises
+			p $P_{#{i}}$ &nbsp; #{premise}
+			- i = 1 + 1
+		hr
+		p $\therefore$ &nbsp; #{conclusion}
+
+mixin symbolkey(key, symbol)
+	.arg.text-justify
+		for k in key
+			p #{k[0]}: #{k[1]}
+
+
+
 mixin MC(x)
 	h4.text-xs-center.m-y-2 #{x.title}
 	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
@@ -52,17 +68,17 @@ block extrahead
 block content
 	- var plugin
 			main.container.p-x-2.page
-				case sectionNum
+				case chapterNum
 					when "sectionconcepts"
 					when "sectionquiz"
 					default
 						.lessonSectionTitle
-							h1 #{moduleNum}.#{sectionNum}
+							h1 #{moduleNum}.#{chapterNum}
 							hr
-							h1  #{content[sectionNum]["1"].sectionname}
-						p #{content[sectionNum]["1"].sectionDescription}
+							h1  #{content[chapterNum]["1"].chapterName}
+						p #{content[chapterNum]["1"].chapterDescription}
 						- var sec = 1
-						for section in content[sectionNum]
+						for section in content[chapterNum]
 							.lessonSubTitle(id = section.title)
 								h4 &sect; #{sec} #{section.title}
 								hr
@@ -71,6 +87,8 @@ block content
 									+quote(section.quote.lines, section.quote.source)
 							for x in section.content
 								case x.type
+									when "smallTitle"
+										h4 #{x.substance}
 									when "p"
 										+paragraphs(x.substance)
 									when "ps"
@@ -95,9 +113,17 @@ block content
 											.col-sm-6.animation.p-a-0.m-x-0
 									when "argument"
 											+argument(x.premises, x.conclusion)
+									when "arg"
+											.flexContainer
+												+arg(x.premises, x.conclusion)
+									when "symbolkey"
+											.flexContainer
+												+symbolkey(x.key, x.symbol)
 									when "event"
 										h4.text-xs-center.m-y-2 #{x.title}
 										div(id = x.eventId).container
+									when "table"
+										.table(id = x.eventId)
 									when "basicVenn"
 											.row(id = x.eventId class = x.class).m-y-3.wholeMC
 												h4.text-xs-center.m-y-2 #{x.title}
@@ -172,7 +198,10 @@ block extrafooter
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="/javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")
-	script(src="/javascripts/vennD.js")
 	script(src="/javascripts/autohidenav.js")
-	script(src="/javascripts/dragAndMatch.js")
-	script(src="/javascripts/binaryQuiz.js")
+	if fileName == "sl1"
+		script(src="/javascripts/"+fileName+".js")
+		script(src="/javascripts/dragAndMatch.js")
+		script(src="/javascripts/binaryQuiz.js")
+	else
+		script(src="/javascripts/chapters/"+fileName+".js")

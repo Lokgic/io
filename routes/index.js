@@ -131,15 +131,16 @@ router.get('/',  function(req, res, next) {
 
 router.get(t = '/m/*/*', function(req, res, next){
 	var moduleID = req.path.split('/')[2]
-	var sectionNum = req.path.split('/')[3]
+	var chapterNum = req.path.split('/')[3]
 
-	var lesson = require('../public/json/'+moduleID + sectionNum +'.json');
+	var lesson = require('../public/json/'+moduleID  +'.json');
 	if (moduleID == "sl"){
 		var title  = "Sentence Logic";
 		var moduleNum = 1;
 	}
-
-	return res.render('page', {title:title, content:lesson, sectionNum: sectionNum, moduleNum:moduleNum});
+	var fileName = moduleID+chapterNum
+	console.log(lesson)
+	return res.render('page', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
 });
 
 
@@ -177,6 +178,7 @@ router.post('/profile/*', function(req,res,next){
 	// console.log(tree)
 	// console.log(mod + ch + section)
 	data.getProfile(uid,function(re){
+
 		var treeSearch = require('../js/treeSearch.js')
 		// var _ = require('underscore.js')
 		var index = {
@@ -186,6 +188,7 @@ router.post('/profile/*', function(req,res,next){
 			id:3,
 			pa:4
 		}
+
 		for (module in re){
 			if (re[module].length != 0){
 				for (record in re[module]){

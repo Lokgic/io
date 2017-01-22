@@ -113,63 +113,7 @@ $(function(){
        var fmt = d3.format('02d');
        return function(l) { return Math.floor(l / 60) + ':' + fmt(l % 60) + ''; };
    }
-   //
-  //  var svg = d3.select("#gradeChart").append('svg'),
-  //      margin = {top: 20, right: 20, bottom: 30, left: 50},
-  //      width = 500
-  //      height = 500
-  //      svg.attr('height',500).attr('width',500)
-  //      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  //  var parseTime = d3.timeParse("%d-%b-%y");
-//
-//    var x = d3.scaleBand().domain(["A+","A","A-","B+","B","B-","C+","C","C-","D+","D","F"]).range([width-70,0]);
-//
-//    var y = d3.scaleLinear()
-//           .domain([18,0])
-//           .range([ 0,height-70]);
-//
-// // console.log(x("B"))
-//   grade2 = []
-//
-//   for (var i = grade.length; i >1;i--){
-//     console.log("Test")
-//     grade2.push(grade[i-1])
-//   }
-//    var line = d3.line()
-//        .x(function(d) { return x(d.grade); })
-//        .y(function(d) { return y(d.title); });
-//
-//        console.log(grade.length)
-//
-//
-//
-//
-//      g.append("g")
-//          .attr("class", "axis axis--x")
-//          .attr("transform", "translate(0," + height + ")")
-//          .call(d3.axisBottom(x));
-//
-//      g.append("g")
-//          .attr("class", "axis axis--y")
-//          .call(d3.axisLeft(y))
-//        .append("text")
-//          .attr("fill", "#000")
-//          .attr("transform", "rotate(-90)")
-//          .attr("y", 6)
-//          .attr("dy", "0.71em")
-//          .style("text-anchor", "end")
-//          .text("Price ($)");
-//
-//      g.append("path")
-//          .datum(grade2)
-//          .attr("class", "line")
-//          .attr("d", line);
-//
-
-
-
-
+  
 
 
 

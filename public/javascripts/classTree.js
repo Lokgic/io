@@ -180,7 +180,7 @@ $(function() {
 
             if (d.data.type != "root"){
               var html = "<p class = 'title'>" +d.data.name +"</p><p>Status: "
-              html += (d.data.completed)? "Completed": "Incompleted";
+              html += (d.data.completed)? "Completed": "Incomplete";
               html += "</p>"
               if (d.data.time){
                 var date = d.data.time.split('T')[0]

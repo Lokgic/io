@@ -24,6 +24,9 @@ module.exports.getProfile = function(uid, callback){
         return callback(error)
       })
       .then(function(tab){
+        if (tab.length== 0) {
+          return callback(null);
+        }
         var toSend = {
           "sl":[],
           "pl":[],
@@ -31,6 +34,7 @@ module.exports.getProfile = function(uid, callback){
           "id":[],
           "pa":[]
         }
+
         for (datapoint in tab){
           toSend[tab[datapoint].module].push(tab[datapoint])
         }
