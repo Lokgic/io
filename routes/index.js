@@ -139,7 +139,7 @@ router.get(t = '/m/*/*', function(req, res, next){
 		var moduleNum = 1;
 	}
 	var fileName = moduleID+chapterNum
-	console.log(fileName)
+	// console.log(fileName)
 	if (fileName == "sl1") return res.render('pagesl1', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
 	else return res.render('page', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
 
@@ -165,7 +165,7 @@ router.post('/profile/*', function(req,res,next){
 	var id = require("../public/json/idTree.json")
 	var pa = require("../public/json/paTree.json")
 	var uid = req.path.split('/')[2]
-	console.log(sl)
+	// console.log(uid)
 	var tree = {
 		"name":"Logic",
 		"type":"root",
@@ -212,7 +212,7 @@ router.post('/profile/*', function(req,res,next){
 		// tree.children[0].completed = true;
 
 		tree.tasksList = treeSearch.searchTask(tree)
-		console.log(tree)
+		// console.log(tree)
 		return res.send(tree)
 	})
 

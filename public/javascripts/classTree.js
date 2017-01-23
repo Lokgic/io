@@ -1,6 +1,6 @@
 $(function() {
 
-
+  var uid = $('#mainnavbar').attr('data')
 
     completeColor = "#444C5C"
 
@@ -26,14 +26,14 @@ $(function() {
         })
     }
 
-    loadProfile(3,function(err,data){
+    loadProfile(uid,function(err,data){
       // for (dp in data){
       //   if (data[dp].chapter == "pset"){
       //     treeData[data[dp].module[1]][1][dp].completed = true
       //   }
       // }
       drawTree(data)
-      console.log(data)
+      // console.log(data)
     })
 
     var main = '#profileTree'
