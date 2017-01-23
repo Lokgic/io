@@ -139,8 +139,10 @@ router.get(t = '/m/*/*', function(req, res, next){
 		var moduleNum = 1;
 	}
 	var fileName = moduleID+chapterNum
-	console.log(lesson)
-	return res.render('page', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
+	console.log(fileName)
+	if (fileName == "sl1") return res.render('pagesl1', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
+	else return res.render('page', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
+
 });
 
 

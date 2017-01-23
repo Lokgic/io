@@ -6,6 +6,12 @@ mixin paragraphsEscaped(set)
 	for par in set
 		p.text-justify
 			!= par
+mixin argument(premises, conclusion)
+	.argument.m-x-3.m-y-1.text-justify
+		for premise in premises
+			p #{premise}
+		hr
+		p #{conclusion}
 
 mixin arg(premises, conclusion)
 	.arg.text-justify
@@ -87,9 +93,6 @@ block content
 										+paragraphs(x.substance)
 									when "ps"
 										+paragraphsEscaped(x.substance)
-									when "important"
-										.important.text-justify.p-a-1
-											+paragraphsEscaped(x.substance)
 									when "half"
 										.card-group(id = x.id).p-a-0.half
 											for col in x.substance
@@ -97,6 +100,8 @@ block content
 													case col.type
 														when "p"
 																+paragraphsEscaped(col.substance)
+														when "argument"
+																+argument(col.premises, col.conclusion)
 									when "scroll"
 										.container.scroll.p-a-0.m-x-0(id = x.eventId)
 											.col-sm-5.text.p-a-0.m-x-0
@@ -106,6 +111,8 @@ block content
 															h4.slideTitle.text-xs-center #{t[1]}
 															p.text-justify.p-a-1(id = t[0]) #{t[2]}
 											.col-sm-6.animation.p-a-0.m-x-0
+									when "argument"
+											+argument(x.premises, x.conclusion)
 									when "arg"
 											.flexContainer
 												+arg(x.premises, x.conclusion)
@@ -152,21 +159,29 @@ block content
 												.readingExQ.text-xs-center.col-lg-6
 												.readingExQ2.text-xs-center.col-lg-6
 												.readingExAns.col-lg-12
-									when "defReview"
+									when "definition"
+										- plugin = "dragMatch"
+										if x.size == "half"
 											.p-a-0.m-r-0.m-l-0
-												.m-l-2.m-b-2.readingEx.dragMatch(id = x.eventId)
+												.sideQuiz.m-l-2.m-b-2.readingEx.dragMatch(id = x.eventId)
 													+drag(x)
 													.card.dropzone.text-xs-center
-														p.dragQ
+														p#dragQ
 													.card.text-xs-center#flyzone
-			.modal.fade.result
-				.modal-dialog.modal-dialog
-					.modal-content
-						.modal-header
-							h4.modal-title
-						.modal-body
-						.modal-footer
-
+												+paragraphsEscaped(x.substance)
+												.modal.fade.result(id = x.eventId+"modal")
+													.modal-dialog.modal-dialog
+														.modal-content
+															.modal-header
+																h4.modal-title Result
+															.modal-body
+															.modal-footer
+										if x.size == "whole"
+											.row(id = x.eventId class = x.class).m-y-3.wholeMC
+												+MC(x)
+												.readingExQ.text-xs-center.col-lg-6
+												.readingExQ2.text-xs-center.col-lg-6
+												.readingExAns.col-lg-12
 
 
 block extrafooter
@@ -182,7 +197,11 @@ block extrafooter
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="/javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")
-	script(src="/javascripts/mods/interact.min.js")
 	script(src="/javascripts/autohidenav.js")
 	script(src="/javascripts/mods/help.js")
-	script(src="/javascripts/chapters/"+fileName+".js")
+	if fileName == "sl1"
+		script(src="/javascripts/"+fileName+".js")
+		script(src="/javascripts/dragAndMatch.js")
+		script(src="/javascripts/binaryQuiz.js")
+	else
+		script(src="/javascripts/chapters/"+fileName+".js")

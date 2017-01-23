@@ -46,14 +46,14 @@
             ]
           },
           "c":{
-            "type": "p",
+            "type": "ps",
             "substance":[
               "This example showcases a core idea in logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
               "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
 
               "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. (It also does not assert that they are false.)This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. This sounds pretty imprecise at the moment, but we will sharpen our understanding of validity as we go on.",
 
-              "Evaluating arguments based on their validity is called $deductive* reasoning, in contradistinction to $inductive$ reasoning, where the value of an inference is based on its probability. In this class we concern ourselves exclusively with deductive reasoning. "
+              "Evaluating arguments based on their validity is called <i>deductive reasoning</i>, in contradistinction to <i>inductive reasoning</i>, where the value of an inference is based on its probability. In this class we concern ourselves exclusively with deductive reasoning. The techniques you would learn in a probability or statistics class are examples of inductive reasoning."
             ]
 
           },
@@ -215,11 +215,9 @@
           "type":"p",
           "substance":["Consider the two arguments below:"]
         },
-        {
-          "type":"half",
-          "substance":[
+
             {
-              "type":"argument",
+              "type":"arg",
               "premises":[
                 "1: Socrates is a person.",
                 "2. All persons are mortal."
@@ -227,18 +225,14 @@
               "conclusion":"C: Socrates is mortal."
             },
             {
-              "type":"argument",
+              "type":"arg",
               "premises":[
                 "1: Socrates is a person.",
                 "2. All persons are carrots."
               ],
               "conclusion":"C: Socrates is carrot."
-            }
-          ]
-        },
-        {
-          "type":"half",
-          "substance":[
+            },
+
             {
               "type":"p",
               "substance":[
@@ -247,15 +241,12 @@
               ]
             },
             {
-              "type":"argument",
+              "type":"arg",
               "premises":[
                 "1: S is M","2.All M are P."
               ],
               "conclusion": "C: S is P"
-            }
-
-          ]
-        },
+            },
         {
           "type":"p",
           "substance":[
@@ -385,28 +376,109 @@
       ]
     },
     "4":{
-      "title":"Truth Tables",
+      "title":"Truth tables and the precise 'meaning' of logical connectives",
       "content":[
         {
           "type":"ps",
           "substance":[
-            "A formal language is built from two kinds of elements: logical symbols and nonlogical symbols. logical symbols have their meaning fixed by the formal language. In SL, the logical symbols are the sentential connectives and the parentheses. When writing a symbolization key, you are not allowed to change the meaning of the logical symbols. You cannot say, for instance, that the $\\neg$ symbol will mean 'not' in one argument and 'perhaps' in another. The $\\neg$ symbol always means logical negation. It is used to translate the English language word 'not', but it is a symbol of a formal language and is defined by its truth conditions.",
+            "So far we rely on our intuitive understanding of 'and,' 'or,' and 'not' to give meanings to their corresponding logical symbols. To make this more precise, we make use a formal tool called a 'truth table,' which is a very effective to show the <i>semantics</i> of the connectives,i.e., how complex sentences are to be interpreted, in terms of whether or not it is true. This is the tables for negation:"
 
-            "The nonlogical symbol are defined simply as all the symbols that aren't logical. The nonlogical symbols in SL are the sentence letters. When we translate an argument from English to SL, for example, the sentence letter $M$ does not have its meaning fixed in advance; instead, we provide a symbolization key that says how $M$ should be interpreted in that argument. When translating from English to a formal language, we provided symbolization keys which were interpretations of all the nonlogical symbols we used in the translation.",
-
-            "In logic, when we study artificial languages, we investigate their semantics by providing an interpretation of the nonlogical symbols. An interpretation is a way of setting up a correspondence between elements of the object language and elements of some other language or logical structure. The symbolization keys we defined earlier are a sort of interpretation. ",
-
-            "Any nonatomic sentence of SL is composed of atomic sentences with sentential connectives. The truth value of the compound sentence depends only on the truth value of the atomic sentences that it comprises. In order to know the truth value of $(D \\wedge E)$, for instance, you only need to know the truth value of $D$ and the truth value of $E$. Connectives that work in this way are called truth functional. More technically, we define a truth-functional connective as an operator that builds larger sentences out of smaller ones, and fixes the truth value of the resulting sentence based only on the truth value of the component sentences. ",
-
-            "Because all of the logical symbols in SL are truth functional, the only aspect of meaning we need to worry about in studying the semantics of SL is truth and falsity. If we want to know about the truth of the sentence $A \\wedge B$, the only thing we need to know is whether $A$ and $B$ are true. It doesn't actually matter what else they mean. So if $A$ is false, then $A \\wedge B$ is false no matter what false sentence $A$ is used to represent. It could be 'I am the Pope' or 'Pi is equal to 3.19.' The larger sentence $A \\wedge B$ is still false.",
-
-            "So to give an interpretation of sentences in SL, all we need to do is create a truth assignment. A truth assignment is a function that maps the sentence letters in SL onto our two truth values. In other words, we just need to assign Ts and Fs to all our sentence letters. The assumption that sentences are exclusively either true or false is called <i>the principle of bivalence</i>, which says just that each sentence is either true or false, but not both. This is a pretty big assumption and has been subject to many philosophical critiques. If you think about the things that make sense in English, there are declarative sentences that cannot easily be assigned a truth value. Can you think of any?"
           ]
         },
         {"type":"table",
-        "eventId":"sl-2-truthtable"}
-      ]
-    }
+        "eventId":"negation"},
+        {"type":"ps",
+        "substance":["Each column represents the possible values that the sentence can hold. $T$ and $F$ are called <i>truth values</i>. This table captures this idea: for any sentence $A$: If $A$ is true, then $\\neg A$ is false. If$\\neg A$ is true, then $A$ is false. So on the row that $A$ gets T, it means that $A$ is true. This is why for any row where $A$ has a $T$, $\\neg A$ has a $F$. Note that A here is just a placeholder - it stands for any grammatically correct SL sentence. It's a <i>metavariable</i> that can represent any sentence in the formal language. (Technically we are supposed to use special symbol like $\\alpha$ for metavariable, but we will not concern ourselves with that here.)" ,
+          "Truth table is supposed to represent <i>all</i> possible combinations of truth values, so the number of rows needed for a table is dependent on how many letters we are dealing with. Thus, $A\\wedge B$, since it has two letters, will have $2^2 = 4$ rows. "
+          ]},
+          {"type":"table",
+          "eventId":"conjunction"},
 
+          {"type":"ps",
+          "substance":["For any sentences $A$ and $B$, $A \\wedge B$ is true if and only if both $A$ and $B$ are true. Conjunction is symmetrical because we can swap the conjuncts without changing the truth value of the sentence. That is, $A\\wedge B$ and $B \\wedge A$ have the same values." ,
+            "Lastly, this is the table for disjunction"
+            ]},
+            {"type":"table",
+            "eventId":"disjunction"},
+
+            {"type":"ps",
+            "substance":["Since we interpret $\\vee$ as being inclusive, the only situation where $A \\vee B$ is false is when they are <i>both</i> false. "
+              ]}
+      ]
+    },
+    "5":{
+        "title":"Truth Functions",
+        "content":[
+          {"type":"p",
+            "substance":["Any nonatomic sentence of SL is composed of atomic sentences with sentential connectives. The truth value of the complex sentence depends only on the truth value of the atomic sentences that it comprises. In order to know the truth value of $(D\\vee E)$, for instance, you only need to know the truth value of $D$ and the truth value of $E$. Connectives that work in this way are called truth functional. A truth function is a rule that tell us how to determine the truth of a sentence by looking at its combination of true sentences and connectives. We define a truth-functional connective as an operator that builds larger sentences out of smaller ones, and fixes the truth value of the resulting sentence based only on the truth value of the component sentences.",
+          "Because all of the logical symbols in SL are truth functional, the only aspect of meaning we need to worry about in studying the semantics of SL is truth and falsity. If we want to know about the truth of the sentence $A \\wedge B$, the only thing we need to know is whether $A$ and $B$ are true. It doesn't actually matter what else they mean. So if $A$ is false, then $A \\wedge B$ is false no matter what false sentence $A$ is used to represent. It could be I am the Pope' or 'Pi is equal to 3.19.' The larger sentence $A \\wedge B$ is still false. So to give an interpretation of sentences in SL, all we need to do is create a truth assignment, which is a function that maps the sentence letters in SL onto our two truth values. In other words, we just need to assign Ts and Fs to all our sentence letters."]}
+        ]
+    },
+    "6":{
+        "title":"Interpreting Complex Sentences",
+        "content":[
+          {"type":"p",
+            "substance":["The truth value of sentences that contain only one connective is given by the truth table definition for that connective. The truth table definition for conjunction, for example, gives the truth conditions for any sentence of the form $(A\\wedge B)$. Even if the conjuncts A and B are long, complicated sentences, the conjunction is true if and only if both A and B are true. Consider the sentence $(H\\wedge I)\\vee \\neg H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth values for the sentence letters and write them underneath the letters in the sentence."
+              ]
+            },
+            {"type":"table",
+            "eventId":"sl-2-6a"},
+
+            {"type":"p",
+              "substance":["Now consider the subsentence $H\\wedge I$. This is a conjunction $A\\wedge B$ with $H$ as A and with $I$ as B. $H$ and $I$ are both true on the first row. Since a conjunction is true when both conjuncts are true, we write a T underneath the conjunction symbol. We continue for the other three rows and get this:"
+                ]
+              },
+              {"type":"table",
+              "eventId":"sl-2-6b"},
+              {"type":"p",
+                "substance":["We do the same for $\\neg H$. Based on the truth table definition, $\\neg H$ is true when $H$ is false, so:"
+                  ]
+                },
+                {"type":"table",
+                "eventId":"sl-2-6c"}
+                ,
+                {
+                  "type":"p",
+                  "substance":[
+                    "The entire sentence is a disjunction $(A \\vee B)$ with $(H \\wedge I)$ as A and with $\\neg H$ as B. On the second row, for example, $(H\\wedge I)$ is false and $\\neg H$ is false. Since for a disjunction to be true  at least one of the disjunct has to be true, we write a F in the second row underneath the disjunction symbol. We continue for the other three rows and get this:"
+                  ]
+                },
+                {"type":"table",
+                "eventId":"sl-2-6d"},
+                {
+                  "type":"p",
+                  "substance":[
+                    "Of course, this is rather messy. Most of the columns underneath the sentence are only there for bookkeeping purposes. Normally we do not write out every single truth value like that. As a matter of fact, when we deal with longer sentences it becomes practically unfeasible to write them all out. Normally, we only write out the truth values for the main connective like this:"
+                  ]
+                },
+                {"type":"table",
+                "eventId":"sl-2-6e"},
+                {
+                  "type":"p",
+                  "substance":[
+                    "When you become more adept with truth tables, you will probably no longer need to copy over the columns for each of the sentence letters.",
+                    "A sentence that contains only one sentence letter requires only two rows, as in the truth table definition for negation. This is true even if the same letter is repeated many times, as in this sentence: $$[(C\\wedge C) \\vee C] \\wedge \\neg(C \\vee C)$$ The complete truth table requires only two lines because there are only two possibilities: $C$ can be true, or it can be false. A single sentence letter can never be marked both T and F on the same row.",
+                    "A sentence that contains three sentence letters requires eight lines. For example"
+                  ]
+                },
+                {"type":"table",
+                "eventId":"sl-2-6f"},
+                {"type":"important",
+                "substance":["In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate Ts and Fs. In the next column to the left, write two Ts, write two Fs, and repeat. For the third sentence letter, write four Ts followed by four Fs. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight Ts followed by eight Fs. For a 32 line table, the next column would have 16 Ts followed by 16 Fs. And so on."]}
+
+        ]
+    },
+    "7":{
+        "title":"Chapter Definition Review",
+        "content":[
+          {"type":"p",
+            "substance":["The truth value of sentences that contain only one connective is given by the truth table definition for that connective. The truth table definition for conjunction, for example, gives the truth conditions for any sentence of the form $(A\\wedge B)$. Even if the conjuncts A and B are long, complicated sentences, the conjunction is true if and only if both A and B are true. Consider the sentence $(H\\wedge I)\\vee \\neg H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth values for the sentence letters and write them underneath the letters in the sentence."
+              ]
+            },
+            {"type":"defReview",
+            "eventId":"sl-2-def"}
+
+        ]
+    }
   }
 }
