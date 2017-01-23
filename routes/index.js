@@ -165,6 +165,7 @@ router.post('/profile/*', function(req,res,next){
 	var id = require("../public/json/idTree.json")
 	var pa = require("../public/json/paTree.json")
 	var uid = req.path.split('/')[2]
+	console.log(sl)
 	var tree = {
 		"name":"Logic",
 		"type":"root",
