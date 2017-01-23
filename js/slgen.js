@@ -6,7 +6,7 @@ var allLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
 var or = "\\vee"
 var and = "\\wedge"
 var neg = "\\neg"
-var level ={
+var allConnectives ={
   "1": [or,and,neg]
 }
 
@@ -105,8 +105,34 @@ function makeLetters(n){
   return _.sample(allLetters,n)
 }
 
-function makeSentence(letters,level){
-  
+function makeSentence(letters,level,diff){
+  var numOfLettter = chance.integer({min: letters.length, max: letters.length+diff})
+  var all = letters;
+  if (numOfLettter != letters.length){
+    var temp = _.sample(letters,numOfLettter - letters.length)
+    Array.prototype.push.apply(all, temp)
+  }
+  all = _.shuffle(all)
+  // console.log(all)
+  var substr = []
+  if (all.length%2 != 0){
+    substr.push(new slSentence(all.shift(),chance.bool()))
+    // console.log(substr)
+  }
+  for (var i = 0;i<all.length;i++){
+    substr.push(new slSentence(all.shift(),chance.bool(), chance.pickone(allConnectives[level]),all.shift(), chance.bool()))
+  }
+
+  if (substr.length == 1) return substr
+  substr = _.shuffle(substr)
+  var output
+  while (substr.length!=0){
+    output = new slSentence(substr.shift(),chance.bool(),chance.pickone(allConnectives[level]),substr.shift(), chance.bool())
+  }
+
+  return output
 }
+
+console.log(makeSentence(makeLetters(),1,2))
 test = new slSentence(chance.character({casing: true}),false,"\\wedge",chance.character({alpha: true}), false)
-console.log(makeLetters())
+// console.log(makeLetters())

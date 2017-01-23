@@ -211,6 +211,7 @@ router.post('/profile/*', function(req,res,next){
 		// tree.children[0].completed = true;
 
 		tree.tasksList = treeSearch.searchTask(tree)
+		console.log(tree)
 		return res.send(tree)
 	})
 
