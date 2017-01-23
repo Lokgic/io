@@ -12,3 +12,12 @@ universal-negative,definition,Universal Negative,No X are Y.,,sl,1,def
 particular-affirmative,definition,Particular Affirmative,Some X are Y.,,sl,1,def
 particular-negative,definition,Particular Negative,Some X are not Y.,,sl,1,def
 foromallogic,definition,Formal Logic,A way of studying logic that achieves content neutrality by replacing parts of the arguments being studied with abstract symbols. Often this will involve the construction of full formal languages.,,sl,2,def
+atomicsentence,definition,Atomic Sentence,A sentence that does not have any sentences as proper parts.,,sl,2,def
+completetruthtable,definition,Complete Truth Table,A table that gives all the possible interpretations for a sentence or set of sentences in SL.,,sl,2,def
+conjunct,definition,Conjunct,A sentence joined to another by a conjunction.,,sl,2,def
+conjunction,definition,Conjunction,The symbol used to represent words and phrases that function like the English word *and*,,sl,2,def
+Disjunct,definition,Disjunct,A sentence joined to another by a disjunction.,,sl,2,def
+Disjunction,definition,Disjunction,The symbol  used to represent words and phrases that function like the English word *or* in its inclusive sense.,,sl,2,def
+metavar,definition,Metavariable,A variable in the metalanguage that can represent any sentence in the formal language.,,sl,2,def
+negation,definition,Negation,The symbol  used to represent words and phrases that function like the English word *not*,,sl,2,def
+truthass,definition,Truth assignment,A function that maps the sentence letters in SL onto truth values.,,sl,2,def

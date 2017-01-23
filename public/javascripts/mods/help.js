@@ -1,3 +1,95 @@
+//universal variables
+try{
+  var logged = ($('#mainnavbar').attr('data') == "notLogged") ? false : true;
+  var uid = $('#mainnavbar').attr('data')
+  var $modal =$('.modal')
+  var modal = d3.select('.modal')
+} catch(e){
+  console.log(e)
+}
+
+
+
+function alert(msg, color, location){
+  if (location == undefined) location = "bottom right"
+      notifyMsg = msg
+      notifyOption = {
+          style: color,
+          position: location
+      }
+
+    $.notify(notifyMsg,notifyOption)
+    }
+var getUid = function(){
+  return $('#mainnavbar').attr('data')
+}
+
+function recordCompletion(uid,mod,chapter,section){
+  var data = {
+      uid: uid,
+      module: mod,
+      chapter: chapter,
+      section: section
+  }
+  $.ajax({
+      url: '/data/record',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      }
+  });
+}
+
+function recordLeader(uid,logicise,score){
+  var data = {
+      uid: uid,
+      logicise: logicise,
+      score: score
+  }
+  $.ajax({
+      url: '/data/leader',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      }
+  });
+}
+
+function sendAttempts(dataSet){
+
+
+  // console.log(toSend)
+  $.ajax({
+      url: '/data/attempt',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(dataSet),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("success message " + res.message)
+      },
+      error: function(res) {
+          //On ajax success do this
+        console.log(res)
+          console.log("error message " + res.message)
+      }
+  });
+}
+
+
+
 //TABLES
 
 function tabulate(data, div) {
@@ -142,7 +234,7 @@ function evaluateSL(vals, sl) {
 
 
 
-//DRAG matching
+
 
 function loadProblems(option, callback) {
     jQuery.post("/problem/" + option)
@@ -153,11 +245,19 @@ function loadProblems(option, callback) {
         })
 };
 
+function cleanModal(){
+  var modal = d3.select('.modal')
+  modal.select('.modal-body').html("")
+}
 
+//DRAG matching
 function makeDefMatch(eventId) {
-    var modal = d3.select('.modal')
+    var modId = eventId.split('-')[0]
+    var chapter = eventId.split('-')[1]
+    var section =  eventId.split('-')[2]
     var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
     var corrected = []
+    var incorrected = []
     var scope = d3.select('#'+eventId)
     var qText = scope.select('.dragQ')
     loadProblems(url, function(error, data) {
@@ -182,10 +282,11 @@ function makeDefMatch(eventId) {
 
 
 
-    function makeResult() {
+    function makeResult(head) {
         // console.log(corrected)
         // console.log(incorrected)f
-        modal.select('.modal-body').html("")
+        cleanModal();
+        modal.select('.modal-header').text(head)
         var corrects = modal.select('.modal-body').append('div')
         corrects.append('h3').text('Correct Match(es)')
         corrects.selectAll('div').data(corrected).enter()
@@ -222,24 +323,28 @@ function makeDefMatch(eventId) {
                 }
                 data.push(datapoint)
             })
+            modal.select('.modal-body').append('button').text('Restart').on('click',function(){
+              location.reload();
+            })
+            sendAttempts(data)
 
-            $.ajax({
-                url: '/data/attempt',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                dataType: 'json',
-                success: function(res) {
-                    //On ajax success do this
-
-                    console.log("success message " + res)
-                }
-            });
+            // $.ajax({
+            //     url: '/data/attempt',
+            //     type: 'POST',
+            //     contentType: 'application/json',
+            //     data: JSON.stringify(data),
+            //     dataType: 'json',
+            //     success: function(res) {
+            //         //On ajax success do this
+            //
+            //         console.log("success message " + res)
+            //     }
+            // });
         }
 
 
 
-        reloadMathjax()
+        // reloadMathjax()
     }
 
 
@@ -333,30 +438,13 @@ function makeDefMatch(eventId) {
 
                     qText.text(currentProblem.question).attr('data', currentProblem.question)
                     msg = "This is correct! Continue dragging the matching box to complete this quiz."
-                    help.alert(msg, 'correctblue')
-                        // makeAlert($('#dragMatch'), "a", "This is correct! Continue dragging the matching box to complete this quiz.",2)
-                } else {
-                    $('.modal-header').append("<p class = 'lead'>You have completed this quiz!</p>")
-                    makeResult();
-                    $modal.modal('toggle')
-                    var data = {
-                        uid: uid,
-                        module: qInfo[0],
-                        chapter: qInfo[1],
-                        section: qInfo[2]
-                    }
-                    $.ajax({
-                        url: '/data/record',
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify(data),
-                        dataType: 'json',
-                        success: function(res) {
-                            //On ajax success do this
+                    alert(msg, 'correctblue')
 
-                            console.log("success message " + res)
-                        }
-                    });
+                } else {
+                    makeResult("You have completed this quiz!");
+                    $modal.modal('toggle')
+                    recordCompletion(uid,modId,chapter,section)
+
 
                 }
 
@@ -364,10 +452,9 @@ function makeDefMatch(eventId) {
 
             } else {
                 event.target.classList.remove('dropzone');
-                $('.modal-header').text("Opps, that wasn't correct. You have matched the following correctly. Press Restart to try again.")
                 currentProblem.input = userInput
                 incorrected.push(currentProblem);
-                makeResult();
+                makeResult("Opps, that wasn't correct. You have matched the following correctly. Press Restart to try again.");
                 $modal.modal('toggle')
             }
         },

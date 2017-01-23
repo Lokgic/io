@@ -464,7 +464,7 @@
                 {"type":"table",
                 "eventId":"sl-2-6f"},
                 {"type":"important",
-                "substance":["In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate Ts and Fs. In the next column to the left, write two Ts, write two Fs, and repeat. For the third sentence letter, write four Ts followed by four Fs. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight Ts followed by eight Fs. For a 32 line table, the next column would have 16 Ts followed by 16 Fs. And so on."]}
+                "substance":["We call a table that gives all the possible interpretations for a sentence or set of sentences in SL a complete truth table. In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate Ts and Fs. In the next column to the left, write two Ts, write two Fs, and repeat. For the third sentence letter, write four Ts followed by four Fs. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight Ts followed by eight Fs. For a 32 line table, the next column would have 16 Ts followed by 16 Fs. And so on."]}
 
         ]
     },
@@ -472,10 +472,11 @@
         "title":"Chapter Definition Review",
         "content":[
           {"type":"p",
-            "substance":["The truth value of sentences that contain only one connective is given by the truth table definition for that connective. The truth table definition for conjunction, for example, gives the truth conditions for any sentence of the form $(A\\wedge B)$. Even if the conjuncts A and B are long, complicated sentences, the conjunction is true if and only if both A and B are true. Consider the sentence $(H\\wedge I)\\vee \\neg H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth values for the sentence letters and write them underneath the letters in the sentence."
+            "substance":["Finish this chapter by completing the the defniition review quiz below."
               ]
             },
             {"type":"defReview",
+              "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
             "eventId":"sl-2-def"}
 
         ]

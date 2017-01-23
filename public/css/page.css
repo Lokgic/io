@@ -5,6 +5,9 @@ body {
 
 
 
+.foot{
+  height:300px;
+}
 
 .important{
   border: 1px black solid;
@@ -80,6 +83,9 @@ body {
   margin:auto;
 }
 
+#mainnavbar{
+  background-color: white;
+}
 /*Main Nav*/
 #mainnavbar a{
   color:#444C5C;

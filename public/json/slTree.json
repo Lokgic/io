@@ -24,7 +24,7 @@
                         "completed": false,
                         "id":"sl-1-2"
                     }, {
-                        "name": "Concepts review",
+                        "name": "Definition review",
                         "type": "section",
                         "completed": false,
                         "id":"sl-1-def"
@@ -32,7 +32,11 @@
                 }, {
                     "name": "The formal language of SL",
                     "type": "chapter",
-                    "children": []
+                    "children": [{
+                      "name":"Definition review",
+                      "type":"section",
+                      "id":"sl-2-def"
+                      }]
                 }, {
                     "name": "Core Concepts in Formal Logic",
                     "type": "chapter",
