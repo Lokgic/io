@@ -472,7 +472,7 @@
         "title":"Chapter Definition Review",
         "content":[
           {"type":"p",
-            "substance":["Finish this chapter by completing the the defniition review quiz below."
+            "substance":["Finish this chapter by completing the the definition review quiz below."
               ]
             },
             {"type":"defReview",
