@@ -10,7 +10,8 @@
         {
                 "name": "Reading",
                 "type":"subtask",
-                "children": [{
+                "children": [
+                  {
                     "name": "Introduction: Validity and Venn Diagrams",
                     "type":"chapter",
                     "children": [{
@@ -34,6 +35,7 @@
                     "type": "chapter",
                     "children": [{
                       "name":"Definition review",
+                      "completed": false,
                       "type":"section",
                       "id":"sl-2-def"
                       }]

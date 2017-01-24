@@ -16,11 +16,20 @@ module.exports.search = function treeSearch(element, key, property){
 module.exports.checkChildren = function checkChildren(element){
   // console.log(element)
      if (element.completed == true){
+
           return true;
+     }else if(element.type=="section"){
+          element.completed = false;
+
+          return false;
      }else if(element.children.length == 0|| element.children==null){
           element.completed = false;
+
+
+
           return false;
      }else if (element.children != null){
+
           var i;
           var result = null;
           for(i=0;  i < element.children.length; i++){

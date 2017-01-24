@@ -204,6 +204,7 @@ router.post('/profile/*', function(req,res,next){
 				// console.log(target)
 				}
 			}
+			// console.log(tree)
 			treeSearch.checkChildren(tree.children[0])
 			// console.log(tree.children[0])
 		}
