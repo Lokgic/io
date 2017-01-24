@@ -2,6 +2,7 @@ $(function(){
   var width = 400
   var height = width + 200
   var barPadding = 10;
+  var color = d3.scaleOrdinal(d3.schemeSet1);
   var logiciseID = d3.select('main').attr('id')
   function openNav() {
     document.getElementById("leaderboard").style.width = width+"px";
@@ -11,7 +12,38 @@ $(function(){
     document.getElementById("leaderboard").style.width = "0";
   }
 
+  function ping(callback){
+  		jQuery.post("/leaderboard/"+logiciseID, function (res){
+  			return callback(res);
+  		})
+  	}
 
+  function top(data){
+
+    var top3div = d3.select('.top3').selectAll('span')
+
+      var top3data = data.slice(0,3)
+
+      // console.log(top3data)
+      top3div.data(top3data).enter()
+            .append('span').style('color',function(d){
+              return color(d.score)
+            }).text(function(d){return d.nickname + "(" +d.score+")  "})
+
+  }
+
+  function topUpdate(data){
+    var top3div = d3.select('.top3').selectAll('span')
+    var top3data = data.slice(0,3)
+
+    top3div.data(top3data).style('color',function(d){
+      return color(d.score)
+    }).text(function(d){return d.nickname + ": " +d.score+" "})
+  }
+
+  ping(function(d){
+    top(d)
+  })
 
   d3.select('#leaderboardButt').on('click',function(){
     ping(function(data){
@@ -20,7 +52,13 @@ $(function(){
         return openNav();
 
       }
-      console.log(data)
+      topUpdate(data)
+      // console.log(data)
+      //top3
+
+
+
+      //bars
       var yPadding = 30
       var barHeight = Math.min((height / data.length)*.80,50)
 
@@ -80,14 +118,10 @@ $(function(){
 
       var board = d3.select('#board')
       var svg = board.append('svg').attr('width',width).attr('height',height)
-      var color = d3.scaleOrdinal(d3.schemeSet1);
 
 
-  function ping(callback){
-  		jQuery.post("/leaderboard/"+logiciseID, function (res){
-  			return callback(res);
-  		})
-  	}
+
+
 
 
   })

@@ -5,21 +5,21 @@ block extrahead
 
 block content
 	-console.log(ranking)
-	main.container.logicizeFS.p-x-1(id = logicise)
-		.logicizeTitle.m-b-2
-			h2.m-b-0 #{info.title}
-			nav.navbar-light.navbar.navbar-full.p-x-0#logicizeNav.subNav
+	main.container.logiciseFS.p-x-1(id = logicise)
+		.logiciseHeader.m-b-2
+			span.logiciseTitle.m-b-0 #{info.title}
+			nav.navbar-light.navbar.navbar-full.p-x-0#logiciseNav.subNav
 				ul.nav.navbar-nav
 					li.nav-item
-						span.navbar-text.text-muted.hidden-md-down #{info.shortDescription}
-					li.nav-item.pull-xs-right
+						span.top3 Current Top 3:	
+					li.nav-item.pull-xs-right.miniNavComponent
 						a.nav-link.p-y-0#leaderboardButt(href = "#") Leaderboard
-					li.nav-item.pull-xs-right
+					li.nav-item.pull-xs-right.miniNavComponent
 						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
-					li.nav-item.pull-xs-right
-						span.navbar-text Passing Score: &nbsp;
+					li.nav-item.pull-xs-right.miniNavComponent
+						span.navbar-text Passing : &nbsp;
 						span#passingscore
-					li.nav-item.pull-xs-right
+					li.nav-item.pull-xs-right.miniNavComponent
 						span.navbar-text Score : &nbsp;
 						span#score 0
 		.row.text-xs-center
@@ -43,7 +43,7 @@ block content
 
 
 block extrafooter
-	link(rel="stylesheet", type="text/css", href="../css/logicize.css")
+	link(rel="stylesheet", type="text/css", href="../css/logicise.css")
 	script(type="text/x-mathjax-config").
 		MathJax.Hub.Config({
 		tex2jax: {
