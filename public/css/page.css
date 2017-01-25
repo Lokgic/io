@@ -84,7 +84,9 @@ body {
 }
 
 #mainnavbar{
-  background-color: white;
+  background-color: none;
+
+
 }
 /*Main Nav*/
 #mainnavbar a{

@@ -3,5 +3,10 @@
     "title": "Venn Diagrams and Syllogistic Validity",
     "shortDescription":"Based on the given argument, complete the Venn diagram and determine its validity.",
     "eventId":"vennSyl"
+  },
+  "truthTable1":{
+    "title": "Truth Table Logicise 1",
+    "shortDescription":"Provide the correct values for the truth table.",
+    "eventId":"truthTable1"
   }
 }

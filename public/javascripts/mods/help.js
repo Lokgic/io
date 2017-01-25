@@ -92,7 +92,8 @@ function sendAttempts(dataSet){
 
 //TABLES
 
-function tabulate(data, div) {
+function tabulate(data, div, op) {
+  d3.select(div).select('table').remove()
     var columns = []
     data.forEach(function(i) {
         columns.push(i.name)
@@ -118,7 +119,14 @@ function tabulate(data, div) {
     for (var i = 0; i < data[0].column.length; i++) {
         var content = []
         for (var j = 0; j < columns.length; j++) {
+          if (op == "fill"){
+            if (data[j].atomic) content.push(data[j].column[i])
+            else content.push("")
+
+          }else{
             content.push(data[j].column[i])
+
+          }
         }
         rows.push(content)
     }
@@ -130,16 +138,23 @@ function tabulate(data, div) {
         .append("tr");
 
     // create a cell in each row for each column
-    var cells = rows.selectAll("td")
-        .data(function(cell) {
-            return cell
-        })
-        .enter()
-        .append("td") // sets the font style
-        .html(function(d) {
-            // console.log(d)
-            return d;
-        });
+
+      var cells = rows.selectAll("td")
+          .data(function(cell) {
+              return cell
+          })
+          .enter()
+          .append("td")
+          .html(function(d) {
+
+              return d;
+          })
+          .attr("class",function(d){
+            if (d == "") return "blank"
+          })
+
+
+
 
     return table;
 }
@@ -234,6 +249,25 @@ function evaluateSL(vals, sl) {
 
 
 
+var mathJax = {
+  load: function () {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+  },
+  reload: function(id){
+    id = id || "";
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,id]);
+  },
+  config: function(){
+    MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+    }}
+  );
+}
+}
 
 
 function loadProblems(option, callback) {

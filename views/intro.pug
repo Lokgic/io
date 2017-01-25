@@ -1,6 +1,6 @@
 extends pagelayout
 
-  
+
 block content
   .jumbotron.jumbotron-fluid
     .container#jimbo
@@ -8,17 +8,17 @@ block content
   for section in text
     if (section.textLoc == "left")
       .container-fluid(id = section.id)
-        .col-sm-5.m-x-0
+        .col-md-5.m-x-0
           for slide in section.slides
             .slide(id = slide.id)
               .slidebox
                 h4.slideTitle.text-xs-center #{slide.title}
                 p.slideText.text-justify(id = slide.id) #{slide.substance}
-        .col-sm-7.introAni.m-x-0
+        .col-md-7.introAni.m-x-0.hidden-sm-down
     else if (section.textLoc == "right")
       .container-fluid(id = section.id).row
-        .col-sm-7.m-x-0.introAni
-        .col-sm-5.m-x-0.push-md-7
+        .col-md-7.m-x-0.introAni.hidden-sm-down
+        .col-md-5.m-x-0.push-md-7
           for slide in section.slides
             .slide(id = slide.id)
               .slidebox

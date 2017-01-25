@@ -1,0 +1,61 @@
+extends pagelayout
+
+block extrahead
+	link(href="https://fonts.googleapis.com/css?family=Abril+Fatface|Titillium+Web:400" rel="stylesheet")
+
+block content
+	-console.log(ranking)
+	main.container.logiciseMain.p-a-0.m-a-0(id = logicise)
+		.logiciseHeader.m-b-2.text-xs-center
+			span.logiciseTitle.m-b-0 #{info.title}
+			nav.navbar-light.navbar.navbar-full.p-x-3#logiciseNav.subNav
+				ul.nav.navbar-nav
+					li.nav-item
+						span.top3 #{info.shortDescription}
+					li.nav-item.pull-xs-right.miniNavComponent
+						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
+					li.nav-item.pull-xs-right.miniNavComponent
+						span.navbar-text Difficulty : &nbsp;
+						span#difficulty
+					li.nav-item.pull-xs-right.miniNavComponent
+						span.navbar-text Passing : &nbsp;
+						span#passingscore
+					li.nav-item.pull-xs-right.miniNavComponent
+						span.navbar-text Score : &nbsp;
+						span#score 0
+		.row.text-xs-center.m-a-0
+			.col-md-3#leaderboard
+				h4.text-xs-center Leaderboard
+				#board
+			.col-md-6#display
+			.col-md-3#control
+				button(type = "button").btn.btn-greyish.m-y-1.btn-block#confirm Confirm
+	.modal.fade(tabindex="-1" role="dialog" aria-labelledby="messageLabel" aria-hidden="true")#messageModal
+		.modal-dialog.modal-lg(role="document")
+			.modal-content
+				.modal-header
+					button.close(type="button" data-dismiss="modal" aria-label="Close")
+						span(aria-hidden="true") &times;
+					h4.modal-title#messageLabel Message Title
+				.modal-body
+
+
+
+block extrafooter
+	link(rel="stylesheet", type="text/css", href="../css/logicise.css")
+	script(type="text/x-mathjax-config").
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		}}
+		);
+	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
+	script(src="../javascripts/mods/help.js")
+	script(src="../javascripts/mods/notify.js")
+	script(src="/javascripts/mods/underscore-min.js")
+	script(src="../javascripts/"+logiciseID+".js")
+	script(src="../javascripts/autohidenav.js")
+	script(src="../javascripts/logleader.js")
+	link(rel="stylesheet", type="text/css", href="/css/leaderboard.css")

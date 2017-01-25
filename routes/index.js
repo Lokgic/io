@@ -267,17 +267,23 @@ router.post('/processing/*', function(req,res,next){
 
 	var generatorID = req.path.split('/')[2]
 	var option = req.path.split('/')[3]
+	var va = req.path.split('/')[4]
 	// console.log(option)
 	var output;
 	var generator = require("../js/"+generatorID+"_gen.js")
+	console.log(generatorID)
 	if (option == undefined){
 		 output  = new generator.makeStuff()
-	} else{
+	} else if (va == undefined){
+
 		output  =  generator[option]()
+
 		// if (option == "cats") console.log(output)
+	} else{
+		output  =  generator[option](va)
 	}
 
-// console.log(output)
+console.log(output)
 
 
 	return res.send(output)
@@ -286,7 +292,7 @@ router.post('/processing/*', function(req,res,next){
 
 router.post('/leaderboard/*',function(req,res,next){
 	var logicise = req.path.split('/')[2]
-	data.getRanking(logicise,function(d){
+	data.getRanking("vennSyl",function(d){
 		// console.log(d)
 		res.send(d)
 	})
@@ -297,10 +303,11 @@ router.get('/logicise/*', function(req,res,next){
 
 
 
-		var logicise = req.path.split('/')[2]
+		var logiciseID = req.path.split('/')[2]
 		var info = require('../public/json/logicises.json');
-	return res.render('logicizeFS', { title:"Venn Diagram: Syllogism", logicise:logicise, info:info[logicise]});
-
+		console.log(logiciseID)
+		if (logiciseID == "vennSyl") return res.render('logicizeFS', { title:"Venn Diagram: Syllogism", logicise:logiciseID, info:info[logiciseID]});
+		else return res.render('logicise', { title:info[logiciseID].title, logiciseID:logiciseID, info:info[logiciseID]});
 
 
 

@@ -6,11 +6,13 @@ var allLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
 var or = "\\vee"
 var and = "\\wedge"
 var neg = "\\neg"
+var negProbability = {likelihood: 10}
 var allConnectives ={
-  "1": [or,and,neg]
+  "1": [or,and]
 }
 
 function makeTruthTable(letters, sentence) {
+  console.log(sentence)
     var nRows = Math.pow(2, letters.length)
     var output = []
     var k = nRows / 2
@@ -28,6 +30,7 @@ function makeTruthTable(letters, sentence) {
             }
         }
         col.column = temp
+        col.atomic = true
         output.push(col)
         k = k / 2
     }
@@ -45,7 +48,8 @@ function makeTruthTable(letters, sentence) {
     // console.log(slSentencetoString(sentence))
     output.push({
         "name": "$" + slSentencetoString(sentence) + "$",
-        "column": lastCol
+        "column": lastCol,
+        "atomic":false
     })
     return output;
 }
@@ -78,7 +82,7 @@ function slSentencetoString(sl) {
 // console.log()
 function evaluateSL(vals, sl) {
     //  console.log(typeof sl.left  != "string")
-    // console.log(vals)
+    console.log(sl)
     if (sl.atomic) {
         return (sl.leftnegated) ? !vals[sl.left] : vals[sl.left];
     }
@@ -100,14 +104,15 @@ function evaluateSL(vals, sl) {
 
 function makeLetters(n){
   if (n == null){
-    n = chance.integer({min: 1, max: 4})
+    n = chance.integer({min: 2, max: 4})
   }
-  return _.sample(allLetters,n)
+  // console.log(n)
+  return chance.pickset(allLetters,n)
 }
 
 function makeSentence(letters,level,diff){
-  var numOfLettter = chance.integer({min: letters.length, max: letters.length+diff})
-  var all = letters;
+  var numOfLettter = chance.integer({min: Math.max(letters.length,2), max: letters.length+diff})
+  var all = letters.slice();
   if (numOfLettter != letters.length){
     var temp = _.sample(letters,numOfLettter - letters.length)
     Array.prototype.push.apply(all, temp)
@@ -116,23 +121,53 @@ function makeSentence(letters,level,diff){
   // console.log(all)
   var substr = []
   if (all.length%2 != 0){
-    substr.push(new slSentence(all.shift(),chance.bool()))
+    substr.push(new slSentence(all.shift(),chance.bool(negProbability)))
     // console.log(substr)
   }
   for (var i = 0;i<all.length;i++){
-    substr.push(new slSentence(all.shift(),chance.bool(), chance.pickone(allConnectives[level]),all.shift(), chance.bool()))
+    substr.push(new slSentence(all.shift(),chance.bool(negProbability), chance.pickone(allConnectives[level]),all.shift(), chance.bool(negProbability)))
   }
 
-  if (substr.length == 1) return substr
+  if (substr.length == 1) return substr[0]
   substr = _.shuffle(substr)
-  var output
+  var output = new slSentence(substr.shift(),chance.bool(negProbability),chance.pickone(allConnectives[level]),substr.shift(), chance.bool(negProbability))
   while (substr.length!=0){
-    output = new slSentence(substr.shift(),chance.bool(),chance.pickone(allConnectives[level]),substr.shift(), chance.bool())
+    output = new slSentence(output,chance.bool(negProbability),chance.pickone(allConnectives[level]),substr.shift(), chance.bool(negProbability))
   }
 
   return output
 }
 
-console.log(makeSentence(makeLetters(),1,2))
-test = new slSentence(chance.character({casing: true}),false,"\\wedge",chance.character({alpha: true}), false)
-// console.log(makeLetters())
+module.exports.truthTable1 = function(v){
+  var nLet
+  var complexity
+    if (v == 1){
+       nLet = 2;
+      complexity = 1
+      connectives = 1
+    } else if (v == 2){
+       nLet = 3;
+      complexity = 1
+      connectives = 1
+      negProbability = {likelihood: 30}
+    }else if (v == 3){
+       nLet = null;
+      complexity = 2
+      connectives = 1
+      negProbability = {likelihood: 30}
+    }
+    var l = makeLetters(nLet)
+    var sen = makeSentence(l,connectives,complexity)
+    return makeTruthTable(l,sen)
+
+
+};
+
+
+
+// console.log(l)
+// test = makeSentence(l,1,2)
+//
+// console.log(test)
+// console.log(makeTruthTable(l,test))
+// // console.log(makeLetters())
