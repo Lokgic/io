@@ -271,7 +271,7 @@ router.post('/processing/*', function(req,res,next){
 	// console.log(option)
 	var output;
 	var generator = require("../js/"+generatorID+"_gen.js")
-	console.log(generatorID)
+	// console.log(generatorID)
 	if (option == undefined){
 		 output  = new generator.makeStuff()
 	} else if (va == undefined){
@@ -283,7 +283,7 @@ router.post('/processing/*', function(req,res,next){
 		output  =  generator[option](va)
 	}
 
-console.log(output)
+// console.log(output)
 
 
 	return res.send(output)
@@ -292,8 +292,8 @@ console.log(output)
 
 router.post('/leaderboard/*',function(req,res,next){
 	var logicise = req.path.split('/')[2]
-	data.getRanking("vennSyl",function(d){
-		// console.log(d)
+	data.getRanking(logicise,function(d){
+		console.log(d)
 		res.send(d)
 	})
 })

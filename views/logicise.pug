@@ -5,7 +5,7 @@ block extrahead
 
 block content
 	-console.log(ranking)
-	main.container.logiciseMain.p-a-0.m-a-0(id = logicise)
+	main.container.logiciseMain.p-a-0.m-a-0(id = logiciseID)
 		.logiciseHeader.m-b-2.text-xs-center
 			span.logiciseTitle.m-b-0 #{info.title}
 			nav.navbar-light.navbar.navbar-full.p-x-3#logiciseNav.subNav
@@ -14,6 +14,9 @@ block content
 						span.top3 #{info.shortDescription}
 					li.nav-item.pull-xs-right.miniNavComponent
 						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
+					li.nav-item.pull-xs-right.miniNavComponent
+						span.navbar-text Chance(s) : &nbsp;
+						span#chance
 					li.nav-item.pull-xs-right.miniNavComponent
 						span.navbar-text Difficulty : &nbsp;
 						span#difficulty

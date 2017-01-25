@@ -24,6 +24,7 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
             .style('fill-opacity',1)
       },
       "venn":function(currentP, location,answer,result){
+        console.log(currentP)
         if (location == undefined) location = mainContainer
         var vennDiv = " .readingExQ2"
         var textDiv = " .readingExQ"
@@ -91,7 +92,9 @@ var readingExMC = function readingExMC(problemSet,mainContainer,type) {
           .style('stroke-opacity',1)
           .style('stroke-width',3)
       var target = currentP.diagram+"D"
+      console.log(target)
       var targetMood = currentP[currentP.diagram+"mood"]
+      console.log(targetMood)
       if (targetMood == "E"){
 
         var toShade = 'g[data-venn-sets="'+ currentP[currentP.diagram+"D"]+ '"]'

@@ -88,7 +88,7 @@ module.exports.leader = function(lead, callback){
 
 module.exports.getRanking = function(name, callback){
 
-	knex.select('student.nickname','leader.score').from('leader').innerJoin('student','student.uid','leader.uid').orderBy('score','desc')
+	knex.select('student.nickname','leader.score').from('leader').innerJoin('student','student.uid','leader.uid').orderBy('score','desc').where("logicise",name)
       .catch(function(error) {
         console.log(error)
         return callback(error)

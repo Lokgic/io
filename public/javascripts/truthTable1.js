@@ -12,9 +12,19 @@ $(function(){
   score.text(currentScore)
   var difficulty = 1
   d3.select('#difficulty').text(difficulty)
+
+
   var u = 0
   var state = "input"
   var currentProblem;
+  var chance = 1;
+  d3.select('#chance').text(chance)
+
+  d3.select('#tutorial').on('click',function(){
+    var head = "Instruction"
+    var body = "<p>In this logicise, you will be asked to fill out various truth tables. You will be given the values of the atomic sentences and you will have to infer the truth values for the complex sentence.</p><p> You have one second chance, if you happened to get one wrong answer. After that, any incorrect response means that you would have to start over!</p><p>The exercise starts slow with easy complex sentences, but get progressively more difficult later on, as you get higher score. Toward the end, expect to see tables with 16 rows (i.e., 4 sentence letters).You need a score of" + toPass + " or above to pass this exercise.</p>"
+    modalMsg(head,body)
+  })
 
   function makeProblem(difficulty){
 
@@ -59,9 +69,18 @@ $(function(){
       // for (row in currentProblem.column){
       //   input.push(d3.select('#row'+row).attr('data'))
       // }
+      console.log(currentProblem)
+      var index
+      for (pro in currentProblem){
+        if (currentProblem[pro].atomic == false) {
+          index = pro
+          break;
+        }
+      }
       var correct = true
       d3.selectAll('.blank').each(function(d,i){
-        if(d3.select(this).attr('data') != currentProblem[2].column[i]){
+        // console.log(d3.select(this).attr('data') +" "+ currentProblem[2].column[i])
+        if(d3.select(this).attr('data') != currentProblem[index].column[i]){
           d3.select(this).style('background', 'red')
           correct = false;
         }else{
@@ -69,16 +88,45 @@ $(function(){
 
         }
       })
+
+      var att = {
+        uid:uid,
+        pid:difficulty,
+        type:"truthTable1",
+        input:currentProblem[index].name,
+        correct:correct
+      }
+      sendAttempts(att);
       if (correct) {
         currentScore += 1;
         score.text(currentScore);
+        alert("This is correct! Press 'confirm' again to continue.","correctblue")
+
       }
       else{
-        state = "restart"
+        if (currentScore < toPass && chance == 0){
+          modalMsg("Result","This is incorrect! Press 'confirm' again to restart. Unfortunately you did not pass.")
+          state = "restart"
+
+
+
+        }else if (chance > 0){
+          chance -= 1;
+          alert("This is incorrect! Incorret values are highlighted in red. You have " + chance + " left before having to start over.","incorred")
+          d3.select('#chance').text(chance);
+          state = "next"
+        }else if (currentScore >= toPass && chance == 0){
+          chance -= 1;
+          modalMsg("Result","This is incorrect! Incorret values are highlighted in red. You have passed the test!")
+          recordCompletion(uid,"sl","logicise","truthTable1")
+          recordLeader(uid,"truthTable1",currentScore)
+          state = "restart"
+        }
+
       }
     }else if (state == "next"){
       if (currentScore == 3) difficulty += 1;
-      else if (currentScore == 9) difficulty += 1;
+      else if (currentScore == 11) difficulty += 1;
       d3.select('#difficulty').text(difficulty)
       makeProblem(difficulty)
       state = "input"

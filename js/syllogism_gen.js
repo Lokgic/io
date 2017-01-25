@@ -47,7 +47,7 @@ function checkValidity(syl){
    placeholder = ['real','fake']
    var tf = chance.bool()
    this.diagram = chance.pickone(placeholder)
-   this.str = (tf)? ["The Venn diagram correctly represents the following statement: " , this[this.diagram +"str"]] : ["Which one of the statements is represented by the Venn diagram?"]
+   this.str = (tf)? ["The Venn diagram correctly represents the following statement: " , this["realstr"]] : ["Which one of the statements is represented by the Venn diagram?"]
    this.choices = (tf)? ["True", "False"]:[this.realstr, this.fakestr]
 
 

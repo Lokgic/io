@@ -63,10 +63,14 @@
                     "type": "chapter",
                     "id":"sl-logicise-vennSyl"
                 }, {
-                    "name": "Wason Selection Task",
-                    "type": "chapter"
+                    "name": "Truth Table 1",
+                    "type": "chapter",
+                    "id":"sl-logicise-truthTable1"
+                },{
+                    "name": "Truth Table 2",
+                    "type":"chapter"
                 }, {
-                    "name": "Puzzles",
+                    "name": "Wason Selection Task",
                     "type": "chapter"
                 }, {
                     "name": "Using Truth Trees",

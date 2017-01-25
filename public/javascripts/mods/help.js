@@ -8,6 +8,13 @@ try{
   console.log(e)
 }
 
+function modalMsg(head,body){
+  cleanModal();
+  modal.select('.modal-header').text(head);
+  modal.select('.modal-body').html(body)
+  $modal.modal('toggle')
+}
+
 
 
 function alert(msg, color, location){
