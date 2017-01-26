@@ -34,7 +34,7 @@ module.exports.getProfile = function(uid, callback){
           "id":[],
           "pa":[]
         }
-
+        console.log(tab)
         for (datapoint in tab){
           toSend[tab[datapoint].module].push(tab[datapoint])
         }
