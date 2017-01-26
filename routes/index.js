@@ -114,7 +114,7 @@ router.get('/logout', function(req, res, next){
 			}
 		})
 	}
-	console.log(req.session)
+	// console.log(req.session)
 });
 
 
@@ -213,7 +213,7 @@ router.post('/profile/*', function(req,res,next){
 		// tree.children[0].completed = true;
 
 		tree.tasksList = treeSearch.searchTask(tree)
-		// console.log(tree)
+		console.log(tree)
 		return res.send(tree)
 	})
 

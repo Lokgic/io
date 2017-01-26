@@ -32,7 +32,7 @@ mixin MC(x)
 			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.showAnswerButt.btn-blue.invisible Show Answer
 			li.nav-item.pull-xs-right
-				button.nav-link.p-y-0.nextButt.btn-blue Next
+				button.nav-link.p-y-0.nextButt.btn-blue(data = "intro") Next
 			li.nav-item.pull-xs-right
 				if (!currentUser)
 					span.red Note: not currently logged in!
@@ -136,22 +136,14 @@ block content
 												.readingExQ.text-xs-center.col-lg-6
 												.readingExQ2.text-xs-center.col-lg-6
 												.readingExAns.col-lg-12
-									when "readingEx"
-										if x.size == "half"
-											.p-a-0.m-r-0.m-l-0
-												.sideQuiz.readingEx.m-l-2.m-b-2(class = x.class id = x.eventId)
-													+MC(x)
-													.readingExQ.text-xs-center
-													.quizIntro
-														+paragraphs(x.intro)
-													.readingExAns
-												+paragraphsEscaped(x.substance)
-										if x.size == "whole"
-											.row(id = x.eventId class = x.class).m-y-3.wholeMC
+									when "mc"
+										.p-a-0.m-r-0.m-l-0
+											.readingEx.m-l-2.m-b-2(id = x.eventId)
 												+MC(x)
-												.readingExQ.text-xs-center.col-lg-6
-												.readingExQ2.text-xs-center.col-lg-6
-												.readingExAns.col-lg-12
+												.readingExQ.text-xs-center
+												.quizIntro
+													+paragraphs(x.intro)
+												.readingExAns
 									when "defReview"
 											.p-a-0.m-r-0.m-l-0
 												.m-l-2.m-b-2.readingEx.dragMatch(id = x.eventId)

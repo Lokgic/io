@@ -11,6 +11,12 @@ var allConnectives ={
   "1": [or,and]
 }
 
+var connectiveEnglish =
+{
+  "\\vee": "or",
+  "\\wedge": "and"
+}
+
 function makeTruthTable(letters, sentence) {
   console.log(sentence)
     var nRows = Math.pow(2, letters.length)
@@ -165,8 +171,107 @@ module.exports.truthTable1 = function(v){
 
 
 
+function makeRandomEnglish(){
+  switch (chance.integer({min: 0, max: 3})){
+    case 0: return chance.first() + " is from " + chance.country({ full: true });
+            break;
+    case 1: return   chance.first() + " lives in " + chance.city();
+            break;
+    case 2: return chance.first() +" loves " +chance.first()
+            break;
+    case 3: return chance.first() +" hates " +chance.first()
+            break;
+  }
+
+}
+
+ function symbolizationKey(letters){
+   console.log(letters)
+   var output = {
+
+   }
+
+   for (letter in letters){
+     output[letters[letter]] = makeRandomEnglish()
+   }
+   return output;
+ }
+
+ function slSentencetoEnglish(sl,key) {
+   var pun = false;
+   var not = "it is not the case that "
+     if (sl.atomic) {
+         return (sl.leftnegated) ? not + key[sl.left] : key[sl.left]
+     }
+     if (typeof sl.left != "string") {
+       var left = slSentencetoEnglish(sl.left,key);
+       pun = true}
+     else var left =key[sl.left]
+     if (typeof sl.right != "string") var right = slSentencetoEnglish(sl.right,key)
+     else var right = key[sl.right]
+     if (sl.leftnegated) left = not + left;
+     if (sl.rightnegated) right = not + right;
+     if (pun) var ou = left +", "+ connectiveEnglish[sl.connective] + " " + right
+    else var ou = left +" "+ connectiveEnglish[sl.connective] + " " + right
+     return ou;
+
+ }
+
+module.exports.slEnglish = function(){
+  var out = []
+  for (var i = 0;i<10;i++){
+    out.push(complexEnglish())
+  }
+
+  return out;
+}
+
+
+function complexEnglish(){
+   var seedReal = chance.integer({min: 2, max: 3})
+   var seedFake = (chance.bool())? seedReal -1 : seedReal +1;
+   var letters = makeLetters()
+   var keys = symbolizationKey(letters)
+   var target = makeSentence(letters,1,seedReal)
+   var alt = makeSentence(letters,1,seedFake)
+   var realEnglish = slSentencetoEnglish(target,keys)
+   var fakeEnglish = slSentencetoEnglish(alt,keys)
+   realEnglish =fix(realEnglish);
+   fakeEnglish = fix(fakeEnglish);
+
+   function fix(str){
+
+    var newStr = str[0].toUpperCase()+str.slice(1) +".";
+    // console.log(newStr)
+    return newStr;
+    }
+
+    slAlt = slSentencetoString(alt)
+    slReal = slSentencetoString(target)
+    choices = _.shuffle([slAlt,slReal])
+    var q = []
+    for (k in keys){
+      q.push(k+": "+keys[k])
+    }
+    q.push(realEnglish)
+   return {
+     question:q,
+     choices:choices,
+     answer:slReal
+   }
+
+
+ }
+
+
 // console.log(l)
-// test = makeSentence(l,1,2)
+
+
+
+// console.log(test)
+// console.log(slSentencetoString(test))
+  // console.log(complexEnglish())
+// console.log(slSentencetoString(test))
 //
 // console.log(test)
 // console.log(makeTruthTable(l,test))

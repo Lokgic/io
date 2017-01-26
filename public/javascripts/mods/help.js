@@ -302,6 +302,7 @@ function makeDefMatch(eventId) {
     var scope = d3.select('#'+eventId)
     var qText = scope.select('.dragQ')
     loadProblems(url, function(error, data) {
+      console.log(url)
         if (error) console.log(error)
         else {
             problemSet = data
@@ -505,4 +506,54 @@ function makeDefMatch(eventId) {
             event.target.classList.remove('drop-target');
         }
     });
+}
+
+
+
+
+//MC
+
+function makeMC(mcProblems,eventID){
+  var quizDiv = d3.select("#"+eventID)
+  quizDiv.select('.QuizIntro').remove()
+  quizDiv.select('.readingExQ').selectAll('div')
+          .data(mcProblems).enter(function(d){return d})
+          .append('div')
+          .attr('id',function(d,i){
+            return i+"-"+eventID
+          })
+          .attr('class',function(d,i){
+            return 'offScreen '+eventID+"offScreen"
+          })
+            .html(function(d){
+            var str = ""
+            for (q in d.question){
+              str+=d.question[q]+"<br>"
+            }
+
+            return str
+          })
+
+
+}
+
+function makeMCChoices(choices,eventID){
+  // console.log(choices)
+
+  var userInput = d3.select('#'+eventID).select('.readingExAns')
+  userInput.selectAll('button').remove()
+
+
+    userInput.selectAll('button').data(choices).enter()
+    .append('button')
+    .attr('class','btn btn-block btn-greyish '+eventID+"butt")
+    .text(function(d){
+      return d.text
+    })
+    .attr('data',function(d){
+
+      return d.data;
+    })
+
+  return d3.selectAll('.'+eventID+"butt")
 }

@@ -17,17 +17,14 @@
                     "children": [{
                         "name": "Evaluate Validity Intuitively",
                         "type": "section",
-                        "completed": false,
                         "id":"sl-1-1"
                     }, {
                         "name": "Basic Venn Diagram",
                         "type": "section",
-                        "completed": false,
                         "id":"sl-1-2"
                     }, {
                         "name": "Definition review",
                         "type": "section",
-                        "completed": false,
                         "id":"sl-1-def"
                     }]
                 }, {
@@ -35,7 +32,6 @@
                     "type": "chapter",
                     "children": [{
                       "name":"Definition review",
-                      "completed": false,
                       "type":"section",
                       "id":"sl-2-def"
                       }]

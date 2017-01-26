@@ -372,6 +372,24 @@
 
             "In response, logicians have chosen to have $\\vee$ to denote disjunction in the inclusive sense: $(A \\vee B)$ means that at least one of the disjuncts, A or B, must be true. They can be both true, but they can't be both false. There is nothing sacred about this - it's simple a choice we have to make in our language. This is not to say that the inclusive sense of disjunction is <i>the</i> meaning of disjunction. In fact, we can symbolize an exclusive or in SL. We just need more than one connective to do it. We can break the sentence into two parts. The first part says that you get one or the other. We translate this as $(A \\vee B)$. The second part says that you do not get both. We can paraphrase this as 'It is not the case that A and B.' How would we symbolize this?"
           ]
+        },
+
+        {
+          "type":"mc",
+          "title": "Reading Exercise: English/SL Translation",
+          "eventId":"sl-2-4",
+          "intro":["For this reading exercise, you will be given either a sentence in SL or in English, and you are asked to pick out the corresponding translation from the options. Do 10 of these to complete the exercise. Click 'next' to begin."],
+          "size":"half",
+          "instruction": "Pick the correct translation.",
+          "substance":[
+
+
+            "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
+            "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
+            "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
+
+            "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
+          ]
         }
       ]
     },
