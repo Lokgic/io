@@ -207,6 +207,11 @@ $(function() {
                 .style("left", (d3.event.pageX)+20 + "px")
                 .style("top", (d3.event.pageY) +20 + "px")
                 .style('background',color[d.data.type])
+                .style("color", function() {
+                  console.log(d.data.type)
+                  if (d.data.type == "section"||d.data.type == "chapter") return '#000'
+                    else return "#fff"
+                })
             })
         .on("mouseout", function(d) {
             div.transition()
