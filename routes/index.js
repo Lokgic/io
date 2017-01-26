@@ -159,12 +159,28 @@ router.get('/logistics', function(req, res, next){
 //100
 //get profile
 router.post('/profile/*', function(req,res,next){
+	function purge(children){
+		// console.log(children)
+		for (o in children){
+			if (children[o].completed) children[o].completed = false;
+			if (children[o].children != null) purge(children[o].children)
+		}
+	}
+
+
+
 	var sl = require("../public/json/slTree.json")
+	purge(sl.children)
 	var pl = require("../public/json/plTree.json")
+	purge(pl.children)
 	var nd = require("../public/json/ndTree.json")
+	purge(nd.children)
 	var id = require("../public/json/idTree.json")
+	purge(id.children)
 	var pa = require("../public/json/paTree.json")
+	purge(pa.children)
 	var uid = req.path.split('/')[2]
+	console.log(sl.children[0].children[0].children[0])
 	// console.log(uid)
 	var tree = {
 		"name":"Logic",
@@ -178,10 +194,13 @@ router.post('/profile/*', function(req,res,next){
 		]
 
 	}
+
 	// console.log(tree)
 	// console.log(mod + ch + section)
-	data.getProfile(uid,function(re){
-
+	data.getProfile(uid,function(response){
+		var re = response
+		// console.log("re = ")
+		// console.log(re)
 		var treeSearch = require('../js/treeSearch.js')
 		// var _ = require('underscore.js')
 		var index = {
@@ -200,7 +219,11 @@ router.post('/profile/*', function(req,res,next){
 				if (target != null) {
 					target.completed = true;
 					target.time = re[module][record].createdAt;
+				}else{
+					target.time = null;
+						target.completed = false;
 				}
+
 				// console.log(target)
 				}
 			}
@@ -213,7 +236,8 @@ router.post('/profile/*', function(req,res,next){
 		// tree.children[0].completed = true;
 
 		tree.tasksList = treeSearch.searchTask(tree)
-		console.log(tree)
+		// console.log(tree.taskList)
+		// console.log(tree.children[0].children[0].children[0].children[0])
 		return res.send(tree)
 	})
 

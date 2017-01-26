@@ -24,7 +24,10 @@ module.exports.getProfile = function(uid, callback){
         return callback(error)
       })
       .then(function(tab){
+        console.log(uid + "is uid")
+        console.log(tab)
         if (tab.length== 0) {
+          console.log("returning null")
           return callback(null);
         }
         var toSend = {
@@ -34,11 +37,11 @@ module.exports.getProfile = function(uid, callback){
           "id":[],
           "pa":[]
         }
-        console.log(tab)
+
         for (datapoint in tab){
           toSend[tab[datapoint].module].push(tab[datapoint])
         }
-
+        console.log("tosend " + toSend)
         return callback(toSend)
         })
 
