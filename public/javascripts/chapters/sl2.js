@@ -126,10 +126,25 @@ $(function(){
            }
          ]
 
-       sl_2_6c = sl_2_6b
-       sl_2_6c[6].column = ["F","F","T","T"]
-       sl_2_6d = sl_2_6c
-       sl_2_6c[5].column = ["T","F","T","T"]
+        var sl_2_6c = []
+       for (col in sl_2_6b){
+         (col != 6)? sl_2_6c.push(sl_2_6b[col]): sl_2_6c.push({
+           "name":"$\\neg$",
+           "column":["F","F","T","T"]});
+       }
+
+
+       var sl_2_6d = []
+       for (col in sl_2_6c){
+         (col != 5)? sl_2_6d.push(sl_2_6c[col]): sl_2_6d.push({
+           "name":"$\\vee$",
+           "column":["T","F","T","T"]
+         } )
+       }
+      //  sl_2_6c = sl_2_6b
+      // //  sl_2_6c[6].column = ["F","F","T","T"]
+      //  sl_2_6d = sl_2_6c
+      //  sl_2_6c[5].column = ["T","F","T","T"]
 
 
 
@@ -154,85 +169,7 @@ $(function(){
 
   makeDefMatch("sl-2-def")
 
-  function complexEngQuiz(eventID){
-    var toComplete
-    var data
-    var next = d3.select('.nextbutt')
-    next.on('click',function(d){
-      var state = d3.select(this).attr('data')
-      if (state == "intro"){
 
-        jQuery.post("/processing/truthTable/slEnglish")
-        .done(function(dd){
-          toComplete = dd.length
-          d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
-          data = dd
-            makeMC(data,eventID)
-            next.attr('data','answer')
-            d3.select('.'+eventID+'offScreen').classed('offScreen',false).classed('currentMC',true)
-            var current = data.shift()
-            // current = current[0]
-            var buttData = []
-            current.choices.forEach(function(k){
-              var obj = {
-                text:"$"+k+"$",
-                data:k
-              }
-              buttData.push(obj)
-            })
-            var buttons = makeMCChoices(buttData,eventID)
-            // console.log(buttons)
-            buttons.on('click',function(d){
-              if (d.data == current.answer){
-                alert("Correct! Press 'Next' to contniue","correctblue")
-              }else{
-                alert("Incorrect! Press 'Next' to contniue","incorred")
-              }
-              toComplete -=1;
-              (toComplete != 0)? next.attr('data','next') :next.attr('data','over');
-              d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
-              buttons.classed('invisible',true)
-            })
-            mathJax.reload(eventID)
-        }).fail()
-      }else if (state == "next"){
-        d3.select('.currentMC').remove()
-        // console.log(data)
-        makeMC(data,eventID)
-        next.attr('data','answer')
-        d3.select('.'+eventID+'offScreen').classed('offScreen',false).classed('currentMC',true)
-        var current = data.shift()
-        // current = current[0]
-        var buttData = []
-        current.choices.forEach(function(k){
-          var obj = {
-            text:"$"+k+"$",
-            data:k
-          }
-          buttData.push(obj)
-        })
-        // console.log(buttData)
-        var buttons = makeMCChoices(buttData,eventID)
-
-
-        buttons.classed('invisible',false).on('click',function(d){
-          if (d.data == current.answer){
-            alert("Correct! Press 'Next' to contniue","correctblue")
-          }else{
-            alert("Incorrect! Press 'Next' to contniue","incorred")
-          }
-          toComplete -=1;
-          (toComplete != 0)? next.attr('data','next') :next.attr('data','over');
-          d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
-          buttons.classed('invisible',true)
-        })
-        mathJax.reload(eventID)
-      }
-
-
-    })
-  }
-
- complexEngQuiz('sl-2-4')
+ mcQuiz('sl-2-4','/processing/truthTable/slEnglish')
 
 })

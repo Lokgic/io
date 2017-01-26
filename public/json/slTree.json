@@ -30,7 +30,13 @@
                 }, {
                     "name": "The formal language of SL",
                     "type": "chapter",
-                    "children": [{
+                    "children": [
+                      {
+                        "name":"Complex English/SL Translation",
+                        "type":"section",
+                        "id":"sl-2-4"
+                        },
+                        {
                       "name":"Definition review",
                       "type":"section",
                       "id":"sl-2-def"

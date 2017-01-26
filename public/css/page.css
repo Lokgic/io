@@ -289,7 +289,7 @@ body {
 
   margin-top: 40px;
   /*padding: 20px 20px;*/
-  font-size: 1em
+  font-size: 1.5em
   /*height:250px;*/
 
 }
@@ -360,8 +360,8 @@ border-bottom:  2px solid grey;
 }
 
 .btn-greyish,.btn-outline-greyish:hover {
-  background-color: #9FB3B6;
-  color:white;
+  background-color: #e3e3e3;
+  color:black;
   border-color:#9FB3B6
 }
 

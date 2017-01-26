@@ -228,6 +228,7 @@ module.exports.slEnglish = function(){
 
 
 function complexEnglish(){
+  negProbability = {likelihood: 10}
    var seedReal = chance.integer({min: 2, max: 3})
    var seedFake = (chance.bool())? seedReal -1 : seedReal +1;
    var letters = makeLetters()
@@ -246,8 +247,8 @@ function complexEnglish(){
     return newStr;
     }
 
-    slAlt = slSentencetoString(alt)
-    slReal = slSentencetoString(target)
+    slAlt = "$"+slSentencetoString(alt) +"$"
+    slReal = "$"+slSentencetoString(target)+"$"
     choices = _.shuffle([slAlt,slReal])
     var q = []
     for (k in keys){
