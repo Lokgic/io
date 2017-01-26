@@ -33,7 +33,7 @@ $(function() {
       //   }
       // }
       drawTree(data)
-      // console.log(data)
+      console.log(data)
     })
 
     var main = '#profileTree'
