@@ -20,6 +20,8 @@ body {
   margin-bottom: 0;
 }
 
+
+
 .tableContainer table{
   margin: auto;
   font-size: 1.5em;
@@ -436,6 +438,11 @@ border-bottom:  2px solid grey;
 .symbolkey{
     margin-left: 20%;
   max-width: 50%
+}
+
+.orderedList{
+  margin-left: 20%;
+max-width: 50%
 }
 
 

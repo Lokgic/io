@@ -35,10 +35,11 @@ $(function(){
       var table = tabulate(currentProblem,'.tableContainer',"fill")
       var input = table.selectAll('.blank')
       input.on('mouseover',function(d){
-        if (state == "input") d3.select(this).style('background','#eee')
+        if (state == "input")$(this).parent().css('background','#eee')
+
       })
       .on('mouseout',function(d){
-        if (state == "input") d3.select(this).style('background','#fff')
+        if (state == "input") $(this).parent().css('background','#fff')
       })
       .on('click',function(d){
         if (state == "input"){
@@ -81,10 +82,10 @@ $(function(){
       d3.selectAll('.blank').each(function(d,i){
         // console.log(d3.select(this).attr('data') +" "+ currentProblem[2].column[i])
         if(d3.select(this).attr('data') != currentProblem[index].column[i]){
-          d3.select(this).style('background', 'red')
+          d3.select(this).style('background', '#BF718A')
           correct = false;
         }else{
-          d3.select(this).style('background', 'blue')
+          d3.select(this).style('background', '#6677C4')
 
         }
       })

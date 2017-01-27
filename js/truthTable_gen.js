@@ -17,7 +17,7 @@ var connectiveEnglish =
   "\\wedge": "and"
 }
 
-function makeTruthTable(letters, sentence) {
+function makeTruthTablebu(letters, sentence) {
   console.log(sentence)
     var nRows = Math.pow(2, letters.length)
     var output = []
@@ -88,7 +88,7 @@ function slSentencetoString(sl) {
 // console.log()
 function evaluateSL(vals, sl) {
     //  console.log(typeof sl.left  != "string")
-    console.log(sl)
+    // console.log(sl)
     if (sl.atomic) {
         return (sl.leftnegated) ? !vals[sl.left] : vals[sl.left];
     }
@@ -144,7 +144,9 @@ function makeSentence(letters,level,diff){
   return output
 }
 
-module.exports.truthTable1 = function(v){
+
+
+truthTable1 = function truthTable1(v){
   var nLet
   var complexity
     if (v == 1){
@@ -163,13 +165,172 @@ module.exports.truthTable1 = function(v){
       negProbability = {likelihood: 30}
     }
     var l = makeLetters(nLet)
-    var sen = makeSentence(l,connectives,complexity)
+    var sen = [makeSentence(l,connectives,complexity)]
     return makeTruthTable(l,sen)
 
+};
+
+module.exports.truthTable1 = truthTable1
+
+function makeTruthTable(letters, sentence) {
+  // console.log(sentence)
+    var nRows = Math.pow(2, letters.length)
+    var output = []
+    var k = nRows / 2
+    for (l in letters) {
+        var col = {}
+        col.name = "$" + letters[l] + "$"
+        var temp = []
+        var current = "T"
+        while (temp.length < nRows) {
+            for (var i = 0; i < k; i++) {
+                temp.push("T")
+            }
+            for (var i = 0; i < k; i++) {
+                temp.push("F")
+            }
+        }
+        col.column = temp
+        col.atomic = true
+        output.push(col)
+        k = k / 2
+    }
+
+    for (sen in sentence){
+      var lastCol = []
+      for (var i = 0; i < nRows; i++) {
+          var val = {}
+          for (var j = 0; j < letters.length; j++) {
+              val[letters[j]] = (output[j].column[i] == "T") ? true : false;
+          }
+          // console.log(val)
+          // console.log(evaluateSL(val,sentence))
+          evaluateSL(val, sentence[sen]) ? lastCol.push("T") : lastCol.push("F");
+
+      }
+      // console.log(slSentencetoString(sentence))
+      output.push({
+          "name": "$" + slSentencetoString(sentence[sen]) + "$",
+          "column": lastCol,
+          "atomic":false
+      })
+    }
+
+    return output;
+}
+
+
+function makeArgument(table){
+  var firstPremise = -1
+  var conclusion = table.length - 1
+
+  var nRow = table[0].column.length
+  for (col in table){
+    if (!table[col].atomic) {
+      table[col].property = checkProperty(table[col].column)
+      if (firstPremise < 0) firstPremise = col;
+      if (col == table.length - 1){
+        table[col].name = "$\\therefore$ " + table[col].name
+        table[col].status = 'conclusion'
+      }else{
+        table[col].status = 'premise'
+      }
+    }
+  }
+  var valid = true
+  var info
+
+
+  for (row in table[0].column){
+    var truePremises = true
+    for (var i = firstPremise;i < conclusion;i++){
+      if (table[i].column[row] == "F") {
+        truePremises = false
+      }
+    }
+    if (truePremises){
+      if (table[conclusion].column[row]=="F") valid = false
+    }
+  }
+  var answer = [];
+
+  for (var i = 0;i< nRow;i++){
+    for (var j = firstPremise;j <= conclusion;j++){
+      answer.push(table[j].column[i])
+
+    }
+  }
+  console.log(answer)
+  console.log(table)
+
+  function checkConsistency(table){
+    for (var i = 0;i< nRow;i++){
+      var rowVar = []
+      for (var j = firstPremise;j <= conclusion;j++){
+        rowVar.push(table[j].column[i])
+      }
+      if (!_.contains(rowVar,"F")) return true;
+    }
+    return false;
+
+  }
+
+
+  return {
+    valid:valid,
+    table:table,
+    nRow: nRow,
+    firstPremiseIndex: parseInt(firstPremise),
+    conclusionIndex: conclusion,
+    answer:answer,
+    consistent:checkConsistency(table)
+  }
+}
+
+function checkProperty(col){
+  if (_.contains(col,"T")&&_.contains(col,"F")) return "contingent"
+  else if (!_.contains(col,"T")) return "contradiction"
+  else if (!_.contains(col,"F")) return "tautology"
+}
+
+console.log(checkProperty(['T','T','T']))
+
+truthTable2 = function truthTable2(v){
+  var nLet
+  var nSen
+  var complexity
+    if (v == 1){
+       nLet = 2;
+      complexity = 1
+      connectives = 1
+      nSen = 3;
+    } else if (v == 2){
+       nLet = 3;
+      complexity = 1
+      connectives = 1
+      negProbability = {likelihood: 30}
+    }else if (v == 3){
+       nLet = null;
+      complexity = 2
+      connectives = 1
+      negProbability = {likelihood: 30}
+    }
+    var l = makeLetters(nLet)
+    var sen = []
+    for (var i = 0;i<nSen;i++){
+      sen.push(makeSentence(l,connectives,complexity))
+    }
+    // console.log(sen)
+
+    return makeArgument(makeTruthTable(l,sen))
 
 };
 
 
+
+module.exports.truthTable2 = truthTable2
+
+console.log(truthTable2(1))
 
 function makeRandomEnglish(){
   switch (chance.integer({min: 0, max: 3})){
@@ -186,7 +347,7 @@ function makeRandomEnglish(){
 }
 
  function symbolizationKey(letters){
-   console.log(letters)
+  //  console.log(letters)
    var output = {
 
    }
@@ -263,6 +424,7 @@ function complexEnglish(){
 
 
  }
+
 
 
 // console.log(l)

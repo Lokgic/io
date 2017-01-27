@@ -585,10 +585,20 @@
 	       "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
 	       "font-family": 'Titillium Web'
 	    },
-	    superblue: {
-	      "color": "white",
-	      "background-color": "blue"
-	    }
+			mini: {
+				// "white-space": "nowrap",
+				"background-color": "#336B87",
+				"padding": "1px 1px",
+				"color":"white",
+				"min-width":"30px",
+				"opacity": .9,
+				"border-radius":"2",
+				"border-width":"1px",
+				"border-color":"#589FC1",
+				"border-style":"solid",
+				 "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
+				 "font-family": 'Titillium Web'
+			}
 	  }
 	});
 	$.notify.addStyle('incorred', {
@@ -608,9 +618,19 @@
 	       "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
 	       "font-family": 'Titillium Web'
 	    },
-	    superblue: {
-	      "color": "white",
-	      "background-color": "blue"
+	    mini: {
+				// "white-space": "nowrap",
+				"background-color": "#763626",
+				"padding": "1px 1px",
+				"color":"white",
+				"min-width":"30px",
+				"opacity": .9,
+				"border-radius":"2",
+				"border-width":"1px",
+				"border-color":"#985858",
+				"border-style":"solid",
+				 "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
+				 "font-family": 'Titillium Web'
 	    }
 	  }
 	});

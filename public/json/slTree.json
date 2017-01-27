@@ -71,6 +71,10 @@
                 },{
                     "name": "Truth Table 2",
                     "type":"chapter"
+                },
+                {
+                    "name": "Truth Table 3",
+                    "type":"chapter"
                 }, {
                     "name": "Wason Selection Task",
                     "type": "chapter"
@@ -95,7 +99,7 @@
           "name":"Conditionals","type":"subtask"
         },
         {
-          "name":"Truth Tables","type":"subtask"
+          "name":"Substitution of Logical Equivalents","type":"subtask"
         },{
           "name":"Semantic Tableaux","type":"subtask"
         }

@@ -207,7 +207,7 @@
   "2":{
     "1":{
       "chapterName":"The formal language of SL",
-      "chapterNum":"1",
+      "chapterNum":"2",
       "chapterDescription":"The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. In formal logic we get content neutrality by replacing parts of the argument we are studying with abstract symbols. In this chapter, we begin our study of formal logic by learning about a symbolic language called $SL$",
       "title": "What is meant by 'formal'?",
       "content":[
@@ -499,5 +499,156 @@
 
         ]
     }
+  },
+  "3":{
+    "1":{
+      "chapterName":"Core Concepts in Formal Logic",
+      "chapterNum":"3",
+      "chapterDescription":"The purpose of a formal language like $SL$ is to facilitate the studying of various logical properties of language, validity being an important one. This chapter explains how SL can explicate what it means for an argument to be valid. We will also look at other logical properties of interest.",
+      "title": "Truth values",
+      "content":[
+        {
+          "type":"p",
+          "substance":["We already came across truth values in the last chapter. Here we will offer a more detailed expression: a truth value is the status of a statement as true or false. Thus the truth value of the sentence 'All dogs are mammals' is 'True,' while the truth value of 'All dogs are reptiles' is false. More precisely, a truth value is the status of a statement with relationship to truth. We have to say this, because there are systems of logic that allow for truth values besides 'true' and 'false,' like 'maybe true,' or 'approximately true,' or 'kinda sorta true.' For instance, some philosophers have claimed that the future is not yet determined. If they are right, then statements about what will be the case are not yet true or false. Some systems of logic accommodate this by having an additional truth value. Other formal languages, so-called paraconsistent logics, allow for statements that are both true {and} false. We won't be dealing with those in this textbook, however. For our purposes, there are two truth values, 'true' and 'false,' and every statement has exactly one of these. Logical systems like ours are called bivalent."]
+        }
+      ]
+    },
+    "2":{
+      "title":"Tautology, contingent statement, contradiction",
+      "content":
+      [
+        {
+        "type":"ps",
+        "substance":["In considering arguments formally, we care about what would be true <i>if</i> the premises were true. Generally, we are not concerned with the actual truth value of any particular statements - whether they are <i>actually</i> true or false. Yet there are some statements that must be true, just as a matter of logic."]
+        },
+        {
+          "type":"orderedList",
+          "substance":[
+            {
+              "id":"a","item":"It's raining."
+            },
+            {
+              "id":"b","item":"Either it is raining or it is not."
+            },{
+              "id":"c","item":"It is both raining and not raining"
+            }
+          ]
+
+        },
+        {
+          "type":"ps",
+          "substance":["In order to know if statement (a) is true, you would need to look outside or check the weather channel. Logically speaking, it might be either true or false. Statements like this are called contingent statements.",
+          "Statement (b) is different. You do not need to look outside to know that it is true. Regardless of what the weather is like, it is either raining or not. If it is drizzling, you might describe it as partly raining or in a way raining and a way not raining. However, our assumption of bivalence means that we have to draw a line, and say at some point that it is raining. And if we have not crossed this line, it is not raining. Thus the statement 'either it is raining or it is not' is always going to be true, no matter what is going on outside. A statement that has to be true, as a matter of logic is called a tautology or logical truth.",
+          "You do not need to check the weather to know about statement (c) either. It must be false, simply as a matter of logic. It might be raining here and not raining across town, it might be raining now but stop raining even as you read this, but it is impossible for it to be both raining and not raining here at this moment. The third statement is logically false; it is false regardless of what the world is like. A logically false statement is called a contradiction.",
+          "Since tautology is defined as a statement that must be true as a matter of logic, no matter how the world is. Something similar goes on in truth tables. With a complete truth table, we consider all of the ways that the world might be. Each line of the truth table corresponds to a way the world might be. This means that if the sentence is true on every line of a complete truth table, then it is true as a matter of logic, regardless of what the world is like.",
+          "More precisely, a statement is a semantic tautology in SL  if and only if the column  under the main connective in the complete truth table for the sentence contains only Ts. This is the semantic definition of a tautology in SL, because it uses truth tables. Remember in logic the only 'meaning' that matters is the truth and falsity of a sentence. Here we are explicating tautology semantically by appealing to the kind of values it has on a truth table. This is an example of a truth table of a tautology:"
+          ]
+        },
+        {
+          "type":"table",
+          "eventId":"tautology"
+        },
+        {
+          "type":"ps",
+          "substance":["Conversely, we defined a contradiction as a sentence that is false no matter how the world is. This means we can define a semantic contradiction in SL as a sentence that has only Fs in the column under them main connective of its complete truth table. Again, this is the semantic definition of a contradiction."
+          ]
+        },{
+          "type":"table",
+          "eventId":"contradiction"
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "Finally, a sentence is contingent if it is sometimes true and sometimes false. Similarly, a sentence is semantically contingent in SL if and only if its complete truth table for has both Ts and Fs under the main connective."
+          ]
+        },{
+          "type":"table",
+          "eventId":"contingent"
+        }
+      ]
+    },
+    "3":{
+      "title":"Logical Equivalence and logical laws",
+      "content":[
+        {
+        "type":"p",
+        "substance":[
+          "Two sentences are logically equivalent in English if they have the same truth value as a matter of logic. Once again, we can use truth tables to define a similar property in SL: Two sentences are semantically logically equivalent in SL if they have the same truth value on every row of a complete truth table.",
+          "Consider the sentences $\\neg(A \\vee B)$ and $\\neg A \\wedge \\neg B$. Are they logically equivalent? To find out, we construct a truth table."
+        ]
+      },
+      {"type":"table","eventId":"equiv"},
+
+      {
+      "type":"ps",
+      "substance":[
+        "(Suggestion: work out the truth table on your own to see how the values came about. )",
+        "There are few logical equivalences that hold quite generally. We call those <i>logical laws of equivalence</i>. The one represented above is called DeMorgan's Law, which you might have seen in other contexts.",
+        "$$\\text{DeMorgan's Law(DeM): for any sentence X and Y, } \\neg(A \\vee B) \\equiv (\\neg A \\wedge \\neg B)\\\\ \\text{ and } \\neg(A \\wedge B) \\equiv (\\neg A \\vee \\neg B)$$",
+        "We use the symbol $\\equiv$ as a shorthand for the English predicate '... is logically equivalent to...'. Note that $\\equiv$ is <i>not</i> a symbol in SL. It is symbol that represents something in English. For instance in the definition of (DeM) above, I could have easily wrote in English and say $\\neg(A \\vee B)$ is logically equivalent to $(\\neg A \\wedge \\neg B)$",
+        "Another important logical law is the law of Double Negation:",
+        "$$\\text{Double Negation(DN): for any sentence X and Y, } A \\equiv \\neg \\neg A$$"
+        ]
+      },
+
+      {
+      "type":"table",
+      "eventId":"dn"
+    },
+    {
+    "type":"ps",
+    "substance":[
+      "I will introduce a few more law, but I will leave the truth tables for you as an exercise. (You may or may not but definitely will see them on test/problem set.)",
+      "$$\\text{Law of Distribution(Dist): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\vee Z) \\equiv ( X \\wedge  Y) \\vee (X \\wedge Z) \\text{ and }  \\\\ X \\vee (Y \\wedge Z) \\equiv ( X \\vee  Y) \\wedge (X \\vee Z)  $$",
+        "$$\\text{Law of Association(Assoc): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\wedge Z) \\equiv ( X \\wedge  Y) \\wedge Z \\text{ and }  \\\\ X \\vee (Y \\vee Z) \\equiv ( X \\vee  Y) \\vee  Z  $$",
+        "$$\\text{Commutation(Com): for any sentence X, and Y, }\\\\ (X \\wedge Y ) \\equiv (Y \\wedge X ) \\text{ and }  \\\\(X \\vee Y ) \\equiv (Y \\vee X )  $$"
+      ]
+    }
+
+    ]
+  },
+  "4":{
+    "title":"Consistency",
+    "content":[
+      {
+        "type":"p",
+        "substance":[
+        "A set of sentences in English is consistent if it is logically possible for them all to be true at once. This means that a sentence is semantically consistent in SL if and only if there is at least one line of a complete truth table on which all of the sentences are true. It is semantically inconsistent otherwise."
+        ]
+      }
+    ]
+  },
+  "5":{
+    "title":"Semantic Entailment and Validity",
+    "content":[
+      {
+        "type":"p",
+        "substance":["Logic is the study of argument, so the most important use of truth tables is to test the validity of arguments. An argument in English is valid if it is logically impossible for the premises to be true and for the conclusion to be false at the same time. So we can define an argument as semantically valid in SL if there is no row of a complete truth table on which the premises are all marked 'T' and the conclusion is marked 'F.' An argument is invalid if there is such a row. Consider this argument and its corresponding truth table:"]
+      },
+      {
+        "type":"arg",
+        "premises":["$((E \\wedge J) \\vee J)$","$((J\\vee J) \\vee E)$"],
+        "conclusion":"$((J \\vee \\neg E)\\vee \\neg E)$"
+      },
+      {
+      "type":"table",
+      "eventId":"validExample"
+    },{
+      "type":"p",
+      "substance":["The only row on which both the premises are T is the first row, and on that row the conclusion is also T, so yes - the argument is valid.",
+      "We used the three dots $\\therefore$ to represent an inference in English. We used this symbol to represent any kind of inference, valid or not. The truth table method gives us a more specific notion of a valid inference. We will call this semantic entailment and represent it using a new symbol, $\\vDash$, called the ``double turnstile.''  The $\\vDash$ is like the $\\therefore$, except for arguments verified to be valid by truth tables. When you use the double turnstile, you write the premises as a set, using curly brackets, { and }, which mathematicians use in set theory. The argument above would be written  $ \\{ ((E \\wedge J ) \\vee J),((J\\vee J) \\vee E) \\}\\vDash ((J \\vee \\neg E)\\vee \\neg E)$. (But sometimes for the sake of convenience I will omit the brackets.)",
+      "We can also use the double turnstile to represent other logical notions. Since a tautology is always true, it is like the conclusion of a valid argument with no premises. The string $\\vDash C$ means that C is true for all truth value assignments. This is equivalent to saying that the sentence is entailed by anything or nothing."
+      ]
+    },
+    {
+      "type":"important",
+      "substance":[
+        "More formally, we can define the double turnstile this way: $\\{ A_1...A_n\\} \\vDash B $ if and only if there is no truth value assignment for which $\\{ A_1...A_n\\}$ are true andB is false. Put differently, it means that B is true for any and all truth value assignments for which$\\{ A_1...A_n\\}$ are true."
+
+      ]
+    }
+
+    ]
+  }
   }
 }

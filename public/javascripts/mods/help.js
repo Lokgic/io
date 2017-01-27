@@ -17,16 +17,23 @@ function modalMsg(head,body){
 
 
 
-function alert(msg, color, location){
-  if (location == undefined) location = "bottom right"
+function alert(msg, color, position,location){
+
+  if (position == undefined) position = "bottom right"
       notifyMsg = msg
       notifyOption = {
           style: color,
-          position: location
+          position: position
       }
 
-    $.notify(notifyMsg,notifyOption)
+    if (location) {
+      notifyOption.className = "mini";
+      $(location).notify(notifyMsg,notifyOption);
     }
+    else $.notify(notifyMsg,notifyOption)
+    }
+
+
 var getUid = function(){
   return $('#mainnavbar').attr('data')
 }
@@ -95,6 +102,24 @@ function sendAttempts(dataSet){
   });
 }
 
+//dropdown
+// <select class="custom-select">
+//   <option selected>Open this select menu</option>
+//   <option value="1">One</option>
+//   <option value="2">Two</option>
+//   <option value="3">Three</option>
+// </select>
+
+function makeDropdown(answer,choices,id){
+  var html = '<select class="custom-select m-x-1" id ="'+id +'">'
+  html += "<option>Select</option>"
+  for (cho in choices){
+    html+='<option class = "dropdownOption" value ="'+choices[cho]+'">' +choices[cho] + "</option>"
+  }
+  html+= "</select>"
+  // console.log(html)
+  return html
+}
 
 
 //TABLES

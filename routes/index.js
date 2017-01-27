@@ -332,7 +332,12 @@ router.get('/logicise/*', function(req,res,next){
 
 		var logiciseID = req.path.split('/')[2]
 		var info = require('../public/json/logicises.json');
-		console.log(logiciseID)
+		// console.log(logiciseID)
+		if (!info[logiciseID]) {
+			var err = new Error('No such logicise exists!')
+			err.status = 400;
+			return next(err);
+		}
 		if (logiciseID == "vennSyl") return res.render('logicizeFS', { title:"Venn Diagram: Syllogism", logicise:logiciseID, info:info[logiciseID]});
 		else return res.render('logicise', { title:info[logiciseID].title, logiciseID:logiciseID, info:info[logiciseID]});
 

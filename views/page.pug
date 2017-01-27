@@ -109,6 +109,9 @@ block content
 									when "arg"
 											.flexContainer
 												+arg(x.premises, x.conclusion)
+									when "orderedList"
+										for line in x.substance
+											p(id = "item"+line.id).orderedList (#{line.id}) &nbsp; #{line.item}
 									when "symbolkey"
 											.flexContainer
 												+symbolkey(x.key, x.symbol)
