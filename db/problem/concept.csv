@@ -6,7 +6,7 @@ invalid,definition,invalid,A property of arguments that holds when the premises 
 logic,definition,logic,the part of the study of reasoning that focuses on argument.,,sl,1,def
 premise,definition,Premise,a statement in an argument that provides evidence for the conclusion,,sl,1,def
 venndiagram,definition,Venn diagram,A diagram that represents categorical statements using circles that stand for classes.,,sl,1,def
-existentialimport,definition,Existential Import, An aspect of the meaning of a statement that which is present if the statement can only be true when the objects it describes exist.,,sl,1,def
+existentialimport,definition,Existential Import,An aspect of the meaning of a statement that which is present if the statement can only be true when the objects it describes exist.,,sl,1,def
 universal-affirmative,definition,Universal Affirmative,All X are Y.,,sl,1,def
 universal-negative,definition,Universal Negative,No X are Y.,,sl,1,def
 particular-affirmative,definition,Particular Affirmative,Some X are Y.,,sl,1,def
@@ -21,8 +21,10 @@ Disjunction,definition,Disjunction,The symbol  used to represent words and phras
 metavar,definition,Metavariable,A variable in the metalanguage that can represent any sentence in the formal language.,,sl,2,def
 negation,definition,Negation,The symbol  used to represent words and phrases that function like the English word *not*,,sl,2,def
 truthass,definition,Truth assignment,A function that maps the sentence letters in SL onto truth values.,,sl,2,def
-consistency,definition,Consistency,'A property possessed by a set of sentences when they can all be true at the same time, but are not necessarily so.',,sl,3,def
+consistency,definition,Consistency,"A property possessed by a set of sentences when they can all be true at the same time, but are not necessarily so.",,sl,3,def
 contingent,definition,Contingent,A statement that is neither a tautology nor a contradiction.,,sl,3,def
-contradiction,definition,Contradiction,'A statement that must be false, as a matter of logic.',,sl,3,def
-inconsistency,definition,Inconsistency,'A property possessed by a set of sentences when they cannot all be true at the same time, but they may all be false at the same time.',,sl,3,def
-truthvalue,definition,Truth Value,'The status of a statement with relationship to truth. In our context, this means the status of a statement as true or false.',,sl,3,def
+truthvalue,definition,Truth Value,"The status of a statement with relationship to truth. In our context, this means the status of a statement as true or false.",,sl,3,def
+inconsistency,definition,Inconsistency,A statement that is neither a tautology nor a contradiction.,,sl,3,def
+semcontradiction,definition,Semantic contradiction in SL,A statement that has only Fs in the column under the main connective of its complete truth table.,,sl,3,def
+sentautology,definition,Semantic tautology,A statement that has only Ts in the column under the main connective of its complete truth table.,,sl,3,def
+sendefinition,definition,Truth assignment,A function that maps the sentence letters in SL onto truth values.,,sl,3,def
