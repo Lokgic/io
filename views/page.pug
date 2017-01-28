@@ -39,7 +39,7 @@ mixin MC(x)
 				else
 					span.problemNumDisplay
 
-mixin drag(x)
+mixin genericActivity(x)
 	h4.text-xs-center.m-y-2 #{x.title}
 	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
 		ul.nav.navbar-nav
@@ -148,12 +148,18 @@ block content
 													+paragraphs(x.intro)
 												.readingExAns
 									when "defReview"
-											.p-a-0.m-r-0.m-l-0
+											.p-a-0.m-r-0.m-l-0.m-t-3
 												.m-l-2.m-b-2.readingEx.dragMatch(id = x.eventId)
-													+drag(x)
+													+genericActivity(x)
 													.card.dropzone.text-xs-center
 														p.dragQ
 													.card.text-xs-center#flyzone
+									when "category"
+											.p-a-0.m-r-0.m-l-0
+												.m-l-2.m-b-2.readingEx.dragMatch(id = x.eventId)
+													+genericActivity(x)
+													.dropdowns
+													button(type = "button").btn.btn-greyish.m-y-3.btn-block#catConfirm Confirm
 			.modal.fade.result
 				.modal-dialog.modal-dialog
 					.modal-content
@@ -166,6 +172,7 @@ block content
 
 block extrafooter
 	link(rel="stylesheet", type="text/css", href="/css/page.css")
+	link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css")
 	script(type="text/x-mathjax-config").
 		MathJax.Hub.Config({
 		tex2jax: {
@@ -174,6 +181,7 @@ block extrafooter
 		);
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js")
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="/javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")

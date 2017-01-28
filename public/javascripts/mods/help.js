@@ -102,23 +102,39 @@ function sendAttempts(dataSet){
   });
 }
 
-//dropdown
-// <select class="custom-select">
-//   <option selected>Open this select menu</option>
-//   <option value="1">One</option>
-//   <option value="2">Two</option>
-//   <option value="3">Three</option>
-// </select>
+// <div class="dropdown">
+//   <button class="dropbtn">Dropdown</button>
+//   <div class="dropdown-content">
+//     <a href="#">Link 1</a>
+//     <a href="#">Link 2</a>
+//     <a href="#">Link 3</a>
+//   </div>
+// </div>
 
-function makeDropdown(answer,choices,id){
-  var html = '<select class="custom-select m-x-1" id ="'+id +'">'
-  html += "<option>Select</option>"
-  for (cho in choices){
-    html+='<option class = "dropdownOption" value ="'+choices[cho]+'">' +choices[cho] + "</option>"
-  }
-  html+= "</select>"
-  // console.log(html)
-  return html
+function makeCategory(eventId){
+  var modId = eventId.split('-')[0]
+  var chapter = eventId.split('-')[1]
+  var section =  eventId.split('-')[2]
+  var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
+
+  var scope = d3.select('#'+eventId)
+  var $scope = $('#'+eventId)
+  loadProblems(url, function(error, data) {
+    console.log(url)
+      if (error) console.log(error)
+      else {
+
+        data = [{id:0, text:'Contingent'}]
+        scope.select('.dropdowns').append('div').attr('class','dropdownQ').attr('id','a').html("<option value='test'>test</option>")
+
+        $('.dropdownQ',"#"+eventId).select2()
+
+
+
+
+      }
+  })
+
 }
 
 
@@ -585,165 +601,165 @@ function makeMCChoices(choices,eventID){
 
 
 
-  function mcQuiz(eventID,url){
-    var toComplete
-    var data
-    var next = d3.select('.nextbutt')
-    var result = []
+function mcQuiz(eventID,url){
+  var toComplete
+  var data
+  var next = d3.select('.nextbutt')
+  var result = []
 
-      jQuery.post(url)
-        .done(function(dd){
-          data = dd
-          toComplete = dd.length
-          d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
-          next.on('click',function(d){
-            var state = d3.select(this).attr('data')
-            if (state == "intro"||state == "next"){
-              d3.select('.currentmc'+eventID).remove();
-              toComplete -=0;
-              makeMC(data,eventID)
-              next.attr('data','answer')
-              d3.select('.'+eventID+'offScreen').classed('offScreen',false).classed('currentMC'+eventID,true)
-              var current = data.shift()
-              // current = current[0]
-              var buttData = []
-              current.choices.forEach(function(k){
-                var obj = {
-                  text:k,
-                  data:k
-                }
-                buttData.push(obj)
-              })
-              result.push(current)
-              var buttons = makeMCChoices(buttData,eventID)
-              // console.log(buttons)
-              buttons.on('click',function(d){
-                result[result.length-1].input = d.data;
-                if (d.data == current.answer){
-                  alert("Correct! Press 'Next' to contniue","correctblue")
-                  result[result.length-1].correct = true;
-                }else{
-                  alert("Incorrect! Press 'Next' to contniue","incorred")
-                  result[result.length-1].correct = false;
+    jQuery.post(url)
+      .done(function(dd){
+        data = dd
+        toComplete = dd.length
+        d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
+        next.on('click',function(d){
+          var state = d3.select(this).attr('data')
+          if (state == "intro"||state == "next"){
+            d3.select('.currentmc'+eventID).remove();
+            toComplete -=0;
+            makeMC(data,eventID)
+            next.attr('data','answer')
+            d3.select('.'+eventID+'offScreen').classed('offScreen',false).classed('currentMC'+eventID,true)
+            var current = data.shift()
+            // current = current[0]
+            var buttData = []
+            current.choices.forEach(function(k){
+              var obj = {
+                text:k,
+                data:k
+              }
+              buttData.push(obj)
+            })
+            result.push(current)
+            var buttons = makeMCChoices(buttData,eventID)
+            // console.log(buttons)
+            buttons.on('click',function(d){
+              result[result.length-1].input = d.data;
+              if (d.data == current.answer){
+                alert("Correct! Press 'Next' to contniue","correctblue")
+                result[result.length-1].correct = true;
+              }else{
+                alert("Incorrect! Press 'Next' to contniue","incorred")
+                result[result.length-1].correct = false;
 
-                }
-                toComplete -=1;
-                (toComplete != 0)? next.attr('data','next') :next.attr('data','over');
-                d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
-                buttons.classed('invisible',true)
+              }
+              toComplete -=1;
+              (toComplete != 0)? next.attr('data','next') :next.attr('data','over');
+              d3.select('#'+eventID).select('.problemnumdisplay').text(toComplete)
+              buttons.classed('invisible',true)
 
-              })
-              mathJax.reload(eventID)
-            }else if (state == "over"){
-              var info = eventID.split('-')
-              recordCompletion(uid,info[0],info[1],info[2])
-              makeResult(result,eventID)
-            }
-          })
-
-      }).fail()
-    }
-
-  function makeResult(problemSet,eventID){
-    var quizDiv = d3.select('#'+eventID)
-
-    var rWidth = quizDiv.node().getBoundingClientRect().width;
-    var rHeight = window.innerHeight*.5
-    var barPadding = 10;
-    var container = quizDiv.select('.readingExQ').style('height',rHeight).style('weight',rWidth)
-    container.html('')
-    container.append('p').attr('class','text-xs-center').text('Quiz result - click the bar to see more info.')
-    var svg = container.append('svg').attr('width',rWidth).attr('height',rHeight)
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
-    var dataset = []
-    dataset = [{"name":"Correct",data:[]},{"name":"Incorrect",data:[]}]
-    for (var i = 0;i<problemSet.length;i++){
-      var obj = {
-        "name":"Problem " + (i+1),
-        data:{
-          question:problemSet[i].question,
-          input:problemSet[i].input,
-          answer:problemSet[i].answer
+            })
+            mathJax.reload(eventID)
+          }else if (state == "over"){
+            var info = eventID.split('-')
+            recordCompletion(uid,info[0],info[1],info[2])
+            makeResult(result,eventID)
           }
-      }
-      if (problemSet[i].correct) dataset[0].data.push(obj)
-      else dataset[1].data.push(obj)
-    }
-    // console.log(dataset)
-    var widthScale = d3.scaleLinear()
-                        .domain([0,problemSet.length])
-                        .range([0,rWidth - 30])
+        })
 
-    var xMargin = 30;
-    var yMargin = 80
-    var barHeight = Math.min((rHeight / dataset.length)*.80,50)
-    var yMult = barHeight + 30;
-    var bars = svg.selectAll("rect")
-        .data(dataset)
-        .enter()
-        .append("rect")
-
-     bars.attr("x", function(d, i) {
-           return xMargin;
-         })
-         .attr("y", function(d,i){
-           return i*yMult +yMargin
-         })
-         .attr("width", 0)
-         .attr("height", barHeight)
-          .transition()
-          .duration(200)
-          .delay(function (d, i) {
-            return i * 50;
-          })
-         .attr("width", function(d){return widthScale(d.data.length) })
-         .attr('fill',function(d){return color(d.name)})
-
-
-
-         bars.on('click',function(d){
-           var br = "<br>"
-           var modalBody = d3.select('.modal-body')
-           modalBody.html("")
-           d3.select('.modal-title').text(d.name);
-           modalBody.selectAll('div').data(d.data).enter().append('div').html(
-             function(dp){
-               str = "<h4>"+dp.name+"</h4><p>"
-                dp.data.question.forEach(function(qstr){
-                  str += qstr+br
-                })
-                str += "Answer: " +dp.data.answer+br
-                str += "Input: " + dp.data.input+br
-                str += "</p>"
-                // console.log(str)
-                return str;
-             }
-           )
-           $('.modal').modal('toggle')
-           mathJax.reload()
-         })
-         .on('mouseover',function(){
-           d3.select(this).attr('fill',"yellow")
-         })
-         .on('mouseout',function(d){
-           d3.select(this).attr('fill',color(d.name))
-
-         })
-
-
-    svg.selectAll("text") .data(dataset) .enter() .append("text")
-    .text(function(d) {
-
-      return d.name + " " + d.data.length +"/"+problemSet.length;
-    })
-    .attr("x", function(d, i) {
-      return widthScale(d.data.length) + xMargin/2 ;
-    })
-    .attr("y", function(d,i){
-      return i*yMult +yMargin + barHeight/2
-    })
-    .attr('fill','black')
-    .attr("text-anchor","end")
-
-
+    }).fail()
   }
+
+function makeResult(problemSet,eventID){
+  var quizDiv = d3.select('#'+eventID)
+
+  var rWidth = quizDiv.node().getBoundingClientRect().width;
+  var rHeight = window.innerHeight*.5
+  var barPadding = 10;
+  var container = quizDiv.select('.readingExQ').style('height',rHeight).style('weight',rWidth)
+  container.html('')
+  container.append('p').attr('class','text-xs-center').text('Quiz result - click the bar to see more info.')
+  var svg = container.append('svg').attr('width',rWidth).attr('height',rHeight)
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
+  var dataset = []
+  dataset = [{"name":"Correct",data:[]},{"name":"Incorrect",data:[]}]
+  for (var i = 0;i<problemSet.length;i++){
+    var obj = {
+      "name":"Problem " + (i+1),
+      data:{
+        question:problemSet[i].question,
+        input:problemSet[i].input,
+        answer:problemSet[i].answer
+        }
+    }
+    if (problemSet[i].correct) dataset[0].data.push(obj)
+    else dataset[1].data.push(obj)
+  }
+  // console.log(dataset)
+  var widthScale = d3.scaleLinear()
+                      .domain([0,problemSet.length])
+                      .range([0,rWidth - 30])
+
+  var xMargin = 30;
+  var yMargin = 80
+  var barHeight = Math.min((rHeight / dataset.length)*.80,50)
+  var yMult = barHeight + 30;
+  var bars = svg.selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+
+   bars.attr("x", function(d, i) {
+         return xMargin;
+       })
+       .attr("y", function(d,i){
+         return i*yMult +yMargin
+       })
+       .attr("width", 0)
+       .attr("height", barHeight)
+        .transition()
+        .duration(200)
+        .delay(function (d, i) {
+          return i * 50;
+        })
+       .attr("width", function(d){return widthScale(d.data.length) })
+       .attr('fill',function(d){return color(d.name)})
+
+
+
+       bars.on('click',function(d){
+         var br = "<br>"
+         var modalBody = d3.select('.modal-body')
+         modalBody.html("")
+         d3.select('.modal-title').text(d.name);
+         modalBody.selectAll('div').data(d.data).enter().append('div').html(
+           function(dp){
+             str = "<h4>"+dp.name+"</h4><p>"
+              dp.data.question.forEach(function(qstr){
+                str += qstr+br
+              })
+              str += "Answer: " +dp.data.answer+br
+              str += "Input: " + dp.data.input+br
+              str += "</p>"
+              // console.log(str)
+              return str;
+           }
+         )
+         $('.modal').modal('toggle')
+         mathJax.reload()
+       })
+       .on('mouseover',function(){
+         d3.select(this).attr('fill',"yellow")
+       })
+       .on('mouseout',function(d){
+         d3.select(this).attr('fill',color(d.name))
+
+       })
+
+
+  svg.selectAll("text") .data(dataset) .enter() .append("text")
+  .text(function(d) {
+
+    return d.name + " " + d.data.length +"/"+problemSet.length;
+  })
+  .attr("x", function(d, i) {
+    return widthScale(d.data.length) + xMargin/2 ;
+  })
+  .attr("y", function(d,i){
+    return i*yMult +yMargin + barHeight/2
+  })
+  .attr('fill','black')
+  .attr("text-anchor","end")
+
+
+}

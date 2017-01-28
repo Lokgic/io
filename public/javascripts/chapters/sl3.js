@@ -103,6 +103,8 @@ $(function(){
        ]
 
        tabulate(validExample,"#validExample")
+       makeDefMatch("sl-3-def")
+        makeCategory("sl-3-cat")
 
       //   var sl_2_6c = []
       //  for (col in sl_2_6b){

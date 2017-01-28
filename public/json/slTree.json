@@ -44,7 +44,11 @@
                 }, {
                     "name": "Core Concepts in Formal Logic",
                     "type": "chapter",
-                    "children": []
+                    "children": [{
+                  "name":"Definition review",
+                  "type":"section",
+                  "id":"sl-3-def"
+                  }]
                 },
                 {
                     "name": "Conditionals and Validity",

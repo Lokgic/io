@@ -20,7 +20,7 @@ var knex = require('knex')({
 
 module.exports.get = function(mod, chapter,section, callback){
 
-	knex.select().from('problem').where("module",mod).where('chapter',chapter).where('section','def')
+	knex.select().from('problem').where("module",mod).where('chapter',chapter).where('section',section)
   .catch(function(error) {
     console.log(error)
     return callback(error)
@@ -46,6 +46,10 @@ module.exports.get = function(mod, chapter,section, callback){
           d[def].options.push(d[def].answer)
           d[def].options = _.shuffle(d[def].options)
         }
+      }
+
+      if (section == "cat"){
+        console.log(d)
       }
 
       // console.log(d)

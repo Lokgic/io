@@ -564,7 +564,11 @@
         },{
           "type":"table",
           "eventId":"contingent"
-        }
+        },
+        {"type":"category",
+          "title":"Categorizing logical properties",
+          "instruction": "For each of the sentences below, determine whether it is a contingent statement, a contradiction, or a tautology. Once done, press confirm. NOTE: There is no penalty for multiple attempts but you must correctly categorize each sentence to get credit!",
+        "eventId":"sl-3-cat"}
       ]
     },
     "3":{
@@ -646,7 +650,10 @@
         "More formally, we can define the double turnstile this way: $\\{ A_1...A_n\\} \\vDash B $ if and only if there is no truth value assignment for which $\\{ A_1...A_n\\}$ are true andB is false. Put differently, it means that B is true for any and all truth value assignments for which$\\{ A_1...A_n\\}$ are true."
 
       ]
-    }
+    },
+    {"type":"defReview",
+      "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
+    "eventId":"sl-3-def"}
 
     ]
   }
