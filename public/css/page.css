@@ -4,6 +4,29 @@ body {
 }
 
 
+.dropdowns{
+  overflow: scroll;
+  height: 50%;
+  background: #eee;
+}
+
+.dropdownQLabel{
+  padding-left: 5px;
+  display: block;
+  width:80%;
+  margin:10px auto;
+
+}
+
+.dropdownQSelect {
+  background: #fff;
+  display: block;
+  width:80%;
+  margin:auto;
+  border-width: 0;
+  color:black;
+}
+
 
 .foot{
   height:300px;

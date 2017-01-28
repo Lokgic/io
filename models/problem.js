@@ -49,11 +49,28 @@ module.exports.get = function(mod, chapter,section, callback){
       }
 
       if (section == "cat"){
-        console.log(d)
+        var toSend = []
+        var choices = []
+        for (problem in d){
+          var toPush = {
+            pid:d[problem].pid,
+            question:d[problem].question,
+            answer: d[problem].answer
+          }
+          console.log(toPush.answer)
+          if (!_.contains(choices,toPush.answer)) choices.push(toPush.answer)
+          toSend.push(toPush)
+        }
+
+        toCall= {
+          choices: choices,
+          problems:_.shuffle(toSend)
+        }
+        return callback(toCall)
       }
 
       // console.log(d)
-      callback(_.shuffle(d))
+      return callback(_.shuffle(d))
     }
 
   })

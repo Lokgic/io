@@ -111,7 +111,7 @@ function sendAttempts(dataSet){
 //   </div>
 // </div>
 
-function makeCategory(eventId){
+function makeCategory(eventId,num){
   var modId = eventId.split('-')[0]
   var chapter = eventId.split('-')[1]
   var section =  eventId.split('-')[2]
@@ -119,15 +119,52 @@ function makeCategory(eventId){
 
   var scope = d3.select('#'+eventId)
   var $scope = $('#'+eventId)
-  loadProblems(url, function(error, data) {
-    console.log(url)
-      if (error) console.log(error)
-      else {
+  var status = "restart"
+  var dropdownSelected = []
 
-        data = [{id:0, text:'Contingent'}]
-        scope.select('.dropdowns').append('div').attr('class','dropdownQ').attr('id','a').html("<option value='test'>test</option>")
+        scope.select('#catConfirm').on('click',function(){
+          if (status == "restart"){
+            loadProblems(url, function(error, data) {
+              if (num == null || num >data.problems.length) num = data.problems.length
+              // console.log(url)
+              data.choices.unshift('Choose here')
+                if (error) console.log(error)
+                else {
+                  console.log(data)
+                  status = "answer";
+                  data.problems = _.shuffle(data.problems)
+                  d3.select('.dropdowns').html('')
+                  for (var problem  =0; problem<num;problem++){
+                    makeDropdown("cat-"+problem, data.problems[problem].question,data.choices,'.dropdowns')
+                    dropdownSelected[problem] = false
+                    d3.selectAll('select').on('change',function(){
+                      var problemIndex = d3.event.target.id.split('-')[1]
+                      if (d3.event.target.value == data.problems[problemIndex].answer) dropdownSelected[problemIndex] = true
+                      else  dropdownSelected[problemIndex] = false
+                    })
+                    mathJax.reload(eventId)
+                  }
 
-        $('.dropdownQ',"#"+eventId).select2()
+                }
+
+
+                })
+
+
+
+          } else {
+            if (!_.contains(dropdownSelected,false)){
+              alert('This is correct! Quiz completed','correctblue')
+            }else{
+              var count = 0;
+              for (var i = 0;i<dropdownSelected.length;i++){
+                if (dropdownSelected[i] == false){
+                  count += 1;
+                }
+              }
+              status = "restart"
+              alert('Unfortunately you have '+count+ " wrong answer(s). Click confirm again to restart.", 'incorred')
+            }
 
 
 
@@ -137,6 +174,20 @@ function makeCategory(eventId){
 
 }
 
+
+function makeDropdown(id, text,choices,div){
+    var wrapper = d3.select(div).append('div').attr('id',"wrapper"+id)
+    wrapper.append('label').attr('class','dropdownQLabel').attr('for','label'+id).text(text)
+    var selector = wrapper.append('select').attr('class','dropdownQSelect').attr('id',id)
+
+    selector.selectAll('option')
+      .data(choices)
+      .enter()
+      .append("option")
+      .text(function(d){return d})
+      .attr('value',function(d){return d})
+    return wrapper
+}
 
 //TABLES
 
