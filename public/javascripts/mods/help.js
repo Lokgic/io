@@ -173,22 +173,27 @@ function makeCategory(option) {
 
                 var incorrect = {}
 
+                var tempToSend = {
+                  type: "category",
+                  uid: uid
 
+                }
                 for (var i = 0; i < dropdownSelected.length; i++) {
 
                     if (dropdownSelected[i] == false) {
-                        incorrect[problemSet[i].answer] = (incorrect[problemSet[i].answer] == null) ? 1 : incorrect[problemSet[i].answer] + 1;
+                        incorrect[problemSet[i].input] = (incorrect[problemSet[i].input] == null) ? 1 : incorrect[problemSet[i].input] + 1;
                     } else {
-                        correct[problemSet[i].answer] = (correct[problemSet[i].answer] == null) ? 1 : correct[problemSet[i].answer] + 1;
+                        correct[problemSet[i].input] = (correct[problemSet[i].input] == null) ? 1 : correct[problemSet[i].input] + 1;
                     }
-                    problemSet[i].correct = dropdownSelected[i]
-                    problemSet[i].type = "category"
-                    problemSet[i].uid = uid
-                    delete problemSet[i]['answer']
-                    delete problemSet[i]['question']
+                    // problemSet[i].correct = dropdownSelected[i]
+                    tempToSend.correct = dropdownSelected[i]
+                    tempToSend.pid = problemSet[i].pid
+                    tempToSend.input = problemSet[i].input
+                    // delete problemSet[i]['answer']
+                    // delete problemSet[i]['question']
 
                 }
-                sendAttempts(problemSet)
+                sendAttempts(tempToSend)
                 // console.log(problemSet)
 
                 var pieFilling = []
@@ -209,8 +214,9 @@ function makeCategory(option) {
                   pieFilling.push(temp)
                 }
                 var total = problemSet.length;
+                console.log(pieFilling)
                 d3.select('.dropdowns').html("")
-                d3.select('.dropdowns').append('p').text('You did not pass. Answers are not given; however, the chart below is a graphical representation of the proprtion of your correct and incorrect answers.').attr('class','m-a-1')
+                d3.select('.dropdowns').append('span').text('You did not pass. Answers are not given; however, the chart below is a graphical representation of the proprtion of your correct and incorrect answers.').attr('class','m-a-1')
                 makePie(pieFilling,'.dropdowns')
                 d3.select('.dropdowns').selectAll('p')
                 .data(problemSet)
@@ -249,7 +255,7 @@ function makePie(data, div) {
     var color = d3.scaleOrdinal(d3.schemeCategory10);
     // var correctColor = d3.scaleOrdinal(d3.schemeSet3);
     var donutWidth = 75;
-    var label = ["Total Breakdown","Correct Answers Only","Mistakes Only"]
+    // var label = ["Total Breakdown","Correct Answers Only","Mistakes Only"]
     var options = ["total","correct","incorrect"]
     var correct = []
     var incorrect = []
@@ -271,37 +277,37 @@ function makePie(data, div) {
     //       .attr('value',function(d){return d.toLowerCase()})
     //
 
-
-    data.forEach(function(d){
-      temp = {
-        label: d.label+ ": " + "correctly chosen",
-        count: d.count
-      }
-      if (d.correct) {
-        temp = {
-          label: d.label+ ": " + "correctly chosen",
-          count: d.count
-        }
-        correct.push(temp)
-      }
-      else {
-        temp = {
-          label: d.label+ ": " + "incorrectly chosen",
-          count: d.count
-        }
-        incorrect.push(temp)
-      }
-      total.push(temp)
-
-    })
-
-
-    var dataset = {
-      "total":total,
-      "correct":correct,
-      "incorrect":incorrect
-    }
-    console.log(dataset)
+    //
+    // data.forEach(function(d){
+    //   temp = {
+    //     label: d.label+ ": " + "correctly chosen",
+    //     count: d.count
+    //   }
+    //   if (d.correct) {
+    //     temp = {
+    //       label: d.label+ ": " + "correctly chosen",
+    //       count: d.count
+    //     }
+    //     correct.push(temp)
+    //   }
+    //   else {
+    //     temp = {
+    //       label: d.label+ ": " + "incorrectly chosen",
+    //       count: d.count
+    //     }
+    //     incorrect.push(temp)
+    //   }
+    //   total.push(temp)
+    //
+    // })
+    //
+    //
+    // var dataset = {
+    //   "total":total,
+    //   "correct":correct,
+    //   "incorrect":incorrect
+    // }
+    // console.log(dataset)
     var svg = d3.select(div)
         .append('svg')
         .attr('width', width)
@@ -315,13 +321,13 @@ function makePie(data, div) {
 
     var pie = d3.pie()
         .value(function(d) {
-          console.log(d)
+          // console.log(d)
             return d.count;
         })
         .sort(null);
 
     var path = svg.selectAll('path')
-        .data(pie(dataset.total),function(d){
+        .data(pie(data),function(d){
           return d.data.label
         })
         .enter()
@@ -329,8 +335,8 @@ function makePie(data, div) {
         .attr('d', arc)
         .attr('fill', function(d, i) {
           // console.log(d)
-            if (d.data.correct) return color(d.data.label)
-            else return color(d.data.label);
+            if (d.data.correct) return color("correctly chosen: "+ d.data.label )
+            else return color("incorrectly chosen: "+d.data.label);
             // return color(d.data.label)
         })
         .attr('opacity',0)
