@@ -99,18 +99,18 @@
       "type":"task",
       "children":[
         {
-          "name":"Arguments and Validity","type":"subtask","id":"sl-pset-1"
+          "name":"Arguments and Validity","type":"subtask","id":"sl-pset-2"
         },
         {
-          "name":"Translation","type":"subtask"
+          "name":"Translation","type":"subtask","id":"sl-pset-4"
         },
         {
-          "name":"Conditionals","type":"subtask"
+          "name":"Venn Diagrams and Categorical Syllogism","type":"subtask","id":"sl-pset-1"
         },
         {
-          "name":"Substitution of Logical Equivalents","type":"subtask"
+          "name":"Substitution of Logical Equivalents","type":"subtask","id":"sl-pset-3"
         },{
-          "name":"Semantic Tableaux","type":"subtask"
+          "name":"Semantic Tableaux","type":"subtask","id":"sl-pset-5"
         }
       ]
     },
