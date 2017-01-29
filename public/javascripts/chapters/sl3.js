@@ -104,7 +104,8 @@ $(function(){
 
        tabulate(validExample,"#validExample")
        makeDefMatch("sl-3-def")
-        makeCategory("sl-3-cat")
+
+        makeCategory({eventId : "sl-3-cat",shuffle:true})
 
       //   var sl_2_6c = []
       //  for (col in sl_2_6b){

@@ -11,6 +11,8 @@ $(function(){
   score = d3.select('#score')
   score.text(currentScore)
   var difficulty = 1
+  var bonus = false;
+  var bonusChance = .05
   d3.select('#difficulty').text(difficulty)
   // var dropdowns = d3.select('#control').append('div').attr('id','dropdown')
 
@@ -22,7 +24,7 @@ $(function(){
 
   d3.select('#tutorial').on('click',function(){
     var head = "Instruction"
-    var body = "<p>In this logicise, you will be asked to fill out various truth tables. You will be given the values of the atomic sentences and you will have to infer the truth values for the complex sentence.</p><p> You have one second chance, if you happened to get one wrong answer. After that, any incorrect response means that you would have to start over!</p><p>The exercise starts slow with easy complex sentences, but get progressively more difficult later on, as you get higher score. Toward the end, expect to see tables with 16 rows (i.e., 4 sentence letters).You need a score of" + toPass + " or above to pass this exercise.</p>"
+    var body = "<p>In this logicise, you will be asked to fill out various truth tables and then determine whether the argument is valid and/or consistent. You will be given the values of the atomic sentences and you will have to infer the truth values for the complex sentence.</p><p> You have one second chance, if you happened to get one wrong answer. After that, any incorrect response means that you would have to start over!</p><p>The exercise starts slow with easy complex sentences, but get progressively more difficult later on, as you get higher score. Toward the end, expect to see tables with 16 rows (i.e., 4 sentence letters).You need a score of" + toPass + " or above to pass this exercise.</p>"
     modalMsg(head,body)
   })
 
@@ -35,10 +37,37 @@ $(function(){
       return dropdownHtml
   }
 
-  function makeProblem(difficulty){
+  var timeDisplay = d3.select('.subNav').append('p').attr('class','display-4 m-y-0')
 
-    load(difficulty,function(err,data){
-      // console.log(data)
+
+  var timer = new Timer({
+      tick : 1,
+      ontick : function (millisec) {
+        var sec = Math.round(millisec / 1000)
+        timeDisplay.text(sec)
+          console.log('interval', sec);
+      },
+      onstart : function() {
+          console.log('timer started');
+      },
+      onend: function(){
+        alert('Time is up! You did not answer the bonus question. You will not be penalized. Press Confirm to continue.', "incorred")
+        state  = "next"
+        timeDisplay.text('')
+      },
+      onstop: function(){
+        timeDisplay.text('')
+      }
+  });
+
+
+  function makeProblem(difficulty){
+    bonus = Math.random() <= bonusChance
+    var diff = (bonus) ? 4: difficulty;
+    if (bonus) timer.start(150)
+    load(diff,function(err,data){
+      console.log(data)
+      if (bonus) alert('Random bonus problem. Answer the problem correct before the end of the timer to get 5 points. You will not be penalized by answering the question incorrectly.', 'incorred')
       currentProblem = data;
       u = u + 1;
       var con = d3.select('#display').append('div').attr('class','tableContainer')
@@ -123,6 +152,7 @@ $(function(){
 
   var button = d3.select('#confirm')
   button.on('click',function(){
+    if (bonus) timer.stop()
     if (state == "input"){
       state = "next"
       // for (row in currentProblem.column){
@@ -191,13 +221,27 @@ $(function(){
       }
       // sendAttempts(att);
       if (correct) {
-        currentScore += 1;
-        score.text(currentScore);
-        alert("This is correct! Press 'confirm' again to continue.","correctblue")
+        if (bonus){
+          currentScore += 5;
+          score.text(currentScore);
+          timer.stop()
+          alert("You answered the bonus question correctly! Press 'confirm' again to continue.","correctblue")
+          bonus = false
+        }else{
+          currentScore += 1;
+          score.text(currentScore);
+          alert("This is correct! Press 'confirm' again to continue.","correctblue")
+        }
+
 
       }
       else{
-        if (currentScore < toPass && chance == 0){
+        if (bonus){
+          state ="next"
+          alert("This is incorrect! But you will not be penalized for missing the bonus question.","incorred")
+          bonus = false
+        }
+        else if (currentScore < toPass && chance == 0){
           modalMsg("Result","This is incorrect! Press 'confirm' again to restart. Unfortunately you did not pass.")
           state = "restart"
 
@@ -211,15 +255,15 @@ $(function(){
         }else if (currentScore >= toPass && chance == 0){
           chance -= 1;
           modalMsg("Result","This is incorrect! Incorret values are highlighted in red. You have passed the test!")
-          recordCompletion(uid,"sl","logicise","truthTable1")
-          recordLeader(uid,"truthTable1",currentScore)
+          recordCompletion(uid,"sl","logicise","truthTable2")
+          recordLeader(uid,"truthTable2",currentScore)
           state = "restart"
         }
 
       }
     }else if (state == "next"){
-      if (currentScore == 3) difficulty += 1;
-      else if (currentScore == 11) difficulty += 1;
+      if (currentScore >= 3) difficulty = 2;
+      else if (currentScore >= 11) difficulty =3 ;
       d3.select('#difficulty').text(difficulty)
       makeProblem(difficulty)
       state = "input"

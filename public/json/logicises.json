@@ -11,7 +11,7 @@
   },
   "truthTable2":{
     "title": "Truth Table Logicise 2",
-    "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid.",
+    "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid or consistent.",
     "eventId":"truthTable2"
   }
 }

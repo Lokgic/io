@@ -4,27 +4,36 @@ body {
 }
 
 
+
 .dropdowns{
   overflow: scroll;
   height: 50%;
   background: #eee;
+  width: 95%;
+  margin:10px auto;
+  border: 1px black solid;
+
 }
 
 .dropdownQLabel{
   padding-left: 5px;
   display: block;
   width:80%;
-  margin:10px auto;
-
+  margin:auto;
+  font-size: 1.5em;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .dropdownQSelect {
+  font-size: 1.5em;
   background: #fff;
   display: block;
   width:80%;
   margin:auto;
   border-width: 0;
   color:black;
+  margin-bottom:30px;
 }
 
 

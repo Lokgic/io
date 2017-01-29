@@ -50,9 +50,10 @@ module.exports.getProfile = function(uid, callback){
 
 
 module.exports.attempt = function(dataset, callback){
-
+  console.log(dataset)
 	knex('attempt').insert(dataset)
       .catch(function(error) {
+        console.log(error)
         return callback(error)
       })
       .then(function(){

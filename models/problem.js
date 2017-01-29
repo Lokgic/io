@@ -64,7 +64,7 @@ module.exports.get = function(mod, chapter,section, callback){
 
         toCall= {
           choices: choices,
-          problems:_.shuffle(toSend)
+          problems:toSend
         }
         return callback(toCall)
       }

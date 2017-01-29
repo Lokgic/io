@@ -45,6 +45,10 @@
                     "name": "Core Concepts in Formal Logic",
                     "type": "chapter",
                     "children": [{
+                  "name":"Categorizing logical properties",
+                  "type":"section",
+                  "id":"sl-3-cat"
+                  },{
                   "name":"Definition review",
                   "type":"section",
                   "id":"sl-3-def"
@@ -74,7 +78,8 @@
                     "id":"sl-logicise-truthTable1"
                 },{
                     "name": "Truth Table 2",
-                    "type":"chapter"
+                    "type":"chapter",
+                    "id":"sl-logicise-truthTable2"
                 },
                 {
                     "name": "Truth Table 3",

@@ -30,5 +30,15 @@ sentautology,definition,Semantic tautology,A statement that has only Ts in the c
 demorgan,definition,DeMorgan's Law," for any sentence X and Y, $(A \vee B) \equiv (\neg A \wedge \neg B)$",,sl,3,def
 dist,definition,Law of Distribution,"For any X and Y, $X \wedge (Y\vee Z) \equiv (X \wedge Y) \vee (X\wedge $Z)",,sl,3,def
 senentail,definition,Semantic entailment,A conception of inference where an argument's validity is verified using a truth table.,,sl,3,def
-teller3-4-a,category,$(B\wedge A)\vee (B\wedge \neg A)$,Contingent.,,sl,3,cat
-teller3-4-b,category,$B\wedge [(\neg A \vee A)\wedge  \neg B)]$,Contradiction.,,sl,3,cat
+teller3-4-a,category,$(B\wedge A)\vee (B\wedge \neg A)$,Contingent,,sl,3,cat
+teller3-4-b,category,$B\wedge [(\neg A \vee A)\wedge  \neg B)]$,Contradiction,,sl,3,cat
+teller3-4-c,category,$(A \wedge B)\vee [(A \wedge \neg B)\wedge  (\neg A\wedge B)]$,Contingent,,sl,3,cat
+teller3-4-d,category,$(A \vee B)\vee \neg ( A\wedge C)$,Tautology,,sl,3,cat
+teller3-4-e,category,$(A \vee B)\wedge (A \vee \neg B) \wedge (\neg A \vee B) \wedge (\neg A \vee \neg B)$,Contradiction,,sl,3,cat
+teller3-4-f,category,$ \neg A \wedge \neg B\wedge (A \vee B)$,Contradiction,,sl,3,cat
+teller3-4-g,category,$(A \vee C)\wedge  C\wedge (A\vee \neg C)$,Contingent,,sl,3,cat
+teller3-4-h,category,$(A \wedge B)\vee \neg B \vee \neg A$,Tautology,,sl,3,cat
+teller3-4-i,category,$(\neg B \wedge A) \vee (\neg A \wedge B ) \vee (A \wedge B) \vee (\neg B \wedge \neg A)$,Tautology,,sl,3,cat
+teller3-4-j,category,$(A \vee  \neg A \vee B) \wedge (A \vee \neg A \vee \neg C)$,Tautology,,sl,3,cat
+teller3-4-k,category,$(A \wedge C) \vee (A \wedge \neg  C) \vee (B \wedge C ) \vee (B \wedge \neg C)$,Contingent,,sl,3,cat
+teller3-4-l,category,$\neg (\neg A \vee C) \vee \neg (\neg B \vee   C) \vee \neg (A \vee B ) \vee C$,Tautology,,sl,3,cat

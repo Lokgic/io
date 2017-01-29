@@ -223,7 +223,7 @@ function makeTruthTable(letters, sentence) {
 function makeArgument(table){
   var firstPremise = -1
   var conclusion = table.length - 1
-
+  console.log(table)
   var nRow = table[0].column.length
   for (col in table){
     if (!table[col].atomic) {
@@ -240,10 +240,11 @@ function makeArgument(table){
   var valid = true
   var info
 
-
+// console.log(firstPremise)
   for (row in table[0].column){
     var truePremises = true
     for (var i = firstPremise;i < conclusion;i++){
+
       if (table[i].column[row] == "F") {
         truePremises = false
       }
@@ -260,8 +261,8 @@ function makeArgument(table){
 
     }
   }
-  console.log(answer)
-  console.log(table)
+  // console.log(answer)
+  // console.log(table)
 
   function checkConsistency(table){
     for (var i = 0;i< nRow;i++){
@@ -293,7 +294,7 @@ function checkProperty(col){
   else if (!_.contains(col,"F")) return "tautology"
 }
 
-console.log(checkProperty(['T','T','T']))
+// console.log(checkProperty(['T','T','T']))
 
 truthTable2 = function truthTable2(v){
   var nLet
@@ -301,26 +302,34 @@ truthTable2 = function truthTable2(v){
   var complexity
     if (v == 1){
        nLet = 2;
-      complexity = 1
-      connectives = 1
-      nSen = 3;
-    } else if (v == 2){
-       nLet = 3;
-      complexity = 1
-      connectives = 1
-      negProbability = {likelihood: 30}
-    }else if (v == 3){
-       nLet = null;
       complexity = 2
       connectives = 1
-      negProbability = {likelihood: 30}
+      nSen = 2;
+    } else if (v == 2){
+       nLet = 3;
+      complexity = 2
+      connectives = 1
+      nSen = 3;
+      negProbability = {likelihood: 10}
+    }else if (v == 3){
+      nLet = null;
+     complexity = 2
+     connectives = 1
+     nSen = 4;
+     negProbability = {likelihood: 20}
+   }else if (v == 4){
+      nLet = 4;
+     complexity = 2
+     connectives = 1
+     nSen = 4;
+     negProbability = {likelihood: 30}
     }
     var l = makeLetters(nLet)
     var sen = []
     for (var i = 0;i<nSen;i++){
       sen.push(makeSentence(l,connectives,complexity))
     }
-    // console.log(sen)
+    console.log(l)
 
     return makeArgument(makeTruthTable(l,sen))
 
@@ -330,7 +339,7 @@ truthTable2 = function truthTable2(v){
 
 module.exports.truthTable2 = truthTable2
 
-console.log(truthTable2(1))
+console.log(truthTable2(2))
 
 function makeRandomEnglish(){
   switch (chance.integer({min: 0, max: 3})){
