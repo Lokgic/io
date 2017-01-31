@@ -421,7 +421,7 @@ function tabulate(data, div, op) {
     })
     var table = d3.select(div).append("table")
 
-
+    console.log(columns)
     thead = table.append("thead"),
         tbody = table.append("tbody");
 
@@ -434,6 +434,7 @@ function tabulate(data, div, op) {
         .text(function(column) {
             return column;
         });
+
 
     var rows = []
 
@@ -474,7 +475,9 @@ function tabulate(data, div, op) {
             if (d == "") return "blank"
         })
 
-
+    if (columns.length>4){
+      table.style('font-size','0.9em')
+    }
 
 
     return table;
@@ -593,6 +596,14 @@ var mathJax = {
     }
 }
 
+function loadLogicise(id,option, callback) {
+    jQuery.post("/processing/"+id+"/" + option)
+        .done(function(data) {
+            callback(null, data);
+        }).fail(function(f) {
+            console.log(f)
+        })
+};
 
 function loadProblems(option, callback) {
     jQuery.post("/problem/" + option)

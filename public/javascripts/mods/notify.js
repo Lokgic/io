@@ -634,23 +634,25 @@
 	    }
 	  }
 	});
-	$.notify.addStyle('info', {
+	$.notify.addStyle('important', {
 	  html: "<div><span data-notify-text/></div>",
 	  classes: {
 	    base: {
 
-	      "background-color": "#444C5C",
+	      "background-color": "#dfe166",
 	      "padding": "50px 30px",
 	      "color":"white",
 	      "min-width":"300px",
 				"max-width":"500px",
-	      "opacity": .9,
+	      "opacity": 1,
 	      "border-radius":"10px",
 	      "border-width":"5px",
 	      "border-color":"grey",
 	      "border-style":"solid",
 	       "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
-	       "font-family": 'Titillium Web'
+	       "font-family": 'Titillium Web',
+				 "font-size":"1em",
+				 "color":"black"
 	    },
 	    mini: {
 				"white-space": "nowrap",

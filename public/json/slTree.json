@@ -58,11 +58,6 @@
                     "name": "Conditionals and Validity",
                     "type": "chapter",
                     "children": []
-                },
-                {
-                    "name": "Truth Trees (Semantic Tableaux)",
-                    "type": "chapter",
-                    "children": []
                 }]
             }, {
                 "name": "Logicise",
@@ -85,11 +80,9 @@
                     "name": "Truth Table 3",
                     "type":"chapter"
                 }, {
-                    "name": "Wason Selection Task",
-                    "type": "chapter"
-                }, {
-                    "name": "Using Truth Trees",
-                    "type": "chapter"
+                    "name": "Wason Selection Task I",
+                    "type": "chapter",
+                    "id":"sl-logicise-wason1"
                 }]
             }
       ]
@@ -109,9 +102,8 @@
         },
         {
           "name":"Substitution of Logical Equivalents","type":"subtask","id":"sl-pset-3"
-        },{
-          "name":"Semantic Tableaux","type":"subtask","id":"sl-pset-5"
         }
+        
       ]
     },
     {

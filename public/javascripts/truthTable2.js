@@ -215,11 +215,11 @@ $(function(){
       var att = {
         uid:uid,
         pid:difficulty,
-        type:"truthTable1",
+        type:"truthTable2",
         input:input,
         correct:correct
       }
-      // sendAttempts(att);
+      sendAttempts(att);
       if (correct) {
         if (bonus){
           currentScore += 5;
