@@ -657,6 +657,225 @@
     "eventId":"sl-3-def"}
 
     ]
+  },
+  "6":{
+      "title":"In class activity",
+      "content":[
+        {"type":"p",
+          "substance":["Prove the logical law listed on this chapter by using truth tables and Venn diagrams."]
+          }
+
+      ]
   }
+},
+"4":{
+  "1":{
+    "chapterName":"Conditionals",
+    "chapterNum":"4",
+    "chapterDescription":"In this chapter we complete our language SL by introducing the logical connectives of conditional and biconditional.",
+    "title": "The intuition behind conditionals",
+    "content":[
+      {
+        "type":"p",
+        "substance":[
+          "Consider the following symbolization key and English sentences"]
+      },
+      {
+        "type":"orderedList",
+        "substance":[
+          {
+            "id":"A","item":"You are a Duke student."
+          },
+          {
+            "id":"B","item":"You are a Blue Devils fan."
+          },{
+            "id":"C","item":"If you are a Duke student, then you are a Blue Devils fan."
+          }
+
+        ]
+
+      },
+      {
+        "type":"ps",
+        "substance":[
+          "Sentence C can be translated partially as 'If $A$, then $B$.' More technically, we refer to the logical relation between A and B as one of <i>implication</i>: A implies B. We will use the symbol $\\to$ to represent this logical relation, so sentence C then becomes $A\\to B$. The connective is called a conditional. The sentence on the left-hand side of the conditional ($R$ in this example) is called the <i>antecedent</i>, and the other is called the <i>consequent</i>.",
+          "The point of conditionals is to capture the situation where <i>one event cannot occur without another.</i> So, to say that $A \\to B$ is to say that You cannot be a Duke student without also being a Blue Devils fan. You can think of this as saying that being a Blue-Devils fan is a required condition for being a Duke student. You cannot be a Duke student without fulfilling it.",
+          "So now suppose you know the following:"
+        ]
+      },
+      {
+        "type":"orderedList",
+        "substance":[
+          {
+            "id":"D","item":"Dennis is a Duke student."
+          },
+          {"id":"E","item":"Deandra is a Blue-Devils fan."}
+
+        ]
+
+      },
+      {
+        "type":"ps",
+        "substance":[
+          "What can we infer from this? Since $A\\to B$ means that a person cannot be a Duke without being a Blue-Devils fan, we can infer that Dennis is also a Blue-Devils fan. On the other hand,$A\\to B$ does not imply that all Blue-Devils fans are Duke students! It's possible that they are just basketball fans in general. So another way to think about conditionals is in terms of possibilities. $A \\to B$ is asserting that a certain scenario is not possible; someone that is a Duke student that is not a Blue-Devils fan ($A \\wedge \\neg B$). But it does not say that B (being a Blue-Devils fan) implies A (being a Duke student). So we don't know if Deandara is a Duke student.",
+          "In English, the truth of conditionals often depends on what would be the case if the antecedent were true - even if, as a matter of fact, the antecedent is false. This poses a problem for translating conditionals into SL.  Considered as sentences of SL, $A$ and $B$ in the above examples have nothing intrinsic to do with each other. In order to consider what the world would be like if $A$ were true, we would need to analyze what $R$ says about the world. Since $A$ is an atomic symbol of SL, however, there is no further structure to be analyzed. When we replace a sentence with a sentence letter, we consider it merely as some atomic sentence that might be true or false.",
+
+              "An important thing to keep in mind is that the symbol $\\to$ does not aim to capture perfectly how the word 'if' is used in English. Instead, it is what logicians call a material conditional, which has a technical meaning: a statement is an material conditional if and only if the only way in which for the statement is false is when the antecedent true but conclusion false. This can be captured by the truth table below:"
+        ]
+      },
+      {"type":"table","eventId":"materialconditional"},
+      {
+        "type":"ps",
+        "substance":[
+          "There is however some strange result for this. This is best explained using examples and the truth tables. Again we will use the conditional statement C above as a basis, but now consider the following people and whether or not they are Duke students:"
+        ]
+      },{
+        "type":"orderedList",
+        "substance":[
+          {
+            "id":"Dennis","item":"a Duke student and a Blue-Devils fan."
+          },
+          {"id":"Eva","item":"a Duke student but not a Blue-Devils fan."},
+          {"id":"Frank","item":"not a Duke student but a Blue-Devils fan"},
+          {"id":"Gwen","item":"not a Duke student and not a Blue-Devils fan."}
+
+        ]
+
+      },
+       {
+          "type":"ps",
+          "substance":[
+            "Now think about the following conditional statements: 'if Dennis is a Duke student, then Dennis is a Blue-Devils fan' and 'if Eva is a Duke student, then Eva is a Blue-Devils fan' - it makes sense to think that the first one is true and the latter false. But the cases of Frank and Gwen are more problematic. Given they are not Duke students, would it be true or false to say, if Frank is a Duke student, then Frank is a Blue-Devils fan' and 'if Gwen is a Duke student, then Gwen is a Blue-Devils fan'? The definition of material condition says they are both true. How is that so?",
+            "One way to think about this is think of conditionals as rules, and then think of the conditional as being false only when the rule is being violated. $A\\to B$ would amount to a rule stating 'you have to be a Blue-Devils fan to be a Duke student.' Frank and Gwen do not violate the rule because the rule only applies to Duke students. Thinking about conditionals this way, it should be easier to see the rationale of material conditionals."
+          ]
+        },
+        {
+          "type":"important",
+          "substance":["The conception of the conditional has other weird consequences. For instance, what happens if the antecedent is not atomic?"]
+        }
+    ]
+  },
+  "2":{
+    "title":"'if' vs 'only if'",
+    "content":
+    [{
+      "type":"ps",
+      "substance":[
+
+        "The difficult thing about conditionals is that in English the usage of conditionals is very messy. So when we translate between conditional and English we cannot simply rely on syntactic markers such as where the word 'if' occurs. For instance, consider the following example:"
+      ]
+    },
+      {
+        "type":"orderedList",
+        "substance":[
+          {
+            "id":"F","item":"You are a Blue-Devils fan if you are a Duke student."
+          },
+          {"id":"G","item":"You are a Blue-Devils fan only if you are a Duke student."}
+
+        ]
+
+      },{
+        "type":"ps",
+        "substance":[
+
+          "F is simply C but slightly rearranged so it means the same thing C does. We can translate it also as $A \\to B$. But what about G? Since the word 'if' also appears in the second half of the sentence, it might be tempting to symbolize this in the same way as sentence F. That would be a mistake.",
+
+          "The unique thing about G is that it appears to be saying that <i>the only way to be a Blue-Devils fan is to be a Duke student.</i> In other words, you cannot be a Blue-Devils fan(B) without being a Duke student(A)! So $A \\to B$ clearly will not work - since it does not say that B cannot be true without A. So G is actually better translated as $B \\to A$."
+
+
+        ]
+      }
+
+    ]
+  },
+  "3":{
+    "title":"Biconditionals: 'if and only if'",
+    "content":[
+      {
+      "type":"ps",
+      "substance":[
+        "Our last logical connective is the <i>biconditional</i> $\\leftrightarrow$, which is logically equivalent to $(A\\to B) \\wedge (B\\to A)$. In English, we often use 'if and only if' to signify biconditionals. In this case, it means that we cannot have one without another, so a biconditional is always true when the two components have the same truth vales, and always false when they don't. <i>Definitions</i> are often explicated in terms of biconditionals. For instance, ",
+        "$$\\text{Someone is a bachelorette if and only if that person is a young unmarried woman.}$$",
+        "$$\\lim_{x\\to a} f(x) = L  \\text{ if and only if }\\lim_{x\\to a^-} f(x) = L = \\lim_{x\\to a^+} fx$$",
+        "For both of the statements above we can easily translate them using $\\leftrightarrow$.",
+        "We could abide without a new symbol for the biconditional. We could translate biconditional statements like the ones above as $(T \\to S)\\wedge(S\\to T)$. We would need parentheses to indicate that $(T \\to S)$ and $(S\\to T)$ are separate conjuncts; the expression $T \\to S\\wedge S\\to T$ would be ambiguous.",
+        "Because we could always write $( A \\to B )\\wedge( B \\to A )$ instead of $ A \\leftrightarrow B $, we do not strictly speaking need to introduce a new symbol for the biconditional. Nevertheless, logical languages usually have such a symbol. SL will have one, which makes it easier to translate phrases like ``if and only if.''",
+        "The truth table for the biconditional is as follows:"
+      ]
+    },
+    {"type":"table","eventId":"biconditional"},
+    {"type":"textInput","substance":["Why is 'if and only if' called a biconditional? Give your best educated guess. You are not graded on correctness but serious answers only. "],"eventId":"sl-4-3"}
+
+  ]
+},
+"4":{
+  "title":"Advanced translations",
+  "content":[
+    {
+      "type":"p",
+      "substance":[
+      "We have now introduced all of the connectives of SL. We can use them together to translate many kinds of sentences. Consider these examples of sentences that use the English-language connective 'unless':"
+      ]
+    },
+    {
+      "type":"orderedList",
+      "substance":[
+        {"id":"H","item":"Unless you wear a jacket, you will catch cold. "},
+        {"id":"I","item":"You will catch cold unless you wear a jacket."}
+      ]
+    },
+    {
+      "type":"ps",
+      "substance":[
+      "Just like 'Y if X' is equivalent to 'if X, Y', H and I are logically equivalent. But how should we translate 'unless'? It's tricky because it does not map straightforwardly onto a conditional statement. One way to explicate this is to interpret the speaker of H and I as expressing a possible preventative event for catching a cold. That is, since wearing jacket is something that can prevent you from getting a get, <i>if you don't wear a jacket, then you will get a cold.</i> This means that this is one way to understand the 'unless' relation:",
+      "$$\\text{Unless X, Y } \\equiv \\neg X \\to Y$$",
+
+      "Notice the nice thing about this explication is that it does not commit the speaker to the idea that, if you wear a jacket, then you won't get a cold. This can be easily seen when we do the translation side by side:"
+      ]
+    },
+    {
+      "type":"orderedList",
+      "substance":[
+        {"id":"J","item":"If you don't wear a jacket, you will catch a cold: $\\neg W \\to O$ "},
+        {"id":"K","item":"If you wear a jacket, you will not catch a cold: $W \\to \\neg I$"}
+      ]
+    },
+    {
+      "type":"ps",
+      "substance":["There is a good reason to think that saying H or I is expressing J but not K, because the speaker could be saying that, even though You might still get a cold even if you wore a jacket - say perhaps you got it by kissing something who has a cold, there is a possibility that you will not get it. So if you don't wear that jacket, then it's guaranteed that you will get a cold.",
+      "Note that in English sometimes 'unless' could signify a biconditional. Consider the sentence: 'I will go to the party, unless John is going'. Perhaps I really hate John so I can't stand going to the party with him being present. Understood as such, it makes to interpret me as saying that if John goes, I won't go, and if I go, that means John didn't go. That would be a biconditional interpretation.",
+    "Examine the truth table for a translation of J."]
+    },
+    {
+      "type":"table","eventId":"unless"
+
+    },{
+      "type":"textInput","eventId":"sl-4-4","substance":["It should look familiar since it is exactly the same as the truth table definition of one of the logical connectives. Which one is it? What would this logically equivalent translation look like? Does it make sense?"]
+    }
+  ]
+},
+"5":{
+  "title":"Necessary and Sufficient Conditions.",
+  "content":[
+    {
+      "type":"p",
+      "substance":["Philosophers often speak of necessary and sufficient conditions for events. They can be explicated as conditionals. By saying X is a necessary condition for Y, they mean roughly that X is a precondition for Y. For instance, being a citizen of the United States is a precondition for being an eligible voter. This means that someone cannot be a eligible voter without being a U.S. citizen, which has the conditional form of $E \\to C$. In contrast to necessary conditions, sufficient conditions provide all that we need to know. For instance, while one cannot be a eligible voter without also being a citizen, being a citizen alone is not sufficient. For instance, if you are convicted felon then your eligibility is affected. This means that being a US citizen is a necessary but not a sufficient condition for being eligible to vote: you definitely cannot vote without being a citizen, but by itself the citizenship is not enough to guarantee your eligibility."]
+      }
+    ]
+  },
+  "6":{
+    "title":"Logical Laws involving conditionals and biconditionals.",
+    "content":[
+      {"type":"ps",
+      "substance":[
+        "There is a number of logical laws involving conditionals. You should check all of them using the truth table. Like the laws we learned in earlier chapters. these laws can be used for SLE.",
+        "$$\\text{Contraposition: } X \\to Y \\equiv \\neg Y \\to \\neg X$$",
+        "$$\\text{Material Implication: } X \\to Y \\equiv \\neg X \\vee Y.$$",
+        "$$\\text{Biconditional Exportation: } X \\leftrightarrow Y \\equiv (X \\to Y) \\wedge (Y \\to X)$$"
+        ]}
+
+    ]
   }
+}
 }

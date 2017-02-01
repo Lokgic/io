@@ -6,9 +6,12 @@ var allLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
 var or = "\\vee"
 var and = "\\wedge"
 var neg = "\\neg"
+var iff = "\\leftrightarrow"
+var implies = "\\to"
 var negProbability = {likelihood: 10}
 var allConnectives ={
-  "1": [or,and]
+  "1": [or,and],
+  "2": [or,and,iff,implies]
 }
 
 var connectiveEnglish =
@@ -104,6 +107,10 @@ function evaluateSL(vals, sl) {
         return left && right
     } else if (sl.connective == or) {
         return left || right
+    } else if (sl.connective == implies){
+      return !left || right
+    } else if (sl.connective == iff){
+      return left == right
     }
 
 }
@@ -339,7 +346,50 @@ truthTable2 = function truthTable2(v){
 
 module.exports.truthTable2 = truthTable2
 
-console.log(truthTable2(2))
+
+truthTable3 = function truthTable3(v){
+  var nLet
+  var nSen
+  var complexity
+    if (v == 1){
+       nLet = 2;
+      complexity = 2
+      connectives = 2
+      nSen = 2;
+    } else if (v == 2){
+       nLet = 3;
+      complexity = 2
+      connectives = 2
+      nSen = 3;
+      negProbability = {likelihood: 10}
+    }else if (v == 3){
+      nLet = null;
+     complexity = 2
+     connectives = 2
+     nSen = 4;
+     negProbability = {likelihood: 20}
+   }else if (v == 4){
+      nLet = 4;
+     complexity = 2
+     connectives = 2
+     nSen = 4;
+     negProbability = {likelihood: 30}
+    }
+    var l = makeLetters(nLet)
+    var sen = []
+    for (var i = 0;i<nSen;i++){
+      sen.push(makeSentence(l,connectives,complexity))
+    }
+    console.log(l)
+
+    return makeArgument(makeTruthTable(l,sen))
+
+};
+
+console.log(truthTable3(2))
+
+module.exports.truthTable3 = truthTable3
+
 
 function makeRandomEnglish(){
   switch (chance.integer({min: 0, max: 3})){

@@ -13,8 +13,18 @@
     ]
   },
     {"name": " < 3 Absences","type":"task"},
-    {"name": "Logicise Achievements", "type":"task"},
-    {"name": "In Class Activities", "type":"task"}
+    {"name": "Logicise Achievements", "type":"task"
+      ,
+      "children":[
+        {"name":"4 x passing scores for 5 logicises","type":"subtask","id":"pa-logicise-4x"}
+      ]},
+    {"name": "In Class Activities", "type":"task",
+    "children":[
+      {"name":"Logical Truths","type":"subtask","id":"pa-inclass-sl1"},
+      {"name":"Substitution of Logical Equivalents","type":"subtask","id":"pa-inclass-sl2"},
+      {"name":"SL Truth Trees","type":"subtask"}
+    ]
+    }
 
   ]
 }

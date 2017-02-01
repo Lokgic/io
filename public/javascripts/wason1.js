@@ -27,7 +27,7 @@ modalMsg("Introduction",html)
   var bonus = false;
   var bonusChance = .05
 
-  var state = "intro"
+  var state = "next"
   var currentProblem;
   var chance = 1;
 

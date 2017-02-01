@@ -55,9 +55,20 @@
                   }]
                 },
                 {
-                    "name": "Conditionals and Validity",
+                    "name": "Conditionals",
                     "type": "chapter",
-                    "children": []
+                    "children": [
+                      {
+                        "name":"Short Question: Biconditional",
+                        "type":"section",
+                        "id":"sl-4-3"
+                      },
+                      {
+                        "name":"Short Question: logical equivalents of 'unless'",
+                        "type":"section",
+                        "id":"sl-4-4"
+                      }
+                    ]
                 }]
             }, {
                 "name": "Logicise",
@@ -103,7 +114,7 @@
         {
           "name":"Substitution of Logical Equivalents","type":"subtask","id":"sl-pset-3"
         }
-        
+
       ]
     },
     {

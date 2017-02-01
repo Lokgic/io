@@ -1062,3 +1062,38 @@ function makeResult(problemSet, eventID) {
 
 
 }
+
+
+function textInputInit(){
+  d3.selectAll('.textInput').select('button').on('click',function(d){
+    // console.log(d3.select(this))
+    var eventId = d3.select(this).attr('data')
+    var response = document.getElementById(eventId+"textArea").value
+    var attempt = {
+      uid:uid,
+      pid:eventId,
+      type:"textInput",
+      input: response,
+      correct:null
+    }
+    modId = eventId.split('-')[0]
+    ch = eventId.split('-')[1]
+    sec = eventId.split('-')[2]
+    // var record = {
+    //   uid:parseInt(uid),
+    //   module: modId,
+    //   chapter:ch,
+    //   section:sec
+    // }
+    // console.log(record)
+    if (response == "" || response == null) alert('A response is required.',"important")
+    else {
+      sendAttempts(attempt);
+      recordCompletion(uid,modId,ch,sec);
+      d3.select('#'+eventId+'Butt').remove()
+      d3.select('#'+eventId+'textArea').remove()
+      d3.select('#'+eventId).append('p').text('Your answer: ' + response)
+
+    }
+  })
+}

@@ -18,5 +18,10 @@
     "title": "Wason Selection Task",
     "shortDescription":"Turn over the cards required to determine whether the given statement is true or false.",
     "eventId":"wason1"
+  },
+  "truthTable3":{
+    "title": "Truth Table Logicise 3",
+    "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid or consistent.",
+    "eventId":"truthTable2"
   }
 }

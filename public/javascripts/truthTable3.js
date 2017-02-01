@@ -1,6 +1,6 @@
 $(function(){
   function load(v,callback){
-    jQuery.post("../processing/truthTable/truthTable2/"+v)
+    jQuery.post("../processing/truthTable/truthTable3/"+v)
     .done(function(data){
         callback(null, data);
     }).fail(function(){$body.append('Failed to Load Quiz')})
@@ -215,7 +215,7 @@ $(function(){
       var att = {
         uid:uid,
         pid:difficulty,
-        type:"truthTable2",
+        type:"truthTable3",
         input:input,
         correct:correct
       }
@@ -255,8 +255,8 @@ $(function(){
         }else if (currentScore >= toPass && chance == 0){
           chance -= 1;
           modalMsg("Result","This is incorrect! Incorret values are highlighted in red. You have passed the test!")
-          recordCompletion(uid,"sl","logicise","truthTable2")
-          recordLeader(uid,"truthTable2",currentScore)
+          recordCompletion(uid,"sl","logicise","truthTable3")
+          recordLeader(uid,"truthTable3",currentScore)
           state = "restart"
         }
 
@@ -267,8 +267,8 @@ $(function(){
       d3.select('#difficulty').text(difficulty)
       makeProblem(difficulty)
       state = "input"
-      consistencyButt.text('Is the argument consistent?').attr('data',"")
       validButt.text('Is the argument valid?').attr('data',"")
+      consistencyButt.text('Is the argument consistent?').attr('data',"")
     }else if (state == "restart"){
       location.reload();
     }

@@ -23,6 +23,8 @@ mixin symbolkey(key, symbol)
 
 
 
+
+
 mixin MC(x)
 	h4.text-xs-center.m-y-2 #{x.title}
 	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
@@ -59,6 +61,9 @@ mixin quote(lines,source)
 block extrahead
 
 
+mixin genericButtonBar(eventId)
+	button(type = "button" id = eventId+"Butt" data=eventId).btn.btn-greyish.btn-block &rarr;
+
 block content
 	- var plugin
 			main.container.p-x-2.page
@@ -90,6 +95,12 @@ block content
 									when "important"
 										.important.text-justify.p-a-1
 											+paragraphsEscaped(x.substance)
+									when "textInput"
+										.important.text-xs-center.p-a-1(id = x.eventId).textInput
+											for par in x.substance
+												p #{par}
+											textarea.m-y-1(id = x.eventId+"textArea" rows="4" cols="50")
+											+genericButtonBar(x.eventId)
 									when "half"
 										.card-group(id = x.id).p-a-0.half
 											for col in x.substance
@@ -116,8 +127,17 @@ block content
 											.flexContainer
 												+symbolkey(x.key, x.symbol)
 									when "event"
-										h4.text-xs-center.m-y-2 #{x.title}
-										div(id = x.eventId).container
+										if x.important
+											.important.text-xs-center.p-a-1
+												h4.text-xs-center.m-y-2 #{x.title}
+												if x.substance
+													+paragraphsEscaped(x.substance)
+												div(id = x.eventId).container
+										else
+											h4.text-xs-center.m-y-2 #{x.title}
+											if x.substance
+												+paragraphsEscaped(x.substance)
+											div(id = x.eventId).container
 									when "table"
 										.tableContainer(id = x.eventId)
 									when "basicVenn"
