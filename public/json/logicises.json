@@ -16,7 +16,7 @@
   },
   "wason1":{
     "title": "Wason Selection Task",
-    "shortDescription":"Turn over the cards required to determine whether the given statement is true or false.",
+    "shortDescription":"Click the cards required to determine whether the given statement is true or false.",
     "eventId":"wason1"
   },
   "truthTable3":{

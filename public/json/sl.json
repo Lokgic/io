@@ -493,7 +493,7 @@
             "substance":["Finish this chapter by completing the the definition review quiz below."
               ]
             },
-            {"type":"defReview",
+            {"type":"matching",
               "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
             "eventId":"sl-2-def"}
 
@@ -652,7 +652,7 @@
 
       ]
     },
-    {"type":"defReview",
+    {"type":"matching",
       "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
     "eventId":"sl-3-def"}
 
@@ -861,7 +861,10 @@
     {
       "type":"p",
       "substance":["Philosophers often speak of necessary and sufficient conditions for events. They can be explicated as conditionals. By saying X is a necessary condition for Y, they mean roughly that X is a precondition for Y. For instance, being a citizen of the United States is a precondition for being an eligible voter. This means that someone cannot be a eligible voter without being a U.S. citizen, which has the conditional form of $E \\to C$. In contrast to necessary conditions, sufficient conditions provide all that we need to know. For instance, while one cannot be a eligible voter without also being a citizen, being a citizen alone is not sufficient. For instance, if you are convicted felon then your eligibility is affected. This means that being a US citizen is a necessary but not a sufficient condition for being eligible to vote: you definitely cannot vote without being a citizen, but by itself the citizenship is not enough to guarantee your eligibility."]
-      }
+    },
+    {"type":"matching",
+      "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
+    "eventId":"sl-4-matching"}
     ]
   },
   "6":{

@@ -67,6 +67,11 @@
                         "name":"Short Question: Logical equivalents of 'unless'",
                         "type":"section",
                         "id":"sl-4-4"
+                      },
+                      {
+                        "name":"Translation involving conditionals",
+                        "type":"section",
+                        "id":"sl-4-matching"
                       }
                     ]
                 }]
@@ -107,7 +112,7 @@
           "name":"Arguments and Validity","type":"subtask","id":"sl-pset-2"
         },
         {
-          "name":"Translation","type":"subtask","id":"sl-pset-4"
+          "name":"Symbolization","type":"subtask","id":"sl-pset-4"
         },
         {
           "name":"Venn Diagrams and Categorical Syllogism","type":"subtask","id":"sl-pset-1"

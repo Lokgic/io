@@ -42,3 +42,11 @@ teller3-4-i,category,$(\neg B \wedge A) \vee (\neg A \wedge B ) \vee (A \wedge B
 teller3-4-j,category,$(A \vee  \neg A \vee B) \wedge (A \vee \neg A \vee \neg C)$,Tautology,,sl,3,cat
 teller3-4-k,category,$(A \wedge C) \vee (A \wedge \neg  C) \vee (B \wedge C ) \vee (B \wedge \neg C)$,Contingent,,sl,3,cat
 teller3-4-l,category,$\neg (\neg A \vee C) \vee \neg (\neg B \vee   C) \vee \neg (A \vee B ) \vee C$,Tautology,,sl,3,cat
+conditional1,matching,"Unless you are a horrible person, you love dogs.",$G \to D$,,sl,4,matching
+conditional2,matching,"You love dogs unless you are a good person.",$\neg G \to D$,,sl,4,matching
+conditional3,matching,"you are a good person only if you hate dogs.",$  G \to  \neg D$,,sl,4,matching
+conditional4,matching,"Hating dog is a necessary condition to be a horrible person.",$\neg G \to \neg D$,,sl,4,matching
+conditional5,matching,"Unless you hate dog, you are a good person.",$D \to G$,,sl,4,matching
+conditional6,matching,"You cannot hate dogs without being a person.",$\neg D \to G$,,sl,4,matching
+conditional7,matching,"you are a horrible person if you like dogs.",$  D \to  \neg G$,,sl,4,matching
+conditional8,matching,"Hating dog is a sufficient condition to be a horrible person.",$\neg D \to \neg G$,,sl,4,matching

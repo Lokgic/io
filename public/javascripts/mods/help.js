@@ -697,7 +697,7 @@ function makeDefMatch(eventId) {
                 location.reload();
             })
             sendAttempts(data)
-
+            mathJax.reload('.modal-body')
             // $.ajax({
             //     url: '/data/attempt',
             //     type: 'POST',

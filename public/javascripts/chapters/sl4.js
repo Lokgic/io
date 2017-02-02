@@ -1,25 +1,7 @@
 $(function(){
 
   textInputInit();
-  //
-  // d3.select('#sl-4-3Butt').on('click',function(d){
-  //   var response = document.getElementById("sl-4-3textArea").value
-  //   var attempt = {
-  //     uid:uid,
-  //     pid:"sl-4-3",
-  //     type:"textInput",
-  //     input: response,
-  //     correct:null
-  //   }
-  //   if (response == "" || response == null) alert('A response is required.',"important")
-  //   else {
-  //     sendAttempts(attempt);
-  //     d3.select('#sl-4-3Butt').remove()
-  //     d3.select('#sl-4-3textArea').remove()
-  //     d3.select('#sl-4-3').append('p').text('Your answer: ' + response)
-  //
-  //   }
-  // })
+
 
   var conditional = [
       {
@@ -86,6 +68,8 @@ $(function(){
             }
           ]
   tabulate(unless,"#unless")
+  makeDefMatch("sl-4-matching")
+  mathJax.reload()
 
 
 })
