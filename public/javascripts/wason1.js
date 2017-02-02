@@ -11,7 +11,6 @@ $(function(){
   var html = ' <p>You will be shown a set of cards. Each card must have a number on one side and a letter on the other. (For instance, there will be no card with numbers on both sides.)</p>'
       html += '<p><em>Your task is to turn over the <strong>minimum</strong> number of cards required to determine whether the statement is true or false.</em></p>'
       html += '<p>Choose by clicking the card(s) and then press "Confirm". You have to start over if you make a mistake. Get the score of ' + toPass + ' or above to pass the logicise.</p>'
-      html += '<p>You can adjust the difficulty by increasing or decreasing the number of cards by pressing + or -. You get more points from playing with a higher number of cards: Number of points possible = number of cards showing. </p>'
       html += '<p><strong>Note:</strong> There is no card with the number 0 or 1. If you see something that looks like them, it is either the vowel O or the vowel I.</p>'
       html += 'Press "Confirm" to start.'
 
