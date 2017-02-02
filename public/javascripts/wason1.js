@@ -115,7 +115,9 @@ modalMsg("Introduction",html)
 
         }else {
           var msg
-          if (currentScore => passingscore){
+          // console.log(currentScore)
+          // console.log(passingscore)
+          if (currentScore >= toPass){
             msg = "This is incorrect! You have passed the logicise. Press confirm to restart."
             recordCompletion(uid,"sl","logicise","wason1")
             recordLeader(uid,"wason1",currentScore)
