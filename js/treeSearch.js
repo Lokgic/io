@@ -1,4 +1,5 @@
 module.exports.search = function treeSearch(element, key, property){
+  // console.log("searching..")
   // console.log(element)
      if(element[key] == property){
           return element;
@@ -14,30 +15,29 @@ module.exports.search = function treeSearch(element, key, property){
 }
 
 module.exports.checkChildren = function checkChildren(element){
+  // console.log("checking children..")
   // console.log(element)
-     if (element.completed == true){
-
-          return true;
-     }else if(element.type=="section"){
-          element.completed = false;
-
-          return false;
-     }else if(element.children.length == 0|| element.children==null){
-          element.completed = false;
-
-
-
-          return false;
-     }else if (element.children != null){
+  // console.log("completed status")
+  // console.log(element.completed)
+   if (element.children != null){
 
           var i;
           var result = null;
           for(i=0;  i < element.children.length; i++){
+            // console.log("checking child of " + element.name +": " +"element.children[i].name")
                result = checkChildren(element.children[i]);
+              //  console.log("result is " + " " +result)
                if (!result) return false;
           }
           element.completed = true;
           return true;
+     }else if (element.completed == true){
+
+          return true;
+     }else if(element.completed==false){
+          // element.completed = false;
+
+          return false;
      }
      return null;
 }

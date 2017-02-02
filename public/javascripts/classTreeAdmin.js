@@ -28,6 +28,7 @@ $(function() {
 
 
       loadProfile(uid,function(err,data){
+        svg.html("")
         // for (dp in data){
         //   if (data[dp].chapter == "pset"){
         //     treeData[data[dp].module[1]][1][dp].completed = true
@@ -80,45 +81,6 @@ $(function() {
 
 
 
-    g = svg.append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-    // svg.append("rect")
-    //     .attr("width", width)
-    //     .attr("height", height)
-    //     .style("fill", "none")
-    //     .style("pointer-events", "all")
-    //     .call(d3.zoom()
-    //         .scaleExtent([1 / 2, 4])
-    //         .on("zoom", zoomed));
-    //
-    // function zoomed() {
-    //   g.attr("transform", d3.event.transform);
-    // }
-
-  //   function nozoom() {
-  //   d3.event.preventDefault();
-  // }
-
-
-
-    var linear = d3.scaleOrdinal()
-    .domain(["Module","Task","Subtask","Chapter","Section"])
-    .range(["#3B596A","#427676","#3F9A82","#A1CD73","#ECDB60",]);
-
-
-
-  svg.append("g")
-    .attr("class", "legendLinear")
-    .attr("transform", "translate(100,100)");
-
-  var legendLinear = d3.legendColor()
-    .shapeWidth(100)
-    .orient('horizontal')
-    .scale(linear);
-
-  svg.select(".legendLinear")
-    .call(legendLinear);
 
 
     var div = d3.select("body").append("div")
@@ -126,6 +88,29 @@ $(function() {
         .style("opacity", 0);
 
     function drawTree(treeData){
+
+          g = svg.append("g")
+            .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+
+          var linear = d3.scaleOrdinal()
+          .domain(["Module","Task","Subtask","Chapter","Section"])
+          .range(["#3B596A","#427676","#3F9A82","#A1CD73","#ECDB60",]);
+
+
+
+        svg.append("g")
+          .attr("class", "legendLinear")
+          .attr("transform", "translate(100,100)");
+
+        var legendLinear = d3.legendColor()
+          .shapeWidth(100)
+          .orient('horizontal')
+          .scale(linear);
+
+        svg.select(".legendLinear")
+          .call(legendLinear);
       // declares a tree layout and assigns the size
       // gradient.html('<stop offset="0%" stop-color="red"/>  <stop offset="50%" stop-color="black"/> <stop offset="100%" stop-color="blue"/>')
       var completion = treeData.tasksList.length/18

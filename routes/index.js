@@ -172,10 +172,10 @@ router.post('/profile/*', function(req,res,next){
 	function purge(children){
 		// console.log(children)
 		for (o in children){
-			if (children[o].completed) {
+			// if (children[o].completed) {
 				children[o].completed = false;
 				children[o].time = null;
-			}
+			// }
 			if (children[o].children != null) purge(children[o].children)
 		}
 	}
