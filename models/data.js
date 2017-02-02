@@ -6,7 +6,7 @@ var pg = require('pg')
 pg.defaults.ssl = (process.env.test)? false : true
 pgurl = (process.env.test)?'postgres://localhost:5432/lok':process.env.DATABASE_URL
 
-console.log(pgurl)
+// console.log(pgurl)
 //pq connection
 var knex = require('knex')({
   client: 'postgresql',
@@ -24,8 +24,8 @@ module.exports.getProfile = function(uid, callback){
         return callback(error)
       })
       .then(function(tab){
-        console.log(uid + "is uid")
-        console.log(tab)
+        // console.log(uid + "is uid")
+        // console.log(tab)
         if (tab.length== 0) {
           console.log("returning null")
           return callback(null);
@@ -41,16 +41,26 @@ module.exports.getProfile = function(uid, callback){
         for (datapoint in tab){
           toSend[tab[datapoint].module].push(tab[datapoint])
         }
-        console.log("tosend " + toSend)
+        // console.log("tosend " + toSend)
         return callback(toSend)
         })
 
       }
 
+  module.exports.getBasic = function(uid, callback){
 
+  	knex.select().from('student').where({'uid':uid})
+        .catch(function(error) {
+          console.log(error)
+          return callback(error)
+        })
+        .then(function(tab){
+          callback(tab[0])
+        })
+}
 
 module.exports.attempt = function(dataset, callback){
-  console.log(dataset)
+  // console.log(dataset)
 	knex('attempt').insert(dataset)
       .catch(function(error) {
         console.log(error)

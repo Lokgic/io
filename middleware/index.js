@@ -15,12 +15,14 @@ function requiresLogin(req, res, next){
 }
 
 function requiresAdmin(req, res, next){
-	if (req.session.userId != '57d1af5a1b9e039b15b159fe' ){
+	if (req.session.nickname == 'admin' && (req.session.userId == 3 || req.session.userId ==1) ){
+		return next();
+
+	}else{
 		var err = new Error("GTFO");
 		err.status = 401;
 		return next(err);
 	}
-	return next();
 }
 
 module.exports.loggedOut = loggedOut;

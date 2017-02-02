@@ -15,7 +15,17 @@ $(function() {
 
     d3.select('#getProfile').on('click',function(){
       uid = document.getElementById('uid').value
-      console.log(uid)
+      // console.log(uid)/
+
+
+      jQuery.post("/getBasic/" + uid)
+          .done(function(data) {
+            d3.select('#name').text(data.name + " ("+data.nickname+")")
+            d3.select('#uid').text(data.uid)
+          }).fail(function(f) {
+              console.log(f)
+          })
+
 
       loadProfile(uid,function(err,data){
         // for (dp in data){
@@ -25,7 +35,7 @@ $(function() {
         // }
         // d3.select('main').html("")
         drawTree(data)
-        console.log(data)
+        // console.log(data)
       })
     })
 
@@ -40,15 +50,15 @@ $(function() {
         })
     }
 
-    loadProfile(uid,function(err,data){
-      // for (dp in data){
-      //   if (data[dp].chapter == "pset"){
-      //     treeData[data[dp].module[1]][1][dp].completed = true
-      //   }
-      // }
-      drawTree(data)
-      console.log(data)
-    })
+    // loadProfile(uid,function(err,data){
+    //   // for (dp in data){
+    //   //   if (data[dp].chapter == "pset"){
+    //   //     treeData[data[dp].module[1]][1][dp].completed = true
+    //   //   }
+    //   // }
+    //   drawTree(data)
+    //   console.log(data)
+    // })
 
     var main = '#profileTree'
 

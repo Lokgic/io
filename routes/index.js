@@ -22,7 +22,9 @@ router.get('/profile', function(req, res, next){
 	return res.render('profile')
 });
 
-
+router.get('/adm', mid.requiresAdmin, function(req, res, next){
+	return res.render('adm')
+});
 
 // REGISTER POST */
 
@@ -158,6 +160,14 @@ router.get('/logistics', function(req, res, next){
 
 //100
 //get profile
+
+router.post('/getBasic/*', function(req,res,next){
+	var uid = req.path.split('/')[2]
+	data.getBasic(uid,function(d){
+		console.log(d)
+		return res.send(d)
+	})
+})
 router.post('/profile/*', function(req,res,next){
 	function purge(children){
 		// console.log(children)

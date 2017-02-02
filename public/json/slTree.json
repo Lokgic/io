@@ -89,7 +89,8 @@
                 },
                 {
                     "name": "Truth Table 3",
-                    "type":"chapter"
+                    "type":"chapter",
+                    "id":"sl-logicise-truthTable3"
                 }, {
                     "name": "Wason Selection Task I",
                     "type": "chapter",

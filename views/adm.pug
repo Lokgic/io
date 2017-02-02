@@ -1,0 +1,21 @@
+extends pagelayout
+
+block content
+	#admControl.m-y-3
+		div.form-group
+			label(for='uid') uid:
+			input#uid.form-control(type='text', placeholder='uid' name='uid')
+		button.btn.btn-primary#getProfile Search
+	#name
+	#uid
+	main#profileTree.m-a-0
+
+block extrafooter
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
+	script(src="../javascripts/mods/notify.js")
+	script(src="/javascripts/mods/underscore-min.js")
+	script(src="../javascripts/autohidenav.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.19.0/d3-legend.min.js")
+	script(src="../javascripts/classTreeAdmin.js")
+	link(rel="stylesheet", type="text/css", href="/css/profile.css")

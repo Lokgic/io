@@ -2,7 +2,7 @@ $(function(){
   var ruleText = d3.select('#display').append('p').attr('class','text-xs-center m-y-3 h4')
   var display = d3.select('#display')
   var svg = display.append('svg')
-  var toPass = 25
+  var toPass = 2
   var timeDisplay = d3.select('.subNav').append('p').attr('class','display-4 m-y-0')
   var currentScore = 0
   score = d3.select('#score')
@@ -115,7 +115,7 @@ modalMsg("Introduction",html)
 
         }else {
           var msg
-          if (currentScore >= passingscore){
+          if (currentScore => passingscore){
             msg = "This is incorrect! You have passed the logicise. Press confirm to restart."
             recordCompletion(uid,"sl","logicise","wason1")
             recordLeader(uid,"wason1",currentScore)
