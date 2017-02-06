@@ -125,7 +125,8 @@
     },
     {
       "name":"Test 1",
-      "type":"task"
+      "type":"task",
+      "id":"sl-test-1"
     }
   ]
 }

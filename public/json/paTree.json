@@ -6,10 +6,10 @@
     "type":"module",
     "children":
     [
-      {"name":"Test 1","type":"task"},
-      {"name":"Test 2","type":"task"},
-      {"name":"Test 3","type":"task"},
-      {"name":"Test 4","type":"task"}
+      {"name":"Test 1","type":"task","id":"pa-pplus-1"},
+      {"name":"Test 2","type":"task","id":"pa-pplus-2"},
+      {"name":"Test 3","type":"task","id":"pa-pplus-3"},
+      {"name":"Test 4","type":"task","id":"pa-pplus-4"}
     ]
   },
     {"name": " < 3 Absences","type":"task"},

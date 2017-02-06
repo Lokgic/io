@@ -857,7 +857,7 @@ $(function(){
         // Don't re-render if scroll didn't change
         if (scrollTop !== newScrollTop) {
 
-          console.log(newScrollTop)
+          // console.log(newScrollTop)
 
 
 

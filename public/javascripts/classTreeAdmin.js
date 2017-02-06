@@ -22,6 +22,7 @@ $(function() {
           .done(function(data) {
             d3.select('#name').text(data.name + " ("+data.nickname+")")
             d3.select('#uid').text(data.uid)
+            d3.select('#uid').attr('data', data.uid)
           }).fail(function(f) {
               console.log(f)
           })
@@ -226,6 +227,22 @@ $(function() {
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
+        })
+        .on('click',function(d){
+          if (d.children != null) alert('not a leaf', 'incorred');
+          else if (d.data.completed) alert('already completed','incorred')
+          else if (d.children == null) {
+            var info = d.data.id.split('-')
+            var uid = d3.select('#uid').attr('data')
+            recordCompletion(uid,info[0],info[1],info[2])
+            alert('recorded',"correctblue")
+            loadProfile(uid,function(err,data){
+              svg.html("")
+              drawTree(data)
+            })
+
+          }
+
         });
 
       // adds the text to the node

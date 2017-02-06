@@ -73,13 +73,13 @@ $(function(){
   var   width = +svg.attr("width"),
       height = +svg.attr("height");
 
-  var points = d3.range(1000).map(phyllotaxis(10));
+  var points = d3.range(100).map(phyllotaxis(20));
 
-  var circle = svg.selectAll("circle")
+  var circle = svg.selectAll("text")
       .data(points)
-    .enter().append("circle")
+    .enter().append("text")
       .attr("transform", function(d) { return "translate(" + (d[0]+w/4.2) + "," + (d[1]+h/2) + ")"; })
-      .attr("r", 8);
+      .text("?");
 
   // svg.append("rect")
   //     .attr("width", width)
