@@ -20,7 +20,7 @@
       ]},
     {"name": "In Class Activities", "type":"task",
     "children":[
-      {"name":"Logical Truths","type":"subtask","id":"pa-inclass-sl1"},
+      {"name":"Proving logical laws: Venn/Truth Tables","type":"subtask","id":"pa-inclass-sl1"},
       {"name":"Substitution of Logical Equivalents","type":"subtask","id":"pa-inclass-sl2"},
       {"name":"SL Truth Trees","type":"subtask"}
     ]
