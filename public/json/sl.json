@@ -606,7 +606,10 @@
       "$$\\text{Law of Distribution(Dist): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\vee Z) \\equiv ( X \\wedge  Y) \\vee (X \\wedge Z) \\text{ and }  \\\\ X \\vee (Y \\wedge Z) \\equiv ( X \\vee  Y) \\wedge (X \\vee Z)  $$",
         "$$\\text{Law of Association(Assoc): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\wedge Z) \\equiv ( X \\wedge  Y) \\wedge Z \\text{ and }  \\\\ X \\vee (Y \\vee Z) \\equiv ( X \\vee  Y) \\vee  Z  $$",
         "$$\\text{Commutation(Com): for any sentence X, and Y, }\\\\ (X \\wedge Y ) \\equiv (Y \\wedge X ) \\text{ and }  \\\\(X \\vee Y ) \\equiv (Y \\vee X )  $$",
-        "$$\\text{Idempotent(Idem): for any sentence X, }\\\\ (X \\wedge X ) \\equiv X \\text{ and } \\\\ (X \\vee X ) \\equiv X $$"
+        "$$\\text{Idempotent(Idem): for any sentence X, }\\\\ (X \\wedge X ) \\equiv X \\text{ and } \\\\ (X \\vee X ) \\equiv X $$",
+        "$$\\text{Contradictory Disjunct: for any sentence X and contradiction Y, }X\\vee Y \\equiv X$$",
+        "$$\\text{Tautological Conjunct: for any sentence X and tautology Y, }X\\wedge Y \\equiv X$$"
+
       ]
     }
 
