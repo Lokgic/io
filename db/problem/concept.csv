@@ -47,6 +47,6 @@ conditional2,matching,"You love dogs unless you are a good person.",$\neg G \to 
 conditional3,matching,"you are a good person only if you hate dogs.",$  G \to  \neg D$,,sl,4,matching
 conditional4,matching,"Hating dog is a necessary condition to be a horrible person.",$\neg G \to \neg D$,,sl,4,matching
 conditional5,matching,"Unless you hate dog, you are a good person.",$D \to G$,,sl,4,matching
-conditional6,matching,"You cannot hate dogs without being a person.",$\neg D \to G$,,sl,4,matching
+conditional6,matching,"You cannot hate dogs without being a good person.",$\neg D \to G$,,sl,4,matching
 conditional7,matching,"you are a horrible person if you like dogs.",$  D \to  \neg G$,,sl,4,matching
 conditional8,matching,"Hating dog is a sufficient condition to be a horrible person.",$\neg D \to \neg G$,,sl,4,matching
