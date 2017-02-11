@@ -197,6 +197,9 @@ function wason1(parm){
       numCards: chance.integer({min: 12, max: 15})
     }
   }
+
+  var colorProbability =
+
   settings = options[parm]
   var rule = new conditionalRule(settings.colorProbability)
   console.log(settings)

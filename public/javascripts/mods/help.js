@@ -17,6 +17,7 @@ function modalMsg(head, body) {
 
 
 
+
 function alert(msg, color, position, location) {
 
     if (position == undefined) position = "bottom right"

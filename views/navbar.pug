@@ -33,6 +33,8 @@ nav.navbar.navbar-fixed-top#mainnavbar(data = userTag)
 				if currentUser
 					li.nav-item
 						a.nav-link(href='/profile') #{nickname}
+					li.nav-item
+						a.nav-link#exp(href='#') 
 					li.nav-item.pull-md-right
 						a.nav-link(href='/logout') Logout
 				else

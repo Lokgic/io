@@ -5,6 +5,16 @@ $(function(){
   var toPass = 25
   var timeDisplay = d3.select('.subNav').append('p').attr('class','display-4 m-y-0')
   var currentScore = 0
+
+  // loadExp(uid,function(err,d){
+  //   console.log(d)
+  //   level = calculateLevel(d.lvl);
+  //   // console.log(level)
+  // })
+  var level = document.getElementById('difficulty').getAttribute('data');
+  console.log(level)
+  // var aaa = loadLevel(1);
+  // console.log(aaa)
   score = d3.select('#score')
 
 
@@ -22,7 +32,7 @@ $(function(){
   })
 modalMsg("Introduction",html)
   // d3.select('#display').html(html)
-  var difficulty = 1
+  var difficulty = level
   var bonus = false;
   var bonusChance = .05
 
@@ -53,9 +63,14 @@ modalMsg("Introduction",html)
 
   function updateStatus(){
     score.text(currentScore)
-    if (currentScore <8) difficulty = 1
-    else if (currentScore >= 8&& currentScore <= 18) difficulty = 2
-    else if (currentScore > 18) difficulty = 2
+    if (!logged){
+      if (currentScore <8) difficulty = 1
+      else if (currentScore >= 8&& currentScore <= 18) difficulty = 2
+      else if (currentScore > 18) difficulty = 2
+    } else{
+      difficulty = level
+    }
+
     d3.select('#difficulty').text(difficulty)
     d3.select('#passingscore').text(toPass)
     d3.select('#chance').text(chance)

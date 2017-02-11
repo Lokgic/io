@@ -18,8 +18,9 @@ block content
 						span.navbar-text Chance(s) : &nbsp;
 						span#chance
 					li.nav-item.pull-xs-right.miniNavComponent
-						span.navbar-text Difficulty : &nbsp;
-						span#difficulty
+						span.navbar-text Level : &nbsp;
+						-console.log(expdata)
+						span#difficulty(data = expdata.lvl) #{expdata.lvl}
 					li.nav-item.pull-xs-right.miniNavComponent
 						span.navbar-text Passing : &nbsp;
 						span#passingscore

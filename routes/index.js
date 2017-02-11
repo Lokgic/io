@@ -161,6 +161,17 @@ router.get('/logistics', function(req, res, next){
 //100
 //get profile
 
+
+router.post('/getExp/*', function(req,res,next){
+	var uid = req.path.split('/')[2]
+	data.getExp(uid,function(d){
+		console.log(d)
+		return res.send(d)
+	})
+})
+
+
+
 router.post('/getBasic/*', function(req,res,next){
 	var uid = req.path.split('/')[2]
 	data.getBasic(uid,function(d){
@@ -351,9 +362,17 @@ router.get('/logicise/*', function(req,res,next){
 			return next(err);
 		}
 		if (logiciseID == "vennSyl") return res.render('logicizeFS', { title:"Venn Diagram: Syllogism", logicise:logiciseID, info:info[logiciseID]});
-		else return res.render('logicise', { title:info[logiciseID].title, logiciseID:logiciseID, info:info[logiciseID]});
+		else {
+			if (req.session.userId){
+				data.getExp(req.session.userId,function(expdata){
+					return res.render('logicise', { title:info[logiciseID].title, logiciseID:logiciseID, info:info[logiciseID],expdata:expdata});
 
+				})
+			}else{
+				return res.render('logicise', { title:info[logiciseID].title, logiciseID:logiciseID, info:info[logiciseID]});
+			}
 
+		}
 
 
 })

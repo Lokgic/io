@@ -1,6 +1,6 @@
 $(function(){
   var width = $('#leaderboard').width()
-  console.log(width)
+  // console.log(width)
   var height = window.innerHeight;
   var barPadding = 10;
   var color = d3.scaleOrdinal(d3.schemeSet1);
