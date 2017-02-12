@@ -1,13 +1,26 @@
 $(function(){
 
 
-
-
-
+    var dimensions = {}
+     dimensions.width = $('#display').width();
+     dimensions.height = window.innerHeight;
+     console.log(dimensions)
     // set the dimensions and margins of the diagram
     var margin = {top: 40, right: 20, bottom: 40, left: 20},
         width = dimensions.width - margin.left - margin.right,
         height = dimensions.height - margin.top - margin.bottom;
+
+
+
+    var treeData = {
+      "name":"a",
+      "children":[
+        {"name":"b",
+        children:[
+          {"name":"C"}
+        ]}
+      ]
+    }
 
     // declares a tree layout and assigns the size
     var treemap = d3.tree()
@@ -19,6 +32,10 @@ $(function(){
     // maps the node data to the tree layout
     nodes = treemap(nodes);
 
+      var svg = d3.select('#display')
+                  .append('svg')
+                  .attr('height',dimensions.height)
+                  .attr('weight',dimensions.weight)
 
         g = svg.append("g")
           .attr("transform",
@@ -28,19 +45,10 @@ $(function(){
     var link = g.selectAll(".link")
         .data( nodes.descendants().slice(1))
       .enter().append("path")
-        .attr('class', function(d,i){
-          if (d.depth >4 && d.depth <7 ) var tag = "set1"
-          else if (d.depth <8 &&d.depth >5) var tag = "set2"
-          else if (d.depth  >7)var tag = "set3"
-          else var tag = "set0"
-          return tag + " link depth"+d.depth
-        })
+        .attr("class", "link")
         .attr("d", function(d) {
-          // console.log(d)
            return "M" + d.x + "," + d.y
-             + "C" + d.x + "," + (d.y + d.parent.y) / 2
-             + " " + d.parent.x + "," +  (d.y + d.parent.y) / 2
-             + " " + d.parent.x + "," + d.parent.y;
+             + "L" + d.parent.x + "," + d.parent.y;
            });
     //
     // // adds each node as a group

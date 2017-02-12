@@ -111,7 +111,7 @@ modalMsg("Introduction",html)
 
 
   d3.select('#confirm').on('click',function(){
-    console.log(state)
+
     if (state == "next"){
       // if (state == "intro") d3.select('#display').selectAll('p').remove()
 

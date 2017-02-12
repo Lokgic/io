@@ -23,5 +23,10 @@
     "title": "Truth Table Logicise 3",
     "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid or consistent.",
     "eventId":"truthTable2"
+  },
+  "tree1":{
+    "title": "Tree 1",
+    "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid or consistent.",
+    "eventId":"tree1"
   }
 }
