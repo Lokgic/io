@@ -61,6 +61,11 @@
   border-left: 2px solid grey;
   margin-top: 0
 }
+
+#interaction{
+  padding:0;
+}
+
 /*.miniNavComponent {
   border-left: 1px grey solid;
   padding-left: 5px;

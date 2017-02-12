@@ -98,7 +98,8 @@ modalMsg("Introduction",html)
       else if (currentScore > 18) difficulty = 2
     } else{
       expInit(uid,function(d){
-        difficulty = d.lvl
+        // difficulty = d.lvl
+        difficulty = 20
         d3.select('#difficulty').text(difficulty+("(+"+ Math.ceil(difficulty/5)+")"))
         // d3.select('#passingscore').text(toPass)
         d3.select('#chance').text(chance)
@@ -270,12 +271,17 @@ modalMsg("Introduction",html)
 
 
   function drawCard(model,svg){
-    var width = $('#interaction').width()
+    var width = $('#display').width()
     var padding = 30;
-    var cardMargin = 30;
-    var cardWidth = (width)/4 - padding
+
+    var cardWidth = 150
     var topMargin = 30
-    var height = (cardWidth + cardMargin)*Math.ceil(model.length/4) +padding
+
+    var colNumber = Math.floor(width/(cardWidth+padding))
+    var height = (cardWidth + 2*cardMargin)*Math.ceil(model.length/colNumber) +topMargin + 200
+    var cardMargin = 10;
+    var leftMargin = (width - colNumber*(cardWidth+2*cardMargin))/2
+    console.log(colNumber)
     svg.attr('width',width)
     .attr('height',height)
     console.log(model)
@@ -285,10 +291,10 @@ modalMsg("Introduction",html)
         svg.selectAll('rect').data(model).enter()
         .append('rect')
         .attr("x", function(d,i){
-          return (i%4)*cardWidth + 2*cardMargin
+          return (i%colNumber)*cardWidth + 2*cardMargin +leftMargin
         })
         .attr('y',function(d,i){
-          return Math.floor(i/4) * cardWidth +cardMargin +topMargin
+          return Math.floor(i/colNumber) * cardWidth +cardMargin +topMargin
         })
         .attr('rx',20)
         .attr('ry',20)
@@ -310,17 +316,17 @@ modalMsg("Introduction",html)
         return d.face.toUpperCase()
       })
       .attr("x", function(d,i){
-        return ((i%4)*cardWidth + 1.5*cardMargin) + cardWidth/2
+        return ((i%colNumber)*cardWidth + 1.5*cardMargin) + cardWidth/2 + leftMargin
       })
       .attr('y',function(d,i){
-        return Math.floor(i/4) * cardWidth + 1.8*cardMargin +topMargin + cardWidth/2
+        return Math.floor(i/colNumber) * cardWidth + 2*cardMargin +topMargin + cardWidth/2
       })
       .attr('fill',function(d){
 
         return (d.color == "blue")?"#79BEDB" : "#EC799A";
       })
       .attr('text-anchor','middle')
-      .attr('font-size',cardWidth*0.6)
+      .attr('font-size',60)
       .attr('opacity',0)
 
         svg.selectAll('text').transition().duration(500)
