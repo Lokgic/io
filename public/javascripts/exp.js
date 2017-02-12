@@ -17,6 +17,7 @@ function expInit(uid, callback) {
 
             document.getElementById('exp').innerHTML = d.string;
             document.getElementById('exp').setAttribute('data', d.lvl)
+            if (callback) return callback(d)
         }).fail(function(f) {
             console.log(f)
         })

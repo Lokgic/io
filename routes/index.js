@@ -270,6 +270,25 @@ router.post('/profile/*', function(req,res,next){
 
 })
 
+router.post('/checkPassed/*',function(req,res,next){
+	// console.log("work?")
+	var mod = req.path.split('/')[2]
+	var ch = req.path.split('/')[3]
+	var section = req.path.split('/')[4]
+	var qu = {
+		uid:req.session.userId,
+		module:mod,
+		chapter:ch,
+		section:section
+
+	}
+	// console.log(qu)
+	data.checkPassed(qu,function(d){
+		res.send(d[0].count != 0)
+
+	})
+})
+
 // grading reporting
 
 router.post('/data/*', function(req,res,next){

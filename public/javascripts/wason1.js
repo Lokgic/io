@@ -5,6 +5,25 @@ $(function(){
   var toPass = 25
   var timeDisplay = d3.select('.subNav').append('p').attr('class','display-4 m-y-0')
   var currentScore = 0
+  var passed = false;
+
+  if (logged) {
+    $.post('/checkPassed/sl/logicise/wason1')
+    .done(function(d){
+      if (d){
+        passed = d;
+        document.getElementById('passingscore').innerHTML ="&#10004;";
+      } else{
+        document.getElementById('passingscore').innerHTML = toPass;
+      }
+
+    })
+    .fail(function(d){
+      console.log(d)
+    })
+  } else{
+    document.getElementById('passingscore').innerHTML = "Not logged";
+  }
 
   // loadExp(uid,function(err,d){
   //   console.log(d)
@@ -12,7 +31,7 @@ $(function(){
   //   // console.log(level)
   // })
   var level = document.getElementById('difficulty').getAttribute('data');
-  console.log(level)
+  // console.log(level)
   // var aaa = loadLevel(1);
   // console.log(aaa)
   score = d3.select('#score')
@@ -60,21 +79,31 @@ modalMsg("Introduction",html)
       }
   });
 
+  function passingWatcher(){
+    if (currentScore >= toPass && !passed && logged){
+      passed = true;
+      recordCompletion(uid,"sl","logicise","wason1")
+      document.getElementById('passingscore').innerHTML ="&#10004;"
+      alert('You have passed the logicise!','correctblue')
+    }
+
+  }
 
   function updateStatus(){
+    passingWatcher();
     score.text(currentScore)
     if (!logged){
       if (currentScore <8) difficulty = 1
       else if (currentScore >= 8&& currentScore <= 18) difficulty = 2
       else if (currentScore > 18) difficulty = 2
     } else{
-      difficulty = level
+      expInit(uid,function(d){
+        difficulty = d.lvl
+        d3.select('#difficulty').text(difficulty+("(+"+ Math.ceil(difficulty/5)+")"))
+        // d3.select('#passingscore').text(toPass)
+        d3.select('#chance').text(chance)
+      })
     }
-
-    d3.select('#difficulty').text(difficulty)
-    d3.select('#passingscore').text(toPass)
-    d3.select('#chance').text(chance)
-
   }
   updateStatus()
 
@@ -116,7 +145,7 @@ modalMsg("Introduction",html)
 
       if (pass){
         alert('This is correct. Press confirm to continue','correctblue')
-        currentScore += 1;
+        currentScore += Math.ceil(difficulty/5);
         state = "next"
         updateStatus()
 
@@ -133,7 +162,6 @@ modalMsg("Introduction",html)
           // console.log(passingscore)
           if (currentScore >= toPass){
             msg = "This is incorrect! You have passed the logicise. Press confirm to restart."
-            recordCompletion(uid,"sl","logicise","wason1")
             recordLeader(uid,"wason1",currentScore)
           } else {
             msg = "This is incorrect! Unfortunately you did not reach the passing score. Press confirm to restart."
@@ -179,8 +207,8 @@ modalMsg("Introduction",html)
         else return '#A43820'
       })
       if (pass){
-        alert('This is correct. You get a bonus of 5 points!','correctblue')
-        currentScore += 5;
+        alert('This is correct. You get a bonus of'+Math.ceil(difficulty/5) * 5+ ' points!','correctblue')
+        currentScore += Math.ceil(difficulty/5) * 5;
         state = "next"
         updateStatus()
 
@@ -198,8 +226,9 @@ modalMsg("Introduction",html)
 
   })
   function wasonInit(difficulty){
-    bonus = Math.random() <= bonusChance
-    var difficulty = (bonus) ? 4: difficulty;
+    console.log(difficulty + " is diff")
+    // bonus = Math.random() <= bonusChance
+    var difficulty = (bonus) ? difficulty*2: difficulty;
     if (bonus) {
       timer.start(120)
       alert('RANDOM BONUS PROBLEM! Solve the problem before the timer ends to get 5 points. You will not be penalized for giving an incorrect answer.',"important")

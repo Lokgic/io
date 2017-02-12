@@ -26,13 +26,18 @@ module.exports.getExp = function(uid,callback){
   })
   .then(function(tab){
 
-    leveldata = [3 ,   8,   14,   23,   35,   60,   67,   88,  112,  140,  172,  208,  249,295,  345,  400,  462,  528,  601,  680,  765,  857 , 955, 1062, 1175, 1296,1425, 1561, 1706, 1860]
+    leveldata = [1,     15,    35,    65,    90,
+                111,   150,   204,   291,   385,
+                532,   691,   878,  1097,  1350,
+                1638,  1965,  2332,  2743,  3200,
+                 3704,  4259,  4866,  5529,  6250,
+                  7030,  7873,  8780,  9755, 10800]
     var exp = tab[0].exp;
     for (var lvl = 0;lvl<leveldata.length;lvl++){
       if (exp <= leveldata[lvl]){
         return callback({
-          string: lvl + " (" + exp + "/" + leveldata[lvl]+ ")",
-          lvl:lvl,
+          string: (parseInt(lvl)+1) + " (" + exp + "/" + leveldata[lvl]+ ")",
+          lvl:lvl+1,
           exp:exp
         })
       }
@@ -111,6 +116,28 @@ module.exports.record = function(record, callback){
 
       }
 
+module.exports.checkPassed = function(query, callback){
+  // console.log("q")
+  // console.log(query)
+  knex('record').count("uid").where({
+    uid:query.uid,
+    module:query.module,
+    chapter:query.chapter,
+    section:query.section
+  }).catch(function(error) {
+    console.log(error)
+    return callback(error)
+  })
+  .then(function(d){
+    // console.log("this")
+    console.log(d)
+    return callback(d)
+
+    })
+
+
+
+}
 
 module.exports.leader = function(lead, callback){
 

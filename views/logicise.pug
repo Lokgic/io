@@ -10,7 +10,7 @@ block content
 			span.logiciseTitle.m-b-0 #{info.title}
 			nav.navbar-light.navbar.navbar-full.p-x-3#logiciseNav.subNav
 				ul.nav.navbar-nav
-					li.nav-item
+					li.nav-item.hidden-md-down
 						span.top3 #{info.shortDescription}
 					li.nav-item.pull-xs-right.miniNavComponent
 						a.nav-link.p-y-0#tutorial(href = "#") Tutorial
@@ -18,14 +18,16 @@ block content
 						span.navbar-text Chance(s) : &nbsp;
 						span#chance
 					li.nav-item.pull-xs-right.miniNavComponent
-						span.navbar-text Level : &nbsp;
-						-console.log(expdata)
-						span#difficulty(data = expdata.lvl) #{expdata.lvl}
+						span.navbar-text Tier : &nbsp;
+						if expdata != null
+							span#difficulty(data = expdata.lvl) #{expdata.lvl}
+						else
+							span#difficulty Not Logged
 					li.nav-item.pull-xs-right.miniNavComponent
 						span.navbar-text Passing : &nbsp;
 						span#passingscore
 					li.nav-item.pull-xs-right.miniNavComponent
-						span.navbar-text Score : &nbsp;
+						a.nav-link.p-y-0#save(href = "#") Score : &nbsp;
 						span#score 0
 		.row.text-xs-center.m-a-0#bigContainer
 			.row.col-md-9#interaction
@@ -65,6 +67,5 @@ block extrafooter
 	script(src="../javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")
 	script(src="../javascripts/"+logiciseID+".js")
-	script(src="../javascripts/autohidenav.js")
 	script(src="../javascripts/logleader.js")
 	link(rel="stylesheet", type="text/css", href="/css/leaderboard.css")

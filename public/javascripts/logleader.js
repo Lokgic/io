@@ -35,7 +35,7 @@ $(function(){
 
         return  d3.interpolateGnBu(y(x))
       }
-      console.log(highest)
+      // console.log(highest)
 
 
       // console.log(data)

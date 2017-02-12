@@ -12,10 +12,9 @@ $(function(){
   score.text(currentScore)
   var difficulty = 1
   var bonus = false;
-  var bonusChance = .05
+  var bonusChance = .01
   d3.select('#difficulty').text(difficulty)
   // var dropdowns = d3.select('#control').append('div').attr('id','dropdown')
-
   var u = 0
   var state = "input"
   var currentProblem;

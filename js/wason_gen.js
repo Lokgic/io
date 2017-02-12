@@ -33,12 +33,14 @@ var conditionalRule = function(colProb){
   var draw = []
   draw[0] = chance.pickone(poss.letter)
   draw[1] = chance.pickone(poss.number)
-  _.shuffle(draw)
+  console.log(draw)
+  draw = _.sample(draw,2)
+  console.log(draw)
   this.left = draw[0]
   this.right = draw[1]
   this.leftCol = chance.bool({likelihood:colProb})? chance.pickone(["red","blue"]): null;
   this.rightCol = chance.bool({likelihood:colProb})? chance.pickone(["red","blue"]): null;
-  console.log(this.rightCol)
+  // console.log(this.rightCol)
 
   this.leftStr = (this.leftCol == null)?strings[this.left]: strings[this.leftCol+this.left]
   this.rightStr = (this.rightCol == null)?strings[this.right]: strings[this.rightCol+this.right]
@@ -178,33 +180,18 @@ Model.prototype.interpret = function(rule){
 
 
 function wason1(parm){
-  var settings
-  var options = {
-    1:{
-      colorProbability: 0,
-      numCards: chance.integer({min: 4, max: 8})
-    },
-    2:{
-      colorProbability: 5,
-      numCards: chance.integer({min: 6, max: 10})
-    },
-    3:{
-      colorProbability: 40,
-      numCards: chance.integer({min: 6, max: 10})
-    },
-    4:{
-      colorProbability: 100,
-      numCards: chance.integer({min: 12, max: 15})
-    }
-  }
 
-  var colorProbability =
-
-  settings = options[parm]
-  var rule = new conditionalRule(settings.colorProbability)
-  console.log(settings)
+  parm = parseInt(parm)
+  var colorProbability = Math.min(100,parm*2)
+  var min =  Math.max(parm-1,1)
+  var max =  parm + Math.ceil(parm/3)
+  numCards = chance.integer({min: min, max: max})
+  // console.log(max + " = max")
+  // settings = options[parm]
+  var rule = new conditionalRule(colorProbability)
+  // console.log(settings)
   var data ={
-    model:new Model(settings.numCards, rule),
+    model:new Model(numCards, rule),
     rule:rule
   }
   return data
