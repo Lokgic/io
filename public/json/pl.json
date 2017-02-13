@@ -1,0 +1,253 @@
+{
+  "1":{
+    "1":{
+        "chapterName": "Why Predicates",
+        "chapterNum": "1",
+        "chapterDescription": "This chapter introduces a logical language called PL. It is a version of predicate Logic, because it introduces words like all and some, which tell us about quantities. As its name implies, the basic units of the language are predicates and terms.",
+        "title":"From Sentences to Predicates",
+
+
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+
+              "Consider the following argument, which is obviously valid in English:"
+
+
+
+
+            ]
+          },
+          {
+            "type":"unorderedList",
+            "substance":[  "If everyone knows logic, then either no one will be confused or everyone will. Everyone will be confused only if we try to believe a contradiction. Everyone knows logic."]
+          },
+          {
+            "type":"p",
+            "substance":[
+              "In order to symbolize this in SL, we will need a symbolization key. "
+            ]
+          },
+          {
+            "type":"symbolkey",
+            "key":[
+
+                ["L","Everyone knows logic."]
+              ,
+
+                ["N","No one will be confused."]
+              ,
+                ["E","Everyone will be confused."]
+              ,
+
+              ["B","We try to believe a contradiction."]
+
+
+            ]
+
+          },{
+            "type":"p",
+            "substance":[
+              "Notice that $N$ and $E$ are both about people being confused, but they are two separate sentence letters. We could not replace $E$ with $\\neg N$. Why not? $\\neg N$ means 'It is not the case that no one will be confused.' This would be the case if even one person were confused, so it is a long way from saying that everyone will be confused.",
+              "Once we have separate sentence letters for $N$ and $E$, however, we erase any connection between the two. They are just two atomic sentences which might be true or false independently. In English, it could never be the case that both no one and everyone was confused. As sentences of SL, however, there is a truth value assignment for which $N$ and $E$ are both true.",
+              "Expressions like 'no one', 'everyone', and 'anyone' are called quantifiers. By translating $N$ and $E$ as separate atomic sentences, we leave out the quantifier structure of the sentences. Fortunately, the quantifier structure is not what makes this argument valid. As such, we can safely ignore it. To see this, we translate the argument to SL:"
+            ]
+          },
+          {
+            "type":"arg",
+            "premises":[
+
+            "$L \\to (N \\vee E)$",
+              "$E \\to B$",
+            "$L$"
+
+
+
+          ],
+          "conclusion":"$\\neg B \\to N$"
+
+          },
+          {
+            "type": "p",
+            "substance":[
+              "This is a valid argument in SL. (You can do a truth table to check this.) ",
+              "Now consider another argument. This one is also valid in English.",
+              "$$\\text{Willard is a logician. All logicians wear funny hats. Therefore, Willard wears a funny hat.}$$",
+              "Using obvious symbolization keys, we translate this argument like so:"
+            ]
+          },
+          {
+            "type":"arg",
+            "premises":[
+
+            "$W$",
+
+            "$A$"
+
+
+
+          ],
+          "conclusion":"$F$"
+
+          },
+          {
+            "type":"p",
+            "substance":[
+              "This is invalid in SL. (Again, you can confirm this with a truth table.) There is something very wrong here, because this is clearly a valid argument in English. The symbolization in SL leaves out all the important structure. Once again, the translation to SL overlooks quantifier structure: The sentence 'All logicians wear funny hats' is about both logicians and hat-wearing. By not translating this structure, we lose the connection between Willard's being a logician and Willard's wearing a hat.",
+
+              "Some arguments with quantifier structure can be captured in SL, like the first example, even though SL ignores the quantifier structure. Other arguments are completely botched in SL, like the second example. Notice that the problem is not that we have made a mistake while symbolizing the second argument. These are the best symbolizations we can give for these arguments in SL."
+
+            ]
+          },
+          {
+            "type":"textInput","eventId":"pl-1-1","substance":["Is that really the best SL translation we can come up with? If $P_2$ is construed as 'If someone is a logician, then she wears a funny hat', would the argument be valid in SL?"]
+          },
+          {
+            "type":"p",
+            "substance":[
+
+
+              "Generally, if an argument containing quantifiers comes out valid in SL, then the English language argument is valid. If it comes out invalid in SL, then we cannot say the English language argument is invalid. The argument might be valid because of quantifier structure which the natural language argument has and which the argument in SL lacks.",
+
+              "Similarly, if a sentence with quantifiers comes out as a tautology in SL, then the English sentence is logically true. If comes out as contingent in SL, then this might be because of the structure of the quantifiers that gets removed when we translate into the formal language.",
+
+              "In order to symbolize arguments that rely on quantifier structure, we need to develop a different logical language. We will call this language predicate Logic, PL."
+            ]
+          }
+        ]
+      },
+      "2":{
+        "title": "Building Blocks of Quantified Logic",
+        "content":
+        [
+
+          {
+            "type":"ps",
+            "substance":[
+              "Just as sentences were the basic unit of sentential logic, predicates will be the basic unit of predicate logic. A predicate is an expression like 'is a dog.' This is not a sentence on its own. It is neither true nor false. In order to be true or false, we need to specify something: Who or what is it that is a dog?",
+
+              "The details of this will be explained in the rest of the chapter, but here is the basic idea: In PL, we will represent predicates with capital letters. For instance, we might let $D$ stand for '_ is a dog.' We will use lower-case letters as the names of specific things. For instance, we might let $b$ stand for Bertie. The expression $Db$ will be a sentence in PL. It is a translation of the sentence 'Bertie is a dog.'",
+
+              "In order to represent quantifier structure, we will also have symbols that represent quantifiers. For instance, '$\\exists$' will mean 'There is some_.' So to say that there is a dog, we can write $\\exists x Dx$; that is: There is some $x$ such that $x$ is a dog.",
+
+              "That will come later. We start by defining singular terms and predicates.",
+
+              "<h3>Singular Terms</h3>",
+
+              "In English, a singular term is a word or phrase that refers to a specific person, place, or thing. The word 'dog' is not a singular term, because there are a great many dogs. The phrase 'Philip's dog Bertie' is a singular term, because it refers to a specific little terrier.",
+
+              "A proper name is a singular term that picks out an individual without describing it. The name 'Emerson' is a proper name, and the name alone does not tell you anything about Emerson. Of course, some names are traditionally given to boys and other are traditionally given to girls. If 'Jack Hathaway' is used as a singular term, you might guess that it refers to a man. However, the name does not necessarily mean that the person referred to is a man---or even that the creature referred to is a person. Jack might be a giraffe for all you could tell just from the name. There is a great deal of philosophical action surrounding this issue, but the important point here is that a name is a singular term because it picks out a single, specific individual.",
+
+              "Other singular terms more obviously convey information about the thing to which they refer. For instance, you can tell without being told anything further that 'Philip's dog Bertie' is a singular term that refers to a dog. A definite description picks out an individual by means of a unique description. In English, definite descriptions are often phrases of the form 'the such-and-so.' They refer to the specific thing that matches the given description. For example, 'the tallest member of Monty Python' and 'the first emperor of China' are definite descriptions. A description that does not pick out a specific individual is not a definite description. 'A member of Monty Python' and 'an emperor of China' are not definite descriptions.",
+
+              "We can use proper names and definite descriptions to pick out the same thing. The proper name 'Mount Rainier' names the location picked out by the definite description 'the highest peak in Washington state.' The expressions refer to the same place in different ways. You learn nothing from my saying that I am going to Mount Rainier, unless you already know some geography. You could guess that it is a mountain, perhaps, but even this is not a sure thing; for all you know it might be a college, like Mount Holyoke. Yet if I were to say that I was going to the highest peak in Washington state, you would know immediately that I was going to a mountain in Washington state.",
+
+              "In English, the specification of a singular term may depend on context; 'Willard' means a specific person and not just someone named Willard; 'P.D. Magnus' as a logical singular term means me and not the other P.D. Magnus. We live with this kind of ambiguity in English, but it is important to keep in mind that singular terms in PL must refer to just one specific thing.",
+
+              "In PL, we will symbolize singular terms with lower-case letters $a$ through $w$. We can add subscripts if we want to use some letter more than once. So $a,b,c,... w, a_1, f_{32}, j_{390}$, and $m_{12}$ are all terms in PL.",
+
+              "Singular terms are called constants because they pick out specific individuals. Note that $x, y$, and $z$ are not constants in PL. They will be variables, letters which do not stand for any specific thing. We will need them when we introduce quantifiers.",
+
+              "<h3>Predicates</h3>",
+
+              "The simplest predicates are properties of individuals. They are things you can say about an object. '_ is a dog' and '_ is a member of Monty Python' are both predicates. In translating English sentences, the term will not always come at the beginning of the sentence: 'A piano fell on _' is also a predicate. Predicates like these are called one-place or monadic, because there is only one blank to fill in. A one-place predicate and a singular term combine to make a sentence.",
+
+              "Other predicates are about the relation between two things. For instance, '_ is bigger than _', '_ is to the left of _', and '_ owes money to _.' These are two-place or dyadic predicates, because they need to be filled in with two terms in order to make a sentence.",
+
+              "In general, you can think about predicates as schematic sentences that need to be filled out with some number of terms. Conversely, you can start with sentences and make predicates out of them by removing terms. Consider the sentence, 'Vinnie borrowed the family car from Nunzio.' By removing a singular term, we can recognize this sentence as using any of three different monadic predicates:"
+            ]
+          },
+          {
+            "type":"unorderedList",
+            "substance":[
+               "_ borrowed the family car from Numzio.",
+              "Vinnie borrowed _ from Nunzio.",
+              "Vinnie borrowed the family car from _."
+            ]
+          },
+          {
+            "type":"p",
+            "substance":[
+              "By removing two singular terms, we can recognize three different dyadic predicates:"
+            ]
+          },
+          {
+            "type":"unorderedList",
+            "substance":[
+               "_ borrowed the family car from _.",
+              "Vinnie borrowed _ from _.",
+               "Vinnie borrowed the _ from _."
+            ]
+          },
+          {
+            "type":"p",
+            "substance":[
+              "By removing all three singular terms, we can recognize one three-place or triadic predicate:"
+            ]
+          },
+          {
+            "type":"unorderedList",
+            "substance":[
+               "_ borrowed _ from _."
+            ]
+          },
+
+          {
+            "type":"p",
+            "substance":[
+              "If we are translating this sentence into PL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If the only thing that we will discuss being borrowed is the family car, then the generality of the three-place predicate is unnecessary. If the only borrowing we need to symbolize is different people borrowing the family car from Nunzio, then a one-place predicate will be enough.",
+
+              "In general, we can have predicates with as many places as we need. Predicates with more than one place are called polyadic. Predicates with $n$ places, for some number $n$, are called n-place or n-adic.",
+
+              "In PL, we symbolize predicates with capital letters $A$ through $Z$, with or without subscripts. When we give a symbolization key for predicates, we will not use blanks; instead, we will use variables. By convention, constants are listed at the end of the key. So we might write a key that looks like this:"
+            ]
+          },
+
+          {
+            "type":"symbolkey",
+            "key":[
+              ["$Ax$", "x is angry."],
+              ["$Hx$","x is happy."],
+              ["$Txy$","x is as taller than y."],
+              ["$a$", "Alex"],
+              ["$b$", "Bob"]
+            ]
+          },
+          {
+            "type":"p",
+            "substance":[
+              "We can symbolize sentences that use any combination of these predicates and terms. For example:"
+            ]
+          },
+          {
+            "type":"unorderedList",
+            "substance":[
+               "Bob is angry.","Alex is happy","If Bob is angry, Alex is happy.", "If Alex is taller than Bob, then Bob is angry."
+            ]
+          },
+          {
+            "type":"p",
+            "substance":[
+              "For the following reading exercise, use the following symbolization key:"
+            ]
+          },
+          {
+            "type":"symbolkey",
+            "key":[
+              ["$Fxy$", "x is a friend of y."],
+              ["$Sxy$","x is shorter than y."],
+              ["$Ax$","x is an adult."],
+              ["$Cx$", "x is a child."],
+              ["$b$", "Joey"],
+              ["$r$","Rob"],
+              ["c","Caroline"]
+            ]
+          },
+          {"type":"matching",
+            "instruction": "Match the following translations by dragging the corresponding PL sentence.",
+          "eventId":"pl-1-matching"}
+        ]
+      }
+  }
+}

@@ -74,6 +74,8 @@ var slSentence = function(l, nl, c, r, nr) {
         this.rightnegated = nr
 }
 
+module.exports.slSentence = slSentence
+
 function slSentencetoString(sl) {
     if (sl.atomic) {
         return (sl.leftnegated) ? "\\neg " + sl.left : sl.left
@@ -87,6 +89,8 @@ function slSentencetoString(sl) {
     return "(" + left + sl.connective + " " + right + ")"
 
 }
+
+module.exports.slSentencetoString = slSentencetoString
 
 // console.log()
 function evaluateSL(vals, sl) {
@@ -115,7 +119,7 @@ function evaluateSL(vals, sl) {
 
 }
 
-function makeLetters(n){
+var makeLetters = function makeLetters(n){
   if (n == null){
     n = chance.integer({min: 2, max: 4})
   }
@@ -123,7 +127,9 @@ function makeLetters(n){
   return chance.pickset(allLetters,n)
 }
 
-function makeSentence(letters,level,diff){
+module.exports.makeLetters = makeLetters
+
+var makeSentence = function makeSentence(letters,level,diff){
   var numOfLettter = chance.integer({min: Math.max(letters.length,2), max: letters.length+diff})
   var all = letters.slice();
   if (numOfLettter != letters.length){
@@ -151,7 +157,7 @@ function makeSentence(letters,level,diff){
   return output
 }
 
-
+module.exports.makeSentence = makeSentence
 
 truthTable1 = function truthTable1(v){
   var nLet
@@ -230,7 +236,7 @@ function makeTruthTable(letters, sentence) {
 function makeArgument(table){
   var firstPremise = -1
   var conclusion = table.length - 1
-  console.log(table)
+  // console.log(table)
   var nRow = table[0].column.length
   for (col in table){
     if (!table[col].atomic) {
@@ -336,7 +342,7 @@ truthTable2 = function truthTable2(v){
     for (var i = 0;i<nSen;i++){
       sen.push(makeSentence(l,connectives,complexity))
     }
-    console.log(l)
+    // console.log(l)
 
     return makeArgument(makeTruthTable(l,sen))
 
@@ -380,13 +386,13 @@ truthTable3 = function truthTable3(v){
     for (var i = 0;i<nSen;i++){
       sen.push(makeSentence(l,connectives,complexity))
     }
-    console.log(l)
+    // console.log(l)
 
     return makeArgument(makeTruthTable(l,sen))
 
 };
 
-console.log(truthTable3(2))
+// console.log(truthTable3(2))
 
 module.exports.truthTable3 = truthTable3
 

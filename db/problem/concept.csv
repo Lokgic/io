@@ -50,3 +50,12 @@ conditional5,matching,"Unless you hate dog, you are a good person.",$D \to G$,,s
 conditional6,matching,"You cannot hate dogs without being a good person.",$\neg D \to G$,,sl,4,matching
 conditional7,matching,"you are a horrible person if you like dogs.",$  D \to  \neg G$,,sl,4,matching
 conditional8,matching,"Hating dog is a sufficient condition to be a horrible person.",$\neg D \to \neg G$,,sl,4,matching
+pl1match1,matching,"If Caroline is a friend of Joey, then Joey is a friend of Caroline.",$Fcj\to Fjc$,,pl,1,matching
+pl1match2,matching,"Joey is a friend of Caroline only if Caroline is a friend of Joey.",$Fjc \to Fcj $,,pl,1,matching
+pl1match3,matching,"Joey is shorter or as short as Rob.",$Sjr \vee \neg (Sjr \vee Srj)$,,pl,1,matching
+pl1match4,matching,"If Joey is shorter than Rob, then Rob is not as short as Joey.",$Sjr \to \neg(Srj \vee Sjr)$,,pl,1,matching
+pl1match5,matching,"Joey is a friend of Caroline if and only if Caroline is a friend of Joey.",$Fjc \leftrightarrow Fcj $,,pl,1,matching
+pl1match6,matching,"Joey is an adult unless he's a child.",$\neg Cj \to Aj$,,pl,1,matching
+pl1match7,matching,"Joey is an child unless he's an adult.",$\neg Aj \to Cj$,,pl,1,matching
+pl1match8,matching,"Joey is an child only if he's an adult.",$ Cj \to Aj$,,pl,1,matching
+pl1match9,matching,"Joey is an child if he's an adult.",$Aj \to Cj$,,pl,1,matching

@@ -17,9 +17,10 @@ mixin arg(premises, conclusion)
 		p $\therefore$ &nbsp; #{conclusion}
 
 mixin symbolkey(key, symbol)
-	.arg.text-justify
+	.symbolkey
 		for k in key
 			p #{k[0]}: #{k[1]}
+
 
 
 
@@ -121,11 +122,18 @@ block content
 											.flexContainer
 												+arg(x.premises, x.conclusion)
 									when "orderedList"
-										for line in x.substance
-											p(id = "item"+line.id).orderedList (#{line.id}) &nbsp; #{line.item}
+										.flexContainer
+											ul
+												for line in x.substance
+													li(id = "item"+line.id).orderedList #{line.id} &nbsp; #{line.item}
 									when "symbolkey"
 											.flexContainer
 												+symbolkey(x.key, x.symbol)
+									when "unorderedList"
+											.flexContainer
+												ul
+													for line in x.substance
+														li #{line}
 									when "event"
 										if x.important
 											.important.text-xs-center.p-a-1

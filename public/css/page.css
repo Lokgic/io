@@ -1,6 +1,6 @@
 
 body {
-  font-family:'Titillium Web', sans-serif;
+  font-family:'Roboto', sans-serif;
 }
 
 
@@ -89,7 +89,7 @@ body {
 
   height: 100vh;
   display:flex;
-  font-family:'Titillium Web', sans-serif;
+  font-family:'Roboto', sans-serif;
   font-size: 1em;
 
 }
@@ -138,16 +138,24 @@ body {
 
 }
 
-#mainnavbar .chapterLink{
-  font-size: 1.2em;
+#mainnavbar .dropdown-item{
+  font-size: 1em;
+
 
 }
+
+#mainnavbar .chapterLink{
+  font-size: 1.5em;
+
+}
+
 /*Main Nav*/
 #mainnavbar a{
   color:white;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.8em;
-  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 0px;
   border-bottom: 1px solid;
   border-color:rgba(0, 21, 29, 0);
 }
@@ -262,16 +270,66 @@ body {
   left:-10000px;
 }
 
-#dragQ{
-  margin-top: 30px;
-  margin-bottom: 30px;
-  /*text-transform: capitalize;*/
+.dragq{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+
 }
+/*
 .draggable{
   margin-top: 10px;
   background: rgba(159, 179, 182,0.6);
+  padding: 20px 0;
+  max-width: 70%;
 
 
+}*/
+.dropzone {
+  background-color: #ddd;
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  /*margin: 10px;*/
+  padding: 20px;
+
+  /*min-height: 100px;*/
+  transition: background-color 0.3s;
+  /*float:left;*/
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #2a546f;
+  /*border-color: #000;*/
+  /*border-style: solid;*/
+  color:white;
+}
+
+.drag-drop {
+  display: inline-block;
+  /*max-width: 80%;*/
+  word-wrap: break-word;
+  /*width:100%;*/
+  padding: 1em 1em;
+  width: auto;
+  color: #000;
+  background-color: rgba(159, 179, 182,0.6);
+  border: solid 2px #fff;
+  border-radius: 10px;
+  max-width: 60%;
+  margin:10px 0;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.drag-drop.can-drop {
+  color: #000;
+  background-color: grey;
 }
 
 .sideQuiz{
@@ -279,7 +337,7 @@ body {
   width: 50%;
 }
 
-.dragMatch .dropzone{
+/*.dragMatch .dropzone{
   background: #464740;
   color:white;
 
@@ -287,7 +345,7 @@ body {
 
 .dragMatch  .drop-target{
   background: rgba(159, 179, 182,0.6);
-  color:black;
+  color:black;*/
 
 }
 .mc{
@@ -479,8 +537,9 @@ border-bottom:  2px solid grey;
     width:100%
 }
 .arg{
-  margin-left: 20%;
-  max-width: 50%
+  /*margin-left: 20%;
+  max-width: 50%*/
+  margin:auto
 }
 
 .arg hr
@@ -497,8 +556,7 @@ border-bottom:  2px solid grey;
 }
 
 .orderedList{
-  margin-left: 20%;
-max-width: 50%
+  margin: auto;
 }
 
 
@@ -569,8 +627,25 @@ font-family: 'Abril Fatface', cursive;
 }
 
 p {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
+  margin-bottom: 40px;
+}
+
+ul li{
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+
+}
+
+ul{
+  margin: auto;
+  margin-bottom: 40px;
+  list-style-type:none;
+}
+.symbolkey{
+  margin: auto;
   margin-bottom: 40px;
 }
 

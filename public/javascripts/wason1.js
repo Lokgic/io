@@ -98,8 +98,8 @@ modalMsg("Introduction",html)
       else if (currentScore > 18) difficulty = 2
     } else{
       expInit(uid,function(d){
-        // difficulty = d.lvl
-        difficulty = 20
+        difficulty = d.lvl
+        // difficulty = 20
         d3.select('#difficulty').text(difficulty+("(+"+ Math.ceil(difficulty/5)+")"))
         // d3.select('#passingscore').text(toPass)
         d3.select('#chance').text(chance)

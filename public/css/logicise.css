@@ -1,8 +1,96 @@
+.treechoices {
+    height: 0px;
+    width: 100%;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    right: 0;
+    background-color: #aaa;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    margin:0;
+    padding: 36px 0 0 0;
+    opacity: 0.9;
+    -webkit-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+    box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+    color:white;
+
+}
+/*
+.treechoices a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s
+}
+
+.treechoices a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.treechoices .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+*/
+
+.node circle {
+  fill: #fff;
+  /*stroke: steelblue;*/
+  /*stroke-width: 3px;*/
+}
+
+
+/*.node text { font:3em}*/
+
+.node text {
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+
+
+
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 5px;
+  opacity: 0.5;
+}
+
+
+
+
+.latexNode{
+  position: absolute;
+  background-color: 'black';
+  width: 500;
+  height: auto;
+  font-size: 1.5em;
+  text-align: left;
+  pointer-events:none;
+
+}
+
+
+
+
+
+
+
+
 .logiciseFS{
 
   background: white;
   max-width: 1500px;
-    margin-bottom: 150px;
+  margin-bottom: 150px;
 
 
 }
@@ -55,6 +143,7 @@
 }
 #display table{
   font-size: 1.3em;
+
 }
 
 #leaderboard{
@@ -62,7 +151,7 @@
   margin-top: 0
 }
 
-#interaction{
+#interaction,#display{
   padding:0;
 }
 

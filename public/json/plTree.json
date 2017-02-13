@@ -10,20 +10,38 @@
                 "name": "Reading",
                 "type":"subtask",
                 "children": [{
-                    "name": "Syntax",
+                    "name": "Why Predicates?",
+                    "type":"chapter",
+                    "children": [
+                      {
+                        "name": "Inadequacy of SL",
+                        "type": "section",
+                        "id":"pl-1-1"
+                    },
+
+                    {
+                        "name": "Basic Predicate Translations",
+                        "type": "section",
+                        "id":"pl-1-matching"
+                    }]
+                }, {
+                    "name": "Quantifiers and its Translations",
                     "type":"chapter",
                     "children": []
-                }, {
-                    "name": "Translations",
-                    "type":"chapter",
-                    "children": []
-                }, {
+                },
+                {
+                  "name":"Recursive Syntax for PL",
+                  "type":"chapter",
+                  "children":[]
+                },
+
+                {
                     "name": "Model Semantics",
                     "type":"chapter",
                     "children": []
                 },
                 {
-                    "name": "Analytic Tableaux(Trees)",
+                    "name": "Analytic Tableaux(Truth Trees)",
                     "type":"chapter",
                     "children": []
                 }]
@@ -31,10 +49,15 @@
                 "name": "Logicise",
                 "type":"subtask",
                 "children": [{
-                    "name": "Wason with Quantities (English)",
+                    "name": "Truth Tree 1 (SL)",
                     "type":"chapter"
 
                 }, {
+                    "name": "Truth Tree 2 (PL)",
+                    "type":"chapter"
+
+                },
+                {
                     "name": "Wason Selection Task in PL",
                     "type":"chapter"
                 }, {

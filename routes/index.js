@@ -139,6 +139,9 @@ router.get(t = '/m/*/*', function(req, res, next){
 	if (moduleID == "sl"){
 		var title  = "Sentence Logic";
 		var moduleNum = 1;
+	} else if (moduleID == "pl"){
+		var title  = "Predicate Logic";
+		var moduleNum = 2;
 	}
 	var fileName = moduleID+chapterNum
 	// console.log(fileName)
