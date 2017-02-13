@@ -139,7 +139,7 @@ modalMsg("Introduction",html)
       }
       sendAttempts(att);
       console.log(currentProblem)
-      d3.selectAll('rect').attr('fill',function(d){
+      svg.selectAll('rect').attr('fill',function(d){
         if (d.correct) return '#444C5C'
         else return '#A43820'
       })
