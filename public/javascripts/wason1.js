@@ -276,10 +276,10 @@ modalMsg("Introduction",html)
 
     var cardWidth = 150
     var topMargin = 30
-
+    var cardMargin = 10;
     var colNumber = Math.floor(width/(cardWidth+padding))
     var height = (cardWidth + 2*cardMargin)*Math.ceil(model.length/colNumber) +topMargin + 200
-    var cardMargin = 10;
+
     var leftMargin = (width - colNumber*(cardWidth+2*cardMargin))/2
     console.log(colNumber)
     svg.attr('width',width)
