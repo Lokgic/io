@@ -200,14 +200,19 @@ router.post('/profile/*', function(req,res,next){
 
 	var sl = require("../public/json/slTree.json")
 	purge(sl.children)
+	sl.completed = false
 	var pl = require("../public/json/plTree.json")
 	purge(pl.children)
+	pl.completed = false
 	var nd = require("../public/json/ndTree.json")
 	purge(nd.children)
+	nd.completed = false
 	var id = require("../public/json/idTree.json")
 	purge(id.children)
+	id.completed = false
 	var pa = require("../public/json/paTree.json")
 	purge(pa.children)
+	pa.completed = false
 	var uid = req.path.split('/')[2]
 	console.log(sl.children[0].children[0].children[0])
 	// console.log(uid)
