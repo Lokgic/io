@@ -12,7 +12,7 @@ $(function(){
     .done(function(d){
       if (d){
         passed = d;
-        document.getElementById('passingscore').innerHTML ="&#10004;";
+        document.getElementById('passingscore').innerHTML = toPass +"&#10004;";
       } else{
         document.getElementById('passingscore').innerHTML = toPass;
       }

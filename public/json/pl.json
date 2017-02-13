@@ -239,7 +239,7 @@
               ["$Sxy$","x is shorter than y."],
               ["$Ax$","x is an adult."],
               ["$Cx$", "x is a child."],
-              ["$b$", "Joey"],
+              ["$j$", "Joey"],
               ["$r$","Rob"],
               ["c","Caroline"]
             ]
