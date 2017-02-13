@@ -813,40 +813,51 @@
   ]
 },
 "4":{
-  "title":"Advanced translations",
+  "title":"X unless Y",
+  "quote":{
+    "lines":[
+      "Joey: Look, y’know how when you’re dating someone and you don’t want to cheat on them, unless it’s with someone really hot? ",
+      "Phoebe: Yeah, totally!",
+      "Joey: All right. Okay. Well this is the same kind of deal. If you’re going to do something wrong... do it right! "
+    ],
+    "source":{
+    "name":  "Friends",
+    "title":"The one with the fake party"
+      }
+  },
   "content":[
     {
       "type":"p",
       "substance":[
-      "We have now introduced all of the connectives of SL. We can use them together to translate many kinds of sentences. Consider these examples of sentences that use the English-language connective 'unless':"
+      "Suppose we codify Joey's idea of faithfulness as 'Joey's rule.' It would look like: "
       ]
     },
     {
       "type":"orderedList",
       "substance":[
-        {"id":"H","item":"Unless you wear a jacket, you will catch cold. "},
-        {"id":"I","item":"You will catch cold unless you wear a jacket."}
+        {"id":"H","item":"Unless the person is hot, don't cheat. "},
+        {"id":"I","item":"Don't cheat unless the person is hot."}
       ]
     },
     {
       "type":"ps",
       "substance":[
-      "Just like 'Y if X' is equivalent to 'if X, Y', H and I are logically equivalent. But how should we translate 'unless'? It's tricky because it does not map straightforwardly onto a conditional statement. One way to explicate this is to interpret the speaker of H and I as expressing a possible preventative event for catching a cold. That is, since wearing jacket is something that can prevent you from getting a get, <i>if you don't wear a jacket, then you will get a cold.</i> This means that this is one way to understand the 'unless' relation:",
-      "$$\\text{Unless X, Y } \\equiv \\neg X \\to Y$$",
+      "Just like 'Y if X' is equivalent to 'if X, Y', H and I are logically equivalent. But how should we translate 'unless'? It's tricky because it does not map straightforwardly onto a conditional statement. One way to think about the connection between the two is through thinking what Joey is really committed into saying. Clearly what is he expressing is a certain conditional relationship between cheating and a person's hotness. So we have four possibilities:"
+      ]
+    },
+    {
+      "type":"orderedList",
+      "substance":[
+        {"id":"A","item":"If someone is hot, you should cheat $ H \\to C$ "},
+        {"id":"B","item":"If someone is not hot, you shouldn't cheat: $ \\neg H\\to  \\neg C$"},
+        {"id":"C","item":"If you cheat, the person is hot: $ C \\to  H$"}
 
-      "Notice the nice thing about this explication is that it does not commit the speaker to the idea that, if you wear a jacket, then you won't get a cold. This can be easily seen when we do the translation side by side:"
-      ]
-    },
-    {
-      "type":"orderedList",
-      "substance":[
-        {"id":"J","item":"If you don't wear a jacket, you will catch a cold: $\\neg W \\to O$ "},
-        {"id":"K","item":"If you wear a jacket, you will not catch a cold: $W \\to \\neg I$"}
+
       ]
     },
     {
       "type":"ps",
-      "substance":["There is a good reason to think that saying H or I is expressing J but not K, because the speaker could be saying that, even though You might still get a cold even if you wore a jacket - say perhaps you got it by kissing something who has a cold, there is a possibility that you will not get it. So if you don't wear that jacket, then it's guaranteed that you will get a cold.",
+      "substance":["What is Joey saying? He was essentially trying to describe to Phoebe where a certain situation where situation is considered (by him) to be allowable. First consider A: this would essentially be saying you should cheat whenever you see a hot person, but this is at all clear what Joey seems to be saying - he doesn't seem to be encouraging Phoebe to cheat on every single hot person on earth. He's not <i>committed into</i> such a strong position. What he is saying, instead, is something more along the lines of: if you <i>do</i> cheat, you should cheat with a hot person. Or putting it differently: if the person is not hot, don't even think about cheating. So B and C are both acceptable translations: they happen to be logically equivalent. ",
       "Note that in English sometimes 'unless' could signify a biconditional. Consider the sentence: 'I will go to the party, unless John is going'. Perhaps I really hate John so I can't stand going to the party with him being present. Understood as such, it makes to interpret me as saying that if John goes, I won't go, and if I go, that means John didn't go. That would be a biconditional interpretation.",
     "Examine the truth table for a translation of J."]
     },
@@ -878,7 +889,9 @@
         "There is a number of logical laws involving conditionals. You should check all of them using the truth table. Like the laws we learned in earlier chapters. these laws can be used for SLE.",
         "$$\\text{Contraposition: } X \\to Y \\equiv \\neg Y \\to \\neg X$$",
         "$$\\text{Material Implication: } X \\to Y \\equiv \\neg X \\vee Y.$$",
-        "$$\\text{Biconditional Exportation: } X \\leftrightarrow Y \\equiv (X \\to Y) \\wedge (Y \\to X)$$"
+        "$$\\text{Biconditional Exportation: } X \\leftrightarrow Y \\equiv (X \\to Y) \\wedge (Y \\to X)$$",
+        "There is also a meta-law that codify the relationship between logical equivalence and biconditionals: (why is this meta?)",
+        "$$X \\equiv Y \\text{ if and only if } X \\leftrightarrow Y$$"
         ]}
 
     ]
