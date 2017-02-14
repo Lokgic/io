@@ -1,6 +1,9 @@
+Chance = require('chance')
+
 _ = require('underscore')
-sl = require('./truthTable_gen.js')
+chance = new Chance()
 PriorityQueue = require('./priority-queue.js')
+var allLetters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"]
 var or = "\\vee"
 var and = "\\wedge"
 var neg = "\\neg"
@@ -25,8 +28,16 @@ var allConnectives ={
       ]
     }
 
+var comparator = {
+  comparator: function(a, b) {
+    if (branchingCheck(a) && branchingCheck(b)) return 0;
+    else if (branchingCheck(a) && !branchingCheck(b)) return 1;
+    else if (!branchingCheck(a) && branchingCheck(b)) return -1;
+    }
+  }
 
-var root = treeData
+
+
 
 function BFS(root){
   var explored = []
@@ -44,101 +55,112 @@ function BFS(root){
   return explored
 }
 
-function makeRoot(nSen,nLet){
-  var l = sl.makeLetters(nLet)
-  out = {
-    name:"root",
-    children:[],
-    givens:[]
+
+var makeLetters = function makeLetters(n){
+  if (n == null){
+    n = chance.integer({min: 2, max: 4})
   }
-  for (var i = 0 ;i < nSen;i++){
-    if (i!= nSen-1){
-      out.givens.push(sl.makeSentence(l,2,1))
-    }else{
-      var conclusion = sl.makeSentence(l,2,1)
-      out.givens.push({
-        atomic:true,
-        left: conclusion,
-        leftnegated:true
-      })
-    }
-  }
-  return out
+  // console.log(n)
+  return chance.pickset(allLetters,n)
 }
 
-// function growTree(root){
-//   var q = root.givens
-//   var checked = []
-//
-//   while (q.length != 0){
-//
-//   }
-//
-//
-//
-// }
+
+var makeSLSentence = function makeSLSentence(letters,conectivesGroup,upper,negProbability){
+  negProbability = negProbability == null? {likelihood: 5}:{likelihood: negProbability};
+  var numOfLettter = chance.integer({min: Math.max(letters.length,2), max: letters.length+upper})
+  var all = letters.slice();
+  if (numOfLettter != letters.length){ //pick random letters for extra letters
+    var temp = _.sample(letters,numOfLettter - letters.length)
+    Array.prototype.push.apply(all, temp)
+  }
+  all = _.shuffle(all)
+  // console.log(all)
+  var substr = [] //parts of wffs
+  if (all.length%2 != 0){ //if number is odd, make one singleton first
+    substr.push(new slSentence(all.shift()))
+    // console.log(substr)
+  }
+  for (var i = 0;i<all.length;i++){ //now but doubleton
+    substr.push(new slSentence(all.shift(),chance.bool(negProbability), chance.pickone(allConnectives[conectivesGroup]),all.shift(), chance.bool(negProbability)))
+  }
+
+  if (substr.length == 1) return substr[0] //only 1 - no need to put together
+  substr = _.shuffle(substr)
+  var output = new slSentence(substr.shift(),chance.bool(negProbability),chance.pickone(allConnectives[conectivesGroup]),substr.shift(), chance.bool(negProbability))
+  while (substr.length!=0){
+    output = new slSentence(output,chance.bool(negProbability),chance.pickone(allConnectives[conectivesGroup]),substr.shift(), chance.bool(negProbability))
+  }
+
+  return output
+}
 
 
-var a = { atomic: true,
-  left:
-   { atomic: false,
-     left: 'A',
-     right: 'F',
-     connective: '\\vee',
-     leftnegated: false,
-     rightnegated: false },
+var slSentence = function(l, nl, c, r, nr, mainNegProb) {
+    mainNegProb = (null)? 10 : mainNegProb;
+    this.mainNeg = chance.bool(mainNegProb)
+    if (typeof l == "string" && r == null) {
+        this.atomic = true
+    } else this.atomic = false;
 
-  connective: '\\vee',
-  leftnegated: true,
-  rightnegated: false }
+    this.left = l,
+    this.right = r,
+    this.connective = c,
+    this.leftnegated = nl,
+    this.rightnegated = nr
+}
 
-  var a2 = { atomic: true,
-    left:
-     { atomic: true,
-       left: 'A',
-       leftnegated: true,
-       rightnegated: false },
 
-    leftnegated: true,
-    rightnegated: false }
+
+
 
 
 
 function branchingCheck(st){
-  if (st.connective == and) return false;
-  if (st.atomic == true){
-    if (st.leftnegated == true){
-      if (st.left.atomic && st.left.leftnegated) return false // double negation
-      if (st.left.connective == or) return false;
-      if (st.left.connective == implies) return false;
-    }
-  }
+  if (st.connective == and && !st.mainNeg) return false;
+  else if (st.connective == or && st.mainNeg) return false;
+  else if (st.connective == implies && st.mainNeg) return false;
+  else if (st.right == null && st.mainNeg && st.left.manNeg) return false;
   return true;
 
 }
 
-var queue = new PriorityQueue({
-  comparator: function(a, b) {
-    if (branchingCheck(a) && branchingCheck(b)) return 0;
-    else if (branchingCheck(a) && !branchingCheck(b)) return 1;
-    else if (!branchingCheck(a) && branchingCheck(b)) return -1;
+
+function Node(data){
+  this.data = data,
+  this.parent = null,
+  this.children = []
+}
+
+function Tree(data) {
+    var node = new Node(data);
+    this._root = node;
+}
+
+
+function makeTree(nSen,nLet){
+  var l = makeLetters(nLet)
+  var givens = []
+  for (var i = 0 ;i < nSen;i++){
+    if (i!= nSen - 1){
+      givens.push(makeSLSentence(l,1,1))
+    }else {
+      givens.push({
+        "mainNeg":true,
+        "left":makeSLSentence(l,1,1)
+      })
     }
+
   }
-);
 
-var l = sl.makeLetters(3)
-queue.queue(a);
-queue.queue(a2);
+  return new Tree(givens)
+}
 
-queue.queue(sl.makeSentence(l,2,1));
-queue.queue(sl.makeSentence(l,2,1));
-queue.queue(sl.makeSentence(l,2,1));
-// var lowest = queue.dequeue(); // returns 5
-// var l = sl.makeLetters(4)
-// var root = makeRoot(2,2)
+function growTree(node){
 
-console.log(queue.dequeue())
-console.log(queue.dequeue())
-console.log(queue.dequeue())
-console.log(queue.dequeue())
-console.log(queue.dequeue())
+}
+
+var l = makeLetters(3)
+
+
+var tree = makeTree(1,2)
+console.log(JSON.stringify(tree, null, 4));
