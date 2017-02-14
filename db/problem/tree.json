@@ -36,24 +36,38 @@
                   "name":"\\neg (N \\to P)",
                   "conclusion":true,
                   "children":[
-                    {"name":"N","closed":true},
-                    {"name":"D\\to P",
-                    "children":[
+                    {
+                      "name":"N",
+                      "children":[
                         {
-                          "name": "D",
+                          "name":"\\neg P",
                           "children":[
-                            {
-                              "name":"\\neg D",
-                              "closed":true
-                            },
-                            {
-                              "name":"P",
-                              "closed":true
-                            }
+                            {"name":"\\neg N","closed":true},
+                            {"name":"D\\to P",
+                            "children":[
+                              {
+                                "name":"\\neg N",
+                                "closed":true
+                              },
+                                {
+                                  "name": "D",
+                                  "children":[
+                                    {
+                                      "name":"\\neg D",
+                                      "closed":true
+                                    },
+                                    {
+                                      "name":"P",
+                                      "closed":true
+                                    }
 
+                                  ]
+                                }
+                              ]}
                           ]
                         }
-                      ]}
+                      ]
+                    }
                   ]
                 }
               ]

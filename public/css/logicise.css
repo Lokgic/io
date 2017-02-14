@@ -1,3 +1,5 @@
+
+
 .treechoices {
     height: 0px;
     width: 100%;
@@ -8,7 +10,6 @@
     background-color: #aaa;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
     margin:0;
     padding: 36px 0 0 0;
     opacity: 0.9;
@@ -17,6 +18,10 @@
     box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
     color:white;
 
+}
+
+.treeChoiceButt{
+  margin-top: 30px;
 }
 /*
 .treechoices a {
@@ -73,7 +78,7 @@
   background-color: 'black';
   width: 500;
   height: auto;
-  font-size: 1.5em;
+  font-size: 1em;
   text-align: left;
   pointer-events:none;
 
