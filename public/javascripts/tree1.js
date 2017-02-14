@@ -26,6 +26,9 @@ $(function(){
 
     var choices = [ 'A', 'B\\vee C \\vee D \\vee Q', 'B', 'C' ]
 
+    $.post('/getTrees',function(d){
+      console.log(d)
+    })
 
     function makeChoices(choices, d3obj){
       d3obj.selectAll('button')

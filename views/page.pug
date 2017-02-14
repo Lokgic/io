@@ -121,6 +121,10 @@ block content
 									when "arg"
 											.flexContainer
 												+arg(x.premises, x.conclusion)
+									when "niceList"
+										ul.list-group
+											for line in x.substance
+												li.list-group-item.niceListItem #{line}
 									when "orderedList"
 										.flexContainer
 											ul

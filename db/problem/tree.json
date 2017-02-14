@@ -1,0 +1,68 @@
+{
+  "1":{
+    "source":"teller-8-1"
+  },
+  "2":{
+    "source":"teller-8-3",
+    "problems":[
+      {
+        "id":"teller-8-3a",
+        "tree":{
+          "name":"$$F$$ $$\\neg(F\\wedge K)$$",
+          "children":[
+
+              {"name":"\\neg F","closed":true},
+              {"name":"\\neg K","closed":false}
+
+          ]
+        }
+
+      }
+    ]
+  },
+  "3":{
+    "problems":[
+      {
+        "id":"teller-9-2-c",
+        "tree":{
+          "name":"N \\to (D \\to P)",
+          "premise":true,
+          "children":[
+            {
+              "name":"N \\to D",
+              "premise":true,
+              "children":[
+                {
+                  "name":"\\neg (N \\to P)",
+                  "conclusion":true,
+                  "children":[
+                    {"name":"N","closed":true},
+                    {"name":"D\\to P",
+                    "children":[
+                        {
+                          "name": "D",
+                          "children":[
+                            {
+                              "name":"\\neg D",
+                              "closed":true
+                            },
+                            {
+                              "name":"P",
+                              "closed":true
+                            }
+
+                          ]
+                        }
+                      ]}
+                  ]
+                }
+              ]
+            }
+          ]
+
+        }
+      }
+    ]
+
+  }
+}

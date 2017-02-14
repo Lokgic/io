@@ -340,6 +340,13 @@ router.post('/problem/*', function(req,res,next){
 
 })
 
+
+router.post('/getTrees',function(req,res,next){
+	var data = require('../db/problem/tree.json')
+	console.log(data)
+	return res.send(data["3"].problems[0])
+})
+
 router.post('/processing/*', function(req,res,next){
 
 	var generatorID = req.path.split('/')[2]

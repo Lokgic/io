@@ -1,900 +1,924 @@
 {
-  "1":{
-    "1":{
-        "chapterName": "What is Logic?",
-        "chapterNum": "1",
-        "chapterDescription": "Logic is a part of the study of human reason, the ability we have to think abstractly, solve problems, explain the things that we know, and infer new knowledge on the basis of evidence. Traditionally, logic has focused on the last of these items, the ability to make inferences on the basis of evidence, by evaluating the deductive validity of arguments. This section explains briefly what this means.",
-        "title": "Logic as the systematic evaluation of arguments",
-        "quote":{
-          "lines":[
-            "M: An argument isn't just contradiction.",
-            "O: Well! it CAN be!",
-            "M: No it can't! An argument is a connected series of statements intended to establish a proposition.",
-            "O: No it isn't!",
-            "M: Yes it is! 'tisn't just contradiction."
-          ],
-          "source":{
-          "name":  "Monty Python",
-          "title":"Argument Clinic"
-            }
-        },
-        "content":{
-          "a":{
-            "type":"p",
-            "substance":[
-
-              "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word 'argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people contradicts or disagree with each other. .",
-              "An argument in this technical is a set of statements intended to provide someone a reason to believe one of the statements in that set, which we call a conclusion. Suppose you are wondering if you friend Bob plays the guitar. You can't quite remember exactly what he plays, but you do recall that he uses a bow. Since you know that guitars are plucked and not bowed, you conclude that Bob indeed does not play the guitar. "
-            ]
-          },
-          "b":{
-            "type":"half",
-            "substance":
-                  [{
+    "1": {
+        "1": {
+            "chapterName": "What is Logic?",
+            "chapterNum": "1",
+            "chapterDescription": "Logic is a part of the study of human reason, the ability we have to think abstractly, solve problems, explain the things that we know, and infer new knowledge on the basis of evidence. Traditionally, logic has focused on the last of these items, the ability to make inferences on the basis of evidence, by evaluating the deductive validity of arguments. This section explains briefly what this means.",
+            "title": "Logic as the systematic evaluation of arguments",
+            "quote": {
+                "lines": [
+                    "M: An argument isn't just contradiction.",
+                    "O: Well! it CAN be!",
+                    "M: No it can't! An argument is a connected series of statements intended to establish a proposition.",
+                    "O: No it isn't!",
+                    "M: Yes it is! 'tisn't just contradiction."
+                ],
+                "source": {
+                    "name": "Monty Python",
+                    "title": "Argument Clinic"
+                }
+            },
+            "content": {
+                "a": {
                     "type": "p",
-              "substance":  [
+                    "substance": [
 
-                "We can reconstruct this line of thought as an argument, like the one to the right. We call the two sentences above line premises. The word 'therefore' signifies that the sentence below the line is the $conclusion$ of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else.  Sometimes you might work things verbally. This is not a problem, because the business of logic is not to describe exact what's going on in your mind but to systemize the rational structure of thoughts."]
-
-              },
-              {
-                "type": "argument",
-                "premises":["1: Bob plays a bowed instrument.",
-                "2: All guitars are plucked and not bowed"],
-                "conclusion":"Therefore, Bob does not play the guitar"
-              }
-            ]
-          },
-          "c":{
-            "type": "ps",
-            "substance":[
-              "This example showcases a core idea in logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
-              "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
-
-              "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. (It also does not assert that they are false.)This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. This sounds pretty imprecise at the moment, but we will sharpen our understanding of validity as we go on.",
-
-              "Evaluating arguments based on their validity is called <i>deductive reasoning</i>, in contradistinction to <i>inductive reasoning</i>, where the value of an inference is based on its probability. In this class we concern ourselves exclusively with deductive reasoning. The techniques you would learn in a probability or statistics class are examples of inductive reasoning."
-            ]
-
-          },
-
-          "d":{
-            "type":"scroll",
-            "eventId":"m1c1s1",
-            "substance":[
-              ["t1","Representing Validity","One way in which we can think about validity is by representing an argument like the one above in a graphical form that accentuates its logical structure. First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
-              ["t2", "Premise 1","states that whatever instrument Bob plays belongs to the bowed circle. This can be represent by a smaller circle situated within the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
-              ["t3", "Not really!","Since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
-              ["t4", "Premise 2 states that","guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
-            ]
-
-          },
-          "d2":{
-            "type":"p",
-            "substance":[
-              "Diagrams like these are immensely useful at the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so we will discuss them more thoroughly. Let us finish this section with a short exercise."
-            ]
-          },
-          "e":{
-            "type":"readingEx",
-            "title": "Reading Exercise: Determining Validity Intuitively",
-            "eventId":"sl-1-1",
-            "intro":["For this reading exercise, try to find out if the argument given is valid, in the technical sense defined above: if the premises is true, must the conclusion be true as well?","It might be difficult to think about these arguments just in your head. Just try your best - for this exercise you are not graded on correctness. You will get credit as long as you complete the set of 10 questions.","After you are done, you can look at the answers. These problems are randomly generated, so you can redo it for practice.","Click 'Next' to begin."],
-            "size":"half",
-            "instruction": "Make your best estimate as to whether the arguments presented below are valid.",
-            "substance":[
-
-
-              "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
-              "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
-              "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
-
-              "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
-            ]
-          },
-          "f":{
-            "type":"p",
-            "substance":[
-              "I hope by now you have gotten a sense of what validity means and how it could be something that is difficult to think about intuitively. Most of what we do here is to learn formal tools that allow us to evaluate the validity of complex arguments more efficiently and reliably. Venn diagrams, the topic of the next section, is one of them."
-            ]
-
-          }
-
-        }
-    },
-    "2":{
-      "title": "Euler and Venn diagrams",
-      "content":{
-        "a":{
-          "type": "p",
-          "substance":[
-            "In 1880 English logician John Venn published two essays on the use of diagrams with circles to represent categorical propositions, like the ones in our Bob example. Venn noted that the best use of such diagrams so far had come from the brilliant Swiss mathematician Leonhard Euler, but they still had many problems, which Venn felt could be solved by bringing in some ideas about logic from his fellow English logician George Boole. Although Venn only claimed to be building on the long logical tradition he traced, since his time these kinds of circle diagrams have been known as Venn diagrams. While they might not be as elegant and powerful as some of the tools we will learn later on, they are still useful in evaluating arguments.",
-            "Consider the diagram below that represents the claim that all guitars are plucked instruments. Outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."
-
-          ]
-        },
-        "b":{
-          "type":"scroll",
-          "eventId":"m1c1s2",
-          "substance":[
-            ["t5","What's wrong with Euler diagrams?","Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While our background knowledge tells us that this is true, the goal of the diagram is to accurately represent the statement in question, not to impose external information. In logic we do not want to assume any proposition that is not explicitly stated. This statement is unclear about whether $all$ guitars or $only$ guitars are plucked. (What's the difference?)"],
-            ["t6", "Making ambiguity explicit","So it should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. The problem however is that Euler diagrams cannot express this relation clearly - either the two circles are of the size, or one is smaller. There is no way to express the ambiguity needed here. Furthermore, it is confusing to put one of the circles directly on top of the other, as shown by the diagram."],
-            ["t7", "Venn's suggestion:","to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles. The advantage of this is that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
-            ["t8", "Representing impossibilities","We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say 'All guitars are plucked instruments,' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."],
-
-            ["t9","Representing ambiguous entities","What if I want to say: Mary plays a plucked instrument? Now we are dealing with $existence$, and not just $possibilities$. To assert that a certain thing exists, we put an X in a region, so there should be an X somewhere in the plucked circle. Should we put the X in the overlapping area? We certainly don't know if Mary plays the guitar, but we also don't know if she does not play it. So we have another ambiguity here. To represent this we put the X right on the border, signifying that the statement is indifferent in respect to whether the instrument is also a guitar. (If Mary turns out to play something that is both a guitar and plucked, then the X would go in the overlapping area.)"]
-
-          ]
-
-        },
-        "c":{
-          "type":"basicVenn",
-          "title": "Reading Exercise: Basic Venn Diagrams",
-          "eventId":"sl-1-2",
-          "size":"whole",
-          "instruction": "Based on the given Venn Diagram, answer the corresponding question."
-        }
-      }
-    },
-    "3":{
-      "title": "Aristotelian logic and categorical statements",
-      "content":{
-        "a":{
-          "type":"ps",
-          "substance":["The premise 'all guitars are plucked instruments' is an example of what logicians call a <a href='https://en.wikipedia.org/wiki/Categorical_proposition' target='_blank'>categorical statement</a>. For most of the history of logic in the West, the focus has been on arguments that rely extensively on those statements called <a href = 'https://en.wikipedia.org/wiki/Syllogism' target='_blank'>categorical syllogism </a>. Aristotle began the study of this kind of argument in his book the <i>Prior Analytics</i> (c.350 BCE).",
-          "A categorical syllogism is a two-premise argument composed of categorical statements. There are actually all kinds of two-premise arguments using categorical statements, but Aristotle only looked at arguments where each statement is in one of the 'moods' of categorical statement. Each mood is a combination of two quantities and two qualities. A quantity of a categorical statement can be either universal - applying to everything in a category, particular - at least one thing in a category. Each categorical statement is also said to have either an affirmative or a negative quality. 'All guitars are plucked' is an instance of a universal affirmation - it makes a positive claim that everything that in the category of guitars. 'No guitar is bowed' would be a instance of universal negation. Some guitars are bowed would be an instance of a 'particular affirmation', and so on."]
-        },
-        "b":{
-          "type":"event",
-          "eventId":"moods",
-          "title":"Basic Categorical Statements in Venn Diagrams"
-        },
-        "c":{
-          "type":"ps",
-          "substance":[
-            "If a region of a Venn diagram is blank - if it is neither shaded nor has an x in it - then it could go either way. Maybe such things exist, maybe they do not.  Notice that when we draw diagrams for the two universal forms, we do not draw any x's. For these forms we are only ruling out possibilities, not asserting that things actually exist. This is part of what Venn learned from Boole. The proposition, 'All guitars are plucked instruments,' denies the existence of any guitar that is not a plucked, but it does not assert the existence of some guitar that is a plucked. That probably reads like gibberish - guitars obviously do exist. So what's the deal?",
-
-            "The reason for this is to accommodate categorical statements about things that don't exist yet makes perfect sense, for instance 'All unicorns have one horn.' This seems like a true statement, but unicorns don't exist. Perhaps what we mean by 'All unicorns have one horn' is that <i>if</i> a unicorn existed, <i>then</i> it would have one horn. But if we interpret the statement about unicorns that way, shouldn't we also interpret the statement about dogs that way? Really all we mean when we say 'All dogs are mammals' is that if there were dogs, then they would be mammals. It takes an extra assertion to point out that dogs do, in fact, exist.",
-
-            "The issue we are discussing here is called existential import. A sentence is said to have existential import if it asserts the existence of the things it is talking about. Until Boole, universal-affirmative statements were often interpreted as having existential import. You might find that more intuitive, but if you interpret all universal-affirmative statements with existential import, they are always false when you are talking about things that don't exist. So, 'All unicorns have one horn' is false in the traditional interpretation. On the other hand, in the modern interpretation all statements about things that don't exist are true. 'All unicorns have one horn' simply asserts that there are no multi-horned unicorns, and this is true because there are no unicorns at all. We call this vacuous truth. Something is vacuously true if it is true simply because it is about things that don't exist. Note that all statements about nonexistent things become vacuously true if you assume they have no existential import, even a statement like 'All unicorns have more than one horn.' A statement like this simply rules out the existence of unicorns with one horn or fewer, and these don't exist because unicorns don't exist. This is a complicated issue that will come up again starting in later sections when we consider conditional statements in this module, and predicate logic later.",
-            "A categorical syllogism consists of two categorical statements as premises, and one as conclusion. The logical relations between these statements are based certain terms they share. For instance, consider this argument:"
-          ]
-        },
-        "d":{
-          "type":"argument",
-          "premises":["P1. All mammals are vertebrates.","P2. All dogs are mammals."],
-          "conclusion":"C. All dogs are vertebrates."
-        },
-        "e":{
-          "type":"p",
-          "substance":[
-            "Notice how the statements in this argument overlap each other. Each statement shares a term with the other two. Premise 2 shares a term with the conclusion and another with Premise 1. Thus there are only three terms spread across the three statements. Each of the three statements can take one of four categorical mood. This gives us $4 \\times 4 \\times 4,$ or 64 possibilities. In addition to varying the kind of statements we use in an Aristotelian syllogism, we can also vary the placement of the terms involved. The combination of 64 moods and 4 figures gives us a total of 256 possible Aristotelian syllogisms. Most of these are valid, but a good chunk of them are. We won't go through every single syllogism like a good medieval logician, but we should be able to analyze them using Venn diagram."
-          ]
-        },
-        "f":{
-          "type":"scroll",
-          "eventId":"m1c1s3",
-          "substance":[
-            ["t10","Three terms:","Since each syllogism involves three terms, we need 3 overlapping circles."],
-            ["t11","Premise 1:","All mammals are vertebrates, so we grey out the the area of the mammal circle that does not overlap with the vertebrate circle."],
-            ["t12","Premise 2:","All dogs are mammals, so we grey out the the area of the dog circle that does not overlap with the mammal circle. Note that part of the circle was greyed already due to premise 1."],
-            ["t13","Does the conclusion 'all dogs are vertebrates' follow?","Upon examining this Venn diagram, we can see that if we greyed out areas in accordance to the premises, the only white area left in the dog circle also overlaps with the vertebrate circle. This represents the idea of an valid argument as one with premises that, if true, would make the conclusion true as well."]
-
-          ]
-
-        }
-      }
-    },
-    "4":{
-        "title":"Wrapping up",
-        "content":{
-          "e":{
-            "type":"definition",
-            "title": "Reading Exercise: Definitions Review Quiz",
-            "eventId":"sl-1-def",
-            "size":"half",
-            "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
-            "substance":[
-              "Finish this section by completing the concepts review quiz. For this quiz, you have to answer all questions correctly to get credit. However you may try as many times as you like.",
-              "After familiarizing yourself with the ideas in the section, you should do the logical exercise ('logicise') <a href='/logicise/vennSyl'>'Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
-              "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern logic - the formal language of sentence logic."
-
-            ]
-          }
-        }
-    }
-  },
-  "2":{
-    "1":{
-      "chapterName":"The formal language of SL",
-      "chapterNum":"2",
-      "chapterDescription":"The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. In formal logic we get content neutrality by replacing parts of the argument we are studying with abstract symbols. In this chapter, we begin our study of formal logic by learning about a symbolic language called $SL$",
-      "title": "What is meant by 'formal'?",
-      "content":[
-        {
-          "type":"p",
-          "substance":["Consider the two arguments below:"]
-        },
-
-            {
-              "type":"arg",
-              "premises":[
-                "1: Socrates is a person.",
-                "2. All persons are mortal."
-              ],
-              "conclusion":"C: Socrates is mortal."
-            },
-            {
-              "type":"arg",
-              "premises":[
-                "1: Socrates is a person.",
-                "2. All persons are carrots."
-              ],
-              "conclusion":"C: Socrates is carrot."
-            },
-
-            {
-              "type":"p",
-              "substance":[
-                "These arguments are both valid. In each case, if the premises were true, the conclusion would have to be true. (In the case of the first argument, the premises are actually true, so the argument is sound, but that is not what we are concerned with right now.) What makes these arguments valid is that they are put together the right way. Another way of thinking about this is to say that they have the same logical form. Both arguments can be written like this:"
-
-              ]
-            },
-            {
-              "type":"arg",
-              "premises":[
-                "1: S is M","2.All M are P."
-              ],
-              "conclusion": "C: S is P"
-            },
-        {
-          "type":"p",
-          "substance":[
-            "In both arguments $S$ stands for Socrates and $M$ stands for person. In the first argument, $P$ stands for mortal; in the second, $P$ stands for carrot. The letters S, M, and P are variables. They are just like the variables you may have learned about in algebra class. In algebra, you had equations like $y = 2x + 3$, where $x$ and $y$ were variables that could stand for any number. Just as $x$ could stand for any number in algebra, `S' can stand for any name in logic. In fact, this is one of the original uses of variables.",
-
-            "The importance of the variable for the history of mathematics is obvious. But it was also incredibly important in one of its original fields of application, logic. For one thing, it allows logicians to be more content neutral. We can set aside any associations we have with people, or carrots, or whatever, when we are analyzing an argument. More importantly, once we set aside content in this way, we discover that something incredibly powerful is left over, the logical structure of the sentence itself. This is what we investigate when we study formal logic. In the case of the two arguments above, identifying the logical structure of statements reveals not only that the two arguments have the same logical form, but they have an impeccable logical form. Both arguments are valid, and any other arguments that have this form will be valid. ",
-
-            "As formal logic evolved, however, the idea of being 'formal' would take on an additional meaning. Despite its historical importance, Aristotelean logic has largely been superseded. Starting in the 19th century people learned to do more than simply replace categories with variables. They learned to replicate the whole structure of sentences with a formal system that brought out all sorts of features of the logical form of arguments. The result was the creation of entire artificial languages. An artificial_language is a language that was consciously developed by identifiable individuals for some purpose.",
-
-            "Artificial languages contrast with natural language, which develop spontaneously and are learned by infants as their first language. Natural languages include all the well-known languages spoken around the world, like English or Japanese or Arabic. The languages developed by logicians are artificial, not natural. When the languages first started being developed in the late 19th and early 20th centuries, the goal was, in fact, to have a logically pure language, free of the irrationalities the plague natural languages. More specifically, they had two distinct goals: first, remove all ambiguity and vagueness, and second, to make the logical structure of the language immediately apparent, so that the language wore its logical structure on its face, as it were. If such a language could be developed, it would help us solve all kinds of problems. The logician and philosopher Rudolf Carnap, for instance, felt that the right artificial language could simply make philosophical problems disappear. (The few quotes that randomly occur on the front page of this website encapsulate this sentiment.)",
-
-            "For the purposes of this textbook, we will say that the core idea of a  formal_language is that it is an artificial language designed to bring out the logical structure of ideas and remove all the ambiguity and vagueness that plague natural languages like English. Creating formal languages always involves all kinds of trade offs. On the one hand, we are trying to create a language that makes a logical structure clear and obvious. This will require simplifying things, removing excess baggage from the language. On the other hand, we want to make the language perfectly precise, free of vagueness and ambiguity. This will mean adding complexity to the language. The other thing was that it was very important for the people developing these languages that you be able to prove the all the truths of mathematics in them. This meant that the languages had to have a certain scope.",
-
-            "This was a trade off no logician was ever able to get perfectly correct, because, as it turns out, a logically pure language is impossible. No formal language can do everything that a natural language can do. Logicians became convinced of this, naturally enough, because of a pair of logical proofs. In 1931, the logician Kurt Goedel showed that you couldn't do all of mathematics in a consistent logical system, which was enough to persuade most of the logicians engaged in the project to drop it. There is a more general problem with the idea of a purely logical language, though, which is that that many of the features logicians were trying to remove from language were actually necessary to make it function. Arika Okrent puts the point quite well. For Okrent, the failure of artificial languages is precisely what illuminates the virtues of natural language. "
-          ]
-        }
-      ]
-    },
-    "2":{
-      "title":"Introducing $SL$",
-      "content":
-      [
-        {
-        "type":"p",
-        "substance":["This section introduces a logical language called SL, which is a version of sentence logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English.In SL, capital letters, called sentence letter are used to represent simple statements. Considered only as a symbol of SL, the letter $A$ could mean any statement. So when translating from English into SL, it is important to provide a symbolization key, or dictionary. The symbolization_key provides an English language sentence for each sentence letter used in the symbolization.",
-        "Consider this argument:"]
-        },
-        {
-          "type":"arg",
-          "premises":["There is an apple on the desk.","If there is an apple on the desk, then Jenny made it to class."],
-          "conclusion":"Jenny made it to class"
-        },
-        {
-          "type":"p",
-          "substance":["This is obviously a valid argument in English. In symbolizing it, we want to preserve the structure of the argument that makes it valid. What happens if we replace each sentence with a letter? Our symbolization key would look like this:"]
-        },
-        {
-          "type":"symbolkey",
-          "key":[["A","There is an apple on the desk."],["B","Jenny made it to class."]]
-        },
-        {
-          "type":"p",
-          "substance":["We would then symbolize the argument in this way:"]
-        },
-        {
-          "type":"arg",
-          "premises":["A","If A, then B."],
-          "conclusion":"B"
-        },
-        {
-          "type":"p",
-          "substance":["There is no necessary connection between some sentence $A$, which could be any statement, and some other sentences $B$, which could also be anything. The important thing about the argument is that the second premise is not merely any statement, logically divorced from the other statement in the argument. The second premise contains the first premise and the conclusion as parts. This is why our symbolization key for the argument only needs to include meanings for $A$ and $B$, and we can build the second premise from those pieces."]
-        }
-      ]
-    },
-    "3":{
-      "title":"The Building Blocks of $SL$",
-      "content":[
-        {
-          "type":"p",
-          "substance":[
-            "There is a structure behind symbolizing English into $SL$. The basic idea is that each sentence should express one self-standing idea and we should explicate logical relations using other symbols. For instance, the sentence 'sky is blue and water is wet' contains two ideas that can be expressed independently. So they each should be assign to a difference letter."
-          ]
-        },
-        {"type":"smallTitle","substance":"Atomic Sentences"},
-        {
-          "type":"p",
-          "substance":[
-            "The individual sentence letters in SL are called atomic sentences, because they are the basic building blocks out of which more complex sentences can be built. We can identify atomic sentences in English as well. Anatomic sentence is one that cannot be broken into parts that are themselves sentences. 'There is an apple on the desk' is an atomic sentence in English, because you can't find any proper part of it that forms a complete sentence. For instance 'an apple on the desk' is a noun phrase, not a complete sentence. Similarly 'on the desk' is a prepositional phrase, and not a sentence, and 'is an' is not any kind of phrase at all. This is what you will find no matter how you divide 'There is an apple on the desk.' On the other hand you can find two proper parts of 'If there is an apple on the desk, then Jenny made it to class' that are complete sentences: 'There is an apple on the desk' and 'Jenny made it to class.' As a general rule, we will want to use atomic sentences in SL (that is, the sentence letters) to represent atomic sentences in English. Otherwise, we will lose some of the logical structure of the English sentence, as we have just seen.",
-
-            "Not just anything in English can be translated into $SL$, however. Logic in general only concerns itself with $statements$, in a technical sense: a unit of language that can be true or false. Statements, as philosophers would say, declarative - they make claims about the world. 'Gress is green' and 'Logic is awesome' are declarative. Things like commands, exclamation, and questions are not declarative and cannot be captured by $SL$."
-          ]
-        },
-        {"type":"smallTitle","substance":"Complex Sentences and Logical Connectives"},
-        {
-          "type":"p",
-          "substance":[
-            "Logical connectives are used to build complex sentences from atomic components. In SL, our logical connectives are called sentential connective because they connect sentence letters. There are five sentential connectives in SL. In this section we will go over three of those."
-          ]
-        },
-        {"type":"smallTitle","substance":"Negation"},
-        {
-          "type":"ps",
-          "substance":[
-            "Suppose we want to translate the sentence:",
-            "$$\\text{Mary is not in Barcelona}$$",
-            "It might be tempting to think of this sentence as being atomic, but logically we should think of this as ",
-
-            "$$\\text{It is not the case that Mary is in Barcelona}$$",
-
-            "It's a mouthful, but it makes its logical structure explicit: this statement is a denial of a certain fact, that Mary is in Barcelona. To symbolize statements that involve denial, we use the <i>negation</i> symbol $\\neg$. So suppose we symbolize 'Mary is in Barcelona' as $B$. To symbolize the complex sentence, we write",
-            "$$\\neg B$$",
-            "Note that a statement can express a denial without using the word 'not'. For instance, 'Mary is nowhere near Barcelona' can be translated as $\\neg B$."
-          ]
-        },
-        {"type":"smallTitle","substance":"Conjunction"},
-        {
-          "type":"ps",
-          "substance":[
-            "Suppose we want to translate the sentence:",
-            "$$\\text{Mary is not in Barcelona and Bill is in Hong Kong.}$$",
-            "We already have half the statement translated. What we need is a way to connect $\\neg B$ to a symbol that says 'Bill is in Hong Kong.' Let's symbolize the latter as H. To symbolize the idea of <i>and</i>, we introduce the symbol $\\wedge$, so",
-
-            "$$(\\neg B \\wedge H)$$",
-
-            "is a symbolization of the original statement in $SL$ The logical connective $\\wedge$ is called the <i>conjunction</i>. $\\neg B$ and $H$ are called conjuncts.",
-
-            "Again, like negation, there is a wide range of English statements that might have identical SL translation. For instance, 'Both A and B' would have the same translation as 'A and B'. Perhaps slightly more surprising are sentences with words like 'but' and 'although' - in SL they are nothing but conjunction. So 'A but B' would be translated as $(A \\wedge B)$."
-          ]
-        },
-        {"type":"smallTitle","substance":"Disjunction"},
-        {
-          "type":"ps",
-          "substance":[
-            "Another way in which two statements can be connected is through <i>disjunction</i>, such as",
-            "$$\\text{Either Amy is a logician or a basketball player.}$$",
-            "To translate statements with is the connective 'or', we introduce the disjunction symbol $\\vee$.",
-
-            "$$(A \\vee B)$$",
-
-            "A and B are called <i>disjuncts</i>. Sometimes in English, the word 'or' excludes the possibility that both disjuncts are true. This is called an <i>exclusive disjunction</i>.  An exclusive disjunction is clearly intended when a restaurant menu says, 'Entrees come with either soup or salad.' You may have soup; you may have salad; but, if you want both soup and salad, then you will have to pay extra.",
-            "At other times, the word 'or' allows for the possibility that both disjuncts might be true. If you are at a dinner party at a friend's house and she says to you 'would you like some more wine or food?' We can reasonably infer that she is offering not just one of them. This would be an instance of an <i>inclusive disjunction</i> The point is that the use of disjunction is ambiguous in English, and that is something we have to fix in a formal language.",
-
-            "In response, logicians have chosen to have $\\vee$ to denote disjunction in the inclusive sense: $(A \\vee B)$ means that at least one of the disjuncts, A or B, must be true. They can be both true, but they can't be both false. There is nothing sacred about this - it's simple a choice we have to make in our language. This is not to say that the inclusive sense of disjunction is <i>the</i> meaning of disjunction. In fact, we can symbolize an exclusive or in SL. We just need more than one connective to do it. We can break the sentence into two parts. The first part says that you get one or the other. We translate this as $(A \\vee B)$. The second part says that you do not get both. We can paraphrase this as 'It is not the case that A and B.' How would we symbolize this?"
-          ]
-        },
-
-        {
-          "type":"mc",
-          "title": "Reading Exercise: English/SL Translation",
-          "eventId":"sl-2-4",
-          "intro":["For this reading exercise, you will be given either a sentence in SL or in English, and you are asked to pick out the corresponding translation from the options. Do 10 of these to complete the exercise. Click 'next' to begin."],
-          "size":"half",
-          "instruction": "Pick the correct translation.",
-          "substance":[
-
-
-            "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
-            "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
-            "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
-
-            "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
-          ]
-        }
-      ]
-    },
-    "4":{
-      "title":"Truth tables and the precise 'meaning' of logical connectives",
-      "content":[
-        {
-          "type":"ps",
-          "substance":[
-            "So far we rely on our intuitive understanding of 'and,' 'or,' and 'not' to give meanings to their corresponding logical symbols. To make this more precise, we make use a formal tool called a 'truth table,' which is a very effective to show the <i>semantics</i> of the connectives,i.e., how complex sentences are to be interpreted, in terms of whether or not it is true. This is the tables for negation:"
-
-          ]
-        },
-        {"type":"table",
-        "eventId":"negation"},
-        {"type":"ps",
-        "substance":["Each column represents the possible values that the sentence can hold. $T$ and $F$ are called <i>truth values</i>. This table captures this idea: for any sentence $A$: If $A$ is true, then $\\neg A$ is false. If$\\neg A$ is true, then $A$ is false. So on the row that $A$ gets T, it means that $A$ is true. This is why for any row where $A$ has a $T$, $\\neg A$ has a $F$. Note that A here is just a placeholder - it stands for any grammatically correct SL sentence. It's a <i>metavariable</i> that can represent any sentence in the formal language. (Technically we are supposed to use special symbol like $\\alpha$ for metavariable, but we will not concern ourselves with that here.)" ,
-          "Truth table is supposed to represent <i>all</i> possible combinations of truth values, so the number of rows needed for a table is dependent on how many letters we are dealing with. Thus, $A\\wedge B$, since it has two letters, will have $2^2 = 4$ rows. "
-          ]},
-          {"type":"table",
-          "eventId":"conjunction"},
-
-          {"type":"ps",
-          "substance":["For any sentences $A$ and $B$, $A \\wedge B$ is true if and only if both $A$ and $B$ are true. Conjunction is symmetrical because we can swap the conjuncts without changing the truth value of the sentence. That is, $A\\wedge B$ and $B \\wedge A$ have the same values." ,
-            "Lastly, this is the table for disjunction"
-            ]},
-            {"type":"table",
-            "eventId":"disjunction"},
-
-            {"type":"ps",
-            "substance":["Since we interpret $\\vee$ as being inclusive, the only situation where $A \\vee B$ is false is when they are <i>both</i> false. "
-              ]}
-      ]
-    },
-    "5":{
-        "title":"Truth Functions",
-        "content":[
-          {"type":"p",
-            "substance":["Any nonatomic sentence of SL is composed of atomic sentences with sentential connectives. The truth value of the complex sentence depends only on the truth value of the atomic sentences that it comprises. In order to know the truth value of $(D\\vee E)$, for instance, you only need to know the truth value of $D$ and the truth value of $E$. Connectives that work in this way are called truth functional. A truth function is a rule that tell us how to determine the truth of a sentence by looking at its combination of true sentences and connectives. We define a truth-functional connective as an operator that builds larger sentences out of smaller ones, and fixes the truth value of the resulting sentence based only on the truth value of the component sentences.",
-          "Because all of the logical symbols in SL are truth functional, the only aspect of meaning we need to worry about in studying the semantics of SL is truth and falsity. If we want to know about the truth of the sentence $A \\wedge B$, the only thing we need to know is whether $A$ and $B$ are true. It doesn't actually matter what else they mean. So if $A$ is false, then $A \\wedge B$ is false no matter what false sentence $A$ is used to represent. It could be I am the Pope' or 'Pi is equal to 3.19.' The larger sentence $A \\wedge B$ is still false. So to give an interpretation of sentences in SL, all we need to do is create a truth assignment, which is a function that maps the sentence letters in SL onto our two truth values. In other words, we just need to assign Ts and Fs to all our sentence letters."]}
-        ]
-    },
-    "6":{
-        "title":"Interpreting Complex Sentences",
-        "content":[
-          {"type":"p",
-            "substance":["The truth value of sentences that contain only one connective is given by the truth table definition for that connective. The truth table definition for conjunction, for example, gives the truth conditions for any sentence of the form $(A\\wedge B)$. Even if the conjuncts A and B are long, complicated sentences, the conjunction is true if and only if both A and B are true. Consider the sentence $(H\\wedge I)\\vee \\neg H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth values for the sentence letters and write them underneath the letters in the sentence."
-              ]
-            },
-            {"type":"table",
-            "eventId":"sl-2-6a"},
-
-            {"type":"p",
-              "substance":["Now consider the subsentence $H\\wedge I$. This is a conjunction $A\\wedge B$ with $H$ as A and with $I$ as B. $H$ and $I$ are both true on the first row. Since a conjunction is true when both conjuncts are true, we write a T underneath the conjunction symbol. We continue for the other three rows and get this:"
-                ]
-              },
-              {"type":"table",
-              "eventId":"sl-2-6b"},
-              {"type":"p",
-                "substance":["We do the same for $\\neg H$. Based on the truth table definition, $\\neg H$ is true when $H$ is false, so:"
-                  ]
+                        "In logic, we use the word 'argument' to refer to the attempt to show that certain evidence supports a conclusion. This is very different from the sort of argument you might have with your family, which could involve screaming and throwing things. We are going to use the word 'argument' a lot in this book, so you need to get used to thinking of it as a name for a rational process, and not a word that describes what happens when people contradicts or disagree with each other. .",
+                        "An argument in this technical is a set of statements intended to provide someone a reason to believe one of the statements in that set, which we call a conclusion. Suppose you are wondering if you friend Bob plays the guitar. You can't quite remember exactly what he plays, but you do recall that he uses a bow. Since you know that guitars are plucked and not bowed, you conclude that Bob indeed does not play the guitar. "
+                    ]
                 },
-                {"type":"table",
-                "eventId":"sl-2-6c"}
-                ,
-                {
-                  "type":"p",
-                  "substance":[
-                    "The entire sentence is a disjunction $(A \\vee B)$ with $(H \\wedge I)$ as A and with $\\neg H$ as B. On the second row, for example, $(H\\wedge I)$ is false and $\\neg H$ is false. Since for a disjunction to be true  at least one of the disjunct has to be true, we write a F in the second row underneath the disjunction symbol. We continue for the other three rows and get this:"
-                  ]
-                },
-                {"type":"table",
-                "eventId":"sl-2-6d"},
-                {
-                  "type":"p",
-                  "substance":[
-                    "Of course, this is rather messy. Most of the columns underneath the sentence are only there for bookkeeping purposes. Normally we do not write out every single truth value like that. As a matter of fact, when we deal with longer sentences it becomes practically unfeasible to write them all out. Normally, we only write out the truth values for the main connective like this:"
-                  ]
-                },
-                {"type":"table",
-                "eventId":"sl-2-6e"},
-                {
-                  "type":"p",
-                  "substance":[
-                    "When you become more adept with truth tables, you will probably no longer need to copy over the columns for each of the sentence letters.",
-                    "A sentence that contains only one sentence letter requires only two rows, as in the truth table definition for negation. This is true even if the same letter is repeated many times, as in this sentence: $$[(C\\wedge C) \\vee C] \\wedge \\neg(C \\vee C)$$ The complete truth table requires only two lines because there are only two possibilities: $C$ can be true, or it can be false. A single sentence letter can never be marked both T and F on the same row.",
-                    "A sentence that contains three sentence letters requires eight lines. For example"
-                  ]
-                },
-                {"type":"table",
-                "eventId":"sl-2-6f"},
-                {"type":"important",
-                "substance":["We call a table that gives all the possible interpretations for a sentence or set of sentences in SL a complete truth table. In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate Ts and Fs. In the next column to the left, write two Ts, write two Fs, and repeat. For the third sentence letter, write four Ts followed by four Fs. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight Ts followed by eight Fs. For a 32 line table, the next column would have 16 Ts followed by 16 Fs. And so on."]}
+                "b": {
+                    "type": "half",
+                    "substance": [{
+                        "type": "p",
+                        "substance": [
 
-        ]
-    },
-    "7":{
-        "title":"Chapter Definition Review",
-        "content":[
-          {"type":"p",
-            "substance":["Finish this chapter by completing the the definition review quiz below."
-              ]
-            },
-            {"type":"matching",
-              "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
-            "eventId":"sl-2-def"}
+                            "We can reconstruct this line of thought as an argument, like the one to the right. We call the two sentences above line premises. The word 'therefore' signifies that the sentence below the line is the $conclusion$ of the argument. If you believe the premises, then the argument provides you with a reason to believe the conclusion. You might use reasoning like this purely in your own head, without talking with anyone else.  Sometimes you might work things verbally. This is not a problem, because the business of logic is not to describe exact what's going on in your mind but to systemize the rational structure of thoughts."
+                        ]
 
-        ]
-    }
-  },
-  "3":{
-    "1":{
-      "chapterName":"Core Concepts in Formal Logic",
-      "chapterNum":"3",
-      "chapterDescription":"The purpose of a formal language like $SL$ is to facilitate the studying of various logical properties of language, validity being an important one. This chapter explains how SL can explicate what it means for an argument to be valid. We will also look at other logical properties of interest.",
-      "title": "Truth values",
-      "content":[
-        {
-          "type":"p",
-          "substance":["We already came across truth values in the last chapter. Here we will offer a more detailed expression: a truth value is the status of a statement as true or false. Thus the truth value of the sentence 'All dogs are mammals' is 'True,' while the truth value of 'All dogs are reptiles' is false. More precisely, a truth value is the status of a statement with relationship to truth. We have to say this, because there are systems of logic that allow for truth values besides 'true' and 'false,' like 'maybe true,' or 'approximately true,' or 'kinda sorta true.' For instance, some philosophers have claimed that the future is not yet determined. If they are right, then statements about what will be the case are not yet true or false. Some systems of logic accommodate this by having an additional truth value. Other formal languages, so-called paraconsistent logics, allow for statements that are both true {and} false. We won't be dealing with those in this textbook, however. For our purposes, there are two truth values, 'true' and 'false,' and every statement has exactly one of these. Logical systems like ours are called bivalent."]
-        }
-      ]
-    },
-    "2":{
-      "title":"Tautology, contingent statement, contradiction",
-      "content":
-      [
-        {
-        "type":"ps",
-        "substance":["In considering arguments formally, we care about what would be true <i>if</i> the premises were true. Generally, we are not concerned with the actual truth value of any particular statements - whether they are <i>actually</i> true or false. Yet there are some statements that must be true, just as a matter of logic."]
-        },
-        {
-          "type":"orderedList",
-          "substance":[
-            {
-              "id":"a","item":"It's raining."
-            },
-            {
-              "id":"b","item":"Either it is raining or it is not."
-            },{
-              "id":"c","item":"It is both raining and not raining"
+                    }, {
+                        "type": "argument",
+                        "premises": ["1: Bob plays a bowed instrument.",
+                            "2: All guitars are plucked and not bowed"
+                        ],
+                        "conclusion": "Therefore, Bob does not play the guitar"
+                    }]
+                },
+                "c": {
+                    "type": "ps",
+                    "substance": [
+                        "This example showcases a core idea in logic: some inferences are truth-preserving. These inferences, if true, would guarantee the conclusion to be true as well. This kind of inferences is called $valid$. There are a number of different ways to define the notion of validity, but we focus on this one:  ",
+                        "$$Validity: \\text{an argument is valid if and only if it is impossible for the premises to be true and the conclusion false}$$",
+
+                        "The important thing to see is that the definition above tries to get at what $would$ happen if the premises were true. It does not assert that the premises actually $are$ true. (It also does not assert that they are false.)This is why a valid argument is sometimes defined as one where the conclusion is true in every imaginable scenario in which the premises are true. This sounds pretty imprecise at the moment, but we will sharpen our understanding of validity as we go on.",
+
+                        "Evaluating arguments based on their validity is called <i>deductive reasoning</i>, in contradistinction to <i>inductive reasoning</i>, where the value of an inference is based on its probability. In this class we concern ourselves exclusively with deductive reasoning. The techniques you would learn in a probability or statistics class are examples of inductive reasoning."
+                    ]
+
+                },
+
+                "d": {
+                    "type": "scroll",
+                    "eventId": "m1c1s1",
+                    "substance": [
+                        ["t1", "Representing Validity", "One way in which we can think about validity is by representing an argument like the one above in a graphical form that accentuates its logical structure. First, consider a circle that contains all plucked instruments and another one that contains all bowed instruments."],
+                        ["t2", "Premise 1", "states that whatever instrument Bob plays belongs to the bowed circle. This can be represent by a smaller circle situated within the bowed circle. Based on this premise alone, do we have good enough reason to think that Bob does not play the guitar?"],
+                        ["t3", "Not really!", "Since that premise alone does not give us enough information to where guitars would be in this diagram. Premise 1 only implies that Bob's instrument is in the bowed circle - but the overlapping area is still part of that circle! What if guitars can be both plucked and bowed? Then it would belong in the middle. Premise 1 $by$ $itself$ does not discriminate against that."],
+                        ["t4", "Premise 2 states that", "guitars are not played with bows. This means that it is impossible for the guitar circle to be inside of the overlapping areas."]
+                    ]
+
+                },
+                "d2": {
+                    "type": "p",
+                    "substance": [
+                        "Diagrams like these are immensely useful at the beginning of the study of logic. We will use them for quite a bit in the first module. There are some nuances to them, however, so we will discuss them more thoroughly. Let us finish this section with a short exercise."
+                    ]
+                },
+                "e": {
+                    "type": "readingEx",
+                    "title": "Reading Exercise: Determining Validity Intuitively",
+                    "eventId": "sl-1-1",
+                    "intro": ["For this reading exercise, try to find out if the argument given is valid, in the technical sense defined above: if the premises is true, must the conclusion be true as well?", "It might be difficult to think about these arguments just in your head. Just try your best - for this exercise you are not graded on correctness. You will get credit as long as you complete the set of 10 questions.", "After you are done, you can look at the answers. These problems are randomly generated, so you can redo it for practice.", "Click 'Next' to begin."],
+                    "size": "half",
+                    "instruction": "Make your best estimate as to whether the arguments presented below are valid.",
+                    "substance": [
+
+
+                        "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
+                        "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
+                        "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
+
+                        "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
+                    ]
+                },
+                "f": {
+                    "type": "p",
+                    "substance": [
+                        "I hope by now you have gotten a sense of what validity means and how it could be something that is difficult to think about intuitively. Most of what we do here is to learn formal tools that allow us to evaluate the validity of complex arguments more efficiently and reliably. Venn diagrams, the topic of the next section, is one of them."
+                    ]
+
+                }
+
             }
-          ]
-
         },
-        {
-          "type":"ps",
-          "substance":["In order to know if statement (a) is true, you would need to look outside or check the weather channel. Logically speaking, it might be either true or false. Statements like this are called contingent statements.",
-          "Statement (b) is different. You do not need to look outside to know that it is true. Regardless of what the weather is like, it is either raining or not. If it is drizzling, you might describe it as partly raining or in a way raining and a way not raining. However, our assumption of bivalence means that we have to draw a line, and say at some point that it is raining. And if we have not crossed this line, it is not raining. Thus the statement 'either it is raining or it is not' is always going to be true, no matter what is going on outside. A statement that has to be true, as a matter of logic is called a tautology or logical truth.",
-          "You do not need to check the weather to know about statement (c) either. It must be false, simply as a matter of logic. It might be raining here and not raining across town, it might be raining now but stop raining even as you read this, but it is impossible for it to be both raining and not raining here at this moment. The third statement is logically false; it is false regardless of what the world is like. A logically false statement is called a contradiction.",
-          "Since tautology is defined as a statement that must be true as a matter of logic, no matter how the world is. Something similar goes on in truth tables. With a complete truth table, we consider all of the ways that the world might be. Each line of the truth table corresponds to a way the world might be. This means that if the sentence is true on every line of a complete truth table, then it is true as a matter of logic, regardless of what the world is like.",
-          "More precisely, a statement is a semantic tautology in SL  if and only if the column  under the main connective in the complete truth table for the sentence contains only Ts. This is the semantic definition of a tautology in SL, because it uses truth tables. Remember in logic the only 'meaning' that matters is the truth and falsity of a sentence. Here we are explicating tautology semantically by appealing to the kind of values it has on a truth table. This is an example of a truth table of a tautology:"
-          ]
+        "2": {
+            "title": "Euler and Venn diagrams",
+            "content": {
+                "a": {
+                    "type": "p",
+                    "substance": [
+                        "In 1880 English logician John Venn published two essays on the use of diagrams with circles to represent categorical propositions, like the ones in our Bob example. Venn noted that the best use of such diagrams so far had come from the brilliant Swiss mathematician Leonhard Euler, but they still had many problems, which Venn felt could be solved by bringing in some ideas about logic from his fellow English logician George Boole. Although Venn only claimed to be building on the long logical tradition he traced, since his time these kinds of circle diagrams have been known as Venn diagrams. While they might not be as elegant and powerful as some of the tools we will learn later on, they are still useful in evaluating arguments.",
+                        "Consider the diagram below that represents the claim that all guitars are plucked instruments. Outside of college logic classes, you may have seen people use a diagram like this to represent a situation where one group is a subclass of another. You may have even seen people call concentric circles like this a Venn diagram. But Venn did not think we should put one circle entirely inside the other if we just want to represent 'All X is Y.' Thus, technically speaking what we have here is an Euler diagrams, a precursor of the Venn diagram."
+
+                    ]
+                },
+                "b": {
+                    "type": "scroll",
+                    "eventId": "m1c1s2",
+                    "substance": [
+                        ["t5", "What's wrong with Euler diagrams?", "Venn pointed out that the circles in an Euler diagram like ours don't just say that 'all guitars are plucked instruments', since area of the plucked circle not covered by the guitar circle implies that there non-guitar plucked instruments. While our background knowledge tells us that this is true, the goal of the diagram is to accurately represent the statement in question, not to impose external information. In logic we do not want to assume any proposition that is not explicitly stated. This statement is unclear about whether $all$ guitars or $only$ guitars are plucked. (What's the difference?)"],
+                        ["t6", "Making ambiguity explicit", "So it should leave it open whether the guitar circle is smaller than or the same size as the plucked circle. The problem however is that Euler diagrams cannot express this relation clearly - either the two circles are of the size, or one is smaller. There is no way to express the ambiguity needed here. Furthermore, it is confusing to put one of the circles directly on top of the other, as shown by the diagram."],
+                        ["t7", "Venn's suggestion:", "to represent just the content of a single proposition, we should always begin by drawing partially overlapping circles. The advantage of this is that we always have spaces available to represent the four possible ways the terms can combine: Area 1 represents things that are plucked instruments but not guitars; area 2, things that are plucked instruments and guitars; area 3, things that are just guitars; and area 4 represents things that are neither plucked instruments nor guitars."],
+                        ["t8", "Representing impossibilities", "We can then mark up these areas to indicate whether something is there or could be there. We shade a region of the diagram to represent the claim that nothing can exist in that region. For instance, if we say 'All guitars are plucked instruments,' we are asserting that nothing can exist that is in the guitar circle unless it is also in the plucked instruments circle. So we shade out the part of the guitar circle that doesn't overlap with plucked instruments."],
+
+                        ["t9", "Representing ambiguous entities", "What if I want to say: Mary plays a plucked instrument? Now we are dealing with $existence$, and not just $possibilities$. To assert that a certain thing exists, we put an X in a region, so there should be an X somewhere in the plucked circle. Should we put the X in the overlapping area? We certainly don't know if Mary plays the guitar, but we also don't know if she does not play it. So we have another ambiguity here. To represent this we put the X right on the border, signifying that the statement is indifferent in respect to whether the instrument is also a guitar. (If Mary turns out to play something that is both a guitar and plucked, then the X would go in the overlapping area.)"]
+
+                    ]
+
+                },
+                "c": {
+                    "type": "basicVenn",
+                    "title": "Reading Exercise: Basic Venn Diagrams",
+                    "eventId": "sl-1-2",
+                    "size": "whole",
+                    "instruction": "Based on the given Venn Diagram, answer the corresponding question."
+                }
+            }
         },
-        {
-          "type":"table",
-          "eventId":"tautology"
+        "3": {
+            "title": "Aristotelian logic and categorical statements",
+            "content": {
+                "a": {
+                    "type": "ps",
+                    "substance": ["The premise 'all guitars are plucked instruments' is an example of what logicians call a <a href='https://en.wikipedia.org/wiki/Categorical_proposition' target='_blank'>categorical statement</a>. For most of the history of logic in the West, the focus has been on arguments that rely extensively on those statements called <a href = 'https://en.wikipedia.org/wiki/Syllogism' target='_blank'>categorical syllogism </a>. Aristotle began the study of this kind of argument in his book the <i>Prior Analytics</i> (c.350 BCE).",
+                        "A categorical syllogism is a two-premise argument composed of categorical statements. There are actually all kinds of two-premise arguments using categorical statements, but Aristotle only looked at arguments where each statement is in one of the 'moods' of categorical statement. Each mood is a combination of two quantities and two qualities. A quantity of a categorical statement can be either universal - applying to everything in a category, particular - at least one thing in a category. Each categorical statement is also said to have either an affirmative or a negative quality. 'All guitars are plucked' is an instance of a universal affirmation - it makes a positive claim that everything that in the category of guitars. 'No guitar is bowed' would be a instance of universal negation. Some guitars are bowed would be an instance of a 'particular affirmation', and so on."
+                    ]
+                },
+                "b": {
+                    "type": "event",
+                    "eventId": "moods",
+                    "title": "Basic Categorical Statements in Venn Diagrams"
+                },
+                "c": {
+                    "type": "ps",
+                    "substance": [
+                        "If a region of a Venn diagram is blank - if it is neither shaded nor has an x in it - then it could go either way. Maybe such things exist, maybe they do not.  Notice that when we draw diagrams for the two universal forms, we do not draw any x's. For these forms we are only ruling out possibilities, not asserting that things actually exist. This is part of what Venn learned from Boole. The proposition, 'All guitars are plucked instruments,' denies the existence of any guitar that is not a plucked, but it does not assert the existence of some guitar that is a plucked. That probably reads like gibberish - guitars obviously do exist. So what's the deal?",
+
+                        "The reason for this is to accommodate categorical statements about things that don't exist yet makes perfect sense, for instance 'All unicorns have one horn.' This seems like a true statement, but unicorns don't exist. Perhaps what we mean by 'All unicorns have one horn' is that <i>if</i> a unicorn existed, <i>then</i> it would have one horn. But if we interpret the statement about unicorns that way, shouldn't we also interpret the statement about dogs that way? Really all we mean when we say 'All dogs are mammals' is that if there were dogs, then they would be mammals. It takes an extra assertion to point out that dogs do, in fact, exist.",
+
+                        "The issue we are discussing here is called existential import. A sentence is said to have existential import if it asserts the existence of the things it is talking about. Until Boole, universal-affirmative statements were often interpreted as having existential import. You might find that more intuitive, but if you interpret all universal-affirmative statements with existential import, they are always false when you are talking about things that don't exist. So, 'All unicorns have one horn' is false in the traditional interpretation. On the other hand, in the modern interpretation all statements about things that don't exist are true. 'All unicorns have one horn' simply asserts that there are no multi-horned unicorns, and this is true because there are no unicorns at all. We call this vacuous truth. Something is vacuously true if it is true simply because it is about things that don't exist. Note that all statements about nonexistent things become vacuously true if you assume they have no existential import, even a statement like 'All unicorns have more than one horn.' A statement like this simply rules out the existence of unicorns with one horn or fewer, and these don't exist because unicorns don't exist. This is a complicated issue that will come up again starting in later sections when we consider conditional statements in this module, and predicate logic later.",
+                        "A categorical syllogism consists of two categorical statements as premises, and one as conclusion. The logical relations between these statements are based certain terms they share. For instance, consider this argument:"
+                    ]
+                },
+                "d": {
+                    "type": "argument",
+                    "premises": ["P1. All mammals are vertebrates.", "P2. All dogs are mammals."],
+                    "conclusion": "C. All dogs are vertebrates."
+                },
+                "e": {
+                    "type": "p",
+                    "substance": [
+                        "Notice how the statements in this argument overlap each other. Each statement shares a term with the other two. Premise 2 shares a term with the conclusion and another with Premise 1. Thus there are only three terms spread across the three statements. Each of the three statements can take one of four categorical mood. This gives us $4 \\times 4 \\times 4,$ or 64 possibilities. In addition to varying the kind of statements we use in an Aristotelian syllogism, we can also vary the placement of the terms involved. The combination of 64 moods and 4 figures gives us a total of 256 possible Aristotelian syllogisms. Most of these are valid, but a good chunk of them are. We won't go through every single syllogism like a good medieval logician, but we should be able to analyze them using Venn diagram."
+                    ]
+                },
+                "f": {
+                    "type": "scroll",
+                    "eventId": "m1c1s3",
+                    "substance": [
+                        ["t10", "Three terms:", "Since each syllogism involves three terms, we need 3 overlapping circles."],
+                        ["t11", "Premise 1:", "All mammals are vertebrates, so we grey out the the area of the mammal circle that does not overlap with the vertebrate circle."],
+                        ["t12", "Premise 2:", "All dogs are mammals, so we grey out the the area of the dog circle that does not overlap with the mammal circle. Note that part of the circle was greyed already due to premise 1."],
+                        ["t13", "Does the conclusion 'all dogs are vertebrates' follow?", "Upon examining this Venn diagram, we can see that if we greyed out areas in accordance to the premises, the only white area left in the dog circle also overlaps with the vertebrate circle. This represents the idea of an valid argument as one with premises that, if true, would make the conclusion true as well."]
+
+                    ]
+
+                }
+            }
         },
-        {
-          "type":"ps",
-          "substance":["Conversely, we defined a contradiction as a sentence that is false no matter how the world is. This means we can define a semantic contradiction in SL as a sentence that has only Fs in the column under them main connective of its complete truth table. Again, this is the semantic definition of a contradiction."
-          ]
-        },{
-          "type":"table",
-          "eventId":"contradiction"
-        },
-        {
-          "type":"ps",
-          "substance":[
-            "Finally, a sentence is contingent if it is sometimes true and sometimes false. Similarly, a sentence is semantically contingent in SL if and only if its complete truth table for has both Ts and Fs under the main connective."
-          ]
-        },{
-          "type":"table",
-          "eventId":"contingent"
-        },
-        {"type":"category",
-          "title":"Categorizing logical properties",
-          "instruction": "For each of the sentences below, determine whether it is a contingent statement, a contradiction, or a tautology. Once done, press confirm. NOTE: There is no penalty for multiple attempts but you must correctly categorize each sentence to get credit!",
-        "eventId":"sl-3-cat"}
-      ]
-    },
-    "3":{
-      "title":"Logical Equivalence and logical laws",
-      "content":[
-        {
-        "type":"p",
-        "substance":[
-          "Two sentences are logically equivalent in English if they have the same truth value as a matter of logic. Once again, we can use truth tables to define a similar property in SL: Two sentences are semantically logically equivalent in SL if they have the same truth value on every row of a complete truth table.",
-          "Consider the sentences $\\neg(A \\vee B)$ and $\\neg A \\wedge \\neg B$. Are they logically equivalent? To find out, we construct a truth table."
-        ]
-      },
-      {"type":"table","eventId":"equiv"},
+        "4": {
+            "title": "Wrapping up",
+            "content": {
+                "e": {
+                    "type": "definition",
+                    "title": "Reading Exercise: Definitions Review Quiz",
+                    "eventId": "sl-1-def",
+                    "size": "half",
+                    "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
+                    "substance": [
+                        "Finish this section by completing the concepts review quiz. For this quiz, you have to answer all questions correctly to get credit. However you may try as many times as you like.",
+                        "After familiarizing yourself with the ideas in the section, you should do the logical exercise ('logicise') <a href='/logicise/vennSyl'>'Venn Diagrams and Syllogistic Validity,</a>' where you will be asked to build Venn diagrams to determine the validity of categorical arguments.",
+                        "We actually will not go any further into categorical arguments. While categorical syllogism is taught in many contexts and important for historical reasons, it is very limited compared to the formal system we will learn in this class. Nevertheless, I hope it gave a you taste of the sort of stuff we will be doing for the rest of the course. But the ideas involved in categorical logic, such as existence and categories are still very important, especially in our later study of predicate logic in module 2. Before we go there, however, we will learn about the foundation of modern logic - the formal language of sentence logic."
 
-      {
-      "type":"ps",
-      "substance":[
-        "(Suggestion: work out the truth table on your own to see how the values came about. )",
-        "There are few logical equivalences that hold quite generally. We call those <i>logical laws of equivalence</i>. The one represented above is called DeMorgan's Law, which you might have seen in other contexts.",
-        "$$\\text{DeMorgan's Law(DeM): for any sentence X and Y, } \\neg(A \\vee B) \\equiv (\\neg A \\wedge \\neg B)\\\\ \\text{ and } \\neg(A \\wedge B) \\equiv (\\neg A \\vee \\neg B)$$",
-        "We use the symbol $\\equiv$ as a shorthand for the English predicate '... is logically equivalent to...'. Note that $\\equiv$ is <i>not</i> a symbol in SL. It is symbol that represents something in English. For instance in the definition of (DeM) above, I could have easily wrote in English and say $\\neg(A \\vee B)$ is logically equivalent to $(\\neg A \\wedge \\neg B)$",
-        "Another important logical law is the law of Double Negation:",
-        "$$\\text{Double Negation(DN): for any sentence X and Y, } A \\equiv \\neg \\neg A$$"
-        ]
-      },
-
-      {
-      "type":"table",
-      "eventId":"dn"
-    },
-    {
-    "type":"ps",
-    "substance":[
-      "I will introduce a few more law, but I will leave the truth tables for you as an exercise. (You may or may not but definitely will see them on test/problem set.)",
-      "$$\\text{Law of Distribution(Dist): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\vee Z) \\equiv ( X \\wedge  Y) \\vee (X \\wedge Z) \\text{ and }  \\\\ X \\vee (Y \\wedge Z) \\equiv ( X \\vee  Y) \\wedge (X \\vee Z)  $$",
-        "$$\\text{Law of Association(Assoc): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\wedge Z) \\equiv ( X \\wedge  Y) \\wedge Z \\text{ and }  \\\\ X \\vee (Y \\vee Z) \\equiv ( X \\vee  Y) \\vee  Z  $$",
-        "$$\\text{Commutation(Com): for any sentence X, and Y, }\\\\ (X \\wedge Y ) \\equiv (Y \\wedge X ) \\text{ and }  \\\\(X \\vee Y ) \\equiv (Y \\vee X )  $$",
-        "$$\\text{Idempotent(Idem): for any sentence X, }\\\\ (X \\wedge X ) \\equiv X \\text{ and } \\\\ (X \\vee X ) \\equiv X $$",
-        "$$\\text{Contradictory Disjunct: for any sentence X and contradiction Y, }X\\vee Y \\equiv X$$",
-        "$$\\text{Tautological Conjunct: for any sentence X and tautology Y, }X\\wedge Y \\equiv X$$"
-
-      ]
-    }
-
-    ]
-  },
-  "4":{
-    "title":"Consistency",
-    "content":[
-      {
-        "type":"p",
-        "substance":[
-        "A set of sentences in English is consistent if it is logically possible for them all to be true at once. This means that a sentence is semantically consistent in SL if and only if there is at least one line of a complete truth table on which all of the sentences are true. It is semantically inconsistent otherwise."
-        ]
-      }
-    ]
-  },
-  "5":{
-    "title":"Semantic Entailment and Validity",
-    "content":[
-      {
-        "type":"p",
-        "substance":["Logic is the study of argument, so the most important use of truth tables is to test the validity of arguments. An argument in English is valid if it is logically impossible for the premises to be true and for the conclusion to be false at the same time. So we can define an argument as semantically valid in SL if there is no row of a complete truth table on which the premises are all marked 'T' and the conclusion is marked 'F.' An argument is invalid if there is such a row. Consider this argument and its corresponding truth table:"]
-      },
-      {
-        "type":"arg",
-        "premises":["$((E \\wedge J) \\vee J)$","$((J\\vee J) \\vee E)$"],
-        "conclusion":"$((J \\vee \\neg E)\\vee \\neg E)$"
-      },
-      {
-      "type":"table",
-      "eventId":"validExample"
-    },{
-      "type":"p",
-      "substance":["The only row on which both the premises are T is the first row, and on that row the conclusion is also T, so yes - the argument is valid.",
-      "We used the three dots $\\therefore$ to represent an inference in English. We used this symbol to represent any kind of inference, valid or not. The truth table method gives us a more specific notion of a valid inference. We will call this semantic entailment and represent it using a new symbol, $\\vDash$, called the ``double turnstile.''  The $\\vDash$ is like the $\\therefore$, except for arguments verified to be valid by truth tables. When you use the double turnstile, you write the premises as a set, using curly brackets, { and }, which mathematicians use in set theory. The argument above would be written  $ \\{ ((E \\wedge J ) \\vee J),((J\\vee J) \\vee E) \\}\\vDash ((J \\vee \\neg E)\\vee \\neg E)$. (But sometimes for the sake of convenience I will omit the brackets.)",
-      "We can also use the double turnstile to represent other logical notions. Since a tautology is always true, it is like the conclusion of a valid argument with no premises. The string $\\vDash C$ means that C is true for all truth value assignments. This is equivalent to saying that the sentence is entailed by anything or nothing."
-      ]
-    },
-    {
-      "type":"important",
-      "substance":[
-        "More formally, we can define the double turnstile this way: $\\{ A_1...A_n\\} \\vDash B $ if and only if there is no truth value assignment for which $\\{ A_1...A_n\\}$ are true andB is false. Put differently, it means that B is true for any and all truth value assignments for which$\\{ A_1...A_n\\}$ are true."
-
-      ]
-    },
-    {"type":"matching",
-      "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
-    "eventId":"sl-3-def"}
-
-    ]
-  },
-  "6":{
-      "title":"In class activity",
-      "content":[
-        {"type":"p",
-          "substance":["Prove the logical law listed in this chapter by using truth tables and Venn diagrams."]
-          }
-
-      ]
-  }
-},
-"4":{
-  "1":{
-    "chapterName":"Conditionals",
-    "chapterNum":"4",
-    "chapterDescription":"In this chapter we complete our language SL by introducing the logical connectives of conditional and biconditional.",
-    "title": "The intuition behind conditionals",
-    "content":[
-      {
-        "type":"p",
-        "substance":[
-          "Consider the following symbolization key and English sentences"]
-      },
-      {
-        "type":"orderedList",
-        "substance":[
-          {
-            "id":"A","item":"You are a Duke student."
-          },
-          {
-            "id":"B","item":"You are a Blue Devils fan."
-          },{
-            "id":"C","item":"If you are a Duke student, then you are a Blue Devils fan."
-          }
-
-        ]
-
-      },
-      {
-        "type":"ps",
-        "substance":[
-          "Sentence C can be translated partially as 'If $A$, then $B$.' More technically, we refer to the logical relation between A and B as one of <i>implication</i>: A implies B. We will use the symbol $\\to$ to represent this logical relation, so sentence C then becomes $A\\to B$. The connective is called a conditional. The sentence on the left-hand side of the conditional ($R$ in this example) is called the <i>antecedent</i>, and the other is called the <i>consequent</i>.",
-          "The point of conditionals is to capture the situation where <i>one event cannot occur without another.</i> So, to say that $A \\to B$ is to say that You cannot be a Duke student without also being a Blue Devils fan. You can think of this as saying that being a Blue-Devils fan is a required condition for being a Duke student. You cannot be a Duke student without fulfilling it.",
-          "So now suppose you know the following:"
-        ]
-      },
-      {
-        "type":"orderedList",
-        "substance":[
-          {
-            "id":"D","item":"Dennis is a Duke student."
-          },
-          {"id":"E","item":"Deandra is a Blue-Devils fan."}
-
-        ]
-
-      },
-      {
-        "type":"ps",
-        "substance":[
-          "What can we infer from this? Since $A\\to B$ means that a person cannot be a Duke without being a Blue-Devils fan, we can infer that Dennis is also a Blue-Devils fan. On the other hand,$A\\to B$ does not imply that all Blue-Devils fans are Duke students! It's possible that they are just basketball fans in general. So another way to think about conditionals is in terms of possibilities. $A \\to B$ is asserting that a certain scenario is not possible; someone that is a Duke student that is not a Blue-Devils fan ($A \\wedge \\neg B$). But it does not say that B (being a Blue-Devils fan) implies A (being a Duke student). So we don't know if Deandara is a Duke student.",
-          "In English, the truth of conditionals often depends on what would be the case if the antecedent were true - even if, as a matter of fact, the antecedent is false. This poses a problem for translating conditionals into SL.  Considered as sentences of SL, $A$ and $B$ in the above examples have nothing intrinsic to do with each other. In order to consider what the world would be like if $A$ were true, we would need to analyze what $R$ says about the world. Since $A$ is an atomic symbol of SL, however, there is no further structure to be analyzed. When we replace a sentence with a sentence letter, we consider it merely as some atomic sentence that might be true or false.",
-
-              "An important thing to keep in mind is that the symbol $\\to$ does not aim to capture perfectly how the word 'if' is used in English. Instead, it is what logicians call a material conditional, which has a technical meaning: a statement is an material conditional if and only if the only way in which for the statement is false is when the antecedent true but conclusion false. This can be captured by the truth table below:"
-        ]
-      },
-      {"type":"table","eventId":"materialconditional"},
-      {
-        "type":"ps",
-        "substance":[
-          "There is however some strange result for this. This is best explained using examples and the truth tables. Again we will use the conditional statement C above as a basis, but now consider the following people and whether or not they are Duke students:"
-        ]
-      },{
-        "type":"orderedList",
-        "substance":[
-          {
-            "id":"Dennis","item":"a Duke student and a Blue-Devils fan."
-          },
-          {"id":"Eva","item":"a Duke student but not a Blue-Devils fan."},
-          {"id":"Frank","item":"not a Duke student but a Blue-Devils fan"},
-          {"id":"Gwen","item":"not a Duke student and not a Blue-Devils fan."}
-
-        ]
-
-      },
-       {
-          "type":"ps",
-          "substance":[
-            "Now think about the following conditional statements: 'if Dennis is a Duke student, then Dennis is a Blue-Devils fan' and 'if Eva is a Duke student, then Eva is a Blue-Devils fan' - it makes sense to think that the first one is true and the latter false. But the cases of Frank and Gwen are more problematic. Given they are not Duke students, would it be true or false to say, if Frank is a Duke student, then Frank is a Blue-Devils fan' and 'if Gwen is a Duke student, then Gwen is a Blue-Devils fan'? The definition of material condition says they are both true. How is that so?",
-            "One way to think about this is think of conditionals as rules, and then think of the conditional as being false only when the rule is being violated. $A\\to B$ would amount to a rule stating 'you have to be a Blue-Devils fan to be a Duke student.' Frank and Gwen do not violate the rule because the rule only applies to Duke students. Thinking about conditionals this way, it should be easier to see the rationale of material conditionals."
-          ]
-        },
-        {
-          "type":"important",
-          "substance":["The conception of the conditional has other weird consequences. For instance, what happens if the antecedent is not atomic?"]
+                    ]
+                }
+            }
         }
-    ]
-  },
-  "2":{
-    "title":"'if' vs 'only if'",
-    "content":
-    [{
-      "type":"ps",
-      "substance":[
-
-        "The difficult thing about conditionals is that in English the usage of conditionals is very messy. So when we translate between conditional and English we cannot simply rely on syntactic markers such as where the word 'if' occurs. For instance, consider the following example:"
-      ]
     },
-      {
-        "type":"orderedList",
-        "substance":[
+    "2": {
+        "1": {
+            "chapterName": "The formal language of SL",
+            "chapterNum": "2",
+            "chapterDescription": "The key to studying argument is to set aside the subject being argued about and to focus on the way it is argued for. If we say an argument is good, then the same kind of argument applied to a different topic will also be good.  If we say an argument is good for solving murders, we will also say that the same kind of argument is good for deciding where to eat, what kind of disease is destroying your crops, or who to vote for. Because logic sets aside what an argument is about, and just looks at how it works rationally, logic is said to have content neutrality. In formal logic we get content neutrality by replacing parts of the argument we are studying with abstract symbols. In this chapter, we begin our study of formal logic by learning about a symbolic language called $SL$",
+            "title": "What is meant by 'formal'?",
+            "content": [{
+                    "type": "p",
+                    "substance": ["Consider the two arguments below:"]
+                },
+
+                {
+                    "type": "arg",
+                    "premises": [
+                        "1: Socrates is a person.",
+                        "2. All persons are mortal."
+                    ],
+                    "conclusion": "C: Socrates is mortal."
+                }, {
+                    "type": "arg",
+                    "premises": [
+                        "1: Socrates is a person.",
+                        "2. All persons are carrots."
+                    ],
+                    "conclusion": "C: Socrates is carrot."
+                },
+
+                {
+                    "type": "p",
+                    "substance": [
+                        "These arguments are both valid. In each case, if the premises were true, the conclusion would have to be true. (In the case of the first argument, the premises are actually true, so the argument is sound, but that is not what we are concerned with right now.) What makes these arguments valid is that they are put together the right way. Another way of thinking about this is to say that they have the same logical form. Both arguments can be written like this:"
+
+                    ]
+                }, {
+                    "type": "arg",
+                    "premises": [
+                        "1: S is M", "2.All M are P."
+                    ],
+                    "conclusion": "C: S is P"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "In both arguments $S$ stands for Socrates and $M$ stands for person. In the first argument, $P$ stands for mortal; in the second, $P$ stands for carrot. The letters S, M, and P are variables. They are just like the variables you may have learned about in algebra class. In algebra, you had equations like $y = 2x + 3$, where $x$ and $y$ were variables that could stand for any number. Just as $x$ could stand for any number in algebra, `S' can stand for any name in logic. In fact, this is one of the original uses of variables.",
+
+                        "The importance of the variable for the history of mathematics is obvious. But it was also incredibly important in one of its original fields of application, logic. For one thing, it allows logicians to be more content neutral. We can set aside any associations we have with people, or carrots, or whatever, when we are analyzing an argument. More importantly, once we set aside content in this way, we discover that something incredibly powerful is left over, the logical structure of the sentence itself. This is what we investigate when we study formal logic. In the case of the two arguments above, identifying the logical structure of statements reveals not only that the two arguments have the same logical form, but they have an impeccable logical form. Both arguments are valid, and any other arguments that have this form will be valid. ",
+
+                        "As formal logic evolved, however, the idea of being 'formal' would take on an additional meaning. Despite its historical importance, Aristotelean logic has largely been superseded. Starting in the 19th century people learned to do more than simply replace categories with variables. They learned to replicate the whole structure of sentences with a formal system that brought out all sorts of features of the logical form of arguments. The result was the creation of entire artificial languages. An artificial_language is a language that was consciously developed by identifiable individuals for some purpose.",
+
+                        "Artificial languages contrast with natural language, which develop spontaneously and are learned by infants as their first language. Natural languages include all the well-known languages spoken around the world, like English or Japanese or Arabic. The languages developed by logicians are artificial, not natural. When the languages first started being developed in the late 19th and early 20th centuries, the goal was, in fact, to have a logically pure language, free of the irrationalities the plague natural languages. More specifically, they had two distinct goals: first, remove all ambiguity and vagueness, and second, to make the logical structure of the language immediately apparent, so that the language wore its logical structure on its face, as it were. If such a language could be developed, it would help us solve all kinds of problems. The logician and philosopher Rudolf Carnap, for instance, felt that the right artificial language could simply make philosophical problems disappear. (The few quotes that randomly occur on the front page of this website encapsulate this sentiment.)",
+
+                        "For the purposes of this textbook, we will say that the core idea of a  formal_language is that it is an artificial language designed to bring out the logical structure of ideas and remove all the ambiguity and vagueness that plague natural languages like English. Creating formal languages always involves all kinds of trade offs. On the one hand, we are trying to create a language that makes a logical structure clear and obvious. This will require simplifying things, removing excess baggage from the language. On the other hand, we want to make the language perfectly precise, free of vagueness and ambiguity. This will mean adding complexity to the language. The other thing was that it was very important for the people developing these languages that you be able to prove the all the truths of mathematics in them. This meant that the languages had to have a certain scope.",
+
+                        "This was a trade off no logician was ever able to get perfectly correct, because, as it turns out, a logically pure language is impossible. No formal language can do everything that a natural language can do. Logicians became convinced of this, naturally enough, because of a pair of logical proofs. In 1931, the logician Kurt Goedel showed that you couldn't do all of mathematics in a consistent logical system, which was enough to persuade most of the logicians engaged in the project to drop it. There is a more general problem with the idea of a purely logical language, though, which is that that many of the features logicians were trying to remove from language were actually necessary to make it function. Arika Okrent puts the point quite well. For Okrent, the failure of artificial languages is precisely what illuminates the virtues of natural language. "
+                    ]
+                }
+            ]
+        },
+        "2": {
+            "title": "Introducing $SL$",
+            "content": [{
+                "type": "p",
+                "substance": ["This section introduces a logical language called SL, which is a version of sentence logic, because the basic units of the language will represent statements, and a statement is usually given by a complete sentence in English.In SL, capital letters, called sentence letter are used to represent simple statements. Considered only as a symbol of SL, the letter $A$ could mean any statement. So when translating from English into SL, it is important to provide a symbolization key, or dictionary. The symbolization_key provides an English language sentence for each sentence letter used in the symbolization.",
+                    "Consider this argument:"
+                ]
+            }, {
+                "type": "arg",
+                "premises": ["There is an apple on the desk.", "If there is an apple on the desk, then Jenny made it to class."],
+                "conclusion": "Jenny made it to class"
+            }, {
+                "type": "p",
+                "substance": ["This is obviously a valid argument in English. In symbolizing it, we want to preserve the structure of the argument that makes it valid. What happens if we replace each sentence with a letter? Our symbolization key would look like this:"]
+            }, {
+                "type": "symbolkey",
+                "key": [
+                    ["A", "There is an apple on the desk."],
+                    ["B", "Jenny made it to class."]
+                ]
+            }, {
+                "type": "p",
+                "substance": ["We would then symbolize the argument in this way:"]
+            }, {
+                "type": "arg",
+                "premises": ["A", "If A, then B."],
+                "conclusion": "B"
+            }, {
+                "type": "p",
+                "substance": ["There is no necessary connection between some sentence $A$, which could be any statement, and some other sentences $B$, which could also be anything. The important thing about the argument is that the second premise is not merely any statement, logically divorced from the other statement in the argument. The second premise contains the first premise and the conclusion as parts. This is why our symbolization key for the argument only needs to include meanings for $A$ and $B$, and we can build the second premise from those pieces."]
+            }]
+        },
+        "3": {
+            "title": "The Building Blocks of $SL$",
+            "content": [{
+                    "type": "p",
+                    "substance": [
+                        "There is a structure behind symbolizing English into $SL$. The basic idea is that each sentence should express one self-standing idea and we should explicate logical relations using other symbols. For instance, the sentence 'sky is blue and water is wet' contains two ideas that can be expressed independently. So they each should be assign to a difference letter."
+                    ]
+                }, {
+                    "type": "smallTitle",
+                    "substance": "Atomic Sentences"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "The individual sentence letters in SL are called atomic sentences, because they are the basic building blocks out of which more complex sentences can be built. We can identify atomic sentences in English as well. Anatomic sentence is one that cannot be broken into parts that are themselves sentences. 'There is an apple on the desk' is an atomic sentence in English, because you can't find any proper part of it that forms a complete sentence. For instance 'an apple on the desk' is a noun phrase, not a complete sentence. Similarly 'on the desk' is a prepositional phrase, and not a sentence, and 'is an' is not any kind of phrase at all. This is what you will find no matter how you divide 'There is an apple on the desk.' On the other hand you can find two proper parts of 'If there is an apple on the desk, then Jenny made it to class' that are complete sentences: 'There is an apple on the desk' and 'Jenny made it to class.' As a general rule, we will want to use atomic sentences in SL (that is, the sentence letters) to represent atomic sentences in English. Otherwise, we will lose some of the logical structure of the English sentence, as we have just seen.",
+
+                        "Not just anything in English can be translated into $SL$, however. Logic in general only concerns itself with $statements$, in a technical sense: a unit of language that can be true or false. Statements, as philosophers would say, declarative - they make claims about the world. 'Gress is green' and 'Logic is awesome' are declarative. Things like commands, exclamation, and questions are not declarative and cannot be captured by $SL$."
+                    ]
+                }, {
+                    "type": "smallTitle",
+                    "substance": "Complex Sentences and Logical Connectives"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "Logical connectives are used to build complex sentences from atomic components. In SL, our logical connectives are called sentential connective because they connect sentence letters. There are five sentential connectives in SL. In this section we will go over three of those."
+                    ]
+                }, {
+                    "type": "smallTitle",
+                    "substance": "Negation"
+                }, {
+                    "type": "ps",
+                    "substance": [
+                        "Suppose we want to translate the sentence:",
+                        "$$\\text{Mary is not in Barcelona}$$",
+                        "It might be tempting to think of this sentence as being atomic, but logically we should think of this as ",
+
+                        "$$\\text{It is not the case that Mary is in Barcelona}$$",
+
+                        "It's a mouthful, but it makes its logical structure explicit: this statement is a denial of a certain fact, that Mary is in Barcelona. To symbolize statements that involve denial, we use the <i>negation</i> symbol $\\neg$. So suppose we symbolize 'Mary is in Barcelona' as $B$. To symbolize the complex sentence, we write",
+                        "$$\\neg B$$",
+                        "Note that a statement can express a denial without using the word 'not'. For instance, 'Mary is nowhere near Barcelona' can be translated as $\\neg B$."
+                    ]
+                }, {
+                    "type": "smallTitle",
+                    "substance": "Conjunction"
+                }, {
+                    "type": "ps",
+                    "substance": [
+                        "Suppose we want to translate the sentence:",
+                        "$$\\text{Mary is not in Barcelona and Bill is in Hong Kong.}$$",
+                        "We already have half the statement translated. What we need is a way to connect $\\neg B$ to a symbol that says 'Bill is in Hong Kong.' Let's symbolize the latter as H. To symbolize the idea of <i>and</i>, we introduce the symbol $\\wedge$, so",
+
+                        "$$(\\neg B \\wedge H)$$",
+
+                        "is a symbolization of the original statement in $SL$ The logical connective $\\wedge$ is called the <i>conjunction</i>. $\\neg B$ and $H$ are called conjuncts.",
+
+                        "Again, like negation, there is a wide range of English statements that might have identical SL translation. For instance, 'Both A and B' would have the same translation as 'A and B'. Perhaps slightly more surprising are sentences with words like 'but' and 'although' - in SL they are nothing but conjunction. So 'A but B' would be translated as $(A \\wedge B)$."
+                    ]
+                }, {
+                    "type": "smallTitle",
+                    "substance": "Disjunction"
+                }, {
+                    "type": "ps",
+                    "substance": [
+                        "Another way in which two statements can be connected is through <i>disjunction</i>, such as",
+                        "$$\\text{Either Amy is a logician or a basketball player.}$$",
+                        "To translate statements with is the connective 'or', we introduce the disjunction symbol $\\vee$.",
+
+                        "$$(A \\vee B)$$",
+
+                        "A and B are called <i>disjuncts</i>. Sometimes in English, the word 'or' excludes the possibility that both disjuncts are true. This is called an <i>exclusive disjunction</i>.  An exclusive disjunction is clearly intended when a restaurant menu says, 'Entrees come with either soup or salad.' You may have soup; you may have salad; but, if you want both soup and salad, then you will have to pay extra.",
+                        "At other times, the word 'or' allows for the possibility that both disjuncts might be true. If you are at a dinner party at a friend's house and she says to you 'would you like some more wine or food?' We can reasonably infer that she is offering not just one of them. This would be an instance of an <i>inclusive disjunction</i> The point is that the use of disjunction is ambiguous in English, and that is something we have to fix in a formal language.",
+
+                        "In response, logicians have chosen to have $\\vee$ to denote disjunction in the inclusive sense: $(A \\vee B)$ means that at least one of the disjuncts, A or B, must be true. They can be both true, but they can't be both false. There is nothing sacred about this - it's simple a choice we have to make in our language. This is not to say that the inclusive sense of disjunction is <i>the</i> meaning of disjunction. In fact, we can symbolize an exclusive or in SL. We just need more than one connective to do it. We can break the sentence into two parts. The first part says that you get one or the other. We translate this as $(A \\vee B)$. The second part says that you do not get both. We can paraphrase this as 'It is not the case that A and B.' How would we symbolize this?"
+                    ]
+                },
+
+                {
+                    "type": "mc",
+                    "title": "Reading Exercise: English/SL Translation",
+                    "eventId": "sl-2-4",
+                    "intro": ["For this reading exercise, you will be given either a sentence in SL or in English, and you are asked to pick out the corresponding translation from the options. Do 10 of these to complete the exercise. Click 'next' to begin."],
+                    "size": "half",
+                    "instruction": "Pick the correct translation.",
+                    "substance": [
+
+
+                        "Consider this argument: 'No Huskies are Bulldogs. All dogs are Bulldogs. Conclusion: no Huskies are dogs.' To begin, it's obvious that something is off with the argument: one of the premises 'all dogs are Bulldogs' is clearly false. Does that mean the argument is invalid?",
+                        "Not necessarily! Remember an argument is valid $if$ the premises were true, the conclusion would be true as well. So there is a hypothetical nature to validity - we are to ask if the premises are true: we are asking what would happen if they were. So this argument is indeed valid - IF all dogs are Bulldogs, then there is no way for Huskies to be dogs.",
+                        "Because of this, there is another concept for valid arguments that contain true premises called soundness. An argument is sound when it is valid AND has only true premises.",
+
+                        "To be sure to keep this in mind when doing this reading exercise. You only have to do it once to get credit for it. You are not graded by your performance, but you are encouraged to do well on them. Once you are finished, correct answers will be shown. It would be a good idea to check and see what you have gotten wrong."
+                    ]
+                }
+            ]
+        },
+        "4": {
+            "title": "Truth tables and the precise 'meaning' of logical connectives",
+            "content": [{
+                    "type": "ps",
+                    "substance": [
+                        "So far we rely on our intuitive understanding of 'and,' 'or,' and 'not' to give meanings to their corresponding logical symbols. To make this more precise, we make use a formal tool called a 'truth table,' which is a very effective to show the <i>semantics</i> of the connectives,i.e., how complex sentences are to be interpreted, in terms of whether or not it is true. This is the tables for negation:"
+
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "negation"
+                }, {
+                    "type": "ps",
+                    "substance": ["Each column represents the possible values that the sentence can hold. $T$ and $F$ are called <i>truth values</i>. This table captures this idea: for any sentence $A$: If $A$ is true, then $\\neg A$ is false. If$\\neg A$ is true, then $A$ is false. So on the row that $A$ gets T, it means that $A$ is true. This is why for any row where $A$ has a $T$, $\\neg A$ has a $F$. Note that A here is just a placeholder - it stands for any grammatically correct SL sentence. It's a <i>metavariable</i> that can represent any sentence in the formal language. (Technically we are supposed to use special symbol like $\\alpha$ for metavariable, but we will not concern ourselves with that here.)",
+                        "Truth table is supposed to represent <i>all</i> possible combinations of truth values, so the number of rows needed for a table is dependent on how many letters we are dealing with. Thus, $A\\wedge B$, since it has two letters, will have $2^2 = 4$ rows. "
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "conjunction"
+                },
+
+                {
+                    "type": "ps",
+                    "substance": ["For any sentences $A$ and $B$, $A \\wedge B$ is true if and only if both $A$ and $B$ are true. Conjunction is symmetrical because we can swap the conjuncts without changing the truth value of the sentence. That is, $A\\wedge B$ and $B \\wedge A$ have the same values.",
+                        "Lastly, this is the table for disjunction"
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "disjunction"
+                },
+
+                {
+                    "type": "ps",
+                    "substance": ["Since we interpret $\\vee$ as being inclusive, the only situation where $A \\vee B$ is false is when they are <i>both</i> false. "]
+                }
+            ]
+        },
+        "5": {
+            "title": "Truth Functions",
+            "content": [{
+                "type": "p",
+                "substance": ["Any nonatomic sentence of SL is composed of atomic sentences with sentential connectives. The truth value of the complex sentence depends only on the truth value of the atomic sentences that it comprises. In order to know the truth value of $(D\\vee E)$, for instance, you only need to know the truth value of $D$ and the truth value of $E$. Connectives that work in this way are called truth functional. A truth function is a rule that tell us how to determine the truth of a sentence by looking at its combination of true sentences and connectives. We define a truth-functional connective as an operator that builds larger sentences out of smaller ones, and fixes the truth value of the resulting sentence based only on the truth value of the component sentences.",
+                    "Because all of the logical symbols in SL are truth functional, the only aspect of meaning we need to worry about in studying the semantics of SL is truth and falsity. If we want to know about the truth of the sentence $A \\wedge B$, the only thing we need to know is whether $A$ and $B$ are true. It doesn't actually matter what else they mean. So if $A$ is false, then $A \\wedge B$ is false no matter what false sentence $A$ is used to represent. It could be I am the Pope' or 'Pi is equal to 3.19.' The larger sentence $A \\wedge B$ is still false. So to give an interpretation of sentences in SL, all we need to do is create a truth assignment, which is a function that maps the sentence letters in SL onto our two truth values. In other words, we just need to assign Ts and Fs to all our sentence letters."
+                ]
+            }]
+        },
+        "6": {
+            "title": "Interpreting Complex Sentences",
+            "content": [{
+                    "type": "p",
+                    "substance": ["The truth value of sentences that contain only one connective is given by the truth table definition for that connective. The truth table definition for conjunction, for example, gives the truth conditions for any sentence of the form $(A\\wedge B)$. Even if the conjuncts A and B are long, complicated sentences, the conjunction is true if and only if both A and B are true. Consider the sentence $(H\\wedge I)\\vee \\neg H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth values for the sentence letters and write them underneath the letters in the sentence."]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6a"
+                },
+
+                {
+                    "type": "p",
+                    "substance": ["Now consider the subsentence $H\\wedge I$. This is a conjunction $A\\wedge B$ with $H$ as A and with $I$ as B. $H$ and $I$ are both true on the first row. Since a conjunction is true when both conjuncts are true, we write a T underneath the conjunction symbol. We continue for the other three rows and get this:"]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6b"
+                }, {
+                    "type": "p",
+                    "substance": ["We do the same for $\\neg H$. Based on the truth table definition, $\\neg H$ is true when $H$ is false, so:"]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6c"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "The entire sentence is a disjunction $(A \\vee B)$ with $(H \\wedge I)$ as A and with $\\neg H$ as B. On the second row, for example, $(H\\wedge I)$ is false and $\\neg H$ is false. Since for a disjunction to be true  at least one of the disjunct has to be true, we write a F in the second row underneath the disjunction symbol. We continue for the other three rows and get this:"
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6d"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "Of course, this is rather messy. Most of the columns underneath the sentence are only there for bookkeeping purposes. Normally we do not write out every single truth value like that. As a matter of fact, when we deal with longer sentences it becomes practically unfeasible to write them all out. Normally, we only write out the truth values for the main connective like this:"
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6e"
+                }, {
+                    "type": "p",
+                    "substance": [
+                        "When you become more adept with truth tables, you will probably no longer need to copy over the columns for each of the sentence letters.",
+                        "A sentence that contains only one sentence letter requires only two rows, as in the truth table definition for negation. This is true even if the same letter is repeated many times, as in this sentence: $$[(C\\wedge C) \\vee C] \\wedge \\neg(C \\vee C)$$ The complete truth table requires only two lines because there are only two possibilities: $C$ can be true, or it can be false. A single sentence letter can never be marked both T and F on the same row.",
+                        "A sentence that contains three sentence letters requires eight lines. For example"
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "sl-2-6f"
+                }, {
+                    "type": "important",
+                    "substance": ["We call a table that gives all the possible interpretations for a sentence or set of sentences in SL a complete truth table. In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate Ts and Fs. In the next column to the left, write two Ts, write two Fs, and repeat. For the third sentence letter, write four Ts followed by four Fs. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight Ts followed by eight Fs. For a 32 line table, the next column would have 16 Ts followed by 16 Fs. And so on."]
+                }
+
+            ]
+        },
+        "7": {
+            "title": "Chapter Definition Review",
+            "content": [{
+                    "type": "p",
+                    "substance": ["Finish this chapter by completing the the definition review quiz below."]
+                }, {
+                    "type": "matching",
+                    "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
+                    "eventId": "sl-2-def"
+                }
+
+            ]
+        }
+    },
+    "3": {
+        "1": {
+            "chapterName": "Core Concepts in Formal Logic",
+            "chapterNum": "3",
+            "chapterDescription": "The purpose of a formal language like $SL$ is to facilitate the studying of various logical properties of language, validity being an important one. This chapter explains how SL can explicate what it means for an argument to be valid. We will also look at other logical properties of interest.",
+            "title": "Truth values",
+            "content": [{
+                "type": "p",
+                "substance": ["We already came across truth values in the last chapter. Here we will offer a more detailed expression: a truth value is the status of a statement as true or false. Thus the truth value of the sentence 'All dogs are mammals' is 'True,' while the truth value of 'All dogs are reptiles' is false. More precisely, a truth value is the status of a statement with relationship to truth. We have to say this, because there are systems of logic that allow for truth values besides 'true' and 'false,' like 'maybe true,' or 'approximately true,' or 'kinda sorta true.' For instance, some philosophers have claimed that the future is not yet determined. If they are right, then statements about what will be the case are not yet true or false. Some systems of logic accommodate this by having an additional truth value. Other formal languages, so-called paraconsistent logics, allow for statements that are both true {and} false. We won't be dealing with those in this textbook, however. For our purposes, there are two truth values, 'true' and 'false,' and every statement has exactly one of these. Logical systems like ours are called bivalent."]
+            }]
+        },
+        "2": {
+            "title": "Tautology, contingent statement, contradiction",
+            "content": [{
+                "type": "ps",
+                "substance": ["In considering arguments formally, we care about what would be true <i>if</i> the premises were true. Generally, we are not concerned with the actual truth value of any particular statements - whether they are <i>actually</i> true or false. Yet there are some statements that must be true, just as a matter of logic."]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                    "id": "a",
+                    "item": "It's raining."
+                }, {
+                    "id": "b",
+                    "item": "Either it is raining or it is not."
+                }, {
+                    "id": "c",
+                    "item": "It is both raining and not raining"
+                }]
+
+            }, {
+                "type": "ps",
+                "substance": ["In order to know if statement (a) is true, you would need to look outside or check the weather channel. Logically speaking, it might be either true or false. Statements like this are called contingent statements.",
+                    "Statement (b) is different. You do not need to look outside to know that it is true. Regardless of what the weather is like, it is either raining or not. If it is drizzling, you might describe it as partly raining or in a way raining and a way not raining. However, our assumption of bivalence means that we have to draw a line, and say at some point that it is raining. And if we have not crossed this line, it is not raining. Thus the statement 'either it is raining or it is not' is always going to be true, no matter what is going on outside. A statement that has to be true, as a matter of logic is called a tautology or logical truth.",
+                    "You do not need to check the weather to know about statement (c) either. It must be false, simply as a matter of logic. It might be raining here and not raining across town, it might be raining now but stop raining even as you read this, but it is impossible for it to be both raining and not raining here at this moment. The third statement is logically false; it is false regardless of what the world is like. A logically false statement is called a contradiction.",
+                    "Since tautology is defined as a statement that must be true as a matter of logic, no matter how the world is. Something similar goes on in truth tables. With a complete truth table, we consider all of the ways that the world might be. Each line of the truth table corresponds to a way the world might be. This means that if the sentence is true on every line of a complete truth table, then it is true as a matter of logic, regardless of what the world is like.",
+                    "More precisely, a statement is a semantic tautology in SL  if and only if the column  under the main connective in the complete truth table for the sentence contains only Ts. This is the semantic definition of a tautology in SL, because it uses truth tables. Remember in logic the only 'meaning' that matters is the truth and falsity of a sentence. Here we are explicating tautology semantically by appealing to the kind of values it has on a truth table. This is an example of a truth table of a tautology:"
+                ]
+            }, {
+                "type": "table",
+                "eventId": "tautology"
+            }, {
+                "type": "ps",
+                "substance": ["Conversely, we defined a contradiction as a sentence that is false no matter how the world is. This means we can define a semantic contradiction in SL as a sentence that has only Fs in the column under them main connective of its complete truth table. Again, this is the semantic definition of a contradiction."]
+            }, {
+                "type": "table",
+                "eventId": "contradiction"
+            }, {
+                "type": "ps",
+                "substance": [
+                    "Finally, a sentence is contingent if it is sometimes true and sometimes false. Similarly, a sentence is semantically contingent in SL if and only if its complete truth table for has both Ts and Fs under the main connective."
+                ]
+            }, {
+                "type": "table",
+                "eventId": "contingent"
+            }, {
+                "type": "category",
+                "title": "Categorizing logical properties",
+                "instruction": "For each of the sentences below, determine whether it is a contingent statement, a contradiction, or a tautology. Once done, press confirm. NOTE: There is no penalty for multiple attempts but you must correctly categorize each sentence to get credit!",
+                "eventId": "sl-3-cat"
+            }]
+        },
+        "3": {
+            "title": "Logical Equivalence and logical laws",
+            "content": [{
+                    "type": "p",
+                    "substance": [
+                        "Two sentences are logically equivalent in English if they have the same truth value as a matter of logic. Once again, we can use truth tables to define a similar property in SL: Two sentences are semantically logically equivalent in SL if they have the same truth value on every row of a complete truth table.",
+                        "Consider the sentences $\\neg(A \\vee B)$ and $\\neg A \\wedge \\neg B$. Are they logically equivalent? To find out, we construct a truth table."
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "equiv"
+                },
+
+                {
+                    "type": "ps",
+                    "substance": [
+                        "(Suggestion: work out the truth table on your own to see how the values came about. )",
+                        "There are few logical equivalences that hold quite generally. We call those <i>logical laws of equivalence</i>. The one represented above is called DeMorgan's Law, which you might have seen in other contexts.",
+                        "$$\\text{DeMorgan's Law(DeM): for any sentence X and Y, } \\neg(A \\vee B) \\equiv (\\neg A \\wedge \\neg B)\\\\ \\text{ and } \\neg(A \\wedge B) \\equiv (\\neg A \\vee \\neg B)$$",
+                        "We use the symbol $\\equiv$ as a shorthand for the English predicate '... is logically equivalent to...'. Note that $\\equiv$ is <i>not</i> a symbol in SL. It is symbol that represents something in English. For instance in the definition of (DeM) above, I could have easily wrote in English and say $\\neg(A \\vee B)$ is logically equivalent to $(\\neg A \\wedge \\neg B)$",
+                        "Another important logical law is the law of Double Negation:",
+                        "$$\\text{Double Negation(DN): for any sentence X and Y, } A \\equiv \\neg \\neg A$$"
+                    ]
+                },
+
+                {
+                    "type": "table",
+                    "eventId": "dn"
+                }, {
+                    "type": "ps",
+                    "substance": [
+                        "I will introduce a few more law, but I will leave the truth tables for you as an exercise. (You may or may not but definitely will see them on test/problem set.)",
+                        "$$\\text{Law of Distribution(Dist): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\vee Z) \\equiv ( X \\wedge  Y) \\vee (X \\wedge Z) \\text{ and }  \\\\ X \\vee (Y \\wedge Z) \\equiv ( X \\vee  Y) \\wedge (X \\vee Z)  $$",
+                        "$$\\text{Law of Association(Assoc): for any sentence X, Y, and Z, }\\\\ X \\wedge (Y \\wedge Z) \\equiv ( X \\wedge  Y) \\wedge Z \\text{ and }  \\\\ X \\vee (Y \\vee Z) \\equiv ( X \\vee  Y) \\vee  Z  $$",
+                        "$$\\text{Commutation(Com): for any sentence X, and Y, }\\\\ (X \\wedge Y ) \\equiv (Y \\wedge X ) \\text{ and }  \\\\(X \\vee Y ) \\equiv (Y \\vee X )  $$",
+                        "$$\\text{Idempotent(Idem): for any sentence X, }\\\\ (X \\wedge X ) \\equiv X \\text{ and } \\\\ (X \\vee X ) \\equiv X $$",
+                        "$$\\text{Contradictory Disjunct: for any sentence X and contradiction Y, }X\\vee Y \\equiv X$$",
+                        "$$\\text{Tautological Conjunct: for any sentence X and tautology Y, }X\\wedge Y \\equiv X$$"
+
+                    ]
+                }
+
+            ]
+        },
+        "4": {
+            "title": "Consistency",
+            "content": [{
+                "type": "p",
+                "substance": [
+                    "A set of sentences in English is consistent if it is logically possible for them all to be true at once. This means that a sentence is semantically consistent in SL if and only if there is at least one line of a complete truth table on which all of the sentences are true. It is semantically inconsistent otherwise."
+                ]
+            }]
+        },
+        "5": {
+            "title": "Semantic Entailment and Validity",
+            "content": [{
+                    "type": "p",
+                    "substance": ["Logic is the study of argument, so the most important use of truth tables is to test the validity of arguments. An argument in English is valid if it is logically impossible for the premises to be true and for the conclusion to be false at the same time. So we can define an argument as semantically valid in SL if there is no row of a complete truth table on which the premises are all marked 'T' and the conclusion is marked 'F.' An argument is invalid if there is such a row. Consider this argument and its corresponding truth table:"]
+                }, {
+                    "type": "arg",
+                    "premises": ["$((E \\wedge J) \\vee J)$", "$((J\\vee J) \\vee E)$"],
+                    "conclusion": "$((J \\vee \\neg E)\\vee \\neg E)$"
+                }, {
+                    "type": "table",
+                    "eventId": "validExample"
+                }, {
+                    "type": "p",
+                    "substance": ["The only row on which both the premises are T is the first row, and on that row the conclusion is also T, so yes - the argument is valid.",
+                        "We used the three dots $\\therefore$ to represent an inference in English. We used this symbol to represent any kind of inference, valid or not. The truth table method gives us a more specific notion of a valid inference. We will call this semantic entailment and represent it using a new symbol, $\\vDash$, called the ``double turnstile.''  The $\\vDash$ is like the $\\therefore$, except for arguments verified to be valid by truth tables. When you use the double turnstile, you write the premises as a set, using curly brackets, { and }, which mathematicians use in set theory. The argument above would be written  $ \\{ ((E \\wedge J ) \\vee J),((J\\vee J) \\vee E) \\}\\vDash ((J \\vee \\neg E)\\vee \\neg E)$. (But sometimes for the sake of convenience I will omit the brackets.)",
+                        "We can also use the double turnstile to represent other logical notions. Since a tautology is always true, it is like the conclusion of a valid argument with no premises. The string $\\vDash C$ means that C is true for all truth value assignments. This is equivalent to saying that the sentence is entailed by anything or nothing."
+                    ]
+                }, {
+                    "type": "important",
+                    "substance": [
+                        "More formally, we can define the double turnstile this way: $\\{ A_1...A_n\\} \\vDash B $ if and only if there is no truth value assignment for which $\\{ A_1...A_n\\}$ are true andB is false. Put differently, it means that B is true for any and all truth value assignments for which$\\{ A_1...A_n\\}$ are true."
+
+                    ]
+                }, {
+                    "type": "matching",
+                    "instruction": "Match the following definitions by dragging the definition to the box containing the concept.",
+                    "eventId": "sl-3-def"
+                }
+
+            ]
+        },
+        "6": {
+            "title": "In class activity",
+            "content": [{
+                    "type": "p",
+                    "substance": ["Prove the logical law listed in this chapter by using truth tables and Venn diagrams."]
+                }
+
+            ]
+        }
+    },
+    "4": {
+        "1": {
+            "chapterName": "Conditionals",
+            "chapterNum": "4",
+            "chapterDescription": "In this chapter we complete our language SL by introducing the logical connectives of conditional and biconditional.",
+            "title": "The intuition behind conditionals",
+            "content": [{
+                "type": "p",
+                "substance": [
+                    "Consider the following symbolization key and English sentences"
+                ]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                        "id": "A",
+                        "item": "You are a Duke student."
+                    }, {
+                        "id": "B",
+                        "item": "You are a Blue Devils fan."
+                    }, {
+                        "id": "C",
+                        "item": "If you are a Duke student, then you are a Blue Devils fan."
+                    }
+
+                ]
+
+            }, {
+                "type": "ps",
+                "substance": [
+                    "Sentence C can be translated partially as 'If $A$, then $B$.' More technically, we refer to the logical relation between A and B as one of <i>implication</i>: A implies B. We will use the symbol $\\to$ to represent this logical relation, so sentence C then becomes $A\\to B$. The connective is called a conditional. The sentence on the left-hand side of the conditional ($R$ in this example) is called the <i>antecedent</i>, and the other is called the <i>consequent</i>.",
+                    "The point of conditionals is to capture the situation where <i>one event cannot occur without another.</i> So, to say that $A \\to B$ is to say that You cannot be a Duke student without also being a Blue Devils fan. You can think of this as saying that being a Blue-Devils fan is a required condition for being a Duke student. You cannot be a Duke student without fulfilling it.",
+                    "So now suppose you know the following:"
+                ]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                        "id": "D",
+                        "item": "Dennis is a Duke student."
+                    }, {
+                        "id": "E",
+                        "item": "Deandra is a Blue-Devils fan."
+                    }
+
+                ]
+
+            }, {
+                "type": "ps",
+                "substance": [
+                    "What can we infer from this? Since $A\\to B$ means that a person cannot be a Duke without being a Blue-Devils fan, we can infer that Dennis is also a Blue-Devils fan. On the other hand,$A\\to B$ does not imply that all Blue-Devils fans are Duke students! It's possible that they are just basketball fans in general. So another way to think about conditionals is in terms of possibilities. $A \\to B$ is asserting that a certain scenario is not possible; someone that is a Duke student that is not a Blue-Devils fan ($A \\wedge \\neg B$). But it does not say that B (being a Blue-Devils fan) implies A (being a Duke student). So we don't know if Deandara is a Duke student.",
+                    "In English, the truth of conditionals often depends on what would be the case if the antecedent were true - even if, as a matter of fact, the antecedent is false. This poses a problem for translating conditionals into SL.  Considered as sentences of SL, $A$ and $B$ in the above examples have nothing intrinsic to do with each other. In order to consider what the world would be like if $A$ were true, we would need to analyze what $R$ says about the world. Since $A$ is an atomic symbol of SL, however, there is no further structure to be analyzed. When we replace a sentence with a sentence letter, we consider it merely as some atomic sentence that might be true or false.",
+
+                    "An important thing to keep in mind is that the symbol $\\to$ does not aim to capture perfectly how the word 'if' is used in English. Instead, it is what logicians call a material conditional, which has a technical meaning: a statement is an material conditional if and only if the only way in which for the statement is false is when the antecedent true but conclusion false. This can be captured by the truth table below:"
+                ]
+            }, {
+                "type": "table",
+                "eventId": "materialconditional"
+            }, {
+                "type": "ps",
+                "substance": [
+                    "There is however some strange result for this. This is best explained using examples and the truth tables. Again we will use the conditional statement C above as a basis, but now consider the following people and whether or not they are Duke students:"
+                ]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                        "id": "Dennis",
+                        "item": "a Duke student and a Blue-Devils fan."
+                    }, {
+                        "id": "Eva",
+                        "item": "a Duke student but not a Blue-Devils fan."
+                    }, {
+                        "id": "Frank",
+                        "item": "not a Duke student but a Blue-Devils fan"
+                    }, {
+                        "id": "Gwen",
+                        "item": "not a Duke student and not a Blue-Devils fan."
+                    }
+
+                ]
+
+            }, {
+                "type": "ps",
+                "substance": [
+                    "Now think about the following conditional statements: 'if Dennis is a Duke student, then Dennis is a Blue-Devils fan' and 'if Eva is a Duke student, then Eva is a Blue-Devils fan' - it makes sense to think that the first one is true and the latter false. But the cases of Frank and Gwen are more problematic. Given they are not Duke students, would it be true or false to say, if Frank is a Duke student, then Frank is a Blue-Devils fan' and 'if Gwen is a Duke student, then Gwen is a Blue-Devils fan'? The definition of material condition says they are both true. How is that so?",
+                    "One way to think about this is think of conditionals as rules, and then think of the conditional as being false only when the rule is being violated. $A\\to B$ would amount to a rule stating 'you have to be a Blue-Devils fan to be a Duke student.' Frank and Gwen do not violate the rule because the rule only applies to Duke students. Thinking about conditionals this way, it should be easier to see the rationale of material conditionals."
+                ]
+            }, {
+                "type": "important",
+                "substance": ["The conception of the conditional has other weird consequences. For instance, what happens if the antecedent is not atomic?"]
+            }]
+        },
+        "2": {
+            "title": "'if' vs 'only if'",
+            "content": [{
+                    "type": "ps",
+                    "substance": [
+
+                        "The difficult thing about conditionals is that in English the usage of conditionals is very messy. So when we translate between conditional and English we cannot simply rely on syntactic markers such as where the word 'if' occurs. For instance, consider the following example:"
+                    ]
+                }, {
+                    "type": "orderedList",
+                    "substance": [{
+                            "id": "F",
+                            "item": "You are a Blue-Devils fan if you are a Duke student."
+                        }, {
+                            "id": "G",
+                            "item": "You are a Blue-Devils fan only if you are a Duke student."
+                        }
+
+                    ]
+
+                }, {
+                    "type": "ps",
+                    "substance": [
+
+                        "F is simply C but slightly rearranged so it means the same thing C does. We can translate it also as $A \\to B$. But what about G? Since the word 'if' also appears in the second half of the sentence, it might be tempting to symbolize this in the same way as sentence F. That would be a mistake.",
+
+                        "The unique thing about G is that it appears to be saying that <i>the only way to be a Blue-Devils fan is to be a Duke student.</i> In other words, you cannot be a Blue-Devils fan(B) without being a Duke student(A)! So $A \\to B$ clearly will not work - since it does not say that B cannot be true without A. So G is actually better translated as $B \\to A$."
+
+
+                    ]
+                }
+
+            ]
+        },
+        "3": {
+            "title": "Biconditionals: 'if and only if'",
+            "content": [{
+                    "type": "ps",
+                    "substance": [
+                        "Our last logical connective is the <i>biconditional</i> $\\leftrightarrow$, which is logically equivalent to $(A\\to B) \\wedge (B\\to A)$. In English, we often use 'if and only if' to signify biconditionals. In this case, it means that we cannot have one without another, so a biconditional is always true when the two components have the same truth vales, and always false when they don't. <i>Definitions</i> are often explicated in terms of biconditionals. For instance, ",
+                        "$$\\text{Someone is a bachelorette if and only if that person is a young unmarried woman.}$$",
+                        "$$\\lim_{x\\to a} f(x) = L  \\text{ if and only if }\\lim_{x\\to a^-} f(x) = L = \\lim_{x\\to a^+} fx$$",
+                        "For both of the statements above we can easily translate them using $\\leftrightarrow$.",
+                        "We could abide without a new symbol for the biconditional. We could translate biconditional statements like the ones above as $(T \\to S)\\wedge(S\\to T)$. We would need parentheses to indicate that $(T \\to S)$ and $(S\\to T)$ are separate conjuncts; the expression $T \\to S\\wedge S\\to T$ would be ambiguous.",
+                        "Because we could always write $( A \\to B )\\wedge( B \\to A )$ instead of $ A \\leftrightarrow B $, we do not strictly speaking need to introduce a new symbol for the biconditional. Nevertheless, logical languages usually have such a symbol. SL will have one, which makes it easier to translate phrases like ``if and only if.''",
+                        "The truth table for the biconditional is as follows:"
+                    ]
+                }, {
+                    "type": "table",
+                    "eventId": "biconditional"
+                }, {
+                    "type": "textInput",
+                    "substance": ["Why is 'if and only if' called a biconditional? Give your best educated guess. You are not graded on correctness but serious answers only. "],
+                    "eventId": "sl-4-3"
+                }
+
+            ]
+        },
+        "4": {
+            "title": "X unless Y",
+            "quote": {
+                "lines": [
+                    "Joey: Look, y’know how when you’re dating someone and you don’t want to cheat on them, unless it’s with someone really hot? ",
+                    "Phoebe: Yeah, totally!",
+                    "Joey: All right. Okay. Well this is the same kind of deal. If you’re going to do something wrong... do it right! "
+                ],
+                "source": {
+                    "name": "Friends",
+                    "title": "The one with the fake party"
+                }
+            },
+            "content": [{
+                "type": "p",
+                "substance": [
+                    "Suppose we codify Joey's idea of faithfulness as 'Joey's rule.' It would look like: "
+                ]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                    "id": "H",
+                    "item": "Unless the person is hot, don't cheat. "
+                }, {
+                    "id": "I",
+                    "item": "Don't cheat unless the person is hot."
+                }]
+            }, {
+                "type": "ps",
+                "substance": [
+                    "Just like 'Y if X' is equivalent to 'if X, Y', H and I are logically equivalent. But how should we translate 'unless'? It's tricky because it does not map straightforwardly onto a conditional statement. One way to think about the connection between the two is through thinking what Joey is really committed into saying. Clearly what is he expressing is a certain conditional relationship between cheating and a person's hotness. So we have four possibilities:"
+                ]
+            }, {
+                "type": "orderedList",
+                "substance": [{
+                        "id": "A",
+                        "item": "If someone is hot, you should cheat $ H \\to C$ "
+                    }, {
+                        "id": "B",
+                        "item": "If someone is not hot, you shouldn't cheat: $ \\neg H\\to  \\neg C$"
+                    }, {
+                        "id": "C",
+                        "item": "If you cheat, the person is hot: $ C \\to  H$"
+                    }
+
+
+                ]
+            }, {
+                "type": "ps",
+                "substance": ["What is Joey saying? He was essentially trying to describe to Phoebe where a certain situation where situation is considered (by him) to be allowable. First consider A: this would essentially be saying you should cheat whenever you see a hot person, but this is at all clear what Joey seems to be saying - he doesn't seem to be encouraging Phoebe to cheat on every single hot person on earth. He's not <i>committed into</i> such a strong position. What he is saying, instead, is something more along the lines of: if you <i>do</i> cheat, you should cheat with a hot person. Or putting it differently: if the person is not hot, don't even think about cheating. So B and C are both acceptable translations: they happen to be logically equivalent. ",
+                    "Note that in English sometimes 'unless' could signify a biconditional. Consider the sentence: 'I will go to the party, unless John is going'. Perhaps I really hate John so I can't stand going to the party with him being present. Understood as such, it makes to interpret me as saying that if John goes, I won't go, and if I go, that means John didn't go. That would be a biconditional interpretation.",
+                    "Examine the truth table for a translation of J."
+                ]
+            }, {
+                "type": "table",
+                "eventId": "unless"
+
+            }, {
+                "type": "textInput",
+                "eventId": "sl-4-4",
+                "substance": ["It should look familiar since it is exactly the same as the truth table definition of one of the logical connectives. Which one is it? What would this logically equivalent translation look like? Does it make sense?"]
+            }]
+        },
+        "5": {
+            "title": "Necessary and Sufficient Conditions.",
+            "content": [{
+                "type": "p",
+                "substance": ["Philosophers often speak of necessary and sufficient conditions for events. They can be explicated as conditionals. By saying X is a necessary condition for Y, they mean roughly that X is a precondition for Y. For instance, being a citizen of the United States is a precondition for being an eligible voter. This means that someone cannot be a eligible voter without being a U.S. citizen, which has the conditional form of $E \\to C$. In contrast to necessary conditions, sufficient conditions provide all that we need to know. For instance, while one cannot be a eligible voter without also being a citizen, being a citizen alone is not sufficient. For instance, if you are convicted felon then your eligibility is affected. This means that being a US citizen is a necessary but not a sufficient condition for being eligible to vote: you definitely cannot vote without being a citizen, but by itself the citizenship is not enough to guarantee your eligibility."]
+            }, {
+                "type": "matching",
+                "instruction": "Match the following sentences by dragging the corresponding SL sentence to the box. G: you are a good person. D: You love dogs.",
+                "eventId": "sl-4-matching"
+            }]
+        },
+        "6": {
+            "title": "Logical Laws involving conditionals and biconditionals",
+            "content": [
+              {
+                  "type": "ps",
+                  "substance": [
+                      "There is a number of logical laws involving conditionals. You should check all of them using the truth table. Like the laws we learned in earlier chapters. these laws can be used for SLE.",
+                      "$$\\text{Contraposition: } X \\to Y \\equiv \\neg Y \\to \\neg X$$",
+                      "$$\\text{Material Implication: } X \\to Y \\equiv \\neg X \\vee Y.$$",
+                      "$$\\text{Biconditional Exportation: } X \\leftrightarrow Y \\equiv (X \\to Y) \\wedge (Y \\to X)$$",
+                      "There is also a meta-law that codify the relationship between logical equivalence and biconditionals: (why is this meta?)",
+                      "$$X \\equiv Y \\text{ if and only if } X \\leftrightarrow Y$$"
+                  ]
+              }
+
+            ]
+        },
+      "7":{
+        "title": "Preparing for test 1",
+        "content":[
           {
-            "id":"F","item":"You are a Blue-Devils fan if you are a Duke student."
-          },
-          {"id":"G","item":"You are a Blue-Devils fan only if you are a Duke student."}
+            "type":"niceList",
+            "substance":[
+              "Be sure to be prepared to answer conceptual questions about validity: you should have a clear idea on how the logical status of a premise or the conclusion can affect the validity of the argument. (See problem-set 1.2)",
+              "Be ready to prove various equivalences in an efficient manner. One way to prepare for this is to memorize the logical laws. You are allowed, but not encouraged to use some sort of cheatsheet with all the laws on it.",
 
-        ]
+              "You will be asked to determine the logical property of various SL sentences. Often they are too long and clumsy for truth tables - you are expected to use laws to reduce them to something more manageable.(lecture + problem-set 1.3)",
 
-      },{
-        "type":"ps",
-        "substance":[
+              "You will be asked to translate arguments and then determine its validity using truth tables. (Truth table logicises)",
 
-          "F is simply C but slightly rearranged so it means the same thing C does. We can translate it also as $A \\to B$. But what about G? Since the word 'if' also appears in the second half of the sentence, it might be tempting to symbolize this in the same way as sentence F. That would be a mistake.",
+              "For conditionals: be sure to understand how to translate them from English and determine their truth values. (Wason and problem-set 1.4)",
 
-          "The unique thing about G is that it appears to be saying that <i>the only way to be a Blue-Devils fan is to be a Duke student.</i> In other words, you cannot be a Blue-Devils fan(B) without being a Duke student(A)! So $A \\to B$ clearly will not work - since it does not say that B cannot be true without A. So G is actually better translated as $B \\to A$."
+              "P vs P+ consideration (1): the effective use of laws to simplify SL sentences during analysis. For instance, if you use truth tables for proofs without reducing them, you are are likely to get a P (assuming the table is correct).",
 
-
+              "P vs P+ consideration (2): correct translations: your answers will be correct enough to pass if you logical analysis is correct even if your translation is off. But to be considered for a P+, your translation has to be accurate and precise."
+            ]
+          }
         ]
       }
-
-    ]
-  },
-  "3":{
-    "title":"Biconditionals: 'if and only if'",
-    "content":[
-      {
-      "type":"ps",
-      "substance":[
-        "Our last logical connective is the <i>biconditional</i> $\\leftrightarrow$, which is logically equivalent to $(A\\to B) \\wedge (B\\to A)$. In English, we often use 'if and only if' to signify biconditionals. In this case, it means that we cannot have one without another, so a biconditional is always true when the two components have the same truth vales, and always false when they don't. <i>Definitions</i> are often explicated in terms of biconditionals. For instance, ",
-        "$$\\text{Someone is a bachelorette if and only if that person is a young unmarried woman.}$$",
-        "$$\\lim_{x\\to a} f(x) = L  \\text{ if and only if }\\lim_{x\\to a^-} f(x) = L = \\lim_{x\\to a^+} fx$$",
-        "For both of the statements above we can easily translate them using $\\leftrightarrow$.",
-        "We could abide without a new symbol for the biconditional. We could translate biconditional statements like the ones above as $(T \\to S)\\wedge(S\\to T)$. We would need parentheses to indicate that $(T \\to S)$ and $(S\\to T)$ are separate conjuncts; the expression $T \\to S\\wedge S\\to T$ would be ambiguous.",
-        "Because we could always write $( A \\to B )\\wedge( B \\to A )$ instead of $ A \\leftrightarrow B $, we do not strictly speaking need to introduce a new symbol for the biconditional. Nevertheless, logical languages usually have such a symbol. SL will have one, which makes it easier to translate phrases like ``if and only if.''",
-        "The truth table for the biconditional is as follows:"
-      ]
-    },
-    {"type":"table","eventId":"biconditional"},
-    {"type":"textInput","substance":["Why is 'if and only if' called a biconditional? Give your best educated guess. You are not graded on correctness but serious answers only. "],"eventId":"sl-4-3"}
-
-  ]
-},
-"4":{
-  "title":"X unless Y",
-  "quote":{
-    "lines":[
-      "Joey: Look, y’know how when you’re dating someone and you don’t want to cheat on them, unless it’s with someone really hot? ",
-      "Phoebe: Yeah, totally!",
-      "Joey: All right. Okay. Well this is the same kind of deal. If you’re going to do something wrong... do it right! "
-    ],
-    "source":{
-    "name":  "Friends",
-    "title":"The one with the fake party"
-      }
-  },
-  "content":[
-    {
-      "type":"p",
-      "substance":[
-      "Suppose we codify Joey's idea of faithfulness as 'Joey's rule.' It would look like: "
-      ]
-    },
-    {
-      "type":"orderedList",
-      "substance":[
-        {"id":"H","item":"Unless the person is hot, don't cheat. "},
-        {"id":"I","item":"Don't cheat unless the person is hot."}
-      ]
-    },
-    {
-      "type":"ps",
-      "substance":[
-      "Just like 'Y if X' is equivalent to 'if X, Y', H and I are logically equivalent. But how should we translate 'unless'? It's tricky because it does not map straightforwardly onto a conditional statement. One way to think about the connection between the two is through thinking what Joey is really committed into saying. Clearly what is he expressing is a certain conditional relationship between cheating and a person's hotness. So we have four possibilities:"
-      ]
-    },
-    {
-      "type":"orderedList",
-      "substance":[
-        {"id":"A","item":"If someone is hot, you should cheat $ H \\to C$ "},
-        {"id":"B","item":"If someone is not hot, you shouldn't cheat: $ \\neg H\\to  \\neg C$"},
-        {"id":"C","item":"If you cheat, the person is hot: $ C \\to  H$"}
-
-
-      ]
-    },
-    {
-      "type":"ps",
-      "substance":["What is Joey saying? He was essentially trying to describe to Phoebe where a certain situation where situation is considered (by him) to be allowable. First consider A: this would essentially be saying you should cheat whenever you see a hot person, but this is at all clear what Joey seems to be saying - he doesn't seem to be encouraging Phoebe to cheat on every single hot person on earth. He's not <i>committed into</i> such a strong position. What he is saying, instead, is something more along the lines of: if you <i>do</i> cheat, you should cheat with a hot person. Or putting it differently: if the person is not hot, don't even think about cheating. So B and C are both acceptable translations: they happen to be logically equivalent. ",
-      "Note that in English sometimes 'unless' could signify a biconditional. Consider the sentence: 'I will go to the party, unless John is going'. Perhaps I really hate John so I can't stand going to the party with him being present. Understood as such, it makes to interpret me as saying that if John goes, I won't go, and if I go, that means John didn't go. That would be a biconditional interpretation.",
-    "Examine the truth table for a translation of J."]
-    },
-    {
-      "type":"table","eventId":"unless"
-
-    },{
-      "type":"textInput","eventId":"sl-4-4","substance":["It should look familiar since it is exactly the same as the truth table definition of one of the logical connectives. Which one is it? What would this logically equivalent translation look like? Does it make sense?"]
     }
-  ]
-},
-"5":{
-  "title":"Necessary and Sufficient Conditions.",
-  "content":[
-    {
-      "type":"p",
-      "substance":["Philosophers often speak of necessary and sufficient conditions for events. They can be explicated as conditionals. By saying X is a necessary condition for Y, they mean roughly that X is a precondition for Y. For instance, being a citizen of the United States is a precondition for being an eligible voter. This means that someone cannot be a eligible voter without being a U.S. citizen, which has the conditional form of $E \\to C$. In contrast to necessary conditions, sufficient conditions provide all that we need to know. For instance, while one cannot be a eligible voter without also being a citizen, being a citizen alone is not sufficient. For instance, if you are convicted felon then your eligibility is affected. This means that being a US citizen is a necessary but not a sufficient condition for being eligible to vote: you definitely cannot vote without being a citizen, but by itself the citizenship is not enough to guarantee your eligibility."]
-    },
-    {"type":"matching",
-      "instruction": "Match the following sentences by dragging the corresponding SL sentence to the box. G: you are a good person. D: You love dogs.",
-    "eventId":"sl-4-matching"}
-    ]
-  },
-  "6":{
-    "title":"Logical Laws involving conditionals and biconditionals.",
-    "content":[
-      {"type":"ps",
-      "substance":[
-        "There is a number of logical laws involving conditionals. You should check all of them using the truth table. Like the laws we learned in earlier chapters. these laws can be used for SLE.",
-        "$$\\text{Contraposition: } X \\to Y \\equiv \\neg Y \\to \\neg X$$",
-        "$$\\text{Material Implication: } X \\to Y \\equiv \\neg X \\vee Y.$$",
-        "$$\\text{Biconditional Exportation: } X \\leftrightarrow Y \\equiv (X \\to Y) \\wedge (Y \\to X)$$",
-        "There is also a meta-law that codify the relationship between logical equivalence and biconditionals: (why is this meta?)",
-        "$$X \\equiv Y \\text{ if and only if } X \\leftrightarrow Y$$"
-        ]}
-
-    ]
-  }
-}
 }
