@@ -161,9 +161,10 @@ $(function(){
 
                           if (d.data.closed != null){
                             branchAnswer[i]= document.getElementById("checkbox"+i).checked == d.data.closed
+                            answersChosen[i] = branchAnswer[i]
                           }
 
-                          answersChosen[i] = branchAnswer[i]
+
                           console.log(answersChosen)
 
                           d3.select($('#answer' + i).height('0px'))
