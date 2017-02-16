@@ -23,7 +23,13 @@
                         "name": "Basic Predicate Translations",
                         "type": "section",
                         "id":"pl-1-matching"
-                    }]
+                    },
+                    {
+                      "name": "Concepts Review",
+                      "type": "section",
+                      "id":"pl-1-def"
+                    }
+                  ]
                 }, {
                     "name": "Quantifiers and its Translations",
                     "type":"chapter",

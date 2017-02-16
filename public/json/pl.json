@@ -1,7 +1,7 @@
 {
   "1":{
     "1":{
-        "chapterName": "Why Predicates",
+        "chapterName": "Why Predicates?",
         "chapterNum": "1",
         "chapterDescription": "This chapter introduces a logical language called PL. It is a version of predicate Logic, because it introduces words like all and some, which tell us about quantities. As its name implies, the basic units of the language are predicates and terms.",
         "title":"From Sentences to Predicates",
@@ -118,7 +118,7 @@
         ]
       },
       "2":{
-        "title": "Building Blocks of Quantified Logic",
+        "title": "Building Blocks of Predicate Logic",
         "content":
         [
 
@@ -241,12 +241,51 @@
               ["$Cx$", "x is a child."],
               ["$j$", "Joey"],
               ["$r$","Rob"],
-              ["c","Caroline"]
+              ["$c$","Caroline"]
             ]
           },
           {"type":"matching",
             "instruction": "Match the following translations by dragging the corresponding PL sentence.",
-          "eventId":"pl-1-matching"}
+          "eventId":"pl-1-matching"},
+          {"type":"ps",
+          "substance":[
+            "<h3>Quantifiers</h3>",
+            "We are now ready to introduce quantifiers. Consider these sentences:"
+            ]},
+            {
+              "type":"unorderedList",
+              "substance":[
+                 "Everyone is an adult.","Everyone is at least as short as Rob","Someone is child."
+
+              ]
+            },
+            {"type":"ps",
+            "substance":[
+              "It might be tempting to translate the first sentence as $Hd \\wedge Hg \\wedge Hm$. Yet this would only say that Donald, Gregor, and Marybeth are happy. We want to say that everyone is happy, even if we have not defined a constant to name them. In order to do this, we introduce the $\\forall$ symbol. This is called the universal quantifier.",
+              "A quantifier must always be followed by a variable and a formula that includes that variable. We can translate the first sentence as $\\forall x Hx$. Paraphrased in English, this means 'For all $x$, $x$ is happy.' The formula that follows the quantifier is called the scope of the quantifier. We will give a formal definition of scope later, but intuitively it is the part of the sentence that the quantifier quantifies over. In $\\forall x Hx$, the scope of the universal quantifier is $Hx$.",
+              "The sentence 'Everyone is at least as short as Rob' can be paraphrased as, 'For all $x$, $x$ is not shorter than Rob.' This translates as $\\forall x \\neg Sxr$.",
+              "In these quantified sentences, the variable $x$ is serving as a kind of placeholder. The expression $\\forall x$ means that you can pick anyone and put them in as $x$. There is no special reason to use $x$ rather than some other variable. The sentence $\\forall x Hx$ means exactly the same thing as $\\forall y Hy$, $\\forall z Hz$, and $\\forall x_5 Hx_5$.",
+              "To translate 'someone is a child', we introduce another new symbol: the existential quantifier, $\\exists$. Like the universal quantifier, the existential quantifier requires a variable. The sentence can be translated as $\\exists x Cx$. This means that there is some $x$ which is a child. More precisely, it means that there is at least one child. Once again, the variable is a kind of placeholder; we could just as easily have translated the sentence as $\\exists z Az$.",
+              "Now consider these sentences:"
+              ]},
+              {
+                "type":"unorderedList",
+                "substance":[
+                   "No one is angry.","There is someone who is not happy.","Not everyone is happy."
+                ]
+              },
+              {"type":"ps",
+              "substance":[
+                "The first sentence can be paraphrased as, 'It is not the case that someone is angry.' This can be translated using negation and an existential quantifier: $\\neg \\exists x Ax$. Yet it could also be paraphrased as, 'Everyone is not angry.' With this in mind, it can be translated using negation and a universal quantifier: $\\forall x \\neg Ax$. Both of these are acceptable translations, because they are logically equivalent. The critical thing is whether the negation comes before or after the quantifier.",
+                "In general, $\\forall x \\psi$ is logically equivalent to $\\neg\\exists x\\neg \\psi$. This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier, and vice versa. One translation might seem more natural than the other, but there is no logical difference in translating with one quantifier rather than the other. For some sentences, it will simply be a matter of taste.",
+                "Sentence \ref{q.en} is most naturally paraphrased as, 'There is some $x$ such that $x$ is not happy.' This becomes $\\exists x \\neg Hx$. Equivalently, we could write $\\neg\\forall x Hx$",
+                "The last sentence is most naturally translated as $\\neg\\forall xHx$. This is logically equivalent to 'someone isn't happy' and so could also be translated as $\\exists x \\neg Hx$.",
+                "Although we have two quantifiers in QL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write '$\\exists x$' knowing that this is just shorthand for '$\\neg \\forall x \\neg$.' There is a choice between making logic formally simple and making it expressively simple. With QL, we opt for expressive simplicity. Both $\\forall$ and $\\exists$ will be symbols of QL."
+                ]
+              },
+              {"type":"matching",
+                "instruction": "Match the following concepts by dragging the corresponding definition.",
+              "eventId":"pl-1-def"}
         ]
       }
   }

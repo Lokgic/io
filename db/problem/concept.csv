@@ -59,3 +59,10 @@ pl1match6,matching,"Joey is an adult unless he's a child.",$\neg Cj \to Aj$,,pl,
 pl1match7,matching,"Joey is an child unless he's an adult.",$\neg Aj \to Cj$,,pl,1,matching
 pl1match8,matching,"Joey is an child only if he's an adult.",$ Cj \to Aj$,,pl,1,matching
 pl1match9,matching,"Joey is an child if he's an adult.",$Aj \to Cj$,,pl,1,matching
+Predicate,definition,Predicate,The basic unit of quantiﬁed logic; cannot be true or false on its own. Symbolized in PL as capitalized letters.,,pl,1,def
+Singular Term,definition,Singular Term,"A word or phrase that refers to a speciﬁc person, place, or thing. Symbolized in PL as a,b,c...",,pl,1,def
+Polyadic,definition,Polyadic,Predicates with more than one place.,,pl,1,def
+Quantifiers,definition,Quantifiers,The part of a sentence that denotes the quantity of something.,,pl,1,def
+Universal Quantifiers,definition,Universal Quantifiers,"A symbol in PL, indicating that the variable under its scope can be substituted with any singular term from the domain of discourse.",,pl,1,def
+Existential Quantifiers,definition,Existential Quantifiers,"A symbol in PL, indicating that there variable under its scope can be substituted with at least one singular term from the universe of discourse.",,pl,1,def
+Scope,definition,Scope,The formula that follows the quantifier.,,pl,1,def
