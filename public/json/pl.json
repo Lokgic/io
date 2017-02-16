@@ -280,9 +280,30 @@
                 "In general, $\\forall x \\psi$ is logically equivalent to $\\neg\\exists x\\neg \\psi$. This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier, and vice versa. One translation might seem more natural than the other, but there is no logical difference in translating with one quantifier rather than the other. For some sentences, it will simply be a matter of taste.",
                 "Sentence \ref{q.en} is most naturally paraphrased as, 'There is some $x$ such that $x$ is not happy.' This becomes $\\exists x \\neg Hx$. Equivalently, we could write $\\neg\\forall x Hx$",
                 "The last sentence is most naturally translated as $\\neg\\forall xHx$. This is logically equivalent to 'someone isn't happy' and so could also be translated as $\\exists x \\neg Hx$.",
-                "Although we have two quantifiers in QL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write '$\\exists x$' knowing that this is just shorthand for '$\\neg \\forall x \\neg$.' There is a choice between making logic formally simple and making it expressively simple. With QL, we opt for expressive simplicity. Both $\\forall$ and $\\exists$ will be symbols of QL."
+                "Although we have two quantifiers in QL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write '$\\exists x$' knowing that this is just shorthand for '$\\neg \\forall x \\neg$.' There is a choice between making logic formally simple and making it expressively simple. With QL, we opt for expressive simplicity. Both $\\forall$ and $\\exists$ will be symbols of QL.",
+                "<h3>Domain of Discourse</h3>",
+                "Given the symbolization key we have been using, $\\forall xHx$ means 'Everyone is happy.' Who is included in this everyone? When we use sentences like this in English, we usually do not mean everyone now alive on the Earth. We certainly do not mean everyone who was ever alive or who will ever live. We mean something more modest: everyone in the building, everyone in the class, or everyone in the room.",
+                "In order to eliminate this ambiguity, we will need to specify a domain of discourse---abbreviated UD. UD here is short for either 'universe of discourse', or 'universal domain', which are just different names for the domain of discourse. The UD is the set of things that we are talking about. So if we want to talk about people in Chicago, we define the UD to be people in the Chicago. We write this at the beginning of the symbolization key, like this: 'UD: people in Chicago'.",
+
+                "The quantifiers range over the universe of discourse. Given this UD, $\\forall x$ means 'Everyone in Chicago' and $\\exists x$ means 'Someone in Chicago.' Each constant names some member of the UD, so we can only use this UD with the symbolization key above if Donald, Gregor, and Marybeth are all in Chicago. If we want to talk about people in places besides Chicago, then we need to include those people in the UD.",
+                "In QL, the UD must be non-empty; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications.",
+                "Even allowing for a UD with just one member can produce some strange results. Suppose we have this as a symbolization key:"
                 ]
               },
+              {
+
+                  "type":"symbolkey",
+                  "key":[
+                    ["$UD$", "the Eiffel Tower"],
+                    ["$Px$","x is in Paris."]
+                  ]
+                },
+                {
+                  "type":"p",
+                  "substance":[
+                    "The sentence $\\forall x Px$ might be paraphrased in English as 'Everything is in Paris.' Yet that would be misleading. It means that everything in the domain is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\\forall x Px$ just means that the Eiffel Tower is in Paris."
+                  ]
+                },
               {"type":"matching",
                 "instruction": "Match the following concepts by dragging the corresponding definition.",
               "eventId":"pl-1-def"}
