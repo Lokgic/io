@@ -312,18 +312,6 @@
   },
   "2":{
     "1":{
-      "chapterName": "",
-      "chapterNum": "",
-      "chapterDescription": "",
-      "title":"",
-      "content":{
-
-      }
-    }
-
-  },
-  "3":{
-    "1":{
       "chapterName": "Model Semantics for PL",
       "chapterNum": "2",
       "chapterDescription": "In module 1 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings(truth vales) for all the non-logical parts of a sentence, in this case, the sentence letters. These were called non-logical because their meaning was not fixed by the rules of SL. The logical part of the language was the system of connectives and parentheses. As it turned out, the logical parts of our language were truth functional: the meaning of the larger sentences built up with the connectives and parentheses was simply a function of the truth of the smaller parts. Because the system of sentential connectives and parentheses is truth functional, our semantic system only needed to look at one aspect of the meaning of the sentence letters, their truth value. Thus an interpretation of a sentence in SL simply turned out to be a truth assignment on the sentence letters. That's why you spent module 1 merrily writing Ts and Fs under sentence letters. Each little row of Ts and Fs represented one way of assigning meaning to a sentence or argument, and all the little rows in the truth table represented all the possible ways of assigning meaning to the sentence or argument (at least as far as truth was concerned.) In this chapter we are going to develop similar methods for PL. Because PL is a more complicated system than SL developing semantics for PL will be much more complicated, and there will be greater limitations for what we can do with these methods." ,
