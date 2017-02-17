@@ -1,0 +1,43 @@
+"chapternum":{
+  "sec":{
+    "chapterName": "",
+    "chapterNum": "",
+    "chapterDescription": "",
+    "title":"",
+    "content":[
+      
+    ]
+  }
+}
+
+{
+  "content":[
+    {
+      "type":"p",
+      "substance":[      ]
+    },
+    {
+      "type":"unorderedList",
+      "substance":[ ]
+    },{
+
+      "type":"symbolkey",
+      "key":[
+          ["",""]
+      ]
+    },
+    {
+      "type":"arg",
+      "premises":[
+      "",
+    ],
+    "conclusion":""
+
+  },
+  {
+    "type":"textInput","eventId":"","substance":[""]
+  }
+  ]
+
+
+}
