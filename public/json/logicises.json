@@ -28,5 +28,10 @@
     "title": "Tree 1",
     "shortDescription":"Provide the correct values for the truth table, and then determine if the argument is valid or consistent.",
     "eventId":"tree1"
+  },
+  "model1":{
+    "title": "Model 1",
+    "shortDescription":"Based on the model provided, provide the correct values for the table.",
+    "eventId":"model1"
   }
 }

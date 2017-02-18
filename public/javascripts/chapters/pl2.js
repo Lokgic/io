@@ -26,7 +26,7 @@ $(function(){
   left = container.append('div').attr('class','col-md-4').attr('id','intuitivemodelLeft').style('border','0px')
   right = container.append('div').attr('class','col-md-8').attr('id','intuitivemodelRight').style('border','0px')
   width = $('#intuitivemodelRight').width() - margin.left - margin.right,
-  height = window.innerHeight*.5 - margin.top - margin.bottom;
+  height = window.innerHeight*.7 - margin.top - margin.bottom;
   var points = d3.range(26).map(phyllotaxis(55));
   var svg = d3.select('#intuitivemodelRight').append('svg').attr('width', width).attr('height', height)
   g = svg.append('g')

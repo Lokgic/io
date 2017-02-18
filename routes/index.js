@@ -352,10 +352,12 @@ router.post('/processing/*', function(req,res,next){
 	var generatorID = req.path.split('/')[2]
 	var option = req.path.split('/')[3]
 	var va = req.path.split('/')[4]
-	// console.log(option)
+
+
 	var output;
 	var generator = require("../js/"+generatorID+"_gen.js")
 	// console.log(generatorID)
+
 	if (option == undefined){
 		 output  = new generator.makeStuff()
 	} else if (va == undefined){
@@ -364,6 +366,7 @@ router.post('/processing/*', function(req,res,next){
 
 		// if (option == "cats") console.log(output)
 	} else{
+		console.log(option + " " + va)
 		output  =  generator[option](va)
 	}
 

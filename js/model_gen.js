@@ -127,14 +127,15 @@ function initModel(d) {
     for (p in pLetter) {
         temp = {
             letter: pLetter[p],
-            place: chance.weighted([1, 2, 3], level[diff].predicatesDistribution),
+            place: chance.weighted([1, 2, 3], diff.predicatesDistribution),
             vars: []
         }
         predicates_pickedForModel[pLetter[p]] = temp;
     }
-    numberOfObject = Math.round(chance.normal(level[diff].objectsDistribution))
+    numberOfObject = Math.max(1,Math.round(chance.normal(diff.objectsDistribution)))
+    // console.log(numberOfObject +" =  "+numberOfObject)
     ud = generateUD(numberOfObject);
-    names = chance.pickset(constants, Math.round(chance.normal(level[diff].constantsDistribution))).sort()
+    names = chance.pickset(constants, Math.max(1,Math.round(chance.normal(diff.constantsDistribution)))).sort()
     allRefs = []
     for (name in names) {
         allRefs.push(new Constant(names[name], chance.pickone(ud)))
@@ -173,11 +174,11 @@ function initExtension(p, model, place) {
     string = "";
     if (out.place == 1) {
         ex = randomPickset(ud, chance.weighted([0, ud.length], [5, 95]), 0).sort()
-        string = '<p>' + p + ' : { ' + ex.join(' , ') + ' }</p>'
+        string = p + ' : {' + ex.join(', ') + '}'
 
     } else {
 
-        option = chance.weighted(level[diff].extensionOptions, level[diff].extensionDistribution);
+        option = chance.weighted(diff.extensionOptions, diff.extensionDistribution);
 
         if (option == "none") {
 
@@ -259,16 +260,17 @@ function initExtension(p, model, place) {
         ex = newEx.sort()
 
         if (option == 'none') {
-            string += "<p>" + p + ": { } " + "</p>"
+            string +=  p + ": { } "
         } else {
             // tempString = ex[0].split('').join(' , ')
-            var string = "<p>" + p + " : { ( " + ex[0] + " ) ";
+            var string = p + " : {(" + ex[0] + ") ";
 
             for (var i = 1; i < ex.length; i++) {
                 // tempString = ex[i].split('').join(' , ')
-                string += ", ( " + ex[i] + " ) ";
+                // console.log(ex[i])
+                string += ", (" + formatSet(ex[i]) + ")";
             }
-            string += ' }</p>'
+            string += '}'
         }
 
 
@@ -280,7 +282,14 @@ function initExtension(p, model, place) {
 }
 
 
-
+function formatSet(set){
+  var out = set[0]
+  // console.log(set)
+  for (var item = 1; item < set.length;item++){
+    out += ", " +set[item]
+  }
+  return out;
+}
 var Constant = function(name, obj) {
     this.name = name;
     this.referent = obj
@@ -293,28 +302,28 @@ var Constant = function(name, obj) {
 
 ////PROPOSITION RELATED
 
-var Proposition = function(model) {
+var Proposition = function(model,diff) {
 
     var o = {
         variables: variables,
         constants: model.names
     }
 
-    left = chance.weighted([model.extensions[chance.pickone(Object.keys(model.extensions))], id], level[diff].identityProb);
-    right = chance.weighted([model.extensions[chance.pickone(Object.keys(model.extensions))], id], level[diff].identityProb);
+    left = chance.weighted([model.extensions[chance.pickone(Object.keys(model.extensions))], id], diff.identityProb);
+    right = chance.weighted([model.extensions[chance.pickone(Object.keys(model.extensions))], id], diff.identityProb);
 
     this.left = {
         letter: left.letter,
         place: left.place,
         negated: chance.bool({
-            likelihood: level[diff].negatedAtomic
+            likelihood: diff.negatedAtomic
         })
     }
     this.right = {
         letter: right.letter,
         place: right.place,
         negated: chance.bool({
-            likelihood: level[diff].negatedAtomic
+            likelihood: diff.negatedAtomic
         })
     }
 
@@ -327,13 +336,13 @@ var Proposition = function(model) {
 
 
     this.negated = chance.bool({
-        likelihood: level[diff].negatedComplex
+        likelihood: diff.negatedComplex
     })
     if (this.negated) this.prefix = negation
     else this.prefix = ""
 
     this.qnegated = chance.bool({
-        likelihood: level[diff].negatedComplex
+        likelihood: diff.negatedComplex
     })
     if (this.negated) this.qprefix = negation
     else this.qprefix = ""
@@ -349,13 +358,13 @@ var Proposition = function(model) {
         //
         // this.left.vars += chance.pickone(o[chance.integer({min:0, max: o.length - 1})])
 
-        // console.log(o["constants"])
-        this.left.vars += chance.pickone(o[chance.weighted(["variables", "constants"], level[diff].predicatesVariableConstantRatio)])
+        // console.log(o)
+        this.left.vars += chance.pickone(o[chance.weighted(["variables", "constants"], diff.predicatesVariableConstantRatio)])
 
 
     }
     for (var i = 0; i < this.right.place; i++) {
-        this.right.vars += chance.pickone(o[chance.weighted(["variables", "constants"], level[diff].predicatesVariableConstantRatio)])
+        this.right.vars += chance.pickone(o[chance.weighted(["variables", "constants"], diff.predicatesVariableConstantRatio)])
 
     }
 
@@ -372,7 +381,7 @@ var Proposition = function(model) {
 
         this.quantifiers[allVars[v]] = {
             variable: allVars[v],
-            quantifier: chance.pickone(quantifiersOptions)
+            quantifier: chance.pickone(diff.quantifiersOptions)
         }
 
         this.qprefix += this.quantifiers[allVars[v]].quantifier + " " + allVars[v]
@@ -398,12 +407,12 @@ var Proposition = function(model) {
 
 }
 
-function initPropSet(model, n) {
+function initPropSet(model, n, diff) {
     output = []
     var keys = _.allKeys(model.extensions)
     var predicates = chance.pickset(keys, n)
     for (var i = 0; i < n; i++) {
-        temp = new Proposition(model)
+        temp = new Proposition(model, diff)
         output.push(temp)
     }
     return output;
@@ -606,10 +615,10 @@ var check = {
     }
 }
 
-function makeProblemSet(model, n) {
+function makeProblemSet(model, n, diff) {
     p = []
     for (var i = 0; i < n; i++) {
-        temp = new Proposition(model)
+        temp = new Proposition(model, diff)
         tv = eval(temp, model)
             // console.log(temp)
             // console.log(tv)
@@ -618,11 +627,43 @@ function makeProblemSet(model, n) {
     return p;
 }
 
+var model1 = function model1(tier){
+  // console.log(tier)
+  if (tier == null) tier = 10
+ var diff =  {
+      identityProb: [1,0],
+      negatedAtomic: 0.03*tier,
+      negatedComplex: 0.01*tier,
+      predicatesDistribution: [.7, .3, 0], //how many place
+      constantsDistribution: {
+          mean: Math.max(1,Math.floor(tier/5)),
+          dev: Math.floor(tier/3)
+      },
+      objectsDistribution: {
+        mean: Math.max(1,Math.floor(tier/5)),
+        dev: 1+ Math.floor(tier/5)
+      },
+      extensionOptions: ["all", "self", "mixed", "none"],
+      extensionDistribution: [.05, 0.2, 0.65, .1], //4
+      predicatesVariableConstantRatio: [tier/130, 1 - tier/130 ],
+      quantifiersOptions: [chance.pickone([every,some])]
+      }
+      // console.log(diff)
+      var model = initModel(diff)
 
-var test = initModel(2)
-console.log(JSON.stringify(test, null, 4));
-var tt = makeProblemSet(test, 4)
-console.log(JSON.stringify(tt, null, 4));
+      return {
+        problems: makeProblemSet(model,4,diff),
+        model,model
+      }
+
+}
+
+module.exports.model1 = model1
+// console.log(model1(1))
+// var test = initModel(2)
+// console.log(JSON.stringify(test, null, 4));
+// var tt = makeProblemSet(test, 4)
+// console.log(JSON.stringify(model1(), null, 4));
 
 testset = [
         ["Moreno", "Moreno"],

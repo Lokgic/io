@@ -25,15 +25,10 @@ $(function(){
     document.getElementById('passingscore').innerHTML = "Not logged";
   }
 
-  // loadExp(uid,function(err,d){
-  //   console.log(d)
-  //   level = calculateLevel(d.lvl);
-  //   // console.log(level)
-  // })
+
+
   var level = document.getElementById('difficulty').getAttribute('data');
-  // console.log(level)
-  // var aaa = loadLevel(1);
-  // console.log(aaa)
+
   score = d3.select('#score')
 
 

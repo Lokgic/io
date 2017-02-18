@@ -55,6 +55,7 @@ body {
   border-radius: 10px;
   max-width: 60%;
   margin: auto;
+  margin-bottom: 100px;
 }
 
 .important p {

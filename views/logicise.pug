@@ -31,11 +31,11 @@ block content
 						span#score 0
 		.row.text-xs-center.m-a-0#bigContainer
 			.row.col-md-9#interaction
-				.col-md-2#control
+				#control
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#confirm Confirm
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt2.invisible
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt3.invisible
-				.col-md-10#display
+				.col-md-12#display
 			.col-md-3#leaderboard
 				h4.text-xs-center Leaderboard
 				#board
@@ -57,7 +57,11 @@ block extrafooter
 		MathJax.Hub.Config({
 		tex2jax: {
 			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
-		}}
+			},
+			"HTML-CSS": {
+			linebreaks: { automatic: true, width: "container" }
+			}
+		}
 		);
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
 	script(src="https://d3js.org/d3.v4.min.js")

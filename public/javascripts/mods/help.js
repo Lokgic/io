@@ -349,6 +349,7 @@ function makeDropdown(id, text, choices, div) {
 //TABLES
 
 function tabulate(data, div, op) {
+  console.log(data)
     d3.select(div).select('table').remove()
     var columns = []
     data.forEach(function(i) {
@@ -366,7 +367,7 @@ function tabulate(data, div, op) {
         .data(columns)
         .enter()
         .append("th")
-        .text(function(column) {
+        .html(function(column) {
             return column;
         });
 
@@ -380,7 +381,12 @@ function tabulate(data, div, op) {
                 if (data[j].atomic) content.push(data[j].column[i])
                 else content.push("")
 
-            } else {
+            } else if (op == "fill2") {
+                if (j ==0) content.push(data[j].column[i])
+                else content.push("")
+
+            }
+            else {
                 content.push(data[j].column[i])
 
             }

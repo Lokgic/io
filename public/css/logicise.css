@@ -1,4 +1,62 @@
+.correctTableCell{
+ background: rgb(102, 119, 196)
+}
 
+.incorrectTableCell{
+  background: rgb(191, 113, 138);}
+
+
+#control{
+    position: fixed;
+    bottom:50px;
+    left:50px;
+    z-index: 1000;
+
+}
+
+#tablespace{
+  display:flex;
+}
+
+#tablespace tr:nth-child(even){background-color: #f2f2f2;}
+
+
+#tablespace th {
+    padding: 20px 40px;
+    text-align: center;
+    background-color: #444C5C;
+    color: white;
+    /*min-width:400px;*/
+
+}
+#tablespace td{
+  padding:20px 15px;
+  font-size: 1.5em;
+  text-align: center;
+
+}
+#tablespace table{
+  margin:auto;
+  /*border: grey solid 2px;*/
+  /*box-shadow: 10px 10px 5px #888888;*/
+
+
+}
+td:hover {
+  background-color:  #78a5a3;
+}
+
+
+
+
+#modelTxt{
+
+}
+#modelTxt p {
+  margin-bottom: 1px;
+  font-style: italic;
+  font-size: 1.2em;
+}
 
 .treechoices {
     height: 0px;

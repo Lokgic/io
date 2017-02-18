@@ -90,19 +90,13 @@
                     "name": "Truth Tree 2 (PL)",
                     "type":"chapter"
 
+                }, 
+                {"name":"Model 1",
+                "type":"chapter",
+                "id":"pl-logicise-model1"
                 },
-                {
-                    "name": "Wason Selection Task in PL",
-                    "type":"chapter"
-                }, {
-                    "name": "Puzzles with Quantities",
-                    "type":"chapter"
-                },
-                {"name":"Model Interpretation",
-                "type":"chapter"
-              },
                  {
-                    "name": "Grid Game 1",
+                    "name": "Model 2",
                     "type":"chapter"
                 }]
             }
