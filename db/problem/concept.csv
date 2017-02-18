@@ -67,3 +67,19 @@ Universal Quantifiers,definition,Universal Quantifiers,"A symbol in PL, indicati
 Existential Quantifiers,definition,Existential Quantifiers,"A symbol in PL, indicating that there variable under its scope can be substituted with at least one singular term from the universe of discourse.",,pl,1,def
 Scope,definition,Scope,The formula that follows the quantifier.,,pl,1,def
 Domain of Discourse,definition,Domain of Discourse,Denotes the set of objects we currently are talking about.,,pl,1,def
+model1,category,$Bc$,False,,pl,2,cat
+model2,category,$Ac \leftrightarrow \neg Nc$,True,,pl,2,cat
+model3,category,$Nc \to (Ac \vee Bc)$,True,,pl,2,cat
+model4,category,$\forall x Ax$,True,,pl,2,cat
+model5,category,$\forall x \neg Bx$,False,,pl,2,cat
+model6,category,$\exists x (Ax \wedge Bx)$,True,,pl,2,cat
+model7,category,$\exists x (Ax \to Nx)$,False,,pl,2,cat
+model8,category,$\forall x (Nx \vee \neg Nx)$,True,,pl,2,cat
+model9,category,$\exists x Bx \to \forall x Ax$,True,,pl,2,cat
+model10,category,$Rbc$,True,,pl,2,cat
+model11,category,$Rcb \to Rcc$,True,,pl,2,cat
+model12,category,$(Rcc \vee Rcb)$,False,,pl,2,cat
+model13,category,$\exists x \exists y Rxy$,True,,pl,2,cat
+model14,category,$\exists  x Rxx$,False,,pl,2,cat
+model15,category,$\forall x \forall y (Rxy \vee Ryx)$,False,,pl,2,cat
+model16,category,$\forall x \forall y \forall z [(Rxz \wedge Ryz) \to Rxy]$,False,,pl,2,cat

@@ -30,19 +30,47 @@
                       "id":"pl-1-def"
                     }
                   ]
-                }, {
-                    "name": "Quantifiers and its Translations",
+                },
+
+                {
+                    "name": "Model Semantics",
                     "type":"chapter",
-                    "children": []
+                    "children": [
+                      {
+                      "name":"Intuition behind models",
+                      "type":"section",
+                      "id":"pl-2-1"
+                    },
+                    {
+                      "name":"Model and equivalence",
+                      "type":"section",
+                      "id":"pl-2-txt1"
+                    },
+                    {
+                      "name":"Model and consistency",
+                      "type":"section",
+                      "id":"pl-2-txt2"
+                    },
+                    {
+                      "name":"Model and validity",
+                      "type":"section",
+                      "id":"pl-2-txt3"
+                    },
+                    {
+                      "name":"Interpretation",
+                      "type":"section",
+                      "id":"pl-2-cat"
+                      }
+
+                    ]
                 },
                 {
                   "name":"Recursive Syntax for PL",
                   "type":"chapter",
                   "children":[]
                 },
-
-                {
-                    "name": "Model Semantics",
+                 {
+                    "name": "Quantifiers and its Translations",
                     "type":"chapter",
                     "children": []
                 },

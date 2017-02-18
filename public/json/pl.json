@@ -280,13 +280,13 @@
                 "In general, $\\forall x \\psi$ is logically equivalent to $\\neg\\exists x\\neg \\psi$. This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier, and vice versa. One translation might seem more natural than the other, but there is no logical difference in translating with one quantifier rather than the other. For some sentences, it will simply be a matter of taste.",
                 "Sentence \ref{q.en} is most naturally paraphrased as, 'There is some $x$ such that $x$ is not happy.' This becomes $\\exists x \\neg Hx$. Equivalently, we could write $\\neg\\forall x Hx$",
                 "The last sentence is most naturally translated as $\\neg\\forall xHx$. This is logically equivalent to 'someone isn't happy' and so could also be translated as $\\exists x \\neg Hx$.",
-                "Although we have two quantifiers in QL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write '$\\exists x$' knowing that this is just shorthand for '$\\neg \\forall x \\neg$.' There is a choice between making logic formally simple and making it expressively simple. With QL, we opt for expressive simplicity. Both $\\forall$ and $\\exists$ will be symbols of QL.",
+                "Although we have two quantifiers in PL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write '$\\exists x$' knowing that this is just shorthand for '$\\neg \\forall x \\neg$.' There is a choice between making logic formally simple and making it expressively simple. With PL, we opt for expressive simplicity. Both $\\forall$ and $\\exists$ will be symbols of PL.",
                 "<h3>Domain of Discourse</h3>",
                 "Given the symbolization key we have been using, $\\forall xHx$ means 'Everyone is happy.' Who is included in this everyone? When we use sentences like this in English, we usually do not mean everyone now alive on the Earth. We certainly do not mean everyone who was ever alive or who will ever live. We mean something more modest: everyone in the building, everyone in the class, or everyone in the room.",
                 "In order to eliminate this ambiguity, we will need to specify a domain of discourse---abbreviated UD. UD here is short for either 'universe of discourse', or 'universal domain', which are just different names for the domain of discourse. The UD is the set of things that we are talking about. So if we want to talk about people in Chicago, we define the UD to be people in the Chicago. We write this at the beginning of the symbolization key, like this: 'UD: people in Chicago'.",
 
                 "The quantifiers range over the universe of discourse. Given this UD, $\\forall x$ means 'Everyone in Chicago' and $\\exists x$ means 'Someone in Chicago.' Each constant names some member of the UD, so we can only use this UD with the symbolization key above if Donald, Gregor, and Marybeth are all in Chicago. If we want to talk about people in places besides Chicago, then we need to include those people in the UD.",
-                "In QL, the UD must be non-empty; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications.",
+                "In PL, the UD must be non-empty; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications.",
                 "Even allowing for a UD with just one member can produce some strange results. Suppose we have this as a symbolization key:"
                 ]
               },
@@ -314,10 +314,25 @@
     "1":{
       "chapterName": "Model Semantics for PL",
       "chapterNum": "2",
-      "chapterDescription": "In module 1 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings(truth vales) for all the non-logical parts of a sentence, in this case, the sentence letters. These were called non-logical because their meaning was not fixed by the rules of SL. The logical part of the language was the system of connectives and parentheses. As it turned out, the logical parts of our language were truth functional: the meaning of the larger sentences built up with the connectives and parentheses was simply a function of the truth of the smaller parts. Because the system of sentential connectives and parentheses is truth functional, our semantic system only needed to look at one aspect of the meaning of the sentence letters, their truth value. Thus an interpretation of a sentence in SL simply turned out to be a truth assignment on the sentence letters. That's why you spent module 1 merrily writing Ts and Fs under sentence letters. Each little row of Ts and Fs represented one way of assigning meaning to a sentence or argument, and all the little rows in the truth table represented all the possible ways of assigning meaning to the sentence or argument (at least as far as truth was concerned.) In this chapter we are going to develop similar methods for PL. Because PL is a more complicated system than SL developing semantics for PL will be much more complicated, and there will be greater limitations for what we can do with these methods." ,
+      "chapterDescription": "In this chapter, we learn about how to use models to evaluate the truth values of PL sentences. " ,
+
       "title":"Some intuition about model semantics",
       "content":[
+        {
+          "type":"ps",
+          "substance":[
 
+            "Consider the sentence to the left below. It is clear that they are <i>about</i> the circles to the right, in the sense that, the meaning - the truth value - of each sentence is contingent upon how things are to right: if we change the colors of the circles, some sentences originally truth could become false. For instance, if some of the circles were blue, the statement 'every circle is black' would end up false. You can experiment with this by clicking on the circles, which  changes its color, and the truth values of the sentences will reflect the updated model.","Thus, each combination of the circles is one possible <i>model</i> which provides the necessary information on how to interpret the sentences. This is the basic intuition about model semantics - we interpret PL sentence in light of the way things within a domain of discourse, which could be everyone in the world, all real numbers, or circles below. Model semantics captures this by using set theory, as a precise way of expressing the existence of objects and their properties in a manner rigorous enough for logic. "
+          ]
+        },
+        {
+          "type":"important",
+          "substance":["Reading exercise: change the model in a way such that the resultant truth values are in this order: false, false, false, true, false, false, true, true"]
+        }
+        ,{
+          "type":"jsEvent",
+          "eventId":"intuitivemodel"
+        }
       ]
     },
     "2":{
@@ -325,7 +340,11 @@
       "content":[
               {
                     "type": "p",
-                    "substance": ["The first thing we need to do is to find an equivalent in QL of a little row of Ts and Fs beneath a sentence in SL. We called this little row of Ts and Fs an interpretation, because it gave one aspect of the meaning of the parts of the sentence, namely their truth values. To come up with an interpretation of a sentence in QL, we will need to look at more than the truth or falsity of sentences, though. We have, after all, broken open the atomic sentence to look at its subatomic parts, and now we will need to assign meaning to these parts. The way to start is to look at the symbolization keys we created when we were translating sentences in and out of QL. The symbolization key contained a universe of discourse (UD), a meaning for each predicate, and an object picked out by each term. For example:"]
+                    "substance": [
+                      "In module 1 we developed the truth table system, a semantic method for evaluating sentences and arguments in SL. The method was called semantic, because it involved establishing meanings(truth vales) for all the non-logical parts of a sentence, in this case, the sentence letters. These were called non-logical because their meaning was not fixed by the rules of SL. The logical part of the language was the system of connectives and parentheses. As it turned out, the logical parts of our language were truth functional: the meaning of the larger sentences built up with the connectives and parentheses was simply a function of the truth of the smaller parts. ",
+                      "Because the system of sentential connectives and parentheses is truth functional, our semantic system only needed to look at one aspect of the meaning of the sentence letters, their truth value. Thus an interpretation of a sentence in SL simply turned out to be a truth assignment on the sentence letters. That's why you spent module 1 merrily writing Ts and Fs under sentence letters. Each little row of Ts and Fs represented one way of assigning meaning to a sentence or argument, and all the little rows in the truth table represented all the possible ways of assigning meaning to the sentence or argument (at least as far as truth was concerned.) Here we are going to develop similar methods for PL. Because PL is a more complicated system than SL developing semantics for PL will be much more complicated, and there will be greater limitations for what we can do with these methods.",
+                      "The first thing we need to do is to find an equivalent in PL of a little row of Ts and Fs beneath a sentence in SL. We called this little row of Ts and Fs an interpretation, because it gave one aspect of the meaning of the parts of the sentence, namely their truth values. To come up with an interpretation of a sentence in PL, we will need to look at more than the truth or falsity of sentences, though. We have, after all, broken open the atomic sentence to look at its subatomic parts, and now we will need to assign meaning to these parts.",
+                      "The way to start is to look at the symbolization keys we created when we were translating sentences in and out of PL. The symbolization key contained a universe of discourse (UD), a meaning for each predicate, and an object picked out by each term. For example:"]
                 },{
 
                     "type": "symbolkey",
@@ -352,15 +371,15 @@
                     "type":"p",
                     "substance":["This symbolization key, along with some basic knowledge of superhero stories, gives us enough information to figure out that the sentence Fb is true. (Notice that the sentence Fb is not true just because of the interpretation. The way we interpret the sentence, plus the way the world is, makes the sentence true.)",
 
-                        "This is the information we need to develop an interpretation of sentences in QL. We are not just assigning truth values anymore. We need to get deeper into meaning here, and look at the reference of the parts of the sentence. Reference is an aspect of meaning that deals with the way bits of language pick out or identify objects in the real world. For our purposes the real world is the universe of discourse, the set of objects we are talking about. To explain how a singular term like b refers, we need only point out the member of the UD it refers to, in this case, Batman. In more technical terms, Batman is the referent of B. For our purposes it is enough to define a referent like this: the referent of a term in QL is the unique object picked out by that term. ",
+                        "This is the information we need to develop an interpretation of sentences in PL. We are not just assigning truth values anymore. We need to get deeper into meaning here, and look at the reference of the parts of the sentence. Reference is an aspect of meaning that deals with the way bits of language pick out or identify objects in the real world. For our purposes the real world is the universe of discourse, the set of objects we are talking about. To explain how a singular term like b refers, we need only point out the member of the UD it refers to, in this case, Batman. In more technical terms, Batman is the referent of B. For our purposes it is enough to define a referent like this: the referent of a term in PL is the unique object picked out by that term. ",
 
                         "(Notice that here to explain what b refers to, I have been forced to simply use another singular term in another language, the name ``Batman.'' To really pick out the object referred to, I would need to draw your attention to something in the actual world, for instance by holding up a comic book and pointing at the character on the cover.)", "We want to use similar methods to talk about the meaning of predicates. To do this we will talk about the extension of a predicate. The extension of a predicate is the set of objects in the UD that the predicate applies to. So if b is in the extension of the predicate F then the sentence Fb is true.",
 
                         "(Identifying the extension of a predicate like F again forces us to rely on another language, English. We can say that the extension of F includes Batman, Superman, Green Lantern, etc. The situation is worse because F has an indefinitely large extension, so we have relied on the English predicate 'fights crime' to describe it.)",
 
-                        "This means that we are able to talk about the meaning of sentences in QL entirely in terms of sets. We use curly brackets { and } to denote sets. The members of the set can be listed in any order, separated by commas. The fact that sets can be in any order is important, because it means that {foo, bar} and {bar, foo} are the same set. It is possible to have a set with no members in it. This is called the define{empty set}. The empty set is sometimes written as {}, but usually it is written as the single symbol $\\emptyset$.",
+                        "This means that we are able to talk about the meaning of sentences in PL entirely in terms of sets. We use curly brackets { and } to denote sets. The members of the set can be listed in any order, separated by commas. The fact that sets can be in any order is important, because it means that {foo, bar} and {bar, foo} are the same set. It is possible to have a set with no members in it. This is called the define{empty set}. The empty set is sometimes written as {}, but usually it is written as the single symbol $\\emptyset$.",
 
-                        "We are now able to give the equivalent of a line in a truth table for QL. An interpretation in QL will be called a model. A model of sentences or arguments in QL consists of a set that is the universe of discourse, individual members of that set that are the referents of the singular terms in the sentences or arguments, and subsets of the universe of discourse which are the extensions of the predicates used in the sentences or arguments. To see how this works imagine I have a bunch of sentences in QL, which include the predicate H and the singular term d. Now consider this symbolization key:"
+                        "We are now able to give the equivalent of a line in a truth table for PL. An interpretation in PL will be called a model. A model of sentences or arguments in PL consists of a set that is the universe of discourse, individual members of that set that are the referents of the singular terms in the sentences or arguments, and subsets of the universe of discourse which are the extensions of the predicates used in the sentences or arguments. To see how this works imagine I have a bunch of sentences in PL, which include the predicate H and the singular term d. Now consider this symbolization key:"
                     ]
                   },
                   {
@@ -439,14 +458,14 @@
 
                         "We will use the double turnstile symbol to represent the notion of <i>semantic entailment</i>. '$\\mathcal{A} \\vDash \\mathcal{B}$' means that an argument from $\\mathcal{A}$ to $\\mathcal{B}$ is semantically valid.  $\\vDash \\mathcal{A}$ means that $\\mathcal{A}$ is a semantic tautology. $\\mathcal{A} \\equiv \\mathcal{B}$ means $\\mathcal{A} $ and $\\mathcal{B} $ are semantically equivalent. ",
 
-                        "In our discussion of SL semantics, we stipulated semantic definitions for various logical concepts in SL that matched our truth table method for determining these concepts. So a sentence was said to be a tautology in SL if the column under its main connective contained only Ts. This was an alternative to saying the the truth table method was an imprecise way of getting at the ordinary language versions of these concepts. We will do something similar for the semantic definitions of logical notions in QL. "
+                        "In our discussion of SL semantics, we stipulated semantic definitions for various logical concepts in SL that matched our truth table method for determining these concepts. So a sentence was said to be a tautology in SL if the column under its main connective contained only Ts. This was an alternative to saying the the truth table method was an imprecise way of getting at the ordinary language versions of these concepts. We will do something similar for the semantic definitions of logical notions in PL. "
                     ]
                 },
                 {
                     "type": "p",
                     "substance": ["Working with models is in some ways like working with truth tables and in some ways not. With truth tables, we could conclusively show that a sentence was a tautology or a contradiction, because the truth table would always have a finite number of lines. We cannot, however, use models to show that a sentence is a tautology or a contradiction, because there are infinitely many ways to model a sentence, and and no single way to talk about all of them, the way we talked about all the lines in a truth table. One thing we can do is show conclusively that a sentence is neither a tautology nor a contradiction, and is instead contingent. A contingent sentence will have at least one model where it is false and one model where it is true.", "As we shall see, this pattern plays itself out with the other logical properties we have covered. Because there are infinitely many ways to model a sentence, we cannot construct models to prove two sentences equivalent, but we can use them to show that two sentences are not equivalent. We cannot use models to show that a set of sentences is inconsistent, but we can use models to show that a set of sentences is consistent. Finally, we cannot construct a finite number of models to show that an argument is valid, but we can use one to show that an argument is invalid.",
 
-                        "We will use the double turnstile symbol for QL much as we did for SL. $\\mathcal{A} \\vDash \\mathcal{B}$' means that an argument from $\\mathcal{A}$ to $\\mathcal{B}$ is semantically valid.  $\\vDash \\mathcal{A}$ means that $\\mathcal{A}$ is a semantic tautology. $\\mathcal{A} \\equiv \\mathcal{B}$ means $\\mathcal{A} $ and $\\mathcal{B} $ are semantically equivalent. ",
+                        "We will use the double turnstile symbol for PL much as we did for SL. $\\mathcal{A} \\vDash \\mathcal{B}$' means that an argument from $\\mathcal{A}$ to $\\mathcal{B}$ is semantically valid.  $\\vDash \\mathcal{A}$ means that $\\mathcal{A}$ is a semantic tautology. $\\mathcal{A} \\equiv \\mathcal{B}$ means $\\mathcal{A} $ and $\\mathcal{B} $ are semantically equivalent. ",
 
                         "In our discussion of SL semantics, we stipulated semantic definitions for various logical concepts in SL that matched our truth table method for determining these concepts. So a sentence was said to be a tautology in SL if the column under its main connective contained only Ts. We will do something similar for the semantic definitions of logical notions in PL, but we will be more precise from now as. We formally define the following concepts:"
                     ]
@@ -454,17 +473,17 @@
                 {
                     "type": "niceList",
                     "substance": [
-                        "A semantic tautology in QL is a sentence $\\mathcal{A}$ that is true in every model; i.e.,  $\\vDash \\mathcal{A}$.",
+                        "A semantic tautology in PL is a sentence $\\mathcal{A}$ that is true in every model; i.e.,  $\\vDash \\mathcal{A}$.",
 
-                        "A semantic contradiction in QL is a sentence \\mathcal{A} that is false in every model; i.e., $\\vDash \\neg \\mathcal{A}$.",
+                        "A semantic contradiction in PL is a sentence $\\mathcal{A}$ that is false in every model; i.e., $\\vDash \\neg \\mathcal{A}$.",
 
-                        "A sentence is semantically contingent in QL if and only if it is neither a tautology nor a contradiction.",
+                        "A sentence is semantically contingent in PL if and only if it is neither a tautology nor a contradiction.",
 
-                        "Two sentences $\\mathcal{A}$ and $\\mathcal{B}$ are semantically equivalent in QL if and only if they have the same truth value in every model.",
+                        "Two sentences $\\mathcal{A}$ and $\\mathcal{B}$ are semantically equivalent in PL if and only if they have the same truth value in every model.",
 
-                        "The set ${\\mathcal{A}_1,\\mathcal{A}_2,\\mathcal{A}_3,...}$ is semantically consistent in QL if and only if there is at least one model in which all of the sentences are true. The set is semantically inconsistent in QL if and if only there is no such model.",
+                        "The set ${\\mathcal{A}_1,\\mathcal{A}_2,\\mathcal{A}_3,...}$ is semantically consistent in PL if and only if there is at least one model in which all of the sentences are true. The set is semantically inconsistent in PL if and if only there is no such model.",
 
-                        "An argument  $\\mathcal{P}_1, \\mathcal{P}_2, ... \\therefore \\mathcal{C}$  is semantically valid in QL if and only if there is no model in which all of the premises are true and the conclusion is false; i.e., ${\\{\\mathcal{P}_1,\\mathcal{P}_2,...}\\}\\vDash\\mathcal{C}$. It is semantically invalid in PL otherwise."
+                        "An argument  $\\mathcal{P}_1, \\mathcal{P}_2, ... \\therefore \\mathcal{C}$  is semantically valid in PL if and only if there is no model in which all of the premises are true and the conclusion is false; i.e., ${\\{\\mathcal{P}_1,\\mathcal{P}_2,...}\\}\\vDash\\mathcal{C}$. It is semantically invalid in PL otherwise."
                     ]
                 },
                 {
@@ -496,7 +515,7 @@
                {
                  "type":"p",
                  "substance":[
-                   "Strictly speaking, a model specifies an extension for every predicate of QL and a referent for every constant. As such, it is generally impossible to write down a complete model. That would require writing down infinitely many extensions and infinitely many referents. However, we do not need to consider every predicate in order to show that there are models in which \\(\\forall xAxx \\to Bd\\) is false. Predicates like \\(H\\) and constants like \\(f_{13}\\) make no difference to the truth or falsity of this sentence. It is enough to specify extensions for \\(A\\) and \\(B\\) and a referent for \\(d\\), as we have done. This provides a partial model in which the sentence is false.",
+                   "Strictly speaking, a model specifies an extension for every predicate of PL and a referent for every constant. As such, it is generally impossible to write down a complete model. That would require writing down infinitely many extensions and infinitely many referents. However, we do not need to consider every predicate in order to show that there are models in which \\(\\forall xAxx \\to Bd\\) is false. Predicates like \\(H\\) and constants like \\(f_{13}\\) make no difference to the truth or falsity of this sentence. It is enough to specify extensions for \\(A\\) and \\(B\\) and a referent for \\(d\\), as we have done. This provides a partial model in which the sentence is false.",
                         "Perhaps you are wondering: What is \\(\\alpha\\)? What does the predicate \\(A\\) mean in English? The partial model could correspond to an interpretation like this one:"
                  ]
                },
@@ -527,7 +546,7 @@
              {
                "type":"ps",
                "substance":[
-                 "We have now shown that \\(\\forall xAxx \\to Bd\\) is neither a tautology nor a contradiction. By the definition of ``contingent in QL,'' this means that \\(\\forall xAxx \\to Bd\\) is contingent. In general, showing that a sentence is contingent will require two models: one in which the sentence is true and another in which the sentence is false.",
+                 "We have now shown that \\(\\forall xAxx \\to Bd\\) is neither a tautology nor a contradiction. By the definition of ``contingent in PL,'' this means that \\(\\forall xAxx \\to Bd\\) is contingent. In general, showing that a sentence is contingent will require two models: one in which the sentence is true and another in which the sentence is false.",
                        "Notice, however, that we cannot show that a sentence actually is a tautology or a contradiction using one or two models this way. For a sentence to be a tautology, it must be true in every possible model. Similarly, if a sentence is a contradiction, it is false in all possible models. But there are infinitely many possible models for any sentence, and we don't have any tools in this text that will let us reason about all of them at once. ",
                     "<h3>Non-equivalence</h3>",
                     "Suppose we want to show that \\(\\forall x Sx\\) and \\(\\exists x Sx\\) are not logically equivalent. We need to construct a model in which the two sentences have different truth values; we want one of them to be true and the other to be false. We start by specifying a UD. Again, we make the UD small so that we can specify extensions easily. We will need at least two members. Let the UD be {\\(\\alpha\\), \\(\\beta\\)}. (If we chose a UD with only one member, the two sentences would end up with the same truth value. In order to see why, try constructing some partial models with one-member UDs.)",
@@ -586,6 +605,12 @@
              },
              {
                "type":"textInput","eventId":"pl-2-txt2","substance":["Can we use models to prove that an argument is valid? Why or why not? Make sure your answer is compatible with your previous answers."]
+             },
+             {
+                 "type": "category",
+                 "title": "Reading exercise: Interpretation",
+                 "instruction": "For each of the sentences below, determine whether it is true or false. Use the following model: $$UD:\\{Bart, Cathy\\}$$ $$A:\\{Bart, Cathy\\}$$ $$ B: \\{Bart\\} $$ $$ N: \\{\\}$$ $$R:\\{(Bart,Cathy)\\}$$ $$b: Bart$$ $$ c: Cathy $$Once done, press confirm. NOTE: There is no penalty for multiple attempts but you must correctly categorize each sentence to get credit!",
+                 "eventId": "pl-2-cat"
              }
 
 

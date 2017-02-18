@@ -168,6 +168,7 @@ function makeCategory(option) {
              else if (!_.contains(dropdownSelected, false)) {
                 alert('Good job! Quiz completed', 'correctblue')
                 recordCompletion(uid, modId, chapter, section)
+                d3.select('#catConfirm').attr('disabled', 'true')
             } else {
 
                 var correct = {}
@@ -263,52 +264,6 @@ function makePie(data, div) {
     var total =[]
 
 
-    // var form =  d3.select(div).append('form')
-    // form.selectAll('label')
-    //       .data(options)
-    //       .enter()
-    //       .append('label')
-    //       .text(function(d,i){
-    //
-    //         return  label[i]})
-    //       .append('input')
-    //       .attr('type','radio')
-    //       .attr('id','dataset')
-    //       .attr('name','dataset')
-    //       .attr('value',function(d){return d.toLowerCase()})
-    //
-
-    //
-    // data.forEach(function(d){
-    //   temp = {
-    //     label: d.label+ ": " + "correctly chosen",
-    //     count: d.count
-    //   }
-    //   if (d.correct) {
-    //     temp = {
-    //       label: d.label+ ": " + "correctly chosen",
-    //       count: d.count
-    //     }
-    //     correct.push(temp)
-    //   }
-    //   else {
-    //     temp = {
-    //       label: d.label+ ": " + "incorrectly chosen",
-    //       count: d.count
-    //     }
-    //     incorrect.push(temp)
-    //   }
-    //   total.push(temp)
-    //
-    // })
-    //
-    //
-    // var dataset = {
-    //   "total":total,
-    //   "correct":correct,
-    //   "incorrect":incorrect
-    // }
-    // console.log(dataset)
     var svg = d3.select(div)
         .append('svg')
         .attr('width', width)
@@ -369,33 +324,12 @@ function makePie(data, div) {
       .attr('x', legendRectSize + legendSpacing)
       .attr('y', legendRectSize - legendSpacing)
       .text(function(d) { return d; });
-      //
-      //
-      // form.on('change',function(){
-      //   // console.log(dataset[d3.event.target.value])
-      //
-      //   var path = svg.selectAll('path')
-      //                 .data(pie(dataset[d3.event.target.value]),function(d){
-      //                   return d.data.label
-      //                 })
-      //   path.transition()
-      //      .duration(750)
-      //      .attrTween('d', function(d) {
-      //        console.log(d)
-      //        var interpolate = d3.interpolate(this._current, d);
-      //        this._current = interpolate(0);
-      //        return function(t) {
-      //          return arc(interpolate(t));
-      //        };
-      //      });
-      //
-      //
-      // })
+
 
 }
 
 function makeDropdown(id, text, choices, div) {
-    var wrapper = d3.select(div).append('div').attr('id', "wrapper" + id)
+    var wrapper = d3.select(div).append('div').attr('id', "wrapper" + id).attr('class','col-md-6')
     wrapper.append('label').attr('class', 'dropdownQLabel').attr('for', 'label' + id).text(text)
     var selector = wrapper.append('select').attr('class', 'dropdownQSelect').attr('id', id)
 

@@ -138,6 +138,8 @@ block content
 												ul
 													for line in x.substance
 														li #{line}
+									when "jsEvent"
+										div(id = x.eventId)
 									when "event"
 										if x.important
 											.important.text-xs-center.p-a-1

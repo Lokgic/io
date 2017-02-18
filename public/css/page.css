@@ -15,10 +15,11 @@ body {
 
 .dropdowns{
   overflow: scroll;
-  height: 50%;
+  min-height: 30%;
+  max-height: 60%;
   background: #eee;
-  width: 95%;
-  margin:10px auto;
+  width: 100%;
+  margin:0 0;
   border: 1px black solid;
 
 }
@@ -28,7 +29,7 @@ body {
   display: block;
   width:80%;
   margin:auto;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -657,6 +658,16 @@ ul{
   margin-bottom: 40px;
 }
 
+
+.modelBlack{
+  fill:#666
+}
+.modelBlue{
+  fill:#96C0CE
+}
+.modelRed{
+  fill:#C25B56
+}
 /*body{
   background-color: #eee;
 }*/
