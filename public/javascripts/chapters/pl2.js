@@ -87,6 +87,13 @@ $(function(){
             recordCompletion(uid, 'pl', 2, 1)
           }
         })
+        .on('mouseover',function(d){
+          d3.select(this).attr('stroke-width', 3).attr('stroke','black')
+        })
+        .on('mouseout',function(d){
+          d3.select(this).attr('stroke-width', 0)
+
+        })
 
 
         var answer = [
