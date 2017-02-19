@@ -327,6 +327,7 @@
         },
         {
           "type":"important",
+          "eventId":"modelballs",
           "substance":["Reading exercise: change the model in a way such that the resultant truth values are in this order: false, false, false, true, false, false, true, true"]
         }
         ,{
