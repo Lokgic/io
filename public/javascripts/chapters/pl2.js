@@ -2,7 +2,7 @@ $(function(){
 
 
   function phyllotaxis(radius) {
-          var theta = Math.PI * (3 - Math.sqrt(5));
+          var theta = Math.PI * (3 - Math.sqrt(15));
           return function(i) {
               var r = radius * Math.sqrt(i),
                   a = theta * i;
@@ -27,7 +27,9 @@ $(function(){
   right = container.append('div').attr('class','col-md-8').attr('id','intuitivemodelRight').style('border','0px')
   width = $('#intuitivemodelRight').width() - margin.left - margin.right,
   height = window.innerHeight*.7 - margin.top - margin.bottom;
-  var points = d3.range(26).map(phyllotaxis(55));
+  console.log(height)
+  var points = d3.range(26).map(phyllotaxis(height/15));
+
   var svg = d3.select('#intuitivemodelRight').append('svg').attr('width', width).attr('height', height)
   g = svg.append('g')
 
