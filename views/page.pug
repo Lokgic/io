@@ -94,7 +94,7 @@ block content
 									when "ps"
 										+paragraphsEscaped(x.substance)
 									when "important"
-										.important.text-justify.p-a-1
+										.important.text-justify.p-a-1(id = x.eventId)
 											+paragraphsEscaped(x.substance)
 									when "textInput"
 										.important.text-xs-center.p-a-1(id = x.eventId).textInput
