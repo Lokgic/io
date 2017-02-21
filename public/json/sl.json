@@ -942,7 +942,8 @@
 
               "P vs P+ consideration (1): the effective use of laws to simplify SL sentences during analysis. For instance, if you use truth tables for proofs without reducing them, you are are likely to get a P (assuming the table is correct).",
 
-              "P vs P+ consideration (2): correct translations: your answers will be correct enough to pass if you logical analysis is correct even if your translation is off. But to be considered for a P+, your translation has to be accurate and precise."
+              "P vs P+ consideration (2): correct translations: your answers will be correct enough to pass if you logical analysis is correct even if your translation is off. But to be considered for a P+, your translation has to be accurate and precise.",
+              "P vs P+ consideration (3): Certain harder problems would be marked with *, which means that its answering them correctly is a necessary condition for a P+."
             ]
           }
         ]
