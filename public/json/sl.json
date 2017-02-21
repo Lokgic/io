@@ -920,5 +920,32 @@
           }
         ]
       }
+    },
+    "5":{
+      "1":{
+        "chapterName": "Test 1 Info",
+        "chapterNum": "5",
+        "chapterDescription": "This page contains information pertaining Test 1",
+        "title":"Preparing for test 1",
+        "content":[
+          {
+            "type":"niceList",
+            "substance":[
+              "Be sure to be prepared to answer conceptual questions about validity: you should have a clear idea on how the logical status of a premise or the conclusion can affect the validity of the argument. (See problem-set 1.2)",
+              "Be ready to prove various equivalences in an efficient manner. One way to prepare for this is to memorize the logical laws. You are allowed, but not encouraged to use some sort of cheatsheet with all the laws on it.",
+
+              "You will be asked to determine the logical property of various SL sentences. Often they are too long and clumsy for truth tables - you are expected to use laws to reduce them to something more manageable.(lecture + problem-set 1.3)",
+
+              "You will be asked to translate arguments and then determine its validity using truth tables. (Truth table logicises)",
+
+              "For conditionals: be sure to understand how to translate them from English and determine their truth values. (Wason and problem-set 1.4)",
+
+              "P vs P+ consideration (1): the effective use of laws to simplify SL sentences during analysis. For instance, if you use truth tables for proofs without reducing them, you are are likely to get a P (assuming the table is correct).",
+
+              "P vs P+ consideration (2): correct translations: your answers will be correct enough to pass if you logical analysis is correct even if your translation is off. But to be considered for a P+, your translation has to be accurate and precise."
+            ]
+          }
+        ]
+      }
     }
 }
