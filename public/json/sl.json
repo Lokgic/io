@@ -925,7 +925,7 @@
       "1":{
         "chapterName": "Test 1 Info",
         "chapterNum": "5",
-        "chapterDescription": "This page contains information pertaining Test 1",
+        "chapterDescription": "This page contains information pertaining Test 1.",
         "title":"Preparing for test 1",
         "content":[
           {
@@ -945,6 +945,26 @@
               "P vs P+ consideration (2): correct translations: your answers will be correct enough to pass if you logical analysis is correct even if your translation is off. But to be considered for a P+, your translation has to be accurate and precise."
             ]
           }
+        ]
+      },
+      "2":{
+        "title":"Sample Test Questions",
+        "content":[
+          {"type":"ps",
+          "substance":[
+            "The section contains samples of <i>some</i> of the problems you will see on the test.",
+            "Validity: Determine if the following situations are possible:",
+            "A valid argument, whose premises are all tautologies, and whose conclusion is contingent.",
+            "A consistent set of sentences that contains two sentences that are not logically equivalent.",
+            "Logical Equivalence: Prove the following logical equivalences. Be sure to write out each line and provide justification. Suggestion: $\\equiv$ is symmetric. $X \\equiv Y$ is the same as $Y \\equiv X$. Do whichever way that seems easier.",
+            "$A \\wedge [B \\vee (\\neg A \\wedge C)] \\equiv (A \\wedge B)$",
+            "$A \\equiv  [(A\\wedge B) \\vee (A \\wedge \\neg B)] \\vee \\neg [(\\neg A \\wedge \\neg B) \\vee (\\neg A \\wedge B )]$ (credit: Emma)",
+            "$(\\neg \\neg A  \\vee B) \\wedge (C \\vee (A \\wedge B)] \\equiv (A \\wedge C) \\vee B$ (credit: Jin)",
+            "Determine the logical status of the following sentences using truth tables. You are encouraged simplify the sentence using logical laws before making a truth table for it (though for some it would be faster just to do a table). Justify your steps.",
+            "$(A\\vee B) \\wedge (A\\vee \\neg B)\\wedge (\\neg A \\vee B) \\wedge (\\neg A \\vee \\neg B)$",
+            "$(A \\leftrightarrow A )\\to (B \\leftrightarrow \\neg B)$"
+            ]}
+
         ]
       }
     }
