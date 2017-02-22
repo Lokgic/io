@@ -594,7 +594,7 @@
                ]
              },
              {
-               "type":"textInput","eventId":"pl-2-txt2","substance":["Can we use models to prove that an argument is valid? Why or why not? Make sure your answer is compatible with your previous answers."]
+               "type":"textInput","eventId":"pl-2-txt3","substance":["Can we use models to prove that an argument is valid? Why or why not? Make sure your answer is compatible with your previous answers."]
              },
              {
                  "type": "category",
