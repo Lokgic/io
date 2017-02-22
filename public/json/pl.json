@@ -303,10 +303,7 @@
                   "substance":[
                     "The sentence $\\forall x Px$ might be paraphrased in English as 'Everything is in Paris.' Yet that would be misleading. It means that everything in the domain is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\\forall x Px$ just means that the Eiffel Tower is in Paris."
                   ]
-                },
-              {"type":"matching",
-                "instruction": "Match the following concepts by dragging the corresponding definition.",
-              "eventId":"pl-1-def"}
+                }
         ]
       }
   },
@@ -456,7 +453,7 @@
           "content":[
             {
                     "type": "ps",
-                    "substance": ["Working with models is in some ways like working with truth tables and in some ways not. With truth tables, we could conclusively show that a sentence was a tautology or a contradiction, because the truth table would always have a finite number of lines. We cannot, however, use models to show that a sentence is a tautology or a contradiction, because there are infinitely many ways to model a sentence, and and no single way to talk about all of them, the way we talked about all the lines in a truth table. One thing we can do is show conclusively that a sentence is neither a tautology nor a contradiction, and is instead contingent. A contingent sentence will have at least one model where it is false and one model where it is true.", 
+                    "substance": ["Working with models is in some ways like working with truth tables and in some ways not. With truth tables, we could conclusively show that a sentence was a tautology or a contradiction, because the truth table would always have a finite number of lines. We cannot, however, use models to show that a sentence is a tautology or a contradiction, because there are infinitely many ways to model a sentence, and and no single way to talk about all of them, the way we talked about all the lines in a truth table. One thing we can do is show conclusively that a sentence is neither a tautology nor a contradiction, and is instead contingent. A contingent sentence will have at least one model where it is false and one model where it is true.",
 
                         "We will use the double turnstile symbol to represent the notion of <i>semantic entailment</i>. '$\\mathcal{A} \\vDash \\mathcal{B}$' means that an argument from $\\mathcal{A}$ to $\\mathcal{B}$ is semantically valid.  $\\vDash \\mathcal{A}$ means that $\\mathcal{A}$ is a semantic tautology. $\\mathcal{A} \\equiv \\mathcal{B}$ means $\\mathcal{A} $ and $\\mathcal{B} $ are semantically equivalent. ",
 
