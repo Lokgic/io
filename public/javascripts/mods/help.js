@@ -639,18 +639,7 @@ function makeDefMatch(eventId) {
             })
             sendAttempts(data)
             mathJax.reload('.modal-body')
-            // $.ajax({
-            //     url: '/data/attempt',
-            //     type: 'POST',
-            //     contentType: 'application/json',
-            //     data: JSON.stringify(data),
-            //     dataType: 'json',
-            //     success: function(res) {
-            //         //On ajax success do this
-            //
-            //         console.log("success message " + res)
-            //     }
-            // });
+
         }
 
 
@@ -659,7 +648,7 @@ function makeDefMatch(eventId) {
     }
 
 
-    interact('.draggable')
+    interact('#'+eventId + ' .draggable')
         .draggable({
             // enable inertial throwing
             inertia: false,
@@ -703,7 +692,7 @@ function makeDefMatch(eventId) {
     // /* The dragging code for '.draggable' from the demo above
     //  * applies to this demo as well so it doesn't have to be repeated. */
     // // enable draggables to be dropped into this
-    interact('.dropzone').dropzone({
+    interact('#'+eventId + ' .dropzone').dropzone({
         // only accept elements matching this CSS selector
         // accept: '.yes-drop',
         // Require a 75% element overlap for a drop to be possible
@@ -776,6 +765,7 @@ function makeDefMatch(eventId) {
         }
     });
 }
+
 
 
 
