@@ -23,11 +23,6 @@
                         "name": "Basic Predicate Translations",
                         "type": "section",
                         "id":"pl-1-matching"
-                    },
-                    {
-                      "name": "Concepts Review",
-                      "type": "section",
-                      "id":"pl-1-def"
                     }
                   ]
                 },
@@ -64,11 +59,6 @@
 
                     ]
                 },
-                {
-                  "name":"Recursive Syntax for PL",
-                  "type":"chapter",
-                  "children":[]
-                },
                  {
                     "name": "Quantifiers and its Translations",
                     "type":"chapter",
@@ -90,7 +80,7 @@
                     "name": "Truth Tree 2 (PL)",
                     "type":"chapter"
 
-                }, 
+                },
                 {"name":"Model 1",
                 "type":"chapter",
                 "id":"pl-logicise-model1"

@@ -607,5 +607,17 @@
           ]
         }
 
+  },
+  "3":{
+    "1":{
+      "chapterName": "Advanced Translations in Pl",
+      "chapterNum": "3",
+      "chapterDescription": "In this chapter, we discuss various strategies and techniques for translating complex English sentences in to PL. ",
+      "title":"",
+      "content":[
+
+      ]
+    }
   }
+
 }
