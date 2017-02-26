@@ -610,12 +610,202 @@
   },
   "3":{
     "1":{
-      "chapterName": "Advanced Translations in Pl",
+      "chapterName": "PL Symbolization",
       "chapterNum": "3",
       "chapterDescription": "In this chapter, we discuss various strategies and techniques for translating complex English sentences in to PL. ",
-      "title":"",
+      "title":"'PLizing' a sentence prior symbolization",
       "content":[
+        {
+          "type":"p",
+          "substance":[
+            "In general, translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, and connectives, so when translating an English sentence, it is useful to think of a rough PL equivalence in English first. Consider these sentences"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+            ["U-A","Every coin in my pocket is a quarter."],
+            ["P-A","Some coin on the table is a dime."],
+            ["U-N","None of the coins in my pocket are quarters."],
+            ["P-N","Some of the coins on the table are not dimes."]
 
+
+          ]
+        },
+        {
+          "type":"p",
+          "substance":[
+            "As you might have noticed already, we encountered these type of sentences in our discussion of categorical logic. PL is sufficiently rich enough that anything can be said in categorical logic can be symbolized in PL. To begin, start by reformulating the English sentence with variables. That is, everyone non-singular term in the sentence ought to be replaced with some variable. None of the sentences above talk about any coin in particular, so we should talk about the coin using the logical idiom 'Every/some x is such that...'.",
+            "To continue, however, we must decide that the scope of 'x' - should it refer to everything, or just every coin? Either option would work, but they do change the translation. For now let us say that the domain of discourse contains all coins, so that when we say 'every x', we simply mean 'every coin'. We will later consider how the translation will go if we were to consider a domain containing everything.",
+            "The nice thing about using a domain of discourse with just coins is that we no longer have to worry about mentioning explicitly that we are talking about coins. So we can translate 'Some coin on the table is a dime as'"
+          ]
+        },{
+          "type":"symbolkey",
+          "key":[
+            ["P-A'","Some x is such that x is on the table and x is a dime."]
+          ]
+        },
+        {
+          "type":"p",
+          "substance":[
+            "It is rather clumsy, but it will pay off when it carry out the symbolization later. Now, for U-A, it might be tempting to rephrase it in the exact same way:"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+            ["U-A'","Every x is such that x is on the table and x is a quarter."]
+          ]
+        },
+        {
+          "type":"p",
+          "substance":[
+            "That, however, would be incorrect. This is because we are essentially saying that everything in the domain (all coins) is a quarter on the table, which is clearly not what the speaker was meaning.",
+            "However, the speaker is clearly saying something about everything in the UD. In module one, we used the Venn diagram to represent universal affirmative - 'All X are Y', where we will draw a diagram in such a way that no X can exists without being also being Y. This idea can be expressed naturally using the conditional - being Y is a necessary condition for being X. So U-A essentially is asserting that this condition holds for everything in the domain, that is"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+            ["U-A''","Every x is such that IF x is on the table, then x is a quarter."]
+          ]
+        }   ,
+        {
+          "type":"p",
+          "substance":[
+            "We can carry out the similar operation to the negated version of these sentences:"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+
+            ["U-N'","Every x is such that if x is in my pocket, then x is not a quarter."],
+            ["P-N'","Some x is such that x is on the table and x is not a dime."]
+
+
+          ]
+        },
+        {
+          "type":"p",
+          "substance":[
+            "Now we are ready to symbolize them as PL. As agreed, since we are not talking about anything besides coins, we let the UD be all coins. Since we are not talking about any specific coins, we do not need to define any constants. So we define this key and symbolize them like so:"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+            ["$UD$:","All coins"],
+            ["$Px$","$x$ is in my pocket."],
+            ["$Tx$","$x$ is on the table."],
+            ["$Qx$","$x$ is a quarter."],
+            ["$Dx$","$x$ is a dime."]
+
+
+          ]
+        },
+        {
+          "type":"ps",
+          "substance":[
+            ""
+          ]
+        },{
+          "type":"symbolkey",
+          "key":[
+            ["U-A","$\\forall x (Px \\to Qx)$"],
+            ["P-A","$\\exists x( Tx \\wedge Dx)$"],
+            ["U-N","$\\forall x (Px \\to \\neg Qx)$"],
+            ["P-A","$\\exists x( Tx \\wedge \\neg Dx)$"]
+
+          ]
+        },
+        {
+          "type":"p",
+          "substance":[
+            "Now what if the domain is everything and not just coins? In that case, we need to introduce a predicate to say that x is a coin and explicity state with in the PL expression that we are talking about coins. Observe how universal and existential cases differ:"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+            ["$UD$:","Everything"],
+            ["U-A","$\\forall x ((Px \\wedge Cx) \\to Qx)$"],
+            ["P-A","$\\exists x( Cx \\wedge Tx \\wedge Dx)$"],
+            ["U-N","$\\forall x ((Px \\wedge Cx)\\to \\neg Qx)$"],
+            ["P-A","$\\exists x( Cx \\wedge Tx \\wedge \\neg Dx)$"]
+
+          ]
+        },
+        {
+          "type":"p",
+          "substance":["Recall this argument in chapter 1 that could not be captured in SL:"]
+        },
+        {
+          "type":"arg",
+          "premises":[            "Willard is a logician.","All logicians wear funny hats."],
+          "conclusion":" Willard wears a funny hat."
+        } ,
+        {
+          "type":"p",
+          "substance":["Now we can symbolize the argument properly:"]
+        }
+        ,{
+            "type":"symbolkey",
+            "key":[
+              ["$UD$:","people"],
+              ["$Lx$","$x$ is a logician."],
+              ["$Fx$","$x$ wears a funny hat."],
+              ["$w$","Willard"]
+
+
+            ]
+          },  {
+              "type":"arg",
+              "premises":[            "Lw","$\\forall x(Lx \\to Fx)$"],
+              "conclusion":"$Fw$"
+            }
+
+      ]
+    },
+    "2":{
+      "title":"Empty Predicates",
+      "content":[
+        {
+          "type":"p",
+          "substance":["A predicate need not apply to anything in the UD. A predicate that applies to nothing in the UD is called an empty predicate.",
+          "Suppose we want to symbolize these two sentences"]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+
+            ["1","Every monkey knows sign language."],
+            ["2","Some monkey knows sign language."]
+
+
+          ]
+        },
+        {
+          "type":"p",
+          "substance":["Using animals as our domain of discourse, and obvious letters for predicates. Sentence 1 can now be translated as $\\forall x(Mx \\to Sx)$. and sentence 2 becomes $\\exists x (Mx \\wedge Sx)$",
+          "It is tempting to say that sentence 1 entails sentence 2; that is: if every monkey knows sign language, then it must be that some monkey knows sign language. However, the entailment does not hold in Pl. It is possible for the sentence $\\forall x(Mx \\to Sx)$ to be true even though the sentence $\\exists x(Mx \\wedge Sx)$ is false.",
+          "How can this be? The answer comes from considering whether these sentences would be true or false if there were no monkeys.",
+          "We have defined $\\forall$ and $\\exists$ in such a way that $\\forall\\psi$ is equivalent to $\\neg \\exists \\neg\\psi$. As such, the universal quantifier doesn't involve the existence of anything---only non-existence. If sentence 1 is true, then there are no monkeys who don't know sign language. If there were no monkeys, then $\\forall x(Mx \\to Sx)$ would be true and $\\exists x(Mx \\wedge Sx)$ would be false.",
+          "We allow empty predicates because we want to be able to say things like, ``I do not know if there are any monkeys, but any monkeys that there are know sign language.'' That is, we want to be able to have predicates that do not (or might not) refer to anything.",
+          "What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean ``$x$ is a refrigerator.'' Now the sentence $\\forall x(Rx \\to Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\\forall x(Rx \\to Mx)$ means that any member of the UD that is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.",
+          "If you were actually translating the sentence ``All refrigerators are monkeys'', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\\forall x(Rx \\to Mx)$ would be false."
+        ]
+
+      },
+      {
+        "type":"important",
+        "substance":[
+          "A UD must have at least one member",
+          "A predicate may apply to all, some, or no members of the UD",
+          "A constant must pick out exactly one member of the UD.",
+          "A member of the UD may be picked out by one constant, many constants, or none at all."
+        ]
+      }
       ]
     }
   }
