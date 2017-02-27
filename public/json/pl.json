@@ -303,7 +303,15 @@
                   "substance":[
                     "The sentence $\\forall x Px$ might be paraphrased in English as 'Everything is in Paris.' Yet that would be misleading. It means that everything in the domain is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\\forall x Px$ just means that the Eiffel Tower is in Paris."
                   ]
-                }
+                },  {
+                    "type":"important",
+                    "substance":[
+                      "A UD must have at least one member",
+                      "A predicate may apply to all, some, or no members of the UD",
+                      "A constant must pick out exactly one member of the UD.",
+                      "A member of the UD may be picked out by one constant, many constants, or none at all."
+                    ]
+                  }
         ]
       }
   },
@@ -613,7 +621,7 @@
       "chapterName": "PL Symbolization",
       "chapterNum": "3",
       "chapterDescription": "In this chapter, we discuss various strategies and techniques for translating complex English sentences in to PL. ",
-      "title":"'PLizing' a sentence prior symbolization",
+      "title":"'PLizing' a sentence before symbolization",
       "content":[
         {
           "type":"p",
@@ -667,7 +675,7 @@
         {
           "type":"symbolkey",
           "key":[
-            ["U-A''","Every x is such that IF x is on the table, then x is a quarter."]
+            ["U-A'","Every x is such that IF x is on the table, then x is a quarter."]
           ]
         }   ,
         {
@@ -763,7 +771,14 @@
               "type":"arg",
               "premises":[            "Lw","$\\forall x(Lx \\to Fx)$"],
               "conclusion":"$Fw$"
-            }
+            },
+            {
+                "type":"mc",
+                "title": "Reading Exercise: English/PL Translation",
+                "instruction": "Pick the correct translation.",
+                "eventId": "pl-3-1",
+                "intro": ["For this reading exercise, you will be given an English statement. Pick the PL sentence that best capture its meaning. You can make as many attempt as you like, but you must answer all questions correctly to receive credit."]
+              }
 
       ]
     },
@@ -791,21 +806,163 @@
           "It is tempting to say that sentence 1 entails sentence 2; that is: if every monkey knows sign language, then it must be that some monkey knows sign language. However, the entailment does not hold in Pl. It is possible for the sentence $\\forall x(Mx \\to Sx)$ to be true even though the sentence $\\exists x(Mx \\wedge Sx)$ is false.",
           "How can this be? The answer comes from considering whether these sentences would be true or false if there were no monkeys.",
           "We have defined $\\forall$ and $\\exists$ in such a way that $\\forall\\psi$ is equivalent to $\\neg \\exists \\neg\\psi$. As such, the universal quantifier doesn't involve the existence of anything---only non-existence. If sentence 1 is true, then there are no monkeys who don't know sign language. If there were no monkeys, then $\\forall x(Mx \\to Sx)$ would be true and $\\exists x(Mx \\wedge Sx)$ would be false.",
-          "We allow empty predicates because we want to be able to say things like, ``I do not know if there are any monkeys, but any monkeys that there are know sign language.'' That is, we want to be able to have predicates that do not (or might not) refer to anything.",
-          "What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean ``$x$ is a refrigerator.'' Now the sentence $\\forall x(Rx \\to Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\\forall x(Rx \\to Mx)$ means that any member of the UD that is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.",
-          "If you were actually translating the sentence ``All refrigerators are monkeys'', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\\forall x(Rx \\to Mx)$ would be false."
+          "We allow empty predicates because we want to be able to say things like, 'I do not know if there are any monkeys, but any monkeys that there are know sign language.' That is, we want to be able to have predicates that do not (or might not) refer to anything.",
+          "What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean '$x$ is a refrigerator.' Now the sentence $\\forall x(Rx \\to Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\\forall x(Rx \\to Mx)$ means that any member of the UD that is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.",
+          "If you were actually translating the sentence 'All refrigerators are monkeys', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\\forall x(Rx \\to Mx)$ would be false."
         ]
 
-      },
-      {
-        "type":"important",
-        "substance":[
-          "A UD must have at least one member",
-          "A predicate may apply to all, some, or no members of the UD",
-          "A constant must pick out exactly one member of the UD.",
-          "A member of the UD may be picked out by one constant, many constants, or none at all."
-        ]
       }
+
+      ]
+    },
+    "3":{
+      "title":"Ambiguous Predicates",
+      "content":[
+        {
+          "type":"ps",
+          "substance":[
+            "Say we want to translate: 'Billie is a skilled surgeon.' One possible way is to let the UD be people, let $Kx$ mean '$x$ is a skilled surgeon', and let $b$ mean Billie. We will then translate the English sentence as $Kb$. Now suppose this sentence occurs within the context of an argument"
+          ]
+        },
+        {
+          "type":"arg",
+          "premises":[
+            "The hospital will only hire a skilled surgeon.","All surgeons are greedy.","Billie is a surgeon, but is not skilled."
+          ],
+          "conclusion":"Billie is greedy, but the hospital will not hire her."
+        },
+        {
+          "type":"p",
+          "substance":[
+            "We need to distinguish being a skilled surgeon from merely being a surgeon. So we might want to define two separate predicates: $Rx$: x is a surgeon and $Kx$: x is skilled. Using obvious letters for others, the argument can be translated as follows:"
+          ]
+        },
+        {
+          "type":"arg",
+          "premises":[
+            "$\\forall x [\\neg (Rx \\wedge Kx) \\to \\neg Hx]$","$\\forall x(Rx \\to Gx)$","$Rb \\wedge \\neg Kb$"
+          ],
+          "conclusion":"$Gb \\wedge \\neg Hb$"
+        },
+        {
+          "type":"p",
+          "substance":[
+            "So far so good. Next suppose that we want to translate this argument:"
+          ]
+        },{
+          "type":"arg",
+          "premises":[
+            "Carol is a skilled surgeon and a tennis player."
+          ],
+          "conclusion":"Carol is a surgeon and a skilled tennis player."
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "If we start with the symbolization key we used for the previous argument, we could add a predicate (let $Tx$ mean '$x$ is a tennis player') and a constant (let $c$ mean Carol). Then the argument becomes: "
+          ]
+        },{
+          "type":"arg",
+          "premises":[
+            "$(Rc \\wedge Kc) \\wedge Tc$"
+          ],
+          "conclusion":"$Tc \\wedge Kc$"
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "This translation is a disaster! It takes what in English is a terrible argument and translates it as a valid argument in QL. The problem is that there is a difference between being skilled as a surgeon and skilled as a tennis player. Translating this argument correctly requires two separate predicates, one for each type of skill. If we let $Sx$ mean '$x$ is skilled as a surgeon' and $Px$ mean '$x$ is skilled as a tennis player,' then we can symbolized the argument in this way:"
+          ]
+        },
+        {
+          "type":"arg",
+          "premises":[
+            "$(Rc \\wedge Sc) \\wedge Tc$"
+          ],
+          "conclusion":"$Tc \\wedge Pc$"
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "Like the English language argument it translates, this is invalid. ",
+            "The moral of these examples is that you need to be careful of symbolizing predicates in an ambiguous way. Similar problems can arise with predicates like good, bad, big, and small. Just as skilled surgeons and skilled tennis players have different skills, big dogs, big mice, and big problems are big in different ways.",
+            "Is it enough to have a predicate that means '$x$ is a skilled surgeon', rather than two predicates '$x$ is skilled' and '$x$ is a surgeon'? Sometimes, as sometimes we do not need to distinguish between skilled surgeons and other surgeons.",
+            "Must we always distinguish between different ways of being skilled, good, bad, or big? No. As the argument about Billy shows, sometimes we only need to talk about one kind of skill. If you are translating an argument that is just about dogs, it is fine to define a predicate that means '$x$ is big.' If the UD includes dogs and mice, however, it is probably best to make the predicate mean '$x$ is big for a dog.'"
+          ]
+        }
+      ]
+    },
+    "4":{
+      "title":"Multiple Quantifiers",
+      "content":[
+        {
+          "type":"symbolkey",
+          "key":[
+
+            ["$UD$","People and dog"],
+            ["$Dx$","x is a dog."],
+            ["$Fxy$","x is a friend of y."],
+            ["Oxy","x owns y."],
+            ["f","Fifi"],
+            ["g","Gerald"]
+
+
+          ]
+        },
+        {
+          "type":"unorderedList",
+          "substance":[
+            "Gerald is a dog owner.","Someone is a dog owner.","All of Gerald's friends are dog owners.","Every dog owner is the friend of a dog owner."
+          ]
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "<i>Gerald is a dog owner</i> can be paraphrased as, 'There is a dog that Gerald owns.' This can be translated as $\\exists x(Dx \\wedge Ogx)$.",
+            "<i>Someone is a dog owner</i> can be paraphrased as, 'There is some $y$ such that $y$ is a dog owner.' The subsentence '$y$ is a dog owner' is just like the first sentence, except that it is about $y$ rather than being about Gerald. So we can translate sentence this as $\\exists y \\exists x(Dx \\wedge Oyx)$. ",
+            "<i>All of Gerald's friends are dog owners.</i> can be paraphrased as, 'Every friend of Gerald is a dog owner.' Translating part of this sentence, we get $\\forall x(Fxg \\to\\text{'$x$ is a dog owner'})$. Again, it is important to recognize that '$x$ is a dog owner' is structurally just like sentence <i>Gerald is a dog owner.</i>. Since we already have an x-quantifier, we will need a different variable for the existential quantifier. Any other variable will do. Using $z$, it can be translated as $\\forall x[Fxg \\to\\exists z(Dz \\wedge Oxz)]$.",
+            "<i>Every dog owner is the friend of a dog owner</i> can be paraphrased as 'For any $x$ that is a dog owner, there is a dog owner who is $x$'s friend.' Partially translated, this becomes $$\\forall x[\\text{$x$ is a dog owner}\\to\\exists y(\\text{$y$ is a dog owner}\\wedge Fxy].$$ Completing the translation, this becomes $$\\forall x[\\exists z(Dz \\wedge Oxz)\\to\\exists y(\\exists z(Dz \\wedge Oyz)\\wedge Fxy].$$"
+          ]
+        },
+        {
+          "type":"symbolkey",
+          "key":[
+
+            ["$UD$","People"],
+            ["$Lxy$","$x$ likes $y$"],
+            ["i","Iris"],
+            ["k","Karl"]
+
+
+          ]
+        },
+        {
+          "type":"unorderedList",
+          "substance":[
+            "Iris likes everyone that Karl likes.","There is someone who likes everyone who likes everyone that he likes."
+          ]
+        },
+        {
+          "type":"ps",
+          "substance":[
+            "The first sentence can be partially translated as $\\forall x(\\text{Karl likes $x$}\\to\\text{Iris likes $x$})$. This becomes $\\forall x(Lkx\\to Lix)$.",
+            "Sentence 2 is almost a tongue-twister. There is little hope of writing down the whole translation immediately, but we can proceed by small steps. An initial, partial translation might look like this: $$\\exists x \\text{ everyone who likes everyone that $x$ likes is liked by $x$}$$",
+            "The part that remains in English is a universal sentence, so we translate further: $$\\exists x\\forall y(\\text{$y$ likes everyone that $x$ likes}\\to\\text{$x$ likes $y$}).$$",
+            "The antecedent of the conditional is structurally just like the first sentence, with $y$ and $x$ in place of Iris and Karl. So sentence 2 can be completely translated in this way $$\\exists x\\forall y[\\forall z(Lxz \\to Lyz) \\to Lxy]$$",
+            "When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps. Paraphrase the English sentence so that the logical structure is readily symbolized in QL. Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.",
+
+            "It is extremely important to note that the order of the quantifiers matters a lot when we are mixing universal and existential quantifiers. For instance, consider the following:"
+          ]
+        },
+        {
+          "type":"unorderedList",
+          "substance":[
+            "$\\forall x \\exists y Lxy$","$\\exists x \\forall y Lxy$"
+          ]
+        },
+        {
+          "type":"textInput","eventId":"pl-3-4","substance":["How would you translate the statements above into English?"]
+        }
       ]
     }
   }

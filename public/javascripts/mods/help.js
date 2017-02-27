@@ -1028,3 +1028,99 @@ function textInputInit(){
     }
   })
 }
+
+
+
+var MCObject = function(eventId,problems){
+  this.id = eventId
+  this.problems = problems
+  this.modId = eventId.split('-')[0]
+  this.ch = eventId.split('-')[1]
+  this.sec = eventId.split('-')[2]
+  this.scope = d3.select('#'+eventId)
+  this.next = this.scope.select('.nextbutt')
+  this.state = "answer"
+  this.scope.select('.QuizIntro').remove()
+  this.correct = []
+  this.incorrect = []
+  this.currentProblemNumber = 0
+  this.scope.select('.readingExQ').selectAll('div')
+      .data(problems).enter(function(d) {
+          return d
+      })
+      .append('div')
+      .attr('id', function(d, i) {
+          return i + "-" + eventId
+      })
+      .attr('class', function(d, i) {
+          return 'offScreen ' + eventId + "offScreen"
+      })
+      .html(function(d) {
+        var str = ""
+        for (q in d.question.split("|")) {
+            str += d.question.split("|")[q] + "<br>"
+        }
+
+        return str
+
+
+      })
+
+      d3.select('.' + eventId + 'offScreen').classed('offScreen', false).classed('currentMC' + eventId, true)
+     this.currentChoices = this.makeChoices()
+     this.currentAnswer = this.problems[this.currentProblemNumber].answer
+
+}
+
+MCObject.prototype.makeChoices = function() {
+    console.log(this.scope)
+
+    var userInput = this.scope.select('.readingExAns')
+    userInput.selectAll('button').remove()
+
+    var options = this.problems[this.currentProblemNumber].options.split("|")
+    userInput.selectAll('button').data(options).enter()
+        .append('button')
+        .attr('class', 'btn btn-block btn-greyish ' + this.id + "butt")
+        .text(function(d) {
+            return d
+        })
+        .attr('data', function(d) {
+
+            return d;
+        })
+    mathJax.reload('#'+this.id)
+    return d3.selectAll('.' + this.id + "butt")
+}
+
+
+function makeMCObj(eventId){
+  var quizIntro = d3.select('#'+eventId+' .quizIntro')
+  var modId = eventId.split('-')[0]
+  var chapter = eventId.split('-')[1]
+  var section = eventId.split('-')[2]
+  var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
+  var state = "uninit"
+  quizIntro.on('click', function(d) {
+    if (state == "uninit"){
+      loadProblems(url, function(err,data){
+        var mmcc = new MCObject(eventId,data)
+        mmcc.currentChoices.on('click',function(d){
+          console.log(mmcc.currentAnswer)
+          console.log(d3.select(this).attr('data') == mmcc.currentAnswer)
+        })
+
+      })
+    }
+  })
+  .on('mouseover',function(){
+    d3.select(this).style('background',"grey")
+    d3.select(this).style('color',"black")
+  })
+  .on('mouseout',function(){
+    d3.select(this).style('background',"black")
+    d3.select(this).style('color',"white")
+
+  })
+
+}
