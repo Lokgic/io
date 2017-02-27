@@ -1038,7 +1038,7 @@ var MCObject = function(eventId,problems){
   this.ch = eventId.split('-')[1]
   this.sec = eventId.split('-')[2]
   this.scope = d3.select('#'+eventId)
-  this.next = this.scope.select('.nextbutt')
+  this.nextButt = this.scope.select('.nextbutt')
   this.state = "answer"
   this.scope.select('.QuizIntro').remove()
   this.correct = []
@@ -1067,13 +1067,35 @@ var MCObject = function(eventId,problems){
       })
 
       d3.select('.' + eventId + 'offScreen').classed('offScreen', false).classed('currentMC' + eventId, true)
+      this.nextButtToggle()
      this.currentChoices = this.makeChoices()
      this.currentAnswer = this.problems[this.currentProblemNumber].answer
 
 }
 
+MCObject.prototype.nextProblem = function(){
+  this.nextButtToggle("")
+  this.scope.select('.currentMC' + this.id).remove()
+  if (this.continue()){
+    this.currentProblemNumber += 1;
+    d3.select('.' + this.id + 'offScreen').classed('offScreen', false).classed('currentMC' + this.id, true)
+   this.currentChoices = this.makeChoices()
+   this.currentAnswer = this.problems[this.currentProblemNumber].answer
+   this.monitorAnswer()
+  }
+
+}
+
+MCObject.prototype.continue = function(){
+  if (this.currentProblemNumber + 1 >= this.problems.length){
+    return false
+  }else{
+    return true;
+  }
+}
+
 MCObject.prototype.makeChoices = function() {
-    console.log(this.scope)
+    // console.log(this.scope)
 
     var userInput = this.scope.select('.readingExAns')
     userInput.selectAll('button').remove()
@@ -1086,13 +1108,50 @@ MCObject.prototype.makeChoices = function() {
             return d
         })
         .attr('data', function(d) {
-
             return d;
         })
     mathJax.reload('#'+this.id)
     return d3.selectAll('.' + this.id + "butt")
 }
 
+MCObject.prototype.nextButtToggle = function(input){
+  if (input == "show"){
+    this.nextButt.classed('offScreen', false)
+  } else(
+    this.nextButt.classed('offScreen', true)
+  )
+}
+
+MCObject.prototype.checkAnswer = function(chosen){
+  this.problems[this.currentProblemNumber].chosen = chosen
+  if ( chosen == this.currentAnswer){
+    this.correct.push(this.currentProblemNumber)
+  } else {
+    this.incorrect.push(this.currentProblemNumber)
+  }
+  this.nextButtToggle("show")
+  this.currentChoices.remove()
+  if (this.continue()) this.state = "nextProblem"
+    else {
+      this.state = "printResult"
+      this.nextButtToggle("show")
+    }
+
+}
+
+MCObject.prototype.printResult = function(){
+  this.scope.select(".currentMC"+this.id).remove()
+  console.log(this.correct)
+  console.log(this.incorrect)
+}
+
+MCObject.prototype.monitorAnswer = function(){
+  var mainObj = this;
+  this.currentChoices.on('click',function(d){
+    var chosen = d3.select(this).attr('data')
+    mainObj.checkAnswer(chosen)
+  })
+}
 
 function makeMCObj(eventId){
   var quizIntro = d3.select('#'+eventId+' .quizIntro')
@@ -1102,16 +1161,17 @@ function makeMCObj(eventId){
   var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
   var state = "uninit"
   quizIntro.on('click', function(d) {
-    if (state == "uninit"){
       loadProblems(url, function(err,data){
         var mmcc = new MCObject(eventId,data)
-        mmcc.currentChoices.on('click',function(d){
-          console.log(mmcc.currentAnswer)
-          console.log(d3.select(this).attr('data') == mmcc.currentAnswer)
+        mmcc.monitorAnswer()
+        mmcc.nextButt.on('click',function(d){
+          console.log(mmcc.state)
+          mmcc[mmcc.state]()
         })
-
       })
-    }
+
+
+
   })
   .on('mouseover',function(){
     d3.select(this).style('background',"grey")
