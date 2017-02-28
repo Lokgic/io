@@ -1141,6 +1141,8 @@ MCObject.prototype.checkAnswer = function(chosen){
 
 MCObject.prototype.printResult = function(){
   this.scope.select(".currentMC"+this.id).remove()
+  var space = this.scope.select('.readingexq')
+  space.append('h3').text('Correct Answers')
   console.log(this.correct)
   console.log(this.incorrect)
 }
