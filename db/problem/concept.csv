@@ -85,18 +85,27 @@ model15,category,$\forall x \forall y (Rxy \vee Ryx)$,False,,pl,2,cat
 model16,category,$\forall x \forall y \forall z [(Rxz \wedge Ryz) \to Rxy]$,False,,pl,2,cat
 pl31-1,universal,All dogs like samurai movies.,$\forall x (Dx \to Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
 pl31-2,existential,Some dogs like samurai movies.,$\exists x (Dx \wedge Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-pl31-3,negated-universal,No dogs like samurai movies.,$\forall x (Dx \to \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-pl31-4,negated-universal,Not all dogs like samurai movies.,$\exists x (Dx \wedge \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-3,negation-universal,No dogs like samurai movies.,$\forall x (Dx \to \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-4,negation-universal,Not all dogs like samurai movies.,$\exists x (Dx \wedge \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
 pl31-5,universal-conditional,Only dogs like samurai movies.,$\forall x (Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg Dx)$|$\exists x (\neg Sx \wedge \neg Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-pl31-6,negated-universal-conditional,Not only dogs like samurai movies.,$\exists x (Sx \wedge \neg Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-pl31-7,negated-universal-conditional,Not only dogs do not like samurai movies.,$\exists x (\neg Sx \wedge \neg  Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-pl31-8,negated-universal-conditional,Only dogs do not like samurai movies.,$\forall x (\neg Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-pl32-1,negated-universal-conditional,There is a dog that is larger than Emerson.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,"No dog that is larger than Emerson.",There is no dog that is larger than Emerson,$,pl,3,1
-pl32-1,negated-universal-conditional,Emerson that is larger than some dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,Any animal that dislikes samurai movies is larger than Bertie.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,There is an animal that is between Bertie and Emerson in size.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,There is no dog that is between Bertie and Emerson in size.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,No dog is larger than itself.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,Every dog is larger than some dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
-pl32-1,negated-universal-conditional,There is an animal that is smaller than every dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl31-6,negation-universal-conditional,Not only dogs like samurai movies.,$\exists x (Sx \wedge \neg Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-7,negation-universal-conditional,Not only dogs do not like samurai movies.,$\exists x (\neg Sx \wedge \neg  Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-8,negation-universal,Only dogs do not like samurai movies.,$\forall x (\neg Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+
+
+
+pl32-1,existential-name,A dog is larger than Emerson.,$\exists x (Dx \wedge Lxe)$
+pl32-1,negation-existential,Emerson is not bigger than some dog.,$\exists x (Dx \wedge \neg Lex)$,,pl,3,1,
+pl32-1,existential,Emerson is larger than some dog.,$\exists x (Dx \wedge Lex)$,$,pl,3,1
+pl32-1,negation-universal-name,,Not all dogs are larger than Emerson.,$\exists x (Dx \wedge Lex)$,$,pl,3,1
+
+pl32-1,negation-universal,No animal is larger than itself.,$\forall x \neg Lxx$,$,pl,3,1
+pl32-1,mixedQuantifiers,Every animal is larger than some animal.,$\forall x \exists y Lxy$,$,pl,3,1
+pl32-1,mixedQuantifiers,There is an animal that is smaller than every animal.,$\exists x \forall y Lyx$,$,pl,3,1
+pl32-1,negation-mixedQuantifiers,Not all animal are larger than some animal.,$\neg \forall x \exists Lxy$,$,pl,3,1
+
+
+pl32-1,mixedQuantifiers-name,Emerson is larger than any animal that is larger than Frankie.,$\forall x (Lxf \to Lex)$,$,pl,3,1
+pl32-1,mixedQuantifiers-name,Emerson is larger than any animal that is smaller than Frankie.,$\forall x (Lfx \to Lex)$,$,pl,3,1
+pl32-1,mixedQuantifiers-name,Emerson is smaller than any animal that is larger than Frankie.,$\forall x   (Lxf \to Lxe)$,$,pl,3,1
+pl32-1,mixedQuantifiers-name,Emerson is smaller than any animal that is smaller than Frankie.,$\forall x  (Lfx \to Lxe)$,$,pl,3,1
