@@ -43,22 +43,22 @@ teller3-4-j,category,$(A \vee  \neg A \vee B) \wedge (A \vee \neg A \vee \neg C)
 teller3-4-k,category,$(A \wedge C) \vee (A \wedge \neg  C) \vee (B \wedge C ) \vee (B \wedge \neg C)$,Contingent,,sl,3,cat
 teller3-4-l,category,$\neg (\neg A \vee C) \vee \neg (\neg B \vee   C) \vee \neg (A \vee B ) \vee C$,Tautology,,sl,3,cat
 conditional1,matching,"Unless you are a horrible person, you love dogs.",$G \to D$,,sl,4,matching
-conditional2,matching,"You love dogs unless you are a good person.",$\neg G \to D$,,sl,4,matching
-conditional3,matching,"you are a good person only if you hate dogs.",$  G \to  \neg D$,,sl,4,matching
-conditional4,matching,"Hating dog is a necessary condition to be a horrible person.",$\neg G \to \neg D$,,sl,4,matching
+conditional2,matching,You love dogs unless you are a good person.,$\neg G \to D$,,sl,4,matching
+conditional3,matching,you are a good person only if you hate dogs.,$  G \to  \neg D$,,sl,4,matching
+conditional4,matching,Hating dog is a necessary condition to be a horrible person.,$\neg G \to \neg D$,,sl,4,matching
 conditional5,matching,"Unless you hate dog, you are a good person.",$D \to G$,,sl,4,matching
-conditional6,matching,"You cannot hate dogs without being a good person.",$\neg D \to G$,,sl,4,matching
-conditional7,matching,"you are a horrible person if you like dogs.",$  D \to  \neg G$,,sl,4,matching
-conditional8,matching,"Hating dog is a sufficient condition to be a horrible person.",$\neg D \to \neg G$,,sl,4,matching
+conditional6,matching,You cannot hate dogs without being a good person.,$\neg D \to G$,,sl,4,matching
+conditional7,matching,you are a horrible person if you like dogs.,$  D \to  \neg G$,,sl,4,matching
+conditional8,matching,Hating dog is a sufficient condition to be a horrible person.,$\neg D \to \neg G$,,sl,4,matching
 pl1match1,matching,"If Caroline is a friend of Joey, then Joey is a friend of Caroline.",$Fcj\to Fjc$,,pl,1,matching
-pl1match2,matching,"Joey is a friend of Caroline only if Caroline is a friend of Joey.",$Fjc \to Fcj $,,pl,1,matching
-pl1match3,matching,"Joey is shorter or as short as Rob.",$Sjr \vee \neg (Sjr \vee Srj)$,,pl,1,matching
+pl1match2,matching,Joey is a friend of Caroline only if Caroline is a friend of Joey.,$Fjc \to Fcj $,,pl,1,matching
+pl1match3,matching,Joey is shorter or as short as Rob.,$Sjr \vee \neg (Sjr \vee Srj)$,,pl,1,matching
 pl1match4,matching,"If Joey is shorter than Rob, then Rob is not as short as Joey.",$Sjr \to \neg(Srj \vee Sjr)$,,pl,1,matching
-pl1match5,matching,"Joey is a friend of Caroline if and only if Caroline is a friend of Joey.",$Fjc \leftrightarrow Fcj $,,pl,1,matching
-pl1match6,matching,"Joey is an adult unless he's a child.",$\neg Cj \to Aj$,,pl,1,matching
-pl1match7,matching,"Joey is an child unless he's an adult.",$\neg Aj \to Cj$,,pl,1,matching
-pl1match8,matching,"Joey is an child only if he's an adult.",$ Cj \to Aj$,,pl,1,matching
-pl1match9,matching,"Joey is an child if he's an adult.",$Aj \to Cj$,,pl,1,matching
+pl1match5,matching,Joey is a friend of Caroline if and only if Caroline is a friend of Joey.,$Fjc \leftrightarrow Fcj $,,pl,1,matching
+pl1match6,matching,Joey is an adult unless he's a child.,$\neg Cj \to Aj$,,pl,1,matching
+pl1match7,matching,Joey is an child unless he's an adult.,$\neg Aj \to Cj$,,pl,1,matching
+pl1match8,matching,Joey is an child only if he's an adult.,$ Cj \to Aj$,,pl,1,matching
+pl1match9,matching,Joey is an child if he's an adult.,$Aj \to Cj$,,pl,1,matching
 Predicate,definition,Predicate,The basic unit of quantiﬁed logic; cannot be true or false on its own. Symbolized in PL as capitalized letters.,,pl,1,def
 Singular Term,definition,Singular Term,"A word or phrase that refers to a speciﬁc person, place, or thing. Symbolized in PL as a,b,c...",,pl,1,def
 Polyadic,definition,Polyadic,Predicates with more than one place.,,pl,1,def
@@ -83,11 +83,20 @@ model13,category,$\exists x \exists y Rxy$,True,,pl,2,cat
 model14,category,$\exists  x Rxx$,False,,pl,2,cat
 model15,category,$\forall x \forall y (Rxy \vee Ryx)$,False,,pl,2,cat
 model16,category,$\forall x \forall y \forall z [(Rxz \wedge Ryz) \to Rxy]$,False,,pl,2,cat
-1,universal,All dogs like samurai movies.,$\forall x (Dx \to Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-2,existential,Some dogs like samurai movies.,$\exists x (Dx \to Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-3,negatedQuantifier,No dogs like samurai movies.,$\forall x (Dx \to \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-4,negatedQuantifier,Not all dogs like samurai movies.,$\exists x (Dx \wedge \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
-5,conditional,Only dogs like samurai movies.,$\forall x (Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge neg Dx)$|$\exists x (\neg Sx \wedge neg Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-6,conditional,Not only dogs like samurai movies.,$\exists x (Sx \wedge neg Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-7,conditional,Not only dogs do not like samurai movies.,$\exists x (\neg Sx \wedge \neg  Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
-8,conditional,Only dogs do not like samurai movies.,$\forall x (\neg Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-1,universal,All dogs like samurai movies.,$\forall x (Dx \to Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \to Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-2,existential,Some dogs like samurai movies.,$\exists x (Dx \wedge Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-3,negated-universal,No dogs like samurai movies.,$\forall x (Dx \to \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-4,negated-universal,Not all dogs like samurai movies.,$\exists x (Dx \wedge \neg Sx)$,$\forall x (Dx \to Sx)$|$\exists x (Dx \wedge Sx)$|$\forall x (Dx \to \neg Sx)$|$\exists x (Dx \wedge \neg Sx)$,pl,3,1
+pl31-5,universal-conditional,Only dogs like samurai movies.,$\forall x (Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg Dx)$|$\exists x (\neg Sx \wedge \neg Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-6,negated-universal-conditional,Not only dogs like samurai movies.,$\exists x (Sx \wedge \neg Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-7,negated-universal-conditional,Not only dogs do not like samurai movies.,$\exists x (\neg Sx \wedge \neg  Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl31-8,negated-universal-conditional,Only dogs do not like samurai movies.,$\forall x (\neg Sx \to Dx)$,$\forall x (Sx \to Dx)$|$\exists x (Sx \wedge \neg  Dx)$|$\exists x (\neg Sx \wedge \neg  Dx)$|$\forall x (\neg Sx \to Dx)$,pl,3,1
+pl32-1,negated-universal-conditional,There is a dog that is larger than Emerson.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,"No dog that is larger than Emerson.",There is no dog that is larger than Emerson,$,pl,3,1
+pl32-1,negated-universal-conditional,Emerson that is larger than some dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,Any animal that dislikes samurai movies is larger than Bertie.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,There is an animal that is between Bertie and Emerson in size.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,There is no dog that is between Bertie and Emerson in size.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,No dog is larger than itself.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,Every dog is larger than some dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1
+pl32-1,negated-universal-conditional,There is an animal that is smaller than every dog.,$\forall x (\neg Sx \to Dx)$,$,pl,3,1

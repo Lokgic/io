@@ -1044,16 +1044,22 @@ var MCObject = function(eventId,problems){
   this.correct = []
   this.incorrect = []
   this.currentProblemNumber = 0
+  this.init()
+
+}
+
+MCObject.prototype.init = function (){
+  var mainObj = this
   this.scope.select('.readingExQ').selectAll('div')
-      .data(problems).enter(function(d) {
+      .data(this.problems).enter(function(d) {
           return d
       })
       .append('div')
       .attr('id', function(d, i) {
-          return i + "-" + eventId
+          return i + "-" + mainObj.id
       })
       .attr('class', function(d, i) {
-          return 'offScreen ' + eventId + "offScreen"
+          return 'offScreen ' + mainObj.id + "offScreen"
       })
       .html(function(d) {
         var str = ""
@@ -1066,11 +1072,11 @@ var MCObject = function(eventId,problems){
 
       })
 
-      d3.select('.' + eventId + 'offScreen').classed('offScreen', false).classed('currentMC' + eventId, true)
+      d3.select('.' + mainObj.id + 'offScreen').classed('offScreen', false).classed('currentMC' + mainObj.id, true)
       this.nextButtToggle()
      this.currentChoices = this.makeChoices()
      this.currentAnswer = this.problems[this.currentProblemNumber].answer
-
+     this.monitorAnswer()
 }
 
 MCObject.prototype.nextProblem = function(){
@@ -1124,6 +1130,8 @@ MCObject.prototype.nextButtToggle = function(input){
 
 MCObject.prototype.checkAnswer = function(chosen){
   this.problems[this.currentProblemNumber].chosen = chosen
+  console.log(this.problems[this.currentProblemNumber])
+  console.log(this)
   if ( chosen == this.currentAnswer){
     this.correct.push(this.currentProblemNumber)
   } else {
@@ -1136,23 +1144,77 @@ MCObject.prototype.checkAnswer = function(chosen){
       this.state = "printResult"
       this.nextButtToggle("show")
     }
-
 }
 
 MCObject.prototype.printResult = function(){
   this.scope.select(".currentMC"+this.id).remove()
-  var space = this.scope.select('.readingexq')
-  space.append('h3').text('Correct Answers')
-  console.log(this.correct)
-  console.log(this.incorrect)
+  var space = this.scope.select('.readingexans')
+  space.classed('p-a-3',true)
+  space.append('').text('You may press next to restart the quiz.')
+  space.append('h2').text('Correct Answers')
+  for (num in this.correct){
+    space.append('p').text(this.problems[num].question + " Your Response: " + this.problems[num].chosen).style('font-size','1em')
+  }
+  space.append('h3').text('Incorrect Answers')
+  for (num in this.incorrect){
+    space.append('p').text(this.problems[num].question + " Your Response: " + this.problems[num].chosen).style('font-size','1em')
+  }
+  mathJax.reload(this.id)
+  sendAttempts(createBatchAttempts(this))
+  if (this.correct.length == this.problems.length) {
+    recordCompletion(uid,this.modId,this.ch,this.sec)
+    alert("Passed!","passed")
+  }
+  this.state = "restart"
 }
+
+MCObject.prototype.restart = function(){
+  var mainObj = this;
+  this.problems = _.shuffle(this.problems)
+  this.currentProblemNumber = 0;
+  this.correct = []
+  this.incorrect = []
+  this.scope.select('.readingexans').html("")
+
+  this.init()
+
+}
+
 
 MCObject.prototype.monitorAnswer = function(){
   var mainObj = this;
   this.currentChoices.on('click',function(d){
     var chosen = d3.select(this).attr('data')
     mainObj.checkAnswer(chosen)
+    alert("Answer recorded. Press next to continue. Result will be shown once all problems have been answered.","correctblue")
   })
+}
+
+
+function createBatchAttempts(dataObj){
+  var batch = []
+  for (num in dataObj.correct){
+    batch.push({
+      uid:uid,
+      pid:dataObj.problems[num].pid,
+      type:dataObj.problems[num].type,
+      input:dataObj.problems[num].chosen,
+      correct:true
+
+    })
+  }
+  for (num in dataObj.incorrect){
+    batch.push({
+      uid:uid,
+      pid:dataObj.problems[num].pid,
+      type:dataObj.problems[num].type,
+      input:dataObj.problems[num].chosen,
+      correct:false
+
+    })
+  }
+  return batch;
+
 }
 
 function makeMCObj(eventId){
@@ -1162,10 +1224,12 @@ function makeMCObj(eventId){
   var section = eventId.split('-')[2]
   var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
   var state = "uninit"
+
   quizIntro.on('click', function(d) {
       loadProblems(url, function(err,data){
         var mmcc = new MCObject(eventId,data)
-        mmcc.monitorAnswer()
+
+        console.log(mmcc)
         mmcc.nextButt.on('click',function(d){
           console.log(mmcc.state)
           mmcc[mmcc.state]()

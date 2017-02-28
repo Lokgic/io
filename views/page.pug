@@ -42,6 +42,23 @@ mixin MC(x)
 				else
 					span.problemNumDisplay
 
+mixin mcObj(x)
+	h4.text-xs-center.m-y-2 #{x.title}
+	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
+		ul.nav.navbar-nav
+			li.nav-item
+				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
+			li.nav-item.pull-xs-right
+				button.nav-link.p-y-0.showAnswerButt.btn-blue.invisible Show Answer
+			li.nav-item.pull-xs-right
+				button.nav-link.p-y-0.nextButt.btn-blue.offScreen Next
+			li.nav-item.pull-xs-right
+				if (!currentUser)
+					span.red Note: not currently logged in!
+				else
+					span.problemNumDisplay
+
+
 mixin genericActivity(x)
 	h4.text-xs-center.m-y-2 #{x.title}
 	nav.navbar-light.navbar.navbar-full.p-x-1#logicizeNav.subNav.m-b-2
@@ -178,6 +195,14 @@ block content
 											.readingEx.m-l-2.m-b-2(id = x.eventId)
 												+MC(x)
 												.readingExQ.p-a-3
+												.quizIntro
+													+paragraphs(x.intro)
+												.readingExAns
+									when "mcObj"
+										.p-a-0.m-r-0.m-l-0
+											.readingEx.m-l-2.m-b-2(id = x.eventId)
+												+mcObj(x)
+												.readingExQ
 												.quizIntro
 													+paragraphs(x.intro)
 												.readingExAns

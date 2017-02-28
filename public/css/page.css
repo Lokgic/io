@@ -271,9 +271,9 @@ body {
   opacity: 0.8;
   background: black;
   color:white;
-  font-size: 0.8em;
   padding:1em;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  font-size: 1.2em
 }
 .offScreen{
   position: absolute;
@@ -388,7 +388,8 @@ body {
   border:1px solid grey;
   border-radius: 20px;
   padding: 20px 0;
-
+  -webkit-transition: height 2s; /* For Safari 3.1 to 6.0 */
+  transition: height 2s;
 }
 
 .resultCorrect {
@@ -412,14 +413,20 @@ body {
 
 .readingExQ{
   /*background: #eee;*/
-
-  margin-top: 40px;
+  padding: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   /*padding: 20px 20px;*/
-  font-size: 1.5em
+  font-size: 1.2em;
   /*height:250px;*/
+  display:flex;
 
 }
 
+.readingExQ div{
+  margin:auto;
+
+}
 .readingExQNum{
   /*background: #90afc5;*/
   /*height:250px;*/

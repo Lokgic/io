@@ -601,6 +601,41 @@
 			}
 	  }
 	});
+
+	$.notify.addStyle('passed', {
+	  html: "<div><span data-notify-text/></div>",
+	  classes: {
+	    base: {
+	      "white-space": "nowrap",
+	      "background-color": "#87E293",
+	      "padding": "50px 30px",
+	      "color":"#FE8402",
+	      "min-width":"300px",
+	      "opacity": .9,
+	      "border-radius":"10px",
+	      "border-width":"5px",
+	      "border-color":"#589FC1",
+	      "border-style":"solid",
+	       "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
+	       "font-family": 'Titillium Web',
+				 "font-size":"1.5em"
+	    },
+			mini: {
+				// "white-space": "nowrap",
+				"background-color": "#336B87",
+				"padding": "1px 1px",
+				"color":"white",
+				"min-width":"30px",
+				"opacity": .9,
+				"border-radius":"2",
+				"border-width":"1px",
+				"border-color":"#589FC1",
+				"border-style":"solid",
+				 "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
+				 "font-family": 'Titillium Web'
+			}
+	  }
+	});
 	$.notify.addStyle('incorred', {
 	  html: "<div><span data-notify-text/></div>",
 	  classes: {

@@ -773,9 +773,9 @@
               "conclusion":"$Fw$"
             },
             {
-                "type":"mc",
+                "type":"mcObj",
                 "title": "Reading Exercise: English/PL Translation",
-                "instruction": "Pick the correct translation.",
+                "instruction": "Pick the correct translation. Symbolization Key: $Dx$: x is a dog, $Sx$: x likes samurai movies.",
                 "eventId": "pl-3-1",
                 "intro": ["For this reading exercise, you will be given an English statement. Pick the PL sentence that best capture its meaning. You can make as many attempt as you like, but you must answer all questions correctly to receive credit."]
               }
