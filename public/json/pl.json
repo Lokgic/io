@@ -196,7 +196,7 @@
           {
             "type":"p",
             "substance":[
-              "If we are translating this sentence into PL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If the only thing that we will discuss being borrowed is the family car, then the generality of the three-place predicate is unnecessary. If the only borrowing we need to symbolize is different people borrowing the family car from Nunzio, then a one-place predicate will be enough.",
+              "If we are symbolizing this sentence into PL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If the only thing that we will discuss being borrowed is the family car, then the generality of the three-place predicate is unnecessary. If the only borrowing we need to symbolize is different people borrowing the family car from Nunzio, then a one-place predicate will be enough.",
 
               "In general, we can have predicates with as many places as we need. Predicates with more than one place are called polyadic. Predicates with $n$ places, for some number $n$, are called n-place or n-adic.",
 
@@ -620,13 +620,13 @@
     "1":{
       "chapterName": "PL Symbolization",
       "chapterNum": "3",
-      "chapterDescription": "In this chapter, we discuss various strategies and techniques for translating complex English sentences in to PL. ",
+      "chapterDescription": "In this chapter, we discuss various strategies and techniques for symbolizing complex English sentences in to PL. ",
       "title":"'PLizing' a sentence before symbolization",
       "content":[
         {
           "type":"p",
           "substance":[
-            "In general, translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, and connectives, so when translating an English sentence, it is useful to think of a rough PL equivalence in English first. Consider these sentences"
+            "In general, symbolizing more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, and connectives, so when symbolizing an English sentence, it is useful to think of a rough PL equivalence in English first. Consider these sentences"
           ]
         },
         {
@@ -775,7 +775,7 @@
             {
                 "type":"mcObj",
                 "title": "Reading Exercise: English/PL Translation",
-                "instruction": "Pick the correct translation. Symbolization Key: $Dx$: x is a dog, $Sx$: x likes samurai movies.",
+                "instruction": "Pick the correct translation. Symbolization Key: $Dx$: x is a dog, $Sx$: x likes samurai movies. The domain of discourse is all animals.",
                 "eventId": "pl-3-1",
                 "intro": ["For this reading exercise, you will be given an English statement. Pick the PL sentence that best capture its meaning. You can make as many attempt as you like, but you must answer all questions correctly to receive credit."]
               }
@@ -808,7 +808,7 @@
           "We have defined $\\forall$ and $\\exists$ in such a way that $\\forall\\psi$ is equivalent to $\\neg \\exists \\neg\\psi$. As such, the universal quantifier doesn't involve the existence of anything---only non-existence. If sentence 1 is true, then there are no monkeys who don't know sign language. If there were no monkeys, then $\\forall x(Mx \\to Sx)$ would be true and $\\exists x(Mx \\wedge Sx)$ would be false.",
           "We allow empty predicates because we want to be able to say things like, 'I do not know if there are any monkeys, but any monkeys that there are know sign language.' That is, we want to be able to have predicates that do not (or might not) refer to anything.",
           "What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean '$x$ is a refrigerator.' Now the sentence $\\forall x(Rx \\to Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\\forall x(Rx \\to Mx)$ means that any member of the UD that is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.",
-          "If you were actually translating the sentence 'All refrigerators are monkeys', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\\forall x(Rx \\to Mx)$ would be false."
+          "If you were actually symbolizing the sentence 'All refrigerators are monkeys', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\\forall x(Rx \\to Mx)$ would be false."
         ]
 
       }
@@ -871,7 +871,7 @@
         {
           "type":"ps",
           "substance":[
-            "This translation is a disaster! It takes what in English is a terrible argument and translates it as a valid argument in QL. The problem is that there is a difference between being skilled as a surgeon and skilled as a tennis player. Translating this argument correctly requires two separate predicates, one for each type of skill. If we let $Sx$ mean '$x$ is skilled as a surgeon' and $Px$ mean '$x$ is skilled as a tennis player,' then we can symbolized the argument in this way:"
+            "This translation is a disaster! It takes what in English is a terrible argument and translates it as a valid argument in PL. The problem is that there is a difference between being skilled as a surgeon and skilled as a tennis player. Translating this argument correctly requires two separate predicates, one for each type of skill. If we let $Sx$ mean '$x$ is skilled as a surgeon' and $Px$ mean '$x$ is skilled as a tennis player,' then we can symbolized the argument in this way:"
           ]
         },
         {
@@ -887,7 +887,7 @@
             "Like the English language argument it translates, this is invalid. ",
             "The moral of these examples is that you need to be careful of symbolizing predicates in an ambiguous way. Similar problems can arise with predicates like good, bad, big, and small. Just as skilled surgeons and skilled tennis players have different skills, big dogs, big mice, and big problems are big in different ways.",
             "Is it enough to have a predicate that means '$x$ is a skilled surgeon', rather than two predicates '$x$ is skilled' and '$x$ is a surgeon'? Sometimes, as sometimes we do not need to distinguish between skilled surgeons and other surgeons.",
-            "Must we always distinguish between different ways of being skilled, good, bad, or big? No. As the argument about Billy shows, sometimes we only need to talk about one kind of skill. If you are translating an argument that is just about dogs, it is fine to define a predicate that means '$x$ is big.' If the UD includes dogs and mice, however, it is probably best to make the predicate mean '$x$ is big for a dog.'"
+            "Must we always distinguish between different ways of being skilled, good, bad, or big? No. As the argument about Billy shows, sometimes we only need to talk about one kind of skill. If you are symbolizing an argument that is just about dogs, it is fine to define a predicate that means '$x$ is big.' If the UD includes dogs and mice, however, it is probably best to make the predicate mean '$x$ is big for a dog.'"
           ]
         }
       ]
@@ -949,7 +949,7 @@
             "Sentence 2 is almost a tongue-twister. There is little hope of writing down the whole translation immediately, but we can proceed by small steps. An initial, partial translation might look like this: $$\\exists x \\text{ everyone who likes everyone that $x$ likes is liked by $x$}$$",
             "The part that remains in English is a universal sentence, so we translate further: $$\\exists x\\forall y(\\text{$y$ likes everyone that $x$ likes}\\to\\text{$x$ likes $y$}).$$",
             "The antecedent of the conditional is structurally just like the first sentence, with $y$ and $x$ in place of Iris and Karl. So sentence 2 can be completely translated in this way $$\\exists x\\forall y[\\forall z(Lxz \\to Lyz) \\to Lxy]$$",
-            "When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps. Paraphrase the English sentence so that the logical structure is readily symbolized in QL. Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.",
+            "When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps. Paraphrase the English sentence so that the logical structure is readily symbolized in PL. Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.",
 
             "It is extremely important to note that the order of the quantifiers matters a lot when we are mixing universal and existential quantifiers. For instance, consider the following:"
           ]
@@ -961,8 +961,22 @@
           ]
         },
         {
-          "type":"textInput","eventId":"pl-3-4","substance":["How would you translate the statements above into English?"]
-        }
+          "type":"textInput","eventId":"pl-3-3","substance":["Distinguishing Mixed Quantifiers: How would you translate the statements above into English?"]
+        },
+        {
+            "type":"mcObj",
+            "title": "Complex Symbolization",
+            "instruction": "Pick the correct translation. Symbolization Key: $Dx$: x is a dog, $Lxy$: x is larger than y. The domain of discourse is all animals. Assume that no two animals are equal in size - if x is not larger than y, then x is smaller than y.",
+            "eventId": "pl-3-2",
+            "intro": ["For this reading exercise, you will be given an English statement. Pick the PL sentence that best capture its meaning. You can make as many attempt as you like, but you must answer all questions correctly to receive credit."]
+          },
+          {
+              "type":"mcObj",
+              "title": "Concepts Review",
+              "instruction": "Pick the correct the definition for the concept presented to you.",
+              "eventId": "pl-3-defmc",
+              "intro": ["Note: this quiz contains concepts from previous chapters."]
+            }
       ]
     }
   }

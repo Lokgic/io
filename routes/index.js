@@ -214,7 +214,7 @@ router.post('/profile/*', function(req,res,next){
 	purge(pa.children)
 	pa.completed = false
 	var uid = req.path.split('/')[2]
-	console.log(sl.children[0].children[0].children[0])
+	// console.log(sl.children[0].children[0].children[0])
 	// console.log(uid)
 	var tree = {
 		"name":"Logic",

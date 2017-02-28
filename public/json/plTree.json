@@ -60,9 +60,30 @@
                     ]
                 },
                  {
-                    "name": "Quantifiers and its Translations",
+                    "name": "PL Symbolization",
                     "type":"chapter",
-                    "children": []
+                    "children": [
+                      {
+                        "name":"Basic Symbolization",
+                        "type":"section",
+                        "id":"pl-3-1"
+                      },
+                      {
+                        "name":"Complex Symbolization",
+                        "type":"section",
+                        "id":"pl-3-2"
+                      },
+                      {
+                        "name":"Distinguishing Mixed Quantifiers",
+                        "type":"section",
+                        "id":"pl-3-3"
+                      },
+                      {
+                        "name":"Definition Review",
+                        "type":"section",
+                        "id":"pl-3-defmc"
+                      }
+                    ]
                 },
                 {
                     "name": "Analytic Tableaux(Truth Trees)",

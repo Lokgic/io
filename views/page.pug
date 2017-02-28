@@ -49,14 +49,18 @@ mixin mcObj(x)
 			li.nav-item
 				span.navbar-text.text-muted.hidden-md-down Instruction: #{x.instruction}
 			li.nav-item.pull-xs-right
+				if (!currentUser)
+					span.red Note: not currently logged in!
+				else
+					span.passedDisplay
+			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.showAnswerButt.btn-blue.invisible Show Answer
 			li.nav-item.pull-xs-right
 				button.nav-link.p-y-0.nextButt.btn-blue.offScreen Next
 			li.nav-item.pull-xs-right
-				if (!currentUser)
-					span.red Note: not currently logged in!
-				else
-					span.problemNumDisplay
+				span.problemNumDisplay
+
+
 
 
 mixin genericActivity(x)

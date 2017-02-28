@@ -81,7 +81,7 @@ function recordLeader(uid, logicise, score) {
 
 function sendAttempts(dataSet) {
 
-
+    if (!logged) return console.log("Not currently logged in")
     // console.log(toSend)
     $.ajax({
         url: '/data/attempt',
@@ -1031,24 +1031,70 @@ function textInputInit(){
 
 
 
-var MCObject = function(eventId,problems){
+var MCObject = function(eventId){
+  var mmcc = this
   this.id = eventId
-  this.problems = problems
   this.modId = eventId.split('-')[0]
   this.ch = eventId.split('-')[1]
   this.sec = eventId.split('-')[2]
   this.scope = d3.select('#'+eventId)
   this.nextButt = this.scope.select('.nextbutt')
-  this.state = "answer"
-  this.scope.select('.QuizIntro').remove()
+  if (logged){
+    checkPassed(mmcc.modId, mmcc.ch,mmcc.sec, function(d){
+      if (d) {
+        mmcc.scope.select('.passedDisplay').html("&check;")
+        this.passed = true
+      }else{
+        this.passed = false
+      }
+    })
+
+  }
+
   this.correct = []
   this.incorrect = []
   this.currentProblemNumber = 0
-  this.init()
+
+  this.nextButt.on('click',function(d){
+    mmcc[mmcc.state]()
+  })
+  var quizIntro = d3.select('#'+eventId+' .quizIntro')
+
+  var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
+
+  quizIntro.on('click', function(d) {
+    mmcc.scope.select('.QuizIntro').remove()
+    // mmcc.scope.style('min-height','30%')
+    // mmcc.scope.select('.readingExQ').style('height','30%')
+    // mmcc.scope.select('.readingExAns').style('margin','auto')
+    loadProblems(url, function(err,data){
+
+      mmcc.state = "answer"
+      mmcc.problems = data
+      console.log(mmcc)
+      mmcc.init()
+
+
+    })
+  })
+  .on('mouseover',function(){
+    d3.select(this).style('background',"grey")
+    d3.select(this).style('color',"black")
+  })
+  .on('mouseout',function(){
+    d3.select(this).style('background',"black")
+    d3.select(this).style('color',"white")
+
+  })
+
+
+
 
 }
 
 MCObject.prototype.init = function (){
+
+
   var mainObj = this
   this.scope.select('.readingExQ').selectAll('div')
       .data(this.problems).enter(function(d) {
@@ -1076,7 +1122,13 @@ MCObject.prototype.init = function (){
       this.nextButtToggle()
      this.currentChoices = this.makeChoices()
      this.currentAnswer = this.problems[this.currentProblemNumber].answer
+     this.updateProblemsLeft()
+
      this.monitorAnswer()
+}
+
+MCObject.prototype.updateProblemsLeft = function(){
+  this.scope.select('.problemNumDisplay').text((this.currentProblemNumber + 1)+'/' + this.problems.length)
 }
 
 MCObject.prototype.nextProblem = function(){
@@ -1085,8 +1137,11 @@ MCObject.prototype.nextProblem = function(){
   if (this.continue()){
     this.currentProblemNumber += 1;
     d3.select('.' + this.id + 'offScreen').classed('offScreen', false).classed('currentMC' + this.id, true)
+  this.currentChoices.remove()
    this.currentChoices = this.makeChoices()
    this.currentAnswer = this.problems[this.currentProblemNumber].answer
+   this.updateProblemsLeft()
+
    this.monitorAnswer()
   }
 
@@ -1105,8 +1160,25 @@ MCObject.prototype.makeChoices = function() {
 
     var userInput = this.scope.select('.readingExAns')
     userInput.selectAll('button').remove()
+    var options = this.problems[this.currentProblemNumber].options
 
-    var options = this.problems[this.currentProblemNumber].options.split("|")
+    if (options == "pool"){
+      options = []
+      var poolId = this.problems[this.currentProblemNumber].pid.split("-")[1]
+      for (prob in this.problems){
+        if (this.problems[prob].pid.split("-")[1] == poolId) options.push(this.problems[prob].answer)
+      }
+      if (options.length < 4){
+        for (prob in this.problems){
+          if (!_.contains(options,this.problems[prob].answer)) options.push(this.problems[prob].answer)
+          if (options.length >= 4) break;
+        }
+      }
+    }else options = options.split("|")
+
+
+
+    _.shuffle(options)
     userInput.selectAll('button').data(options).enter()
         .append('button')
         .attr('class', 'btn btn-block btn-greyish ' + this.id + "butt")
@@ -1138,7 +1210,7 @@ MCObject.prototype.checkAnswer = function(chosen){
     this.incorrect.push(this.currentProblemNumber)
   }
   this.nextButtToggle("show")
-  this.currentChoices.remove()
+  this.currentChoices.classed('invisible', true)
   if (this.continue()) this.state = "nextProblem"
     else {
       this.state = "printResult"
@@ -1147,23 +1219,26 @@ MCObject.prototype.checkAnswer = function(chosen){
 }
 
 MCObject.prototype.printResult = function(){
+  this.currentChoices.remove()
   this.scope.select(".currentMC"+this.id).remove()
   var space = this.scope.select('.readingexans')
   space.classed('p-a-3',true)
-  space.append('').text('You may press next to restart the quiz.')
+  space.append('p').text('You may press next to restart the quiz.')
   space.append('h2').text('Correct Answers')
   for (num in this.correct){
-    space.append('p').text(this.problems[num].question + " Your Response: " + this.problems[num].chosen).style('font-size','1em')
+    space.append('p').text(this.problems[this.correct[num]].question + " Your Response: " + this.problems[this.correct[num]].chosen).style('font-size','1em')
   }
   space.append('h3').text('Incorrect Answers')
   for (num in this.incorrect){
-    space.append('p').text(this.problems[num].question + " Your Response: " + this.problems[num].chosen).style('font-size','1em')
+    space.append('p').text(this.problems[this.incorrect[num]].question + " Your Response: " + this.problems[this.incorrect[num]].chosen).style('font-size','1em')
   }
   mathJax.reload(this.id)
-  sendAttempts(createBatchAttempts(this))
-  if (this.correct.length == this.problems.length) {
+  if (logged) sendAttempts(createBatchAttempts(this))
+  if (logged && !this.passed &&this.correct.length == this.problems.length) {
     recordCompletion(uid,this.modId,this.ch,this.sec)
     alert("Passed!","passed")
+    if (d) mmcc.scope.select('.passedDisplay').html("&check;")
+    this.passed = true
   }
   this.state = "restart"
 }
@@ -1217,36 +1292,17 @@ function createBatchAttempts(dataObj){
 
 }
 
-function makeMCObj(eventId){
-  var quizIntro = d3.select('#'+eventId+' .quizIntro')
-  var modId = eventId.split('-')[0]
-  var chapter = eventId.split('-')[1]
-  var section = eventId.split('-')[2]
-  var url = eventId.split('-')[0] + '/' + eventId.split('-')[1] + '/' + eventId.split('-')[2]
-  var state = "uninit"
+function checkPassed(m,c,s,callback){
+  var url = '/checkPassed/'+m+'/'+c+'/'+s
+  console.log(url)
+    $.post(url)
+    .done(function(d){
+      console.log(d)
+      callback(d)
 
-  quizIntro.on('click', function(d) {
-      loadProblems(url, function(err,data){
-        var mmcc = new MCObject(eventId,data)
-
-        console.log(mmcc)
-        mmcc.nextButt.on('click',function(d){
-          console.log(mmcc.state)
-          mmcc[mmcc.state]()
-        })
-      })
-
-
-
-  })
-  .on('mouseover',function(){
-    d3.select(this).style('background',"grey")
-    d3.select(this).style('color',"black")
-  })
-  .on('mouseout',function(){
-    d3.select(this).style('background',"black")
-    d3.select(this).style('color',"white")
-
-  })
+    })
+    .fail(function(d){
+      console.log(d)
+    })
 
 }
