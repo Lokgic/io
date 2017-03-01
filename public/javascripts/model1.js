@@ -116,7 +116,7 @@ $(function(){
         d3.select('#display').append('div').attr('class','col-md-12 p-a-3').attr('id','tableSpace')
         var toTab = [col1,col2]
         tabulate(toTab, '#tableSpace',"fill2")
-        console.log(answer)
+
         mathJax.reload('#display')
 
         d3.selectAll('.blank').on('click',function(d,i){
@@ -206,11 +206,10 @@ $(function(){
         correct:correct
       }
 
-      console.log(att)
+
       if (logged) sendAttempts(att);
       updateStatus()
-      console.log(answer)
-      console.log(input)
+
     }
 
   })

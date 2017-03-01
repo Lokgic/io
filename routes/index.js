@@ -356,7 +356,8 @@ router.post('/processing/*', function(req,res,next){
 
 	var output;
 	var generator = require("../js/"+generatorID+"_gen.js")
-	// console.log(generatorID)
+	// console.log("here")
+	// console.log(generator)
 
 	if (option == undefined){
 		 output  = new generator.makeStuff()
@@ -370,7 +371,7 @@ router.post('/processing/*', function(req,res,next){
 		output  =  generator[option](va)
 	}
 
-// console.log(output)
+	console.log(output)
 
 
 	return res.send(output)

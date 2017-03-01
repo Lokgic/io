@@ -33,5 +33,10 @@
     "title": "Model 1",
     "shortDescription":"Based on the model provided, provide the correct values for the table.",
     "eventId":"model1"
+  },
+  "alienTree1":{
+    "title": "Alien Family Tree 1",
+    "shortDescription":"Alien Family Tree.",
+    "eventId":"alienTree1"
   }
 }

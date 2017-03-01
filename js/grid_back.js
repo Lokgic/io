@@ -274,7 +274,7 @@ stat = {
 }
 // console.log(stat)
 // console.log(evaluate(stat, model))
-var debug = false
+var debug = true
 
 if (debug){
   var test = require('tape')
