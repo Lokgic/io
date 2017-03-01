@@ -9,7 +9,8 @@
         {
                 "name": "Reading",
                 "type":"subtask",
-                "children": [{
+                "children": [
+                  {
                     "name": "Why Predicates?",
                     "type":"chapter",
                     "children": [
@@ -88,7 +89,7 @@
                 {
                     "name": "Analytic Tableaux(Truth Trees)",
                     "type":"chapter",
-                    "children": []
+                    "children": null
                 }]
             }, {
                 "name": "Logicise",

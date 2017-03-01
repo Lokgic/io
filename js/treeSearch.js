@@ -1,6 +1,5 @@
 module.exports.search = function treeSearch(element, key, property){
   // console.log("searching..")
-  // console.log(element)
      if(element[key] == property){
           return element;
      }else if (element.children != null){
@@ -11,6 +10,8 @@ module.exports.search = function treeSearch(element, key, property){
           }
           return result;
      }
+    //  console.log("returning null for " + element[0])
+
      return null;
 }
 

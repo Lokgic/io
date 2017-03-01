@@ -186,10 +186,13 @@ router.post('/getBasic/*', function(req,res,next){
 
 router.post('/profile/*', function(req,res,next){
 	function purge(children){
-		// console.log(children)
+
+		// console.log("purging child of " + children.name)
 		for (o in children){
 			// if (children[o].completed) {
 				children[o].completed = false;
+				// console.log("purging" + children[o].name)
+
 				children[o].time = null;
 			// }
 			if (children[o].children != null) purge(children[o].children)
@@ -250,13 +253,17 @@ router.post('/profile/*', function(req,res,next){
 				for (record in re[module]){
 					var id = re[module][record].module + "-" + re[module][record].chapter + "-" +re[module][record].section;
 				var target = treeSearch.search(tree.children[index[re[module][record].module]],"id",id)
+				// console.log(target)
+				// console.log(target != null)
 				if (target != null) {
 					target.completed = true;
 					target.time = re[module][record].createdAt;
-				}else{
-					target.time = null;
-						target.completed = false;
 				}
+				// else{
+				//
+				// 	target.time = null;
+				// 		target.completed = false;
+				// }
 
 				// console.log(target)
 				}
@@ -367,11 +374,11 @@ router.post('/processing/*', function(req,res,next){
 
 		// if (option == "cats") console.log(output)
 	} else{
-		console.log(option + " " + va)
+		// console.log(option + " " + va)
 		output  =  generator[option](va)
 	}
 
-	console.log(output)
+	// console.log(output)
 
 
 	return res.send(output)
@@ -381,7 +388,7 @@ router.post('/processing/*', function(req,res,next){
 router.post('/leaderboard/*',function(req,res,next){
 	var logicise = req.path.split('/')[2]
 	data.getRanking(logicise,function(d){
-		console.log(d)
+		// console.log(d)
 		res.send(d)
 	})
 })
