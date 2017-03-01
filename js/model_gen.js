@@ -407,6 +407,8 @@ var Proposition = function(model,diff) {
 
 }
 
+module.exports.Proposition = Proposition
+
 function initPropSet(model, n, diff) {
     output = []
     var keys = _.allKeys(model.extensions)

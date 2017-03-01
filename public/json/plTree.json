@@ -116,7 +116,19 @@
     },
     {
       "name":"Problem Set 2",
-      "type":"task"
+      "type":"task",
+      "children":[
+        {
+          "name":"Model Semantics","type":"subtask","id":"pl-pset-1"
+        },
+        {
+          "name":"Sheffer Stroke and SL Trees","type":"subtask","id":"pl-pset-2"
+        },
+        {
+          "name":"PL trees and translations","type":"subtask","id":"pl-pset-3"
+        }
+
+      ]
     },
     {
       "name":"Test 2",
