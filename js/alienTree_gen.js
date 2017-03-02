@@ -7,7 +7,7 @@ var pl = require('./model_gen.js')
 var color = ["blue","green","red","black","purple"]
 
 
-var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
+var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i','j','k','l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
 var variables = ['x', 'y', 'z']
 // var predicates = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
 var every = '\\forall';

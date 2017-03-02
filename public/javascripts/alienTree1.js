@@ -86,7 +86,7 @@ $(function() {
           .attr("x", 25)
           .style("text-anchor", "start")
           .text(function(d) {
-              return d.data.name;
+              return d.data.constant +": "+d.data.name;
           });
 
     })
