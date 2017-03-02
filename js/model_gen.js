@@ -303,7 +303,7 @@ var Constant = function(name, obj) {
 ////PROPOSITION RELATED
 
 var Proposition = function(model,diff) {
-
+  console.log(model)
     var o = {
         variables: variables,
         constants: model.names
@@ -617,7 +617,7 @@ var check = {
     }
 }
 
-function makeProblemSet(model, n, diff) {
+var makeProblemSet = function makeProblemSet(model, n, diff) {
     p = []
     for (var i = 0; i < n; i++) {
         temp = new Proposition(model, diff)
@@ -628,6 +628,8 @@ function makeProblemSet(model, n, diff) {
     }
     return p;
 }
+
+module.exports.makeProblemSet = makeProblemSet
 
 var model1 = function model1(tier){
   // console.log(tier)
@@ -652,7 +654,7 @@ var model1 = function model1(tier){
       }
       // console.log(diff)
       var model = initModel(diff)
-
+      console.log(model)
       return {
         problems: makeProblemSet(model,4,diff),
         model,model
@@ -661,7 +663,7 @@ var model1 = function model1(tier){
 }
 
 module.exports.model1 = model1
-// console.log(model1(1))
+// console.log(model1(5))
 // var test = initModel(2)
 // console.log(JSON.stringify(test, null, 4));
 // var tt = makeProblemSet(test, 4)

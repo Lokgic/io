@@ -327,7 +327,7 @@
           "type":"ps",
           "substance":[
 
-            "Consider the sentence to the left below. It is clear that they are <i>about</i> the circles to the right, in the sense that, the meaning - the truth value - of each sentence is contingent upon how the circles are arranged: if we change the colors of the circles, some sentences originally truth could become false. For instance, if some of the circles were blue, the statement 'every circle is black' would end up false. You can experiment with this by clicking on each circle, which changes its color, and the truth values of the sentences will reflect the updated model.",
+            "Consider the sentences to the left below. It is clear that they are <i>about</i> the circles to the right, in the sense that, the meaning - the truth value - of each sentence is contingent upon how the circles are arranged: if we change the colors of the circles, some sentences originally truth could become false. For instance, if some of the circles were blue, the statement 'every circle is black' would end up false. You can experiment with this by clicking on each circle, which changes its color, and the truth values of the sentences will reflect the updated model.",
             "Thus, each combination of the circles is one possible <i>model</i> which provides the necessary information on how to interpret the sentences. This is the basic intuition about model semantics - we interpret PL sentence in light of the way things within a domain of discourse, which could be everyone in the world, all real numbers, or circles below. Model semantics captures this by using set theory, as a precise way of expressing the existence of objects and their properties. "
           ]
         },

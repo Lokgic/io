@@ -7,11 +7,12 @@ $(function() {
       })
     }
 
-    loadTree(function(table){
+    loadTree(function(data){
+      console.log(data)
       var dimensions = {}
        dimensions.width = $('#display').width();
        dimensions.height = window.innerHeight*.7;
-       console.log(dimensions)
+      //  console.log(dimensions)
 
       // set the dimensions and margins of the diagram
       var margin = {top: 50, right:30, bottom: 100, left: 30},
@@ -24,7 +25,7 @@ $(function() {
           .parentId(function(d) {
               return d.parent;
           })
-          (table);
+          (data.relation);
 
 
       var treemap = d3.tree()
