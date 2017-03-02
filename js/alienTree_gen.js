@@ -89,7 +89,11 @@ function makeAliens(n){
     var temp = chance.last()
     if (!_.contains(namePool,temp)) namePool.push(temp)
   }
-  var constantPool = chance.pickset(constants,n)
+  var constantPool = []
+  if (n > constants.length){
+    
+  }
+   = chance.pickset(constants,n)
 
   var output = []
   while (namePool.length > 0){
