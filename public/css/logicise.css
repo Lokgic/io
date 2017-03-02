@@ -5,7 +5,43 @@
 .incorrectTableCell{
   background: rgb(191, 113, 138);}
 
+  .treechoices {
+      height: 0px;
+      width: 100%;
+      position: fixed;
+      z-index: 1001;
+      top: 0;
+      right: 0;
+      background-color: #aaa;
+      overflow-x: hidden;
+      transition: 0.5s;
+      margin:0;
+      padding: 36px 0 0 0;
+      opacity: 0.9;
+      -webkit-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+      -moz-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+      box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+      color:white;
 
+  }
+
+
+.floatInfo{
+  transition: 0.4s;
+  position: fixed;
+  top:100px;
+  left:-10000;
+  max-height:80%;
+  max-width:20%;
+  background: rgba(55,55,55,0.9);
+  padding:20px 20px;
+  color:white;
+  z-index: 1001;
+  overflow-x: hidden;
+  -webkit-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+  box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
+}
 #control{
     position: fixed;
     bottom:50px;
@@ -58,25 +94,7 @@ td:hover {
   font-size: 1.2em;
 }
 
-.treechoices {
-    height: 0px;
-    width: 100%;
-    position: fixed;
-    z-index: 1001;
-    top: 0;
-    right: 0;
-    background-color: #aaa;
-    overflow-x: hidden;
-    transition: 0.5s;
-    margin:0;
-    padding: 36px 0 0 0;
-    opacity: 0.9;
-    -webkit-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
-    box-shadow: -11px 2px 14px -5px rgba(0,0,0,0.75);
-    color:white;
 
-}
 
 .treeChoiceButt{
   margin-top: 30px;

@@ -30,13 +30,14 @@ block content
 						a.nav-link.p-y-0#save(href = "#") Score : &nbsp;
 						span#score 0
 		.row.text-xs-center.m-a-0#bigContainer
-			.row.col-md-9#interaction
+			.row.col-lg-10#interaction
+				.col-lg-2.col-md-0#information
 				#control
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#confirm Confirm
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt2.invisible
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt3.invisible
-				.col-md-12#display
-			.col-md-3#leaderboard
+				.col-lg-10.col-md-12#display
+			.col-lg-2#leaderboard
 				h4.text-xs-center Leaderboard
 				#board
 
@@ -68,6 +69,7 @@ block extrafooter
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="../javascripts/mods/help.js")
 	script(src="../javascripts/mods/timer.js")
+	script(src="../javascripts/mods/logicisehelp.js")
 	script(src="../javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")
 	script(src="../javascripts/"+logiciseID+".js")
