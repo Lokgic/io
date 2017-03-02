@@ -1,7 +1,7 @@
 $(function() {
 
     function loadTree(callback){
-      $.post('/processing/alienTree/alienTree1/20')
+      $.post('/processing/alienTree/alienTree1/30')
       .done(function(d){
         callback(d)
       })

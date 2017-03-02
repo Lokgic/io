@@ -91,9 +91,13 @@ function makeAliens(n){
   }
   var constantPool = []
   if (n > constants.length){
-    
-  }
-   = chance.pickset(constants,n)
+    var needed = n - constants.length
+    for (var i = 0; i<needed;i++){
+      constantPool.push("a_"+i)
+    }
+    constantPool = _.union(constants,constantPool)
+  } else constantPool = chance.pickset(constants,n)
+
 
   var output = []
   while (namePool.length > 0){
