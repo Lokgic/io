@@ -316,6 +316,33 @@ router.post('/data/*', function(req,res,next){
 	})
 
 })
+
+router.post('/statData/*', function(req,res,next){
+	var database = req.path.split('/')[2]
+
+	data.statData(req.body,database,function(error, response){
+		if (error) {
+			var message
+			if (error.code == 23505){
+
+					message="Quiz already completed!"
+				}else{
+					message = "DB error"
+				}
+
+
+			res.send({message:message})
+		}
+		else {
+			console.log(response)
+			var resp ={
+				message:response
+			}
+			res.send(resp)
+		}
+	})
+
+})
 //get problems
 router.post('/problem/*', function(req,res,next){
 

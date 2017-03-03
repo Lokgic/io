@@ -197,15 +197,100 @@ logiciseTracker.prototype.nextState = function(){
   me[nextState[me.state]]()
 
 }
-//
-// logiciseTracker.prototype.nextProblem = function(){
-//   var me = this
-//   // console.log(me.drawProblem)
-//   var nextState = {
-//     "init":"drawProblem",
-//     "userInput":"checkAnswer",
-//     "nextProblem":"nextProblem"
-//   }
-//   me[nextState[me.state]]()
-//
-// }
+
+
+var modelStatDataObject = function(uid){
+
+    this.uid = uid
+    this.reset()
+
+
+
+
+}
+
+var connectiveKey = {
+  "\\vee":"disjunction",
+  "\\wedge":"conjunction",
+  "\\to":"conditional",
+  "\\leftrightarrow":"biconditional",
+  "\\forall":"universal",
+  "\\exists":"existential"
+}
+
+modelStatDataObject.prototype.connecitveCount = function(c){
+  this[connectiveKey[c]] += 1;
+}
+
+modelStatDataObject.prototype.sendDB = function(note){
+  // console.log("sending")
+  this.note = note;
+  var dat = this
+  console.log(dat)
+  $.ajax({
+      url: '/statData/modelstat',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(dat),
+      dataType: 'json',
+      success: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("message " + res.message)
+      },
+      error: function(res) {
+          //On ajax success do this
+          console.log(res)
+          console.log("error message " + res.message)
+      }
+  });
+  this.reset()
+}
+
+modelStatDataObject.prototype.reset = function(c){
+  this.depth = 1
+  this.udSize = 0
+  this.constants = 0
+  this.onePlace = 0
+  this.twoPlace = 0
+  this.threePlace = 0
+  this.conditional = 0
+  this.disjunction = 0
+  this.biconditional = 0
+  this.conjunction = 0
+  this.negation = 0
+  this.universal = 0
+  this.existential = 0
+  this.correct = 0
+  this.incorrect = 0
+  this.identity = 0
+  this.note = ""
+
+}
+
+modelStatDataObject.prototype.processModel = function(d){
+  msData = this
+  msData.udSize = d.model.ud.length
+  msData.constants = _.keys(d.model.referents).length
+  var place = [0,0,0]
+  var extLen = 0
+  for (ex in d.model.extensions){
+    extLen += d.model.extensions[ex].extension.length
+    place[d.model.extensions[ex].place - 1] += 1
+  }
+  console.log(place)
+  for (problem in d.problems){
+    if (d.problems[problem][0].negated) msData.negation += 1
+    if (d.problems[problem][0].left.negated) msData.negation += 1
+    if (d.problems[problem][0].right.negated) msData.negation += 1
+
+     msData.connecitveCount(d.problems[problem][0].connective)
+     for (q in d.problems[problem][0].quantifiers){
+       msData.connecitveCount(d.problems[problem][0].quantifiers[q].quantifier)
+     }
+  }
+  msData.extensionMean = Math.round(extLen/_.keys(d.model.extensions).length)
+  msData.onePlace = place[0]
+  msData.twoPlace = place[1]
+  msData.threePlace = place[2]
+}

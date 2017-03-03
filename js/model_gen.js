@@ -15,7 +15,7 @@ var disjunction = '\\vee'
 var iff = '\\leftrightarrow'
 var quantifiersOptions = [some, every]
 var connectives = [conjunction, conditional, disjunction, iff]
-var objectCategory = ["first", "country", "last", "state"]
+var objectCategory = ["first", "country", "last","state"]
 var catArg = {
     "state": {
         full: true,
@@ -336,14 +336,14 @@ var Proposition = function(model,diff) {
 
 
     this.negated = chance.bool({
-        likelihood: diff.negatedComplex
+        likelihood: 0
     })
     if (this.negated) this.prefix = negation
     else this.prefix = ""
 
-    this.qnegated = chance.bool({
-        likelihood: diff.negatedComplex
-    })
+    // this.qnegated = chance.bool({
+    //     likelihood: diff.negatedComplex
+    // })
     if (this.negated) this.qprefix = negation
     else this.qprefix = ""
 
@@ -642,8 +642,10 @@ var makeProblemSet = function makeProblemSet(model, n, diff) {
 
 module.exports.makeProblemSet = makeProblemSet
 
-var model1 = function model1(tier){
+var expScale = require('./generatorHelp.js').expScale
 
+var model1 = function model1(tier){
+  tier = parseInt(tier)
   if (tier == null) tier = 10
  var diff =  {
       identityProb: [1,0],
@@ -673,7 +675,56 @@ var model1 = function model1(tier){
 
 }
 
+
+
 module.exports.model1 = model1
+
+
+var model2 = function(tier){
+  tier = parseInt(tier)
+  // tier = 7
+  if (tier == null) tier = 10
+  var  twoPlaceChance = expScale(0.2,0.8,20,tier)
+  var  threePlaceChance = expScale(0,Math.min(0.3,1-twoPlaceChance),20,tier)
+  var onePlaceChance = 1 - twoPlaceChance - threePlaceChance
+  var extensionDistribution  = {"2":expScale(0.3,0.8,20,tier)}
+  extensionDistribution[0] = expScale(0,Math.min(0.05,1-extensionDistribution[2]),20,tier)
+  extensionDistribution[1] = (1 - extensionDistribution[0] - extensionDistribution[2])/2
+  extensionDistribution[3] = extensionDistribution[1]
+  var predicateRatio =  expScale(0.5,1,20,tier)
+
+  var diff =  {
+      identityProb: [1,0],
+      negatedAtomic: expScale(1,4,20,tier)*tier,
+      negatedComplex: expScale(0,2,20,tier)*tier,
+      predicatesDistribution: [onePlaceChance, twoPlaceChance, threePlaceChance], //how many place
+      constantsDistribution: {
+          mean: 3,
+          dev: 2
+      },
+      objectsDistribution: {
+        mean: tier,
+        dev: expScale(0,tier/5,20,tier,true)
+      },
+      extensionOptions: ["all", "self", "mixed", "none"],
+      extensionDistribution: [extensionDistribution[0], extensionDistribution[1], extensionDistribution[2], extensionDistribution[3]], //4
+      predicatesVariableConstantRatio: [predicateRatio, 1 - predicateRatio ],
+      quantifiersOptions: [every,some]
+      }
+
+      var model = initModel(diff)
+
+      return {
+        problems: makeProblemSet(model,expScale(3,6,20,tier,true),diff),
+        model,model
+      }
+
+}
+  // console.log(JSON.stringify(model2(10),null,2))
+module.exports.model2 = model2
+
+
+
 
 testset = [
         ["Moreno", "Moreno"],

@@ -102,6 +102,19 @@ module.exports.attempt = function(dataset, callback){
 
       }
 
+module.exports.statData = function(dataset, database,callback){
+  // console.log(dataset)
+	knex(database).insert(dataset)
+      .catch(function(error) {
+        console.log(error)
+        return callback(error)
+      })
+      .then(function(){
+        return callback(null,"recorded stat")
+        })
+
+      }
+
 module.exports.record = function(record, callback){
 
 	knex('record').insert(record)

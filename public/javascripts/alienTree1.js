@@ -7,10 +7,9 @@ $(function() {
     "R":"x is same race as y.",
     "S":"x is a sibling of y.",
     "F":"x is from the same family as y.",
+    "G":"x is a grandparent of y.",
     "B":"x is blue.",
     "D":"x is red.",
-    "K":"x is black.",
-    "G":"x is green.",
     "U":"x is purple."
     }
     var parm = {
@@ -22,6 +21,11 @@ $(function() {
     }
     var tracker = new logiciseTracker(parm)
     tracker.updateStatus()
+
+
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     // console.log(symbolkey)
     var floatInfo = ""
@@ -112,6 +116,28 @@ $(function() {
                .attr('height','40')
                .attr("x", "-15")
                .attr("y", "-25")
+               .on("mouseover", function() {
+                 div.transition()
+                     .duration(200)
+                     .style("opacity", .9);
+
+                var html = "<p class = 'lead m-x-1'> " + d.data.name + "</p>" + "<p class = 'm-x-1'> Race: " + d.data.color + "</p>" + "<p class = ' m-x-1'> PL constant: " + d.data.constant + "</p>"
+
+                 div.html(
+                   html
+                 )
+                     .style("left", (d3.event.pageX)+20 + "px")
+                     .style("top", (d3.event.pageY) +20 + "px")
+                     .style('background', 'rgba(55,55,55,1)')
+                     .style("color", function() {
+                       return 'white'
+                     })
+                 })
+             .on("mouseout", function(d) {
+                 div.transition()
+                     .duration(500)
+                     .style("opacity", 0);
+             });
              })
 
             });
@@ -187,19 +213,7 @@ $(function() {
     })
     tracker.enableTutorial()
 
-    // tracker.checkAnswer = function(){
-    //   var me = this
-    //   if (this.currentChoice == null) alert("No input detected!","important")
-    //   else{
-    //     if (this.currentChoice == this.currentAnswer){
-    //       tracker.addScore()
-    //       tracker.updateStatus()
-    //     } else{
-    //
-    //       tracker.mistake()
-    //     }
-    //   }
-    // }
+
     var mainDisplay = d3.select('.subNav').append('p').attr('class','lead m-y-0')
 
 

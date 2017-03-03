@@ -8,13 +8,12 @@ $(function(){
   var answer = []
   var input = []
   var difficulty
-  var msData = new modelStatDataObject(uid);
   score = d3.select('#score')
 
-  d3.select('#display').text('Press Confirm to begin')
+
 
   if (logged) {
-    $.post('/checkPassed/pl/logicise/model1')
+    $.post('/checkPassed/pl/logicise/model2')
     .done(function(d){
       if (d){
         passed = d;
@@ -34,7 +33,7 @@ $(function(){
   function passingWatcher(){
     if (currentScore >= toPass && !passed && logged){
       passed = true;
-      recordCompletion(uid,"pl","logicise","model1")
+      recordCompletion(uid,"pl","logicise","model2")
       document.getElementById('passingscore').innerHTML ="&#10004;"
       alert('You have passed the logicise!','correctblue')
     }
@@ -62,11 +61,12 @@ $(function(){
 
 
 
-
+  var msData = new modelStatDataObject(uid);
   function loadModel(callback){
 
-    $.post('/processing/model/model1/'+difficulty)
+    $.post('/processing/model/model2/'+difficulty)
     .done(function(d){
+      console.log(d)
       callback(d)
     })
   }
@@ -131,7 +131,8 @@ $(function(){
             }
           }
         })
-          msData.processModel(d)
+
+         msData.processModel(d)
 
 
     })
@@ -155,12 +156,9 @@ $(function(){
 
         if (input[i]){
           d3.select(this).attr('class','correctTableCell')
-          // tempMem.push(input[i])
+
         } else if (input[i] == false){
            d3.select(this).attr('class','incorrectTableCell')
-          //  tempMem.push(!answer[i])
-        } else {
-          // tempMem.push("none")
 
         }
 
@@ -170,6 +168,7 @@ $(function(){
         if (t) msData.correct += 1;
         else msData.incorrect += 1;
       })
+      // console.log(msData)
       msData.sendDB('set')
       var correct
       if (!_.every(input, function(ans){return ans})){
@@ -185,7 +184,7 @@ $(function(){
           // console.log(passingscore)
           if (currentScore >= toPass){
             msg = "This is incorrect! Your score is now on the leaderboard. Press confirm to restart."
-            if (logged) recordLeader(uid,"model1",currentScore)
+            if (logged) recordLeader(uid,"model2",currentScore)
           } else {
             msg = "This is incorrect! Unfortunately you did not reach the score needed to be on the leaderboard. Press confirm to restart."
           }
@@ -206,13 +205,13 @@ $(function(){
       }
       var att = {
         uid:uid,
-        pid:1,
+        pid:2,
         type:"model",
         input:"",
         correct:correct
       }
 
-
+      console.log(att)
       if (logged) sendAttempts(att);
       updateStatus()
 

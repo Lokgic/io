@@ -227,14 +227,16 @@ function makeModel(relations,letterGroup){
   }
 }
 
-function expScale(a,b,c,exp){
-  var out = d3.scaleLinear()
-    .domain([0, c])
-    .range([a, b])
-    .clamp(true)
-  return out(exp);
-}
+// function expScale(a,b,c,exp){
+//   var out = d3.scaleLinear()
+//     .domain([0, c])
+//     .range([a, b])
+//     .clamp(true)
+//   return out(exp);
+// }
+var expScale = require('./generatorHelp.js').expScale
 
+// console.log(expScale(1,4,20,10))
 alienTree1 = function alienTree1(tier){
   if (tier == null) tier = 10
   tier = parseInt(tier)
@@ -248,7 +250,7 @@ alienTree1 = function alienTree1(tier){
     .clamp(true)
 
   var n = Math.round(chance.normal({mean: tier, dev: expScale(1,4,20,tier)} ))
-  console.log(expScale(1,4,tier))
+  // console.log(expScale(1,4,20,tier))
   n = Math.max(3, n)
 
   var relation = buildRelations(makeAliens(n))
@@ -283,11 +285,11 @@ alienTree1 = function alienTree1(tier){
 
 
 module.exports.alienTree1 = alienTree1
-var test =[ { name: 'Schneider', parent: 'Douglas', color: 'red', constant: 'l' },
-  { name: 'Saunders', parent: 'Schneider', color: 'black', constant: 'h' },
-  { name: 'Vega', parent: 'Lloyd', color: 'purple', constant: 'p' },
-  { name: 'Douglas', parent: 'Lloyd', color: 'black', constant: 'g' },
-  { name: 'Lloyd', parent: null, color: 'black', constant: 't' } ]
+// var test =[ { name: 'Schneider', parent: 'Douglas', color: 'red', constant: 'l' },
+//   { name: 'Saunders', parent: 'Schneider', color: 'black', constant: 'h' },
+//   { name: 'Vega', parent: 'Lloyd', color: 'purple', constant: 'p' },
+//   { name: 'Douglas', parent: 'Lloyd', color: 'black', constant: 'g' },
+//   { name: 'Lloyd', parent: null, color: 'black', constant: 't' } ]
 
 // console.log(predicates.isGreen(test))
 //

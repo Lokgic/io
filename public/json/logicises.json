@@ -34,6 +34,13 @@
     "shortDescription":"Based on the model provided, provide the correct values for the table.",
     "eventId":"model1"
   },
+  "model2":{
+    "title": "Model 2",
+    "shortDescription":"Based on the model provided, provide the correct values for the table.",
+    "eventId":"model2",
+    "intro":"This is a harder version of model 1 logicise. The main difference is that here you are more likely to see negated predicate and quantifiers. Also, you are more likely fully quantified sentences and often quantifiers are mixed. Press 'Confirm' to begin."
+
+  },
   "alienTree1":{
     "title": "Alien Family Tree 1",
     "shortDescription":"Alien Family Tree.",
@@ -42,7 +49,7 @@
     "tutorial":[
       "You will be given an Alien family tree as a model, and a PL statement to interpret based on the relationship delineated by the tree. Symbolization key and some explanation where needed.",
       "Some important terminology: if a two-place predicate, say, P is said to be reflexive, it means Pxx has to be true. For instance, Fxx is true for any x because each alien is from the same family as itself. Symmetry means if Pxy is true, Pyx also has to be true.  Asymmetry means if can only true in one direction: if Pxy is true then Pyx has to be false.",
-      "A: x is a ancestor of y - there is a direct path from x to y, and order matters as x has to come before y. Cannot be reflexive: no one can be an ancestor of itself. ",
+      "A: x is an ancestor of y - there is a direct path from x to y, and order matters as x has to come before y. Cannot be reflexive: no one can be an ancestor of itself. ",
       "P: x is parent of y. x comes directly before y. Every alien only has one parent. Non-reflexive, and asymmetric.",
       "C: x is child of y. x comes directly after y. An alien can have zero to many children. Asymmetric.",
       "L: x is of the same lineage as y. x and y are on the same path, where order does not matter. reflexive and symmetric. ",
