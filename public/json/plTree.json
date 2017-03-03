@@ -95,12 +95,14 @@
                 "name": "Logicise",
                 "type":"subtask",
                 "children": [{
-                    "name": "Truth Tree 1 (SL)",
-                    "type":"chapter"
+                    "name": "Alien Family Tree 1 ",
+                    "type":"chapter",
+                    "id":"pl-logicise-alienTree1"
 
                 }, {
-                    "name": "Truth Tree 2 (PL)",
-                    "type":"chapter"
+                  "name": "Alien Family Tree 2 ",
+                  "type":"chapter",
+                  "id":"pl-logicise-alienTree2"
 
                 },
                 {"name":"Model 1",
