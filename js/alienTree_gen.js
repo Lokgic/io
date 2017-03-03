@@ -248,7 +248,7 @@ alienTree1 = function alienTree1(n,tier){
         relation:relation,
         model:model
       }
-  console.log(JSON.stringify(output, null, 4));
+  console.log(JSON.stringify(outputç, null, 4));
       return output
 
 }
