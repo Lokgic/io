@@ -7,10 +7,7 @@ var problem = require('../models/problem')
 //for rendering index
 
 
-// student.authenticate("m1","abc",function(error, user){
-// 	if (error) console.log(error+ " err!")
-// 	else console.log(user)
-// })
+
 
 /* GET register */
 
@@ -54,7 +51,7 @@ router.post('/register', function(req, res, next){
 			if (error){
 				return next(error);
 			}else{
-				// console.log(user)
+
 				req.session.userId = user.uid;
 				req.session.nickname = user.nickname
 				return res.redirect('/')
@@ -83,7 +80,7 @@ router.post('/login', function(req, res, next){
 				err.status = 401;
 				return next(err);
 			} else{
-				// console.log(req.session)
+
 
 				req.session.userId = user.uid;
 				req.session.nickname = user.nickname;
@@ -116,7 +113,7 @@ router.get('/logout', function(req, res, next){
 			}
 		})
 	}
-	// console.log(req.session)
+
 });
 
 
@@ -144,7 +141,7 @@ router.get(t = '/m/*/*', function(req, res, next){
 		var moduleNum = 2;
 	}
 	var fileName = moduleID+chapterNum
-	// console.log(fileName)
+
 	if (fileName == "sl1") return res.render('pagesl1', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
 	else return res.render('page', {fileName:fileName,title:title, content:lesson, chapterNum: chapterNum, moduleNum:moduleNum});
 
@@ -168,7 +165,7 @@ router.get('/logistics', function(req, res, next){
 router.post('/getExp/*', function(req,res,next){
 	var uid = req.path.split('/')[2]
 	data.getExp(uid,function(d){
-		console.log(d)
+
 		return res.send(d)
 	})
 })
@@ -178,7 +175,7 @@ router.post('/getExp/*', function(req,res,next){
 router.post('/getBasic/*', function(req,res,next){
 	var uid = req.path.split('/')[2]
 	data.getBasic(uid,function(d){
-		console.log(d)
+
 		return res.send(d)
 	})
 })
@@ -187,14 +184,14 @@ router.post('/getBasic/*', function(req,res,next){
 router.post('/profile/*', function(req,res,next){
 	function purge(children){
 
-		// console.log("purging child of " + children.name)
+
 		for (o in children){
-			// if (children[o].completed) {
+
 				children[o].completed = false;
-				// console.log("purging" + children[o].name)
+
 
 				children[o].time = null;
-			// }
+
 			if (children[o].children != null) purge(children[o].children)
 		}
 	}
@@ -217,8 +214,7 @@ router.post('/profile/*', function(req,res,next){
 	purge(pa.children)
 	pa.completed = false
 	var uid = req.path.split('/')[2]
-	// console.log(sl.children[0].children[0].children[0])
-	// console.log(uid)
+
 	var tree = {
 		"name":"Logic",
 		"type":"root",
@@ -232,14 +228,12 @@ router.post('/profile/*', function(req,res,next){
 
 	}
 
-	// console.log(tree)
-	// console.log(mod + ch + section)
+
 	data.getProfile(uid,function(response){
 		var re = response
-		// console.log("re = ")
-		// console.log(re)
+
 		var treeSearch = require('../js/treeSearch.js')
-		// var _ = require('underscore.js')
+
 		var index = {
 			sl:0,
 			pl:1,
@@ -253,32 +247,22 @@ router.post('/profile/*', function(req,res,next){
 				for (record in re[module]){
 					var id = re[module][record].module + "-" + re[module][record].chapter + "-" +re[module][record].section;
 				var target = treeSearch.search(tree.children[index[re[module][record].module]],"id",id)
-				// console.log(target)
-				// console.log(target != null)
+
 				if (target != null) {
 					target.completed = true;
 					target.time = re[module][record].createdAt;
 				}
-				// else{
-				//
-				// 	target.time = null;
-				// 		target.completed = false;
-				// }
 
-				// console.log(target)
 				}
 			}
-			// console.log(tree)
+
 			treeSearch.checkChildren(tree.children[0])
-			// console.log(tree.children[0])
+
 		}
-		// console.log(treeSearch(tree.children[0],'id','sl-1-1'))
-		// tree.children[0].children[0].completed = true;
-		// tree.children[0].completed = true;
+
 
 		tree.tasksList = treeSearch.searchTask(tree)
-		// console.log(tree.taskList)
-		// console.log(tree.children[0].children[0].children[0].children[0])
+
 		return res.send(tree)
 	})
 
@@ -286,7 +270,7 @@ router.post('/profile/*', function(req,res,next){
 })
 
 router.post('/checkPassed/*',function(req,res,next){
-	// console.log("work?")
+
 	var mod = req.path.split('/')[2]
 	var ch = req.path.split('/')[3]
 	var section = req.path.split('/')[4]
@@ -297,7 +281,7 @@ router.post('/checkPassed/*',function(req,res,next){
 		section:section
 
 	}
-	// console.log(qu)
+
 	data.checkPassed(qu,function(d){
 		res.send(d[0].count != 0)
 
@@ -308,7 +292,7 @@ router.post('/checkPassed/*',function(req,res,next){
 
 router.post('/data/*', function(req,res,next){
 	var mode = req.path.split('/')[2]
-	// console.log(req.body)
+
 	data[mode](req.body,function(error, response){
 		if (error) {
 			var message
@@ -338,7 +322,7 @@ router.post('/problem/*', function(req,res,next){
 	var mod = req.path.split('/')[2]
 	var ch = req.path.split('/')[3]
 	var section = req.path.split('/')[4]
-	// console.log(mod + ch + section)
+
 	problem.get(mod,ch,section,function(re){
 		// console.log(re)
 		return res.send(re)
@@ -350,7 +334,7 @@ router.post('/problem/*', function(req,res,next){
 
 router.post('/getTrees',function(req,res,next){
 	var data = require('../db/problem/tree.json')
-	console.log(data)
+
 	return res.send(data["3"].problems[0])
 })
 
@@ -363,8 +347,6 @@ router.post('/processing/*', function(req,res,next){
 
 	var output;
 	var generator = require("../js/"+generatorID+"_gen.js")
-	// console.log("here")
-	// console.log(generator)
 
 	if (option == undefined){
 		 output  = new generator.makeStuff()
@@ -372,13 +354,12 @@ router.post('/processing/*', function(req,res,next){
 
 		output  =  generator[option]()
 
-		// if (option == "cats") console.log(output)
 	} else{
-		// console.log(option + " " + va)
+
 		output  =  generator[option](va)
 	}
 
-	// console.log(output)
+
 
 
 	return res.send(output)
@@ -388,7 +369,7 @@ router.post('/processing/*', function(req,res,next){
 router.post('/leaderboard/*',function(req,res,next){
 	var logicise = req.path.split('/')[2]
 	data.getRanking(logicise,function(d){
-		// console.log(d)
+
 		res.send(d)
 	})
 })
@@ -400,7 +381,7 @@ router.get('/logicise/*', function(req,res,next){
 
 		var logiciseID = req.path.split('/')[2]
 		var info = require('../public/json/logicises.json');
-		// console.log(logiciseID)
+
 		if (!info[logiciseID]) {
 			var err = new Error('No such logicise exists!')
 			err.status = 400;

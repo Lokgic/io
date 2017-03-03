@@ -12,22 +12,6 @@ var knex = require('knex')({
 });
 
 
-// //check pw
-// knex.select().from('students').where("sid","m1").then(function(d){
-// 	if (d.length == 0){
-// 		console.log("no such user found")
-// 	}
-// 	else if (d.length == 1) var result = bcrypt.compareSync('abc',d[0].password)
-
-//   	if (result){
-//   		console.log(d[0])
-//   	}else{
-//   		console.log('wrong username or password')
-//   	}
-//   console.log(result)
-
-// });
-
 
 
 

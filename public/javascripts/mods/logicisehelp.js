@@ -55,7 +55,7 @@ logiciseTracker.prototype.disableButt = function(n,text){
 logiciseTracker.prototype.passingWatcher = function passingWatcher(){
   if (this.currentScore >= this.toPass && !this.passed && logged){
     this.passed = true;
-    recordCompletion(uid,this.module,"logicise",this.logilogiciseId)
+    recordCompletion(uid,this.module,"logicise",this.logiciseId)
     document.getElementById('passingscore').innerHTML ="&#10004;"
     alert('You have passed the logicise!','correctblue')
   }
@@ -75,9 +75,8 @@ logiciseTracker.prototype.updateStatus = function updateStatus(){
   this.scoreDisplay.text(me.currentScore)
 
   if (!logged){
-    if (this.currentScore <8) this.difficulty = 5
-    else if (this.currentScore >= 8&& this.currentScore <= 18) this.difficulty = 10
-    else if (this.currentScore > 18) this.difficulty = 15
+    this.difficulty = Math.max(7,this.currentScore)
+    this.multipler = 2
   } else{
     expInit(uid,function(d){
       me.difficulty = d.lvl
@@ -130,6 +129,7 @@ logiciseTracker.prototype.mistake = function(){
 logiciseTracker.prototype.loadProblem = function (arg,callback){
     if (arg == "exp") arg = this.difficulty
     var url = '/processing/'+this.logiciseCategory+'/'+this.logiciseId+'/'+arg
+    console.log(url)
     $.post(url)
     .done(function(d){
       callback(d)

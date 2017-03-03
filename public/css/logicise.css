@@ -1,3 +1,9 @@
+.logiciseIntro{
+  max-width: 70%;
+  font-size: 0.9em;
+  color: grey;
+}
+
 .correctTableCell{
  background: rgb(102, 119, 196)
 }

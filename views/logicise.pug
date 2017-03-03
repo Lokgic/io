@@ -37,6 +37,8 @@ block content
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt2.invisible
 					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt3.invisible
 				.col-lg-10.col-md-12#display
+					if info.intro
+						p.logiciseIntro #{info.intro}
 			.col-lg-2#leaderboard
 				h4.text-xs-center Leaderboard
 				#board
@@ -51,7 +53,7 @@ block content
 				if info.tutorial
 					.modal-body
 						for x in info.tutorial
-							p #{x}
+							p.lead.m-a-1 #{x}
 				else
 					.modal-body
 

@@ -3,7 +3,7 @@ var chance = new Chance();
 var _ = require('underscore');
 
 //preloading variables for stringbuilding
-var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't'];
+var constants = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i','j','k','l', 'm', 'n', 'o', 'p','q', 'r', 's', 't'];
 var variables = ['x', 'y', 'z']
 var predicates = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
 var every = '\\forall';
@@ -303,7 +303,7 @@ var Constant = function(name, obj) {
 ////PROPOSITION RELATED
 
 var Proposition = function(model,diff) {
-  console.log(model)
+  // console.log(model)
     var o = {
         variables: variables,
         constants: model.names
@@ -428,7 +428,7 @@ function getVal(model, predicateLetter, tuple) {
         return check.isIdentical(tuple[0], tuple[1])
     } else {
 
-        console.log(tuple)
+        // console.log(tuple)
 
         extension = model.extensions[predicateLetter].extension
         for (pair in extension) {
@@ -459,11 +459,11 @@ function connectiveInterpret(model, l, r, p) {
         case disjunction:
             return v[0] || v[1];
         case iff:
-            console.log("iff")
-            console.log(v[0])
-            console.log(v[1])
-            console.log(p.left.letter)
-            console.log(p.left.letter)
+            // console.log("iff")
+            // console.log(v[0])
+            // console.log(v[1])
+            // console.log(p.left.letter)
+            // console.log(p.left.letter)
 
             return v[0] == v[1];
 
@@ -504,8 +504,7 @@ function recursion(p, model, sub_L, sub_R, targetVar) {
         sub_L2 = substite.varToObject(sub_L, targetVar, object)
         sub_R2 = substite.varToObject(sub_R, targetVar, object)
 
-        // console.log(eval(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar)+1]))
-        // return 0;
+
         return recursion(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar) + 1])
 
     })
@@ -516,8 +515,9 @@ function recursion(p, model, sub_L, sub_R, targetVar) {
 
 
 function eval(p, model, sub_L, sub_R, targetVar) {
-    console.log(sub_L)
-    console.log(sub_R)
+    // console.log("evaling " )
+    // console.log(JSON.stringify(p, null, 4))
+    // console.log(model)
     quantifiers = p.quantifiers;
     left = p.left;
     right = p.right;
@@ -525,14 +525,17 @@ function eval(p, model, sub_L, sub_R, targetVar) {
     allVars = p.allVars;
     referents = model.referents
     if (sub_L == undefined || sub_R == undefined) {
+        // console.log("L : "+ p.left.vars)
         sub_L = substite.stringToSet(p.left.vars, referents);
         sub_R = substite.stringToSet(p.right.vars, referents);
+        // console.log(sub_L)
+
     }
-    // console.log(check.noVariables(sub_L))
+
     if (check.noVariables(sub_L) && check.noVariables(sub_R)) {
 
         out = connectiveInterpret(model, sub_L, sub_R, p)
-            // console.log("here? " + !out )
+
         if (p.negated) return !out;
         else return out;
     }
@@ -549,8 +552,7 @@ function eval(p, model, sub_L, sub_R, targetVar) {
         sub_L2 = substite.varToObject(sub_L, targetVar, object)
         sub_R2 = substite.varToObject(sub_R, targetVar, object)
 
-        // console.log(eval(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar)+1]))
-        // return 0;
+
         return eval(p, model, sub_L2, sub_R2, allVars[allVars.indexOf(targetVar) + 1])
 
     })
@@ -564,7 +566,7 @@ function eval(p, model, sub_L, sub_R, targetVar) {
 
 var substite = {
     varToObject: function(strArr, targetVar, object) {
-        newArr = []
+        var newArr = []
         for (var i = 0; i < strArr.length; i++) {
             if (strArr[i] == targetVar) newArr[i] = object
             else newArr[i] = strArr[i]
@@ -572,12 +574,17 @@ var substite = {
         return newArr;
     },
     stringToSet: function(string, referents) {
-        strArr = string.split('');
-        set = []
+
+
+        var strArr = string.split('');
+
+        var set = []
         for (var i = 0; i < strArr.length; i++) {
+            // console.log(referents)
             if (check.isConstant(strArr[i])) set.push(referents[strArr[i]].referent)
             else set.push(strArr[i])
         }
+
         return set;
     }
 }
@@ -585,8 +592,7 @@ var substite = {
 
 var check = {
     noVariables: function(x) {
-        // console.log(x)
-        // console.log(_.isEmpty(_.intersection(x, variables)))
+
         if (typeof x == "string") return onlyConstant(x)
         else return _.isEmpty(_.intersection(x, variables))
     },
@@ -628,8 +634,7 @@ var makeProblemSet = function makeProblemSet(model, n, diff) {
     for (var i = 0; i < n; i++) {
         temp = new Proposition(model, diff)
         tv = eval(temp, model)
-            // console.log(temp)
-            // console.log(tv)
+
         p.push([temp, tv])
     }
     return p;
@@ -638,7 +643,7 @@ var makeProblemSet = function makeProblemSet(model, n, diff) {
 module.exports.makeProblemSet = makeProblemSet
 
 var model1 = function model1(tier){
-  // console.log(tier)
+
   if (tier == null) tier = 10
  var diff =  {
       identityProb: [1,0],
@@ -658,9 +663,9 @@ var model1 = function model1(tier){
       predicatesVariableConstantRatio: [tier/130, 1 - tier/130 ],
       quantifiersOptions: [chance.pickone([every,some])]
       }
-      // console.log(diff)
+
       var model = initModel(diff)
-      // console.log(model)
+
       return {
         problems: makeProblemSet(model,4,diff),
         model,model
@@ -669,17 +674,12 @@ var model1 = function model1(tier){
 }
 
 module.exports.model1 = model1
-// console.log(model1(5))
-// var test = initModel(2)
-// console.log(JSON.stringify(test, null, 4));
-// var tt = makeProblemSet(test, 4)
-// console.log(JSON.stringify(model1(), null, 4));
 
 testset = [
         ["Moreno", "Moreno"],
         ["Moreno", "Moreno"]
     ]
-    // console.log(_.isEqual(testset[0],testset[1]))
+
 testModel = {
     referents: {
         g: {
