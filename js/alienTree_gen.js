@@ -20,16 +20,45 @@ var iff = '\\leftrightarrow'
 var quantifiersOptions = [some, every]
 var connectives = [conjunction, conditional, disjunction, iff]
 
-
+function ancestorOf(x,y,all){
+  if (y.parent == null || x == y) return false
+  else if (y.parent == x.name) return true;
+  else {
+    for (alien in all){
+      if (all[alien].name == y.parent){
+        return ancestorOf(x,all[alien],all)
+      }
+    }
+  }
+}
 
 var predicates = {
   ancestorOf: ancestorOf,
   parentOf: function(x,y){return y.parent == x.name},
   childOf: function(x,y){return x.parent == y.name},
-  sameLineage: function(x,y,all){return ancestorOf(x,y,all) && ancestorOf(y,x,all)},
+  sameLineage: function(x,y,all){
+    var currentNode = x;
+    while (currentNode.parent != null){
+      if (currentNode.parent == y.name) return true
+      else {
+        currentNode = _.where(all, {name: currentNode.parent});
+      }
+    }
+
+    var currentNode = y;
+    while (currentNode.parent != null){
+      if (currentNode.parent == x.name) return true
+      else {
+        currentNode = _.where(all, {name: currentNode.parent})[0];
+      }
+
+      return false;
+    }
+    return ancestorOf(x,y,all) && ancestorOf(y,x,all)
+  },
   sameRaceAs:function(x,y){return x.color == y.color},
   sameFamilyAs:function(x,y){return predicates.parentOf(x,y) || predicates.parentOf(y,x)|| predicates.siblingOf(x,y)},
-  siblingOf:function(x,y){return x.parent == y.parent},
+  siblingOf:function(x,y){return x.parent == y.parent && x != y},
   isBlue:function(x){return x.color == "blue"},
   isGreen:function(x){return x.color == "green"},
   isRed:function(x){return x.color == "red"},
@@ -128,17 +157,7 @@ function buildRelations(aliens){
   return aliens
 }
 
-function ancestorOf(x,y,all){
-  if (y.parent == null ) return false
-  else if (y.parent == x.name|| x == y) return true;
-  else {
-    for (alien in all){
-      if (all[alien].name == y.parent){
-        return ancestorOf(x,all[alien],all)
-      }
-    }
-  }
-}
+
 
 
 
@@ -200,6 +219,7 @@ alienTree1 = function alienTree1(n,tier){
   var relation = buildRelations(makeAliens(n))
   // console.log(relation)
   var model =  makeModel(relation)
+  // console.log(model)
   if (tier == null) tier = 10
   var diff =  {
       identityProb: [1,0],
@@ -221,11 +241,15 @@ alienTree1 = function alienTree1(n,tier){
       }
       // console.log(diff)
       // var model = initModel(diff)
+      // console.log(JSON.stringify(model.extensions, null, 4));
       // console.log(model)
-      return {
+      var output = {
         problems: pl.makeProblemSet(model,5,diff),
-        relation:relation
+        relation:relation,
+        model:model
       }
+  console.log(JSON.stringify(output, null, 4));
+      return output
 
 }
 
@@ -233,13 +257,15 @@ alienTree1 = function alienTree1(n,tier){
 
 
 module.exports.alienTree1 = alienTree1
-var test = {
-  "name":"kk",
-  "color":"black"
-}
+var test =[ { name: 'Schneider', parent: 'Douglas', color: 'red', constant: 'l' },
+  { name: 'Saunders', parent: 'Schneider', color: 'black', constant: 'h' },
+  { name: 'Vega', parent: 'Lloyd', color: 'purple', constant: 'p' },
+  { name: 'Douglas', parent: 'Lloyd', color: 'black', constant: 'g' },
+  { name: 'Lloyd', parent: null, color: 'black', constant: 't' } ]
 
 // console.log(predicates.isGreen(test))
 //
-// a = alienTree1(5)
-// console.log(JSON.stringify(a, null, 4));
+// console.log(predicates.siblingOf(test[0],test[2],test))
+a = alienTree1(5)
+console.log(JSON.stringify(a, null, 4));
 // console.log(a)

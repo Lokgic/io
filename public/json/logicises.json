@@ -37,6 +37,20 @@
   "alienTree1":{
     "title": "Alien Family Tree 1",
     "shortDescription":"Alien Family Tree.",
-    "eventId":"alienTree1"
+    "eventId":"alienTree1",
+    "tutorial":[
+      "You will be given an Alien family tree as a model, and a PL statement to interpret based on the relationship delineated by the tree. Symbolization key and some explanation where needed:",
+      "A: x is a ancestor of y - there is a direct path from x to y, and order matters as x has to come before y.",
+      "P: x is parent of y. x comes directly before y. Every alien only has one parent.",
+      "C: x is child of y. x comes directly after y. An alien can have zero to many children.",
+      "L: x is of the same lineage as y. x and y are on the same path, where order does not matter.",
+      "R: x is same race as y. Race refers to the color of the aliens - so same race means same color.",
+      "S: x is sibling of y. x and y share the same parent.",
+      "F: x is from the same family as y. x is a sibling, child, or parent of y.",
+      "B: x is blue.",
+      "D: x is red.",
+      "K: x is black.",
+      "G: x is green.",
+      "U: x is purple."    ]
   }
 }

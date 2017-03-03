@@ -47,9 +47,13 @@ block content
 				.modal-header
 					button.close(type="button" data-dismiss="modal" aria-label="Close")
 						span(aria-hidden="true") &times;
-					h4.modal-title#messageLabel Message Title
-				.modal-body
-
+					h4.modal-title#messageLabel Message
+				if info.tutorial
+					.modal-body
+						for x in info.tutorial
+							p #{x}
+				else
+					.modal-body
 
 
 block extrafooter

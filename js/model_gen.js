@@ -428,7 +428,7 @@ function getVal(model, predicateLetter, tuple) {
         return check.isIdentical(tuple[0], tuple[1])
     } else {
 
-        // console.log(tuple)
+        console.log(tuple)
 
         extension = model.extensions[predicateLetter].extension
         for (pair in extension) {
@@ -459,6 +459,12 @@ function connectiveInterpret(model, l, r, p) {
         case disjunction:
             return v[0] || v[1];
         case iff:
+            console.log("iff")
+            console.log(v[0])
+            console.log(v[1])
+            console.log(p.left.letter)
+            console.log(p.left.letter)
+
             return v[0] == v[1];
 
     }
@@ -510,8 +516,8 @@ function recursion(p, model, sub_L, sub_R, targetVar) {
 
 
 function eval(p, model, sub_L, sub_R, targetVar) {
-    // console.log(sub_L)
-    // console.log(sub_R)
+    console.log(sub_L)
+    console.log(sub_R)
     quantifiers = p.quantifiers;
     left = p.left;
     right = p.right;
@@ -654,7 +660,7 @@ var model1 = function model1(tier){
       }
       // console.log(diff)
       var model = initModel(diff)
-      console.log(model)
+      // console.log(model)
       return {
         problems: makeProblemSet(model,4,diff),
         model,model

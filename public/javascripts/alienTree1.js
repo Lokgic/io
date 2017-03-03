@@ -1,18 +1,18 @@
 $(function() {
   var symbolkey = {
-    "A":"x is ancestor of y.",
+    "A":"x is an ancestor of y.",
     "P":"x is parent of y.",
     "C":"x is child of y.",
     "L":"x is of the same lineage as y.",
     "R":"x is same race as y.",
-    "S":"x is sibling of y.",
+    "S":"x is a sibling of y.",
+    "F":"x is from the same family as y.",
     "B":"x is blue.",
     "D":"x is red.",
     "K":"x is black.",
     "G":"x is green.",
-    "U":"x is purple.",
-    "F":"x is from the same family as y."
-  }
+    "U":"x is purple."
+    }
     var parm = {
       toPass: 30,
       logiciseCategory:"alienTree",
@@ -22,8 +22,7 @@ $(function() {
     }
     var tracker = new logiciseTracker(parm)
     tracker.updateStatus()
-    tracker.enableButt(2,"Choose Truth Value")
-    tracker.enableButt(3,"Symbolization Keys")
+
     // console.log(symbolkey)
     var floatInfo = ""
     for (key in symbolkey){
@@ -32,47 +31,13 @@ $(function() {
 
     }
     tracker.floatInfo(floatInfo)
-
-    var nextState = {
-      "intro":"newTree",
-      "userInput":"checkAnswer"
-    }
-
-    tracker.butt[3].on('click',function(){
-      tracker.floatInfoToggle()
-    })
-
-    tracker.butt[2].on('click',function(){
-      if (tracker.currentChoice == true) tracker.currentChoice = false;
-      else tracker.currentChoice = true;
-      d3.select(this).text("Your answer: " +tracker.currentChoice)
-
-    })
-    tracker.state = "intro"
-
-    tracker.butt.confirm.on('click',function(d){
-      tracker[nextState[tracker.state]]()
-    })
-
-    tracker.checkAnswer = function(){
-      var me = this
-      if (this.currentChoice == null) alert("No input detected!","important")
-      else{
-        if (this.currentChoice == this.currentAnswer){
-          alert("Correct!","correctblue")
-          tracker.addScore()
-          tracker.updateStatus()
-        }
-      }
-    }
-    var mainDisplay = d3.select('.subNav').append('p').attr('class','lead m-y-0')
-    tracker.newTree = function(){
+    tracker.drawProblem = function(){
 
         tracker.state = "userInput"
         var me = this
         tracker.cleanDisplay()
         tracker.loadProblem("exp",function(data){
-
+          console.log(data)
           me.problemSet = data.problems
           var problem = me.problemSet.pop()
           console.log(problem)
@@ -105,7 +70,7 @@ $(function() {
 
           // maps the node data to the tree layout
           nodes = treemap(root);
-          console.log(nodes)
+          // console.log(nodes)
           var svg = d3.select("#display").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom),
@@ -161,10 +126,81 @@ $(function() {
               });
         })
     }
-    // loadTree(function(data){
+    tracker.nextProblem = function(){
+      var me = this
+      me.currentChoice = null
+      me.state = "userInput"
+      if (this.problemSet.length!=0){
+        var problem = me.problemSet.pop()
+        me.currentProblem = problem[0]
+        mainDisplay.text("Evalute this statement: $"+me.currentProblem.string+"$")
+        me.currentAnswer = problem[1]
+        console.log(problem)
+
+        mathJax.reload()
+      } else{
+        tracker.drawProblem()
+      }
+    }
+
+    // var nextState = {
+    //   "intro":"newTree",
+    //   "userInput":"checkAnswer",
+    //   "nextProblem":"nextProblem"
+    // }
+
+
+    tracker.butt[3].default = "Show Symbolization Keys"
+
+    tracker.butt[2].default = "Choose Truth Value"
+
+
+    tracker.enableButt(2,tracker.butt[2].default)
+    tracker.enableButt(3,tracker.butt[3].default)
+    tracker.butt[3].d3obj.on('click',function(){
+      tracker.floatInfoToggle()
+      if (tracker.butt[3].d3obj.text() == tracker.butt[3].default) tracker.butt[3].d3obj.text("Hide Keys")
+      else tracker.butt[3].d3obj.text(tracker.butt[3].default)
+    })
+
+
+    tracker.butt.confirm.d3obj.on('click',function(d){
+      if (tracker.state == "nextProblem"){
+        tracker.butt[2].d3obj.text(tracker.butt[2].default)
+                              .attr("style","")
+      }
+      tracker.nextState()
+    })
+
+    tracker.butt[2].d3obj.on('click',function(){
+      if (tracker.state == "userInput"){
+        if (tracker.currentChoice == true) {
+          tracker.currentChoice = false;
+          tracker.butt[2].d3obj.style('background', 'salmon')
+        }
+        else {
+          tracker.currentChoice = true;
+          tracker.butt[2].d3obj.style('background', 'skyblue')
+        }
+        d3.select(this).text("Your answer: " +tracker.currentChoice)
+      }
+    })
+    tracker.enableTutorial()
+
+    // tracker.checkAnswer = function(){
+    //   var me = this
+    //   if (this.currentChoice == null) alert("No input detected!","important")
+    //   else{
+    //     if (this.currentChoice == this.currentAnswer){
+    //       tracker.addScore()
+    //       tracker.updateStatus()
+    //     } else{
     //
-    //
-    // })
+    //       tracker.mistake()
+    //     }
+    //   }
+    // }
+    var mainDisplay = d3.select('.subNav').append('p').attr('class','lead m-y-0')
 
 
 

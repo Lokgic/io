@@ -3,7 +3,7 @@ var logiciseTracker = function(parm){
   this.logiciseCategory = parm.logiciseCategory
   this.toPass = parm.toPass
   this.currentScore = 0
-  this.buttonState = "init"
+  this.state = "init"
   this.logiciseId = parm.logiciseId
   this.module = parm.module
   this.scoreDisplay = d3.select('#score')
@@ -11,9 +11,15 @@ var logiciseTracker = function(parm){
   this.chanceLeft = parm.chanceLeft
 
   this.butt = {
-    confirm:d3.select('#confirm'),
-    2:d3.select('#butt2'),
-    3:d3.select('#butt3')
+    confirm:{
+      d3obj: d3.select('#confirm')
+    },
+    2:{
+      d3obj:d3.select('#butt2')
+    },
+    3:{
+      d3obj:d3.select('#butt3')
+    }
   }
   var me = this
   if (logged) {
@@ -38,7 +44,12 @@ var logiciseTracker = function(parm){
 }
 
 logiciseTracker.prototype.enableButt = function(n,text){
-  this.butt[n].classed('invisible',false).text(text)
+  this.butt[n].d3obj.classed('invisible',false).text(text)
+
+}
+
+logiciseTracker.prototype.disableButt = function(n,text){
+  this.butt[n].d3obj.classed('invisible',true)
 
 }
 logiciseTracker.prototype.passingWatcher = function passingWatcher(){
@@ -52,11 +63,14 @@ logiciseTracker.prototype.passingWatcher = function passingWatcher(){
 }
 
 logiciseTracker.prototype.addScore = function (){
+  alert("Correct! You earned a score of "+this.multipler + ".","correctblue")
+  this.state = "nextProblem"
   this.currentScore += this.multipler
 }
 
 logiciseTracker.prototype.updateStatus = function updateStatus(){
   var me = this
+  this.currentAnswer = null;
   this.passingWatcher();
   this.scoreDisplay.text(me.currentScore)
 
@@ -101,6 +115,17 @@ logiciseTracker.prototype.floatInfoToggle = function(){
 }
 
 
+logiciseTracker.prototype.mistake = function(){
+  if (this.chanceLeft > 0){
+    this.chanceLeft -= 1;
+    alert("This is incorrect. :( You have "+ this.chanceLeft +" left. Press confirm to continue.","incorred")
+    this.state = "nextProblem"
+  } else{
+    alert("This is incorrect. :( You have no more chance left. Press confirm to restart.","incorred")
+    this.state = "restart"
+  }
+
+}
 
 logiciseTracker.prototype.loadProblem = function (arg,callback){
     if (arg == "exp") arg = this.difficulty
@@ -114,3 +139,47 @@ logiciseTracker.prototype.loadProblem = function (arg,callback){
 logiciseTracker.prototype.cleanDisplay = function(){
   d3.select('#display').html("")
 }
+
+logiciseTracker.prototype.enableTutorial = function(){
+  d3.select('#tutorial').on('click', function(){
+    $('#messageModal').modal('toggle')
+  })
+}
+
+logiciseTracker.prototype.checkAnswer = function(){
+  var me = this
+  if (this.currentChoice == null) alert("No input detected!","important")
+  else{
+    if (this.currentChoice == this.currentAnswer){
+      me.addScore()
+      me.updateStatus()
+    } else{
+
+      me.mistake()
+    }
+  }
+}
+
+logiciseTracker.prototype.nextState = function(){
+  var me = this
+  // console.log(me.drawProblem)
+  var nextState = {
+    "init":"drawProblem",
+    "userInput":"checkAnswer",
+    "nextProblem":"nextProblem"
+  }
+  me[nextState[me.state]]()
+
+}
+//
+// logiciseTracker.prototype.nextProblem = function(){
+//   var me = this
+//   // console.log(me.drawProblem)
+//   var nextState = {
+//     "init":"drawProblem",
+//     "userInput":"checkAnswer",
+//     "nextProblem":"nextProblem"
+//   }
+//   me[nextState[me.state]]()
+//
+// }
