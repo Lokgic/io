@@ -83,7 +83,7 @@ var predicates = {
 }
 
 
-var predicateLetter = {
+var predicateLetter = [{
   "A":"ancestorOf",
   "P":"parentOf",
   "C":"childOf",
@@ -95,7 +95,7 @@ var predicateLetter = {
   "D":"isRed",
   "U":"isPurple",
   "F":"sameFamilyAs"
-}
+}]
 
 var predicatePlace = {
   "A":2,
@@ -175,7 +175,8 @@ function findParent(x,all){
   return null;
 }
 
-function makeModel(relations){
+function makeModel(relations,letterGroup){
+
   var nLetter = 6
   var referents = {}
   var names = []
@@ -190,7 +191,8 @@ function makeModel(relations){
     referents[relations[alien].constant] = r
   }
 
-  var letters = chance.pickset(_.keys(predicateLetter),nLetter)
+  var letters = chance.pickset(_.keys(predicateLetter[letterGroup]),nLetter)
+
   var extensions = {}
   for (l in letters){
     var obj = {}
@@ -199,14 +201,14 @@ function makeModel(relations){
     obj.extension = []
     if (obj.place == 1){
       _.each(relations,function(alien){
-        if (predicates[predicateLetter[obj.letter]](alien)){
+        if (predicates[predicateLetter[letterGroup][obj.letter]](alien)){
           obj.extension.push(alien.name)
         }
       })
     } else if (obj.place == 2){
       _.each(relations,function(x){
         _.each(relations,function(y){
-          if (predicates[predicateLetter[obj.letter]](x,y,relations)){
+          if (predicates[predicateLetter[letterGroup][obj.letter]](x,y,relations)){
             obj.extension.push([x.name,y.name])
           }
         })
@@ -251,7 +253,7 @@ alienTree1 = function alienTree1(tier){
 
   var relation = buildRelations(makeAliens(n))
   // console.log(relation)
-  var model =  makeModel(relation)
+  var model =  makeModel(relation,0)
   // console.log(model)
   var twoPlaceChance = expScale(0,.9,20,tier)
   var varChance = expScale(0,.3,20,tier)

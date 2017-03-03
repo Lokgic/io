@@ -130,7 +130,7 @@ $(function() {
       var me = this
       me.currentChoice = null
       me.state = "userInput"
-      if (this.problemSet.length!=0){
+      if (this.problemSet.length!=0 && this.problemSet != null){
         var problem = me.problemSet.pop()
         me.currentProblem = problem[0]
         mainDisplay.text("Evalute this statement: $"+me.currentProblem.string+"$")

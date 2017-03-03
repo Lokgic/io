@@ -1,5 +1,6 @@
 
 var logiciseTracker = function(parm){
+  this.default = parm
   this.logiciseCategory = parm.logiciseCategory
   this.toPass = parm.toPass
   this.currentScore = 0
@@ -97,6 +98,15 @@ logiciseTracker.prototype.floatInfo = function(html){
     .html(html)
 }
 
+logiciseTracker.prototype.restart = function(){
+  this.currentScore = 0
+  this.chanceLeft = this.default.chanceLeft
+  this.problemSet = []
+  this.currentChoice = null;
+  this.updateStatus()
+  this.nextProblem()
+}
+
 logiciseTracker.prototype.floatInfoToggle = function(){
   var me = this
   if (this.floatInfoState == "hidden"){
@@ -120,7 +130,8 @@ logiciseTracker.prototype.mistake = function(){
     alert("This is incorrect. :( You have "+ this.chanceLeft +" left. Press confirm to continue.","incorred")
     this.state = "nextProblem"
   } else{
-    alert("This is incorrect. :( You have no more chance left. Press confirm to restart.","incorred")
+    alert("This is incorrect. :( You have no more chance left. Press confirm to restart. If you passed and are signed in, you score will show up on the leaderboard.","incorred")
+    if (logged && this.currentScore > this.toPass) recordLeader(uid,this.logiciseId,this.currentScore)
     this.state = "restart"
   }
 
@@ -150,6 +161,18 @@ logiciseTracker.prototype.checkAnswer = function(){
   var me = this
   if (this.currentChoice == null) alert("No input detected!","important")
   else{
+    if (logged){
+      var att = {
+        uid:uid,
+        pid:this.currentProblem.string,
+        type:this.logiciseId,
+        input:this.currentChoice,
+        correct:this.currentChoice == this.currentAnswer
+
+      }
+    sendAttempts(att)
+    }
+
     if (this.currentChoice == this.currentAnswer){
       me.addScore()
       me.updateStatus()
@@ -160,13 +183,16 @@ logiciseTracker.prototype.checkAnswer = function(){
   }
 }
 
+
+
 logiciseTracker.prototype.nextState = function(){
   var me = this
   // console.log(me.drawProblem)
   var nextState = {
     "init":"drawProblem",
     "userInput":"checkAnswer",
-    "nextProblem":"nextProblem"
+    "nextProblem":"nextProblem",
+    "restart":"restart"
   }
   me[nextState[me.state]]()
 
