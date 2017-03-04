@@ -3,8 +3,12 @@ $(function() {
     "A":"x is an ancestor of y.",
     "P":"x is parent of y.",
     "C":"x is child of y.",
+    "L":"x is of the same lineage as y.",
     "R":"x is same race as y.",
     "S":"x is a sibling of y.",
+    "F":"x is from the same family as y.",
+    "G":"x is a grandparent of y.",
+    "W":"x is between y and z",
     "B":"x is blue.",
     "D":"x is red.",
     "U":"x is purple."
@@ -12,7 +16,7 @@ $(function() {
     var parm = {
       toPass: 30,
       logiciseCategory:"alienTree",
-      logiciseId: "alienTree1",
+      logiciseId: "alienTree2",
       module: "pl",
       chanceLeft:2
     }

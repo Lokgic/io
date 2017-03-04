@@ -74,16 +74,25 @@ var predicates = {
   isBlue:function(x){return x.color == "blue"},
   isRed:function(x){return x.color == "red"},
   isPurple:function(x){return x.color == "purple"},
-  isParent:function(x,all){
-    for (alien in all){
-      if (alien[all].parent == x.name) return true
-    }
-    return false;
+  isBetween:function(x,y,z,all){
+    if (x == y || x == z || y==z) return false
+    else if ((predicates.ancestorOf(x,y,all) && predicates.ancestorOf(z,x,all)) || (predicates.ancestorOf(x,z,all) && predicates.ancestorOf(y,x,all))) return true
+    else return false;
   }
 }
 
 
 var predicateLetter = [{
+  "A":"ancestorOf",
+  "P":"parentOf",
+  "C":"childOf",
+  "R":"sameRaceAs",
+  "S":"siblingOf",
+  "B":"isBlue",
+  "D":"isRed",
+  "U":"isPurple"
+},
+{
   "A":"ancestorOf",
   "P":"parentOf",
   "C":"childOf",
@@ -94,10 +103,12 @@ var predicateLetter = [{
   "B":"isBlue",
   "D":"isRed",
   "U":"isPurple",
-  "F":"sameFamilyAs"
+  "F":"sameFamilyAs",
+  "W":"isBetween"
 }]
 
 var predicatePlace = {
+  "W":3,
   "A":2,
   "P":2,
   "C":2,
@@ -177,7 +188,7 @@ function findParent(x,all){
 
 function makeModel(relations,letterGroup){
 
-  var nLetter = 6
+  var nLetter = 4
   var referents = {}
   var names = []
   var ud = []
@@ -213,7 +224,18 @@ function makeModel(relations,letterGroup){
           }
         })
       })
-    }
+    }else if (obj.place == 3){
+     _.each(relations,function(x){
+       _.each(relations,function(y){
+         _.each(relations,function(z){
+           if (predicates[predicateLetter[letterGroup][obj.letter]](x,y,z,relations)){
+             obj.extension.push([x.name,y.name,z.name])
+           }
+         })
+
+       })
+     })
+   }
     extensions[letters[l]] = obj
 
   }
@@ -249,7 +271,7 @@ alienTree1 = function alienTree1(tier){
     .range([0, 100])
     .clamp(true)
 
-  var n = Math.round(chance.normal({mean: tier, dev: expScale(1,4,20,tier)} ))
+  var n = Math.round(chance.normal({mean: tier*.6, dev: expScale(1,4,20,tier)} ))
   // console.log(expScale(1,4,20,tier))
   n = Math.max(3, n)
 
@@ -257,12 +279,12 @@ alienTree1 = function alienTree1(tier){
   // console.log(relation)
   var model =  makeModel(relation,0)
   // console.log(model)
-  var twoPlaceChance = expScale(0,.9,20,tier)
+  var twoPlaceChance = expScale(0,.6,20,tier)
   var varChance = expScale(0,.3,20,tier)
   var diff =  {
       identityProb: [1,0],
-      negatedAtomic:  expScale(0,.5,20,tier),
-      negatedComplex: expScale(0,.3,20,tier),
+      negatedAtomic:  expScale(0,15,20,tier),
+      // negatedComplex: expScale(0,.3,20,tier),
       predicatesDistribution: [1-twoPlaceChance, twoPlaceChance, 0], //how many place
       predicatesVariableConstantRatio: [varChance, 1 - varChance ],
       quantifiersOptions: [chance.pickone([every,some])]
@@ -281,10 +303,55 @@ alienTree1 = function alienTree1(tier){
 
 }
 
+alienTree2 = function alienTree2(tier){
+  if (tier == null) tier = 10
+  tier = parseInt(tier)
+  var probScale = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, 1])
+    .clamp(true)
+  var percentScale = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, 100])
+    .clamp(true)
+  var sd = expScale(1,4,20,tier)
+  var n = Math.round(chance.normal({mean: tier, dev: sd} ))
+
+  n = Math.max(3, n)
+
+  var relation = buildRelations(makeAliens(n))
+  // console.log(relation)
+  var model =  makeModel(relation,1)
+  // console.log(model)
+  var twoPlaceChance = expScale(0.4,.9,20,tier)
+  var varChance = expScale(0.8,1,20,tier)
+  var diff =  {
+      identityProb: [1,0],
+      negatedAtomic:  expScale(10,40,20,tier),
+      // negatedComplex: expScale(0,.3,20,tier),
+      // predicatesDistribution: [0, 0, 1], //how many place
+      predicatesVariableConstantRatio: [varChance, 1 - varChance ],
+      quantifiersOptions: [every,some]
+      }
+      // console.log(diff)
+      // var model = initModel(diff)
+      // console.log(JSON.stringify(model.extensions, null, 4));
+      // console.log(model)
+      var output = {
+        problems: pl.makeProblemSet(model,Math.round(expScale(4,1,15,tier)),diff),
+        relation:relation,
+        model:model
+      }
+  // console.log(JSON.stringify(output, null, 4));
+      return output
+
+}
+
 
 
 
 module.exports.alienTree1 = alienTree1
+module.exports.alienTree2 = alienTree2
 // var test =[ { name: 'Schneider', parent: 'Douglas', color: 'red', constant: 'l' },
 //   { name: 'Saunders', parent: 'Schneider', color: 'black', constant: 'h' },
 //   { name: 'Vega', parent: 'Lloyd', color: 'purple', constant: 'p' },
@@ -294,6 +361,6 @@ module.exports.alienTree1 = alienTree1
 // console.log(predicates.isGreen(test))
 //
 // console.log(predicates.siblingOf(test[0],test[2],test))
-a = alienTree1(5)
+// a = alienTree2(5)
 // console.log(JSON.stringify(a, null, 4));
 // console.log(a)

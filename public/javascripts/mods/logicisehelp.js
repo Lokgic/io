@@ -64,6 +64,8 @@ logiciseTracker.prototype.passingWatcher = function passingWatcher(){
 }
 
 logiciseTracker.prototype.addScore = function (){
+  if (this.analytic != null) this.analytic.correct += 1
+
   alert("Correct! You earned a score of "+this.multipler + ".","correctblue")
   this.state = "nextProblem"
   this.currentScore += this.multipler
@@ -125,6 +127,8 @@ logiciseTracker.prototype.floatInfoToggle = function(){
 
 
 logiciseTracker.prototype.mistake = function(){
+  if (this.analytic != null) this.analytic.incorrect += 1
+
   if (this.chanceLeft > 0){
     this.chanceLeft -= 1;
     alert("This is incorrect. :( You have "+ this.chanceLeft +" left. Press confirm to continue.","incorred")
@@ -132,6 +136,7 @@ logiciseTracker.prototype.mistake = function(){
   } else{
     alert("This is incorrect. :( You have no more chance left. Press confirm to restart. If you passed and are signed in, you score will show up on the leaderboard.","incorred")
     if (logged && this.currentScore > this.toPass) recordLeader(uid,this.logiciseId,this.currentScore)
+    if (this.analytic) this.analytic.sendDB(this.analyticId)
     this.state = "restart"
   }
 
