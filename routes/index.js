@@ -7,11 +7,17 @@ var problem = require('../models/problem')
 //for rendering index
 
 
+router.get('/testing', mid.loggedOut, function(req, res, next){
+	var test = require('../bayes/test.js')
+	test.test()
+	return res.render('register', {title: 'Sign up'})
+});
 
 
 /* GET register */
 
 router.get('/register', mid.loggedOut, function(req, res, next){
+
 	return res.render('register', {title: 'Sign up'})
 });
 
