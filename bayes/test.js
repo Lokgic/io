@@ -1,26 +1,19 @@
 
-function scp(){
-  var myPythonScriptPath = '/bayes/pys.py';
-
-  // Use python shell
-  var PythonShell = require('python-shell');
-  var pyshell = new PythonShell(myPythonScriptPath);
-  pyshell.on('message', function (message) {
-      // received a message sent from the Python script (a simple "print" statement)
-      console.log(message);
-  });
-
-  // end the input stream and allow the process to exit
-  pyshell.end(function (err) {
-      if (err){
-          throw err;
-      };
-
-      console.log('finished');
-  });
-}
 
 
-module.exports.test = function(){
-  scp()
-}
+// module.exports.test = function(){
+//
+// }
+
+var PythonShell = require('python-shell');
+
+var options = {
+  mode: 'text',
+  args: [[1,2,3,4]]
+};
+
+PythonShell.run('script.py', options, function (err, results) {
+  if (err) throw err;
+  // results is an array consisting of messages collected during execution
+  console.log('results: %j', results);
+});
