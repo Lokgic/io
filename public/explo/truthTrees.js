@@ -46,11 +46,7 @@ $(function(){
         .data( nodes.descendants().slice(1))
       .enter().append("path")
         .attr('class', function(d,i){
-          if (d.depth >4 && d.depth <7 ) var tag = "set1"
-          else if (d.depth <8 &&d.depth >5) var tag = "set2"
-          else if (d.depth  >7)var tag = "set3"
-          else var tag = "set0"
-          return tag + " link depth"+d.depth
+          return 'link link'+i
         })
         .attr("d", function(d) {
           // console.log(d)
@@ -63,12 +59,10 @@ $(function(){
     // // adds each node as a group
     var node = g.selectAll(".node")
         .data(nodes.descendants())
-      .enter().append("g")
-        .attr("class", function(d) {
-          if (d.depth >4 && d.depth <7 ) var tag = "ngroup1"
-          else if (d.depth <11 &&d.depth >6) var tag = "ngroup2"
-          else var tag = "ngroup0"
-          return  tag+ " depth"+d.depth + " node" +
+        .enter().append("g")
+        .attr("class", function(d,i) {
+
+          return   "node" +
             (d.children ? " node--internal" : " node--leaf"); })
         .attr("transform", function(d) {
           return "translate(" + d.x + "," + d.y + ")"; });
@@ -76,14 +70,61 @@ $(function(){
     //
     //       // adds the circle to the node
           node.append("circle")
+            .attr('class',function(d,i){
+              return 'circle'+i
+            })
             .attr("r", 30)
-    //
+         .on('mouseover', function(d,i){
+           var allCells = d3.selectAll('td')._groups[0]
+           for (var n = 0; n<allCells.length;n++){
+             if (!_.contains(d.data.cell,parseInt(n))){
+               d3.select(allCells[n]).style('opacity',0)
+               // console.log(allCells[n])
+             }
+          }
+
+             for (var x = 0;x<7;x++){
+              //  d3.select('.entity'+i+' .link').style('opacity',0)
+               if (!_.contains(d.data.node,parseInt(x))){
+                //  d3.select('.link'+i).style('opacity',0)
+                //  d3.selectAll('.link'+x).style('opacity',0)
+                 d3.selectAll('.text'+x).style('opacity',0)
+
+
+               }
+
+               if (!_.contains(d.data.link,parseInt(x))){
+                //  d3.select('.link'+i).style('opacity',0)
+                //  d3.selectAll('.link'+x).style('opacity',0)
+                 d3.selectAll('.link'+x).style('opacity',0)
+
+
+               }
+
+
+              // console.log(_.contains(d.data.cell,6))
+
+           }
+          //  console.log(i)
+         })
+         .on("mouseout",function(){
+           d3.selectAll('td').style('opacity',1)
+           for (var x = 0;x<7;x++){
+             d3.selectAll('.link'+x)
+                .style('opacity',1)
+              d3.selectAll('.text'+x)
+                 .style('opacity',1)
+
+            }
+
+         })
     //       // adds the text to the node
-          node.each(function(d) {
+          node.each(function(d,i) {
               if (_.contains(d.data.name.split(''),'|')){
                 // console.log(this)
                 var t = d3.select(this).append('text')
                 .style("text-anchor", "middle")
+                .attr('class','text'+i)
                 var textchunks = d.data.name.split('|')
                 var y = 1
                 for (chunck in textchunks){
@@ -91,6 +132,7 @@ $(function(){
                     .attr('x',0)
                     .attr('dy', 2 *(chunck+1))
                     .text(textchunks[chunck])
+                    .attr('class','text'+i)
                 }
 
               }
@@ -99,6 +141,7 @@ $(function(){
                 .append("text")
 
                 .attr('stroke-fill','grey')
+                .attr('class','text'+i)
                 .attr("y", function(d) { return 8; })
                 .style("text-anchor", "middle")
                 .text(d.data.name);
