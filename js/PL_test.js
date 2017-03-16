@@ -15,7 +15,8 @@ A = {
 
 // console.log(new Proposition(A,"\\neg"))
 // console.log(generateUD(5,"constant") )
-var m = new Model(generateUD(3,"constant"))
+var m = new Model({n:2})
 m.generatePredicate(3,"random")
 m.generatePredicate(2,"self")
-console.log(m)
+m.generateReferents("iid")
+console.log(JSON.stringify(m, null, 2));

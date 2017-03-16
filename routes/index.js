@@ -162,6 +162,11 @@ router.get('/logistics', function(req, res, next){
 
 
 
+router.get('/explo/*', function(req, res, next){
+	var exploId = req.path.split('/')[2]
+	return res.render('explo',{fileName:exploId, title:"Epistemic Exploration"});
+})
+
 
 
 //100

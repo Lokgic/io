@@ -1,0 +1,44 @@
+extends pagelayout
+
+block content
+		main.exploMain
+			.exploContainer
+				.col-sm-4.explanation
+					.leftTop
+						h4.exploTitle.text-xs-center.m-b-3 The Anatomy of a Truth Tree
+						.textBox
+							p.text-justify The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table.
+					.leftBottom
+				.col-sm-8.interaction
+				
+		.modal.fade.result
+			.modal-dialog.modal-dialog
+				.modal-content
+					.modal-header
+						h4.modal-title
+					.modal-body
+					.modal-footer
+
+
+
+block extrafooter
+	link(href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet")
+	link(rel="stylesheet", type="text/css", href="/css/page.css")
+	script(type="text/x-mathjax-config").
+		MathJax.Hub.Config({
+		tex2jax: {
+			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+		},
+		"HTML-CSS": {linebreaks: { automatic: true, width: "container" }
+		}
+		}
+		);
+	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
+	link(rel="stylesheet", type="text/css", href="/css/explo.css")
+	script(src="https://d3js.org/d3.v4.min.js")
+	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
+	script(src="/javascripts/mods/notify.js")
+	script(src="/javascripts/mods/underscore-min.js")
+	script(src="/javascripts/mods/interact.min.js")
+	script(src="/javascripts/mods/help.js")
+	script(src="/explo/"+fileName+".js")
