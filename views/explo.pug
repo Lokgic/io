@@ -3,14 +3,15 @@ extends pagelayout
 block content
 		main.exploMain
 			.exploContainer
-				.col-sm-4.explanation
+				.col-lg-5.explanation
 					.leftTop
 						h4.exploTitle.text-xs-center.m-b-3 The Anatomy of a Truth Tree
 						.textBox
-							p.text-justify The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table.
 					.leftBottom
-				.col-sm-8.interaction
-				
+				.col-lg-7.interaction
+		nav.navbar.navbar-fixed-bottom.navbar-inverse.bg-inverse
+			button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation")
+				span.navbar-toggler-icon
 		.modal.fade.result
 			.modal-dialog.modal-dialog
 				.modal-content

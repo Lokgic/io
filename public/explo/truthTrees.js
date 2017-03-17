@@ -1,9 +1,13 @@
 $(function(){
-  explanation = d3.select('.explanation')
-  interaction = d3.select('.interaction')
-
+  var explanation = d3.select('.explanation')
+  var interaction = d3.select('.interaction')
+  var leftTop = d3.select('.leftTop')
+  var tooltipData
+  var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
   function drawTree(treeData,div){
-    console.log(treeData)
+    // console.log(treeData)
     // set the dimensions and margins of the diagram
     var svg = d3.select(div).append("svg")
     var scope = d3.select(div)
@@ -15,7 +19,7 @@ $(function(){
       .attr("height", dimensions.height)
       // console.log(dimensions)
     }
-    console.log(d3.select(div).node().getBoundingClientRect())
+    // console.log(d3.select(div).node().getBoundingClientRect())
 
 
     setDimensions();
@@ -78,7 +82,12 @@ $(function(){
            var allCells = d3.selectAll('td')._groups[0]
            for (var n = 0; n<allCells.length;n++){
              if (!_.contains(d.data.cell,parseInt(n))){
-               d3.select(allCells[n]).style('opacity',0)
+               d3.select(allCells[n])
+               .transition()
+               .style('background','black')
+               d3.select(allCells[n])
+               .transition()
+               .style('opacity',0)
                // console.log(allCells[n])
              }
           }
@@ -96,10 +105,23 @@ $(function(){
                if (!_.contains(d.data.link,parseInt(x))){
                 //  d3.select('.link'+i).style('opacity',0)
                 //  d3.selectAll('.link'+x).style('opacity',0)
-                 d3.selectAll('.link'+x).style('opacity',0)
+                 d3.selectAll('.link'+x).transition().style('opacity',0)
 
 
                }
+
+
+               tooltip.html('')
+                     .append('p')
+                     .text(tooltipData[i])
+
+               tooltip.style("left", (d3.event.pageX)-350 + "px")
+                   .style("top", (d3.event.pageY) - 90 + "px")
+                   .style('background','white')
+                   .style("color", 'black')
+                tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
 
 
               // console.log(_.contains(d.data.cell,6))
@@ -108,14 +130,23 @@ $(function(){
           //  console.log(i)
          })
          .on("mouseout",function(){
-           d3.selectAll('td').style('opacity',1)
+           d3.selectAll('td')
+           .transition()
+           .style('background','white')
+           .style('opacity',1)
+
            for (var x = 0;x<7;x++){
              d3.selectAll('.link'+x)
+             .transition()
                 .style('opacity',1)
               d3.selectAll('.text'+x)
                  .style('opacity',1)
 
             }
+
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
 
          })
     //       // adds the text to the node
@@ -153,11 +184,17 @@ $(function(){
 
 
   $.getJSON("explos.json", function(json) {
-    console.log(json.truthTrees); // this will show the info it in firebug console
+    // console.log(json.truthTrees); // this will show the info it in firebug console
+
+
     var section1 = json.truthTrees.sections[0]
+    leftTop.append('p')
+            .attr('class','text-justify')
+            .text(section1.text["anatomy"])
     // explanation.append('h3').text(section1.title)
     tabulate(section1.data.anatomy,".leftBottom")
     drawTree(section1.data.anatTree,".interaction")
+    tooltipData = section1.tooltip
     mathJax.reload()
   });
 

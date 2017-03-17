@@ -1,3 +1,29 @@
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width:300px;
+    padding:  10px;
+    font: 12px sans-serif;
+    color:white;
+    border: 5px solid black;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+
+div.tooltip.title {
+
+    font: 20px;
+  }
+
+  div.tooltip p {
+    font-family: 'EB Garamond',serif;
+    font-size: 1.2em;
+      text-align: justify;
+      margin: 10px 10px;
+    }
+
 text {
   font-size:23;
   font-family: 'EB Garamond',serif;
@@ -19,13 +45,6 @@ text {
 
 
 
-.ngroup0 g, .ngroup1,.ngroup2, .ngroup3{
-  opacity: 0;
-}
-
-.set1,.set2,.set3 {
-  stroke-opacity:0 ;
-}
 
 
 .link {
@@ -41,6 +60,7 @@ text {
   height: 100vh;
   padding-top: 80px;
 }
+
 
 .exploContainer {
   min-height:70%;
