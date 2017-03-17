@@ -1,24 +1,31 @@
 extends pagelayout
 
 block content
-		main.exploMain
-			.exploContainer
-				.col-lg-5.explanation
-					.leftTop
-						h4.exploTitle.text-xs-center.m-b-3 The Anatomy of a Truth Tree
-						.textBox
-					.leftBottom
-				.col-lg-7.interaction
-		nav.navbar.navbar-fixed-bottom.navbar-inverse.bg-inverse
-			button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation")
-				span.navbar-toggler-icon
-		.modal.fade.result
-			.modal-dialog.modal-dialog
-				.modal-content
-					.modal-header
-						h4.modal-title
-					.modal-body
-					.modal-footer
+	#car.carousel.slide(data-ride = "carousel")
+		ol.carousel-indicators
+			li(data-target = '#car' data-slide-to="0").active
+			li(data-target = '#car' data-slide-to="1")
+		.carousel-inner(role="listbox")
+			.carousel-item.active
+				.exploMain
+					.exploContainer
+						.col-lg-5.explanation
+							.leftTop
+								h4.exploTitle.text-xs-center.m-b-3 The Anatomy of a Truth Tree
+								.textBox
+							.leftBottom
+						.col-lg-7.interaction
+			.carousel-item
+				p bbb
+	main
+
+	.modal.fade.result
+		.modal-dialog.modal-dialog
+			.modal-content
+				.modal-header
+					h4.modal-title
+				.modal-body
+				.modal-footer
 
 
 

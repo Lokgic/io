@@ -1,4 +1,7 @@
 $(function(){
+  $('.carousel').carousel({
+  interval: false
+})
   var explanation = d3.select('.explanation')
   var interaction = d3.select('.interaction')
   var leftTop = d3.select('.leftTop')

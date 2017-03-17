@@ -1,3 +1,19 @@
+.carousel-indicators li  {
+  border: black 1px solid;
+  border-radius: 0;
+  width:60px;
+  height:10px;
+  margin: 0 20px;
+}
+
+.carousel-indicators .active {
+  border: black 1px solid;
+  background: black;
+  border-radius: 0;
+  width:60px;
+  height:10px;
+  margin: 0 20px;
+}
 
 div.tooltip {
     position: absolute;
@@ -58,7 +74,7 @@ text {
 .exploMain{
   display: flex;
   height: 100vh;
-  padding-top: 80px;
+  padding-top: 0;
 }
 
 
