@@ -3,7 +3,13 @@ $(function(){
   var tooltipData
   var tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
-      .style("opacity", 0);
+  tooltip.style("right",  "10px")
+        .style('position','fixed')
+        .style("top", "90%")
+        .text("Mouse over each tree node for further information.")
+  tooltip.transition()
+      .duration(500)
+      .style("opacity", 0.5)
   function drawTree(treeData,div,type){
     // console.log(treeData)
     // set the dimensions and margins of the diagram
@@ -15,7 +21,7 @@ $(function(){
       // console.log(winDi)
       dimensions.width = d3.select(div).node().getBoundingClientRect().width
       if (window.innerWidth < window.innerHeight){
-        dimensions.height = dimensions.width
+        dimensions.height = dimensions.width*1.5
         // d3.select('.carousel-inner').style('height','150vh')
       }else{
 
@@ -80,11 +86,11 @@ $(function(){
         .attr("transform", function(d) {
           return "translate(" + d.x + "," + d.y + ")"; });
 
-    //
+
     //       // adds the circle to the node
-          node.append("circle")
+        node.append("circle")
             .attr('class',function(d,i){
-              return 'circle'+i
+              return 'mover circle'+i
             })
             .attr("r", function(d){
               if (_.contains(d.data.name.split(""),"|")){
@@ -110,6 +116,7 @@ $(function(){
             }
           }else if (type =="pl"){
             var area = d3.select('.leftBottom')
+            area.html("")
             area.classed('text-xs-center',true)
             var text = ""
             for (set in d.data.model){
@@ -146,9 +153,11 @@ $(function(){
                      .text(tooltipData[i])
               if (window.innerWidth < window.innerHeight || window.innerWidth <600){
                 tooltip.style("right",  "10px")
-                    .style("top", "30px")
+                    .style("top", "70%")
+                    .style('position','fixed')
               }else{
-                tooltip.style("right", "30px")
+                tooltip.style('position','absolute')
+                .style("right", "30px")
                     .style("top", (d3.event.pageY) - 90 + "px")
               }
 
@@ -159,7 +168,7 @@ $(function(){
                 .duration(200)
                 .style("opacity", .9);
 
-
+            mathJax.reload('.tooltip')
               // console.log(_.contains(d.data.cell,6))
 
            }
@@ -172,7 +181,14 @@ $(function(){
              .style('background','white')
              .style('opacity',1)
            }else if (type == "pl"){
-             d3.select('.leftBottom').html("")
+               var area = d3.select('.leftBottom')
+               area.html("")
+               area.classed('text-xs-center',true)
+               for (set in leftBottomDefault){
+                 area.append('p')
+                     .text('$'+set+'$:$\\{' + leftBottomDefault[set]+ '\\}$')
+               }
+               mathJax.reload('.leftBottom')
            }
 
 
@@ -184,10 +200,13 @@ $(function(){
                  .style('opacity',1)
 
             }
-
+            tooltip.style("right",  "10px")
+                  .style("top", "90%")
+                  .style('position','fixed')
+                  .text("Mouse over each tree node for further information.")
             tooltip.transition()
                 .duration(500)
-                .style("opacity", 0);
+                .style("opacity", 0.5);
 
          })
     //       // adds the text to the node
@@ -242,16 +261,32 @@ $(function(){
 
   $.getJSON("explos.json", function(json) {
     // console.log(json.truthTrees); // this will show the info it in firebug console
+
     var title = d3.select('.exploTitle').attr('id')
     var type = json[title].type
-    var section1 = json[title].sections[0]
-    console.log(type)
+    var section1  = json[title].sections[0]
+    console.log(section1)
     var leftTop = d3.select('.leftTop')
-    leftTop.append('p')
+    leftTop.selectAll('p')
+            .data(section1.text)
+            .enter()
+            .append('p')
             .attr('class','text-justify')
-            .text(section1.text["main"])
+            .text(function(d){
+              console.log(d)
+              return d})
     // explanation.append('h3').text(section1.title)
     if (type == "sl") tabulate(section1.data.anatomy,".leftBottom")
+    else if (type == "pl"){
+        leftBottomDefault = section1.default
+        var area = d3.select('.leftBottom')
+        area.classed('text-xs-center',true)
+        for (set in section1.default){
+          area.append('p')
+              .text('$'+set+'$:$\\{' + section1.default[set]+ '\\}$')
+        }
+        mathJax.reload('.leftBottom')
+    }
     drawTree(section1.data.anatTree,".interaction",type)
     tooltipData = section1.tooltip
     mathJax.reload()

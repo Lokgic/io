@@ -160,13 +160,14 @@ router.get('/logistics', function(req, res, next){
 	return res.render('logistics',{syllabus:syllabus});
 })
 
-router.get('/trees', function(req, res, next){
-	return res.render('trees',{section:"basic", title:"Trees"});
-
-})
+// router.get('/trees', function(req, res, next){
+// 	return res.render('trees',{section:"basic", title:"Trees"});
+//
+// })
 
 router.get('/trees/*', function(req, res, next){
-	var section = req.path.split('/')[2]
+	var section = (req.path.split('/')[2] == '')? "basic": req.path.split('/')[2];
+
 	var file = require('../public/trees/explos.json')
 	var title = file[section].title
 	var name = []
@@ -178,8 +179,9 @@ router.get('/trees/*', function(req, res, next){
 		console.log(file[name[n]].title)
 		info.push([name[n],file[name[n]].title])
 	}
-	console.log(info)
+
 	if (name.indexOf(section)!= -1 && section != null)  {
+		console.log("here")
 		return res.render('trees',{section:section,title:"Trees",title:title,info:info});
 	}else return res.render('trees',{section:"basic",title:"Trees",title:"Anatomy of a Truth Tree",info:info});
 

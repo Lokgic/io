@@ -30,7 +30,7 @@ div.tooltip {
     width:300px;
     padding:  10px;
     font: 12px sans-serif;
-    color:white;
+    color:black;
     border: 5px solid black;
     border-radius: 8px;
     pointer-events: none;
@@ -62,13 +62,15 @@ text {
 }
 
 
-.node text { font:3em}
+.node text { font:2em}
 
 .node--internal text {
   text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 }
 
-
+.explanation{
+  font-size: .8em;
+}
 
 .leftBottom{
   min-height: 150px;
