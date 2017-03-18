@@ -1,24 +1,25 @@
 extends pagelayout
 
 block content
-	#car.carousel.slide(data-ride = "carousel")
-		ol.carousel-indicators
-			li(data-target = '#car' data-slide-to="0").active
-			li(data-target = '#car' data-slide-to="1")
-		.carousel-inner(role="listbox")
-			.carousel-item.active
-				.exploMain
-					.exploContainer
-						.col-lg-5.explanation
-							.leftTop
-								h4.exploTitle.text-xs-center.m-b-3 The Anatomy of a Truth Tree
-								.textBox
-							.leftBottom
-						.col-lg-7.interaction
-			.carousel-item
-				p bbb
-	main
+	
 
+	main.exploMain
+		.exploContainer
+			.col-lg-4.explanation
+				.leftTop
+					h4.exploTitle.text-xs-center.m-b-3(id = section) #{title}
+					.textBox
+				.leftBottom
+			.col-lg-8.interaction
+	nav.navbar.navbar-fixed-bottom#secondaryNav
+		.container
+			button.navbar-toggler.hidden-lg-up(type = "button" data-toggle ="collapse" data-target="#secondaryNavCollapse" aria-controls="secondaryNavCollapse" aria-expanded="false" aria-label="Toggle navigation" style='color:black')  	&#x022AB;
+			.collapse.navbar-toggleable-md#secondaryNavCollapse
+				ul.navbar-nav
+					for item in info
+						li.nav-item.align-middle.secondaryNavItem
+							a.nav-link(href='/trees/'+ item[0]) #{item[1]}
+		
 	.modal.fade.result
 		.modal-dialog.modal-dialog
 			.modal-content
@@ -37,7 +38,7 @@ block extrafooter
 		tex2jax: {
 			inlineMath: [ ['$','$'], ['\\(','\\)'] ]
 		},
-		"HTML-CSS": {linebreaks: { automatic: true, width: "container" }
+		"HTML-CSS": {linebreaks: { automatic: false, width: "container" }
 		}
 		}
 		);
@@ -49,4 +50,8 @@ block extrafooter
 	script(src="/javascripts/mods/underscore-min.js")
 	script(src="/javascripts/mods/interact.min.js")
 	script(src="/javascripts/mods/help.js")
-	script(src="/explo/"+fileName+".js")
+	case section
+		when "basic"
+		when "sl"
+		default
+			script(src="/trees/trees.js")

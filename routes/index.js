@@ -160,11 +160,30 @@ router.get('/logistics', function(req, res, next){
 	return res.render('logistics',{syllabus:syllabus});
 })
 
+router.get('/trees', function(req, res, next){
+	return res.render('trees',{section:"basic", title:"Trees"});
+
+})
+
+router.get('/trees/*', function(req, res, next){
+	var section = req.path.split('/')[2]
+	var file = require('../public/trees/explos.json')
+	var title = file[section].title
+	var name = []
+	for (obj in file){
+		name.push(obj)
+	}
+	var info = []
+	for (n in name){
+		console.log(file[name[n]].title)
+		info.push([name[n],file[name[n]].title])
+	}
+	console.log(info)
+	if (name.indexOf(section)!= -1 && section != null)  {
+		return res.render('trees',{section:section,title:"Trees",title:title,info:info});
+	}else return res.render('trees',{section:"basic",title:"Trees",title:"Anatomy of a Truth Tree",info:info});
 
 
-router.get('/explo/*', function(req, res, next){
-	var exploId = req.path.split('/')[2]
-	return res.render('explo',{fileName:exploId, title:"Epistemic Exploration"});
 })
 
 

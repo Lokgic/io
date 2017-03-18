@@ -1,10 +1,5 @@
 $(function(){
-  $('.carousel').carousel({
-  interval: false
-})
-  var explanation = d3.select('.explanation')
-  var interaction = d3.select('.interaction')
-  var leftTop = d3.select('.leftTop')
+
   var tooltipData
   var tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
@@ -16,8 +11,19 @@ $(function(){
     var scope = d3.select(div)
     var dimensions ={}
     function setDimensions(){
+      // var winDi = d3.select(div).node().getBoundingClientRect();
+      // console.log(winDi)
       dimensions.width = d3.select(div).node().getBoundingClientRect().width
-      dimensions.height = d3.select('.explocontainer').node().getBoundingClientRect().height
+      if (window.innerWidth < window.innerHeight){
+        dimensions.height = dimensions.width
+        // d3.select('.carousel-inner').style('height','150vh')
+      }else{
+
+        dimensions.height = d3.select('.explocontainer').node().getBoundingClientRect().height
+
+
+      }
+      console.log(dimensions)
       svg.attr("width", dimensions.width)
       .attr("height", dimensions.height)
       // console.log(dimensions)
@@ -29,7 +35,7 @@ $(function(){
     // var originalPos = dimensions.top/3
 
 
-    var margin = {top: 40, right: 20, bottom: 40, left: 20},
+    var margin = {top: 60, right: 30, bottom: 60, left: 30},
         width = dimensions.width - margin.left - margin.right,
         height = dimensions.height - margin.top - margin.bottom;
 
@@ -117,10 +123,16 @@ $(function(){
                tooltip.html('')
                      .append('p')
                      .text(tooltipData[i])
+              if (window.innerWidth < window.innerHeight || window.innerWidth <600){
+                tooltip.style("right",  "10px")
+                    .style("top", "30px")
+              }else{
+                tooltip.style("left", (d3.event.pageX)-350 + "px")
+                    .style("top", (d3.event.pageY) - 90 + "px")
+              }
 
-               tooltip.style("left", (d3.event.pageX)-350 + "px")
-                   .style("top", (d3.event.pageY) - 90 + "px")
-                   .style('background','white')
+
+                  tooltip .style('background','white')
                    .style("color", 'black')
                 tooltip.transition()
                 .duration(200)
@@ -191,6 +203,7 @@ $(function(){
 
 
     var section1 = json.truthTrees.sections[0]
+    var leftTop = d3.select('.leftTop')
     leftTop.append('p')
             .attr('class','text-justify')
             .text(section1.text["anatomy"])
@@ -199,6 +212,7 @@ $(function(){
     drawTree(section1.data.anatTree,".interaction")
     tooltipData = section1.tooltip
     mathJax.reload()
+
   });
 
 

@@ -1,0 +1,418 @@
+{
+  "basic":{
+    "title":"The Anatomy of a Truth Tree",
+    "type":"sl",
+    "sections":[
+      {
+        "title":"The Anatomy of a Truth Tree",
+        "data":{
+          "anatomy":[
+              {
+                "name":"$A$",
+                "column":["T","T","F","F"]
+              },
+              {
+                "name":"$B$",
+                "column":["T","F","T","F"]
+              },
+              {
+                "name":"$A \\vee B$",
+                "column":["T","T","T","F"]
+              },
+              {
+                "name":"$A \\to \\neg B$",
+                "column":["F","T","T","T"]
+              }
+            ],
+          "anatTree":{
+            "name":"A∨B|A→¬B",
+            "node":[0],
+            "link":[],
+            "cell":[6,7,10,11],
+            "children":[
+              {
+                "name":"A",
+                "node":[0,1],
+                "link":[0],
+                "cell":[4,6,7],
+                "children":[
+                  {"name":"¬A|✗",
+                    "node":[0,1,3],
+                    "link":[0,2],
+                  "cell":[]},
+                  {"name":"¬B",
+                  "cell":[4,5,6,7],
+                  "node":[0,1,4],
+                  "link":[0,3]
+                  }
+                ]
+              },
+              {
+                "name":"B",
+                "cell":[9,10,11],
+                "node":[0,2],
+                "link":[1],
+                "children":[
+                  {"name":"¬A",
+                  "cell":[8,9,10,11],
+                  "node":[0,2,5],
+                "link":[1,4]
+                  },
+                  {"name":"¬B|✗",
+                    "cell":[],
+                    "node":[0,2,6],
+                  "link":[1,5]
+                }
+                ]
+              }
+            ]
+          }
+        },
+        "text":{
+          "main":"The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table."
+        },
+        "tooltip":{
+          "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the rows on a truth table where these propositions are true.",
+          "1":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "2":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "3":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. However, within this path we already have A. Corresponding to this, there is no row in the table that can contain both A and ¬A. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out.",
+          "4":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "5":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "6":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. However, within this path we already have B. Corresponding to this, there is no row in the table that can contain both B and ¬B. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out."
+        }
+      }
+    ]
+  },
+  "sl":{
+    "title":"SL Example",
+    "type":"sl",
+    "sections":[
+      {
+        "title":"Truth Tree in Action: Argument in SL",
+        "data":{
+          "anatomy":[
+              {
+                "name":"$A$",
+                "column":["T","T","T","T","F","F","F","F"]
+              },
+              {
+                "name":"$B$",
+                "column":["T","T","F","F","T","T","F","F"]
+              },
+              {
+                "name":"$C$",
+                "column":["T","F","T","F","T","F","T","F"]
+              },
+              {
+                "name":"$A \\to (B \\vee C)$",
+                "column":["T","T","T","F","T","T","T","T"]
+              },
+              {
+                "name":"$(A \\vee B)$",
+                "column":["T","T","T","T","T","T","T","F"]
+              },
+              {
+                "name":"$\\neg (B \\vee C)$",
+                "column":["F","F","F","T","F","F","F","T"]
+              },
+              {
+                "name":"$\\neg \\neg A $",
+                "column":["T","T","T","T","F","F","F","F"]
+              }
+            ],
+          "anatTree":{
+            "name":"A→(B∨C)|A∨B|¬(B∨C)|¬¬A",
+            "node":[0],
+            "link":[],
+            "cell":[3,4,10,11,17,18,25,26,31,32,38,39,45,46,52,54,6,13,20,27],
+            "children":[
+              {
+                "name":"¬B|¬C",
+                "cell":[21,22,23,24,25,26,27,49,50,51,52,53,54,55],
+                "node":[0,1],
+                "link":[0],
+                "children":[
+
+
+                    {
+                      "name":"¬A|✗",
+                      "node":[0,1,2],
+                      "link":[0,1],
+                      "cell":[49,50,51,52,53,54,55],
+                      "children":[
+
+                      ]
+                    },
+                    {
+                      "name":"B∨C",
+                      "cell":[21,22,23,24,25,26,27,49,50,51,52,53,54,55],
+                      "node":[0,1,3],
+                      "link":[0,2],
+                      "children":[
+                        {"name":"A",
+                        "cell":[49,50,51,52,53,54,55],
+                        "node":[0,1,3,4],
+                      "link":[0,2,3],
+                      "children":[
+                        {
+                          "name":"B|✗",
+                          "node":[0,1,3,4,6],
+                        "link":[0,2,3,5]
+                        },
+                        {
+                          "name":"C|✗",
+                          "node":[0,1,3,4,7],
+                        "link":[0,2,3,6]
+                        }
+
+                      ]
+                        },
+                        {"name":"B|✗",
+                          "cell":[],
+                          "node":[0,1,3,5],
+                        "link":[0,2,4]
+                      }
+                      ]
+                    }
+                ]
+              }
+            ]
+          }
+        },
+        "text":{
+          "main":"When using truth trees to analyze the validity of an argument, be sure to negate the the conclusion. Recall that invalidity occurs when it is possible for an argument to be true while premise false. ",
+          "generalRule":[
+            "Decompose non-branching node first."
+          ]
+        },
+        "tooltip":{
+          "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the rows on a truth table where these propositions are true.",
+          "1":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "2":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "3":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. However, within this path we already have A. Corresponding to this, there is no row in the table that can contain both A and ¬A. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out.",
+          "4":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "5":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "6":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. However, within this path we already have B. Corresponding to this, there is no row in the table that can contain both B and ¬B. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out."
+        }
+      }
+    ]
+  },
+  "ude":{
+    "title":"Universal Decomposition",
+    "type":"pl",
+    "sections":[
+      {
+        "title":"Universal Decomposition",
+        "data":{
+          "anatTree":{
+            "name":"Aa|¬¬∀xBx",
+            "node":[0],
+            "link":[],
+            "model":{
+              "UD":["a"],
+              "A":["a"]
+            },
+            "children":[
+              {
+                "name":"∀xBx",
+                "node":[0,1],
+                "link":[0],
+                "model":{
+                  "UD":["a"],
+                  "A":["a"]
+                },
+                "children":[
+                  {"name":"Ba",
+                    "node":[0,1,2],
+                    "link":[0,1],
+                    "model":{
+                      "UD":["a"],
+                      "A":["a"],
+                      "B":["a"]
+                    },
+                  "children":[
+
+
+                  ]
+                }
+
+                ]
+              }
+            ]
+          }
+        },
+        "text":{
+          "main":"The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table."
+        },
+        "tooltip":{
+          "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the rows on a truth table where these propositions are true.",
+          "1":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "2":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "3":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. However, within this path we already have A. Corresponding to this, there is no row in the table that can contain both A and ¬A. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out.",
+          "4":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "5":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "6":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. However, within this path we already have B. Corresponding to this, there is no row in the table that can contain both B and ¬B. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out."
+        }
+      }
+    ]
+  },
+  "exe":{
+    "title":"Existential Decomposition",
+    "type":"pl",
+    "sections":[
+      {
+        "title":"Existential Decomposition",
+        "data":{
+          "anatTree":{
+            "name":"∃xBx|¬Bb",
+            "node":[0],
+            "link":[],
+            "model":{
+              "UD":["b"],
+              "B":[]
+            },
+            "children":[
+              {
+                "name":"Be",
+                "node":[0,1],
+                "link":[0],
+                "model":{
+                  "UD":["b,e"],
+                  "B":["e"]
+                },
+                "children":[
+
+                ]
+              }
+            ]
+          }
+        },
+        "text":{
+          "main":"The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table."
+        },
+        "tooltip":{
+          "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the rows on a truth table where these propositions are true.",
+          "1":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "2":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "3":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. However, within this path we already have A. Corresponding to this, there is no row in the table that can contain both A and ¬A. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out.",
+          "4":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "5":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "6":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. However, within this path we already have B. Corresponding to this, there is no row in the table that can contain both B and ¬B. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out."
+        }
+      }
+    ]
+  },
+  "mixed":{
+    "title":"Mixed Decomposition",
+    "type":"pl",
+    "sections":[
+      {
+        "title":"Mixed Decomposition",
+        "data":{
+          "anatTree":{
+            "name":"∀x Lxe ∨ ∀x¬ Lxa|¬Lae|¬¬∃xLxa",
+            "node":[0],
+            "link":[],
+            "model":{
+              "UD":["a,e"],
+              "L":[]
+            },
+            "children":[
+              {
+                "name":"∃xLxa",
+                "node":[0,1],
+                "link":[0],
+                "model":{
+                  "UD":["b,e"],
+                  "L":["(?,a)"]
+                },
+                "children":[
+                  {
+                    "name":"∀x Lxe",
+                    "node":[0,1,2],
+                    "link":[0,1],
+                    "model":{
+                      "UD":["a,e"],
+                      "L":["(?,a),(?,e)"]
+                    },
+                    "children":[
+                      {
+                        "name":"Lba",
+                        "node":[0,1,2,4],
+                        "link":[0,1,3],
+                        "model":{
+                          "UD":["a,b,e"],
+                          "L":["(b,a),(?,e)"]
+                        },
+                        "children":[
+                          {
+                            "name":"Lae|Lbe|Lee|✗",
+                            "node":[0,1,2,4,6],
+                            "link":[0,1,3,5],
+                            "model":{
+                              "UD":["a,b,e"],
+                              "L":["(b,a),\\underline{(a,e)},(b,e),(e,e)"]
+                            },
+                            "children":[
+
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name":"∀x¬ Lxa",
+                    "node":[0,1,3],
+                    "link":[0,2],
+                    "model":{
+                      "UD":["e"],
+                      "L":["(?,a)"]
+                    },
+                    "children":[
+                      {
+                        "name":"Lba",
+                        "node":[0,1,3,5],
+                        "link":[0,2,4],
+                        "model":{
+                          "UD":["a,e"],
+                          "L":["(b,a)"]
+                        },
+                        "children":[
+                          {
+                            "name":"¬Laa|¬Lba|¬Lea|✗",
+                            "node":[0,1,3,5,7],
+                            "link":[0,2,4,6],
+                            "model":{
+                              "UD":["a,b,e"],
+                              "L":["\\underline{(b,a)}"]
+                            },
+                            "children":[
+
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "text":{
+          "main":"The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table."
+        },
+        "tooltip":{
+          "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the rows on a truth table where these propositions are true.",
+          "1":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "2":"The splitting of the branch is the result of the decomposition of A∨B. The two new branches can be thought of representing different ways in which the original propositions can be satisfied. Since A∨B only requires one of the disjuncts to be true, we can entertain situations where one of them is true. The root already narrows us down to two rows, and this new node leaves us with only one row. We are not done however - we have to make sure the branch is consistent.",
+          "3":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. However, within this path we already have A. Corresponding to this, there is no row in the table that can contain both A and ¬A. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out.",
+          "4":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "5":"This branch is further divided with the decomposition of A→¬B, which gives us ¬A for this branch. All propositions on this path have been decomposed and there is no contradiction. This branch then contains an interpretation for the original set of propositions. This corresponds to a complete row on the table, where the propositions on the root node are true.",
+          "6":"This branch is further divided with the decomposition of A→¬B, which gives us ¬B for this branch. However, within this path we already have B. Corresponding to this, there is no row in the table that can contain both B and ¬B. As a result, this path doesn't lead to a viable interpretation, and consequently crossed out."
+        }
+      }
+    ]
+  }
+}
