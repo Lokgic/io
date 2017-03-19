@@ -1,11 +1,18 @@
 .derivation{
 
-  margin: 40px 10px;
+  margin: 0 0 30px 30px;
   font-family: 'EB Garamond',serif;
 }
 #scope1{
   max-width: 600px
 }
+
+
+.hoverable {
+  border: 2px grey dashed;
+
+}
+
 
 .unfocused{
   background: grey;
@@ -22,6 +29,7 @@
 .line {
     height:3em;
     padding:8px;
+
 }
 
 .scope {

@@ -200,14 +200,15 @@ router.get('/deduction/*', function(req, res, next){
 	}
 	var info = []
 	for (n in name){
-		console.log(file[name[n]].title)
+		// console.log(file[name[n]].title)
 		info.push([name[n],file[name[n]].title])
 	}
 
+	var text = file[section].text
 	if (name.indexOf(section)!= -1 && section != null)  {
 
-		return res.render('deduction',{section:section,title:title,title:title,info:info});
-	}else return res.render('deduction',{section:"fundamentals",title:"Natuaral Deduction: Fundamentals",info:info});
+		return res.render('deduction',{section:section,title:title,title:title,info:info,text:text});
+	}else return res.render('deduction',{section:"fundamentals",title:"Natuaral Deduction: Fundamentals",info:info,text:text});
 
 
 })
