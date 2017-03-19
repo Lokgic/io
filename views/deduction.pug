@@ -5,12 +5,9 @@ block content
 
 	main.exploMain
 		.exploContainer
-			.col-lg-4.explanation
-				.leftTop
+			.col-lg-6.explanation
 					h4.exploTitle.text-xs-center.m-b-3(id = section) #{title}
-					.textBox
-				.leftBottom
-			.col-lg-8.interaction
+			.col-lg-6.interaction
 	nav.navbar.navbar-fixed-bottom#secondaryNav
 		.container
 			button.navbar-toggler.hidden-lg-up(type = "button" data-toggle ="collapse" data-target="#secondaryNavCollapse" aria-controls="secondaryNavCollapse" aria-expanded="false" aria-label="Toggle navigation" style='color:black')  	&#x022AB;
@@ -18,7 +15,7 @@ block content
 				ul.navbar-nav
 					for item in info
 						li.nav-item.align-middle.secondaryNavItem
-							a.nav-link(href='/trees/'+ item[0]) #{item[1]}
+							a.nav-link(href='/deduction/'+ item[0]) #{item[1]}
 		
 	.modal.fade.result
 		.modal-dialog.modal-dialog
@@ -43,7 +40,7 @@ block extrafooter
 		}
 		);
 	script(type="text/javascript"  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML")
-	link(rel="stylesheet", type="text/css", href="/trees/trees.css")
+	link(rel="stylesheet", type="text/css", href="/deduction/deduction.css")
 	script(src="https://d3js.org/d3.v4.min.js")
 	script(src="https://d3js.org/d3-scale-chromatic.v1.min.js")
 	script(src="/javascripts/mods/notify.js")
@@ -51,7 +48,5 @@ block extrafooter
 	script(src="/javascripts/mods/interact.min.js")
 	script(src="/javascripts/mods/help.js")
 	case section
-		when "basic"
-		when "sl"
 		default
-			script(src="/trees/trees.js")
+			script(src="/deduction/deduction.js")

@@ -259,7 +259,7 @@ $(function(){
   }
 
 
-  $.getJSON("explos.json", function(json) {
+  $.getJSON("trees.json", function(json) {
     // console.log(json.truthTrees); // this will show the info it in firebug console
 
     var title = d3.select('.exploTitle').attr('id')
