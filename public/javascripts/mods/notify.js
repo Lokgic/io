@@ -602,6 +602,40 @@
 	  }
 	});
 
+	$.notify.addStyle('deduction', {
+	  html: "<div><span data-notify-html/></div>",
+	  classes: {
+	    base: {
+	      // "white-space": "nowrap",
+				// "text-align":"justify",
+	      "background-color": "white",
+	      "color":"black",
+	      "width":"300px",
+	      "opacity": .9,
+	      "border-radius":"2px",
+	      "border-width":"1px",
+	      "border-color":"black",
+	      "border-style":"solid",
+	       "font-family": 'Roboto',
+				 "font-size":".7em"
+	    },
+			mini: {
+				// "white-space": "nowrap",
+				"background-color": "#336B87",
+				"padding": "1px 1px",
+				"color":"white",
+				"min-width":"30px",
+				"opacity": .9,
+				"border-radius":"2",
+				"border-width":"1px",
+				"border-color":"#589FC1",
+				"border-style":"solid",
+				 "text-shadow": "3px 3px 10px rgba(0,0,0,0.2)",
+				 "font-family": 'Titillium Web'
+			}
+	  }
+	});
+
 	$.notify.addStyle('passed', {
 	  html: "<div><span data-notify-text/></div>",
 	  classes: {

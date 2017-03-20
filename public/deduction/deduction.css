@@ -1,10 +1,33 @@
-.derivation{
+.offScreen{
+  position: absolute;
+  left:-10000px;
+}
 
-  margin: 0 0 30px 30px;
+.leftSlide{
+  transition-duration: 600ms;
+}
+.paraHead{
+  font-size: 1em;
+  margin-right: 15px;
+  font-weight: 700;
+}
+
+
+.derivation{
+  text-align: center;
+  margin: 30px 0;
   font-family: 'EB Garamond',serif;
 }
-#scope1{
+/*#scope1{
   max-width: 600px
+}*/
+.interaction{
+  max-width: 600px;
+}
+.explanation{
+  font-size: .8em;
+  text-align: justify;
+  max-width: 600px;
 }
 
 
@@ -13,10 +36,28 @@
 
 }
 
+.hoverContent{
+  margin: 30px;
+}
+
+.hoverableWord {
+  /*border-bottom: 2px grey ridge;*/
+  color:#0099CC	;
+  background: none;
+  border: none;
+  padding: 0;
+  margin:0
+
+}
 
 .unfocused{
   background: grey;
   opacity: 0.5;
+}
+
+.focused{
+  background: blue;
+
 }
 
 .ass {
@@ -58,7 +99,11 @@
   font-family: 'EB Garamond',serif;
 
 }
-
+.arrow{
+  color:grey;
+  background: none;
+  border: none;
+}
 .secondaryNavItem a{
   text-decoration: none;
   color: grey;
@@ -72,10 +117,10 @@
 }
 
 .exploContainer {
-  min-height:70%;
+  /*min-height:70%;
   min-width:70%;
   max-width: 80%;
-  max-height: 80%;
+  max-height: 80%;*/
   margin: auto;
 
 }

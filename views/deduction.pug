@@ -2,14 +2,22 @@ extends pagelayout
 
 block content
 
-
+	
 	main.exploMain
 		.exploContainer
-			h4.exploTitle.text-xs-center.m-b-3(id = section) #{title}
+			.exploTitle.text-xs-center.m-b-3(id = section) #{title}
 			.col-lg-6.explanation
-					for t in text
-						p.expTextTitle
-							!= t
+				.slideTitle.text-xs-center.m-b-3(id = section) 
+					button.m-x-2.arrow#backward &pr; 
+					span.m-x-2
+					button.m-x-2.arrow#forward &sc;
+				each slide, index in slides 
+					.leftSlide.offScreen(id = "slide"+index)
+						for par in slide.text
+							p
+								span.paraHead #{par[0]}
+								span
+									!= par[1]
 			.col-lg-6.interaction
 	nav.navbar.navbar-fixed-bottom#secondaryNav
 		.container
@@ -19,7 +27,6 @@ block content
 					for item in info
 						li.nav-item.align-middle.secondaryNavItem
 							a.nav-link(href='/deduction/'+ item[0]) #{item[1]}
-
 	.modal.fade.result
 		.modal-dialog.modal-dialog
 			.modal-content
