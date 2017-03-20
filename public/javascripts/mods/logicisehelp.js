@@ -134,8 +134,8 @@ logiciseTracker.prototype.mistake = function(){
     alert("This is incorrect. :( You have "+ this.chanceLeft +" left. Press confirm to continue.","incorred")
     this.state = "nextProblem"
   } else{
-    alert("This is incorrect. :( You have no more chance left. Press confirm to restart. If you passed and are signed in, you score will show up on the leaderboard.","incorred")
-    if (logged && this.currentScore > this.toPass) recordLeader(uid,this.logiciseId,this.currentScore)
+    alert("This is incorrect. :( You have no more chances left. Press confirm to restart. If you passed and are signed in, your score will show up on the leaderboard.","incorred")
+    if (logged && this.currentScore >= this.toPass) recordLeader(uid,this.logiciseId,this.currentScore)
     if (this.analytic) this.analytic.sendDB(this.analyticId)
     this.state = "restart"
   }

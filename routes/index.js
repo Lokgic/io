@@ -298,11 +298,12 @@ router.post('/profile/*', function(req,res,next){
 			id:3,
 			pa:4
 		}
-
+		// console.log(re)
 		for (module in re){
 			if (re[module].length != 0){
 				for (record in re[module]){
 					var id = re[module][record].module + "-" + re[module][record].chapter + "-" +re[module][record].section;
+
 				var target = treeSearch.search(tree.children[index[re[module][record].module]],"id",id)
 
 				if (target != null) {
@@ -312,9 +313,9 @@ router.post('/profile/*', function(req,res,next){
 
 				}
 			}
-
+			// console.log(tree)
 			treeSearch.checkChildren(tree.children[0])
-
+			treeSearch.checkChildren(tree.children[1])
 		}
 
 
