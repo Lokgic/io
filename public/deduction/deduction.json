@@ -1,7 +1,7 @@
 {
   "fundamentals":{
     "title":"Natural Deduction: Fundamentals",
-    "derivation":"$\\{A \\wedge B, B \\to C\\} \\vdash A\\wedge(B \\wedge C)$",
+    "derivation":"$\\{A \\wedge B, B \\to C\\} \\vdash A\\wedge(B \\vee D)$",
     "proof": [
 
               [1,"$A \\wedge B$", "Given",{"hoverable":false}],
@@ -9,23 +9,51 @@
               [1, "$A$","1 $\\wedge E$"],
               [1, "$B$", "1 $\\wedge E$"],
               [1, "$C$","2,4 $\\to E$"],
-              [1,"$B\\wedge C$ ", "4,5 $\\wedge I$"],
-              [1, "$A \\wedge B$", "3,6 $\\wedge I$"]
+              [1,"$B\\vee D$ ", "4,5 $\\vee I$"],
+              [1, "$A \\wedge (B\\vee D)$", "3,6 $\\wedge I$"]
 
           ],
     "slides":[
       {
           "title":"Basic Concepts 1",
           "text":[
-            ["Deduction","is a <i>syntactic</i> understanding of the notion of <span class = hoverableWord hoverID = '2' id = inference>inferences</span>. Recall that we had the semantic notion of entailment, symbolized as $\\vDash$, when we reason about arguments in terms of the propositions' truth values. Here, we think about inferences <span class = hoverableWord hoverID = '3'>in terms of rules of inferences that grounded in the relationship between the symbols themselves.</span>"],
+            ["Deduction","is a <i>syntactic</i> understanding of the notion of <span class = hoverableWord hoverID = '2' id = inference>inference</span>. In earlier modules we learned about the semantic notion of entailment, symbolized as $\\vDash$, when we reason about arguments in terms of the propositions' truth values. Here, we think about inferences <span class = hoverableWord hoverID = '3'>in terms of rules of inferences that grounded in the relationship between the symbols themselves.</span> "],
+
             ["Derivability","The symbol $\\vdash$ represents the notion of <i> syntactical derivability</i>. For any set of SL or PL statement $\\Gamma$ and some statement $\\phi$, '$\\Gamma \\vdash \\phi$' means ' <span class = hoverableWord hoverID = '1'>from the set $\\Gamma$, the sentence $\\phi$ is derivable using permissible rules of inferences.'</span> We will sometimes refer the process of deriving something a <i>derivation</i> or a <i>proof</i>."]
           ]
       },
       {
           "title":"Basic Concepts 2",
           "text":[
-            ["Assumptions","The statements above the horizontal lines are assumptions - they are <span class = hoverableWord hoverID = '4' id = 'accessible' >accessible</span> for drawing inferences. Our job as the deducer is to find out that <i>deductively</i> follow from these given assumptions. In this derivation, we were given certain assumptions(premises)</span>; but not all derivations begin with given assumptions, however. Eventually we will learn to prove statements without them; we'd have to make them our own."],
-            ["Justification","The numbers and symbols to the right are called justification, that tells us how this particular line was derived. For instance, <span class = hoverableWord hoverID = '5'>we justify the first two lines</span> by stating that these were given. <span class = hoverableWord hoverID = '6'>Lines 3 to 7</span>, however, were the product of using rules of inferences on the lines indicated."]
+            ["Assumption","The statements above the horizontal lines are assumptions - they are <span class = hoverableWord hoverID = '4' id = 'accessible' >accessible</span> for drawing inferences. Our job as the deducer is to find out that <i>deductively</i> follow from these given assumptions. In this derivation, we were given certain assumptions(premises)</span>; but not all derivations begin with given assumptions, however. Eventually we will learn to prove statements without them; we'd have to make them our own."],
+            ["Justification","The numbers and symbol to the right of each line are there to justify that particular line was derived. For instance, <span class = hoverableWord hoverID = '5'>we justify the first two lines</span> by stating that these were given. <span class = hoverableWord hoverID = '6'>Lines 3 to 7</span>, however, were the product of using rules of inferences on the lines indicated."]
+          ]
+      },
+      {
+          "title":"Some Groundwork",
+          "text":[
+              ["Formulas","We will also starting referring the SL or PL sentences as <i> formulas </i>, as opposed to propositions or sentences. The reason for this is to emphasize that in a syntactic context we are treating the symbols as nothing but a bunch of strings. Putting it differently, when we say formulas we refer to the symbols themselves without caring about its meaning at all. "],
+            ["Formalism","For the sake of convenience, we will express rules of inferences using this notation: $(\\Gamma, \\theta)$, which is an ordered pair that says: from the finite set of formulas $\\Gamma$, we can infer the formula $\\theta$. This seems pretty abstract, but you will see that it is really nothing but a straightforward procedure of processing bits of strings. "]
+          ]
+      },
+      {
+          "title":"Rules of Inferences 1",
+          "text":[
+              ["$\\wedge E$:","$(\\{\\alpha \\wedge \\beta\\},\\alpha)$ and $(\\{\\alpha \\wedge \\beta\\},\\beta)$"],
+
+            ["Conjunction Elimination -","$\\wedge E$ says that <span class = hoverableWord hoverID = '7'>whenever you have a formula of the form $\\alpha \\wedge \\beta$, you are entitled to infer either $\\alpha$ or $\\beta$</span>. This rule is supposed to mirror the truth table definition of conjunction: $\\alpha \\wedge \\beta$ is true when both of the conjuncts are true. "],
+            ["$\\wedge I$:","$(\\{\\alpha, \\beta\\},\\alpha \\wedge \\beta)$"],
+            ["Conjunction Introduction","works in the opposite way: if you have two separate sentence $\\alpha$ and $\\beta$, you can put them together with a conjunction.<span class = hoverableWord hoverID = 8> In the example here, we put 3 and 6 together using this rule, producing line 7.</span> In this case, $\\beta$ takes the form of a complex formula $(B \\vee D)$"]
+          ]
+      },
+      {
+          "title":"Rules of Inferences 2",
+          "text":[
+              ["$\\vee E$:","$(\\{\\alpha\\},\\alpha \\vee \\beta)$"],
+
+            ["Disjunction Introduction","is similar to $\\wedge I$, except you only need one formula to start with. <span class=hoverableWord hoverID=9>The idea is that you are allowed to introduce a disjunction as long as one of the disjuncts is accessible.</span>"],
+            ["$\\to E$:","$(\\{\\alpha, \\alpha \\to \\beta\\}, \\beta)$"],
+            ["Conditional Elimination","is also called by its Latin name <i>Modus Ponens</i>. <span class = hoverableWord hoverID = 10> It states that whenever you have a conditional statement along its <i>antecedent</i>, you are allowed to infer the consequent as well.</span>$"]
           ]
       }
 
@@ -71,6 +99,30 @@
       {
         "focus":true,
         "target":["line3","line4","line5","line6","line7"]
+
+      },
+      "7":{
+        "target":"#line3",
+        "text":[
+          "Remember that $\\alpha$ and $\\beta$ are metavariables that could stand for any SL formula. So $A \\wedge B$ is an instance of $\\alpha \\wedge \\beta$. Here, you see the line 3 and 4 of derivation comes from line 1 using $\\wedge E$. "
+        ],
+        "location":"bottom center"
+      },
+      "8":{
+        "focus":true,
+        "target":["line3","line6","line7"]
+
+      },
+      "9":{
+        "target":"#line6",
+        "text":[
+          "Here the proof went from $B$ to $B \\vee D$. It might seem strange that $D$ just came out of nowhere, but as you know as long as $B$ is true, $B \\vee whatever$ will be tree as well. So it does not matter whether or not we already have D. In fact, we can infer $B\\vee (D\\wedge E \\wedge F \\wedge G)$ from $B$ and the inference would still be good."
+        ],
+        "location":"top center"
+      },
+      "10":{
+        "focus":true,
+        "target":["line2","line4","line5"]
 
       }
     }
