@@ -85,11 +85,6 @@
                         "id":"pl-3-defmc"
                       }
                     ]
-                },
-                {
-                    "name": "Analytic Tableaux(Truth Trees)",
-                    "type":"chapter",
-                    "children": null
                 }]
             }, {
                 "name": "Logicise",
