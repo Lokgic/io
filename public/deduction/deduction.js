@@ -6,6 +6,14 @@ $(function(){
   //       .style('position','fixed')
   //       .style("top", "90%")
   //       .text("Mouse over each tree node for further information.")
+
+
+  $('#forward').notify("Press '>' or '<' to nagviate between the topics.",{
+    "position":"bottom",
+    "autoHide":true,
+    "clickToHide":true,
+    "style":"deduction"
+  })
   function drawDeduction(div,lines,der){
       var area = d3.select(div)
       var der = area.append('h4').text(der).attr('class','derivation')
