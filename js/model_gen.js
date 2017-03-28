@@ -720,8 +720,10 @@ var model2 = function(tier){
       }
 
 }
-  // console.log(JSON.stringify(model2(10),null,2))
+  console.log(JSON.stringify(model2(2),null,2))
 module.exports.model2 = model2
+
+
 
 
 
