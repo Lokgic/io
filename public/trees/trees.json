@@ -69,7 +69,7 @@
           }
         },
         "text":[
-          "The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. In other words, it determines if a given set of propositions are consistent. Each path of the tree can be thought of as rows in a truth table."
+          "The purpose of a truth tree is to produce an interpretation of the atomic sentences that render the propositions all true. It determines if a given set of propositions is consistent. The decomposition rules we have ensure that each of the subsequent nodes logically follows from the sentence it decomposes. Each path of the tree can be thought of as rows in a truth table that would render the formulas on the path true."
         ],
         "tooltip":{
           "0": "The root of the tree contains the set of propositions of which we try to establish consistency. To do so, we assume these propositions to be true - we can think of it as trying to find the truth values for the atomic sentences on rows where these propositions are true, if they exist. Having a complete truth table in front of us, we know these rows exist, but truth trees give us a systematic method to ascertain the same fact without filling out a table. As the table indicates, at the end of the tree, we should be able to find out that there are at least two combinations of A and B that can satisfy the given set of propositions (i.e., wherever A and B have different truth values).",

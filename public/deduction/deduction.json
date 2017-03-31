@@ -53,7 +53,7 @@
 
             ["Disjunction Introduction","is similar to $\\wedge I$, except you only need one formula to start with. <span class=hoverableWord hoverID=9>The idea is that you are allowed to introduce a disjunction as long as one of the disjuncts is accessible.</span>"],
             ["$\\to E$:","$(\\{\\alpha, \\alpha \\to \\beta\\}, \\beta)$"],
-            ["Conditional Elimination","is also called by its Latin name <i>Modus Ponens</i>. <span class = hoverableWord hoverID = 10> It states that whenever you have a conditional statement along its <i>antecedent</i>, you are allowed to infer the consequent as well.</span>$"]
+            ["Conditional Elimination","is also called by its Latin name <i>Modus Ponens</i>. <span class = hoverableWord hoverID = 10> It states that whenever you have a conditional statement along its <i>antecedent</i>, you are allowed to infer the consequent as well.</span>"]
           ]
       }
 
