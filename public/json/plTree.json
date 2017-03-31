@@ -130,7 +130,8 @@
     },
     {
       "name":"Test 2",
-      "type":"task"
+      "type":"task",
+      "id":"pl-test-1"
 
     }
   ]

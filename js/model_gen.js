@@ -722,10 +722,17 @@ var model2 = function(tier){
       }
 
 }
-
-// console.log(JSON.stringify(model2(2),null,2))
-module.exports.model2 = model2
-model2(2)
+// <<<<<<< HEAD
+//   console.log(JSON.stringify(model2(2),null,2))
+// module.exports.model2 = model2
+// =======
+// >>>>>>> c2fa159daaf75ff55792d52a7be02fedbc0053a7
+//
+// // console.log(JSON.stringify(model2(2),null,2))
+// module.exports.model2 = model2
+// model2(2)
+//
+//
 
 
 
