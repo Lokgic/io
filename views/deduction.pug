@@ -6,14 +6,13 @@ block content
 	main.exploMain
 		.exploContainer
 			.exploTitle.text-xs-center.m-b-3(id = section) #{title}
-			
+			.col-lg-6.explanation
+				.slideTitle.text-xs-center.m-b-3(id = section) 
+					button.m-x-2.arrow#backward &pr; 
+					span.m-x-2
+					button.m-x-2.arrow#forward &sc;
 				each slide, index in slides 
-					.col-lg-6.explanation
-						.slideTitle.text-xs-center.m-b-3(id = section) 
-							button.m-x-2.arrow#backward &pr; 
-							span.m-x-2
-							button.m-x-2.arrow#forward &sc;
-					.leftSlide(id = "slide"+index)
+					.leftSlide.offScreen(id = "slide"+index)
 						for par in slide.text
 							p
 								span.paraHead #{par[0]}

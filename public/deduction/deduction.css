@@ -4,23 +4,15 @@
 }
 
 .leftSlide{
-
-  height: 100vh;
-  display:flex;
-  font-family:'Titillium Web', sans-serif;
-  font-size: 1em;
-
+  transition-duration: 600ms;
 }
-
 .paraHead{
   font-size: 1em;
   margin-right: 15px;
   font-weight: 700;
 }
 
-.explanation p {
-  margin-bottom: 15px;
-}
+
 .derivation{
   text-align: center;
   margin: 30px 0;
@@ -31,7 +23,6 @@
 }*/
 .interaction{
   max-width: 600px;
-  /*position: fixed;*/
 }
 .explanation{
   font-size: .8em;
