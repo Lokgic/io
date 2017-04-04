@@ -713,9 +713,9 @@ var model2 = function(tier){
       }
 
       var model = initModel(diff)
-      console.log(JSON.stringify(model,null,5))
-      var demo = makeProblemSet(model,expScale(3,6,20,tier,true),diff)
-      console.log(JSON.stringify(demo,null,5))
+      // // console.log(JSON.stringify(model,null,5))
+      // var demo = makeProblemSet(model,expScale(3,6,20,tier,true),diff)
+      // console.log(JSON.stringify(demo,null,5))
       return {
         problems: makeProblemSet(model,expScale(3,6,20,tier,true),diff),
         model,model
@@ -729,7 +729,7 @@ var model2 = function(tier){
 // >>>>>>> c2fa159daaf75ff55792d52a7be02fedbc0053a7
 //
 // // console.log(JSON.stringify(model2(2),null,2))
-// module.exports.model2 = model2
+module.exports.model2 = model2
 // model2(2)
 //
 //
