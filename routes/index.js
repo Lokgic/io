@@ -145,6 +145,9 @@ router.get(t = '/m/*/*', function(req, res, next){
 	} else if (moduleID == "pl"){
 		var title  = "Predicate Logic";
 		var moduleNum = 2;
+	}else if (moduleID == "nd"){
+		var title  = "Natural Deduction";
+		var moduleNum = 3;
 	}
 	var fileName = moduleID+chapterNum
 

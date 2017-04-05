@@ -50,7 +50,7 @@ $(function(){
         .on('mouseover',function(){
           var id = d3.select(this).attr('id')
           var dim = d3.select(div).node().getBoundingClientRect()
-          console.log(dim)
+
         })
   }
 
