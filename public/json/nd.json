@@ -522,5 +522,119 @@
             }
           ]
         }
+    },
+    "2":{
+      "1":{
+        "chapterName":"Proving Theorems in SL",
+        "chapterNum":"2",
+        "chapterDescription":"So far all we've looked at is whether conclusions follow validly from sets of premises. However, as we saw in the chapter on truth tables, there are other logical properties we want to investigate: whether a statement is a tautology, a contradiction or a contingent statement, whether two statements are equivalent, and whether sets of sentences are consistent. In this section, we will look at using derivations to test for two properties which will be important in later sections, logical equivalence and being a tautology.",
+        "title":"Syntactic Equivalences",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "We can say that two statements are  syntactically logically equivalent in SL if you can derive each of them from the other. We can symbolize this the same way we symbolized semantic equivalence. When we introduced the double turnstile, we said we would write the symbol facing both directions to indicate that two sentences were semantically equivalent, like this: $A  \\wedge B \\equiv_{\\vDash} B  \\wedge A$. We can do the same thing with the single turnstile for syntactic equivalence, like this:  $A  \\wedge B \\equiv_{\\vdash} B  \\wedge A$. ",
+              "For an example of how we can show two sentences to be syntactically equivalent, consider the sentences $P \\to  (Q \\to  R)$ and $(P \\to  Q) \\to  (P \\to  R)$. To prove these logically equivalent using derivations, we simply use derivations to prove the equivalence one way, from P \\to  (Q \\to  R) to (P \\to  Q) \\to  (P \\to  R). And then we prove it going the other way, from (P \\to  Q) \\to  (P \\to  R) to P \\to  (Q \\to  R). We set up the proof going left to right like this:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"logeq1"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "Since our want line is a conditional, we can set this up as a conditional proof. Once we set up the conditional proof, we also have a conditional in next want line, which means that we can put a conditional proof inside a conditional proof, like this."
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"logeq2"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "This shows that $P \\to  (Q \\to  R) \\vdash (P \\to  Q) \\to  (P \\to  R)$. In order to show $P \\to  (Q \\to  R)  \\equiv_{\\vdash} (P \\to  Q) \\to  (P \\to  R)$, we need to prove the equivalence going the other direction. That proof is left as an exercise."
+            ]
+          },
+          {
+            "type":"p",
+            "substance":[
+
+              "These two proofs show that $P \\to  (Q \\to  R)$ and $(P \\to  Q) \\to  (P \\to  R)$ are equivalent, so we can write $P \\to  (Q \\to  R)  \\equiv_{\\vdash} (P \\to  Q) \\to  (P \\to  R)$. "
+            ]
+          }
+        ]
+      },
+      "2":{
+        "title":"Syntactic Tautology in SL",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "We can also prove that a sentence is a tautology using a derivation. A tautology is something that must be true as a matter of logic. If we want to put this in syntactic terms, we would say that  syntactic tautology in SL is a statement that can be derived without any premises, because its truth doesn't depend on anything else. Now that we have all of our rules for starting and ending subproofs, we can actually do this. Rather than listing any premises, we simply start a subproof at the beginning of the derivation. The rest of the proof can work only using premises assumed for the purposes of subproofs. By the end of the proof, you have discharged all these assumptions, and are left knowing a tautological statement without relying on any leftover premises. Consider this proof of the law of noncontradiction: $\\neg(G  \\wedge \\neg G)$. "
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"taut"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "This statement simply says that any sentence G cannot be both true and not true at the same time. We prove it by imagining what would happen if G were actually both true and not true, and then pointing out that we already have our contradiction. ",
+              "In the previous chapter, we expressed the fact that something could be proven a tautology using truth tables or trees by writing the double turnstile in front of it. The law of noncontradiction above could have been proven using truth tables, so we could write: $\\vdash \\neg (G  \\wedge \\neg G)$ In this chapter, we will use the single turnstile the same way, to indicate that a sentence can be proven to be a tautology using a derivation. Thus the above proof entitles us to write $\\vdash \\neg (G  \\wedge \\neg G)$.  "
+            ]
+          }
+        ]
+      },
+      "3":{
+        "title":"Derived Rules",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "Now that we have our five rules for introduction and our five rules for elimination, plus the rule of reiteration, our system is complete. If an argument is valid, and you can symbolize that argument in SL, you can prove that the argument is valid using a derivation.  Now that our system is complete, we can really begin to play around with it and explore the exciting  logical world it creates.",
+              "There's an exciting logical world created by these eleven rules? Yes, yes there is. You can begin to see this by noticing that there are a lot of other interesting rules that we could have used for our introduction and elimination rules, but didn't. In many textbooks, the system of natural deduction has a disjunction elimination rule that works like this:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"derivedRules1"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "You might think our system is incomplete because it lacks this alternative rule of disjunction elimination. Yet this is not the case. If you can do a proof with this rule, you can do a proof with the basic rules of the natural deduction system. Furthermore, once you have a proof of this rule, you can use it inside other proofs whenever you think you would need a rule like $\\vee *$. Simply use the proof you gave in the last homework as a sort of recipe for generating a new series of steps to get you to a line saying $C \\vee D$",
+              "But adding lines to a proof using this recipe all the time would be a pain in the neck. What's worse, there are dozens of interesting possible rules out there, which we could have used for our introduction and elimination rules, and which we now find ourselves replacing with recipes like the one above.",
+              "Fortunately our basic set of introduction and elimination rules, plus reiteration, was meant to be expanded on. That's part of the game we are playing here. The first system of deduction created in the Western tradition was the system of geometry created by Euclid (c 300 BCE). Euclid's Elements  began with 10 basic laws, along with definitions of terms like 'point,' 'line,' and 'plane.' He then went on to prove hundreds of different theorems about geometry, and each time he proved a theorem he could use that theorem to help him prove later theorems.",
+              "We can do the same thing in our system of natural deduction. What we need is a rule that will allow us to make up new rules. The new rules we add to the system will be called derived rules. Our ten rules for adding and eliminating connectives are then the axioms of SL. Now here is our rule for adding rules."
+            ]
+          },{
+            "type":"important",
+            "substance":["Rule of Derived Theorem Introduction: Given a derivation in SL of some argument $A_1... A_n \\equiv_{\\vdash} B$, create the rule $A_1$ ... $A_n \\equiv_{\\vdash} B$ and assign a name to it of the form '$T_n$', to be read 'theorem n.' Now given a derivation of some theorem $T_m$, where $n < m$, if $A_1$ ... $A_n$ occur as earlier lines $x_1$ ... $x_n$ in a proof, one may infer B, and justify it '$T_n$, $x_1$ ... $x_n$', so long as none of lines $x_1$ ... $x_n$ are in a closed subproof."]
+          },
+          {
+            "type":"p",
+            "substance":["Let's make our rule $\\vee *$ above our first theorem. The proof of $T_1$ is derived simply from the recipe above.",
+            "$T_1:$Constructive Dilemma: $ \\{ A \\vee B, A \\to C, B \\to C \\} \\vdash C$"
+          ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"derivedRules2"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "Informally, we will refer to $T_1$ as 'Constructive Dilemma' or by the abbreviation 'CD.' Most theorems will have names and easy abbreviations like this. We will generally use the abbreviations to refer to the proofs when we use them in derivations, because they are easier to remember. ",
+              "Several other important theorems have already appeared as examples or in homework problems. We'll talk about most of them in the next section, when we discuss rules of replacement. In the meantime, there is one important one we need to introduce now",
+              "$T_2$ Modus Tollens(MT): $\\{A \\to B, \\neg B\\} \\vdash \\neg A$",
+              "Its proof is left as an exercise."
+            ]
+          }
+        ]
+      }
+
     }
 }
