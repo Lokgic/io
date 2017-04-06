@@ -534,7 +534,7 @@
             "type":"p",
             "substance":[
               "We can say that two statements are  syntactically logically equivalent in SL if you can derive each of them from the other. We can symbolize this the same way we symbolized semantic equivalence. When we introduced the double turnstile, we said we would write the symbol facing both directions to indicate that two sentences were semantically equivalent, like this: $A  \\wedge B \\equiv_{\\vDash} B  \\wedge A$. We can do the same thing with the single turnstile for syntactic equivalence, like this:  $A  \\wedge B \\equiv_{\\vdash} B  \\wedge A$. ",
-              "For an example of how we can show two sentences to be syntactically equivalent, consider the sentences $P \\to  (Q \\to  R)$ and $(P \\to  Q) \\to  (P \\to  R)$. To prove these logically equivalent using derivations, we simply use derivations to prove the equivalence one way, from P \\to  (Q \\to  R) to (P \\to  Q) \\to  (P \\to  R). And then we prove it going the other way, from (P \\to  Q) \\to  (P \\to  R) to P \\to  (Q \\to  R). We set up the proof going left to right like this:"
+              "For an example of how we can show two sentences to be syntactically equivalent, consider the sentences $P \\to  (Q \\to  R)$ and $(P \\to  Q) \\to  (P \\to  R)$. To prove these logically equivalent using derivations, we simply use derivations to prove the equivalence one way, from $P \\to  (Q \\to  R)$ to $(P \\to  Q) \\to  (P \\to  R)$. And then we prove it going the other way, from $(P \\to  Q) \\to  (P \\to  R)$ to $P \\to  (Q \\to  R)$. We set up the proof going left to right like this:"
             ]
           },
           {
