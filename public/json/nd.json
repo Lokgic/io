@@ -634,6 +634,42 @@
             ]
           }
         ]
+      },
+      "4":{
+        "title":"Rules of Replacement",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "Very often in a derivation, you have probably been tempted to apply a rule to a part of a line. For instance, if you knew $F \\to (G \\wedge  H)$ and wanted $F \\to  G$, you would be tempted to apply  \\wedge  E to just the $G  \\wedge  H$ part of $F  \\to  (G  \\wedge  H)$. But, of course you aren't allowed to do that. We will now introduce some new derived rules where you can do that. These are called rules of replacement, because they can be used to replace part of a sentence with a logically equivalent expression. What makes the rules of replacement different from other derived rules is that they draw on only one previous line and are symmetrical, so that you can reverse premise and conclusion and still have a valid argument. ",
+              "Suppose you wanted to prove $(M  \\vee  P)  \\to  (P  \\wedge  M)$, $\\therefore$ $(P  \\vee  M)  \\to  (M  \\wedge  P)$ You could do it using only the basic rules, but it will be long and inconvenient. With the the la of commutation, we can provide a proof easily:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"comm"
+          },
+          {
+            "type":"important",
+            "substance":["Inserting rules of replacement:  Given a theorem T of the form $ A   \\equiv_{\\vdash}  B$ and a line in a derivation  C  which contains in it a sentence  D  , where  D   is a substitution instance of either  A  or  B , replace  D   with the equivalent substitution instance of the other side of theorem T. "]
+          }
+        ]
+      },
+      "5":{
+        "title":"Proof Strategy",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "There is no simple recipe for proofs, and there is no substitute for practice. Here, though, are some rules of thumb and strategies to keep in mind.",
+              "The ultimate goal is to derive the conclusion. Look at the conclusion and ask what the introduction rule is for its main logical operator. This gives you an idea of what should happen Just before the last line of the proof. Then you can treat this line as if it were your goal. Ask what you could do to derive this new goal. For example: If your conclusion is a conditional $ A  \\to  B $, plan to use the  \\to I  rule. This requires starting a subproof in which you assume  A . In the subproof, you want to derive  B . Similarly, if your conclusion is a biconditional, $ A   \\to f  B $, plan on using { \\to f}I and be prepared to launch two subproofs. If you are trying to prove a single sentence letter or a negated single sentence letter, you might plan on using indirect proof. ",
+              "When you are starting a proof, look at the premises; later, look at the sentences that you have derived so far. Think about the elimination rules for the main operators of these sentences. These will tell you what your options are. For example: If you have $A  \\wedge  B$ use  \\wedge  E to get $A$ and $B$ separately. If you have $A  \\vee  B$ see if you can find the negation of either $A$ or $B$ and use  \\vee  E.",
+              "Once you have decided how you might be able to get to the conclusion, ask what you might be able to do with the premises. Then consider the target sentences again and ask how you might reach them.  Remember, a long proof is formally just a number of short proofs linked together, so you can fill the gap by alternately working back from the conclusion and forward from the premises.",
+              " Replacement rules can often make your life easier. If a proof seems impossible, try out some different substitutions.For example: It is often difficult to prove a disjunction using the basic rules. If you want to show $ A  \\vee  B $, it is often easier to show $ \\neg  A  \\to  B $ and use the MC rule. Some replacement rules should become second nature. If you see a negated disjunction, for instance, you should immediately think of DeMorgan's rule.",
+              "If you cannot find a way to show something directly, try assuming its negation. Remember that most proofs can be done either indirectly or directly. One way might be easier---or perhaps one sparks your imagination more than the other---but either one is formally legitimate."
+            ]
+          }
+        ]
       }
 
     }
