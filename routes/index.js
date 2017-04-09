@@ -319,6 +319,9 @@ router.post('/profile/*', function(req,res,next){
 			// console.log(tree)
 			treeSearch.checkChildren(tree.children[0])
 			treeSearch.checkChildren(tree.children[1])
+			treeSearch.checkChildren(tree.children[2])
+			treeSearch.checkChildren(tree.children[3])
+			treeSearch.checkChildren(tree.children[4])
 		}
 
 
