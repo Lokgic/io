@@ -672,5 +672,142 @@
         ]
       }
 
+    },
+    "3":{
+      "1":{
+        "chapterName":"Natural Deduction in PL",
+         "chapterNum":"3",
+         "chapterDescription":"For proofs in QL, we use all of the basic rules of SL plus four new basic rules: both introduction and elimination rules for each of the quantifiers. Since all of the derived rules of SL are derived from the basic rules, they will also hold in QL. We will add another derived rule, a replacement rule called quantifier negation.",
+         "title":"Universal Elimination",
+         "content":[
+           {
+             "type":"p",
+             "substance":[
+               "If you have $\\forall x Ax$, it is legitimate to infer that anything is an $A$. You can infer $Aa$, $Ab$, $Az$, $Ad_3$--- in short, you can infer $A v $ for any constant c . This is the general form of the universal elimination rule ($\\forall$E):"
+             ]
+           },
+           {
+             "type":"fitch",
+             "eventId":"ue1"
+           },
+           {
+             "type":"p",
+             "substance":[
+               "$ A [ v |x]$ is a substitution instance of $\forallx A $. The symbols for a substitution instance are not symbols of QL, so you cannot write them in a proof. Instead, you write the substituted sentence with the constant c  replacing all occurrences of the variable x in  A . For example:"
+             ]
+           },
+           {
+             "type":"fitch",
+             "eventId":"ue2"
+           }
+         ]
+      },
+      "2":{
+        "title":"Existential Introduction",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "When is it legitimate to infer $\\exists x Ax$? If you know that something is an $A$--- for instance, if you have $Aa$ available in the proof.",
+              "This is the existential introduction rule ($\\exists$I):"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ei1"
+          },
+          {
+            "type":"Universal Introduction",
+            "substance":[
+              "A universal claim like $\\forall x Px$ would be proven if {every} substitution instance of it had been proven, if every sentence $Pa$, $Pb$, $...$ were available in a proof. Alas, there is no hope of proving every substitution instance. That would require proving $Pa$, $Pb$, $...$, $Pj_2$, $...$, $Ps_7$, $...$, and so on to infinity. There are infinitely many constants in QL, and so this process would never come to an end.",
+              "Consider a simple argument: $\\forall x Mx$, \\therefore $\\forall y My$",
+              "It makes no difference to the meaning of the sentence whether we use the variable $x$ or the variable $y$, so this argument is obviously valid. Suppose we begin in this way:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ui1"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "We have derived $Ma$. Nothing stops us from using the same justification to derive $Mb$,..., $Mj_2$, $...$, $Ms_7$, $...$, and so on until we run out of space or patience. We have effectively shown the way to prove $M v $ for any constant c . From this, $\\forall x Mx$ follows.",
+              "It is important here that $a$ was just some arbitrary constant. We had not made any special assumptions about it. If $Ma$ were a premise of the argument, then this would not show anything about all $y$. For example:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ui2"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "Note that we can do this for any constant that does not occur in an undischarged assumption and for any variable."
+
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ui3"
+          }
+
+
+        ]
+      },
+      "3":{
+        "title":"Existential Elimination",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "A sentence with an existential quantifier tells us that there is some member of the UD that satisfies a formula. For example, $\\exists x Sx$ tells us (roughly) that there is at least one $S$. It does not tell us which member of the UD satisfies $S$, however. We cannot immediately conclude $Sa$, $Sf_{23}$, or any other substitution instance of the sentence. What can we do?",
+              "Suppose that we knew both $\\exists x Sx$ and $\\forall x(Sx \\to  Tx)$. We could reason in this way:",
+              "Since $\\exists x Sx$, there is something that is an $S$. We do not know which constants refer to this thing, if any do, so call this thing $\\Omega$. From $\\forall x(Sx \\to  Tx)$, it follows that if $\\Omega$ is an $S$, then it is a $T$. Therefore $\\Omega$ is a $T$.  Because $\\Omega$ is a $T$, we know that $\\exists x Tx$.",
+              "In this paragraph, we introduced a name for the thing that is an $S$. We called it $\\Omega$, so that we could reason about it and derive some consequences from there being an $S$. Since $\\Omega$ is just a bogus name introduced for the purpose of the proof and not a genuine constant, we could not mention it in the conclusion. Yet we could derive a sentence that does not mention $\\Omega$; namely, $\\exists x Tx$. This sentence does follow from the two premises.",
+              "We want the existential elimination rule to work in a similar way. Yet since Greek letters like $\\Omega$ are not symbols of QL, we cannot use them in formal proofs. Instead, we will use constants of QL which do not otherwise appear in the proof. A constant that is used to stand in for whatever it is that satisfies an existential claim is called a proxy. Reasoning with the proxy must all occur inside a subproof, and the proxy cannot be a constant that is doing work elsewhere in the proof.",
+              "This is the schematic form of the existential elimination rule ($\\exists$E): "
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ee1"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "$*$ The constant c  must not appear in $\\exists x Ax$, in b , or in any undischarged assumption.",
+              "With this rule, we can give a formal proof that $\\exists x Sx$ and $\\forall x(Sx \\to  Tx)$ together entail $\\exists x Tx$. The structure of the proof is effectively the same as the English-language argument with which we began, except that the subproof uses the constant ``$a$'' rather than the bogus name $\\Omega$."
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventId":"ee2"
+          }
+        ]
+      },
+      "4":{
+        "title":"Quantifier Negation",
+        "content":[
+          {
+            "type":"p",
+            "substance":[
+              "When translating from English to QL, we noted that $\\neg\\exists x\\neg A $ is logically equivalent to $\\forall x A $. In QL, they are provably equivalent. We can prove one half of the equivalence with a rather gruesome proof:"
+            ]
+          },
+          {
+            "type":"fitch",
+            "eventid":"qn"
+          },
+          {
+            "type":"p",
+            "substance":[
+              "In order to show that the two sentences are genuinely equivalent, we need a second proof that assumes $\\neg\\exists x\\neg A $ and derives $\\forall x A $. We leave that proof as an exercise for the reader.",
+              "It will often be useful to translate between quantifiers by adding or subtracting negations in this way, so we add two derived rules for this purpose. These rules are called quantifier negation (QN):$\\neg \\forall x Ax \\equiv_{\\vdash} \\exists x \\neg Ax$ and $\\neg \\exists x Ax \\equiv_{\\vdash} \\forall x \\neg Ax$",
+              "Since QN is a replacement rule, it can be used on whole sentences or on subformula."
+            ]
+
+          }
+        ]
+      }
     }
 }
