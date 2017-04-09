@@ -143,7 +143,7 @@ $(function() {
           .enter().append("path")
           .attr("class", "link")
           .style("stroke", function(d) {
-            // console.log(d)
+            console.log(d.data)
             if (d.data.completed) return color[d.data.type]
               else return "white";
           })

@@ -2,22 +2,6 @@
   "name":"Participatory",
   "type":"module",
   "children":[
-    {"name":"P+",
-    "type":"module",
-    "children":
-    [
-      {"name":"Test 1","type":"task","id":"pa-pplus-1"},
-      {"name":"Test 2","type":"task","id":"pa-pplus-2"},
-      {"name":"Test 3","type":"task","id":"pa-pplus-3"},
-      {"name":"Test 4","type":"task","id":"pa-pplus-4"}
-    ]
-  },
-    {"name": " < 3 Absences","type":"task","id":"pa-attendance-satisified"},
-    {"name": "Logicise Achievements",
-      "type":"module"
-      ,
-      "type":"task","id":"pa-logicise-4x"
-    },
     {"name": "In Class Activities", "type":"task",
     "children":[
       {"name":"Proving logical laws: Venn/Truth Tables","type":"subtask","id":"pa-inclass-sl1"},
@@ -26,6 +10,17 @@
         {"name":"PL Translation","type":"subtask","id":"pa-inclass-pl2"}
     ]
   },
+    {"name":"Test 1 P+","type":"task","id":"pa-pplus-1"},
+    {"name":"Test 2 P+","type":"task","id":"pa-pplus-2"},
+    {"name":"Test 3 P+","type":"task","id":"pa-pplus-3"},
+    {"name":"Test 4 P+","type":"task","id":"pa-pplus-4"},
+    {"name": " < 3 Absences","type":"task","id":"pa-attendance-satisified"},
+    {"name": "Logicise Achievements",
+      "type":"module"
+      ,
+      "type":"task","id":"pa-logicise-4x"
+    },
+
   {
     "name":"Deduction Task Credit","type":"task","id":"pa-deduction-inclass"
   }
