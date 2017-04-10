@@ -31,22 +31,22 @@
       "type":"task",
       "children":[
         {
-          "name": "SL Basic Derviations",
-          "type":"subtask"
+          "name": "SL Basic Derivations",
+          "type":"subtask",
+          "id":"nd-pset-1"
         },
         {
-          "name": "SL Proofs and Rules of Replacements",
-          "type":"subtask"
+          "name": "SL Premiseless",
+          "type":"subtask",
+          "id":"nd-pset-2"
+
 
         },
         {
-          "name":"PL Derviations",
-          "type":"subtask"
+          "name":"PL Deduction",
+          "type":"subtask",
+          "id":"nd-pset-3"
 
-        },
-        {
-          "name": "PL: Proofs",
-          "type":"subtask"
 
         }
       ]
