@@ -15,7 +15,7 @@ $(function() {
 
     d3.select('#getProfile').on('click',function(){
       uid = document.getElementById('uid').value
-      console.log(uid)
+      // console.log(uid)
 
       loadProfile(uid,function(err,data){
         // for (dp in data){
@@ -25,7 +25,7 @@ $(function() {
         // }
         // d3.select('main').html("")
         drawTree(data)
-        console.log(data)
+        // console.log(data)
       })
     })
 
@@ -36,7 +36,7 @@ $(function() {
         .done(function(data){
           callback(null,data);
         }).fail(function(f){
-          console.log(f)
+          // console.log(f)
         })
     }
 
@@ -47,7 +47,7 @@ $(function() {
       //   }
       // }
       drawTree(data)
-      console.log(data)
+      // console.log(data)
     })
 
     var main = '#profileTree'
@@ -143,7 +143,7 @@ $(function() {
           .enter().append("path")
           .attr("class", "link")
           .style("stroke", function(d) {
-            console.log(d.data)
+            // console.log(d.data)
             if (d.data.completed) return color[d.data.type]
               else return "white";
           })

@@ -16,10 +16,10 @@ module.exports.search = function treeSearch(element, key, property){
 }
 
 module.exports.checkChildren = function checkChildren(element){
-  console.log("checking children..")
-  console.log(element)
-  console.log("completed status")
-  console.log(element.completed)
+  // console.log("checking children..")
+  // console.log(element)
+  // console.log("completed status")
+  // console.log(element.completed)
    if (element.children != null){
 
           var i;

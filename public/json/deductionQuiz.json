@@ -1,0 +1,20 @@
+{
+  "1":{
+    "background":{
+      "type":"fitch",
+      "substance":[
+        [1,"$A \\leftrightarrow D$",""],
+        [1,"$C$",""],
+        [1,"$((A \\leftrightarrow D ) \\wedge C) \\to (C \\leftrightarrow B)$","Premises",{"ass":true}],
+        [1,"",""]
+      ]
+    },
+    "question":[
+      {
+        "text":"testing",
+        "correct":["correct1","correct2"],
+        "incorrect":["incorrect1","incorrect2","incorrect3"]
+      }
+    ]
+  }
+}

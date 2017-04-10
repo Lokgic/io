@@ -708,3 +708,8 @@ ul{
   margin:0;
   height:10px
 }
+
+.fitch{
+  max-width: 800px;
+  margin:auto;
+}
