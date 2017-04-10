@@ -287,6 +287,45 @@ td:hover {
 
 /*deduction stuff*/
 
+.fitch{
+  padding: 50px;
+}
+
+.fitch h4{
+  margin-bottom: 50px;
+  margin-right: 50px;
+}
+
+.btn-mc{
+  background: white;
+  border:1px solid black;
+}
+
+.btn-mc:hover{
+  background: grey;
+
+}
+
+.fitch .active{
+  background: black;
+  color:white;
+
+}
+/*
+.fitch .active{
+  background-color: black;
+  color:white;
+}
+
+.fitch .focus{
+  background-color: inherit;
+  color:inherit;
+}*/
+
+/*.fitch .btn-secondary:hover{
+  background-color: black;
+  color:white;
+}*/
 
 .ass {
 

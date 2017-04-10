@@ -77,6 +77,9 @@ block extrafooter
 	script(src="../javascripts/mods/logicisehelp.js")
 	script(src="../javascripts/mods/notify.js")
 	script(src="/javascripts/mods/underscore-min.js")
-	script(src="../javascripts/"+logiciseID+".js")
+	if (logiciseID == "deductionQuiz1")
+		script(src="../javascripts/deductionQuiz.js")
+	else
+		script(src="../javascripts/"+logiciseID+".js")
 	script(src="../javascripts/logleader.js")
 	link(rel="stylesheet", type="text/css", href="/css/leaderboard.css")

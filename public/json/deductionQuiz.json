@@ -1,20 +1,86 @@
 {
-  "1":{
-    "background":{
-      "type":"fitch",
-      "substance":[
-        [1,"$A \\leftrightarrow D$",""],
-        [1,"$C$",""],
-        [1,"$((A \\leftrightarrow D ) \\wedge C) \\to (C \\leftrightarrow B)$","Premises",{"ass":true}],
-        [1,"",""]
+  "deductionQuiz1":{
+    "1":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$A \\leftrightarrow D$",""],
+          [1,"$C$",""],
+          [1,"$((A \\leftrightarrow D ) \\wedge C) \\to (C \\leftrightarrow B)$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":["$C\\leftrightarrow B$","$C$","$B$","$C\\vee A$","$A \\vee C$","$E\\to C$","$F\\to B$"],
+          "incorrect":["$A$","$B\\wedge A$","$\\neg B\\wedge C$","$D$"]
+        }
       ]
     },
-    "question":[
-      {
-        "text":"testing",
-        "correct":["correct1","correct2"],
-        "incorrect":["incorrect1","incorrect2","incorrect3"]
-      }
-    ]
+    "2":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$\\neg A\\wedge C$",""],
+          [1,"$A \\vee B$",""],
+          [1,"$((B \\wedge C ) \\to (D \\wedge E)$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":["$\\neg A$","$C$","$B$","$B\\wedge C$","$D \\wedge E$","$D$","$C \\leftrightarrow (\\neg A \\wedge C)$","$\\neg B\\to B$"],
+          "incorrect":["$A \\vee \\neg C$","$A \\to \\neg C$","$B \\to \\neg B$","$C \\leftrightarrow ( A \\wedge C)$"]
+        }
+      ]
+    },
+    "3":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$A\\to (B \\to (C \\to D))$",""],
+          [1,"$A \\wedge (B\\wedge C)$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":["$A$","$C$","$B$","$B\\wedge C$","$D \\vee E$","$C \\to D$","$C \\leftrightarrow D$","$\\neg C\\vee D$","$Z \\vee \\neg Z$","$B \\to (C \\to D)$"],
+          "incorrect":["$C\\to \\neg D$","$A \\wedge \\neg A$","$\\neg B$","$\\neg D$"]
+        }
+      ]
+    },
+    "4":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable without any premise?",
+          "type":"checkbox",
+          "correct":[
+            "$O\\to O$","$N \\vee \\neg N$",
+            "$\\neg (A \\to \\neg C) \\to (A \\to C)$",
+            "$(B\\to \\neg B) \\leftrightarrow \\neg B$",
+            "$(P \\wedge \\neg P) \\vee (Q \\leftrightarrow Q))$",
+            "$(P \\to [P \\to Q]) \\to (P \\leftrightarrow Q)$",
+            "$Z \\vee \\neg Z$"],
+          "incorrect":[
+            "$(A \\to \\neg C) \\to (A \\to C)$",
+            "$O\\to  \\neg O$",
+            "$(P \\vee \\neg P) \\wedge (Q \\vee Q))$",
+            "$(\\neg P \\vee \\neg P) \\vee (Q \\wedge \\neg Q))$"]
+        }
+      ]
+    }
   }
 }

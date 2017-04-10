@@ -7,35 +7,20 @@
       "type":"task",
       "children":[
         {
-                "name": "Reading",
+                "name": "Logicises",
                 "type":"subtask",
                 "children": [{
-                    "name": "SL: Basic Rules of Inferences",
-                    "type":"chapter"
+                    "name": "SL Deduction Quiz",
+                    "type":"chapter",
+                    "id":"nd-logicise-deductionQuiz1"
 
 
                 }, {
-                    "name": "SL: Hypothetical Rules of Inferences",
+                    "name": "PL Deduction Quiz",
                     "type":"chapter",
+                    "id":"nd-logicise-deductionQuiz2"
 
-                    "children": []
-                }, {
-                    "name": "SL: Proofs and Rules of Replacements",
-                    "type":"chapter",
 
-                    "children": []
-                },
-                {
-                    "name": "PL: Universal Elimination and Existential Introduction",
-                    "type":"chapter",
-
-                    "children": []
-                },
-                {
-                  "name": "PL: Universal Introduction and Existential Elimination",
-                  "type":"chapter",
-
-                  "children":[]
                 }
               ]
             }

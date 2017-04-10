@@ -79,10 +79,10 @@
       "D: x is red.",
       "U: x is purple."    ]
   },
-  "deductionQuiz":{
-    "title":"Deduction Quiz",
-    "shortDescription":"",
-    "eventId":"deductionQuiz",
-    "intro":"Intro"
+  "deductionQuiz1":{
+    "title":"Deduction Quiz 1",
+    "shortDescription":"Check all answers. Press confirm to submit answers.",
+    "eventId":"deductionQuiz1",
+    "intro":"deductionQuiz1"
   }
 }
