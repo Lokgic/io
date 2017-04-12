@@ -84,5 +84,11 @@
     "shortDescription":"Check all answers. Press confirm to submit answers.",
     "eventId":"deductionQuiz1",
     "intro":"deductionQuiz1"
+  },
+  "deductionQuiz2":{
+    "title":"Deduction Quiz 2",
+    "shortDescription":"Check all answers. Press confirm to submit answers.",
+    "eventId":"deductionQuiz2",
+    "intro":"deductionQuiz2"
   }
 }

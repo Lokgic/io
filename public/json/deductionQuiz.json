@@ -82,5 +82,110 @@
         }
       ]
     }
+  },
+  "deductionQuiz2":{
+    "1":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$\\forall x \\exists y (Rxy \\vee Ryz)$",""],
+          [1,"$\\forall x \\neg Rmx$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":["$\\exists y (Rmy \\vee Rym)$","$\\exists x Rxm$","$\\neg \\exists x Rmx$","$\\neg Rma$"],
+          "incorrect":["$ Rma \\vee Ram$","$Ram$"]
+        }
+      ]
+    },
+    "2":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$\\forall x (\\exists y Lxy \\to \\forall z Lzx)$",""],
+          [1,"$Lab$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":[
+            "$\\exists y Lay \\to \\forall z Lza$",
+            "$\\exists y Lay$","$\\forall z Lza$",
+            "$Lca$","$\\exists y Lcy \\to \\forall z Lzc$",
+            "$\\exists y Lcy$",
+            "$\\forall z Lzc$",
+            "$Lcc$",
+            "$\\forall x Lxx$",
+            "$A \\to Lab$",
+            "$Lab \\vee Lee$"
+            ],
+          "incorrect":[
+            "$\\forall x (Lxa \\to \\forall z Lza)$"]
+        }
+      ]
+    },
+    "3":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"$\\forall x Jx$"],
+          [1,"$\\forall x (Jx \\to Kx)$",""],
+          [1,"$\\exists x \\forall y Lxy$","Premises",{"ass":true}],
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable from the premises above?",
+          "type":"checkbox",
+          "correct":[
+            "$Ja$",
+            "$Ja \\to Ka$",
+            "$Ka$",
+            "$\\exists x (Kx \\wedge Lxx)$",
+            "$Jb$"
+          ],
+          "incorrect":[
+            "$\\forall y Lay$",
+            "$Laa$",
+            "$Ka \\wedge Laa$",
+            "$\\forall y Lby$",
+            "$\\forall y Lky$"
+          ]
+        }
+      ]
+    },
+    "4":{
+      "background":{
+        "type":"fitch",
+        "substance":[
+          [1,"",""]
+        ]
+      },
+      "question":[
+        {
+          "text":"Which of the following expressions are derivable without any premise?",
+          "type":"checkbox",
+          "correct":[
+            "$\\forall z (Pz \\vee \\neg Pz)$",
+            "$\\forall x Rxx \\to \\exists x \\exists y Rxy$",
+            "$\\forall y \\exists x (Qy \\to Qx)$",
+            "$\\forall x Fx \\vee \\neg \\forall x Fx$",
+            "$\\forall x Mx \\vee \\forall x \\neg Mx$"
+          ],
+          "incorrect":[
+            "$\\forall x Fx$",
+            "$\\exists x Fx \\vee \\exists y Fy$",
+            "$\\forall x (Ky \\to Kz)$"]
+        }
+      ]
+    }
   }
 }
