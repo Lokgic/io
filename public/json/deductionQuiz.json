@@ -33,8 +33,8 @@
         {
           "text":"Which of the following expressions are derivable from the premises above?",
           "type":"checkbox",
-          "correct":["$\\neg A$","$C$","$B$","$B\\wedge C$","$D \\wedge E$","$D$","$C \\leftrightarrow (\\neg A \\wedge C)$","$\\neg B\\to B$"],
-          "incorrect":["$A \\vee \\neg C$","$A \\to \\neg C$","$B \\to \\neg B$","$C \\leftrightarrow ( A \\wedge C)$"]
+          "correct":["$\\neg A$","$C$","$B$","$B\\wedge C$","$D \\wedge E$","$D$","$C \\leftrightarrow (\\neg A \\wedge C)$","$\\neg B\\to B$","$A \\to \\neg C$"],
+          "incorrect":["$A \\vee \\neg C$","$B \\to \\neg B$","$C \\leftrightarrow ( A \\wedge C)$"]
         }
       ]
     },
