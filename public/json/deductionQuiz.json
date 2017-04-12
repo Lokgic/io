@@ -72,7 +72,7 @@
             "$\\neg (A \\to \\neg C) \\to (A \\to C)$",
             "$(B\\to \\neg B) \\leftrightarrow \\neg B$",
             "$(P \\wedge \\neg P) \\vee (Q \\leftrightarrow Q))$",
-            "$(P \\to [P \\to Q]) \\to (P \\leftrightarrow Q)$",
+            "$(P \\to [P \\to Q]) \\to (P \\to Q)$",
             "$Z \\vee \\neg Z$"],
           "incorrect":[
             "$(A \\to \\neg C) \\to (A \\to C)$",
