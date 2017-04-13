@@ -148,6 +148,9 @@ router.get(t = '/m/*/*', function(req, res, next){
 	}else if (moduleID == "nd"){
 		var title  = "Natural Deduction";
 		var moduleNum = 3;
+	}else if (moduleID == "id"){
+		var title  = "Identity";
+		var moduleNum = 4;
 	}
 	var fileName = moduleID+chapterNum
 
