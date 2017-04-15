@@ -436,11 +436,21 @@ router.post('/processing/*', function(req,res,next){
 
 
 	var generatorID = req.path.split('/')[2]
+	var option = req.path.split('/')[3]
+	var va = req.path.split('/')[4]
 	if (generatorID == "grid"){
+		console.log("here")
+		va = parseInt(va)
+		console.log(va)
+		if (va <5) var n = 4
+		else if (va >= 5 && va <= 10) var n = 3
+		else if (va > 10 && va <= 15) var n = 2
+		else n = 1
+		console.log(n)
 		grid = require("../js/grid_gen.js")
 		var model  = new grid.Model()
 
-		var statements = grid.generateStatements(4,model)
+		var statements = grid.generateStatements(4*n,model)
 	// console.log(statements)
 		var modelMin = model.grid
 
@@ -454,8 +464,7 @@ router.post('/processing/*', function(req,res,next){
 
 	}
 
-	var option = req.path.split('/')[3]
-	var va = req.path.split('/')[4]
+
 
 
 	var output;

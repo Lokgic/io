@@ -43,6 +43,8 @@ var logiciseTracker = function(parm){
   }
 
 
+
+
 }
 
 logiciseTracker.prototype.enableButt = function(n,text){
@@ -83,6 +85,7 @@ logiciseTracker.prototype.updateStatus = function updateStatus(){
     this.multipler = 2
   } else{
     expInit(uid,function(d){
+
       me.difficulty = d.lvl
       me.multipler = Math.ceil(me.difficulty/5)
       // difficulty = 14
@@ -144,9 +147,13 @@ logiciseTracker.prototype.mistake = function(){
 }
 
 logiciseTracker.prototype.loadProblem = function (arg,callback){
-    if (arg == "exp") arg = this.difficulty
+    if (arg == "exp") {
+      this.updateStatus()
+      console.log(this.difficulty)
+      arg = this.difficulty
+    }
     var url = '/processing/'+this.logiciseCategory+'/'+this.logiciseId+'/'+arg
-    console.log(url)
+    // console.log(url)
     $.post(url)
     .done(function(d){
       callback(d)

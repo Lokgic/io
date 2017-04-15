@@ -47,12 +47,10 @@ $(function() {
         noAtt: true
     }
 
-    var floatInfo = "<p>Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its value.</p><p>Spatial predicates do not always imply directly! For instance, an object from a different column can still be above another object as long as it occupies a higher row."
 
 
     var tracker = new logiciseTracker(parm)
 
-    tracker.floatInfo(floatInfo)
     tracker.enableTutorial()
 
     function loadGrid(callback) {
@@ -79,7 +77,6 @@ $(function() {
             $('#' + (i + 1)).children(".ql").text(print[statements[i][0].prefix](statements[i][0]))
             solutions.push(statements[i][1])
         }
-        // console.log(solutions)
         mathJax.reload();
         return solutions
     }
@@ -128,12 +125,13 @@ $(function() {
     //   })
     //
     // }
-
+    tracker.updateStatus()
     tracker.nextProblem = function() {
-        var me = this
 
+        var me = this
+        this.updateStatus()
         me.state = "userInput"
-        loadGrid(function(err, problem) {
+        me.loadProblem("", function(problem) {
             // currentAnswers = printGrid(problem)
             console.log(problem)
             me.currentAnswer = printGrid(problem)
@@ -147,7 +145,7 @@ $(function() {
         })
     }
 
-    tracker.updateStatus()
+
     tracker.nextProblem()
     tracker.butt.confirm.d3obj.on('click', function(d) {
         tracker.nextState()
@@ -165,7 +163,7 @@ $(function() {
             conseq = createEq(_.union(parts.v_1, [parts.backref]), eq, or)
             qPrefix = parts.quantifiers_ID + parts.quantifier_backref
 
-            antecedent = "(" + parts.quantifier_relations + createConnective(_.union(parts.relations, [parts.property_2], parts.property_1), and) + ")"
+            antecedent = "(" + parts.quantifier_relations + "("+createConnective(_.union(parts.relations, [parts.property_2], parts.property_1), and) + "))"
 
             // console.log(conseq)
             return "$" + qPrefix + "[" + antecedent + implies + "(" + conseq + ")]$"

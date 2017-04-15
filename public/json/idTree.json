@@ -7,86 +7,22 @@
       "type":"task",
       "children":[
         {
-                "name": "Reading",
-                "type":"subtask",
-                "children": [{
-                    "name": "Identity in PL",
-                    "type":"chapter",
-                    "children": [{
-                        "name": "Beginning Translations with Identity",
-                        "type":"section"
+            "name": "Physical Model with Identity",
+            "type":"chapter",
+            "id":"id-logicise-grid"
 
 
-                    }, {
-                        "name": "Basic Venn Diagram",
-                        "type":"section"
-                    }, {
-                        "name": "Concepts review",
-                        "type":"section"
-                    }]
-                }, {
-                    "name": "Identity and Quantity",
-                    "type":"chapter",
-                    "children": [{
-                        "name": "Translations with Identity and Quantity",
-                        "type":"section"
-                    }]
-                }, {
-                    "name": "Definite Descriptions",
-                    "type":"chapter",
-                    "children": [{
-                        "name": "Translating Definite Descriptions",
-                        "type":"section"
+        }, {
+            "name": "Model Semantics with Identity",
+            "type":"chapter",
+            "id":"id-logicise-model3"
+
+        }
 
 
-                    }, {
-                        "name": "Quantity Statements Involving Definite Descriptions",
-                        "type":"section"
 
-
-                    }]
-                },
-                {
-                    "name": "Models for Identity",
-                    "type":"chapter",
-                    "children": [{
-                        "name": "Mathematical Expressions in PL+",
-                        "type":"section"
-
-                    },
-                    {
-                      "name": "Proofs with Identity",
-                      "type":"chapter",
-                      "children": [{
-                          "name": "Using Identity Introduction and Elimination",
-                          "type":"section"
-
-                    }]
-                },
-                {
-                  "name": "Trees with Identity",
-                  "type":"chapter"
-
-                }
-              ]
-            }, {
-                "name": "Logicise",
-                "type":"subtask",
-
-                "children": [{
-                    "name": "Physical Model with Identity",
-                    "type":"chapter"
-
-
-                }, {
-                    "name": "Model Semantics with Identity",
-                    "type":"chapter"
-
-                }]
-            }
       ]
-      }
-    ]
+
   },
   {
     "name":"Problem Set 4",

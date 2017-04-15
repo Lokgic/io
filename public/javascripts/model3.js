@@ -12,7 +12,7 @@ $(function(){
 
 
   if (logged) {
-    $.post('/checkPassed/pl/logicise/model3')
+    $.post('/checkPassed/id/logicise/model3')
     .done(function(d){
       if (d){
         passed = d;
@@ -32,7 +32,7 @@ $(function(){
   function passingWatcher(){
     if (currentScore >= toPass && !passed && logged){
       passed = true;
-      recordCompletion(uid,"pl","logicise","model3")
+      recordCompletion(uid,"id","logicise","model3")
       document.getElementById('passingscore').innerHTML ="&#10004;"
       alert('You have passed the logicise!','correctblue')
     }
@@ -83,7 +83,7 @@ $(function(){
         input =[]
         answer = []
         var col1 = {
-          "name":"PL Wffs",
+          "name":"PL Formulas",
           "column":[]
         }
         answer = []

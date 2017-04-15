@@ -45,7 +45,7 @@
     "title": "Model 3",
     "shortDescription":"Based on the model provided, provide the correct values for the table.",
     "eventId":"model3",
-    "intro":"This is about as hard as the model 2 logicise, with the addition of the identity symbol."
+    "intro":"This is about as hard as the model 2 logicise, with the addition of the identity symbol. Click 'confirm' to start."
 
   },
   "alienTree1":{
@@ -99,9 +99,13 @@
     "intro":"deductionQuiz2"
   },
   "grid":{
-    "title":"Identity Interpretation Using Grid",
-    "shortDescription":"shortDescription.",
+    "title":"Identity Interpretation Using Physical Models",
+    "shortDescription":"Provide truth values for the PL expressions given in the table, using the grid above as a model.",
     "eventId":"grid",
-    "intro":"grid"
+    "intro":"grid",
+    "tutorial":[
+      "Provide truth values for the PL expressions given in the table. Click on the corresponding box on the table to select its value.","Spatial predicates do not always imply directly! For instance, an object from a different column can still be above another object as long as it occupies a higher row."
+
+    ]
   }
 }
