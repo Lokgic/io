@@ -10,6 +10,7 @@ var logiciseTracker = function(parm){
   this.scoreDisplay = d3.select('#score')
   this.difficulty = 0
   this.chanceLeft = parm.chanceLeft
+  this.noAtt = (parm.noAtt)? true : false;
 
   this.butt = {
     confirm:{
@@ -164,9 +165,9 @@ logiciseTracker.prototype.enableTutorial = function(){
 
 logiciseTracker.prototype.checkAnswer = function(){
   var me = this
-  if (this.currentChoice == null) alert("No input detected!","important")
+  if (this.currentChoice == null || _.contains(this.currentChoice, null)) alert("Incomplete response!","important")
   else{
-    if (logged){
+    if (logged && !me.noAtt){
       var att = {
         uid:uid,
         pid:this.currentProblem.string,
@@ -177,14 +178,14 @@ logiciseTracker.prototype.checkAnswer = function(){
       }
     sendAttempts(att)
     }
-
-    if (this.currentChoice == this.currentAnswer){
+    if (this.currentChoice == this.currentAnswer||_.isEqual(this.currentAnswer,this.currentChoice)){
+      console.log("correct")
       me.addScore()
-      me.updateStatus()
     } else{
-
+      console.log("incorrect")
       me.mistake()
     }
+    me.updateStatus()
   }
 }
 

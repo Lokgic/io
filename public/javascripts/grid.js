@@ -1,58 +1,59 @@
 $(function() {
-  var some = " \\exists "
-  var every = " \\forall "
-  var and = " \\wedge "
-  var or = " \\vee "
-  var $butt = $('#gridbutt');
-  var implies = " \\to "
-  var neq = " \\neq "
-  var eq = " = "
-  var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\lambda ', ' \\psi ']
-  var predicates = {
-      vowel: "V",
-      left: "L",
-      right: "R",
-      above: "A",
-      under: "U",
-      sameCol: "Y",
-      sameRow: "X",
-      consonant: "C",
-      letter: "T",
-      number: "N",
-      even: "E",
-      odd: "O"
-  }
-  var quantifiers = {
-      some: some,
-      every: every,
-      atLeast: some,
-      atMost: every
-  }
+    var some = " \\exists "
+    var every = " \\forall "
+    var and = " \\wedge "
+    var or = " \\vee "
+    var $butt = $('#gridbutt');
+    var implies = " \\to "
+    var neq = " \\neq "
+    var eq = " = "
+    var variables = ['x', 'y', 'z', 'w', 'u', 'v', ' \\lambda ', ' \\psi ']
+    var predicates = {
+        vowel: "V",
+        left: "L",
+        right: "R",
+        above: "A",
+        under: "U",
+        sameCol: "Y",
+        sameRow: "X",
+        consonant: "C",
+        letter: "T",
+        number: "N",
+        even: "E",
+        odd: "O"
+    }
+    var quantifiers = {
+        some: some,
+        every: every,
+        atLeast: some,
+        atMost: every
+    }
 
-  var connectives = {
-      neq: neq,
-      and: and,
-      or: or,
-      implies: implies,
-      every: implies,
-      some: and
-  }
+    var connectives = {
+        neq: neq,
+        and: and,
+        or: or,
+        implies: implies,
+        every: implies,
+        some: and
+    }
 
-  var parm = {
-    toPass: 25,
-    logiciseCategory:"grid",
-    logiciseId: "grid",
-    module: "id",
-    chanceLeft:3
-  }
+    var parm = {
+        toPass: 25,
+        logiciseCategory: "grid",
+        logiciseId: "grid",
+        module: "id",
+        chanceLeft: 3,
+        noAtt: true
+    }
 
-  var floatInfo = "<p>Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its value.</p><p>Spatial predicates do not always imply directly! For instance, an object from a different column can still be above another object as long as it occupies a higher row."
+    var floatInfo = "<p>Provide truth values for the QL expressions given in the table. Click on the corresponding box on the table to select its value.</p><p>Spatial predicates do not always imply directly! For instance, an object from a different column can still be above another object as long as it occupies a higher row."
 
 
-  var tracker = new logiciseTracker(parm)
-  tracker.updateStatus()
-  tracker.floatInfo(floatInfo)
+    var tracker = new logiciseTracker(parm)
 
+    tracker.floatInfo(floatInfo)
+    tracker.enableTutorial()
 
     function loadGrid(callback) {
         jQuery.post("../processing/grid")
@@ -83,23 +84,75 @@ $(function() {
         return solutions
     }
 
-
-    tracker.drawProblem = function(){
-      tracker.state = "userInput"
-      var me = this
-      tracker.state = "userInput"
-      loadGrid(function(err, problem) {
-          // currentAnswers = printGrid(problem)
-          console.log(problem)
-          currentAnswers = printGrid(problem)
-          console.log(currentAnswers)
-
-      })
-
+    tracker.interaction = function() {
+        me = this
+        this.userInput = d3.selectAll('.answer')
+        this.userInput.text("Click")
+        this.userInput.data(this.currentAnswer)
+            .enter()
+        console.log(this.userInput)
+        this.userInput.on('click', function(d, i) {
+            if (tracker.state == 'userInput') {
+                if ($(this).text() == "T") {
+                    $(this).text("F")
+                    me.currentChoice[i] = false
+                    $(this).attr("value", false)
+                    $(this).addClass("false")
+                    $(this).removeClass("true")
+                } else {
+                    me.currentChoice[i] = true
+                    $(this).text("T")
+                    $(this).attr("value", true)
+                    $(this).addClass("true")
+                    $(this).removeClass("false")
+                }
+                console.log(me.currentChoice)
+            }
+            // me.currentChoice[i] =
+        })
     }
 
-    tracker.drawProblem()
 
+
+    // tracker.drawProblem = function(){
+    //   tracker.state = "userInput"
+    //   var me = this
+    //   tracker.state = "userInput"
+    //   loadGrid(function(err, problem) {
+    //       // currentAnswers = printGrid(problem)
+    //       console.log(problem)
+    //       currentAnswers = printGrid(problem)
+    //       console.log(currentAnswers)
+    //
+    //
+    //   })
+    //
+    // }
+
+    tracker.nextProblem = function() {
+        var me = this
+
+        me.state = "userInput"
+        loadGrid(function(err, problem) {
+            // currentAnswers = printGrid(problem)
+            console.log(problem)
+            me.currentAnswer = printGrid(problem)
+            console.log(me.currentAnswer)
+            me.currentChoice = []
+            for (n in me.currentAnswer) {
+                me.currentChoice[n] = null
+            }
+            tracker.interaction()
+
+        })
+    }
+
+    tracker.updateStatus()
+    tracker.nextProblem()
+    tracker.butt.confirm.d3obj.on('click', function(d) {
+        tracker.nextState()
+        tracker.updateStatus()
+    })
 
     var print = {
         atMost: function(s) {
@@ -158,41 +211,43 @@ $(function() {
     }
 
 
-        function createEq(arrVar, e, conn, backref){
+    function createEq(arrVar, e, conn, backref) {
 
 
-          if (backref == undefined){
+        if (backref == undefined) {
             if (arrVar.length == 1) return arr[0]
-            if (arrVar.length >= 2){
-              output = arrVar[0] + e + arrVar[1]
-            } if (arrVar.length >= 3){
-              output += conn + arrVar[0] + e + arrVar[2] + conn +arrVar[1] + e +arrVar[2]
-            } if (arrVar.length >= 4){
-              output += conn + arrVar[0] + e + arrVar[3] + conn +arrVar[2] + e +arrVar[3]
+            if (arrVar.length >= 2) {
+                output = arrVar[0] + e + arrVar[1]
+            }
+            if (arrVar.length >= 3) {
+                output += conn + arrVar[0] + e + arrVar[2] + conn + arrVar[1] + e + arrVar[2]
+            }
+            if (arrVar.length >= 4) {
+                output += conn + arrVar[0] + e + arrVar[3] + conn + arrVar[2] + e + arrVar[3]
             }
             return output
-          } else{
-            output = arrVar[0] + e +backref
-            if (arrVar.length >= 2){
-              for (var i = 1;i<arrVar.length;i++){
-                output += conn + arrVar[i] + e +backref
+        } else {
+            output = arrVar[0] + e + backref
+            if (arrVar.length >= 2) {
+                for (var i = 1; i < arrVar.length; i++) {
+                    output += conn + arrVar[i] + e + backref
                 }
-              }
-              return output;
             }
-          }
-
-
-
-        function createConnective(arrVar, connective){
-          // console.log(arrVar)
-          if (arrVar.length == 1) return arrVar[0]
-          out = arrVar[0]
-          for (var i = 1; i < arrVar.length; i++){
-            out +=  connective + arrVar[i]
-          }
-          return out;
+            return output;
         }
+    }
+
+
+
+    function createConnective(arrVar, connective) {
+        // console.log(arrVar)
+        if (arrVar.length == 1) return arrVar[0]
+        out = arrVar[0]
+        for (var i = 1; i < arrVar.length; i++) {
+            out += connective + arrVar[i]
+        }
+        return out;
+    }
 
     var string_relationQ = {
         some: and,
@@ -274,13 +329,13 @@ $(function() {
             x = v[i]
             quantifiers_ID += quantifiers[s.prefix] + x
             property_1.push(predicates[s.kind_1] + x)
-            if (s.prefix == "atMost"){
-              relations.push(predicates[s.relation] + v[i] + subject)
+            if (s.prefix == "atMost") {
+                relations.push(predicates[s.relation] + v[i] + subject)
             }
 
         }
 
-        if (s.prefix == "atLeast") relations.push(predicates[s.relation] + backref+ subject)
+        if (s.prefix == "atLeast") relations.push(predicates[s.relation] + backref + subject)
         quantifier_backref = every + backref
         quantifier_relations = quantifiers[s.quantifier_2] + subject
         property_2 = predicates[s.kind_2] + subject
@@ -288,15 +343,15 @@ $(function() {
 
 
         output = {
-          quantifier_backref:quantifier_backref,
+            quantifier_backref: quantifier_backref,
             quantifiers_ID: quantifiers_ID,
             quantifier_relations: quantifier_relations,
             property_1: property_1,
             property_2: property_2,
             relations: relations,
             v_1: v,
-            subject:subject,
-            backref:backref
+            subject: subject,
+            backref: backref
 
         }
         return output;
