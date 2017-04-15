@@ -30,14 +30,62 @@ block content
 						span#score 0
 		.row.text-xs-center.m-a-0#bigContainer
 			.row.col-lg-10#interaction
-				.col-lg-2.col-md-0#information
-				#control
-					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#confirm Confirm
-					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt2.invisible
-					button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt3.invisible
-				.col-lg-10.col-md-12#display
-					if info.intro
-						p.logiciseIntro #{info.intro}
+				if logiciseID == 'grid'
+					.col-lg-6.col-md-12.p-t-1.p-x-3
+						.card.p-a-0
+							.card-header Symbols:
+							.card-block
+								.col-md-6.col-sm-12
+									ul.m-a-0
+										li V: x is a vowel.
+										li C: ....a consonant.
+										li T: ....a letter.
+										li N: ....a number.
+										li E: ....even.
+										li O: ..... odd.
+								.col-md-6.col-sm-12
+									ul.m-a-0
+										li U: x is under y.
+										li A: ....above....
+										li L: ...left of...
+										li R: ..right of...
+										li X: x is in the same row as y
+										li Y: .......same column......
+					.col-lg-6.col-md-12.p-t-1.p-x-3
+						.card
+							.card-header.lead.text-xs-center UD: Things in the grid below
+						table.table.table-inverse.table-hover.table-bordered#grid.display-4.text-xs-center
+							tbody
+								each i in [0,1,2]
+									tr
+										each j in [0,1,2]
+											- id = i + "_" +j
+											td(id =id ) #{id}
+					#control
+						button(type = "button").btn.btn-greyish.m-y-3.btn-lg#confirm Confirm
+					.col-lg-12.col-md-12#problems
+						.table-responsive.m-t-1
+							table.table.table-bordered
+								thead.thead-inverse
+									tr
+										th.text-xs-center #
+										th.text-xs-center T/F?
+										th.text-xs-center QL Expression
+								tbody
+									each k in [1,2,3,4]
+										tr(id = k)
+											th(scope = "row") #{k}
+											td.answer.lead.text-xs-center Click
+											td.ql QL#{k}
+				else
+					.col-lg-2.col-md-0#information
+					#control
+						button(type = "button").btn.btn-greyish.m-y-3.btn-lg#confirm Confirm
+						button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt2.invisible
+						button(type = "button").btn.btn-greyish.m-y-3.btn-lg#butt3.invisible
+					.col-lg-10.col-md-12#display
+						if info.intro
+							p.logiciseIntro #{info.intro}
 			.col-lg-2#leaderboard
 				h4.text-xs-center Leaderboard
 				#board

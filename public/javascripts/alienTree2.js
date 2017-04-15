@@ -45,12 +45,12 @@ $(function() {
         var me = this
         tracker.cleanDisplay()
         tracker.loadProblem("exp",function(data){
-          console.log(data)
+
           tracker.analytic.processModel(data)
-          console.log(tracker.analytic)
+
           me.problemSet = data.problems
           var problem = me.problemSet.pop()
-          console.log(problem)
+
           me.currentProblem = problem[0]
           mainDisplay.text("Evalute this statement: $"+me.currentProblem.string+"$")
           me.currentAnswer = problem[1]

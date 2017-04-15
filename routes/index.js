@@ -434,7 +434,26 @@ router.post('/getTrees',function(req,res,next){
 
 router.post('/processing/*', function(req,res,next){
 
+
 	var generatorID = req.path.split('/')[2]
+	if (generatorID == "grid"){
+		grid = require("../js/grid_gen.js")
+		var model  = new grid.Model()
+
+		var statements = grid.generateStatements(4,model)
+	// console.log(statements)
+		var modelMin = model.grid
+
+		problem = {
+			model:modelMin,
+			statements: statements
+		}
+
+
+		return res.send(problem)
+
+	}
+
 	var option = req.path.split('/')[3]
 	var va = req.path.split('/')[4]
 
@@ -496,7 +515,6 @@ router.get('/logicise/*', function(req,res,next){
 
 
 })
-
 
 
 module.exports = router;
