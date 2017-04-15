@@ -41,6 +41,13 @@
     "intro":"This is a harder version of model 1 logicise. The main difference is that here you are more likely to see negated predicate and quantifiers. Also, you are more likely fully quantified sentences and often quantifiers are mixed. Press 'Confirm' to begin."
 
   },
+  "model3":{
+    "title": "Model 3",
+    "shortDescription":"Based on the model provided, provide the correct values for the table.",
+    "eventId":"model3",
+    "intro":"This is about as hard as the model 2 logicise, with the addition of the identity symbol."
+
+  },
   "alienTree1":{
     "title": "Alien Family Tree 1",
     "shortDescription":"Alien Family Tree.",
@@ -90,5 +97,11 @@
     "shortDescription":"Check all answers. Press confirm to submit answers.",
     "eventId":"deductionQuiz2",
     "intro":"deductionQuiz2"
+  },
+  "grid":{
+    "title":"Identity Interpretation Using Grid",
+    "shortDescription":"shortDescription.",
+    "eventId":"grid",
+    "intro":"grid"
   }
 }
