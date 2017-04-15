@@ -193,6 +193,9 @@ logiciseTracker.prototype.checkAnswer = function(){
       me.mistake()
     }
     me.updateStatus()
+    if (me.feedback){
+      me.feedback()
+    }
   }
 }
 

@@ -84,6 +84,7 @@ $(function() {
     tracker.interaction = function() {
         me = this
         this.userInput = d3.selectAll('.answer')
+        this.userInput.style('background','white')
         this.userInput.text("Click")
         this.userInput.data(this.currentAnswer)
             .enter()
@@ -145,7 +146,15 @@ $(function() {
         })
     }
 
+    tracker.feedback = function(){
 
+        me.userInput.each(function(d,i){
+          console.log(this)
+          if (d == me.currentChoice[i]) d3.select(this).style('background','steelblue')
+          else d3.select(this).style('background','red')
+        })
+
+    }
     tracker.nextProblem()
     tracker.butt.confirm.d3obj.on('click', function(d) {
         tracker.nextState()
