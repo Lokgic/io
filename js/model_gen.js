@@ -685,7 +685,7 @@ var model2 = function(tier){
   // tier = 7
   if (tier == null) tier = 10
   var  twoPlaceChance = expScale(0.2,0.8,20,tier)
-  var  threePlaceChance = expScale(0,Math.min(0.3,1-twoPlaceChance),20,tier)
+  var  threePlaceChance = 0
   var onePlaceChance = 1 - twoPlaceChance - threePlaceChance
   var extensionDistribution  = {"2":expScale(0.3,0.8,20,tier)}
   extensionDistribution[0] = expScale(0,Math.min(0.05,1-extensionDistribution[2]),20,tier)
@@ -733,7 +733,7 @@ var model3 = function(tier){
   // tier = 7
   if (tier == null) tier = 10
   var  twoPlaceChance = expScale(0.2,0.8,20,tier)
-  var  threePlaceChance = expScale(0,Math.min(0.3,1-twoPlaceChance),20,tier)
+  var  threePlaceChance = 0
   var onePlaceChance = 1 - twoPlaceChance - threePlaceChance
   var extensionDistribution  = {"2":expScale(0.3,0.8,20,tier)}
   extensionDistribution[0] = expScale(0,Math.min(0.05,1-extensionDistribution[2]),20,tier)
