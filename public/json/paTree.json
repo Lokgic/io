@@ -23,6 +23,9 @@
 
   {
     "name":"Deduction Task Credit","type":"task","id":"pa-deduction-inclass"
+  },
+  {
+    "name":"Logicise Top 4","type":"task","id":"pa-logicise-top4"
   }
 
   ]

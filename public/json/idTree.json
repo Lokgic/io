@@ -29,19 +29,13 @@
     "type":"task",
 
     "children":[
-      {"name":"Translation",
+      {"name":"Interpretation",
       "type":"subtask"
     },
-      {"name":"Deduction",
+      {"name":"Deduction and Translation",
       "type":"subtask"
 
-      },
-      {"name":"Trees",
-         "type":"subtask"
-       },
-      {"name":"Evaluating Arguments",
-       "type":"subtask"
-     }
+      }
     ]
   },
   {
