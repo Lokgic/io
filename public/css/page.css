@@ -717,6 +717,7 @@ ul{
 
 .expRank{
   display:flex;
+  padding-top:200px;
   height:100%
 }
 
