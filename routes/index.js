@@ -425,6 +425,13 @@ router.post('/problem/*', function(req,res,next){
 
 })
 
+router.get('/expRank',mid.requiresLogin, function(req,res,next){
+	data.expRank(function(d){
+		// console.log(d[0])
+		return res.render('expRank',{students:d,uid:req.session.userId})
+	})
+
+})
 
 router.post('/getTrees',function(req,res,next){
 	var data = require('../db/problem/tree.json')

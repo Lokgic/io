@@ -46,6 +46,17 @@ module.exports.getExp = function(uid,callback){
   })
 }
 
+module.exports.expRank = function(callback){
+  knex.select('uid','exp').from('exp')
+    .catch(function(error){
+      console.log(error)
+      return callback(error)
+    })
+    .then(function(tab){
+     return callback(tab)
+    })
+}
+
 module.exports.getProfile = function(uid, callback){
 
 	knex.select().from('record').where({'uid':uid})

@@ -1,0 +1,19 @@
+extends pagelayout
+block content
+  - var n = 1
+  .expRank
+    .container
+      p.lead Your User ID: #{uid}
+      table.table.text-xs-center
+        thead
+          tr
+            th.text-xs-center Rank
+            th.text-xs-center User ID
+            th.text-xs-center Score
+        tbody
+          for stu in students
+            tr
+              th(scope = 'row').text-xs-center #{n}
+              - n += 1
+              td #{stu.uid}
+              td #{stu.exp}
