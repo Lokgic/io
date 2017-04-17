@@ -88,7 +88,7 @@
       "background":{
         "type":"fitch",
         "substance":[
-          [1,"$\\forall x \\exists y (Rxy \\vee Ryz)$",""],
+          [1,"$\\forall x \\exists y (Rxy \\vee Ryx)$",""],
           [1,"$\\forall x \\neg Rmx$","Premises",{"ass":true}],
           [1,"",""]
         ]
