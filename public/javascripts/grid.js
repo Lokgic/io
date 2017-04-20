@@ -39,11 +39,11 @@ $(function() {
     }
 
     var parm = {
-        toPass: 25,
+        toPass: 15,
         logiciseCategory: "grid",
         logiciseId: "grid",
         module: "id",
-        chanceLeft: 3,
+        chanceLeft: 2,
         noAtt: true
     }
 
