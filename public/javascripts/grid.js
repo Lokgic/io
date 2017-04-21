@@ -49,7 +49,9 @@ $(function() {
 
 
     var tracker = new logiciseTracker(parm)
-
+    tracker.currentProblem = {
+      string: ""
+    }
     tracker.enableTutorial()
 
     function loadGrid(callback) {
