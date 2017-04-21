@@ -432,9 +432,10 @@ router.get('/expRank',mid.requiresLogin, function(req,res,next){
 		var alienCap = 800
 		for (row in d){
 			if (d[row].n > alienCap){
+				var exp = d[row].exp - alienCap + 800
 				table.push({
 					uid:d[row].uid,
-					exp: d[row].exp - (d[row].n - alienCap)
+					exp: exp
 				})
 			}else{
 				table.push({
