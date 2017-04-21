@@ -43,8 +43,7 @@ $(function() {
         logiciseCategory: "grid",
         logiciseId: "grid",
         module: "id",
-        chanceLeft: 2,
-        noAtt: true
+        chanceLeft: 2
     }
 
 
