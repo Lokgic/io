@@ -444,7 +444,7 @@ router.get('/expRank',mid.requiresLogin, function(req,res,next){
 				})
 			}
 		}
-		table.sort(function(a,b) {return (a.exp > b.exp) ? -1 : ((b.exp > a.exp) ? 1 : 0);} );
+		table.sort(function(a,b) {return (a.exp > b.exp) ? 1 : ((b.exp > a.exp) ? -1 : 0);} );
 		// console.log(table)
 		return res.render('expRank',{students:table,uid:req.session.userId})
 	})
