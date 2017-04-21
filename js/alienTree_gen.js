@@ -260,8 +260,6 @@ var expScale = require('./generatorHelp.js').expScale
 
 // console.log(expScale(1,4,20,10))
 alienTree1 = function alienTree1(tier){
-  if (tier == null) tier = 10
-  tier = parseInt(tier)
   var probScale = d3.scaleLinear()
     .domain([0, 20])
     .range([0, 1])
@@ -270,39 +268,78 @@ alienTree1 = function alienTree1(tier){
     .domain([0, 20])
     .range([0, 100])
     .clamp(true)
+  if (tier == null) tier = 10
+  tier = parseInt(tier)
+  if (tier < 15){
 
-  var n = Math.round(chance.normal({mean: tier*.6, dev: expScale(1,4,20,tier)} ))
-  // console.log(expScale(1,4,20,tier))
-  n = Math.max(3, n)
 
-  var relation = buildRelations(makeAliens(n))
-  // console.log(relation)
-  var model =  makeModel(relation,0)
-  // console.log(model)
-  var twoPlaceChance = expScale(0,.6,20,tier)
-  var varChance = expScale(0,.3,20,tier)
-  var diff =  {
-      identityProb: [1,0],
-      negatedAtomic:  expScale(0,15,20,tier),
-      // negatedComplex: expScale(0,.3,20,tier),
-      predicatesDistribution: [1-twoPlaceChance, twoPlaceChance, 0], //how many place
-      predicatesVariableConstantRatio: [varChance, 1 - varChance ],
-      quantifiersOptions: [chance.pickone([every,some])]
-      }
-      // console.log(diff)
-      // var model = initModel(diff)
-      // console.log(JSON.stringify(model.extensions, null, 4));
-      // console.log(model)
-      var output = {
-        problems: pl.makeProblemSet(model,Math.round(expScale(5,1,15,tier)),diff),
-        relation:relation,
-        model:model
-      }
-  // console.log(JSON.stringify(output, null, 4));
-      return output
+
+    var n = Math.round(chance.normal({mean: tier*.6, dev: expScale(1,4,20,tier)} ))
+    // console.log(expScale(1,4,20,tier))
+    n = Math.max(3, n)
+
+    var relation = buildRelations(makeAliens(n))
+    // console.log(relation)
+    var model =  makeModel(relation,0)
+    // console.log(model)
+    var twoPlaceChance = expScale(0,.6,20,tier)
+    var varChance = expScale(0,.3,20,tier)
+    var diff =  {
+        identityProb: [1,0],
+        negatedAtomic:  expScale(0,15,20,tier),
+        // negatedComplex: expScale(0,.3,20,tier),
+        predicatesDistribution: [1-twoPlaceChance, twoPlaceChance, 0], //how many place
+        predicatesVariableConstantRatio: [varChance, 1 - varChance ],
+        quantifiersOptions: [chance.pickone([every,some])]
+        }
+        // console.log(diff)
+        // var model = initModel(diff)
+        // console.log(JSON.stringify(model.extensions, null, 4));
+        // console.log(model)
+        var output = {
+          problems: pl.makeProblemSet(model,Math.round(expScale(5,1,15,tier)),diff),
+          relation:relation,
+          model:model
+        }
+    // console.log(JSON.stringify(output, null, 4));
+        return output
+  } else{
+    var sd = expScale(1,4,20,tier)
+    var n = 20
+
+    // n = Math.max(3, n)
+
+    var relation = buildRelations(makeAliens(n))
+    // console.log(relation)
+    var model =  makeModel(relation,1)
+    // console.log(model)
+    var twoPlaceChance = 1
+    var varChance = expScale(0.8,1,20,tier)
+    var diff =  {
+        identityProb: [1,0],
+        negatedAtomic:  expScale(10,40,20,tier),
+        // negatedComplex: expScale(0,.3,20,tier),
+        // predicatesDistribution: [0, 0, 1], //how many place
+        predicatesVariableConstantRatio: [varChance, 1 - varChance ],
+        quantifiersOptions: [every,some]
+        }
+        // console.log(diff)
+        // var model = initModel(diff)
+        // console.log(JSON.stringify(model.extensions, null, 4));
+        // console.log(model)
+        var output = {
+          problems: pl.makeProblemSet(model,Math.round(expScale(4,1,15,tier)),diff),
+          relation:relation,
+          model:model
+        }
+    // console.log(JSON.stringify(output, null, 4));
+        return output
+
+  }
+
 
 }
-
+// console.log(alienTree1(3))
 alienTree2 = function alienTree2(tier){
   if (tier == null) tier = 10
   tier = parseInt(tier)
