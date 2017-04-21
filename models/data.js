@@ -47,7 +47,7 @@ module.exports.getExp = function(uid,callback){
 }
 
 module.exports.expRank = function(callback){
-  knex.select('uid','exp').from('exp')
+  knex.select('uid','exp','n').from('exp2')
     .catch(function(error){
       console.log(error)
       return callback(error)
@@ -56,6 +56,26 @@ module.exports.expRank = function(callback){
      return callback(tab)
     })
 }
+
+// module.exports.alienScore = function(uid, callback){
+//   knex('attempt').count('correct as score').where({
+//     correct:true,
+//     uid:uid,
+//     type:"alienTree1"
+//   })
+//   .orWhere({
+//     correct:true,
+//     uid:uid,
+//     type:"alienTree2"
+//   })
+//     .catch(function(error){
+//       console.log(error)
+//       return callback(error)
+//     })
+//     .then(function(tab){
+//      return callback(tab)
+//     })
+// }
 
 module.exports.getProfile = function(uid, callback){
 

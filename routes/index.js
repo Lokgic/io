@@ -427,8 +427,25 @@ router.post('/problem/*', function(req,res,next){
 
 router.get('/expRank',mid.requiresLogin, function(req,res,next){
 	data.expRank(function(d){
-		// console.log(d[0])
-		return res.render('expRank',{students:d,uid:req.session.userId})
+		// console.log(d)
+		var table = []
+		var alienCap = 800
+		for (row in d){
+			if (d[row].n > alienCap){
+				table.push({
+					uid:d[row].uid,
+					exp: d[row].exp - (d[row].n - alienCap)
+				})
+			}else{
+				table.push({
+					uid:d[row].uid,
+					exp: d[row].exp
+				})
+			}
+		}
+		table.sort(function(a,b) {return (a.exp > b.exp) ? -1 : ((b.exp > a.exp) ? 1 : 0);} );
+		// console.log(table)
+		return res.render('expRank',{students:table,uid:req.session.userId})
 	})
 
 })
