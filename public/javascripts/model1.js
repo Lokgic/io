@@ -204,17 +204,17 @@ $(function(){
         updateStatus()
         correct = true
       }
-      var att = {
-        uid:uid,
-        pid:1,
-        type:"model",
-        input:"",
-        correct:correct
-      }
+      // var att = {
+      //   uid:uid,
+      //   pid:1,
+      //   type:"model",
+      //   input:"",
+      //   correct:correct
+      // }
 
 
-      if (logged) sendAttempts(att);
-      updateStatus()
+      // if (logged) sendAttempts(att);
+      // updateStatus()
 
     }
 

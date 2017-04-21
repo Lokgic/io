@@ -18,7 +18,8 @@ $(function() {
       logiciseCategory:"alienTree",
       logiciseId: "alienTree2",
       module: "pl",
-      chanceLeft:2
+      chanceLeft:2,
+      noAtt: true
     }
 
     var tracker = new logiciseTracker(parm)

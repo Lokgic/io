@@ -203,16 +203,16 @@ $(function(){
         updateStatus()
         correct = true
       }
-      var att = {
-        uid:uid,
-        pid:2,
-        type:"model",
-        input:"",
-        correct:correct
-      }
-
-      console.log(att)
-      if (logged) sendAttempts(att);
+      // var att = {
+      //   uid:uid,
+      //   pid:2,
+      //   type:"model",
+      //   input:"",
+      //   correct:correct
+      // }
+      //
+      // console.log(att)
+      // if (logged) sendAttempts(att);
       updateStatus()
 
     }
