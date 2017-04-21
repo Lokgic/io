@@ -30,7 +30,7 @@ module.exports.getExp = function(uid,callback){
                 111,   150,   204,   291,   385,
                 532,   691,   878,  1097,  1200,
                 1350,  1732,  2443,  3200,  3704,
-                 4259,  5529,  6250,  7873,  9755]
+                 4759,  6529,  9250,  12873,  18755]
     var exp = tab[0].exp;
     for (var lvl = 0;lvl<leveldata.length;lvl++){
       if (exp <= leveldata[lvl]){
