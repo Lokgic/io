@@ -445,7 +445,7 @@ router.get('/expRank',mid.requiresLogin, function(req,res,next){
 			}
 		}
 		table.sort(function(a,b) {
-			return a.exp - b.exp;
+			return b.exp - a.exp;
 		} );
 		// console.log(table)
 		return res.render('expRank',{students:table,uid:req.session.userId})
