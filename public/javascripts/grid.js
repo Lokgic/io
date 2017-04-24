@@ -135,8 +135,11 @@ $(function() {
         me.state = "userInput"
         me.loadProblem("", function(problem) {
             // currentAnswers = printGrid(problem)
-            console.log(problem)
+            // console.log(problem)
             me.currentAnswer = printGrid(problem)
+            me.currentProblem = {
+              string:me.currentAnswer + ""
+            }
             console.log(me.currentAnswer)
             me.currentChoice = []
             for (n in me.currentAnswer) {

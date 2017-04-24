@@ -180,7 +180,7 @@ logiciseTracker.prototype.checkAnswer = function(){
         pid:this.currentProblem.string,
         type:this.logiciseId,
         input:this.currentChoice,
-        correct:this.currentChoice == this.currentAnswer
+        correct:(this.currentChoice == this.currentAnswer||_.isEqual(this.currentAnswer,this.currentChoice))
 
       }
     sendAttempts(att)
