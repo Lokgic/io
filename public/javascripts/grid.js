@@ -140,7 +140,7 @@ $(function() {
             me.currentProblem = {
               string:me.currentAnswer + ""
             }
-            console.log(me.currentAnswer)
+            // console.log(me.currentAnswer)
             me.currentChoice = []
             for (n in me.currentAnswer) {
                 me.currentChoice[n] = null
