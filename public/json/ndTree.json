@@ -53,7 +53,8 @@
     },
     {
       "name":"Test 3",
-      "type":"task"
+      "type":"task",
+      "id":"nd-test-3"
     }
   ]
 }
