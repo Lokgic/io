@@ -42,7 +42,8 @@
   },
   {
     "name":"Test 4",
-    "type":"task"
+    "type":"task",
+    "id":"id-test-4"
 
   }
 ]
