@@ -24,7 +24,7 @@ $(function(){
 
     })
     .fail(function(d){
-      console.log(d)
+      // console.log(d)
     })
   } else{
     document.getElementById('passingscore').innerHTML = "Not logged";
@@ -66,7 +66,7 @@ $(function(){
 
     $.post('/processing/model/model2/'+difficulty)
     .done(function(d){
-      console.log(d)
+      // console.log(d)
       callback(d)
     })
   }
@@ -211,7 +211,7 @@ $(function(){
         correct:correct
       }
 
-      console.log(att)
+      // console.log(att)
       if (logged) sendAttempts(att);
       updateStatus()
 

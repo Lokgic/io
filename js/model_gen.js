@@ -789,7 +789,7 @@ var model2 = function(tier){
 }
 
 module.exports.model2 = model2
-console.log(model2(16))
+// console.log(model2(16))
 //
 //
 
