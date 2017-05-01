@@ -647,6 +647,33 @@ var expScale = require('./generatorHelp.js').expScale
 var model1 = function model1(tier){
   tier = parseInt(tier)
   if (tier == null) tier = 10
+  if (tier > 15){
+    var diff =  {
+         identityProb: [1,0],
+         negatedAtomic: 0.03*tier,
+         negatedComplex: 0.01*tier,
+         predicatesDistribution: [.2, .8, 0], //how many place
+         constantsDistribution: {
+             mean: 12,
+             dev: 3
+         },
+         objectsDistribution: {
+           mean: 12,
+           dev: 4
+         },
+         extensionOptions: ["all", "self", "mixed", "none"],
+         extensionDistribution: [.5, 0.1, 0.3, .1], //4
+         predicatesVariableConstantRatio: [tier/130, 1 - tier/130 ],
+         quantifiersOptions: [every,some]
+         }
+
+         var model = initModel(diff)
+
+         return {
+           problems: makeProblemSet(model,8,diff),
+           model,model
+         }
+  }
  var diff =  {
       identityProb: [1,0],
       negatedAtomic: 0.03*tier,
@@ -724,7 +751,7 @@ var model2 = function(tier){
 }
 
 module.exports.model2 = model2
-// model2(2)
+console.log(model1(16))
 //
 //
 
