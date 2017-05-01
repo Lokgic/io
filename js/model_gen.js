@@ -652,18 +652,18 @@ var model1 = function model1(tier){
          identityProb: [1,0],
          negatedAtomic: 0.03*tier,
          negatedComplex: 0.01*tier,
-         predicatesDistribution: [.2, .8, 0], //how many place
+         predicatesDistribution: [.1, .8, 0.1], //how many place
          constantsDistribution: {
-             mean: 12,
-             dev: 3
+             mean: 5,
+             dev: 1
          },
          objectsDistribution: {
            mean: 12,
            dev: 4
          },
          extensionOptions: ["all", "self", "mixed", "none"],
-         extensionDistribution: [.5, 0.1, 0.3, .1], //4
-         predicatesVariableConstantRatio: [tier/130, 1 - tier/130 ],
+         extensionDistribution: [.4, 0.1, 0.4, .1], //4
+         predicatesVariableConstantRatio: [.7, .3 ],
          quantifiersOptions: [every,some]
          }
 
@@ -751,7 +751,7 @@ var model2 = function(tier){
 }
 
 module.exports.model2 = model2
-console.log(model1(16))
+// console.log(model1(16))
 //
 //
 
