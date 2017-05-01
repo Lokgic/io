@@ -711,6 +711,44 @@ var model2 = function(tier){
   tier = parseInt(tier)
   // tier = 7
   if (tier == null) tier = 10
+  if (tier > 15 ){
+    var  twoPlaceChance = 0.3
+    var  threePlaceChance = 0.7
+    var onePlaceChance = 0
+    var extensionDistribution  = {"2":expScale(0.3,0.8,20,tier)}
+    extensionDistribution[0] = expScale(0,Math.min(0.05,1-extensionDistribution[2]),20,tier)
+    extensionDistribution[1] = (1 - extensionDistribution[0] - extensionDistribution[2])/2
+    extensionDistribution[3] = extensionDistribution[1]
+    var predicateRatio =  .9
+
+    var diff =  {
+        identityProb: [1,0],
+        negatedAtomic: expScale(1,4,20,tier)*tier,
+        negatedComplex: expScale(0,2,20,tier)*tier,
+        predicatesDistribution: [onePlaceChance, twoPlaceChance, threePlaceChance], //how many place
+        constantsDistribution: {
+            mean: 6,
+            dev: 2
+        },
+        objectsDistribution: {
+          mean: 50,
+          dev: expScale(0,tier/5,20,tier,true)
+        },
+        extensionOptions: ["all", "self", "mixed", "none"],
+        extensionDistribution: [extensionDistribution[0], extensionDistribution[1], extensionDistribution[2], extensionDistribution[3]], //4
+        predicatesVariableConstantRatio: [predicateRatio, 1 - predicateRatio ],
+        quantifiersOptions: [every,some]
+        }
+
+        var model = initModel(diff)
+        // // console.log(JSON.stringify(model,null,5))
+        // var demo = makeProblemSet(model,expScale(3,6,20,tier,true),diff)
+        // console.log(JSON.stringify(demo,null,5))
+        return {
+          problems: makeProblemSet(model,expScale(3,6,20,tier,true),diff),
+          model,model
+        }
+  }
   var  twoPlaceChance = expScale(0.2,0.8,20,tier)
   var  threePlaceChance = 0
   var onePlaceChance = 1 - twoPlaceChance - threePlaceChance
@@ -751,7 +789,7 @@ var model2 = function(tier){
 }
 
 module.exports.model2 = model2
-// console.log(model1(16))
+console.log(model2(16))
 //
 //
 
