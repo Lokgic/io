@@ -349,7 +349,7 @@ function makeDropdown(id, text, choices, div) {
 //TABLES
 
 function tabulate(data, div, op) {
-  console.log(data)
+  // console.log(data)
     d3.select(div).select('table').remove()
     var columns = []
     data.forEach(function(i) {
@@ -357,7 +357,7 @@ function tabulate(data, div, op) {
     })
     var table = d3.select(div).append("table")
 
-    console.log(columns)
+    // console.log(columns)
     thead = table.append("thead"),
         tbody = table.append("tbody");
 
